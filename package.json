@@ -12,10 +12,7 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": ["dist", "src"],
   "scripts": {
     "build": "tsc --build",
     "preinstall": "bunx only-allow bun"
@@ -24,7 +21,8 @@
     "lefthook": "1.8.4",
     "only-allow": "1.2.1",
     "typescript": "5.8.3",
-    "shellcheck": "3.0.0"
+    "shellcheck": "3.0.0",
+    "cspell": "8.16.0"
   },
   "sideEffects": false
 }
