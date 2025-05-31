@@ -23,7 +23,8 @@
   "devDependencies": {
     "lefthook": "1.8.4",
     "only-allow": "1.2.1",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "shellcheck": "3.0.0"
   },
   "sideEffects": false
 }
