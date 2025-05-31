@@ -18,11 +18,13 @@
     "preinstall": "bunx only-allow bun"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "lefthook": "1.8.4",
     "only-allow": "1.2.1",
     "typescript": "5.8.3",
     "shellcheck": "3.0.0",
-    "cspell": "8.16.0"
+    "cspell": "8.16.0",
+    "vitest": "2.1.5"
   },
   "sideEffects": false
 }
