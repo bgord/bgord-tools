@@ -19,13 +19,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "19.5.0",
-    "@commitlint/config-conventional": "19.5.0",
-    "lefthook": "1.8.4",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "cspell": "9.0.2",
+    "lefthook": "1.11.4",
     "only-allow": "1.2.1",
+    "shellcheck": "3.1.0",
     "typescript": "5.8.3",
-    "shellcheck": "3.0.0",
-    "cspell": "8.16.0",
     "vitest": "2.1.5"
   },
   "sideEffects": false
