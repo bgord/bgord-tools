@@ -28,5 +28,8 @@
     "typescript": "5.8.3",
     "vitest": "3.1.4"
   },
+  "dependencies": {
+    "zod": "3.25.36"
+  },
   "sideEffects": false
 }
