@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { noop, anoop } from "../src/noop.service";
+import { anoop, noop } from "../src/noop.service";
 
 describe("noop", () => {
   test("does nothing", () => {
