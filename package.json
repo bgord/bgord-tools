@@ -1,0 +1,28 @@
+{
+  "name": "@bgord/tools",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "author": "Bartosz Gordon",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "preinstall": "bunx only-allow bun"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3",
+    "only-allow": "1.2.1"
+  },
+  "sideEffects": false
+}
