@@ -1,9 +1,9 @@
+import { DateFormatters } from "./date-formatter.service";
 import type { TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
-import { DateFormatters } from "./date-formatter.service";
+type RelativeDateType = { raw: TimestampType; relative: string };
 
-export type RelativeDateType = { raw: TimestampType; relative: string };
 export class RelativeDate {
   static truthy(timestampMs: TimestampType): RelativeDateType {
     return RelativeDate._format(timestampMs);

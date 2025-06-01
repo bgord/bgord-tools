@@ -1,9 +1,10 @@
 import { z } from "zod/v4";
 
-export const RevisionValueSchema = z.number().int().min(0);
-export type RevisionValueSchemaType = z.infer<typeof RevisionValueSchema>;
+const RevisionValueSchema = z.number().int().min(0);
 
-export type ETagValueType = string;
+type RevisionValueSchemaType = z.infer<typeof RevisionValueSchema>;
+
+type ETagValueType = string;
 
 export class ETag {
   static HEADER_NAME = "ETag";

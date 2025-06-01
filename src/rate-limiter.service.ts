@@ -1,16 +1,18 @@
 import type { TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
-export type RateLimiterOptionsType = {
+type RateLimiterOptionsType = {
   ms: TimestampType;
 };
 
-export type RateLimiterResultSuccessType = { allowed: true };
-export type RateLimiterResultErrorType = {
+type RateLimiterResultSuccessType = { allowed: true };
+
+type RateLimiterResultErrorType = {
   allowed: false;
   remainingMs: TimestampType;
 };
-export type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
+
+type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
 export class RateLimiter {
   private lastInvocationTimestampMs: Falsy<TimestampType> = null;

@@ -10,9 +10,10 @@ export enum SizeUnit {
 }
 
 const SizeValueSchema = z.number().positive();
-export type SizeValueType = z.infer<typeof SizeValueSchema>;
 
-export type SizeConfigType = {
+type SizeValueType = z.infer<typeof SizeValueSchema>;
+
+type SizeConfigType = {
   unit: SizeUnit;
   value: SizeValueType;
 };

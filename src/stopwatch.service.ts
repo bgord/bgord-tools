@@ -1,12 +1,12 @@
 import type { TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
-export enum StopwatchState {
+enum StopwatchState {
   started = "started",
   stopped = "finished",
 }
 
-export type StopwatchResultType = { durationMs: TimestampType };
+type StopwatchResultType = { durationMs: TimestampType };
 
 export class Stopwatch {
   private state: StopwatchState = StopwatchState.started;

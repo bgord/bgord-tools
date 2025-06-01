@@ -1,8 +1,8 @@
 import { format, formatDistanceToNow } from "date-fns";
 
-export type FormattedDateType = string;
+type FormattedDateType = string;
 
-export type DateFormattersInputType = Parameters<typeof format>[0];
+type DateFormattersInputType = Parameters<typeof format>[0];
 
 export class DateFormatters {
   static datetime(date: DateFormattersInputType): FormattedDateType {

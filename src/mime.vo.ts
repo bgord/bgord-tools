@@ -1,6 +1,6 @@
-export type MimeRawType = string;
-export type MimeTypeType = string;
-export type MimeSubtypeType = string;
+type MimeRawType = string;
+type MimeTypeType = string;
+type MimeSubtypeType = string;
 
 export class Mime {
   readonly raw: MimeRawType;
