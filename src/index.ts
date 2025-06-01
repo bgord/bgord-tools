@@ -4,6 +4,7 @@ export * from "./date-calculator.service";
 export * from "./date-formatter.service";
 export * from "./dates-of-the-week.vo";
 export * from "./etags.vo";
+export * from "./language.vo";
 export * from "./mime.vo";
 export * from "./noop.service";
 export * from "./rate-limiter.service";
