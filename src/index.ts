@@ -12,6 +12,7 @@ export * from "./rounding.service";
 export * from "./size.vo";
 export * from "./sleep.service";
 export * from "./stopwatch.service";
+export * from "./time-zone-offset-value.vo";
 export * from "./time.service";
 export * from "./timestamp.vo";
 export * from "./ts-utils";
