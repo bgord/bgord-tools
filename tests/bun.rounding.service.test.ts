@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.service";
 
-describe("Rounding Strategies", () => {
+describe("Rounding", () => {
   test("RoundToNearest rounds to the nearest integer", () => {
     const rounding = new RoundToNearest();
     expect(rounding.round(5.6)).toBe(6);
