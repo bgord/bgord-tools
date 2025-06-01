@@ -1,11 +1,4 @@
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  setSystemTime,
-} from "bun:test";
+import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 
 import { Stopwatch } from "../src/stopwatch.service";
 
@@ -15,7 +8,7 @@ describe("Stopwatch", () => {
 
   afterEach(() => setSystemTime());
 
-  it("calculates duration correctly", () => {
+  test("calculates duration correctly", () => {
     const stopwatch = new Stopwatch();
 
     // simulate 500ms passing
@@ -26,7 +19,7 @@ describe("Stopwatch", () => {
     expect(result.durationMs).toBe(500);
   });
 
-  it("throws if stop is called twice", () => {
+  test("throws if stop is called twice", () => {
     const stopwatch = new Stopwatch();
     setSystemTime(1_000_000 + 100);
 

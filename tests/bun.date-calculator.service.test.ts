@@ -1,11 +1,4 @@
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  setSystemTime,
-} from "bun:test";
+import { afterEach, beforeEach, describe, expect, it, setSystemTime } from "bun:test";
 
 import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";

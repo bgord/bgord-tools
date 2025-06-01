@@ -1,27 +1,27 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {
-  it("parses a valid positive integer", () => {
+  test("parses a valid positive integer", () => {
     const now = Date.now();
     const parsed = Timestamp.parse(now);
     expect(parsed).toBe(now);
   });
 
-  it("throws on negative numbers", () => {
+  test("throws on negative numbers", () => {
     expect(() => Timestamp.parse(-123)).toThrow();
   });
 
-  it("throws on non-integer numbers", () => {
+  test("throws on non-integer numbers", () => {
     expect(() => Timestamp.parse(123.45)).toThrow();
   });
 
-  it("throws on non-number values", () => {
+  test("throws on non-number values", () => {
     expect(() => Timestamp.parse("123" as any)).toThrow();
   });
 
-  it("defaults to current timestamp", () => {
+  test("defaults to current timestamp", () => {
     const before = Date.now();
     const parsed = Timestamp.parse(undefined);
     const after = Date.now();
