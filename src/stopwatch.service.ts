@@ -6,7 +6,7 @@ enum StopwatchState {
   stopped = "finished",
 }
 
-type StopwatchResultType = { durationMs: TimestampType };
+export type StopwatchResultType = { durationMs: TimestampType };
 
 export class Stopwatch {
   private state: StopwatchState = StopwatchState.started;
