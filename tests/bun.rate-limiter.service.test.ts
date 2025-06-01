@@ -1,9 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, test } from "bun:test";
 
 import { RateLimiter } from "../src/rate-limiter.service";
 
 describe("RateLimiter", () => {
-  it("should allow the first invocation", () => {
+  test("should allow the first invocation", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
@@ -11,7 +11,7 @@ describe("RateLimiter", () => {
     expect(result.allowed).toBe(true);
   });
 
-  it("should not allow invocations within the rate limit", () => {
+  test("should not allow invocations within the rate limit", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
@@ -26,7 +26,7 @@ describe("RateLimiter", () => {
     expect(second.remainingMs).toBe(1);
   });
 
-  it("should allow invocations just after the rate limit", () => {
+  test("should allow invocations just after the rate limit", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
@@ -39,7 +39,7 @@ describe("RateLimiter", () => {
     expect(second.allowed).toBe(true);
   });
 
-  it("should reset the invocation timestamp after the rate limit", () => {
+  test("should reset the invocation timestamp after the rate limit", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, setSystemTime } from "bun:test";
 
 import { DateFormatters } from "../src/date-formatter.service";
 
@@ -27,12 +27,9 @@ describe("DateFormatters", () => {
   });
 
   describe("relative", () => {
-    beforeEach(() => {
-      vi.useFakeTimers();
-      vi.setSystemTime(new Date("2024-06-01T15:35:00Z"));
-    });
+    beforeEach(() => setSystemTime(new Date("2024-06-01T15:35:00Z")));
 
-    afterEach(() => vi.useRealTimers());
+    afterEach(() => setSystemTime());
 
     it("returns relative time with suffix", () => {
       const result = DateFormatters.relative(testDate);

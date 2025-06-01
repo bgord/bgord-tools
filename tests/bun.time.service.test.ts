@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, test } from "bun:test";
 
 import { Time } from "../src/time.service";
 
 describe("Time", () => {
   describe("Days", () => {
-    it("should correctly convert days", () => {
+    test("should correctly convert days", () => {
       const days = Time.Days(2);
       expect(days.days).toBe(2);
       expect(days.hours).toBe(48);
@@ -15,7 +15,7 @@ describe("Time", () => {
   });
 
   describe("Hours", () => {
-    it("should correctly convert hours", () => {
+    test("should correctly convert hours", () => {
       const hours = Time.Hours(3);
       expect(hours.days).toBe(0.13);
       expect(hours.hours).toBe(3);
@@ -26,7 +26,7 @@ describe("Time", () => {
   });
 
   describe("Minutes", () => {
-    it("should correctly convert minutes", () => {
+    test("should correctly convert minutes", () => {
       const minutes = Time.Minutes(30);
       expect(minutes.days).toBe(0.02);
       expect(minutes.hours).toBe(0.5);
@@ -37,7 +37,7 @@ describe("Time", () => {
   });
 
   describe("Seconds", () => {
-    it("should correctly convert seconds", () => {
+    test("should correctly convert seconds", () => {
       const seconds = Time.Seconds(120);
       expect(seconds.days).toBe(0);
       expect(seconds.hours).toBe(0.03);
@@ -48,7 +48,7 @@ describe("Time", () => {
   });
 
   describe("Ms", () => {
-    it("should correctly convert ms", () => {
+    test("should correctly convert ms", () => {
       const ms = Time.Ms(500);
       expect(ms.days).toBe(0);
       expect(ms.hours).toBe(0);
@@ -59,23 +59,23 @@ describe("Time", () => {
   });
 
   describe("Now", () => {
-    it("minus", () => {
+    test("minus", () => {
       const result = Time.Now(1700000000000).Minus(Time.Ms(500));
       expect(result.ms).toEqual(1699999999500);
     });
 
-    it("add", () => {
+    test("add", () => {
       const result = Time.Now(1700000000000).Add(Time.Ms(500));
       expect(result.ms).toEqual(1700000000500);
     });
   });
 
   describe("isAfter", () => {
-    it("returns true is another time is after", () => {
+    test("returns true is another time is after", () => {
       expect(Time.Ms(1700000000000).isAfter(Time.Ms(0))).toEqual(true);
     });
 
-    it("returns false is another time is not after", () => {
+    test("returns false is another time is not after", () => {
       expect(Time.Ms(1700000000000).isAfter(Time.Now().Minus(Time.Days(3)))).toEqual(false);
     });
   });
