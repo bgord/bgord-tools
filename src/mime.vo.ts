@@ -32,6 +32,7 @@ export class Mime {
     return this.subtype === another.subtype || this.subtype === "*";
   }
 }
+
 export class InvalidMimeError extends Error {
   constructor() {
     super();
