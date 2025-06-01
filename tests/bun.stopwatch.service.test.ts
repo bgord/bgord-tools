@@ -1,35 +1,33 @@
-import { describe, expect, it } from "vitest";
-
-// TODO: remove sleep
-import { sleep } from "../src/sleep.service";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Stopwatch } from "../src/stopwatch";
 
-const DELTA_MS = 10;
-const DELAY_MS = 100;
-
 describe("Stopwatch", () => {
-  it(`returns the duration after a delay of ${DELAY_MS} ms`, async () => {
-    const stopwatch = new Stopwatch();
-    await sleep({ ms: DELAY_MS });
-    const result = stopwatch.stop();
-
-    expect(result.durationMs).above(DELAY_MS);
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(1_000_000); // Set a consistent start time
   });
 
-  it("returns the duration without a delay", async () => {
-    const stopwatch = new Stopwatch();
-    const result = stopwatch.stop();
-
-    expect(result.durationMs).approximately(0, DELTA_MS);
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
-  it("throws an error when stopped twice", async () => {
+  it("calculates duration correctly", () => {
     const stopwatch = new Stopwatch();
-    await sleep({ ms: DELAY_MS });
+
+    // simulate 500ms passing
+    vi.advanceTimersByTime(500);
+
     const result = stopwatch.stop();
 
-    expect(result.durationMs).approximately(DELAY_MS, DELTA_MS);
+    expect(result.durationMs).toBe(500);
+  });
 
-    expect(() => stopwatch.stop()).toThrow("Stopwatch is already stopped");
+  it("throws if stop is called twice", () => {
+    const stopwatch = new Stopwatch();
+    vi.advanceTimersByTime(100);
+
+    stopwatch.stop();
+
+    expect(() => stopwatch.stop()).toThrowError("Stopwatch is already stopped");
   });
 });
