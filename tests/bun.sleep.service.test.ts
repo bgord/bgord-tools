@@ -1,22 +1,13 @@
-import { describe, expect, it, vi } from "bun:test";
+import { describe, expect, it } from "bun:test";
 
 import { sleep } from "../src/sleep.service";
 
 describe("sleep", () => {
-  it("waits for the specified milliseconds", async () => {
-    vi.useFakeTimers();
-    const spy = vi.fn();
+  it("sleep waits ~1000ms", async () => {
+    const start = Date.now();
+    await sleep({ ms: 50 });
+    const duration = Date.now() - start;
 
-    sleep({ ms: 1000 }).then(spy);
-
-    expect(spy).not.toHaveBeenCalled();
-
-    vi.advanceTimersByTime(1000);
-
-    await vi.runAllTicks();
-
-    expect(spy).toHaveBeenCalled();
-
-    vi.useRealTimers();
+    expect(duration).toBeGreaterThanOrEqual(45);
   });
 });

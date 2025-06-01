@@ -1,17 +1,20 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  setSystemTime,
+} from "bun:test";
 
 import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";
 
 describe("DateCalculator", () => {
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2024-06-01T12:00:00Z")); // UTC noon
-  });
+  // UTC noon
+  beforeEach(() => setSystemTime(new Date("2024-06-01T12:00:00Z")));
 
-  afterEach(() => {
-    vi.useRealTimers();
-  });
+  afterEach(() => setSystemTime());
 
   it("returns start of day timestamp for UTC timezone", () => {
     const now = Date.now(); // 2024-06-01T12:00:00Z

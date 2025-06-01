@@ -1,18 +1,21 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "bun:test";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  setSystemTime,
+} from "bun:test";
 
 import { RelativeDate } from "../src/relative-date.vo";
 
 describe("RelativeDate", () => {
   const timestampMs = new Date("2024-06-01T12:00:00Z").getTime();
 
-  beforeEach(() => {
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date("2024-06-01T12:05:00Z")); // 5 minutes later
-  });
+  // 5 minutes later
+  beforeEach(() => setSystemTime(new Date("2024-06-01T12:05:00Z")));
 
-  afterEach(() => {
-    vi.useRealTimers();
-  });
+  afterEach(() => setSystemTime());
 
   describe("truthy", () => {
     it("formats a timestamp into relative format", () => {
