@@ -1,0 +1,68 @@
+# Changelog
+- 2025-06-01 15:43 4841b8f **Merge pull request #5 from bgord/workflows**
+- 2025-06-01 15:42 05c1e97 **step: setup infra**
+- 2025-06-01 15:41 f29fe4d **Merge pull request #2 from bgord/workflows**
+- 2025-06-01 15:41 4045316 **feature: setup workflows**
+- 2025-06-01 15:39 020f5ec **Merge pull request #1 from bgord/remove_vitest_dep**
+- 2025-06-01 15:36 7baa69f **refactor: unify test over it**
+- 2025-06-01 15:33 e703e1c **step: bump bgord/scripts**
+- 2025-06-01 15:24 3688f4e **refactor: adjust tests for bun:test**
+- 2025-06-01 15:16 e38c80f **refactor: replace vitest with bun:test**
+- 2025-06-01 15:15 e63aeaa **refactor: install bun types**
+- 2025-06-01 15:13 f596fcc **step: uninstall vitest**
+- 2025-06-01 15:09 8f5e351 **refactor: remove possibly unused exports**
+- 2025-06-01 15:06 130b4f8 **step: implement DateCalculator tests**
+- 2025-06-01 14:40 389d2f6 **refactor: reorganize src/index exports**
+- 2025-06-01 14:33 db48983 **refactor: rename date-calculator**
+- 2025-06-01 14:25 aed6123 **step: migrate relative dates**
+- 2025-06-01 14:17 a668dc7 **step: test date formatter**
+- 2025-06-01 14:12 16931c2 **refactor: extract date-formatter**
+- 2025-06-01 14:10 d202d4a **refactor: rename dates-of-the-week**
+- 2025-06-01 14:09 1a03f4e **refactor: adjust naming convention**
+- 2025-06-01 14:07 92d561c **step: rewrite stopwatch tests**
+- 2025-06-01 14:02 bc195c0 **step: test timestamp vo**
+- 2025-06-01 14:01 f15d948 **step: test sleep service**
+- 2025-06-01 13:32 17f18c3 **refactor: fix exports**
+- 2025-06-01 13:18 625c0e3 **refactor: migrate dates**
+- 2025-06-01 13:16 7574917 **step: install date-fns**
+- 2025-06-01 13:05 8bf5382 **refactor: migrate stopwatch**
+- 2025-06-01 12:59 677e9dc **step: migrate sleep service**
+- 2025-06-01 00:46 eb76f96 **refactor: migrate rate limiter service**
+- 2025-06-01 00:45 aa5881c **refactor: migrate ts-utils**
+- 2025-06-01 00:43 c5e274e **step: migrate timestamp**
+- 2025-05-31 17:47 641e0f6 **refactor: migrate time**
+- 2025-05-31 17:38 bb04064 **refactor: migrate etags**
+- 2025-05-31 17:37 19d544a **refactor: rename zod variable to include Schema**
+- 2025-05-31 17:33 f588e4f **step: migrate mime.vo**
+- 2025-05-31 17:33 a26725e **step: add mime.vo tests**
+- 2025-05-31 17:18 0f8e509 **step: add size.vo tests**
+- 2025-05-31 17:17 c5f36a2 **refactor: migrate size vo**
+- 2025-05-31 17:13 eca2a43 **step: install zod**
+## 2025-05-31 17:10 v0.2.2
+- 2025-05-31 17:10 f2083c4 **step: improve noop tests**
+- 2025-05-31 17:10 cd8d820 **0.2.2**
+## 2025-05-31 17:07 v0.2.1
+- 2025-05-31 17:07 8dcf02e **0.2.1**
+- 2025-05-31 17:05 9d25045 **step: add noop**
+## 2025-05-31 16:51 v0.2.0
+- 2025-05-31 16:51 a8ce771 **0.2.0**
+## 2025-05-31 16:49 v0.1.0
+- 2025-05-31 16:49 28510ed **step: setup version**
+- 2025-05-31 16:49 1e94220 **0.1.0**
+- 2025-05-31 16:41 068e1fd **step: bump bgord/scripts**
+- 2025-05-31 16:32 a68cd99 **step: update vitest**
+- 2025-05-31 16:32 89c550b **step: update linters**
+- 2025-05-31 16:28 eb6990d **step: bump bgord/scripts**
+- 2025-05-31 16:28 684a246 **step: add rounding tests**
+- 2025-05-31 16:23 0c02b91 **step: install commit lint**
+- 2025-05-31 16:22 18adc1c **step: install biome**
+- 2025-05-31 16:19 743c2b1 **step: add packages used bylefthook**
+- 2025-05-31 16:18 0f9ccbf **step: update gitignore**
+- 2025-05-31 16:16 5c93bb6 **step: add packages used bylefthook**
+- 2025-05-31 16:12 6d226f0 **step: add rounding service**
+- 2025-05-31 16:10 b1eb4f7 **step: setup bgord-scripts**
+- 2025-05-31 16:10 15dd164 **step: add lefthook config**
+- 2025-05-31 16:09 480a06a **step: install lefthook**
+- 2025-05-31 16:08 372357a **step: setup tsconfig.json**
+- 2025-05-31 16:04 cfac731 **step: setup basic packages**
+- 2025-05-31 16:03 5623630 **step: setup gitignore**
