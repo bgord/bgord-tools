@@ -11,12 +11,9 @@ export enum SizeUnit {
 
 const SizeValueSchema = z.number().positive();
 
-type SizeValueType = z.infer<typeof SizeValueSchema>;
+export type SizeValueType = z.infer<typeof SizeValueSchema>;
 
-type SizeConfigType = {
-  unit: SizeUnit;
-  value: SizeValueType;
-};
+type SizeConfigType = { unit: SizeUnit; value: SizeValueType };
 
 export class Size {
   private readonly unit: SizeUnit;
