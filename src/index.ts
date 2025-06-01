@@ -1,4 +1,5 @@
 export * from "./dates.service";
+export * from "./dates-of-the-week.vo";
 export * from "./etags.vo";
 export * from "./mime.vo";
 export * from "./noop.service";
