@@ -1,4 +1,5 @@
 # Changelog
+- 2025-06-01 15:44 8c42ba8 **Merge pull request #3 from bgord/dependabot/npm_and_yarn/lefthook-1.11.13**
 - 2025-06-01 15:43 4841b8f **Merge pull request #5 from bgord/workflows**
 - 2025-06-01 15:42 05c1e97 **step: setup infra**
 - 2025-06-01 15:41 f29fe4d **Merge pull request #2 from bgord/workflows**
@@ -22,6 +23,8 @@
 - 2025-06-01 14:07 92d561c **step: rewrite stopwatch tests**
 - 2025-06-01 14:02 bc195c0 **step: test timestamp vo**
 - 2025-06-01 14:01 f15d948 **step: test sleep service**
+- 2025-06-01 13:43 4134679 **docs: generate CHANGELOG**
+- 2025-06-01 13:42 6679184 **build(deps-dev): bump lefthook from 1.11.4 to 1.11.13**
 - 2025-06-01 13:32 17f18c3 **refactor: fix exports**
 - 2025-06-01 13:18 625c0e3 **refactor: migrate dates**
 - 2025-06-01 13:16 7574917 **step: install date-fns**
