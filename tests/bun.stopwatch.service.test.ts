@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Stopwatch } from "../src/stopwatch";
+
+import { Stopwatch } from "../src/stopwatch.service";
 
 describe("Stopwatch", () => {
   beforeEach(() => {

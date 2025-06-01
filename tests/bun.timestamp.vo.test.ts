@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {

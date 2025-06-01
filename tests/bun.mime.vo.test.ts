@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { InvalidMimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {

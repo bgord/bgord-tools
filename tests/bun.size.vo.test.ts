@@ -1,4 +1,5 @@
 import { describe, expect, test } from "vitest";
+
 import { Size, SizeUnit } from "../src/size.vo";
 
 describe("Size", () => {
