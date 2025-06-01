@@ -1,30 +1,14 @@
-import { format, formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 
 import { Time } from "./time.service";
 import type { TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
+import { DateFormatters } from "./date-formatter.service";
+
 export type FormattedDateType = string;
 
 export type DateFormattersInputType = Parameters<typeof format>[0];
-
-export class DateFormatters {
-  static datetime(date: DateFormattersInputType): FormattedDateType {
-    return format(date, "yyyy/MM/dd HH:mm");
-  }
-
-  static date(date: DateFormattersInputType): FormattedDateType {
-    return format(date, "yyyy/MM/dd");
-  }
-
-  static monthDay(date: DateFormattersInputType): FormattedDateType {
-    return format(date, "MM/dd");
-  }
-
-  static relative(date: DateFormattersInputType) {
-    return formatDistanceToNow(date, { addSuffix: true });
-  }
-}
 
 export type RelativeDateType = { raw: TimestampType; relative: string };
 export class RelativeDate {
