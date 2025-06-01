@@ -7,3 +7,5 @@ export * from "./time.service";
 export * from "./timestamp.vo";
 export * from "./ts-utils";
 export * from "./rate-limiter.service";
+export * from "./stopwatch";
+export * from "./sleep.service";
