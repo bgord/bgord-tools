@@ -1,4 +1,6 @@
 # Changelog
+## 2025-06-01 15:52 v0.3.1
+- 2025-06-01 15:52 a638487 **0.3.1**
 - 2025-06-01 15:52 8296500 **refactor: export SizeValueType**
 - 2025-06-01 15:51 791e1b7 **step: export StopwatchResultType**
 ## 2025-06-01 15:48 v0.3.0
@@ -29,6 +31,7 @@
 - 2025-06-01 14:07 92d561c **step: rewrite stopwatch tests**
 - 2025-06-01 14:02 bc195c0 **step: test timestamp vo**
 - 2025-06-01 14:01 f15d948 **step: test sleep service**
+- 2025-06-01 13:52 afdbbfc **docs: generate CHANGELOG**
 - 2025-06-01 13:48 261134b **docs: generate CHANGELOG**
 - 2025-06-01 13:46 c56ea30 **docs: generate CHANGELOG**
 - 2025-06-01 13:45 3e74e7b **docs: generate CHANGELOG**
