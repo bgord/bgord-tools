@@ -4,6 +4,7 @@
     "": {
       "name": "@bgord/tools",
       "dependencies": {
+        "date-fns": "4.1.0",
         "zod": "3.25.36",
       },
       "devDependencies": {
@@ -409,6 +410,8 @@
     "cspell-trie-lib": ["cspell-trie-lib@9.0.2", "", { "dependencies": { "@cspell/cspell-pipe": "9.0.2", "@cspell/cspell-types": "9.0.2", "gensequence": "^7.0.0" } }, "sha512-inXu6YEoJFLYnxgcXy3quCoGgSWYRye1kM4dj8kbYtNAQgUVD93hPFdmPWObwhVawsS3rQybckG3DSnmxBe9Fg=="],
 
     "dargs": ["dargs@8.1.0", "", {}, "sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw=="],
+
+    "date-fns": ["date-fns@4.1.0", "", {}, "sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg=="],
 
     "debug": ["debug@4.4.1", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ=="],
 

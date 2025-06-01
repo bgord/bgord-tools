@@ -29,6 +29,7 @@
     "vitest": "3.1.4"
   },
   "dependencies": {
+    "date-fns": "4.1.0",
     "zod": "3.25.36"
   },
   "sideEffects": false
