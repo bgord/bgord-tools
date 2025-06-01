@@ -1,4 +1,6 @@
 # Changelog
+## 2025-06-01 15:48 v0.3.0
+- 2025-06-01 15:48 078b0a2 **0.3.0**
 - 2025-06-01 15:46 46d9e74 **step: update packages**
 - 2025-06-01 15:45 a266e2a **Merge pull request #4 from bgord/dependabot/npm_and_yarn/zod-3.25.46**
 - 2025-06-01 15:44 8c42ba8 **Merge pull request #3 from bgord/dependabot/npm_and_yarn/lefthook-1.11.13**
@@ -25,6 +27,7 @@
 - 2025-06-01 14:07 92d561c **step: rewrite stopwatch tests**
 - 2025-06-01 14:02 bc195c0 **step: test timestamp vo**
 - 2025-06-01 14:01 f15d948 **step: test sleep service**
+- 2025-06-01 13:46 c56ea30 **docs: generate CHANGELOG**
 - 2025-06-01 13:45 3e74e7b **docs: generate CHANGELOG**
 - 2025-06-01 13:45 1865797 **docs: generate CHANGELOG**
 - 2025-06-01 13:43 7433a79 **build(deps): bump zod from 3.25.36 to 3.25.46**
