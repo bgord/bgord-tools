@@ -1,11 +1,5 @@
-import { format } from "date-fns";
-
 import { Time } from "./time.service";
 import type { TimestampType } from "./timestamp.vo";
-
-export type FormattedDateType = string;
-
-export type DateFormattersInputType = Parameters<typeof format>[0];
 
 type GetStartOfDayTsInTzConfigType = {
   now: TimestampType;
