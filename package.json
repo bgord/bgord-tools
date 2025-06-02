@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "date-fns": "4.1.0",
-    "zod": "3.25.46"
+    "zod": "3.25.48"
   },
   "sideEffects": false
 }
