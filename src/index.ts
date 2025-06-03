@@ -7,6 +7,7 @@ export * from "./etags.vo";
 export * from "./language.vo";
 export * from "./mime.vo";
 export * from "./noop.service";
+export * from "./package-version.vo";
 export * from "./rate-limiter.service";
 export * from "./relative-date.vo";
 export * from "./rounding.service";
