@@ -17,4 +17,5 @@ export * from "./stopwatch.service";
 export * from "./time-zone-offset-value.vo";
 export * from "./time.service";
 export * from "./timestamp.vo";
+export * from "./timezone.vo";
 export * from "./ts-utils";
