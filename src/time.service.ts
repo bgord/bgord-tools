@@ -13,7 +13,7 @@ interface TimeResultInterface {
   isBefore(another: TimeResultInterface): boolean;
 }
 
-class TimeResult implements TimeResultInterface {
+export class TimeResult implements TimeResultInterface {
   constructor(
     readonly days: number,
     readonly hours: number,
