@@ -1,7 +1,9 @@
 # Changelog
+- 2025-06-05 00:44 a9e1329 **refactor: remove schema from vo names**
 ## 2025-06-05 00:04 v0.5.0
 - 2025-06-05 00:04 e8e8b76 **0.5.0**
 - 2025-06-05 00:02 051f142 **Merge pull request #9 from bgord/bgord_bun_adjustments**
+- 2025-06-04 22:04 db7bdca **docs: generate CHANGELOG**
 - 2025-06-04 22:03 d450276 **docs: generate CHANGELOG**
 - 2025-06-03 23:26 1ece1ba **step: migrate timezone vo**
 - 2025-06-03 23:18 78ce7fd **step: migrate package version**
