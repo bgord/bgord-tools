@@ -1,4 +1,13 @@
 # Changelog
+- 2025-06-05 00:02 051f142 **Merge pull request #9 from bgord/bgord_bun_adjustments**
+- 2025-06-03 23:26 1ece1ba **step: migrate timezone vo**
+- 2025-06-03 23:18 78ce7fd **step: migrate package version**
+- 2025-06-01 16:44 96d5e5a **step: add language vo**
+- 2025-06-01 16:40 5c87a14 **refactor: adjust naming**
+- 2025-06-01 16:39 6d248ac **step: add time zone offset**
+- 2025-06-01 16:36 ecdef29 **step: exprot time result**
+- 2025-06-01 16:28 9ab085b **step: add build version**
+- 2025-06-01 16:23 1fd6493 **step: add api-key.vo**
 ## 2025-06-01 15:55 v0.4.0
 - 2025-06-01 15:55 95c0422 **0.4.0**
 ## 2025-06-01 15:52 v0.3.1
@@ -33,6 +42,7 @@
 - 2025-06-01 14:07 92d561c **step: rewrite stopwatch tests**
 - 2025-06-01 14:02 bc195c0 **step: test timestamp vo**
 - 2025-06-01 14:01 f15d948 **step: test sleep service**
+- 2025-06-01 13:55 d75f031 **docs: generate CHANGELOG**
 - 2025-06-01 13:52 d5e63d4 **docs: generate CHANGELOG**
 - 2025-06-01 13:52 afdbbfc **docs: generate CHANGELOG**
 - 2025-06-01 13:48 261134b **docs: generate CHANGELOG**
