@@ -9,9 +9,9 @@ export enum SizeUnit {
   GB = "GB",
 }
 
-const SizeValueSchema = z.number().positive();
+const SizeValue = z.number().positive();
 
-export type SizeValueType = z.infer<typeof SizeValueSchema>;
+export type SizeValueType = z.infer<typeof SizeValue>;
 
 type SizeConfigType = { unit: SizeUnit; value: SizeValueType };
 
@@ -30,7 +30,7 @@ export class Size {
 
   constructor(config: SizeConfigType) {
     this.unit = config.unit;
-    this.value = SizeValueSchema.parse(config.value);
+    this.value = SizeValue.parse(config.value);
     this.bytes = this.calculateBytes(config);
   }
 

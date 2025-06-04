@@ -4,7 +4,7 @@ type MajorType = number;
 type MinorType = number;
 type PatchType = number;
 
-export const PackageVersionSchema = z
+export const PackageVersionValue = z
   .string()
   .min(1)
   .refine(
@@ -56,7 +56,7 @@ export const PackageVersionSchema = z
       patch: Number(patch),
     };
   });
-export type PackageVersionSchemaType = z.infer<typeof PackageVersionSchema>;
+export type PackageVersionValueType = z.infer<typeof PackageVersionValue>;
 
 export class PackageVersion {
   constructor(
@@ -79,13 +79,13 @@ export class PackageVersion {
   }
 
   static fromStringWithV(value: string) {
-    const version = PackageVersionSchema.parse(value);
+    const version = PackageVersionValue.parse(value);
 
     return new PackageVersion(version.major, version.minor, version.patch);
   }
 
   static fromString(value: string) {
-    const version = PackageVersionSchema.parse(`v${value}`);
+    const version = PackageVersionValue.parse(`v${value}`);
 
     return new PackageVersion(version.major, version.minor, version.patch);
   }

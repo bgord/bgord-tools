@@ -1,8 +1,8 @@
 import { z } from "zod/v4";
 
-const RevisionValueSchema = z.number().int().min(0);
+const RevisionValue = z.number().int().min(0);
 
-type RevisionValueSchemaType = z.infer<typeof RevisionValueSchema>;
+type RevisionValueType = z.infer<typeof RevisionValue>;
 
 type ETagValueType = string;
 
@@ -13,7 +13,7 @@ export class ETag {
 
   readonly value: ETagValueType;
 
-  private constructor(readonly revision: RevisionValueSchemaType) {
+  private constructor(readonly revision: RevisionValueType) {
     this.value = revision.toString();
   }
 
@@ -36,7 +36,7 @@ export class WeakETag {
 
   readonly value: WeakETagValueType;
 
-  private constructor(readonly revision: RevisionValueSchemaType) {
+  private constructor(readonly revision: RevisionValueType) {
     this.value = `W/${revision.toString()}`;
   }
 
