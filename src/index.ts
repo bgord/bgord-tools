@@ -23,3 +23,4 @@ export * from "./email-mask.service";
 export * from "./money.vo";
 export * from "./leap-year-checker.service";
 export * from "./sum.service";
+export * from "./mean.service";
