@@ -36,3 +36,4 @@ export * from "./simple-linear-regression.service";
 export * from "./outlier-detector.service";
 export * from "./dll.service";
 export * from "./min-max-scaler.service";
+export * from "./revision.vo";
