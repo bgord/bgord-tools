@@ -26,4 +26,5 @@ export * from "./sum.service";
 export * from "./mean.service";
 export * from "./percentage.service";
 export * from "./random.service";
-export * from "./thousands-separator.service.";
+export * from "./thousands-separator.service";
+export * from "./population-standard-deviation.service";
