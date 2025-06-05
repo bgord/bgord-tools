@@ -30,3 +30,4 @@ export * from "./thousands-separator.service";
 export * from "./population-standard-deviation.service";
 export * from "./z-score.service";
 export * from "./visually-unambiguous-characters-generator.service";
+export * from "./streak-calculator.service";
