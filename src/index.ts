@@ -28,3 +28,4 @@ export * from "./percentage.service";
 export * from "./random.service";
 export * from "./thousands-separator.service";
 export * from "./population-standard-deviation.service";
+export * from "./z-score.service";
