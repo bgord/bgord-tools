@@ -25,3 +25,4 @@ export * from "./leap-year-checker.service";
 export * from "./sum.service";
 export * from "./mean.service";
 export * from "./percentage.service";
+export * from "./random.service";
