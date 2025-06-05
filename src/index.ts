@@ -22,3 +22,4 @@ export * from "./ts-utils";
 export * from "./email-mask.service";
 export * from "./money.vo";
 export * from "./leap-year-checker.service";
+export * from "./sum.service";
