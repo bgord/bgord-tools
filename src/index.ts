@@ -20,3 +20,4 @@ export * from "./timestamp.vo";
 export * from "./timezone.vo";
 export * from "./ts-utils";
 export * from "./email-mask.service";
+export * from "./money.vo";
