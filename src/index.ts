@@ -39,3 +39,4 @@ export * from "./min-max-scaler.service";
 export * from "./revision.vo";
 export * from "./reordering.service";
 export * from "./mime-types.vo";
+export * from "./feature-flag.vo";
