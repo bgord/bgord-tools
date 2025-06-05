@@ -1,4 +1,4 @@
-type MimeRawType = string;
+export type MimeRawType = string;
 type MimeTypeType = string;
 type MimeSubtypeType = string;
 
