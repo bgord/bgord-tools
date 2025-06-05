@@ -32,3 +32,4 @@ export * from "./z-score.service";
 export * from "./visually-unambiguous-characters-generator.service";
 export * from "./streak-calculator.service";
 export * from "./stepper.service";
+export * from "./simple-linear-regression.service";
