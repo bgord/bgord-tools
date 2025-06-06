@@ -15,6 +15,7 @@ export * from "./mean.service";
 export * from "./mime-types.vo";
 export * from "./mime.vo";
 export * from "./min-max-scaler.service";
+export * from "./minute.vo";
 export * from "./money.vo";
 export * from "./noop.service";
 export * from "./outlier-detector.service";
