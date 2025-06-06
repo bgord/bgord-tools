@@ -1,5 +1,7 @@
 # Changelog
+- 2025-06-07 01:28 bfd7a41 **step: update zod**
 - 2025-06-07 01:26 a64b019 **step: bump bgord/scripts**
+- 2025-06-06 23:27 548db07 **docs: generate CHANGELOG**
 - 2025-06-06 21:27 4e076cd **step: migrate image related validators**
 - 2025-06-06 17:29 4f2cdce **step: add more clock formatters**
 - 2025-06-06 17:24 b65a374 **step: add more hour formatters**
