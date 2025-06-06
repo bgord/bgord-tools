@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { Clock } from "../src/clock.vo";
+import { Clock, ClockFormatters } from "../src/clock.vo";
 import { Hour } from "../src/hour.vo";
 import { Minute } from "../src/minute.vo";
 
@@ -8,6 +8,11 @@ describe("Clock", () => {
   test("formats using default TWENTY_FOUR_HOURS", () => {
     const clock = new Clock(new Hour(9), new Minute(5));
     expect(clock.get().formatted).toBe("09:05");
+  });
+
+  test("formats using TWELVE_HOURS", () => {
+    const clock = new Clock(new Hour(13), new Minute(30));
+    expect(clock.get(ClockFormatters.TWELVE_HOURS).formatted).toBe("01:30");
   });
 
   test("formats using a custom formatter", () => {

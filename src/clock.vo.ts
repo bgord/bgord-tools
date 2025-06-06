@@ -1,10 +1,18 @@
-import { Hour } from "./hour.vo";
+import { Hour, HourFormatters } from "./hour.vo";
 import { Minute } from "./minute.vo";
 
 export type ClockFormatter = (hour: Hour, minute: Minute) => string;
 
-export const ClockFormatters: Record<string, ClockFormatter> = {
+enum ClockFormatterEnum {
+  TWENTY_FOUR_HOURS = "TWENTY_FOUR_HOURS",
+  TWELVE_HOURS = "TWELVE_HOURS",
+}
+
+export const ClockFormatters: Record<ClockFormatterEnum, ClockFormatter> = {
   TWENTY_FOUR_HOURS: (hour, minute) => `${hour.get().formatted}:${minute.get().formatted}`,
+
+  TWELVE_HOURS: (hour, minute) =>
+    `${hour.get(HourFormatters.TWELVE_HOURS).formatted}:${minute.get().formatted}`,
 } as const;
 
 export class Clock {
