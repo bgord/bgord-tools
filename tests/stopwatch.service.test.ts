@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bu
 import { Stopwatch } from "../src/stopwatch.service";
 
 describe("Stopwatch", () => {
-  // Set a consistent start time
   beforeEach(() => setSystemTime(1_000_000));
 
   afterEach(() => setSystemTime());
@@ -11,7 +10,6 @@ describe("Stopwatch", () => {
   test("calculates duration correctly", () => {
     const stopwatch = new Stopwatch();
 
-    // simulate 500ms passing
     setSystemTime(1_000_000 + 500);
 
     const result = stopwatch.stop();

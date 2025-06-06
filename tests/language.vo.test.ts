@@ -1,4 +1,5 @@
 import { describe, expect, it } from "bun:test";
+
 import { Language } from "../src/language.vo";
 
 describe("Language", () => {

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+
 import { PopulationStandardDeviation } from "../src/population-standard-deviation.service";
 
 describe("Standard Deviation Calculation", () => {

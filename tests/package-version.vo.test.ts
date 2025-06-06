@@ -1,4 +1,5 @@
 import { describe, expect, it } from "bun:test";
+
 import { PackageVersion } from "../src/package-version.vo";
 
 describe("PackageVersion", () => {

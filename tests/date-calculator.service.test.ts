@@ -4,7 +4,6 @@ import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";
 
 describe("DateCalculator", () => {
-  // UTC noon
   beforeEach(() => setSystemTime(new Date("2024-06-01T12:00:00Z")));
 
   afterEach(() => setSystemTime());

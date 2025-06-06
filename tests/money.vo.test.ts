@@ -1,4 +1,5 @@
 import { describe, expect, it } from "bun:test";
+
 import { Money, MoneyDivisionFactor, MoneyMultiplicationFactor } from "../src/money.vo";
 import { RoundDown, RoundUp } from "../src/rounding.service";
 
