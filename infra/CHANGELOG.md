@@ -1,8 +1,50 @@
 # Changelog
+- 2025-06-07 01:26 a64b019 **step: bump bgord/scripts**
+- 2025-06-06 21:27 4e076cd **step: migrate image related validators**
+- 2025-06-06 17:29 4f2cdce **step: add more clock formatters**
+- 2025-06-06 17:24 b65a374 **step: add more hour formatters**
+- 2025-06-06 17:22 3e0fbfc **step: add TWENTY_FOUR_HOURS_WITHOUT_PADDING hour formatter**
+- 2025-06-06 17:17 b9739cb **step: migrate clock.vo**
+- 2025-06-06 17:15 7dc691e **step: migrate minute.vo**
+- 2025-06-06 17:14 9434024 **step: migrate hour vo**
+- 2025-06-06 16:47 c2ce26a **fix: pagination and filter naming**
+- 2025-06-06 16:42 8aad08b **refactor: migrate pagination**
+- 2025-06-06 16:41 7bf03dc **step: migrate filter**
+- 2025-06-06 16:32 aa2d680 **refactor: use test instead of it**
+- 2025-06-06 16:30 22476ae **refactor: reorganize tests**
+- 2025-06-06 16:19 2fe7cb0 **refactor: reorganize imports**
+- 2025-06-05 23:59 24da7f0 **step: reoerganize exports**
+- 2025-06-05 23:23 b18123c **step: migrate feature flag**
+- 2025-06-05 23:18 f685108 **step: migrate mime types**
+- 2025-06-05 23:15 589667d **refactor: migrate reordering**
+- 2025-06-05 23:11 7ed50ef **step: migrate revision**
+- 2025-06-05 23:07 e729f41 **step: migrate min-max-scaler**
+- 2025-06-05 23:06 347f565 **step: migrate dll**
+- 2025-06-05 23:04 477bb37 **step: migrate outlier detector**
+- 2025-06-05 23:02 12489a2 **step: migrate simple linear regression**
+- 2025-06-05 23:01 6d25db4 **step: migrate stepper**
+- 2025-06-05 22:59 173449d **step: migrate streak calculator**
+- 2025-06-05 22:57 932a144 **step: migrate visually-unambiguous-characters-generator.service.ts**
+- 2025-06-05 22:56 031ef3a **step: migrate z-score**
+- 2025-06-05 22:54 3988eec **step: migrate standard deviation**
+- 2025-06-05 22:51 7591ec7 **step: migrate thousands separator**
+- 2025-06-05 22:50 2b92748 **step: migrate randoml**
+- 2025-06-05 22:49 1d380eb **step: migrate percentage**
+- 2025-06-05 22:47 772c4cb **step: migrate mean**
+- 2025-06-05 22:46 0f3e3eb **step: migrate sum**
+- 2025-06-05 22:45 11f929d **step: migrate leap year checker**
+- 2025-06-05 22:44 62b9704 **step: migrate money vo**
+- 2025-06-05 22:42 9fdb01a **step: migrate email-mask**
+- 2025-06-05 20:28 a71dd45 **refactor: rename tests**
+## 2025-06-05 20:02 v0.6.0
+- 2025-06-05 20:02 63a9540 **0.6.0**
+- 2025-06-05 20:00 257eb38 **step: bump zod**
+- 2025-06-05 00:59 f000477 **step: bump bgord/scripts**
 - 2025-06-05 00:44 a9e1329 **refactor: remove schema from vo names**
 ## 2025-06-05 00:04 v0.5.0
 - 2025-06-05 00:04 e8e8b76 **0.5.0**
 - 2025-06-05 00:02 051f142 **Merge pull request #9 from bgord/bgord_bun_adjustments**
+- 2025-06-04 22:44 902c801 **docs: generate CHANGELOG**
 - 2025-06-04 22:04 db7bdca **docs: generate CHANGELOG**
 - 2025-06-04 22:03 d450276 **docs: generate CHANGELOG**
 - 2025-06-03 23:26 1ece1ba **step: migrate timezone vo**
