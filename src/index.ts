@@ -8,6 +8,7 @@ export * from "./email-mask.service";
 export * from "./etags.vo";
 export * from "./feature-flag.vo";
 export * from "./filter.vo";
+export * from "./hour.vo";
 export * from "./language.vo";
 export * from "./leap-year-checker.service";
 export * from "./mean.service";
