@@ -1,5 +1,6 @@
 export * from "./api-key.vo";
 export * from "./build-version.vo";
+export * from "./clock.vo";
 export * from "./date-calculator.service";
 export * from "./date-formatter.service";
 export * from "./dates-of-the-week.vo";
