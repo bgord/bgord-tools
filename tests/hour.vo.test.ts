@@ -19,6 +19,11 @@ describe("Hour", () => {
     expect(hour.get().formatted).toBe("05");
   });
 
+  test("formats using TWENTY_FOUR_HOURS_WITHOUT_PADDING", () => {
+    const hour = new Hour(5, HourFormatters.TWENTY_FOUR_HOURS_WITHOUT_PADDING);
+    expect(hour.get().formatted).toBe("5");
+  });
+
   test("formats using AM_PM", () => {
     const hour = new Hour(5, HourFormatters.AM_PM);
     expect(hour.get().formatted).toBe("5 a.m.");

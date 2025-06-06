@@ -4,8 +4,7 @@ import { Minute } from "./minute.vo";
 export type ClockFormatter = (hour: Hour, minute: Minute) => string;
 
 export const ClockFormatters: Record<string, ClockFormatter> = {
-  TWENTY_FOUR_HOURS: (hour, minute) =>
-    `${hour.get().formatted}:${minute.get().formatted}`,
+  TWENTY_FOUR_HOURS: (hour, minute) => `${hour.get().formatted}:${minute.get().formatted}`,
 } as const;
 
 export class Clock {
@@ -16,8 +15,7 @@ export class Clock {
     private readonly minute: Minute,
     formatter?: ClockFormatter,
   ) {
-    this.formatter =
-      (formatter as ClockFormatter) ?? ClockFormatters.TWENTY_FOUR_HOURS;
+    this.formatter = (formatter as ClockFormatter) ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
   get(formatter?: ClockFormatter) {
@@ -31,8 +29,7 @@ export class Clock {
 
   equals(another: Clock): boolean {
     return (
-      this.hour.get().raw === another.get().raw.hour &&
-      this.minute.get().raw === another.get().raw.minute
+      this.hour.get().raw === another.get().raw.hour && this.minute.get().raw === another.get().raw.minute
     );
   }
 
@@ -41,10 +38,7 @@ export class Clock {
       return true;
     }
 
-    if (
-      this.hour.get().raw === another.hour.get().raw &&
-      this.minute.get().raw > another.minute.get().raw
-    ) {
+    if (this.hour.get().raw === another.hour.get().raw && this.minute.get().raw > another.minute.get().raw) {
       return true;
     }
 
@@ -56,10 +50,7 @@ export class Clock {
       return true;
     }
 
-    if (
-      this.hour.get().raw === another.hour.get().raw &&
-      this.minute.get().raw < another.minute.get().raw
-    ) {
+    if (this.hour.get().raw === another.hour.get().raw && this.minute.get().raw < another.minute.get().raw) {
       return true;
     }
 

@@ -3,6 +3,8 @@ export type HourFormatter = (value: Hour["value"]) => string;
 export const HourFormatters: Record<string, HourFormatter> = {
   TWENTY_FOUR_HOURS: (value) => value.toString().padStart(2, "0"),
 
+  TWENTY_FOUR_HOURS_WITHOUT_PADDING: (value) => value.toString(),
+
   AM_PM: (value) => {
     if (value < 12) return `${value.toString()} a.m.`;
     return `${value.toString()} p.m.`;

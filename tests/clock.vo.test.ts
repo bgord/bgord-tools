@@ -1,4 +1,4 @@
-import { describe, test, expect } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 import { Clock } from "../src/clock.vo";
 import { Hour } from "../src/hour.vo";
@@ -12,8 +12,7 @@ describe("Clock", () => {
 
   test("formats using a custom formatter", () => {
     const clock = new Clock(new Hour(15), new Minute(30));
-    const customFormatter = (h: Hour, m: Minute) =>
-      `Hour=${h.get().formatted}, Min=${m.get().formatted}`;
+    const customFormatter = (h: Hour, m: Minute) => `Hour=${h.get().formatted}, Min=${m.get().formatted}`;
     expect(clock.get(customFormatter).formatted).toBe("Hour=15, Min=30");
   });
 
