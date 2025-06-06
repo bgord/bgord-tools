@@ -1,9 +1,17 @@
 export type HourFormatter = (value: Hour["value"]) => string;
 
-export const HourFormatters: Record<string, HourFormatter> = {
+enum HourFormatterEnum {
+  TWENTY_FOUR_HOURS = "TWENTY_FOUR_HOURS",
+  TWENTY_FOUR_HOURS_WO_PADDING = "TWENTY_FOUR_HOURS_WO_PADDING",
+  AM_PM = "AM_PM",
+  TWELVE_HOURS = "TWELVE_HOURS",
+  TWELVE_HOURS_WO_PADDING = "TWELVE_HOURS_WO_PADDING",
+}
+
+export const HourFormatters: Record<HourFormatterEnum, HourFormatter> = {
   TWENTY_FOUR_HOURS: (value) => value.toString().padStart(2, "0"),
 
-  TWENTY_FOUR_HOURS_WITHOUT_PADDING: (value) => value.toString(),
+  TWENTY_FOUR_HOURS_WO_PADDING: (value) => value.toString(),
 
   AM_PM: (value) => {
     if (value < 12) return `${value.toString()} a.m.`;
