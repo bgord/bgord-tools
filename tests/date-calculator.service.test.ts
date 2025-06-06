@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, setSystemTime } from "bun:test";
+import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 
 import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";
@@ -8,7 +8,7 @@ describe("DateCalculator", () => {
 
   afterEach(() => setSystemTime());
 
-  it("returns start of day timestamp for UTC timezone", () => {
+  test("returns start of day timestamp for UTC timezone", () => {
     const now = Date.now(); // 2024-06-01T12:00:00Z
     const result = DateCalculator.getStartOfDayTsInTz({
       now,
@@ -19,7 +19,7 @@ describe("DateCalculator", () => {
     expect(result).toBe(expected);
   });
 
-  it("returns start of day for UTC+2 timezone", () => {
+  test("returns start of day for UTC+2 timezone", () => {
     const now = Date.now(); // 2024-06-01T12:00:00Z
     const offset = Time.Hours(2).ms; // +2 hours
 
@@ -34,7 +34,7 @@ describe("DateCalculator", () => {
     expect(result).toBe(expected);
   });
 
-  it("returns start of day for UTC-5 timezone", () => {
+  test("returns start of day for UTC-5 timezone", () => {
     const now = Date.now(); // 2024-06-01T12:00:00Z
     const offset = -Time.Hours(5).ms;
 

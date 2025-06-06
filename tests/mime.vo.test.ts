@@ -1,9 +1,9 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 import { InvalidMimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {
-  it("should create a Mime instance with valid input", () => {
+  test("should create a Mime instance with valid input", () => {
     const plainText = "text/plain";
     const mime = new Mime(plainText);
 
@@ -13,13 +13,13 @@ describe("Mime", () => {
     expect(mime.subtype).toBe("plain");
   });
 
-  it("should throw InvalidMimeError for invalid input", () => {
+  test("should throw InvalidMimeError for invalid input", () => {
     expect(() => new Mime("")).toThrow(InvalidMimeError);
     expect(() => new Mime("/subtype")).toThrow(InvalidMimeError);
     expect(() => new Mime("type/")).toThrow(InvalidMimeError);
   });
 
-  it("should correctly check if a Mime instance satisfies another", () => {
+  test("should correctly check if a Mime instance satisfies another", () => {
     const textPlain = new Mime("text/plain");
     const textHtml = new Mime("text/html");
     const appJson = new Mime("application/json");
@@ -33,7 +33,7 @@ describe("Mime", () => {
     expect(wildcard.isSatisfiedBy(textPlain)).toBe(true);
   });
 
-  it("should correctly check wildcard type and subtype", () => {
+  test("should correctly check wildcard type and subtype", () => {
     const textPlain = new Mime("text/plain");
     const imageWildcard = new Mime("image/*");
     const wildcardPlain = new Mime("*/plain");

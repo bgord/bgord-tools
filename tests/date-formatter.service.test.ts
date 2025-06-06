@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, setSystemTime } from "bun:test";
+import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 
 import { DateFormatters } from "../src/date-formatter.service";
 
@@ -6,21 +6,21 @@ describe("DateFormatters", () => {
   const testDate = new Date("2024-06-01T15:30:00Z");
 
   describe("datetime", () => {
-    it("formats date with date and time", () => {
+    test("formats date with date and time", () => {
       const result = DateFormatters.datetime(testDate);
       expect(result).toBe("2024/06/01 15:30");
     });
   });
 
   describe("date", () => {
-    it("formats date with just year/month/day", () => {
+    test("formats date with just year/month/day", () => {
       const result = DateFormatters.date(testDate);
       expect(result).toBe("2024/06/01");
     });
   });
 
   describe("monthDay", () => {
-    it("formats date with just month/day", () => {
+    test("formats date with just month/day", () => {
       const result = DateFormatters.monthDay(testDate);
       expect(result).toBe("06/01");
     });
@@ -31,7 +31,7 @@ describe("DateFormatters", () => {
 
     afterEach(() => setSystemTime());
 
-    it("returns relative time with suffix", () => {
+    test("returns relative time with suffix", () => {
       const result = DateFormatters.relative(testDate);
       expect(result).toBe("5 minutes ago");
     });

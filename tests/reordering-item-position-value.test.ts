@@ -1,9 +1,9 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 import { ReorderingPosition } from "../src/reordering.service";
 
 describe("ReorderingPosition VO", () => {
-  it("validation errors", () => {
+  test("validation errors", () => {
     const values = [-1, 2.5, "a"];
 
     for (const value of values) {
