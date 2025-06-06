@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 
 export const Email = z.email();
+
 export type EmailType = z.infer<typeof Email>;
 
 export class EmailMask {

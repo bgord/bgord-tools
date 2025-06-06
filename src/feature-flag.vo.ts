@@ -5,6 +5,7 @@ export enum FeatureFlagEnum {
   no = "no",
 }
 export const FeatureFlagValue = z.enum(FeatureFlagEnum);
+
 export type FeatureFlagValueType = z.infer<typeof FeatureFlagValue>;
 
 export class FeatureFlag {

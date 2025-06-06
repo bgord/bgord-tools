@@ -1,9 +1,7 @@
 import type { TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
-type RateLimiterOptionsType = {
-  ms: TimestampType;
-};
+type RateLimiterOptionsType = { ms: TimestampType };
 
 type RateLimiterResultSuccessType = { allowed: true };
 

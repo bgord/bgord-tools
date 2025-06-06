@@ -1,7 +1,9 @@
 import { z } from "zod/v4";
+
 import { ETag, WeakETag } from "./etags.vo";
 
 export const RevisionValue = z.number().int().min(0);
+
 export type RevisionValueType = z.infer<typeof RevisionValue>;
 
 export class Revision {
