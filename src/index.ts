@@ -18,6 +18,7 @@ export * from "./money.vo";
 export * from "./noop.service";
 export * from "./outlier-detector.service";
 export * from "./package-version.vo";
+export * from "./pagination";
 export * from "./percentage.service";
 export * from "./population-standard-deviation.service";
 export * from "./random.service";
