@@ -7,6 +7,7 @@ export * from "./dll.service";
 export * from "./email-mask.service";
 export * from "./etags.vo";
 export * from "./feature-flag.vo";
+export * from "./filter";
 export * from "./language.vo";
 export * from "./leap-year-checker.service";
 export * from "./mean.service";
