@@ -1,5 +1,9 @@
 # Changelog
+- 2025-06-07 15:52 0b5be94 **step: bump bgord/scripts**
+- 2025-06-07 15:51 5490d9c **step: bump bgord/scripts**
+- 2025-06-07 15:43 cf89d6e **step: bump bgord/scripts**
 - 2025-06-07 15:32 e73ffa1 **step: bump bgord/scripts**
+- 2025-06-07 13:32 5140900 **docs: generate CHANGELOG**
 ## 2025-06-07 01:29 v0.7.0
 - 2025-06-07 01:29 2d3f135 **0.7.0**
 - 2025-06-07 01:28 bfd7a41 **step: update zod**
