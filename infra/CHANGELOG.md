@@ -1,6 +1,9 @@
 # Changelog
+## 2025-06-11 13:33 v0.8.0
+- 2025-06-11 13:33 c300643 **0.8.0**
 ## 2025-06-11 13:31 v0.7.1
 - 2025-06-11 13:29 1e29444 **step: update zod**
+- 2025-06-11 11:32 bde4a7e **docs: generate CHANGELOG**
 - 2025-06-11 11:31 f280f23 **docs: generate CHANGELOG**
 - 2025-06-10 20:11 8435eee **step: setup readme**
 - 2025-06-10 20:11 1059f01 **step: update zod**
