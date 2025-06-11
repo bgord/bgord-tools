@@ -1,8 +1,11 @@
 # Changelog
+- 2025-06-11 23:01 cb7e78a **step: bump zod**
+- 2025-06-11 13:56 7aa2306 **refactor: adjust build script**
 ## 2025-06-11 13:33 v0.8.0
 - 2025-06-11 13:33 c300643 **0.8.0**
 ## 2025-06-11 13:31 v0.7.1
 - 2025-06-11 13:29 1e29444 **step: update zod**
+- 2025-06-11 11:33 0d6485a **docs: generate CHANGELOG**
 - 2025-06-11 11:32 bde4a7e **docs: generate CHANGELOG**
 - 2025-06-11 11:31 f280f23 **docs: generate CHANGELOG**
 - 2025-06-10 20:11 8435eee **step: setup readme**
