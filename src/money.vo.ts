@@ -5,20 +5,23 @@ import { RoundToNearest, RoundingStrategy } from "./rounding.service";
 export const MoneyAmount = z
   .number()
   .int({ message: "money.amount.invalid " })
-  .min(0, { message: "money.amount.invalid " });
+  .min(0, { message: "money.amount.invalid " })
+  .brand("MoneyAmount");
 
 export type MoneyAmountType = z.infer<typeof MoneyAmount>;
 
 export const MoneyMultiplicationFactor = z
   .number()
-  .min(0, { message: "money.multiplication-factor.invalid" });
+  .min(0, { message: "money.multiplication-factor.invalid" })
+  .brand("MoneyMultiplicationFactor");
 
 export type MoneyMultiplicationFactorType = z.infer<typeof MoneyMultiplicationFactor>;
 
 export const MoneyDivisionFactor = z
   .number()
   .min(0, { message: "money.division-factor.invalid" })
-  .refine((value) => value !== 0, { message: "money.division-factor.invalid" });
+  .refine((value) => value !== 0, { message: "money.division-factor.invalid" })
+  .brand("MoneyDivisionFactor");
 
 export type MoneyDivisionFactorType = z.infer<typeof MoneyDivisionFactor>;
 

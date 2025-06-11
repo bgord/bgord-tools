@@ -57,7 +57,8 @@ export const PackageVersionValue = z
       minor: Number(minor),
       patch: Number(patch),
     };
-  });
+  })
+  .brand("PackageVersionValue");
 export type PackageVersionValueType = z.infer<typeof PackageVersionValue>;
 
 export class PackageVersion {

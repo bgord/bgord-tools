@@ -1,11 +1,13 @@
 import { z } from "zod/v4";
 
-export const Email = z.email();
+export const Email = z.email().brand("Email");
 
 export type EmailType = z.infer<typeof Email>;
 
+type EmailMaskedType = string;
+
 export class EmailMask {
-  static censor(email: EmailType): EmailType {
+  static censor(email: EmailType): EmailMaskedType {
     const [beforeAt, afterAt] = email.split("@");
 
     const local = beforeAt as string;

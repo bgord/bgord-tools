@@ -4,6 +4,7 @@ export const Timestamp = z
   .number()
   .int()
   .positive()
-  .default(() => Date.now());
+  .default(() => Date.now())
+  .brand("Timestamp");
 
 export type TimestampType = z.infer<typeof Timestamp>;

@@ -1,10 +1,10 @@
 import { z } from "zod/v4";
 
-const Take = z.number().int().positive();
+const Take = z.number().int().gte(0).brand("Take");
 
 type TakeType = z.infer<typeof Take>;
 
-const Skip = z.number().int().positive();
+const Skip = z.number().int().gte(0).brand("Skip");
 
 type SkipType = z.infer<typeof Skip>;
 
@@ -12,7 +12,8 @@ const Page = z.coerce
   .number()
   .int()
   .transform((value) => (value <= 0 ? 1 : value))
-  .default(1);
+  .default(1)
+  .brand("Page");
 
 export type PageType = z.infer<typeof Page>;
 
@@ -43,7 +44,7 @@ export class Pagination {
     const page = Page.parse(values.page);
     const take = Take.parse(_take);
 
-    const skip = (page - 1) * take;
+    const skip = Skip.parse((page - 1) * take);
 
     return { values: { take, skip }, page };
   }
@@ -54,8 +55,10 @@ export class Pagination {
     const currentPage = config.pagination.page;
     const lastPage = Pagination.getLastPage(config);
 
-    const previousPage = currentPage > 1 ? currentPage - 1 : undefined;
-    const nextPage = currentPage < lastPage ? currentPage + 1 : undefined;
+    const previousPage =
+      currentPage > 1 ? Page.parse(currentPage - 1) : undefined;
+    const nextPage =
+      currentPage < lastPage ? Page.parse(currentPage + 1) : undefined;
 
     return {
       result: config.result,
@@ -78,7 +81,9 @@ export class Pagination {
   }
 
   private static getLastPage(config: PaginationExhaustedConfig): PageType {
-    return Math.ceil(config.total / config.pagination.values.take);
+    const lastPage = Math.ceil(config.total / config.pagination.values.take);
+
+    return Page.parse(lastPage);
   }
 
   static empty = {
@@ -94,7 +99,7 @@ export class Pagination {
   };
 
   static getFirstPage({ take }: { take: TakeType }): PaginationType {
-    return { values: { take, skip: 0 }, page: 1 };
+    return { values: { take, skip: Skip.parse(0) }, page: Page.parse(1) };
   }
 }
 

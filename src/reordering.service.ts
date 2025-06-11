@@ -2,15 +2,15 @@ import { z } from "zod/v4";
 
 import { DoublyLinkedList, Node } from "./dll.service";
 
-export const ReorderingItemPositionValue = z.number().int().min(0);
+export const ReorderingItemPositionValue = z.number().int().min(0).brand("ReorderingItemPositionValue");
 
 export type ReorderingItemPositionValueType = z.infer<typeof ReorderingItemPositionValue>;
 
-export const ReorderingCorrelationId = z.string().min(1);
+export const ReorderingCorrelationId = z.string().min(1).brand("ReorderingCorrelationId");
 
 export type ReorderingCorrelationIdType = z.infer<typeof ReorderingCorrelationId>;
 
-export const ReorderingItemId = z.uuid();
+export const ReorderingItemId = z.uuid().brand("ReorderingItemId");
 
 export type ReorderingItemIdType = z.infer<typeof ReorderingItemId>;
 
@@ -99,7 +99,7 @@ export class ReorderingCalculator {
   }
 
   add(id: ReorderingItem["id"]): ReorderingItem {
-    const position = new ReorderingPosition(this.dll.getSize());
+    const position = new ReorderingPosition(ReorderingItemPositionValue.parse(this.dll.getSize()));
     const item = new ReorderingItem(id, position);
     this.dll.append(new Node(item));
     return item;
@@ -155,10 +155,11 @@ export class ReorderingCalculator {
 export class ReorderingIntegrator {
   static appendPosition(reordering: ReorderingType[]) {
     return function <T extends { id: ReorderingItemIdType }>(item: T): WithReorderingPositionValue<T> {
-      return {
-        ...item,
-        position: reordering.find((x) => x.id === item.id)?.position ?? 0,
-      };
+      const position = ReorderingItemPositionValue.parse(
+        reordering.find((x) => x.id === item.id)?.position ?? 0,
+      );
+
+      return { ...item, position };
     };
   }
 

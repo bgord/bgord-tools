@@ -1,4 +1,4 @@
-import type { TimestampType } from "./timestamp.vo";
+import { Timestamp, TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
 enum StopwatchState {
@@ -11,7 +11,7 @@ export type StopwatchResultType = { durationMs: TimestampType };
 export class Stopwatch {
   private state: StopwatchState = StopwatchState.started;
 
-  private readonly startMs: TimestampType = Date.now();
+  private readonly startMs: TimestampType = Timestamp.parse(Date.now());
 
   private stopMs: Falsy<TimestampType>;
 
@@ -21,8 +21,8 @@ export class Stopwatch {
     }
 
     this.state = StopwatchState.stopped;
-    this.stopMs = Date.now();
+    this.stopMs = Timestamp.parse(Date.now());
 
-    return { durationMs: this.stopMs - this.startMs };
+    return { durationMs: Timestamp.parse(this.stopMs - this.startMs) };
   }
 }

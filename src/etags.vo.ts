@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-const RevisionValue = z.number().int().min(0);
+const RevisionValue = z.number().int().min(0).brand("RevisionValue");
 
 type RevisionValueType = z.infer<typeof RevisionValue>;
 
@@ -23,7 +23,7 @@ export class ETag {
     const candidate = Number(value);
 
     if (Number.isNaN(candidate)) return null;
-    return new ETag(candidate);
+    return new ETag(RevisionValue.parse(candidate));
   }
 }
 
@@ -46,6 +46,6 @@ export class WeakETag {
     const candidate = Number(value.split("W/")[1]);
 
     if (Number.isNaN(candidate)) return null;
-    return new WeakETag(candidate);
+    return new WeakETag(RevisionValue.parse(candidate));
   }
 }

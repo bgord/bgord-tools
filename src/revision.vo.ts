@@ -2,14 +2,14 @@ import { z } from "zod/v4";
 
 import { ETag, WeakETag } from "./etags.vo";
 
-export const RevisionValue = z.number().int().min(0);
+export const RevisionValue = z.number().int().min(0).brand("RevisionValue");
 
 export type RevisionValueType = z.infer<typeof RevisionValue>;
 
 export class Revision {
   readonly value: RevisionValueType;
 
-  static initial: RevisionValueType = 0;
+  static initial: RevisionValueType = RevisionValue.parse(0);
 
   constructor(value: unknown) {
     const result = RevisionValue.safeParse(value);

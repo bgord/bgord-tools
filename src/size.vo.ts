@@ -9,7 +9,7 @@ export enum SizeUnit {
   GB = "GB",
 }
 
-const SizeValue = z.number().positive();
+const SizeValue = z.number().positive().brand("SizeValue");
 
 export type SizeValueType = z.infer<typeof SizeValue>;
 
@@ -81,11 +81,11 @@ export class Size {
   private calculateBytes(config: SizeConfigType): SizeValueType {
     switch (config.unit) {
       case SizeUnit.kB:
-        return config.value * Size.KB_MULTIPLIER;
+        return SizeValue.parse(config.value * Size.KB_MULTIPLIER);
       case SizeUnit.MB:
-        return config.value * Size.MB_MULTIPLIER;
+        return SizeValue.parse(config.value * Size.MB_MULTIPLIER);
       case SizeUnit.GB:
-        return config.value * Size.GB_MULTIPLIER;
+        return SizeValue.parse(config.value * Size.GB_MULTIPLIER);
       default:
         // SizeUnit.b
         return config.value;
