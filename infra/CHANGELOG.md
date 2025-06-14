@@ -1,10 +1,13 @@
 # Changelog
+## 2025-06-14 10:06 v0.9.0
+- 2025-06-14 10:06 3eefb87 **0.9.0**
 - 2025-06-14 10:04 65167ca **step: bump bgord/scripts**
 - 2025-06-14 10:04 2e133ea **feature: add iban vo**
 - 2025-06-14 09:32 e8f0c63 **step: change tsconfig target and module to es2022**
 - 2025-06-14 09:30 1aa5873 **step: bump packages**
 - 2025-06-14 09:27 c3126fb **step: regenerate lock file**
 - 2025-06-14 09:27 7b2bfeb **fix: formatting**
+- 2025-06-14 08:05 da19700 **docs: generate CHANGELOG**
 - 2025-06-14 07:35 cfffffb **docs: generate CHANGELOG**
 - 2025-06-11 23:20 6161012 **step: add brand types**
 - 2025-06-11 23:01 cb7e78a **step: bump zod**
