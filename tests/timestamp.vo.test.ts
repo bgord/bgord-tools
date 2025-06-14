@@ -6,7 +6,15 @@ describe("Timestamp", () => {
   test("parses a valid positive integer", () => {
     const now = Date.now();
     const parsed = Timestamp.parse(now);
-    expect(parsed).toBe(now);
+    // @ts-expect-error
+    expect(parsed).toEqual(now);
+  });
+
+  test("accepts 0", () => {
+    const now = 0;
+    const parsed = Timestamp.parse(now);
+    // @ts-expect-error
+    expect(parsed).toEqual(now);
   });
 
   test("throws on negative numbers", () => {
