@@ -1,4 +1,5 @@
 # Changelog
+- 2025-06-14 10:09 7413d1e **fix: zod v4 import**
 ## 2025-06-14 10:06 v0.9.0
 - 2025-06-14 10:06 3eefb87 **0.9.0**
 - 2025-06-14 10:04 65167ca **step: bump bgord/scripts**
@@ -7,6 +8,7 @@
 - 2025-06-14 09:30 1aa5873 **step: bump packages**
 - 2025-06-14 09:27 c3126fb **step: regenerate lock file**
 - 2025-06-14 09:27 7b2bfeb **fix: formatting**
+- 2025-06-14 08:06 c901e28 **docs: generate CHANGELOG**
 - 2025-06-14 08:05 da19700 **docs: generate CHANGELOG**
 - 2025-06-14 07:35 cfffffb **docs: generate CHANGELOG**
 - 2025-06-11 23:20 6161012 **step: add brand types**
