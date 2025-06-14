@@ -11,9 +11,9 @@ export enum SizeUnit {
 
 const SizeValue = z.number().positive().brand("SizeValue");
 
-export type SizeValueType = z.infer<typeof SizeValue>;
+type SizeValueType = z.infer<typeof SizeValue>;
 
-type SizeConfigType = { unit: SizeUnit; value: SizeValueType };
+type SizeConfigType = { unit: SizeUnit; value: number };
 
 export class Size {
   private readonly unit: SizeUnit;
@@ -31,7 +31,7 @@ export class Size {
   constructor(config: SizeConfigType) {
     this.unit = config.unit;
     this.value = SizeValue.parse(config.value);
-    this.bytes = this.calculateBytes(config);
+    this.bytes = this.calculateBytes();
   }
 
   toString(): string {
@@ -78,17 +78,17 @@ export class Size {
 
   static unit = SizeUnit;
 
-  private calculateBytes(config: SizeConfigType): SizeValueType {
-    switch (config.unit) {
+  private calculateBytes(): SizeValueType {
+    switch (this.unit) {
       case SizeUnit.kB:
-        return SizeValue.parse(config.value * Size.KB_MULTIPLIER);
+        return SizeValue.parse(this.value * Size.KB_MULTIPLIER);
       case SizeUnit.MB:
-        return SizeValue.parse(config.value * Size.MB_MULTIPLIER);
+        return SizeValue.parse(this.value * Size.MB_MULTIPLIER);
       case SizeUnit.GB:
-        return SizeValue.parse(config.value * Size.GB_MULTIPLIER);
+        return SizeValue.parse(this.value * Size.GB_MULTIPLIER);
       default:
         // SizeUnit.b
-        return config.value;
+        return this.value;
     }
   }
 }
