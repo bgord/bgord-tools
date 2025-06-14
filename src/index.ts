@@ -34,7 +34,6 @@ export * from "./revision.vo";
 export * from "./rounding.service";
 export * from "./simple-linear-regression.service";
 export * from "./size.vo";
-export * from "./sleep.service";
 export * from "./stepper.service";
 export * from "./stopwatch.service";
 export * from "./streak-calculator.service";
