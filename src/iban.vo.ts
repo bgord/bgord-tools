@@ -5,10 +5,10 @@ const IBAN_REGEX = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/;
 
 const IBANValueSchema = z
   .string()
-  .transform((val) => val.replace(/\s+/g, "").toUpperCase())
-  .refine((iban) => IBAN_REGEX.test(iban), {
-    message: "invalid.iban.format",
-  });
+  .trim()
+  .toUpperCase()
+  .transform((val) => val.replace(/\s+/g, ""))
+  .refine((iban) => IBAN_REGEX.test(iban), { message: "invalid.iban.format" });
 
 type IBANValueType = z.infer<typeof IBANValueSchema>;
 
