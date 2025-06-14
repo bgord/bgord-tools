@@ -55,10 +55,8 @@ export class Pagination {
     const currentPage = config.pagination.page;
     const lastPage = Pagination.getLastPage(config);
 
-    const previousPage =
-      currentPage > 1 ? Page.parse(currentPage - 1) : undefined;
-    const nextPage =
-      currentPage < lastPage ? Page.parse(currentPage + 1) : undefined;
+    const previousPage = currentPage > 1 ? Page.parse(currentPage - 1) : undefined;
+    const nextPage = currentPage < lastPage ? Page.parse(currentPage + 1) : undefined;
 
     return {
       result: config.result,
