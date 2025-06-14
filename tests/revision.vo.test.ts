@@ -1,11 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
-import { ETag, WeakETag } from "../src/etags.vo";
+import { ETag, RevisionValue, WeakETag } from "../src/etags.vo";
 import { InvalidRevisionError, Revision, RevisionMismatchError } from "../src/revision.vo";
 
 describe("Revision class", () => {
   test("Revision constructor should create a valid Revision instance", () => {
-    const revisionValue = 0;
+    const revisionValue = RevisionValue.parse(0);
     const revision = new Revision(revisionValue);
 
     expect(revision.value).toBe(revisionValue);
@@ -37,7 +37,7 @@ describe("Revision class", () => {
     const revision = new Revision(123);
     const incrementedRevision = revision.next();
 
-    expect(incrementedRevision.value).toBe(revision.value + 1);
+    expect(incrementedRevision.value).toBe(RevisionValue.parse(revision.value + 1));
   });
 
   test("Revision fromETag should create a valid Revision instance from ETag", () => {
@@ -58,7 +58,7 @@ describe("Revision class", () => {
     const weakEtag = WeakETag.fromHeader("W/123");
     const revision = Revision.fromWeakETag(weakEtag);
 
-    expect(revision.value).toEqual(weakEtag?.revision as number);
+    expect(revision.value).toEqual(RevisionValue.parse(weakEtag?.revision));
   });
 
   test("Revision fromWeakETag should throw InvalidRevisionError for null WeakETag", () => {

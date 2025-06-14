@@ -36,7 +36,7 @@ describe("DateCalculator", () => {
   });
 
   test("returns start of day for UTC-5 timezone", () => {
-    const now = Date.now(); // 2024-06-01T12:00:00Z
+    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
     const offset = -Time.Hours(5).ms;
 
     const result = DateCalculator.getStartOfDayTsInTz({
