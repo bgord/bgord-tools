@@ -1,5 +1,11 @@
 # Changelog
+- 2025-06-14 09:32 e8f0c63 **step: change tsconfig target and module to es2022**
+- 2025-06-14 09:30 1aa5873 **step: bump packages**
+- 2025-06-14 09:27 c3126fb **step: regenerate lock file**
+- 2025-06-14 09:27 7b2bfeb **fix: formatting**
+- 2025-06-11 23:20 6161012 **step: add brand types**
 - 2025-06-11 23:01 cb7e78a **step: bump zod**
+- 2025-06-11 21:01 bb86cdb **docs: generate CHANGELOG**
 - 2025-06-11 13:56 7aa2306 **refactor: adjust build script**
 ## 2025-06-11 13:33 v0.8.0
 - 2025-06-11 13:33 c300643 **0.8.0**
