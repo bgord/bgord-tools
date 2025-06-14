@@ -1,7 +1,10 @@
 # Changelog
+## 2025-06-14 12:49 v0.9.2
+- 2025-06-14 12:49 e1851ba **0.9.2**
 - 2025-06-14 12:47 da3e36c **refactor: adjust rate limiter types**
 - 2025-06-14 12:34 1f92f9e **step: make timestamp accept 0**
 - 2025-06-14 12:24 1bd43ed **refactor: improve size vo implementation**
+- 2025-06-14 10:48 dfabe00 **docs: generate CHANGELOG**
 ## 2025-06-14 10:10 v0.9.1
 - 2025-06-14 10:10 49b8065 **0.9.1**
 - 2025-06-14 10:09 7413d1e **fix: zod v4 import**
