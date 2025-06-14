@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 
 import { Stopwatch } from "../src/stopwatch.service";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("Stopwatch", () => {
   beforeEach(() => setSystemTime(1_000_000));
@@ -14,7 +15,7 @@ describe("Stopwatch", () => {
 
     const result = stopwatch.stop();
 
-    expect(result.durationMs).toBe(500);
+    expect(result.durationMs).toBe(Timestamp.parse(500));
   });
 
   test("throws if stop is called twice", () => {

@@ -1,10 +1,10 @@
 import { z } from "zod/v4";
 
-const Take = z.number().int().gte(0).brand("Take");
+const Take = z.number().int().gte(0);
 
 type TakeType = z.infer<typeof Take>;
 
-const Skip = z.number().int().gte(0).brand("Skip");
+const Skip = z.number().int().gte(0);
 
 type SkipType = z.infer<typeof Skip>;
 
@@ -12,8 +12,7 @@ const Page = z.coerce
   .number()
   .int()
   .transform((value) => (value <= 0 ? 1 : value))
-  .default(1)
-  .brand("Page");
+  .default(1);
 
 export type PageType = z.infer<typeof Page>;
 

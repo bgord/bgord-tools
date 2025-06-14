@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { ETag, WeakETag } from "../src/etags.vo";
+import { ETag, RevisionValue, WeakETag } from "../src/etags.vo";
 
 describe("ETag class", () => {
   test("ETag fromHeader should create a valid ETag instance", () => {
@@ -27,7 +27,7 @@ describe("WeakETag class", () => {
     const weakEtag = WeakETag.fromHeader(value);
 
     expect(weakEtag?.value).toBe(value);
-    expect(weakEtag?.revision).toBe(123);
+    expect(weakEtag?.revision).toBe(RevisionValue.parse(123));
   });
 
   test("WeakETag fromHeader should throw an error for invalid WeakETag value", () => {

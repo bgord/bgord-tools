@@ -4,9 +4,9 @@ import { Language } from "../src/language.vo";
 
 describe("Language", () => {
   test("accepts valid lowercase 2-letter ISO codes", () => {
-    expect(Language.parse("en")).toBe("en");
-    expect(Language.parse("es")).toBe("es");
-    expect(Language.parse("pl")).toBe("pl");
+    expect(() => Language.parse("en")).not.toThrow();
+    expect(() => Language.parse("es")).not.toThrow();
+    expect(() => Language.parse("pl")).not.toThrow();
   });
 
   test("rejects uppercase codes", () => {

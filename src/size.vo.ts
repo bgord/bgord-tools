@@ -9,7 +9,7 @@ export enum SizeUnit {
   GB = "GB",
 }
 
-const SizeValue = z.number().positive().brand("SizeValue");
+export const SizeValue = z.number().positive().brand("SizeValue");
 
 type SizeValueType = z.infer<typeof SizeValue>;
 

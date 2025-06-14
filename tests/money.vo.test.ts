@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { Money, MoneyDivisionFactor, MoneyMultiplicationFactor } from "../src/money.vo";
+import { Money, MoneyAmount, MoneyDivisionFactor, MoneyMultiplicationFactor } from "../src/money.vo";
 import { RoundDown, RoundUp } from "../src/rounding.service";
 
 const roundUp = new RoundUp();
@@ -9,12 +9,12 @@ const roundDown = new RoundDown();
 describe("Money", () => {
   test("creates an empty instance", () => {
     const money = new Money();
-    expect(money.getAmount()).toEqual(0);
+    expect(money.getAmount()).toEqual(MoneyAmount.parse(0));
   });
 
   test("creates an instance with a value", () => {
     const money = new Money(100);
-    expect(money.getAmount()).toEqual(100);
+    expect(money.getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
   test("throws an error when passing a float value", () => {
@@ -25,35 +25,35 @@ describe("Money", () => {
     const money1 = new Money(100);
     const money2 = new Money();
 
-    expect(money1.add(money2).getAmount()).toEqual(100);
+    expect(money1.add(money2).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
   test("multiply() - integer", () => {
     const money = new Money(100);
     const factor = MoneyMultiplicationFactor.parse(5);
 
-    expect(money.multiply(factor).getAmount()).toEqual(500);
+    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(500));
   });
 
   test("multiply() - float", () => {
     const money = new Money(100);
     const factor = MoneyMultiplicationFactor.parse(1.5);
 
-    expect(money.multiply(factor).getAmount()).toEqual(150);
+    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(150));
   });
 
   test("subtract() - result more than zero", () => {
     const money1 = new Money(100);
     const money2 = new Money(20);
 
-    expect(money1.subtract(money2).getAmount()).toEqual(80);
+    expect(money1.subtract(money2).getAmount()).toEqual(MoneyAmount.parse(80));
   });
 
   test("subtract() - result zero", () => {
     const money1 = new Money(100);
     const money2 = new Money(100);
 
-    expect(money1.subtract(money2).getAmount()).toEqual(0);
+    expect(money1.subtract(money2).getAmount()).toEqual(MoneyAmount.parse(0));
   });
 
   test("subtract() - result less than zero", () => {
@@ -67,49 +67,49 @@ describe("Money", () => {
     const money = new Money(99);
     const factor = MoneyMultiplicationFactor.parse(1.5);
 
-    expect(money.multiply(factor).getAmount()).toEqual(149);
+    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(149));
   });
 
   test("multiply() - float - with round-up rounding", () => {
     const money = new Money(99, roundUp);
     const factor = MoneyMultiplicationFactor.parse(1.5);
 
-    expect(money.multiply(factor).getAmount()).toEqual(149);
+    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(149));
   });
 
   test("multiply() - float - with round-down rounding", () => {
     const money = new Money(99, roundDown);
     const factor = MoneyMultiplicationFactor.parse(1.5);
 
-    expect(money.multiply(factor).getAmount()).toEqual(148);
+    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(148));
   });
 
   test("divide() - int", () => {
     const money = new Money(99);
     const factor = MoneyDivisionFactor.parse(1.5);
 
-    expect(money.divide(factor).getAmount()).toEqual(66);
+    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(66));
   });
 
   test("divide() - float - with default round-to-nearest rounding", () => {
     const money = new Money(99);
     const factor = MoneyDivisionFactor.parse(2);
 
-    expect(money.divide(factor).getAmount()).toEqual(50);
+    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(50));
   });
 
   test("divide() - float - with round-up rounding", () => {
     const money = new Money(99, roundUp);
     const factor = MoneyDivisionFactor.parse(2);
 
-    expect(money.divide(factor).getAmount()).toEqual(50);
+    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(50));
   });
 
   test("divide() - float - with round-down rounding", () => {
     const money = new Money(99, roundDown);
     const factor = MoneyDivisionFactor.parse(2);
 
-    expect(money.divide(factor).getAmount()).toEqual(49);
+    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(49));
   });
 
   test("equals()", () => {

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bu
 
 import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("DateCalculator", () => {
   beforeEach(() => setSystemTime(new Date("2024-06-01T12:00:00Z")));
@@ -9,7 +10,7 @@ describe("DateCalculator", () => {
   afterEach(() => setSystemTime());
 
   test("returns start of day timestamp for UTC timezone", () => {
-    const now = Date.now(); // 2024-06-01T12:00:00Z
+    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
     const result = DateCalculator.getStartOfDayTsInTz({
       now,
       timeZoneOffsetMs: 0,
@@ -20,7 +21,7 @@ describe("DateCalculator", () => {
   });
 
   test("returns start of day for UTC+2 timezone", () => {
-    const now = Date.now(); // 2024-06-01T12:00:00Z
+    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
     const offset = Time.Hours(2).ms; // +2 hours
 
     const result = DateCalculator.getStartOfDayTsInTz({

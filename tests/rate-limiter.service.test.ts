@@ -1,13 +1,14 @@
 import { describe, expect, test } from "bun:test";
 
 import { RateLimiter } from "../src/rate-limiter.service";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("RateLimiter", () => {
   test("should allow the first invocation", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
-    const result = rateLimiter.verify(0);
+    const result = rateLimiter.verify(Timestamp.parse(0));
     expect(result.allowed).toBe(true);
   });
 
@@ -15,12 +16,12 @@ describe("RateLimiter", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
-    const currentTimestampMs = 0;
+    const currentTimestampMs = Timestamp.parse(0);
 
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toBe(true);
 
-    const second = rateLimiter.verify(currentTimestampMs + ms - 1);
+    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms - 1));
     expect(second.allowed).toBe(false);
     // @ts-ignore
     expect(second.remainingMs).toBe(1);
@@ -30,12 +31,12 @@ describe("RateLimiter", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
-    const currentTimestampMs = 0;
+    const currentTimestampMs = Timestamp.parse(0);
 
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toBe(true);
 
-    const second = rateLimiter.verify(currentTimestampMs + ms);
+    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms));
     expect(second.allowed).toBe(true);
   });
 
@@ -43,18 +44,18 @@ describe("RateLimiter", () => {
     const ms = 1000;
     const rateLimiter = new RateLimiter({ ms });
 
-    const currentTimestampMs = 0;
+    const currentTimestampMs = Timestamp.parse(0);
 
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toBe(true);
 
-    const second = rateLimiter.verify(currentTimestampMs + ms);
+    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms));
     expect(second.allowed).toBe(true);
 
-    const third = rateLimiter.verify(currentTimestampMs + ms + 1);
+    const third = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms + 1));
     expect(third.allowed).toBe(false);
 
-    const fourth = rateLimiter.verify(currentTimestampMs + ms + 2);
+    const fourth = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms + 2));
     expect(fourth.allowed).toBe(false);
   });
 });

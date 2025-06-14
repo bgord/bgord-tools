@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-const RevisionValue = z.number().int().min(0).brand("RevisionValue");
+export const RevisionValue = z.number().int().min(0).brand("RevisionValue");
 
 type RevisionValueType = z.infer<typeof RevisionValue>;
 

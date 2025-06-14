@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { Size, SizeUnit } from "../src/size.vo";
+import { Size, SizeUnit, SizeValue } from "../src/size.vo";
 
 describe("Size", () => {
   test("Create Size instance with bytes", () => {
@@ -37,7 +37,7 @@ describe("Size", () => {
 
     const bytes = size.toBytes();
 
-    expect(bytes).toEqual(sizeConfig.value);
+    expect(bytes).toEqual(SizeValue.parse(sizeConfig.value));
   });
 
   test("Convert Size to Bytes (kB)", () => {
@@ -46,7 +46,7 @@ describe("Size", () => {
 
     const bytes = size.toBytes();
 
-    expect(bytes).toEqual(524288);
+    expect(bytes).toEqual(SizeValue.parse(524288));
   });
 
   test("Convert Size to Bytes (MB)", () => {
@@ -55,7 +55,7 @@ describe("Size", () => {
 
     const bytes = size.toBytes();
 
-    expect(bytes).toEqual(1572864);
+    expect(bytes).toEqual(SizeValue.parse(1572864));
   });
 
   test("Convert Size to Bytes (GB)", () => {
@@ -64,35 +64,35 @@ describe("Size", () => {
 
     const bytes = size.toBytes();
 
-    expect(bytes).toEqual(1610612736);
+    expect(bytes).toEqual(SizeValue.parse(1610612736));
   });
 
   test("Static method: Convert Size to Bytes (bytes)", () => {
     const sizeConfig = { unit: SizeUnit.b, value: 8192 };
     const bytes = Size.toBytes(sizeConfig);
 
-    expect(bytes).toEqual(sizeConfig.value);
+    expect(bytes).toEqual(SizeValue.parse(sizeConfig.value));
   });
 
   test("Static method: Convert Size to Bytes (kB)", () => {
     const sizeConfig = { unit: SizeUnit.kB, value: 256 };
     const bytes = Size.toBytes(sizeConfig);
 
-    expect(bytes).toEqual(262144);
+    expect(bytes).toEqual(SizeValue.parse(262144));
   });
 
   test("Static method: Convert Size to Bytes (MB)", () => {
     const sizeConfig = { unit: SizeUnit.MB, value: 0.75 };
     const bytes = Size.toBytes(sizeConfig);
 
-    expect(bytes).toEqual(786432);
+    expect(bytes).toEqual(SizeValue.parse(786432));
   });
 
   test("Static method: Convert Size to Bytes (GB)", () => {
     const sizeConfig = { unit: SizeUnit.GB, value: 0.75 };
     const bytes = Size.toBytes(sizeConfig);
 
-    expect(bytes).toEqual(805306368);
+    expect(bytes).toEqual(SizeValue.parse(805306368));
   });
 
   test("Comparison function", () => {
