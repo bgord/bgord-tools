@@ -1,6 +1,10 @@
 # Changelog
+- 2025-06-15 00:07 6ad30a5 **fix: types in tests**
+- 2025-06-14 23:40 40b2890 **feature: add iban mask**
+- 2025-06-14 23:08 1532d01 **refactor: improve iban vo**
 - 2025-06-14 19:56 bdbcef8 **refactor: remove sleep**
 - 2025-06-14 19:56 63b5283 **step: update cspell**
+- 2025-06-14 17:57 dfe86cd **docs: generate CHANGELOG**
 ## 2025-06-14 12:49 v0.9.2
 - 2025-06-14 12:49 e1851ba **0.9.2**
 - 2025-06-14 12:47 da3e36c **refactor: adjust rate limiter types**
