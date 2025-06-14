@@ -1,7 +1,8 @@
+import type { TimeResult } from "./time.service";
 import { Timestamp, TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
-type RateLimiterOptionsType = { ms: TimestampType };
+type RateLimiterOptionsType = Pick<TimeResult, "ms">;
 
 type RateLimiterResultSuccessType = { allowed: true };
 
