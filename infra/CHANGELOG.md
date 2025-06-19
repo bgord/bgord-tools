@@ -1,7 +1,10 @@
 # Changelog
+- 2025-06-15 00:14 ffc1237 **refactor: remove tsconfig rootDir**
 - 2025-06-15 00:07 6ad30a5 **fix: types in tests**
+- 2025-06-15 00:07 4b97847 **fix: types in tests**
 - 2025-06-14 23:40 40b2890 **feature: add iban mask**
 - 2025-06-14 23:08 1532d01 **refactor: improve iban vo**
+- 2025-06-14 22:08 46c9409 **docs: generate CHANGELOG**
 - 2025-06-14 19:56 bdbcef8 **refactor: remove sleep**
 - 2025-06-14 19:56 63b5283 **step: update cspell**
 - 2025-06-14 17:57 dfe86cd **docs: generate CHANGELOG**
