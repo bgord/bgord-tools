@@ -1,4 +1,4 @@
-import { RoundToDecimal, RoundingStrategy } from "./rounding.service";
+import { RoundingStrategy, RoundToDecimal } from "./rounding.service";
 import { Sum } from "./sum.service";
 
 export class Mean {

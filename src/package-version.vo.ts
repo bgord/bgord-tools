@@ -41,7 +41,7 @@ export const PackageVersionValue = z
         }
 
         return true;
-      } catch (error) {
+      } catch (_error) {
         return false;
       }
     },

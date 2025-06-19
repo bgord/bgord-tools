@@ -1,6 +1,6 @@
 import { Mean } from "./mean.service";
 import { PopulationStandardDeviation } from "./population-standard-deviation.service";
-import { RoundToDecimal, RoundingStrategy } from "./rounding.service";
+import { RoundingStrategy, RoundToDecimal } from "./rounding.service";
 
 export class ZScore {
   private readonly mean: number;

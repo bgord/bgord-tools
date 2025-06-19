@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
-
-import { IbanMask } from "../src/iban-mask.service";
 import { IBAN } from "../src/iban.vo";
+import { IbanMask } from "../src/iban-mask.service";
 
 describe("IbanMask", () => {
   test("works for a correct value with spaces", () => {

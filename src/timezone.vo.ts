@@ -15,7 +15,7 @@ export const Timezone = z
 
         // If the formatting succeeds without throwing an error, the timezone is valid
         return true;
-      } catch (error) {
+      } catch (_error) {
         // An error occurred, indicating an invalid timezone
         return false;
       }
