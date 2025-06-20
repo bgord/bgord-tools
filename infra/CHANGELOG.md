@@ -1,4 +1,5 @@
 # Changelog
+- 2025-06-20 11:25 a37a977 **step: bump bgord/scripts**
 ## 2025-06-19 12:12 v0.9.3
 - 2025-06-19 12:12 689fb76 **0.9.3**
 - 2025-06-19 12:11 96a8afe **step: bump bgord/scripts**
@@ -6,6 +7,7 @@
 - 2025-06-19 12:06 52be289 **step: update biome**
 - 2025-06-19 12:05 c7c51f2 **step: update zod**
 - 2025-06-19 12:05 c46b243 **step: update lefthook**
+- 2025-06-19 10:12 e9479d9 **docs: generate CHANGELOG**
 - 2025-06-19 10:11 a09892f **docs: generate CHANGELOG**
 - 2025-06-19 10:04 bdd1a38 **docs: generate CHANGELOG**
 - 2025-06-15 00:14 ffc1237 **refactor: remove tsconfig rootDir**
