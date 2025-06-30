@@ -1,5 +1,8 @@
 # Changelog
+- 2025-06-30 19:14 47a9d31 **step: bump bgord/scripts**
+- 2025-06-25 14:30 240c52d **step: update packages**
 - 2025-06-20 11:25 a37a977 **step: bump bgord/scripts**
+- 2025-06-20 09:25 0710e75 **docs: generate CHANGELOG**
 ## 2025-06-19 12:12 v0.9.3
 - 2025-06-19 12:12 689fb76 **0.9.3**
 - 2025-06-19 12:11 96a8afe **step: bump bgord/scripts**
