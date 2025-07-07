@@ -1,6 +1,9 @@
 # Changelog
+- 2025-07-07 13:55 41bd079 **step: bump bgord/scripts**
+- 2025-07-07 13:55 122b3ab **step: update packages**
 - 2025-07-02 23:35 da2beb5 **step: update packages**
 - 2025-07-02 23:35 7a451f7 **step: bump bgord/scripts**
+- 2025-07-02 21:36 6d869b9 **docs: generate CHANGELOG**
 - 2025-06-30 19:15 35212ab **step: bump bgord/scripts**
 - 2025-06-30 19:15 2e1fa11 **step: sync configs**
 - 2025-06-30 19:14 47a9d31 **step: bump bgord/scripts**
