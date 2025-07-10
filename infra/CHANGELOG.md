@@ -1,8 +1,10 @@
 # Changelog
+- 2025-07-10 21:24 0fc83a0 **step: install knip**
 ## 2025-07-10 21:20 v0.10.1
 - 2025-07-10 21:20 617038b **0.10.1**
 - 2025-07-10 21:19 507ba7a **refactor: remove zod/v4 reference**
 - 2025-07-10 21:17 cf61bfb **step: update packages**
+- 2025-07-10 19:20 a9f65f7 **docs: generate CHANGELOG**
 - 2025-07-10 19:19 72fc557 **docs: generate CHANGELOG**
 ## 2025-07-07 16:36 v0.10.0
 - 2025-07-07 16:36 61bca1f **0.10.0**
