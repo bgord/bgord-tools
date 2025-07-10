@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { z } from "zod";
 
 import { RoundToDecimal } from "./rounding.service";
 

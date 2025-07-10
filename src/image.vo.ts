@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { z } from "zod";
 
 export const Width = z.number().int().positive().max(10000).brand("Width");
 

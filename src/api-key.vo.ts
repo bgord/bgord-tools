@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { z } from "zod";
 
 export const ApiKey = z.string().trim().length(64).brand("ApiKey");
 
