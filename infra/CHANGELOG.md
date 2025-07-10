@@ -1,7 +1,10 @@
 # Changelog
+- 2025-07-10 21:19 507ba7a **refactor: remove zod/v4 reference**
+- 2025-07-10 21:17 cf61bfb **step: update packages**
 ## 2025-07-07 16:36 v0.10.0
 - 2025-07-07 16:36 61bca1f **0.10.0**
 - 2025-07-07 14:39 2e31765 **step: bump bgord/scripts**
+- 2025-07-07 14:36 7d084bc **docs: generate CHANGELOG**
 - 2025-07-07 13:55 41bd079 **step: bump bgord/scripts**
 - 2025-07-07 13:55 122b3ab **step: update packages**
 - 2025-07-07 12:40 6237515 **docs: generate CHANGELOG**
