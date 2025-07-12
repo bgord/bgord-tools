@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
-import { ETag, RevisionValue, WeakETag } from "../src/etags.vo";
+import { ETag, WeakETag } from "../src/etags.vo";
+import { RevisionValue } from "../src/revision.vo";
 
 describe("ETag class", () => {
   test("ETag fromHeader should create a valid ETag instance", () => {

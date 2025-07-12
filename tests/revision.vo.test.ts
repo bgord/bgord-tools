@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
-import { ETag, RevisionValue, WeakETag } from "../src/etags.vo";
-import { InvalidRevisionError, Revision, RevisionMismatchError } from "../src/revision.vo";
+import { ETag, WeakETag } from "../src/etags.vo";
+import { InvalidRevisionError, Revision, RevisionMismatchError, RevisionValue } from "../src/revision.vo";
 
 describe("Revision class", () => {
   test("Revision constructor should create a valid Revision instance", () => {
