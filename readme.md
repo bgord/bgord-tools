@@ -1,1 +1,77 @@
-# @bgord/tools
+# bgord-tools
+
+## Configuration:
+
+Clone the repository
+
+```
+git clone git@github.com:bgord/journal.git --recurse-submodules
+```
+
+Install packages
+
+```
+bun i
+```
+
+Run the tests
+
+```
+./bgord-scripts/test-run.sh
+```
+
+## Files:
+
+```
+src/
+├── api-key.vo.ts
+├── build-version.vo.ts
+├── clock.vo.ts
+├── date-calculator.service.ts
+├── date-formatter.service.ts
+├── dates-of-the-week.vo.ts
+├── dll.service.ts
+├── email-mask.service.ts
+├── etags.vo.ts
+├── feature-flag.vo.ts
+├── filter.vo.ts
+├── hour.vo.ts
+├── iban-mask.service.ts
+├── iban.vo.ts
+├── image.vo.ts
+├── language.vo.ts
+├── leap-year-checker.service.ts
+├── mean.service.ts
+├── mime-types.vo.ts
+├── mime.vo.ts
+├── min-max-scaler.service.ts
+├── minute.vo.ts
+├── money.vo.ts
+├── noop.service.ts
+├── outlier-detector.service.ts
+├── package-version.vo.ts
+├── pagination.service.ts
+├── percentage.service.ts
+├── population-standard-deviation.service.ts
+├── random.service.ts
+├── rate-limiter.service.ts
+├── relative-date.vo.ts
+├── reordering.service.ts
+├── revision.vo.ts
+├── rounding.service.ts
+├── simple-linear-regression.service.ts
+├── size.vo.ts
+├── stepper.service.ts
+├── stopwatch.service.ts
+├── streak-calculator.service.ts
+├── sum.service.ts
+├── thousands-separator.service.ts
+├── time-zone-offset-value.vo.ts
+├── time.service.ts
+├── timestamp.vo.ts
+├── timezone.vo.ts
+├── ts-utils.ts
+├── visually-unambiguous-characters-generator.service.ts
+└── z-score.service.ts
+```
+
