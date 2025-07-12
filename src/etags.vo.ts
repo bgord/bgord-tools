@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v4";
 
 export const RevisionValue = z.number().int().min(0).brand("RevisionValue");
 
