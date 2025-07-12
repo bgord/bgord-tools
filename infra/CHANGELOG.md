@@ -1,4 +1,5 @@
 # Changelog
+- 2025-07-12 19:16 f0999c3 **refactor: remove RevisionValue**
 - 2025-07-12 18:45 8bac091 **step: add docs package workflow**
 - 2025-07-12 18:44 0d80883 **step: bump bgord/scripts**
 ## 2025-07-12 17:40 v0.11.0
@@ -7,6 +8,8 @@
 - 2025-07-12 17:37 2f285eb **refactor: revert zod**
 - 2025-07-12 17:36 c355bc8 **step: update zod**
 - 2025-07-12 17:36 553aaa6 **step: update lefthook**
+- 2025-07-12 16:46 64335b1 **docs: generate CHANGELOG**
+- 2025-07-12 16:46 243e16c **docs: generate readme**
 - 2025-07-12 15:40 9243474 **docs: generate CHANGELOG**
 - 2025-07-12 15:40 7c2f2cf **docs: generate CHANGELOG**
 - 2025-07-10 21:24 0fc83a0 **step: install knip**
