@@ -1,8 +1,11 @@
 # Changelog
+## 2025-07-12 17:40 v0.11.0
+- 2025-07-12 17:40 3c80e22 **0.11.0**
 - 2025-07-12 17:39 82d3c0a **refactor: restore zod/v4**
 - 2025-07-12 17:37 2f285eb **refactor: revert zod**
 - 2025-07-12 17:36 c355bc8 **step: update zod**
 - 2025-07-12 17:36 553aaa6 **step: update lefthook**
+- 2025-07-12 15:40 9243474 **docs: generate CHANGELOG**
 - 2025-07-10 21:24 0fc83a0 **step: install knip**
 ## 2025-07-10 21:20 v0.10.1
 - 2025-07-10 21:20 617038b **0.10.1**
