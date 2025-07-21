@@ -1,4 +1,5 @@
 # Changelog
+- 2025-07-21 15:13 e3cf84d **step: update packages**
 ## 2025-07-12 19:27 v0.11.1
 - 2025-07-12 19:27 d2025bc **0.11.1**
 - 2025-07-12 19:16 f0999c3 **refactor: remove RevisionValue**
@@ -10,6 +11,7 @@
 - 2025-07-12 17:37 2f285eb **refactor: revert zod**
 - 2025-07-12 17:36 c355bc8 **step: update zod**
 - 2025-07-12 17:36 553aaa6 **step: update lefthook**
+- 2025-07-12 17:27 c61464a **docs: generate CHANGELOG**
 - 2025-07-12 17:27 c0dea34 **docs: generate CHANGELOG**
 - 2025-07-12 16:46 64335b1 **docs: generate CHANGELOG**
 - 2025-07-12 16:46 243e16c **docs: generate readme**
