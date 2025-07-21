@@ -1,7 +1,9 @@
 # Changelog
+- 2025-07-21 17:55 e0c1652 **step: revert zod version**
 ## 2025-07-21 15:18 v0.12.0
 - 2025-07-21 15:18 359c1b8 **0.12.0**
 - 2025-07-21 15:13 e3cf84d **step: update packages**
+- 2025-07-21 13:18 1a46369 **docs: generate CHANGELOG**
 - 2025-07-21 13:14 8806a59 **docs: generate CHANGELOG**
 ## 2025-07-12 19:27 v0.11.1
 - 2025-07-12 19:27 d2025bc **0.11.1**
