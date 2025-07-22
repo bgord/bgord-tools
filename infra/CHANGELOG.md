@@ -1,7 +1,15 @@
 # Changelog
+- 2025-07-22 20:55 a11ce88 **step: make week constructor public**
+- 2025-07-22 16:09 919335e **step: test week**
+- 2025-07-22 16:09 0aed114 **step: export date ranges**
+- 2025-07-22 16:00 7a6e1ed **step: add date range tests**
+- 2025-07-22 15:52 608accd **step: add week**
+- 2025-07-22 15:51 4f03550 **step: add date-range**
+- 2025-07-22 15:20 4fab8ea **refactor: remove timestamp.default**
 ## 2025-07-21 17:56 v0.12.1
 - 2025-07-21 17:56 3d30863 **0.12.1**
 - 2025-07-21 17:55 e0c1652 **step: revert zod version**
+- 2025-07-21 15:56 c7af570 **docs: generate CHANGELOG**
 - 2025-07-21 15:56 9cce92e **docs: generate CHANGELOG**
 ## 2025-07-21 15:18 v0.12.0
 - 2025-07-21 15:18 359c1b8 **0.12.0**
