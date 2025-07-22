@@ -3,7 +3,7 @@ import { DateRange } from "./date-range.vo";
 import { Timestamp, TimestampType } from "./timestamp.vo";
 
 export class Week extends DateRange {
-  private constructor(start: TimestampType, end: TimestampType) {
+  constructor(start: TimestampType, end: TimestampType) {
     super(start, end);
   }
 
