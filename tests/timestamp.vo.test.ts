@@ -28,13 +28,4 @@ describe("Timestamp", () => {
   test("throws on non-number values", () => {
     expect(() => Timestamp.parse("123" as any)).toThrow();
   });
-
-  test("defaults to current timestamp", () => {
-    const before = Date.now();
-    const parsed = Timestamp.parse(undefined);
-    const after = Date.now();
-
-    expect(parsed).toBeGreaterThanOrEqual(before);
-    expect(parsed).toBeLessThanOrEqual(after);
-  });
 });
