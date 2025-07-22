@@ -1,5 +1,8 @@
 # Changelog
+- 2025-07-22 21:21 967e284 **0.12.2**
 - 2025-07-22 20:55 a11ce88 **step: make week constructor public**
+- 2025-07-22 19:21 0ac15b5 **docs: generate readme**
+- 2025-07-22 19:20 397c90f **docs: generate CHANGELOG**
 - 2025-07-22 16:09 919335e **step: test week**
 - 2025-07-22 16:09 0aed114 **step: export date ranges**
 - 2025-07-22 16:00 7a6e1ed **step: add date range tests**
