@@ -29,6 +29,7 @@ src/
 ├── clock.vo.ts
 ├── date-calculator.service.ts
 ├── date-formatter.service.ts
+├── date-range.vo.ts
 ├── dates-of-the-week.vo.ts
 ├── dll.service.ts
 ├── email-mask.service.ts
@@ -72,6 +73,7 @@ src/
 ├── timezone.vo.ts
 ├── ts-utils.ts
 ├── visually-unambiguous-characters-generator.service.ts
+├── week.vo.ts
 └── z-score.service.ts
 ```
 
