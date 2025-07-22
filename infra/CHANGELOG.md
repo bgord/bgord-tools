@@ -1,6 +1,9 @@
 # Changelog
+## 2025-07-22 21:22 v0.12.3
+- 2025-07-22 21:22 a12c6ed **0.12.3**
 - 2025-07-22 21:21 967e284 **0.12.2**
 - 2025-07-22 20:55 a11ce88 **step: make week constructor public**
+- 2025-07-22 19:22 456595b **docs: generate CHANGELOG**
 - 2025-07-22 19:21 0ac15b5 **docs: generate readme**
 - 2025-07-22 19:20 397c90f **docs: generate CHANGELOG**
 - 2025-07-22 16:09 919335e **step: test week**
