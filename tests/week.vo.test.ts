@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import { Timestamp } from "../src/timestamp.vo";
-import { Week } from "../src/week";
+import { Week } from "../src/week.vo";
 
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 
