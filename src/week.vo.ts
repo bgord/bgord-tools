@@ -1,13 +1,14 @@
 import { endOfISOWeek, getISOWeek, getISOWeekYear, setISOWeek, startOfISOWeek } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { Timestamp, TimestampType } from "./timestamp.vo";
+import { WeekIsoId, WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
   constructor(start: TimestampType, end: TimestampType) {
     super(start, end);
   }
 
-  toIsoId(): string {
+  toIsoId(): WeekIsoIdType {
     const year = getISOWeekYear(this.getStart());
     const week = getISOWeek(this.getStart()).toString().padStart(2, "0");
 
@@ -25,8 +26,8 @@ export class Week extends DateRange {
     return Week.fromTimestamp(now);
   }
 
-  static fromIsoId(isoId: string): Week {
-    const [yearPart, weekPart] = isoId.split("-W");
+  static fromIsoId(isoId: WeekIsoIdType): Week {
+    const [yearPart, weekPart] = WeekIsoId.parse(isoId).split("-W");
 
     const year = Number(yearPart);
     const week = Number(weekPart);
