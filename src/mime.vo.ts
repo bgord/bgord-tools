@@ -50,3 +50,7 @@ export class NotAcceptedMimeError extends Error {
     this.mime = mime;
   }
 }
+
+export const MIMES = {
+  csv: new Mime("text/csv"),
+};
