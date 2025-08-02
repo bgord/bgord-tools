@@ -30,7 +30,7 @@
     "lefthook": "1.12.2",
     "only-allow": "1.2.1",
     "shellcheck": "3.1.0",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "dependencies": {
     "date-fns": "4.1.0",
