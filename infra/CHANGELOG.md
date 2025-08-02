@@ -1,8 +1,10 @@
 # Changelog
+- 2025-08-02 18:05 f53249e **step: update packages**
 ## 2025-07-24 17:13 v0.12.5
 - 2025-07-24 17:13 b90d18c **0.12.5**
 - 2025-07-24 17:12 af2868b **step: add MIMES.csv**
 - 2025-07-24 15:13 676c065 **docs: generate CHANGELOG**
+- 2025-07-24 15:13 02fb30a **docs: generate CHANGELOG**
 ## 2025-07-23 16:54 v0.12.4
 - 2025-07-23 16:54 996579b **0.12.4**
 - 2025-07-23 16:50 a7efdc2 **step: add week iso id vo**
