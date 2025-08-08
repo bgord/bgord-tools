@@ -31,6 +31,8 @@ src/
 ├── date-formatter.service.ts
 ├── date-range.vo.ts
 ├── dates-of-the-week.vo.ts
+├── day-iso-id.vo.ts
+├── day.vo.ts
 ├── dll.service.ts
 ├── email-mask.service.ts
 ├── etags.vo.ts
