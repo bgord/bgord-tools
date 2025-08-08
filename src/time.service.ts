@@ -1,4 +1,5 @@
 import { RoundToDecimal } from "./rounding.service";
+import type { TimestampType } from "./timestamp.vo";
 
 const rounding = new RoundToDecimal(2);
 
@@ -7,7 +8,7 @@ interface TimeResultInterface {
   readonly hours: number;
   readonly minutes: number;
   readonly seconds: number;
-  readonly ms: number;
+  readonly ms: TimestampType;
 
   isAfter(another: TimeResultInterface): boolean;
   isBefore(another: TimeResultInterface): boolean;
@@ -19,7 +20,7 @@ export class TimeResult implements TimeResultInterface {
     readonly hours: number,
     readonly minutes: number,
     readonly seconds: number,
-    readonly ms: number,
+    readonly ms: TimestampType,
   ) {}
 
   isAfter(another: TimeResultInterface): boolean {
@@ -38,7 +39,7 @@ export class Time {
       value * 24,
       value * 24 * 60,
       value * 24 * 60 * 60,
-      value * 24 * 60 * 60 * 1000,
+      (value * 24 * 60 * 60 * 1000) as TimestampType,
     );
   }
 
@@ -48,7 +49,7 @@ export class Time {
       value,
       value * 60,
       value * 60 * 60,
-      value * 60 * 60 * 1000,
+      (value * 60 * 60 * 1000) as TimestampType,
     );
   }
 
@@ -58,7 +59,7 @@ export class Time {
       rounding.round(value / 60),
       value,
       value * 60,
-      value * 60 * 1000,
+      (value * 60 * 1000) as TimestampType,
     );
   }
 
@@ -68,7 +69,7 @@ export class Time {
       rounding.round(value / 60 / 60),
       rounding.round(value / 60),
       value,
-      value * 1000,
+      (value * 1000) as TimestampType,
     );
   }
 
@@ -78,12 +79,14 @@ export class Time {
       rounding.round(value / 1000 / 60 / 60),
       rounding.round(value / 1000 / 60),
       rounding.round(value / 1000),
-      value,
+      value as TimestampType,
     );
   }
 
   static Now(now = Date.now()) {
     return {
+      value: now as TimestampType,
+
       Minus(time: TimeResultInterface): TimeResultInterface {
         return Time.Ms(now - time.ms);
       },
