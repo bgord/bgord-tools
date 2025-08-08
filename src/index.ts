@@ -5,6 +5,7 @@ export * from "./date-calculator.service";
 export * from "./date-formatter.service";
 export * from "./date-range.vo";
 export * from "./dates-of-the-week.vo";
+export * from "./day.vo";
 export * from "./day-iso-id.vo";
 export * from "./dll.service";
 export * from "./email-mask.service";
