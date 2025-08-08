@@ -1,7 +1,9 @@
 # Changelog
+- 2025-08-08 20:55 8e8cffa **step: add time service timestamp type**
 ## 2025-08-02 18:06 v0.12.6
 - 2025-08-02 18:06 19547c3 **0.12.6**
 - 2025-08-02 18:05 f53249e **step: update packages**
+- 2025-08-02 16:06 2966d31 **docs: generate CHANGELOG**
 - 2025-08-02 16:05 086d4bd **docs: generate CHANGELOG**
 ## 2025-07-24 17:13 v0.12.5
 - 2025-07-24 17:13 b90d18c **0.12.5**
