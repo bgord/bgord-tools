@@ -1,7 +1,10 @@
 # Changelog
+- 2025-08-08 23:44 c78e551 **step: implement day.vo**
+- 2025-08-08 23:38 6e3af0d **feature: add day iso id**
 ## 2025-08-08 20:56 v0.12.7
 - 2025-08-08 20:56 5e787aa **0.12.7**
 - 2025-08-08 20:55 8e8cffa **step: add time service timestamp type**
+- 2025-08-08 18:56 c8af1a5 **docs: generate CHANGELOG**
 - 2025-08-08 18:56 1627985 **docs: generate CHANGELOG**
 ## 2025-08-02 18:06 v0.12.6
 - 2025-08-02 18:06 19547c3 **0.12.6**
