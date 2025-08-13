@@ -1,7 +1,11 @@
 # Changelog
+- 2025-08-13 23:31 0c04b6b **step: bump bgord/scripts**
+- 2025-08-13 23:30 df9cab8 **fix: biome hints**
+- 2025-08-13 23:29 0b351ee **step: update biome**
 ## 2025-08-13 22:15 v0.12.9
 - 2025-08-13 22:15 d485369 **0.12.9**
 - 2025-08-13 22:14 d17e711 **step: update packages**
+- 2025-08-13 20:15 8850c65 **docs: generate CHANGELOG**
 - 2025-08-13 20:15 16d8d95 **docs: generate CHANGELOG**
 ## 2025-08-12 13:57 v0.12.8
 - 2025-08-12 13:57 c7365eb **0.12.8**
