@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { OutlierDetector } from "../src/outlier-detector.service";
 
 describe("Outlier detector", () => {

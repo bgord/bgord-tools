@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { anoop, noop } from "../src/noop.service";
 
 describe("noop", () => {

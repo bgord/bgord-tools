@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Sum } from "../src/sum.service";
 
 describe("Sum", () => {

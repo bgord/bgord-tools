@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Hour, HourFormatters } from "../src/hour.vo";
 
 describe("Hour", () => {

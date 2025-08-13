@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { InvalidMimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {

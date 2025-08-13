@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { ApiKey } from "../src/api-key.vo";
 
 describe("ApiKey", () => {

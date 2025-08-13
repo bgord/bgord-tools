@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Random } from "../src/random.service";
 
 describe("Random", () => {

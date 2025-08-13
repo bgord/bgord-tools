@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Percentage } from "../src/percentage.service";
 import { RoundUp } from "../src/rounding.service";
 

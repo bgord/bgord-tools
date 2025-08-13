@@ -1,5 +1,4 @@
 import { describe, expect, it } from "bun:test";
-
 import { Height, Width } from "../src/image.vo";
 
 describe("Width validator", () => {

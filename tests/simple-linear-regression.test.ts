@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { SimpleLinearRegression } from "../src/simple-linear-regression.service";
 
 describe("SimpleLinearRegression", () => {

@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { ETag, WeakETag } from "../src/etags.vo";
 import { RevisionValue } from "../src/revision.vo";
 

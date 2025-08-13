@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Minute } from "../src/minute.vo";
 
 describe("Minute", () => {

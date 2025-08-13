@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Mean } from "../src/mean.service";
 import { RoundToNearest } from "../src/rounding.service";
 

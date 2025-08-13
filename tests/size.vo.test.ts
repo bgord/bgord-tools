@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Size, SizeUnit, SizeValue } from "../src/size.vo";
 
 describe("Size", () => {

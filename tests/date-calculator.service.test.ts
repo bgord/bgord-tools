@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
-
 import { DateCalculator } from "../src/date-calculator.service";
 import { Time } from "../src/time.service";
 import { Timestamp } from "../src/timestamp.vo";

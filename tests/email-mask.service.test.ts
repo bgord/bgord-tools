@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Email, EmailMask } from "../src/email-mask.service";
 
 describe("EmailMask", () => {

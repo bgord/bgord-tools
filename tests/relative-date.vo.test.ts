@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
-
 import { RelativeDate } from "../src/relative-date.vo";
 import { Timestamp } from "../src/timestamp.vo";
 

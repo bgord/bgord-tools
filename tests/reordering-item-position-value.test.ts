@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { ReorderingPosition } from "../src/reordering.service";
 
 describe("ReorderingPosition VO", () => {

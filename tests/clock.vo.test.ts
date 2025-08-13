@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Clock, ClockFormatters } from "../src/clock.vo";
 import { Hour } from "../src/hour.vo";
 import { Minute } from "../src/minute.vo";

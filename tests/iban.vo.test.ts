@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { IBAN } from "../src/iban.vo";
 
 describe("IBAN", () => {

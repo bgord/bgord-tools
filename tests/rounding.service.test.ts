@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.service";
 
 describe("Rounding", () => {

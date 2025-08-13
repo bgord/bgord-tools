@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {

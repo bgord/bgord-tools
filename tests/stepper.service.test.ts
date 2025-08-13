@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Stepper } from "../src/stepper.service";
 
 describe("Stepper", () => {

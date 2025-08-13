@@ -1,5 +1,4 @@
 import { expect, test } from "bun:test";
-
 import { Timezone } from "../src/timezone.vo";
 
 test("valid timezones", () => {

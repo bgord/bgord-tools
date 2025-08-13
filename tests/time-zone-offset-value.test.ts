@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { TimeZoneOffsetValue, TimeZoneOffsetValueType } from "../src/time-zone-offset-value.vo";
 
 describe("TimeZoneOffset", () => {

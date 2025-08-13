@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { ThousandsSeparator } from "../src/thousands-separator.service";
 
 describe("ThousandsSeparator", () => {

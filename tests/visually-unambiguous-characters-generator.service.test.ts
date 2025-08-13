@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { VisuallyUnambiguousCharactersGenerator } from "../src/visually-unambiguous-characters-generator.service";
 
 describe("VisuallyUnambiguousCharactersGenerator", () => {

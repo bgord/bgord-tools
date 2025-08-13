@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { Pagination } from "../src/pagination.service";
 
 describe("Pagination", () => {

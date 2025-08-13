@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { MIME_TYPES } from "../src/mime-types.vo";
 
 describe("MIME_TYPES", () => {

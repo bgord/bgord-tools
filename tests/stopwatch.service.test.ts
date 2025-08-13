@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
-
 import { Stopwatch } from "../src/stopwatch.service";
 import { Timestamp } from "../src/timestamp.vo";
 

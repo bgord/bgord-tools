@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { ReorderingCalculator, ReorderingTransfer } from "../src/reordering.service";
 
 describe("Calculator", () => {

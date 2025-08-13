@@ -1,6 +1,5 @@
 import { describe, expect, test } from "bun:test";
 import { subDays } from "date-fns";
-
 import { StreakCalculator } from "../src/streak-calculator.service";
 
 const now = new Date();

@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-
 import { MinMaxScaler } from "../src/min-max-scaler.service";
 
 describe("MinMaxScaler", () => {
