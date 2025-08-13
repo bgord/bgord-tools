@@ -1,6 +1,8 @@
 # Changelog
+- 2025-08-13 22:14 d17e711 **step: update packages**
 ## 2025-08-12 13:57 v0.12.8
 - 2025-08-12 13:57 c7365eb **0.12.8**
+- 2025-08-12 11:57 9b451ae **docs: generate CHANGELOG**
 - 2025-08-08 23:44 c78e551 **step: implement day.vo**
 - 2025-08-08 23:38 6e3af0d **feature: add day iso id**
 - 2025-08-08 21:45 c9342ee **docs: generate CHANGELOG**
