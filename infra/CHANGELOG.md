@@ -1,6 +1,9 @@
 # Changelog
+## 2025-08-14 19:39 v0.12.10
+- 2025-08-14 19:39 d6e8961 **0.12.10**
 - 2025-08-14 19:38 76b7b88 **step: update packages**
 - 2025-08-14 19:35 5640bda **fix: to iso id in day vo**
+- 2025-08-14 17:38 13995c9 **docs: generate CHANGELOG**
 - 2025-08-14 00:18 ced4b41 **step: bump bgord/scripts**
 - 2025-08-14 00:18 0d318bd **refactor: format imports**
 - 2025-08-13 23:31 0c04b6b **step: bump bgord/scripts**
