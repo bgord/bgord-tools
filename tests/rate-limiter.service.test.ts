@@ -22,7 +22,7 @@ describe("RateLimiter", () => {
 
     const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + ms - 1));
     expect(second.allowed).toBe(false);
-    // @ts-ignore
+    // @ts-expect-error
     expect(second.remainingMs).toBe(1);
   });
 

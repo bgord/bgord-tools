@@ -153,7 +153,6 @@ export class DoublyLinkedList<T> {
   reverse(): void {
     [this.head, this.tail] = [this.tail, this.head];
 
-    // @ts-ignore
     for (const node of this) {
       [node.prev, node.next] = [node.next, node.prev];
     }
