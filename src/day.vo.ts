@@ -1,6 +1,7 @@
 import { endOfDay, startOfDay } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, DayIsoIdType } from "./day-iso-id.vo";
+import { Time } from "./time.service";
 import { Timestamp, TimestampType } from "./timestamp.vo";
 
 export class Day extends DateRange {
@@ -9,7 +10,7 @@ export class Day extends DateRange {
   }
 
   toIsoId(): DayIsoIdType {
-    return new Date(this.getStart()).toISOString().slice(0, 10) as DayIsoIdType;
+    return new Date(this.getStart() + Time.Hours(12).ms).toISOString().slice(0, 10) as DayIsoIdType;
   }
 
   static fromTimestamp(timestamp: TimestampType): Day {
