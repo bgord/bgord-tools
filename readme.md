@@ -51,6 +51,7 @@ src/
 ├── minute.vo.ts
 ├── money.vo.ts
 ├── noop.service.ts
+├── notification-template.vo.ts
 ├── outlier-detector.service.ts
 ├── package-version.vo.ts
 ├── pagination.service.ts
