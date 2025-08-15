@@ -1,5 +1,9 @@
 # Changelog
+## 2025-08-15 19:42 v0.12.11
+- 2025-08-15 19:42 740f989 **0.12.11**
 - 2025-08-15 19:40 d1ac893 **step: add notification template**
+- 2025-08-15 17:42 f285475 **docs: generate CHANGELOG**
+- 2025-08-15 17:42 6dc7428 **docs: generate readme**
 - 2025-08-14 19:47 e20d38c **step: bump bgord/scripts**
 ## 2025-08-14 19:39 v0.12.10
 - 2025-08-14 19:39 d6e8961 **0.12.10**
