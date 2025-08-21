@@ -55,4 +55,5 @@ export const MIMES = {
   csv: new Mime("text/csv"),
   text: new Mime("text/plain"),
   markdown: new Mime("text/markdown"),
+  pdf: new Mime("application/pdf"),
 };
