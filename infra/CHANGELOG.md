@@ -1,9 +1,16 @@
 # Changelog
+- 2025-08-23 18:36 5b20e43 **refactor: remove language vo brand**
+- 2025-08-23 18:08 94a53aa **step: update packages**
+- 2025-08-21 22:56 eaed6f6 **step: add pdf export file**
+- 2025-08-21 22:48 24ba753 **step: add mimes.markdown**
+- 2025-08-21 22:32 4a2ba06 **step: add mimes.text**
+- 2025-08-21 16:36 aa3418c **step: update knip**
 ## 2025-08-15 19:42 v0.12.11
 - 2025-08-15 19:42 740f989 **0.12.11**
 - 2025-08-15 19:40 d1ac893 **step: add notification template**
 - 2025-08-15 17:42 f285475 **docs: generate CHANGELOG**
 - 2025-08-15 17:42 6dc7428 **docs: generate readme**
+- 2025-08-15 17:42 2d01928 **docs: generate CHANGELOG**
 - 2025-08-14 19:47 e20d38c **step: bump bgord/scripts**
 ## 2025-08-14 19:39 v0.12.10
 - 2025-08-14 19:39 d6e8961 **0.12.10**
