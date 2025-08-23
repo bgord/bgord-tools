@@ -1,6 +1,9 @@
 # Changelog
+## 2025-08-23 18:38 v0.12.12
+- 2025-08-23 18:38 5772945 **0.12.12**
 - 2025-08-23 18:36 5b20e43 **refactor: remove language vo brand**
 - 2025-08-23 18:08 94a53aa **step: update packages**
+- 2025-08-23 16:37 df68984 **docs: generate CHANGELOG**
 - 2025-08-21 22:56 eaed6f6 **step: add pdf export file**
 - 2025-08-21 22:48 24ba753 **step: add mimes.markdown**
 - 2025-08-21 22:32 4a2ba06 **step: add mimes.text**
