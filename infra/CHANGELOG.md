@@ -1,6 +1,9 @@
 # Changelog
+## 2025-08-24 15:45 v0.12.13
+- 2025-08-24 15:45 22644d2 **0.12.13**
 - 2025-08-24 15:44 eaa9b88 **refactor: remove date-fns from peers**
 - 2025-08-24 15:42 698a718 **step: update zod**
+- 2025-08-24 13:44 74c3704 **docs: generate CHANGELOG**
 - 2025-08-24 13:42 7e35b1a **docs: generate CHANGELOG**
 ## 2025-08-23 18:38 v0.12.12
 - 2025-08-23 18:38 5772945 **0.12.12**
