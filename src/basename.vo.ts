@@ -6,6 +6,7 @@ export const BasenameSchema = z
   .min(1, "basename_empty")
   .max(128, "basename_too_long")
   .refine((s) => !/[/\\]/.test(s), "basename_slashes_forbidden")
+  // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
   .refine((s) => !/[\u0000-\u001F\u007F]/.test(s), "basename_control_chars_forbidden")
   // check dot-segments FIRST so "." / ".." get the intended error
   .refine((s) => s !== "." && s !== "..", "basename_dot_segments_forbidden")

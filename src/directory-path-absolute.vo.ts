@@ -5,6 +5,7 @@ export const DirectoryPathAbsoluteSchema = z
   .trim()
   .refine((value) => value.startsWith("/"), "abs_dir_must_start_with_slash")
   .refine((value) => !value.includes("\\"), "abs_dir_backslash_forbidden")
+  // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
   .refine((value) => !/[\u0000-\u001F\u007F]/.test(value), "abs_dir_control_chars_forbidden")
   .transform((value) => value.replace(/\/{2,}/g, "/"))
   .transform((value) => (value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value))

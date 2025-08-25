@@ -5,6 +5,7 @@ export const DirectoryPathRelativeSchema = z
   .trim()
   .refine((value) => !value.startsWith("/"), "rel_dir_must_not_start_with_slash")
   .refine((value) => !value.includes("\\"), "rel_dir_backslash_forbidden")
+  // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
   .refine((value) => !/[\u0000-\u001F\u007F]/.test(value), "rel_dir_control_chars_forbidden")
   .transform((value) => value.replace(/\/{2,}/g, "/"))
   .transform((value) => value.replace(/^\/+|\/+$/g, ""))
