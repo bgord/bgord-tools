@@ -1,5 +1,7 @@
 import { DirectoryPathAbsoluteSchema, type DirectoryPathAbsoluteType } from "./directory-path-absolute.vo";
 import { DirectoryPathRelativeSchema, type DirectoryPathRelativeType } from "./directory-path-relative.vo";
+import { FilePathAbsoluteSchema } from "./file-path-absolute-schema.vo";
+import { FilePathRelativeSchema } from "./file-path-relative-schema.vo";
 import type { Filename } from "./filename.vo";
 
 export class FilePathRelative {
@@ -14,6 +16,11 @@ export class FilePathRelative {
   }
 
   static fromPartsSafe(directory: DirectoryPathRelativeType, filename: Filename) {
+    return new FilePathRelative(directory, filename);
+  }
+
+  static fromString(pathCandidate: string): FilePathRelative {
+    const { directory, filename } = FilePathRelativeSchema.parse(pathCandidate);
     return new FilePathRelative(directory, filename);
   }
 
@@ -54,6 +61,11 @@ export class FilePathAbsolute {
   }
 
   static fromPartsSafe(directory: DirectoryPathAbsoluteType, filename: Filename) {
+    return new FilePathAbsolute(directory, filename);
+  }
+
+  static fromString(pathCandidate: string): FilePathAbsolute {
+    const { directory, filename } = FilePathAbsoluteSchema.parse(pathCandidate);
     return new FilePathAbsolute(directory, filename);
   }
 

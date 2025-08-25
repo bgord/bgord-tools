@@ -26,6 +26,28 @@ describe("FilePathRelative", () => {
     const absolutePath = relativePath.toAbsolute(absoluteDir);
     expect(absolutePath.get()).toBe("/tmp/app/avatar.webp");
   });
+
+  test("parses a basic relative path", () => {
+    const filePath = FilePathRelative.fromString("tmp/file.txt");
+
+    expect(filePath.get()).toBe("tmp/file.txt");
+    // @ts-expect-error
+    expect(filePath.getDirectory()).toEqual("tmp");
+    expect(filePath.getFilename().get()).toBe("file.txt");
+  });
+
+  test("parses a nested path and normalizes duplicate slashes/whitespace", () => {
+    const filePath = FilePathRelative.fromString("  a//b///c/file.png  ");
+
+    expect(filePath.get()).toBe("a/b/c/file.png");
+    // @ts-expect-error
+    expect(filePath.getDirectory()).toBe("a/b/c");
+    expect(filePath.getFilename().get()).toBe("file.png");
+  });
+
+  test("rejects absolute paths", () => {
+    expect(() => FilePathRelative.fromString("/tmp/file.txt")).toThrow();
+  });
 });
 
 describe("FilePathAbsolute", () => {
@@ -49,5 +71,27 @@ describe("FilePathAbsolute", () => {
     const relativeDir = DirectoryPathRelativeSchema.parse("users/avatars");
     const relativePath = absolutePath.toRelative(relativeDir);
     expect(relativePath.get()).toBe("users/avatars/avatar.webp");
+  });
+
+  test("parses a root-level file", () => {
+    const filePath = FilePathAbsolute.fromString("/avatar.webp");
+
+    expect(filePath.get()).toBe("/avatar.webp");
+    // @ts-expect-error
+    expect(filePath.getDirectory()).toBe("/");
+    expect(filePath.getFilename().get()).toBe("avatar.webp");
+  });
+
+  test("parses a nested path and normalizes duplicate slashes/whitespace", () => {
+    const filePath = FilePathAbsolute.fromString("   /var//uploads///avatar.webp   ");
+
+    expect(filePath.get()).toBe("/var/uploads/avatar.webp");
+    // @ts-expect-error
+    expect(filePath.getDirectory()).toBe("/var/uploads");
+    expect(filePath.getFilename().get()).toBe("avatar.webp");
+  });
+
+  test("rejects relative paths", () => {
+    expect(() => FilePathAbsolute.fromString("var/uploads/avatar.webp")).toThrow();
   });
 });
