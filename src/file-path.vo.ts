@@ -2,7 +2,7 @@ import { DirectoryPathAbsoluteSchema, type DirectoryPathAbsoluteType } from "./d
 import { DirectoryPathRelativeSchema, type DirectoryPathRelativeType } from "./directory-path-relative.vo";
 import type { Filename } from "./filename.vo";
 
-export class RelativeFilePath {
+export class FilePathRelative {
   private constructor(
     private readonly directory: DirectoryPathRelativeType,
     private readonly filename: Filename,
@@ -10,11 +10,11 @@ export class RelativeFilePath {
 
   static fromParts(directoryCandidate: string, filename: Filename) {
     const directory = DirectoryPathRelativeSchema.parse(directoryCandidate);
-    return new RelativeFilePath(directory, filename);
+    return new FilePathRelative(directory, filename);
   }
 
   static fromPartsSafe(directory: DirectoryPathRelativeType, filename: Filename) {
-    return new RelativeFilePath(directory, filename);
+    return new FilePathRelative(directory, filename);
   }
 
   get() {
@@ -29,20 +29,20 @@ export class RelativeFilePath {
     return this.filename;
   }
 
-  withDirectoryRelative(newDirectory: DirectoryPathRelativeType): RelativeFilePath {
-    return new RelativeFilePath(newDirectory, this.filename);
+  withDirectoryRelative(newDirectory: DirectoryPathRelativeType): FilePathRelative {
+    return new FilePathRelative(newDirectory, this.filename);
   }
 
-  withFilename(newFilename: Filename): RelativeFilePath {
-    return new RelativeFilePath(this.directory, newFilename);
+  withFilename(newFilename: Filename): FilePathRelative {
+    return new FilePathRelative(this.directory, newFilename);
   }
 
-  toAbsolute(newDirectory: DirectoryPathAbsoluteType): AbsoluteFilePath {
-    return AbsoluteFilePath.fromPartsSafe(newDirectory, this.filename);
+  toAbsolute(newDirectory: DirectoryPathAbsoluteType): FilePathAbsolute {
+    return FilePathAbsolute.fromPartsSafe(newDirectory, this.filename);
   }
 }
 
-export class AbsoluteFilePath {
+export class FilePathAbsolute {
   private constructor(
     private readonly directory: DirectoryPathAbsoluteType,
     private readonly filename: Filename,
@@ -50,11 +50,11 @@ export class AbsoluteFilePath {
 
   static fromParts(directoryCandidate: string, filename: Filename) {
     const directory = DirectoryPathAbsoluteSchema.parse(directoryCandidate);
-    return new AbsoluteFilePath(directory, filename);
+    return new FilePathAbsolute(directory, filename);
   }
 
   static fromPartsSafe(directory: DirectoryPathAbsoluteType, filename: Filename) {
-    return new AbsoluteFilePath(directory, filename);
+    return new FilePathAbsolute(directory, filename);
   }
 
   get() {
@@ -70,15 +70,15 @@ export class AbsoluteFilePath {
     return this.filename;
   }
 
-  withDirectoryAbsolute(newDirectory: DirectoryPathAbsoluteType): AbsoluteFilePath {
-    return new AbsoluteFilePath(newDirectory, this.filename);
+  withDirectoryAbsolute(newDirectory: DirectoryPathAbsoluteType): FilePathAbsolute {
+    return new FilePathAbsolute(newDirectory, this.filename);
   }
 
-  withFilename(newFilename: Filename): AbsoluteFilePath {
-    return new AbsoluteFilePath(this.directory, newFilename);
+  withFilename(newFilename: Filename): FilePathAbsolute {
+    return new FilePathAbsolute(this.directory, newFilename);
   }
 
-  toRelative(newDirectory: DirectoryPathRelativeType): RelativeFilePath {
-    return RelativeFilePath.fromPartsSafe(newDirectory, this.filename);
+  toRelative(newDirectory: DirectoryPathRelativeType): FilePathRelative {
+    return FilePathRelative.fromPartsSafe(newDirectory, this.filename);
   }
 }
