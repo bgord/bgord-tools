@@ -1,8 +1,11 @@
 # Changelog
+- 2025-08-25 17:55 e6f7470 **step: add to extension in mime**
 - 2025-08-25 17:53 6679283 **fix: biome**
 - 2025-08-25 17:52 00598ce **step: add exports**
 - 2025-08-25 17:49 58fdefd **step: add file tests**
 - 2025-08-25 17:47 7957523 **step: move file classes**
+- 2025-08-25 15:53 9e2dd9e **docs: generate CHANGELOG**
+- 2025-08-25 15:53 536f7d8 **docs: generate readme**
 ## 2025-08-24 15:45 v0.12.13
 - 2025-08-24 15:45 22644d2 **0.12.13**
 - 2025-08-24 15:44 eaa9b88 **refactor: remove date-fns from peers**
