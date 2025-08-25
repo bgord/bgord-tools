@@ -16,6 +16,8 @@ export * from "./etags.vo";
 export * from "./extension.vo";
 export * from "./feature-flag.vo";
 export * from "./file-path.vo";
+export * from "./file-path-absolute-schema.vo";
+export * from "./file-path-relative-schema.vo";
 export * from "./filename.vo";
 export * from "./filename-from-string.vo";
 export * from "./filename-suffix.vo";
