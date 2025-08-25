@@ -1,3 +1,5 @@
+import { ExtensionSchema, type ExtensionType } from "./extension.vo";
+
 export type MimeRawType = string;
 
 type MimeTypeType = string;
@@ -32,6 +34,10 @@ export class Mime {
     if (!typeMatches) return false;
 
     return this.subtype === another.subtype || this.subtype === "*";
+  }
+
+  toExtension(): ExtensionType {
+    return ExtensionSchema.parse(this.subtype);
   }
 }
 

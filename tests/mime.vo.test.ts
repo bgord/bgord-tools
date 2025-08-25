@@ -45,4 +45,10 @@ describe("Mime", () => {
     expect(imageWildcard.isSatisfiedBy(wildcard)).toBe(false);
     expect(wildcardPlain.isSatisfiedBy(wildcard)).toBe(false);
   });
+
+  test("basic to extension", () => {
+    const pdf = new Mime("application/pdf");
+    // @ts-expect-error
+    expect(pdf.toExtension()).toEqual("pdf");
+  });
 });
