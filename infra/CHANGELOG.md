@@ -1,6 +1,9 @@
 # Changelog
+- 2025-08-26 00:31 58728b6 **step: add static methods**
+- 2025-08-26 00:22 e2a643e **step: define absolute/relative paths**
 ## 2025-08-25 23:46 v0.12.15
 - 2025-08-25 23:46 918d0c7 **0.12.15**
+- 2025-08-25 21:47 889ca5e **docs: generate CHANGELOG**
 - 2025-08-25 21:45 c3986e2 **docs: generate CHANGELOG**
 - 2025-08-25 18:04 fd09e5b **refactor: rename file paths**
 ## 2025-08-25 17:56 v0.12.14
