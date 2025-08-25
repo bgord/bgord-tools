@@ -41,6 +41,8 @@ src/
 ├── etags.vo.ts
 ├── extension.vo.ts
 ├── feature-flag.vo.ts
+├── file-path-absolute-schema.vo.ts
+├── file-path-relative-schema.vo.ts
 ├── file-path.vo.ts
 ├── filename-from-string.vo.ts
 ├── filename-suffix.vo.ts
