@@ -25,6 +25,7 @@ Run the tests
 ```
 src/
 ├── api-key.vo.ts
+├── basename.vo.ts
 ├── build-version.vo.ts
 ├── clock.vo.ts
 ├── date-calculator.service.ts
@@ -33,10 +34,17 @@ src/
 ├── dates-of-the-week.vo.ts
 ├── day-iso-id.vo.ts
 ├── day.vo.ts
+├── directory-path-absolute.vo.ts
+├── directory-path-relative.vo.ts
 ├── dll.service.ts
 ├── email-mask.service.ts
 ├── etags.vo.ts
+├── extension.vo.ts
 ├── feature-flag.vo.ts
+├── file-path.vo.ts
+├── filename-from-string.vo.ts
+├── filename-suffix.vo.ts
+├── filename.vo.ts
 ├── filter.vo.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
