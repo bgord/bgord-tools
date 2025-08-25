@@ -1,4 +1,5 @@
 # Changelog
+- 2025-08-25 18:04 fd09e5b **refactor: rename file paths**
 ## 2025-08-25 17:56 v0.12.14
 - 2025-08-25 17:56 3b39bb4 **0.12.14**
 - 2025-08-25 17:55 e6f7470 **step: add to extension in mime**
@@ -6,6 +7,7 @@
 - 2025-08-25 17:52 00598ce **step: add exports**
 - 2025-08-25 17:49 58fdefd **step: add file tests**
 - 2025-08-25 17:47 7957523 **step: move file classes**
+- 2025-08-25 15:56 a7c10f6 **docs: generate CHANGELOG**
 - 2025-08-25 15:55 db42d34 **docs: generate CHANGELOG**
 - 2025-08-25 15:53 9e2dd9e **docs: generate CHANGELOG**
 - 2025-08-25 15:53 536f7d8 **docs: generate readme**
