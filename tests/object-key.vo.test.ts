@@ -1,0 +1,82 @@
+import { describe, expect, test } from "bun:test";
+import { ObjectKey } from "../src/object-key.vo";
+
+describe("ObjectKey (VO)", () => {
+  test("accepts typical valid keys", () => {
+    const valid = [
+      "users/123/avatar.webp",
+      "users/u-1/avatar.webp",
+      "users/abc_def/avatar-1.2_3.webp",
+      "env.prod/users/a_b-c/avatar.webp",
+      "avatar.webp", // single-segment key is allowed
+    ];
+
+    for (const key of valid) {
+      const result = ObjectKey.safeParse(key);
+      expect(result.success).toBe(true);
+      // @ts-expect-error
+      if (result.success) expect(result.data).toBe(key);
+    }
+  });
+
+  test("trims whitespace", () => {
+    const input = "   users/u/avatar.webp  ";
+    const result = ObjectKey.safeParse(input);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      // @ts-expect-error
+      expect(result.data).toBe("users/u/avatar.webp");
+    }
+  });
+
+  test("rejects leading slash", () => {
+    const result = ObjectKey.safeParse("/users/u/avatar.webp");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects backslashes", () => {
+    const result = ObjectKey.safeParse("users\\u\\avatar.webp");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects control characters", () => {
+    const result = ObjectKey.safeParse("users/\u0000/avatar.webp");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects empty string", () => {
+    const result = ObjectKey.safeParse("");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects trailing slash (empty last segment)", () => {
+    const result = ObjectKey.safeParse("users/u/");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects dot and dotdot segments", () => {
+    const bad = ["users/./avatar.webp", "users/../avatar.webp"];
+    for (const key of bad) {
+      const result = ObjectKey.safeParse(key);
+      expect(result.success).toBe(false);
+    }
+  });
+
+  test("rejects uppercase letters in any segment", () => {
+    const bad = ["Users/u/avatar.webp", "users/U/avatar.webp", "users/u/Avatar.webp"];
+    for (const key of bad) {
+      const result = ObjectKey.safeParse(key);
+      expect(result.success).toBe(false);
+    }
+  });
+
+  test("rejects consecutive slashes (empty segment)", () => {
+    const result = ObjectKey.safeParse("users//avatar.webp");
+    expect(result.success).toBe(false);
+  });
+
+  test("rejects spaces in segments", () => {
+    const result = ObjectKey.safeParse("users/user id/avatar.webp");
+    expect(result.success).toBe(false);
+  });
+});

@@ -36,6 +36,7 @@ export * from "./minute.vo";
 export * from "./money.vo";
 export * from "./noop.service";
 export * from "./notification-template.vo";
+export * from "./object-key.vo";
 export * from "./outlier-detector.service";
 export * from "./package-version.vo";
 export * from "./pagination.service";
