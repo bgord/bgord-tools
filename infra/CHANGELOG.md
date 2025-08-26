@@ -1,5 +1,9 @@
 # Changelog
+## 2025-08-26 21:52 v0.12.18
+- 2025-08-26 21:52 091c17b **0.12.18**
 - 2025-08-26 21:50 795b77c **step: add object key**
+- 2025-08-26 19:52 2bf886c **docs: generate CHANGELOG**
+- 2025-08-26 19:52 0ca30a9 **docs: generate readme**
 ## 2025-08-26 12:34 v0.12.17
 - 2025-08-26 12:34 7b86a2f **0.12.17**
 - 2025-08-26 12:33 f112ac3 **step: update packages**
