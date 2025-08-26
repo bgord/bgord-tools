@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { ExtensionSchema } from "../src/extension.vo";
 import { InvalidMimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {
@@ -50,5 +51,11 @@ describe("Mime", () => {
     const pdf = new Mime("application/pdf");
     // @ts-expect-error
     expect(pdf.toExtension()).toEqual("pdf");
+  });
+
+  test("fromExtension", () => {
+    const extension = ExtensionSchema.parse("pdf");
+    const mime = Mime.fromExtension(extension);
+    expect(mime.raw).toEqual("application/pdf");
   });
 });

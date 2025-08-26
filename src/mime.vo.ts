@@ -28,6 +28,10 @@ export class Mime {
     this.subtype = subtype;
   }
 
+  static fromExtension(extension: ExtensionType): Mime {
+    return new Mime(String(mime.contentType(extension)));
+  }
+
   isSatisfiedBy(another: Mime): boolean {
     if (this.raw === another.raw) return true;
 
