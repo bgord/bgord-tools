@@ -25,6 +25,7 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@types/bun": "1.2.20",
+    "@types/mime-types": "^3.0.1",
     "cspell": "9.2.0",
     "knip": "5.63.0",
     "lefthook": "1.12.3",
@@ -34,7 +35,8 @@
     "zod": "4.1.1"
   },
   "dependencies": {
-    "date-fns": "4.1.0"
+    "date-fns": "4.1.0",
+    "mime-types": "^3.0.1"
   },
   "peerDependencies": {
     "zod": "4.1.1"
