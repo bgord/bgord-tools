@@ -33,6 +33,26 @@ export class Size {
     this.bytes = this.calculateBytes();
   }
 
+  static fromBytes(candidate: number): Size {
+    const value = SizeValue.parse(candidate);
+    return new Size({ value, unit: SizeUnit.b });
+  }
+
+  static fromKb(candidate: number): Size {
+    const value = SizeValue.parse(candidate);
+    return new Size({ value, unit: SizeUnit.kB });
+  }
+
+  static fromMB(candidate: number): Size {
+    const value = SizeValue.parse(candidate);
+    return new Size({ value, unit: SizeUnit.MB });
+  }
+
+  static fromGB(candidate: number): Size {
+    const value = SizeValue.parse(candidate);
+    return new Size({ value, unit: SizeUnit.GB });
+  }
+
   toString(): string {
     return `${this.value} ${this.unit}`;
   }

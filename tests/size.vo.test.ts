@@ -141,4 +141,17 @@ describe("Size", () => {
       expect(GB.format(SizeUnit.GB)).toEqual("2 GB");
     });
   });
+
+  test("fromBytes", () => {
+    expect(Size.fromBytes(1000).format(SizeUnit.b)).toEqual("1000 b");
+  });
+  test("fromKb", () => {
+    expect(Size.fromKb(1000).format(SizeUnit.kB)).toEqual("1000 kB");
+  });
+  test("fromMB", () => {
+    expect(Size.fromMB(1000).format(SizeUnit.MB)).toEqual("1000 MB");
+  });
+  test("fromGB", () => {
+    expect(Size.fromGB(1000).format(SizeUnit.GB)).toEqual("1000 GB");
+  });
 });
