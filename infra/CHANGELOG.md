@@ -1,8 +1,11 @@
 # Changelog
+## 2025-08-26 12:34 v0.12.17
+- 2025-08-26 12:34 7b86a2f **0.12.17**
 - 2025-08-26 12:33 f112ac3 **step: update packages**
 - 2025-08-26 12:32 8ec5f98 **step: add size from methods**
 - 2025-08-26 12:24 6690cb0 **step: add from extension**
 - 2025-08-26 12:21 9ec4239 **fix: mime to extension**
+- 2025-08-26 10:33 803b7bf **docs: generate CHANGELOG**
 ## 2025-08-26 00:34 v0.12.16
 - 2025-08-26 00:34 2a7a7a9 **0.12.16**
 - 2025-08-26 00:31 58728b6 **step: add static methods**
