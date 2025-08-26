@@ -62,6 +62,7 @@ src/
 ├── money.vo.ts
 ├── noop.service.ts
 ├── notification-template.vo.ts
+├── object-key.vo.ts
 ├── outlier-detector.service.ts
 ├── package-version.vo.ts
 ├── pagination.service.ts
