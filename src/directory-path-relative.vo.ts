@@ -17,6 +17,6 @@ export const DirectoryPathRelativeSchema = z
         .every((segment) => /^[A-Za-z0-9._-]+$/.test(segment) && segment !== "." && segment !== ".."),
     "rel_dir_bad_segments",
   )
-  .brand("relative_directory_path");
+  .brand("directory_path_relative");
 
 export type DirectoryPathRelativeType = z.infer<typeof DirectoryPathRelativeSchema>;
