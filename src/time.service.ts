@@ -83,6 +83,7 @@ export class Time {
     );
   }
 
+  // TODO remove?
   static Now(now = Date.now()) {
     return {
       value: now as TimestampType,
