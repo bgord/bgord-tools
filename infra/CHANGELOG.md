@@ -1,7 +1,10 @@
 # Changelog
+- 2025-08-28 17:04 5659d85 **step: update packages**
+- 2025-08-27 14:11 c220fd8 **refactor: rename brand types**
 ## 2025-08-26 21:52 v0.12.18
 - 2025-08-26 21:52 091c17b **0.12.18**
 - 2025-08-26 21:50 795b77c **step: add object key**
+- 2025-08-26 19:53 241aed3 **docs: generate CHANGELOG**
 - 2025-08-26 19:52 2bf886c **docs: generate CHANGELOG**
 - 2025-08-26 19:52 0ca30a9 **docs: generate readme**
 ## 2025-08-26 12:34 v0.12.17
