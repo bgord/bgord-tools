@@ -1,7 +1,13 @@
 # Changelog
+- 2025-08-30 21:20 7705798 **fix: deps**
+- 2025-08-30 17:57 19ffb3a **refactor: require a value in from now**
+- 2025-08-30 17:56 a8b8cad **refactor: remove Time.Now.value**
+- 2025-08-30 17:55 60ad853 **refactor: adjust types**
+- 2025-08-28 23:52 0365f0f **step: bump bgord/scripts**
 ## 2025-08-28 21:27 v0.12.20
 - 2025-08-28 21:27 79aae42 **0.12.20**
 - 2025-08-28 21:26 f1da4c2 **step: update packages**
+- 2025-08-28 19:27 4603037 **docs: generate CHANGELOG**
 - 2025-08-28 19:26 3aa1e31 **docs: generate CHANGELOG**
 ## 2025-08-28 17:06 v0.12.19
 - 2025-08-28 17:06 f90aaa2 **0.12.19**
