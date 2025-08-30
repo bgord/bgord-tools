@@ -1,5 +1,7 @@
 # Changelog
+- 2025-08-30 21:21 e819850 **0.12.21**
 - 2025-08-30 21:20 7705798 **fix: deps**
+- 2025-08-30 19:21 22f10e2 **docs: generate CHANGELOG**
 - 2025-08-30 17:57 19ffb3a **refactor: require a value in from now**
 - 2025-08-30 17:56 a8b8cad **refactor: remove Time.Now.value**
 - 2025-08-30 17:55 60ad853 **refactor: adjust types**
