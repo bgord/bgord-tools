@@ -1,9 +1,11 @@
 # Changelog
+- 2025-08-30 23:48 3d2fa7e **refactor: remove date.now refs**
 ## 2025-08-30 21:21 v0.12.22
 ## 2025-08-30 21:21 v0.12.21
 - 2025-08-30 21:21 e819850 **0.12.21**
 - 2025-08-30 21:21 484a12d **0.12.22**
 - 2025-08-30 21:20 7705798 **fix: deps**
+- 2025-08-30 19:21 c76c387 **docs: generate CHANGELOG**
 - 2025-08-30 19:21 b09e2d4 **docs: generate CHANGELOG**
 - 2025-08-30 19:21 22f10e2 **docs: generate CHANGELOG**
 - 2025-08-30 17:57 19ffb3a **refactor: require a value in from now**
