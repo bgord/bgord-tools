@@ -83,11 +83,8 @@ export class Time {
     );
   }
 
-  // TODO remove?
-  static Now(now = Date.now()) {
+  static Now(now: TimestampType) {
     return {
-      value: now as TimestampType,
-
       Minus(time: TimeResultInterface): TimeResultInterface {
         return Time.Ms(now - time.ms);
       },
