@@ -1,4 +1,4 @@
-import { IBAN } from "./iban.vo";
+import type { IBAN } from "./iban.vo";
 
 type IbanMaskedType = string;
 

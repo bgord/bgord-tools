@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { RoundingStrategy, RoundToNearest } from "./rounding.service";
+import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
 
 export const MoneyAmount = z
   .number()

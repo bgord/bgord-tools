@@ -1,4 +1,4 @@
-import { Timestamp, TimestampType } from "./timestamp.vo";
+import { Timestamp, type TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
 enum StopwatchState {

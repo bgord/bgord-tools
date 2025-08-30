@@ -1,5 +1,5 @@
 import { Mean } from "./mean.service";
-import { RoundingStrategy, RoundToDecimal } from "./rounding.service";
+import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
 import { Sum } from "./sum.service";
 
 export class PopulationStandardDeviation {

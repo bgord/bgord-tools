@@ -1,4 +1,4 @@
-import { TimestampType } from "./timestamp.vo";
+import type { TimestampType } from "./timestamp.vo";
 
 export class DateRange {
   constructor(

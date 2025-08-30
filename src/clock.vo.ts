@@ -1,5 +1,5 @@
-import { Hour, HourFormatters } from "./hour.vo";
-import { Minute } from "./minute.vo";
+import { type Hour, HourFormatters } from "./hour.vo";
+import type { Minute } from "./minute.vo";
 
 export type ClockFormatter = (hour: Hour, minute: Minute) => string;
 

@@ -1,4 +1,4 @@
-import { RoundingStrategy, RoundToDecimal } from "./rounding.service";
+import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
 
 type MinMaxScalerValueType = number;
 

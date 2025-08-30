@@ -1,4 +1,4 @@
-import { RoundingStrategy, RoundToNearest } from "./rounding.service";
+import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
 
 export class Percentage {
   static of(

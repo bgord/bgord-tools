@@ -1,8 +1,8 @@
 import { endOfDay, startOfDay } from "date-fns";
 import { DateRange } from "./date-range.vo";
-import { DayIsoId, DayIsoIdType } from "./day-iso-id.vo";
+import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Time } from "./time.service";
-import { Timestamp, TimestampType } from "./timestamp.vo";
+import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 export class Day extends DateRange {
   private constructor(start: TimestampType, end: TimestampType) {
