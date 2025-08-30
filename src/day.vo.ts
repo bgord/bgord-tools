@@ -19,7 +19,7 @@ export class Day extends DateRange {
     return new Day(start, end);
   }
 
-  static fromNow(now: TimestampType = Timestamp.parse(Date.now())): Day {
+  static fromNow(now: TimestampType): Day {
     return Day.fromTimestamp(now);
   }
 

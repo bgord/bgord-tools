@@ -18,7 +18,7 @@ export class Week extends DateRange {
     return new Week(start, end);
   }
 
-  static fromNow(now: TimestampType = Timestamp.parse(Date.now())): Week {
+  static fromNow(now: TimestampType): Week {
     return Week.fromTimestamp(now);
   }
 
