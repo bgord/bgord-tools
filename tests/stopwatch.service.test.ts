@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 import { Stopwatch } from "../src/stopwatch.service";
-import { Timestamp } from "../src/timestamp.vo";
+import { Timestamp, type TimestampType } from "../src/timestamp.vo";
 
 describe("Stopwatch", () => {
   beforeEach(() => setSystemTime(1_000_000));
@@ -8,7 +8,8 @@ describe("Stopwatch", () => {
   afterEach(() => setSystemTime());
 
   test("calculates duration correctly", () => {
-    const stopwatch = new Stopwatch();
+    const now = 1_000_000 as TimestampType;
+    const stopwatch = new Stopwatch(now);
 
     setSystemTime(1_000_000 + 500);
 
@@ -18,7 +19,8 @@ describe("Stopwatch", () => {
   });
 
   test("throws if stop is called twice", () => {
-    const stopwatch = new Stopwatch();
+    const now = 1_000_000 as TimestampType;
+    const stopwatch = new Stopwatch(now);
     setSystemTime(1_000_000 + 100);
 
     stopwatch.stop();

@@ -11,9 +11,9 @@ export type StopwatchResultType = { durationMs: TimestampType };
 export class Stopwatch {
   private state: StopwatchState = StopwatchState.started;
 
-  private readonly startMs: TimestampType = Timestamp.parse(Date.now());
-
   private stopMs: Falsy<TimestampType>;
+
+  constructor(private readonly startMs: TimestampType) {}
 
   stop(): StopwatchResultType {
     if (this.state === StopwatchState.stopped) {

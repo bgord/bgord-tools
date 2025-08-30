@@ -6,9 +6,6 @@ import { Week } from "../src/week.vo";
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 
 describe("Week VO", () => {
-  /* ────────────────────────────────────────────────────────────
-   * 1. Mid-year date – Tue 22 Jul 2025 should be week 30/2025
-   * ────────────────────────────────────────────────────────── */
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
     const timestamp = toMs("2025-07-22T12:00:00Z"); // Tuesday
     const week = Week.fromTimestamp(timestamp);
@@ -23,9 +20,6 @@ describe("Week VO", () => {
     expect(week.contains(timestamp)).toBe(true);
   });
 
-  /* ────────────────────────────────────────────────────────────
-   * 2. Year-crossing date – Wed 31 Dec 2025 belongs to week 01/2026
-   * ────────────────────────────────────────────────────────── */
   test("correctly handles a date where ISO week spills into the next calendar year", () => {
     const timestamp = toMs("2025-12-31T23:59:59Z"); // Wednesday
     const week = Week.fromTimestamp(timestamp);
@@ -43,7 +37,7 @@ describe("Week VO", () => {
     expect(week.toIsoId()).toBe(id);
   });
 
-  test("fromNow() produces the same week as fromTimestamp(Date.now())", () => {
+  test("fromNow", () => {
     const now = Timestamp.parse(Date.now());
     const weekA = Week.fromTimestamp(now);
     const weekB = Week.fromNow(now);
@@ -51,9 +45,6 @@ describe("Week VO", () => {
     expect(weekB.equals(weekA)).toBe(true);
   });
 
-  /* ────────────────────────────────────────────────────────────
-   * 5. contains() returns false for values outside the range
-   * ────────────────────────────────────────────────────────── */
   test("contains() returns false for timestamps outside the week", () => {
     const timestamp = toMs("2025-07-22T12:00:00Z");
     const week = Week.fromTimestamp(timestamp);
