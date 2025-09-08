@@ -1,5 +1,7 @@
 # Changelog
+- 2025-09-08 17:07 b4ab123 **step: bump bgord/scripts**
 - 2025-09-08 17:07 87a16f6 **step: update packages**
+- 2025-09-08 15:07 79117f1 **docs: generate CHANGELOG**
 ## 2025-08-30 23:49 v0.12.23
 - 2025-08-30 23:49 db4e7ce **0.12.23**
 - 2025-08-30 23:48 3d2fa7e **refactor: remove date.now refs**
