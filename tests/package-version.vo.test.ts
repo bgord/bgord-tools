@@ -88,4 +88,9 @@ describe("PackageVersion", () => {
       expect(PackageVersion.fromStringWithV("v1.1.1").patch).toEqual(1);
     });
   });
+
+  test("toString", () => {
+    const version = PackageVersion.fromString("5.0.1");
+    expect(version.toString()).toEqual("5.0.1");
+  });
 });
