@@ -1,6 +1,8 @@
 # Changelog
+- 2025-09-15 21:39 957fc01 **step: update packages**
 ## 2025-09-09 13:04 v0.12.25
 - 2025-09-09 13:04 9e2a611 **0.12.25**
+- 2025-09-09 11:04 f673cd6 **docs: generate CHANGELOG**
 - 2025-09-09 11:03 d6c9208 **docs: generate CHANGELOG**
 - 2025-09-08 23:10 d2366e5 **step: add package version to string**
 ## 2025-09-08 17:17 v0.12.24
