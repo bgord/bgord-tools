@@ -20,7 +20,6 @@ export * from "./file-path-relative-schema.vo";
 export * from "./filename.vo";
 export * from "./filename-from-string.vo";
 export * from "./filename-suffix.vo";
-export * from "./filter.vo";
 export * from "./hour.vo";
 export * from "./iban.vo";
 export * from "./iban-mask.service";
