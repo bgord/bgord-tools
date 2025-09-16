@@ -1,3 +1,5 @@
+import type { TimestampType } from "./timestamp.vo";
+
 export class Minute {
   private readonly value: number;
 
@@ -13,7 +15,7 @@ export class Minute {
     this.value = candidate;
   }
 
-  static fromUtcTimestamp(timestamp: number): Minute {
+  static fromUtcTimestamp(timestamp: TimestampType): Minute {
     const minutes = new Date(timestamp).getUTCMinutes();
     return new Minute(minutes);
   }

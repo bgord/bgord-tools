@@ -3,8 +3,8 @@ import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
 
 export const MoneyAmount = z
   .number()
-  .int({ message: "money.amount.invalid " })
-  .min(0, { message: "money.amount.invalid " })
+  .int({ message: "money.amount.invalid" })
+  .min(0, { message: "money.amount.invalid" })
   .brand("MoneyAmount");
 
 export type MoneyAmountType = z.infer<typeof MoneyAmount>;
@@ -61,8 +61,6 @@ export class Money {
   }
 
   divide(factor: MoneyDivisionFactorType) {
-    if (factor === 0) throw new Error("Cannot divide by zero");
-
     const result = this.rounding.round(this.amount / factor);
 
     return new Money(MoneyAmount.parse(result), this.rounding);

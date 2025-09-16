@@ -3,7 +3,7 @@ import type { Falsy } from "./ts-utils";
 
 enum StopwatchState {
   started = "started",
-  stopped = "finished",
+  stopped = "stopped",
 }
 
 export type StopwatchResultType = { durationMs: TimestampType };

@@ -30,16 +30,6 @@ export const PackageVersionValue = z
           return false;
         }
 
-        if (
-          !(
-            Number.isInteger(Number(major)) &&
-            Number.isInteger(Number(minor)) &&
-            Number.isInteger(Number(patch))
-          )
-        ) {
-          return false;
-        }
-
         return true;
       } catch (_error) {
         return false;

@@ -17,6 +17,6 @@ export const DirectoryPathAbsoluteSchema = z
         segment.length > 0 && /^[A-Za-z0-9._-]+$/.test(segment) && segment !== "." && segment !== "..",
     );
   }, "abs_dir_bad_segments")
-  .brand("directory_path_absolute_");
+  .brand("directory_path_absolute");
 
 export type DirectoryPathAbsoluteType = z.infer<typeof DirectoryPathAbsoluteSchema>;
