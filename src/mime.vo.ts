@@ -2,9 +2,7 @@ import * as mime from "mime-types";
 import { ExtensionSchema, type ExtensionType } from "./extension.vo";
 
 export type MimeRawType = string;
-
 type MimeTypeType = string;
-
 type MimeSubtypeType = string;
 
 export class Mime {

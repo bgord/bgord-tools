@@ -1,7 +1,4 @@
-type RandomGenerateConfigType = {
-  min: number;
-  max: number;
-};
+type RandomGenerateConfigType = { min: number; max: number };
 
 export class Random {
   static generate(config?: RandomGenerateConfigType) {

@@ -6,17 +6,11 @@ export const Timezone = z
   .refine(
     (value) => {
       try {
-        // Create a dummy date and time format using the specified timezone
-        const dummyDate = new Date();
+        const date = new Date();
         const formatter = new Intl.DateTimeFormat("en-US", { timeZone: value });
-
-        // Format the dummy date
-        formatter.format(dummyDate);
-
-        // If the formatting succeeds without throwing an error, the timezone is valid
+        formatter.format(date);
         return true;
       } catch (_error) {
-        // An error occurred, indicating an invalid timezone
         return false;
       }
     },

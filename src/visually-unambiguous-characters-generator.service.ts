@@ -31,10 +31,7 @@ export class VisuallyUnambiguousCharactersGenerator {
       .map(
         () =>
           VisuallyUnambiguousCharactersGenerator.chars[
-            Random.generate({
-              min: 0,
-              max: VisuallyUnambiguousCharactersGenerator.chars.length - 1,
-            })
+            Random.generate({ min: 0, max: VisuallyUnambiguousCharactersGenerator.chars.length - 1 })
           ],
       )
       .join("");

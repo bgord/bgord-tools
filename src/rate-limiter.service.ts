@@ -3,11 +3,8 @@ import { Timestamp, type TimestampType } from "./timestamp.vo";
 import type { Falsy } from "./ts-utils";
 
 type RateLimiterOptionsType = Pick<TimeResult, "ms">;
-
 type RateLimiterResultSuccessType = { allowed: true };
-
 type RateLimiterResultErrorType = { allowed: false; remainingMs: TimestampType };
-
 type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
 export class RateLimiter {
