@@ -6,10 +6,7 @@ type RateLimiterOptionsType = Pick<TimeResult, "ms">;
 
 type RateLimiterResultSuccessType = { allowed: true };
 
-type RateLimiterResultErrorType = {
-  allowed: false;
-  remainingMs: TimestampType;
-};
+type RateLimiterResultErrorType = { allowed: false; remainingMs: TimestampType };
 
 type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
@@ -33,9 +30,6 @@ export class RateLimiter {
       return { allowed: true };
     }
 
-    return {
-      allowed: false,
-      remainingMs: Timestamp.parse(nextAllowedTimestampMs - currentTimestampMs),
-    };
+    return { allowed: false, remainingMs: Timestamp.parse(nextAllowedTimestampMs - currentTimestampMs) };
   }
 }

@@ -16,9 +16,6 @@ export class RelativeDate {
   }
 
   private static _format(timestampMs: TimestampType): RelativeDateType {
-    return {
-      raw: timestampMs,
-      relative: DateFormatters.relative(timestampMs),
-    };
+    return { raw: timestampMs, relative: DateFormatters.relative(timestampMs) };
   }
 }
