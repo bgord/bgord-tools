@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Minute } from "../src/minute.vo";
+import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Minute", () => {
   test("throws for invalid minute values", () => {
@@ -9,16 +10,12 @@ describe("Minute", () => {
   });
 
   test("creates a valid Minute instance", () => {
-    const minute = new Minute(5);
-    expect(minute.get().raw).toBe(5);
+    expect(new Minute(5).get().raw).toBe(5);
   });
 
   test("formats minute to two digits", () => {
-    const m1 = new Minute(3);
-    expect(m1.get().formatted).toBe("03");
-
-    const m2 = new Minute(12);
-    expect(m2.get().formatted).toBe("12");
+    expect(new Minute(3).get().formatted).toBe("03");
+    expect(new Minute(12).get().formatted).toBe("12");
   });
 
   test("equals compares correctly", () => {
@@ -49,5 +46,9 @@ describe("Minute", () => {
   test("Minute.ZERO and Minute.MAX return correct values", () => {
     expect(Minute.ZERO.get().raw).toBe(0);
     expect(Minute.MAX.get().raw).toBe(59);
+  });
+
+  test("fromUtcTimestamp", () => {
+    expect(Minute.fromUtcTimestamp(1700000000000 as TimestampType).get().raw).toEqual(13);
   });
 });

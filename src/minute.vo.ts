@@ -13,11 +13,13 @@ export class Minute {
     this.value = candidate;
   }
 
+  static fromUtcTimestamp(timestamp: number): Minute {
+    const minutes = new Date(timestamp).getUTCMinutes();
+    return new Minute(minutes);
+  }
+
   get() {
-    return {
-      raw: this.value,
-      formatted: this.value.toString().padStart(2, "0"),
-    };
+    return { raw: this.value, formatted: this.value.toString().padStart(2, "0") };
   }
 
   equals(another: Minute): boolean {
