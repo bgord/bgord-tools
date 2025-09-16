@@ -1,10 +1,14 @@
 # Changelog
+## 2025-09-16 20:31 v0.13.0
+- 2025-09-16 20:31 ae899b5 **0.13.0**
 - 2025-09-16 20:06 71db945 **step: add weekday vo**
 - 2025-09-16 19:44 2a70ea7 **step: add clock from utc timestamp**
 - 2025-09-16 19:37 80194a9 **step: add minute from utc timestamp**
 - 2025-09-16 19:33 9200604 **refactor: simplify if throw new**
 - 2025-09-16 19:25 fcc6168 **step: add hour from utc timestamp**
 - 2025-09-16 19:22 a423d78 **fix: hour formatters**
+- 2025-09-16 18:23 b398c4d **docs: generate CHANGELOG**
+- 2025-09-16 18:23 4178280 **docs: generate readme**
 - 2025-09-16 16:03 ae21645 **refactor: remove filter**
 - 2025-09-16 15:58 12d4cc6 **refactor: improve code**
 - 2025-09-16 15:51 588c61c **refactor: remove build version**
