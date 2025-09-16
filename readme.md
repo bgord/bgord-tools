@@ -26,7 +26,6 @@ Run the tests
 src/
 ├── api-key.vo.ts
 ├── basename.vo.ts
-├── build-version.vo.ts
 ├── clock.vo.ts
 ├── date-calculator.service.ts
 ├── date-formatter.service.ts
