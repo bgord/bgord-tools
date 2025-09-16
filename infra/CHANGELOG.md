@@ -1,4 +1,7 @@
 # Changelog
+- 2025-09-17 00:11 8723cdd **step: add quarter**
+- 2025-09-17 00:05 8c6b777 **step: add month vo**
+- 2025-09-16 23:24 ebdd404 **refactor: remove whitespace**
 ## 2025-09-16 20:31 v0.13.0
 - 2025-09-16 20:31 ae899b5 **0.13.0**
 - 2025-09-16 20:06 71db945 **step: add weekday vo**
@@ -7,6 +10,7 @@
 - 2025-09-16 19:33 9200604 **refactor: simplify if throw new**
 - 2025-09-16 19:25 fcc6168 **step: add hour from utc timestamp**
 - 2025-09-16 19:22 a423d78 **fix: hour formatters**
+- 2025-09-16 18:31 79d6a55 **docs: generate CHANGELOG**
 - 2025-09-16 18:23 b398c4d **docs: generate CHANGELOG**
 - 2025-09-16 18:23 4178280 **docs: generate readme**
 - 2025-09-16 16:03 ae21645 **refactor: remove filter**
