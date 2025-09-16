@@ -42,6 +42,8 @@ export * from "./package-version.vo";
 export * from "./pagination.service";
 export * from "./percentage.service";
 export * from "./population-standard-deviation.service";
+export * from "./quarter.vo";
+export * from "./quarter-iso-id.vo";
 export * from "./random.service";
 export * from "./rate-limiter.service";
 export * from "./relative-date.vo";
