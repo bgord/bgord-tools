@@ -4,9 +4,7 @@ import { Sum } from "./sum.service";
 
 export class PopulationStandardDeviation {
   static calculate(values: number[], rounding: RoundingStrategy = new RoundToDecimal(2)): number {
-    if (values.length < 2) {
-      throw new Error("At least two values are needed");
-    }
+    if (values.length < 2) throw new Error("At least two values are needed");
 
     const mean = Mean.calculate(values);
     const n = values.length;

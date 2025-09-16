@@ -35,15 +35,9 @@ export class Hour {
   static readonly MAX = new Hour(23);
 
   constructor(candidate: number, formatter?: HourFormatter) {
-    if (!Number.isInteger(candidate)) {
-      throw new Error("Invalid hour");
-    }
-    if (candidate < 0) {
-      throw new Error("Invalid hour");
-    }
-    if (candidate >= 24) {
-      throw new Error("Invalid hour");
-    }
+    if (!Number.isInteger(candidate)) throw new Error("Invalid hour");
+    if (candidate < 0) throw new Error("Invalid hour");
+    if (candidate >= 24) throw new Error("Invalid hour");
 
     this.value = candidate;
     this.formatter = (formatter as HourFormatter) ?? HourFormatters.TWENTY_FOUR_HOURS;

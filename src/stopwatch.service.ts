@@ -16,9 +16,7 @@ export class Stopwatch {
   constructor(private readonly startMs: TimestampType) {}
 
   stop(): StopwatchResultType {
-    if (this.state === StopwatchState.stopped) {
-      throw new Error("Stopwatch is already stopped");
-    }
+    if (this.state === StopwatchState.stopped) throw new Error("Stopwatch is already stopped");
 
     this.state = StopwatchState.stopped;
     this.stopMs = Timestamp.parse(Date.now());

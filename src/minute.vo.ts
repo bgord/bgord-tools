@@ -6,17 +6,9 @@ export class Minute {
   static readonly MAX = new Minute(59);
 
   constructor(candidate: number) {
-    if (!Number.isInteger(candidate)) {
-      throw new Error("Invalid minute");
-    }
-
-    if (candidate < 0) {
-      throw new Error("Invalid minute");
-    }
-
-    if (candidate >= 60) {
-      throw new Error("Invalid minute");
-    }
+    if (!Number.isInteger(candidate)) throw new Error("Invalid minute");
+    if (candidate < 0) throw new Error("Invalid minute");
+    if (candidate >= 60) throw new Error("Invalid minute");
 
     this.value = candidate;
   }

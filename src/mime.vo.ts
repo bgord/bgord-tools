@@ -13,13 +13,8 @@ export class Mime {
   constructor(value: MimeRawType) {
     const [type, subtype] = value.split("/");
 
-    if (typeof type !== "string" || type.length === 0) {
-      throw new InvalidMimeError();
-    }
-
-    if (typeof subtype !== "string" || subtype.length === 0) {
-      throw new InvalidMimeError();
-    }
+    if (typeof type !== "string" || type.length === 0) throw new InvalidMimeError();
+    if (typeof subtype !== "string" || subtype.length === 0) throw new InvalidMimeError();
 
     this.raw = value;
     this.type = type;

@@ -10,14 +10,8 @@ export class Stepper {
   private readonly total: StepType;
 
   constructor(config: StepperConfigType) {
-    if (!Number.isInteger(config.total)) {
-      throw new Error("Total value is not an integer");
-    }
-
-    if (config.total <= Stepper.DEFAULT_CURRENT) {
-      throw new Error("Total value should be greater than one");
-    }
-
+    if (!Number.isInteger(config.total)) throw new Error("Total value is not an integer");
+    if (config.total <= Stepper.DEFAULT_CURRENT) throw new Error("Total value should be greater than one");
     this.total = config.total;
   }
 

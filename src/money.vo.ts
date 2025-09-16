@@ -55,17 +55,13 @@ export class Money {
   subtract(money: Money) {
     const result = this.rounding.round(this.amount - money.getAmount());
 
-    if (result < Money.ZERO) {
-      throw new Error("Less than zero");
-    }
+    if (result < Money.ZERO) throw new Error("Less than zero");
 
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
   divide(factor: MoneyDivisionFactorType) {
-    if (factor === 0) {
-      throw new Error("Cannot divide by zero");
-    }
+    if (factor === 0) throw new Error("Cannot divide by zero");
 
     const result = this.rounding.round(this.amount / factor);
 

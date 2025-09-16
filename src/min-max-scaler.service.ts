@@ -26,13 +26,8 @@ export class MinMaxScaler {
     const lower = config.bound?.lower ?? 0;
     const upper = config.bound?.upper ?? 1;
 
-    if (config.max - config.min < 0) {
-      throw new Error("Invalid MinMaxScaler min-max config");
-    }
-
-    if (upper - lower <= 0) {
-      throw new Error("Invalid MinMaxScaler bound config");
-    }
+    if (config.max - config.min < 0) throw new Error("Invalid MinMaxScaler min-max config");
+    if (upper - lower <= 0) throw new Error("Invalid MinMaxScaler bound config");
 
     this.rounding = rounding;
 
@@ -45,9 +40,7 @@ export class MinMaxScaler {
   scale(value: MinMaxScalerValueType) {
     const { min, max, lower, upper } = this;
 
-    if (value < min || value > max) {
-      throw new Error("Value out of min/max range");
-    }
+    if (value < min || value > max) throw new Error("Value out of min/max range");
 
     if (min === max)
       return {
@@ -70,9 +63,7 @@ export class MinMaxScaler {
   descale(scaled: MinMaxScalerValueType) {
     const { min, max, lower, upper } = this;
 
-    if (scaled < lower || scaled > upper) {
-      throw new Error("Scaled value out of bounds");
-    }
+    if (scaled < lower || scaled > upper) throw new Error("Scaled value out of bounds");
 
     const result = ((scaled - lower) / (upper - lower)) * (max - min) + min;
 
@@ -85,9 +76,7 @@ export class MinMaxScaler {
   }
 
   static getMinMax(values: MinMaxScalerValueType[]) {
-    if (values.length === 0) {
-      throw new Error("An empty array supplied");
-    }
+    if (values.length === 0) throw new Error("An empty array supplied");
 
     return { min: Math.min(...values), max: Math.max(...values) };
   }

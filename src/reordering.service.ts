@@ -63,10 +63,7 @@ export class ReorderingTransfer {
 
   readonly to: ReorderingPosition;
 
-  constructor(config: {
-    id: ReorderingItem["id"];
-    to: ReorderingItemPositionValueType;
-  }) {
+  constructor(config: { id: ReorderingItem["id"]; to: ReorderingItemPositionValueType }) {
     this.id = config.id;
     this.to = new ReorderingPosition(config.to);
   }
@@ -106,9 +103,8 @@ export class ReorderingCalculator {
 
   delete(id: ReorderingItem["id"]) {
     const item = this.dll.find((x) => x.data.eq(id));
-    if (!item) {
-      throw new Error("Cannot find Item");
-    }
+    if (!item) throw new Error("Cannot find Item");
+
     this.dll.remove(item);
     this.recalculate();
   }
@@ -117,12 +113,8 @@ export class ReorderingCalculator {
     const current = this.dll.find((node) => node.data.eq(transfer.id));
     const target = this.dll.find((node) => node.data.position.eq(transfer.to));
 
-    if (!current) {
-      throw new Error("Cannot find current Item");
-    }
-    if (!target) {
-      throw new Error("Cannot find target Item");
-    }
+    if (!current) throw new Error("Cannot find current Item");
+    if (!target) throw new Error("Cannot find target Item");
 
     const direction = transfer.getDirection(current.data.position);
 

@@ -31,16 +31,12 @@ export class Revision {
   }
 
   static fromETag(etag: ETag | null): Revision {
-    if (!etag) {
-      throw new InvalidRevisionError();
-    }
+    if (!etag) throw new InvalidRevisionError();
     return new Revision(etag.revision);
   }
 
   static fromWeakETag(weakEtag: WeakETag | null): Revision {
-    if (!weakEtag) {
-      throw new InvalidRevisionError();
-    }
+    if (!weakEtag) throw new InvalidRevisionError();
     return new Revision(weakEtag.revision);
   }
 }

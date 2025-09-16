@@ -10,9 +10,7 @@ export class ZScore {
     values: number[],
     private readonly rounding: RoundingStrategy = new RoundToDecimal(2),
   ) {
-    if (values.length < 2) {
-      throw new Error("At least two values are needed");
-    }
+    if (values.length < 2) throw new Error("At least two values are needed");
 
     this.mean = Mean.calculate(values);
     this.standardDeviation = PopulationStandardDeviation.calculate(values);

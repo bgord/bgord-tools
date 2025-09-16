@@ -20,9 +20,7 @@ export class SimpleLinearRegression {
   static fromPairs(pairs: SLRPairType[], rounding?: RoundingStrategy) {
     const n = pairs.length;
 
-    if (n < 2) {
-      throw new Error("At least two pairs needed");
-    }
+    if (n < 2) throw new Error("At least two pairs needed");
 
     const x = pairs.map((pair) => pair.x);
     const y = pairs.map((pair) => pair.y);
@@ -30,30 +28,19 @@ export class SimpleLinearRegression {
     const xy = pairs.map((pair) => pair.x * pair.y);
 
     const sX = Sum.of(x);
-    if (sX >= Number.MAX_SAFE_INTEGER) {
-      throw new Error("Sum of x values is too big");
-    }
+    if (sX >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x values is too big");
 
     const sY = Sum.of(y);
-    if (sY >= Number.MAX_SAFE_INTEGER) {
-      throw new Error("Sum of y values is too big");
-    }
+    if (sY >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of y values is too big");
 
     const sSX = Sum.of(xx);
-    if (sSX >= Number.MAX_SAFE_INTEGER) {
-      throw new Error("Sum of x squared values is too big");
-    }
+    if (sSX >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x squared values is too big");
 
     const sXY = Sum.of(xy);
-    if (sXY >= Number.MAX_SAFE_INTEGER) {
-      throw new Error("Sum of x times y values is too big");
-    }
+    if (sXY >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x times y values is too big");
 
     const bDenominator = sSX - sX ** 2 / n;
-
-    if (bDenominator === 0) {
-      throw new Error("Unable to create the model");
-    }
+    if (bDenominator === 0) throw new Error("Unable to create the model");
 
     const b = (sXY - (sX * sY) / n) / bDenominator;
     const a = (sY - b * sX) / n;
