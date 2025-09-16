@@ -1,5 +1,6 @@
-import { type Hour, HourFormatters } from "./hour.vo";
-import type { Minute } from "./minute.vo";
+import { Hour, HourFormatters } from "./hour.vo";
+import { Minute } from "./minute.vo";
+import type { TimestampType } from "./timestamp.vo";
 
 export type ClockFormatter = (hour: Hour, minute: Minute) => string;
 
@@ -24,6 +25,12 @@ export class Clock {
     formatter?: ClockFormatter,
   ) {
     this.formatter = (formatter as ClockFormatter) ?? ClockFormatters.TWENTY_FOUR_HOURS;
+  }
+
+  static fromUtcTimestamp(timestamp: TimestampType, formatter?: ClockFormatter) {
+    const hour = Hour.fromUtcTimestamp(timestamp);
+    const minute = Minute.fromUtcTimestamp(timestamp);
+    return new Clock(hour, minute, formatter);
   }
 
   get(formatter?: ClockFormatter) {

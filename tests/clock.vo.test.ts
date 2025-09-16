@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Clock, ClockFormatters } from "../src/clock.vo";
 import { Hour } from "../src/hour.vo";
 import { Minute } from "../src/minute.vo";
+import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Clock", () => {
   test("formats using default TWENTY_FOUR_HOURS", () => {
@@ -76,5 +77,11 @@ describe("Clock", () => {
     const minute = new Minute(8);
     const clock = new Clock(hour, minute);
     expect(clock.get().raw).toEqual({ hour: 7, minute: 8 });
+  });
+
+  test("fromUtcTimestamp", () => {
+    const clock = Clock.fromUtcTimestamp(1700000000000 as TimestampType).get().raw;
+    expect(clock.hour).toEqual(22);
+    expect(clock.minute).toEqual(13);
   });
 });
