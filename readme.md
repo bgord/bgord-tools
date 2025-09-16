@@ -46,7 +46,6 @@ src/
 ├── filename-from-string.vo.ts
 ├── filename-suffix.vo.ts
 ├── filename.vo.ts
-├── filter.vo.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
 ├── iban.vo.ts
@@ -88,6 +87,7 @@ src/
 ├── visually-unambiguous-characters-generator.service.ts
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
+├── weekday.vo.ts
 └── z-score.service.ts
 ```
 
