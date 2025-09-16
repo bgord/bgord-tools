@@ -32,6 +32,8 @@ export * from "./mime-types.vo";
 export * from "./min-max-scaler.service";
 export * from "./minute.vo";
 export * from "./money.vo";
+export * from "./month.vo";
+export * from "./month-iso-id.vo";
 export * from "./noop.service";
 export * from "./notification-template.vo";
 export * from "./object-key.vo";

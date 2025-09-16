@@ -1,0 +1,51 @@
+import { describe, expect, test } from "bun:test";
+import { endOfMonth, startOfMonth } from "date-fns";
+import { Month } from "../src/month.vo";
+import { MonthIsoId } from "../src/month-iso-id.vo";
+import { Timestamp } from "../src/timestamp.vo";
+
+const toMs = (s: string) => Timestamp.parse(Date.parse(s));
+
+describe("Month VO", () => {
+  test("creates the correct range & ISO id from a mid-year timestamp", () => {
+    const timestamp = toMs("2025-07-22T12:00:00Z");
+    const month = Month.fromTimestamp(timestamp);
+
+    expect(month.getStart()).toBe(Timestamp.parse(startOfMonth(timestamp).getTime()));
+    expect(month.getEnd()).toBe(Timestamp.parse(endOfMonth(timestamp).getTime()));
+    expect(month.toIsoId()).toBe("2025-07");
+    expect(month.contains(timestamp)).toBe(true);
+  });
+
+  test("handles a timestamp near year boundary in UTC", () => {
+    const timestamp = toMs("2025-12-31T23:59:59Z");
+    const month = Month.fromTimestamp(timestamp);
+
+    expect(month.getStart()).toBe(Timestamp.parse(startOfMonth(timestamp).getTime()));
+    expect(month.getEnd()).toBe(Timestamp.parse(endOfMonth(timestamp).getTime()));
+    expect(month.toIsoId()).toBe("2025-12");
+  });
+
+  test("round-trips via ISO id", () => {
+    const ids = ["1970-01", "1999-12", "2024-02", "2025-12", "2026-01"] as const;
+    for (const id of ids) {
+      const parsed = MonthIsoId.parse(id);
+      const month = Month.fromIsoId(parsed);
+      expect(month.toIsoId()).toBe(id);
+    }
+  });
+
+  test("fromNow equals fromTimestamp(now)", () => {
+    const now = Timestamp.parse(Date.now());
+    const a = Month.fromTimestamp(now);
+    const b = Month.fromNow(now);
+    expect(b.equals(a)).toBe(true);
+  });
+
+  test("contains() returns false for timestamps outside the month", () => {
+    const timestamp = toMs("2025-07-22T12:00:00Z");
+    const month = Month.fromTimestamp(timestamp);
+    expect(month.contains(Timestamp.parse(month.getStart() - 1))).toBe(false);
+    expect(month.contains(Timestamp.parse(month.getEnd() + 1))).toBe(false);
+  });
+});
