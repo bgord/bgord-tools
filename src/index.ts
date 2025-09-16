@@ -66,4 +66,6 @@ export * from "./visually-unambiguous-characters-generator.service";
 export * from "./week.vo";
 export * from "./week-iso-id.vo";
 export * from "./weekday.vo";
+export * from "./year.vo";
+export * from "./year-iso-id.vo";
 export * from "./z-score.service";
