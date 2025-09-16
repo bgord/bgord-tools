@@ -1,5 +1,7 @@
 # Changelog
+- 2025-09-16 11:10 18c3324 **refactor: reformat files**
 - 2025-09-15 21:39 957fc01 **step: update packages**
+- 2025-09-15 19:39 2fe2ed7 **docs: generate CHANGELOG**
 ## 2025-09-09 13:04 v0.12.25
 - 2025-09-09 13:04 9e2a611 **0.12.25**
 - 2025-09-09 11:04 f673cd6 **docs: generate CHANGELOG**
