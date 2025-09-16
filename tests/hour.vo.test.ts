@@ -9,48 +9,34 @@ describe("Hour", () => {
   });
 
   test("creates a valid Hour instance", () => {
-    const hour = new Hour(5);
-    expect(hour.get().raw).toBe(5);
+    expect(new Hour(5).get().raw).toBe(5);
   });
 
   test("formats using default (TWENTY_FOUR_HOURS)", () => {
-    const hour = new Hour(5);
-    expect(hour.get().formatted).toBe("05");
+    expect(new Hour(5).get().formatted).toBe("05");
   });
 
   test("formats using TWENTY_FOUR_HOURS_WO_PADDING", () => {
-    const hour = new Hour(5, HourFormatters.TWENTY_FOUR_HOURS_WO_PADDING);
-    expect(hour.get().formatted).toBe("5");
+    expect(new Hour(5, HourFormatters.TWENTY_FOUR_HOURS_WO_PADDING).get().formatted).toBe("5");
   });
 
   test("formats using AM_PM", () => {
-    const hour = new Hour(5, HourFormatters.AM_PM);
-    expect(hour.get().formatted).toBe("5 a.m.");
-
-    const hour2 = new Hour(15, HourFormatters.AM_PM);
-    expect(hour2.get().formatted).toBe("15 p.m.");
+    expect(new Hour(5, HourFormatters.AM_PM).get().formatted).toBe("5 a.m.");
+    expect(new Hour(15, HourFormatters.AM_PM).get().formatted).toBe("3 p.m.");
   });
 
   test("formats using TWELVE_HOURS", () => {
-    const hour = new Hour(15, HourFormatters.TWELVE_HOURS);
-    expect(hour.get().formatted).toBe("03");
-
-    const hour2 = new Hour(0, HourFormatters.TWELVE_HOURS);
-    expect(hour2.get().formatted).toBe("00");
+    expect(new Hour(15, HourFormatters.TWELVE_HOURS).get().formatted).toBe("03");
+    expect(new Hour(0, HourFormatters.TWELVE_HOURS).get().formatted).toBe("12");
   });
 
   test("formats using TWELVE_HOURS_WO_PADDING", () => {
-    const hour = new Hour(15, HourFormatters.TWELVE_HOURS_WO_PADDING);
-    expect(hour.get().formatted).toBe("3");
-
-    const hour2 = new Hour(0, HourFormatters.TWELVE_HOURS_WO_PADDING);
-    expect(hour2.get().formatted).toBe("0");
+    expect(new Hour(15, HourFormatters.TWELVE_HOURS_WO_PADDING).get().formatted).toBe("3");
+    expect(new Hour(0, HourFormatters.TWELVE_HOURS_WO_PADDING).get().formatted).toBe("12");
   });
 
   test("get() supports overriding formatter", () => {
-    const hour = new Hour(13);
-    const result = hour.get(HourFormatters.AM_PM);
-    expect(result.formatted).toBe("13 p.m.");
+    expect(new Hour(13).get(HourFormatters.AM_PM).formatted).toBe("1 p.m.");
   });
 
   test("equals compares correctly", () => {

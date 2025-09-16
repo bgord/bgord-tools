@@ -14,13 +14,13 @@ export const HourFormatters: Record<HourFormatterEnum, HourFormatter> = {
   TWENTY_FOUR_HOURS_WO_PADDING: (value) => value.toString(),
 
   AM_PM: (value) => {
-    if (value < 12) return `${value.toString()} a.m.`;
-    return `${value.toString()} p.m.`;
+    const twelveHour = value % 12 || 12;
+    return `${twelveHour.toString()} ${value < 12 ? "a.m." : "p.m."}`;
   },
 
-  TWELVE_HOURS: (value) => (value % 12).toString().padStart(2, "0"),
+  TWELVE_HOURS: (value) => (value % 12 || 12).toString().padStart(2, "0"),
 
-  TWELVE_HOURS_WO_PADDING: (value) => (value % 12).toString(),
+  TWELVE_HOURS_WO_PADDING: (value) => (value % 12 || 12).toString(),
 } as const;
 
 export class Hour {
