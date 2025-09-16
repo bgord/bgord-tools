@@ -1,3 +1,5 @@
+import type { TimestampType } from "./timestamp.vo";
+
 export type HourFormatter = (value: Hour["value"]) => string;
 
 export enum HourFormatterEnum {
@@ -63,6 +65,12 @@ export class Hour {
 
   isBefore(another: Hour): boolean {
     return this.value < another.get().raw;
+  }
+
+  static fromUtcTimestamp(timestamp: TimestampType, formatter?: HourFormatter): Hour {
+    const hours = new Date(timestamp).getUTCHours();
+
+    return new Hour(hours, formatter);
   }
 
   static list(formatter?: HourFormatter) {

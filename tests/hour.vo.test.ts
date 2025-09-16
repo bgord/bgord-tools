@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Hour, HourFormatters } from "../src/hour.vo";
+import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Hour", () => {
   test("throws for invalid hour values", () => {
@@ -67,5 +68,9 @@ describe("Hour", () => {
   test("Hour.ZERO and Hour.MAX are correct", () => {
     expect(Hour.ZERO.get().raw).toBe(0);
     expect(Hour.MAX.get().raw).toBe(23);
+  });
+
+  test("fromUtcTimestamp", () => {
+    expect(Hour.fromUtcTimestamp(1700000000000 as TimestampType).get().raw).toEqual(22);
   });
 });
