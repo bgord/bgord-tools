@@ -1,7 +1,9 @@
 # Changelog
+- 2025-09-16 15:51 588c61c **refactor: remove build version**
 ## 2025-09-16 11:11 v0.12.26
 - 2025-09-16 11:11 ecddbd5 **0.12.26**
 - 2025-09-16 11:10 18c3324 **refactor: reformat files**
+- 2025-09-16 09:12 dec6b3e **docs: generate CHANGELOG**
 - 2025-09-16 09:10 45ad8bf **docs: generate CHANGELOG**
 - 2025-09-15 21:39 957fc01 **step: update packages**
 - 2025-09-15 19:39 2fe2ed7 **docs: generate CHANGELOG**
