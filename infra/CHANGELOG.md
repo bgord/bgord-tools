@@ -1,7 +1,16 @@
 # Changelog
+- 2025-09-17 12:03 91b1430 **step: update packages**
+- 2025-09-17 12:02 4f99171 **refactor: reformat files**
+- 2025-09-17 11:57 21965bd **refactor: simplify tests**
+- 2025-09-17 11:19 b69842c **refactor: simplify weekday**
+- 2025-09-17 11:16 bc34b10 **refactor: move leap year check to year vo**
+- 2025-09-17 11:11 503c50b **step: add year from number**
+- 2025-09-17 00:18 6967226 **step: add year**
 - 2025-09-17 00:11 8723cdd **step: add quarter**
 - 2025-09-17 00:05 8c6b777 **step: add month vo**
 - 2025-09-16 23:24 ebdd404 **refactor: remove whitespace**
+- 2025-09-16 22:15 bcf4f39 **docs: generate readme**
+- 2025-09-16 22:15 bc872fe **docs: generate CHANGELOG**
 ## 2025-09-16 20:31 v0.13.0
 - 2025-09-16 20:31 ae899b5 **0.13.0**
 - 2025-09-16 20:06 71db945 **step: add weekday vo**
