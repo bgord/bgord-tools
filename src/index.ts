@@ -25,7 +25,6 @@ export * from "./iban.vo";
 export * from "./iban-mask.service";
 export * from "./image.vo";
 export * from "./language.vo";
-export * from "./leap-year-checker.service";
 export * from "./mean.service";
 export * from "./mime.vo";
 export * from "./mime-types.vo";

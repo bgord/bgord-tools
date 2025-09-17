@@ -8,6 +8,11 @@ export class Year extends DateRange {
     return String(getYear(this.getStart())) as YearIsoIdType;
   }
 
+  isLeapYear(): boolean {
+    const year = getYear(this.getStart());
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+
   static fromTimestamp(timestamp: TimestampType): Year {
     const start = Timestamp.parse(startOfYear(timestamp).getTime());
     const end = Timestamp.parse(endOfYear(timestamp).getTime());

@@ -69,4 +69,9 @@ describe("Year VO", () => {
     expect(() => Year.fromNumber(2025.5)).toThrow("year.invalid_integer");
     expect(() => Year.fromNumber(Number.NaN)).toThrow("year.invalid_integer");
   });
+
+  test("leap year check for 2000", () => expect(Year.fromNumber(2000).isLeapYear()).toBe(true));
+  test("leap year check for 2010", () => expect(Year.fromNumber(2010).isLeapYear()).toBe(false));
+  test("leap year check for 2024", () => expect(Year.fromNumber(2024).isLeapYear()).toBe(true));
+  test("leap year check for 2400", () => expect(Year.fromNumber(2400).isLeapYear()).toBe(true));
 });
