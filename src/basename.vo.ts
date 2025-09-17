@@ -15,5 +15,4 @@ export const BasenameSchema = z
   .refine((s) => !s.endsWith("."), "basename_trailing_dot_forbidden")
   .regex(/^[A-Za-z0-9._-]+$/, "basename_bad_chars")
   .brand("basename");
-
 export type BasenameType = z.infer<typeof BasenameSchema>;

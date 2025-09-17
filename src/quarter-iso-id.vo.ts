@@ -15,5 +15,4 @@ export const QuarterIsoId = z
     },
     { message: "quarter-iso-id.invalid" },
   );
-
 export type QuarterIsoIdType = z.infer<typeof QuarterIsoId>;

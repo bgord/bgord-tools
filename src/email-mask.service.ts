@@ -1,7 +1,6 @@
 import { z } from "zod/v4";
 
 export const Email = z.email().brand("Email");
-
 export type EmailType = z.infer<typeof Email>;
 
 type EmailMaskedType = string;

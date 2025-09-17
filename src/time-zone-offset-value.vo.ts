@@ -7,5 +7,4 @@ export const TimeZoneOffsetValue = z
   .transform((value) => Number(value))
   .transform((value) => (Number.isNaN(value) ? 0 : value))
   .brand("TimeZoneOffsetValue");
-
 export type TimeZoneOffsetValueType = z.infer<typeof TimeZoneOffsetValue>;

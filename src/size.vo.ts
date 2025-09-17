@@ -9,7 +9,6 @@ export enum SizeUnit {
 }
 
 export const SizeValue = z.number().positive().brand("SizeValue");
-
 type SizeValueType = z.infer<typeof SizeValue>;
 
 type SizeConfigType = { unit: SizeUnit; value: number };

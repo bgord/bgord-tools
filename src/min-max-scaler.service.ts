@@ -1,14 +1,10 @@
 import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
 
 type MinMaxScalerValueType = number;
-
 type MinMaxScalerConfigType = {
   min: MinMaxScalerValueType;
   max: MinMaxScalerValueType;
-  bound?: {
-    lower: MinMaxScalerValueType;
-    upper: MinMaxScalerValueType;
-  };
+  bound?: { lower: MinMaxScalerValueType; upper: MinMaxScalerValueType };
   rounding?: RoundingStrategy;
 };
 

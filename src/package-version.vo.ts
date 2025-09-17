@@ -1,9 +1,7 @@
 import { z } from "zod/v4";
 
 type MajorType = number;
-
 type MinorType = number;
-
 type PatchType = number;
 
 export const PackageVersionValue = z

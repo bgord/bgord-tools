@@ -20,5 +20,4 @@ export const WeekIsoId = z
     },
     { message: "week-iso-id.invalid" },
   );
-
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;

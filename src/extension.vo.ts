@@ -13,5 +13,4 @@ export const ExtensionSchema = z
       .regex(/^[a-z0-9]+$/, "extension_bad_chars"),
   )
   .brand("extension");
-
 export type ExtensionType = z.infer<typeof ExtensionSchema>;

@@ -1,11 +1,9 @@
 import { z } from "zod/v4";
 
 const Take = z.number().int().gte(0);
-
 type TakeType = z.infer<typeof Take>;
 
 const Skip = z.number().int().gte(0);
-
 type SkipType = z.infer<typeof Skip>;
 
 const Page = z.coerce
@@ -13,30 +11,14 @@ const Page = z.coerce
   .int()
   .transform((value) => (value <= 0 ? 1 : value))
   .default(1);
-
 export type PageType = z.infer<typeof Page>;
 
-export type PaginationType = {
-  values: { take: TakeType; skip: SkipType };
-  page: PageType;
-};
-
+export type PaginationType = { values: { take: TakeType; skip: SkipType }; page: PageType };
 export type PaginationValuesType = Record<string, unknown>;
-
 export type TotalType = number;
-
 export type ExhaustedType = boolean;
-
-export type PaginationExhaustedConfig = {
-  total: TotalType;
-  pagination: PaginationType;
-};
-
-export type PaginationPrepareConfigType<T> = {
-  total: TotalType;
-  pagination: PaginationType;
-  result: T[];
-};
+export type PaginationExhaustedConfig = { total: TotalType; pagination: PaginationType };
+export type PaginationPrepareConfigType<T> = { total: TotalType; pagination: PaginationType; result: T[] };
 
 export class Pagination {
   static parse(values: PaginationValuesType, _take: TakeType): PaginationType {
@@ -59,14 +41,7 @@ export class Pagination {
 
     return {
       result: config.result,
-      meta: {
-        exhausted,
-        currentPage,
-        previousPage,
-        nextPage,
-        lastPage,
-        total: config.total,
-      },
+      meta: { exhausted, currentPage, previousPage, nextPage, lastPage, total: config.total },
     };
   }
 

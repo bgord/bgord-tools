@@ -17,5 +17,4 @@ export const Timezone = z
     { message: "timezone.invalid" },
   )
   .brand("Timezone");
-
 export type TimezoneType = z.infer<typeof Timezone>;

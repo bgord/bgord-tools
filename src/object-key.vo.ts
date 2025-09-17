@@ -13,5 +13,4 @@ export const ObjectKey = z
     "obj_key_bad_segments",
   )
   .brand("object_key");
-
 export type ObjectKeyType = z.infer<typeof ObjectKey>;

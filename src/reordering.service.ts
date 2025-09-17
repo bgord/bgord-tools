@@ -2,15 +2,12 @@ import { z } from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 
 export const ReorderingItemPositionValue = z.number().int().min(0);
-
 export type ReorderingItemPositionValueType = z.infer<typeof ReorderingItemPositionValue>;
 
 export const ReorderingCorrelationId = z.string().min(1);
-
 export type ReorderingCorrelationIdType = z.infer<typeof ReorderingCorrelationId>;
 
 export const ReorderingItemId = z.uuid();
-
 export type ReorderingItemIdType = z.infer<typeof ReorderingItemId>;
 
 export const Reordering = z.object({
@@ -21,9 +18,7 @@ export const Reordering = z.object({
 
 export type ReorderingType = z.infer<typeof Reordering>;
 
-export type WithReorderingPositionValue<T> = T & {
-  position: ReorderingItemPositionValueType;
-};
+export type WithReorderingPositionValue<T> = T & { position: ReorderingItemPositionValueType };
 
 export class ReorderingPosition {
   readonly value: ReorderingItemPositionValueType;

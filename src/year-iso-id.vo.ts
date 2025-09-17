@@ -10,5 +10,4 @@ export const YearIsoId = z
     },
     { message: "year-iso-id.invalid" },
   );
-
 export type YearIsoIdType = z.infer<typeof YearIsoId>;

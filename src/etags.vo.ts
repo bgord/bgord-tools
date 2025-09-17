@@ -1,7 +1,6 @@
 import { z } from "zod/v4";
 
 const RevisionValue = z.number().int().min(0);
-
 type RevisionValueType = z.infer<typeof RevisionValue>;
 
 type ETagValueType = string;

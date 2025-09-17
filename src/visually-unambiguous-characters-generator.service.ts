@@ -1,6 +1,7 @@
 import { Random } from "./random.service";
 
 export class VisuallyUnambiguousCharactersGenerator {
+  // prettier-ignore
   static chars = [
     "a",
     "b",

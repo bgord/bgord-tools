@@ -2,9 +2,7 @@ import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
 import { Sum } from "./sum.service";
 
 export type SLRPairType = { x: number; y: number };
-
 export type SLRParamsType = { a: number; b: number };
-
 export type SLRPredictionType = number;
 
 export class SimpleLinearRegression {

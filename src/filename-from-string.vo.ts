@@ -16,5 +16,4 @@ export const FilenameFromStringSchema = z
     const extension = ExtensionSchema.parse(string.slice(index + 1));
     return { basename: base, extension: extension };
   });
-
 export type FilenameFromString = z.infer<typeof FilenameFromStringSchema>;

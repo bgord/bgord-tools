@@ -1,5 +1,4 @@
 type StepType = number;
-
 type StepperConfigType = { total: StepType };
 
 export class Stepper {

@@ -6,5 +6,4 @@ export const FilenameSuffixSchema = z
   .transform((value) => value.replace(/[^A-Za-z0-9_-]/g, ""))
   .pipe(z.string().max(32, "suffix_too_long"))
   .brand("basename_suffix");
-
 export type FilenameSuffixSchemaType = z.infer<typeof FilenameSuffixSchema>;

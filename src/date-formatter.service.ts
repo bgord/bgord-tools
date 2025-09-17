@@ -1,7 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 
 type FormattedDateType = string;
-
 type DateFormattersInputType = Parameters<typeof format>[0];
 
 export class DateFormatters {

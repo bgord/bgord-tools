@@ -1,10 +1,7 @@
 import { Time } from "./time.service";
 import type { TimestampType } from "./timestamp.vo";
 
-type GetStartOfDayTsInTzConfigType = {
-  now: TimestampType;
-  timeZoneOffsetMs: number;
-};
+type GetStartOfDayTsInTzConfigType = { now: TimestampType; timeZoneOffsetMs: number };
 
 export class DateCalculator {
   static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType) {

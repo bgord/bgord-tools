@@ -1,12 +1,7 @@
 import { format, isAfter, isEqual, subDays } from "date-fns";
 
 type DateType = string;
-
-export type StreakType = {
-  cutoff: DateType;
-  dates: DateType[];
-  streak: number;
-};
+export type StreakType = { cutoff: DateType; dates: DateType[]; streak: number };
 
 export class StreakCalculator {
   private readonly cutoff: DateType;

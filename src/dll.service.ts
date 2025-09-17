@@ -1,8 +1,6 @@
 export class Node<T> {
   data: T;
-
   prev: Node<T> | null = null;
-
   next: Node<T> | null = null;
 
   constructor(data: Node<T>["data"]) {
@@ -39,11 +37,8 @@ export class Node<T> {
 
 export class DoublyLinkedList<T> {
   static EMPTY_SIZE = 0;
-
   private size = DoublyLinkedList.EMPTY_SIZE;
-
   private head: Node<T> | null = null;
-
   private tail: Node<T> | null = null;
 
   getSize(): DoublyLinkedList<T>["size"] {
