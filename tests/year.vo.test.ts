@@ -27,11 +27,25 @@ describe("Year VO", () => {
   });
 
   test("round-trips via ISO id", () => {
-    const ids = ["1970", "1999", "2024", "2025", "2026"] as const; // keep 0000 out to avoid JS Date quirks
+    const ids = ["1970", "1999", "2024", "2025", "2026"];
     for (const id of ids) {
       const parsed = YearIsoId.parse(id);
       const year = Year.fromIsoId(parsed);
       expect(year.toIsoId()).toBe(id);
+    }
+  });
+
+  test("fromNumber builds the same range & id as fromIsoId", () => {
+    const samples = [1970, 1999, 2024, 2025, 2026];
+    for (const value of samples) {
+      const a = Year.fromNumber(value);
+      const b = Year.fromIsoId(String(value));
+
+      expect(a.toIsoId()).toBe(String(value));
+      expect(b.toIsoId()).toBe(String(value));
+      expect(a.getStart()).toBe(b.getStart());
+      expect(a.getEnd()).toBe(b.getEnd());
+      expect(a.equals(b)).toBe(true);
     }
   });
 
@@ -47,5 +61,12 @@ describe("Year VO", () => {
     const year = Year.fromTimestamp(timestamp);
     expect(year.contains(Timestamp.parse(year.getStart() - 1))).toBe(false);
     expect(year.contains(Timestamp.parse(year.getEnd() + 1))).toBe(false);
+  });
+
+  test("fromNumber rejects invalid inputs", () => {
+    expect(() => Year.fromNumber(-1)).toThrow("year.out_of_range");
+    expect(() => Year.fromNumber(10000)).toThrow("year.out_of_range");
+    expect(() => Year.fromNumber(2025.5)).toThrow("year.invalid_integer");
+    expect(() => Year.fromNumber(Number.NaN)).toThrow("year.invalid_integer");
   });
 });

@@ -1,4 +1,4 @@
-import { endOfYear, getYear, setYear, startOfYear } from "date-fns";
+import { endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
@@ -18,9 +18,14 @@ export class Year extends DateRange {
     return Year.fromTimestamp(now);
   }
 
+  static fromNumber(value: number): Year {
+    if (!Number.isInteger(value)) throw new Error("year.invalid_integer");
+    if (value < 0 || value > 9999) throw new Error("year.out_of_range");
+    const reference = Timestamp.parse(Date.UTC(value, 0, 1, 0, 0, 0, 0));
+    return Year.fromTimestamp(reference);
+  }
+
   static fromIsoId(isoId: YearIsoIdType): Year {
-    const year = Number(YearIsoId.parse(isoId));
-    const reference = setYear(new Date(Date.UTC(1970, 0, 1)), year);
-    return Year.fromTimestamp(Timestamp.parse(reference.getTime()));
+    return Year.fromNumber(Number(YearIsoId.parse(isoId)));
   }
 }
