@@ -51,7 +51,6 @@ src/
 ├── iban.vo.ts
 ├── image.vo.ts
 ├── language.vo.ts
-├── leap-year-checker.service.ts
 ├── mean.service.ts
 ├── mime-types.vo.ts
 ├── mime.vo.ts
@@ -92,6 +91,8 @@ src/
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
 ├── weekday.vo.ts
+├── year-iso-id.vo.ts
+├── year.vo.ts
 └── z-score.service.ts
 ```
 
