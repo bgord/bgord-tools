@@ -48,14 +48,11 @@ describe("Mime", () => {
   });
 
   test("basic to extension", () => {
-    const pdf = new Mime("application/pdf");
     // @ts-expect-error
-    expect(pdf.toExtension()).toEqual("pdf");
+    expect(new Mime("application/pdf").toExtension()).toEqual("pdf");
   });
 
   test("fromExtension", () => {
-    const extension = ExtensionSchema.parse("pdf");
-    const mime = Mime.fromExtension(extension);
-    expect(mime.raw).toEqual("application/pdf");
+    expect(Mime.fromExtension(ExtensionSchema.parse("pdf")).raw).toEqual("application/pdf");
   });
 });

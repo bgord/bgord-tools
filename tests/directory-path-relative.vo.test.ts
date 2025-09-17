@@ -4,7 +4,6 @@ import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 
 function expectZodIssue(inputString: string, expectedMessage: string) {
   try {
-    // @ts-expect-error we want this to throw
     DirectoryPathRelativeSchema.parse(inputString);
     throw new Error("Expected to fail, but it passed");
   } catch (error) {

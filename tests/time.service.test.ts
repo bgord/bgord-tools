@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Time } from "../src/time.service";
+import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Time", () => {
   describe("Days", () => {
@@ -9,7 +10,7 @@ describe("Time", () => {
       expect(days.hours).toBe(48);
       expect(days.minutes).toBe(2880);
       expect(days.seconds).toBe(172800);
-      expect(days.ms).toBe(172800000);
+      expect(days.ms).toBe(172800000 as TimestampType);
     });
   });
 
@@ -20,7 +21,7 @@ describe("Time", () => {
       expect(hours.hours).toBe(3);
       expect(hours.minutes).toBe(180);
       expect(hours.seconds).toBe(10800);
-      expect(hours.ms).toBe(10800000);
+      expect(hours.ms).toBe(10800000 as TimestampType);
     });
   });
 
@@ -31,7 +32,7 @@ describe("Time", () => {
       expect(minutes.hours).toBe(0.5);
       expect(minutes.minutes).toBe(30);
       expect(minutes.seconds).toBe(1800);
-      expect(minutes.ms).toBe(1800000);
+      expect(minutes.ms).toBe(1800000 as TimestampType);
     });
   });
 
@@ -42,7 +43,7 @@ describe("Time", () => {
       expect(seconds.hours).toBe(0.03);
       expect(seconds.minutes).toBe(2);
       expect(seconds.seconds).toBe(120);
-      expect(seconds.ms).toBe(120000);
+      expect(seconds.ms).toBe(120000 as TimestampType);
     });
   });
 
@@ -53,19 +54,19 @@ describe("Time", () => {
       expect(ms.hours).toBe(0);
       expect(ms.minutes).toBe(0.01);
       expect(ms.seconds).toBe(0.5);
-      expect(ms.ms).toBe(500);
+      expect(ms.ms).toBe(500 as TimestampType);
     });
   });
 
   describe("Now", () => {
     test("minus", () => {
-      const result = Time.Now(1700000000000).Minus(Time.Ms(500));
-      expect(result.ms).toEqual(1699999999500);
+      const result = Time.Now(1700000000000 as TimestampType).Minus(Time.Ms(500));
+      expect(result.ms).toEqual(1699999999500 as TimestampType);
     });
 
     test("add", () => {
-      const result = Time.Now(1700000000000).Add(Time.Ms(500));
-      expect(result.ms).toEqual(1700000000500);
+      const result = Time.Now(1700000000000 as TimestampType).Add(Time.Ms(500));
+      expect(result.ms).toEqual(1700000000500 as TimestampType);
     });
   });
 
@@ -75,7 +76,8 @@ describe("Time", () => {
     });
 
     test("returns false is another time is not after", () => {
-      expect(Time.Ms(1700000000000).isAfter(Time.Now().Minus(Time.Days(3)))).toEqual(false);
+      const now = Date.now() as TimestampType;
+      expect(Time.Ms(1700000000000).isAfter(Time.Now(now).Minus(Time.Days(3)))).toEqual(false);
     });
   });
 });

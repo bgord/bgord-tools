@@ -4,7 +4,6 @@ import { Timestamp, type TimestampType } from "../src/timestamp.vo";
 
 describe("Stopwatch", () => {
   beforeEach(() => setSystemTime(1_000_000));
-
   afterEach(() => setSystemTime());
 
   test("calculates duration correctly", () => {

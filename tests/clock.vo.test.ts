@@ -6,19 +6,16 @@ import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Clock", () => {
   test("formats using default TWENTY_FOUR_HOURS", () => {
-    const clock = new Clock(new Hour(9), new Minute(5));
-    expect(clock.get().formatted).toBe("09:05");
+    expect(new Clock(new Hour(9), new Minute(5)).get().formatted).toBe("09:05");
   });
 
   test("formats using TWELVE_HOURS", () => {
-    const clock = new Clock(new Hour(13), new Minute(30));
-    expect(clock.get(ClockFormatters.TWELVE_HOURS).formatted).toBe("01:30");
+    expect(new Clock(new Hour(13), new Minute(30)).get(ClockFormatters.TWELVE_HOURS).formatted).toBe("01:30");
   });
 
   test("formats using a custom formatter", () => {
-    const clock = new Clock(new Hour(15), new Minute(30));
     const customFormatter = (h: Hour, m: Minute) => `Hour=${h.get().formatted}, Min=${m.get().formatted}`;
-    expect(clock.get(customFormatter).formatted).toBe("Hour=15, Min=30");
+    expect(new Clock(new Hour(15), new Minute(30)).get(customFormatter).formatted).toBe("Hour=15, Min=30");
   });
 
   test("equals returns true for same hour and minute", () => {
@@ -73,10 +70,7 @@ describe("Clock", () => {
   });
 
   test("raw values from get() are correct", () => {
-    const hour = new Hour(7);
-    const minute = new Minute(8);
-    const clock = new Clock(hour, minute);
-    expect(clock.get().raw).toEqual({ hour: 7, minute: 8 });
+    expect(new Clock(new Hour(7), new Minute(8)).get().raw).toEqual({ hour: 7, minute: 8 });
   });
 
   test("fromUtcTimestamp", () => {

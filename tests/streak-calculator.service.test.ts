@@ -16,11 +16,7 @@ describe("StreakCalculator", () => {
   });
 
   test("returns proper metadata", () => {
-    expect(streakCalculator.calculate([])).toEqual({
-      cutoff: today,
-      streak: 0,
-      dates: [],
-    });
+    expect(streakCalculator.calculate([])).toEqual({ cutoff: today, streak: 0, dates: [] });
   });
 
   test("returns 1 for one date streak", () => {

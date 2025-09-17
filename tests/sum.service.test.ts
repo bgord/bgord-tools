@@ -3,22 +3,18 @@ import { Sum } from "../src/sum.service";
 
 describe("Sum", () => {
   test("works for one value", () => {
-    const result = Sum.of([1]);
-    expect(result).toEqual(1);
+    expect(Sum.of([1])).toEqual(1);
   });
 
   test("works for two values", () => {
-    const result = Sum.of([1, 2]);
-    expect(result).toEqual(3);
+    expect(Sum.of([1, 2])).toEqual(3);
   });
 
   test("works for three values", () => {
-    const result = Sum.of([1, 3, 6]);
-    expect(result).toEqual(10);
+    expect(Sum.of([1, 3, 6])).toEqual(10);
   });
 
   test("works for all zeros", () => {
-    const result = Sum.of([0, 0, 0]);
-    expect(result).toEqual(0);
+    expect(Sum.of([0, 0, 0])).toEqual(0);
   });
 });

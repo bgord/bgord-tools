@@ -20,8 +20,6 @@ describe("Percentage", () => {
   });
 
   test("works correctly with round up rounding", () => {
-    const rounding = new RoundUp();
-
-    expect(Percentage.of(1, 3, rounding)).toBe(34);
+    expect(Percentage.of(1, 3, new RoundUp())).toBe(34);
   });
 });

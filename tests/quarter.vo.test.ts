@@ -29,11 +29,7 @@ describe("Quarter VO", () => {
 
   test("round-trips via ISO id", () => {
     const ids = ["1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "2026-Q1"] as const;
-    for (const id of ids) {
-      const parsed = QuarterIsoId.parse(id);
-      const quarter = Quarter.fromIsoId(parsed);
-      expect(quarter.toIsoId()).toBe(id);
-    }
+    for (const id of ids) expect(Quarter.fromIsoId(QuarterIsoId.parse(id)).toIsoId()).toBe(id);
   });
 
   test("fromNow equals fromTimestamp(now)", () => {

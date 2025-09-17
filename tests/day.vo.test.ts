@@ -29,8 +29,7 @@ describe("Day VO", () => {
   });
 
   test("round-trips ISO id → Day → ISO id", () => {
-    const id = "2025-12-31";
-    expect(Day.fromIsoId(id).toIsoId()).toBe(id);
+    expect(Day.fromIsoId("2025-12-31").toIsoId()).toBe("2025-12-31");
   });
 
   test("fromNow", () => {

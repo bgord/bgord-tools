@@ -11,24 +11,18 @@ describe("Standard Deviation Calculation", () => {
   });
 
   test("calculates standard deviation for two values", () => {
-    const result = PopulationStandardDeviation.calculate([1, 2]);
-    expect(result).toEqual(0.5);
+    expect(PopulationStandardDeviation.calculate([1, 2])).toEqual(0.5);
   });
 
   test("calculates standard deviation for three values", () => {
-    const result = PopulationStandardDeviation.calculate([1, 2, 3]);
-    expect(result).toEqual(0.82);
+    expect(PopulationStandardDeviation.calculate([1, 2, 3])).toEqual(0.82);
   });
 
   test("calculates standard deviation for a set of numbers", () => {
-    // prettier-ignore
-    const result = PopulationStandardDeviation.calculate([2, 4, 4, 4, 5, 5, 7, 9]);
-    expect(result).toEqual(2);
+    expect(PopulationStandardDeviation.calculate([2, 4, 4, 4, 5, 5, 7, 9])).toEqual(2);
   });
 
   test("calculates standard deviation for another set of numbers", () => {
-    // prettier-ignore
-    const result = PopulationStandardDeviation.calculate([1, 1, 1, 1, 1, 1, 10]);
-    expect(result).toEqual(3.15);
+    expect(PopulationStandardDeviation.calculate([1, 1, 1, 1, 1, 1, 10])).toEqual(3.15);
   });
 });

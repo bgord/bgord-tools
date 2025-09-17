@@ -3,17 +3,11 @@ import { Timestamp } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {
   test("parses a valid positive integer", () => {
-    const now = Date.now();
-    const parsed = Timestamp.parse(now);
-    // @ts-expect-error
-    expect(parsed).toEqual(now);
+    expect(Timestamp.safeParse(Date.now()).success).toEqual(true);
   });
 
   test("accepts 0", () => {
-    const now = 0;
-    const parsed = Timestamp.parse(now);
-    // @ts-expect-error
-    expect(parsed).toEqual(now);
+    expect(Timestamp.safeParse(0).success).toEqual(true);
   });
 
   test("throws on negative numbers", () => {

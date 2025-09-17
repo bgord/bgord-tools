@@ -12,12 +12,8 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
     test("length of 5", () => {
       const length = 5;
       const result = VisuallyUnambiguousCharactersGenerator.generate(length);
-
       expect(result.length).toEqual(length);
-
-      for (const char of result) {
-        expect(VisuallyUnambiguousCharactersGenerator.chars).toContain(char);
-      }
+      for (const char of result) expect(VisuallyUnambiguousCharactersGenerator.chars).toContain(char);
     });
   });
 });

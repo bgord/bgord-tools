@@ -1,66 +1,54 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, test } from "bun:test";
 import { Height, Width } from "../src/image.vo";
 
 describe("Width validator", () => {
-  it("should accept a positive integer", () => {
-    const result = Width.safeParse(100);
-    expect(result.success).toBe(true);
+  test("should accept a positive integer", () => {
+    expect(Width.safeParse(100).success).toBe(true);
   });
 
-  it("should reject zero", () => {
-    const result = Width.safeParse(0);
-    expect(result.success).toBe(false);
+  test("should reject zero", () => {
+    expect(Width.safeParse(0).success).toBe(false);
   });
 
-  it("should reject negative numbers", () => {
-    const result = Width.safeParse(-42);
-    expect(result.success).toBe(false);
+  test("should reject negative numbers", () => {
+    expect(Width.safeParse(-42).success).toBe(false);
   });
 
-  it("should reject non-integer numbers", () => {
-    const result = Width.safeParse(3.14);
-    expect(result.success).toBe(false);
+  test("should reject non-integer numbers", () => {
+    expect(Width.safeParse(3.14).success).toBe(false);
   });
 
-  it("should reject non-number values", () => {
-    const result = Width.safeParse("100");
-    expect(result.success).toBe(false);
+  test("should reject non-number values", () => {
+    expect(Width.safeParse("100").success).toBe(false);
   });
 
-  it("should reject a number over the max", () => {
-    const result = Width.safeParse(10_0001);
-    expect(result.success).toBe(false);
+  test("should reject a number over the max", () => {
+    expect(Width.safeParse(10_0001).success).toBe(false);
   });
 });
 
 describe("Height validator", () => {
-  it("should accept a positive integer", () => {
-    const result = Height.safeParse(200);
-    expect(result.success).toBe(true);
+  test("should accept a positive integer", () => {
+    expect(Height.safeParse(200).success).toBe(true);
   });
 
-  it("should reject zero", () => {
-    const result = Height.safeParse(0);
-    expect(result.success).toBe(false);
+  test("should reject zero", () => {
+    expect(Height.safeParse(0).success).toBe(false);
   });
 
-  it("should reject negative numbers", () => {
-    const result = Height.safeParse(-10);
-    expect(result.success).toBe(false);
+  test("should reject negative numbers", () => {
+    expect(Height.safeParse(-10).success).toBe(false);
   });
 
-  it("should reject non-integer numbers", () => {
-    const result = Height.safeParse(12.5);
-    expect(result.success).toBe(false);
+  test("should reject non-integer numbers", () => {
+    expect(Height.safeParse(12.5).success).toBe(false);
   });
 
-  it("should reject non-number values", () => {
-    const result = Height.safeParse(null);
-    expect(result.success).toBe(false);
+  test("should reject non-number values", () => {
+    expect(Height.safeParse(null).success).toBe(false);
   });
 
-  it("should reject a number over the max", () => {
-    const result = Height.safeParse(10_0001);
-    expect(result.success).toBe(false);
+  test("should reject a number over the max", () => {
+    expect(Height.safeParse(10_0001).success).toBe(false);
   });
 });

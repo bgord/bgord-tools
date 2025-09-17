@@ -3,142 +3,92 @@ import { Size, SizeUnit, SizeValue } from "../src/size.vo";
 
 describe("Size", () => {
   test("Create Size instance with bytes", () => {
-    const sizeConfig = { unit: SizeUnit.b, value: 500 };
-    const size = new Size(sizeConfig);
-
-    expect(size.toString()).toEqual("500 b");
+    expect(new Size({ unit: SizeUnit.b, value: 500 }).toString()).toEqual("500 b");
   });
 
   test("Create Size instance with kB", () => {
-    const sizeConfig = { unit: SizeUnit.kB, value: 500 };
-    const size = new Size(sizeConfig);
-
-    expect(size.toString()).toEqual("500 kB");
+    expect(new Size({ unit: SizeUnit.kB, value: 500 }).toString()).toEqual("500 kB");
   });
 
   test("Create Size instance with MB", () => {
-    const sizeConfig = { unit: SizeUnit.MB, value: 2 };
-    const size = new Size(sizeConfig);
-
-    expect(size.toString()).toEqual("2 MB");
+    expect(new Size({ unit: SizeUnit.MB, value: 2 }).toString()).toEqual("2 MB");
   });
 
   test("Create Size instance with GB", () => {
-    const sizeConfig = { unit: SizeUnit.GB, value: 2 };
-    const size = new Size(sizeConfig);
-
-    expect(size.toString()).toEqual("2 GB");
+    expect(new Size({ unit: SizeUnit.GB, value: 2 }).toString()).toEqual("2 GB");
   });
 
   test("Convert Size to Bytes (bytes)", () => {
-    const sizeConfig = { unit: SizeUnit.b, value: 4096 };
-    const size = new Size(sizeConfig);
-
-    const bytes = size.toBytes();
-
-    expect(bytes).toEqual(SizeValue.parse(sizeConfig.value));
+    expect(Size.fromBytes(4096).toBytes()).toEqual(SizeValue.parse(4096));
   });
 
   test("Convert Size to Bytes (kB)", () => {
-    const sizeConfig = { unit: SizeUnit.kB, value: 512 };
-    const size = new Size(sizeConfig);
-
-    const bytes = size.toBytes();
-
-    expect(bytes).toEqual(SizeValue.parse(524288));
+    expect(Size.fromKb(512).toBytes()).toEqual(SizeValue.parse(524288));
   });
 
   test("Convert Size to Bytes (MB)", () => {
-    const sizeConfig = { unit: SizeUnit.MB, value: 1.5 };
-    const size = new Size(sizeConfig);
-
-    const bytes = size.toBytes();
-
-    expect(bytes).toEqual(SizeValue.parse(1572864));
+    expect(Size.fromMB(1.5).toBytes()).toEqual(SizeValue.parse(1572864));
   });
 
   test("Convert Size to Bytes (GB)", () => {
-    const sizeConfig = { unit: SizeUnit.GB, value: 1.5 };
-    const size = new Size(sizeConfig);
-
-    const bytes = size.toBytes();
-
-    expect(bytes).toEqual(SizeValue.parse(1610612736));
+    expect(Size.fromGB(1.5).toBytes()).toEqual(SizeValue.parse(1610612736));
   });
 
   test("Static method: Convert Size to Bytes (bytes)", () => {
-    const sizeConfig = { unit: SizeUnit.b, value: 8192 };
-    const bytes = Size.toBytes(sizeConfig);
-
-    expect(bytes).toEqual(SizeValue.parse(sizeConfig.value));
+    expect(Size.fromBytes(8192).toBytes()).toEqual(SizeValue.parse(8192));
   });
 
   test("Static method: Convert Size to Bytes (kB)", () => {
-    const sizeConfig = { unit: SizeUnit.kB, value: 256 };
-    const bytes = Size.toBytes(sizeConfig);
-
-    expect(bytes).toEqual(SizeValue.parse(262144));
+    expect(Size.fromKb(256).toBytes()).toEqual(SizeValue.parse(262144));
   });
 
   test("Static method: Convert Size to Bytes (MB)", () => {
-    const sizeConfig = { unit: SizeUnit.MB, value: 0.75 };
-    const bytes = Size.toBytes(sizeConfig);
-
-    expect(bytes).toEqual(SizeValue.parse(786432));
+    expect(Size.fromMB(0.75).toBytes()).toEqual(SizeValue.parse(786432));
   });
 
   test("Static method: Convert Size to Bytes (GB)", () => {
-    const sizeConfig = { unit: SizeUnit.GB, value: 0.75 };
-    const bytes = Size.toBytes(sizeConfig);
-
-    expect(bytes).toEqual(SizeValue.parse(805306368));
+    expect(Size.fromGB(0.75).toBytes()).toEqual(SizeValue.parse(805306368));
   });
 
   test("Comparison function", () => {
-    const first = new Size({ unit: SizeUnit.GB, value: 1 });
-    const second = new Size({ unit: SizeUnit.MB, value: 1 });
-
-    expect(first.isGreaterThan(second)).toBeTruthy();
+    expect(Size.fromGB(1).isGreaterThan(Size.fromMB(1))).toBeTruthy();
   });
 
   test("Comparison function", () => {
-    const first = new Size({ unit: SizeUnit.MB, value: 1 });
-    const second = new Size({ unit: SizeUnit.MB, value: 1 });
-
-    expect(first.isGreaterThan(second)).toBeFalsy();
+    expect(Size.fromMB(1).isGreaterThan(Size.fromMB(1))).toBeFalsy();
   });
 
   describe("format", () => {
     test("should return formatted bytes", () => {
-      const bytes = new Size({ unit: SizeUnit.b, value: 1024 });
-      expect(bytes.format(SizeUnit.b)).toEqual("1024 b");
-      expect(bytes.format(SizeUnit.kB)).toEqual("1 kB");
-      expect(bytes.format(SizeUnit.MB)).toEqual("0 MB");
-      expect(bytes.format(SizeUnit.GB)).toEqual("0 GB");
+      const value = Size.fromBytes(1024);
+      expect(value.format(SizeUnit.b)).toEqual("1024 b");
+      expect(value.format(SizeUnit.kB)).toEqual("1 kB");
+      expect(value.format(SizeUnit.MB)).toEqual("0 MB");
+      expect(value.format(SizeUnit.GB)).toEqual("0 GB");
     });
 
     test("should return formatted kB", () => {
-      const kB = new Size({ unit: SizeUnit.kB, value: 512 });
-      expect(kB.format(SizeUnit.b)).toEqual("524288 b");
-      expect(kB.format(SizeUnit.kB)).toEqual("512 kB");
-      expect(kB.format(SizeUnit.MB)).toEqual("0.5 MB");
-      expect(kB.format(SizeUnit.GB)).toEqual("0 GB");
+      const value = Size.fromKb(512);
+      expect(value.format(SizeUnit.b)).toEqual("524288 b");
+      expect(value.format(SizeUnit.kB)).toEqual("512 kB");
+      expect(value.format(SizeUnit.MB)).toEqual("0.5 MB");
+      expect(value.format(SizeUnit.GB)).toEqual("0 GB");
     });
 
     test("should return formatted MB", () => {
-      const MB = new Size({ unit: SizeUnit.MB, value: 128 });
-      expect(MB.format(SizeUnit.b)).toEqual("134217728 b");
-      expect(MB.format(SizeUnit.kB)).toEqual("131072 kB");
-      expect(MB.format(SizeUnit.MB)).toEqual("128 MB");
-      expect(MB.format(SizeUnit.GB)).toEqual("0.13 GB");
+      const value = Size.fromMB(128);
+      expect(value.format(SizeUnit.b)).toEqual("134217728 b");
+      expect(value.format(SizeUnit.kB)).toEqual("131072 kB");
+      expect(value.format(SizeUnit.MB)).toEqual("128 MB");
+      expect(value.format(SizeUnit.GB)).toEqual("0.13 GB");
     });
 
     test("should return formatted GB", () => {
-      const GB = new Size({ unit: SizeUnit.GB, value: 2 });
-      expect(GB.format(SizeUnit.b)).toEqual("2147483648 b");
-      expect(GB.format(SizeUnit.kB)).toEqual("2097152 kB");
-      expect(GB.format(SizeUnit.MB)).toEqual("2048 MB");
-      expect(GB.format(SizeUnit.GB)).toEqual("2 GB");
+      const value = Size.fromGB(2);
+      expect(value.format(SizeUnit.b)).toEqual("2147483648 b");
+      expect(value.format(SizeUnit.kB)).toEqual("2097152 kB");
+      expect(value.format(SizeUnit.MB)).toEqual("2048 MB");
+      expect(value.format(SizeUnit.GB)).toEqual("2 GB");
     });
   });
 

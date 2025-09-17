@@ -21,8 +21,8 @@ describe("FilenameFromStringSchema (minimal)", () => {
 
   test("rejects strings without a proper dot-separated extension", () => {
     expect(() => FilenameFromStringSchema.parse("avatar")).toThrow(ZodError);
+
     try {
-      // @ts-expect-error – we want the exact message
       FilenameFromStringSchema.parse("avatar");
     } catch (e) {
       const err = e as ZodError;

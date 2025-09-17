@@ -7,17 +7,11 @@ describe("RelativeDate", () => {
 
   // 5 minutes later
   beforeEach(() => setSystemTime(new Date("2024-06-01T12:05:00Z")));
-
   afterEach(() => setSystemTime());
 
   describe("truthy", () => {
     test("formats a timestamp into relative format", () => {
-      const result = RelativeDate.truthy(timestampMs);
-
-      expect(result).toEqual({
-        raw: timestampMs,
-        relative: "5 minutes ago",
-      });
+      expect(RelativeDate.truthy(timestampMs)).toEqual({ raw: timestampMs, relative: "5 minutes ago" });
     });
   });
 
@@ -29,12 +23,7 @@ describe("RelativeDate", () => {
     });
 
     test("formats a valid timestamp", () => {
-      const result = RelativeDate.falsy(timestampMs);
-
-      expect(result).toEqual({
-        raw: timestampMs,
-        relative: "5 minutes ago",
-      });
+      expect(RelativeDate.falsy(timestampMs)).toEqual({ raw: timestampMs, relative: "5 minutes ago" });
     });
   });
 });

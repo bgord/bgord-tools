@@ -5,13 +5,8 @@ describe("Calculator", () => {
   describe("add()", () => {
     test("correctly adds items", () => {
       const calculator = new ReorderingCalculator();
-
-      for (const id of ["a", "b", "c"]) {
-        calculator.add(id);
-      }
-
+      for (const id of ["a", "b", "c"]) calculator.add(id);
       calculator.transfer(new ReorderingTransfer({ id: "c", to: 1 }));
-
       expect(calculator.read().ids).toEqual(["a", "c", "b"]);
     });
   });
@@ -24,8 +19,7 @@ describe("Calculator", () => {
     });
 
     test("throws when Item is not found", () => {
-      const calculator = ReorderingCalculator.fromArray(["a", "b", "c"]);
-      expect(() => calculator.delete("d")).toThrow("Cannot find Item");
+      expect(() => ReorderingCalculator.fromArray(["a", "b", "c"]).delete("d")).toThrow("Cannot find Item");
     });
   });
 
@@ -100,12 +94,8 @@ describe("Calculator", () => {
     });
 
     test("10 elements", () => {
-      // prettier-ignore
       const calculator = ReorderingCalculator.fromArray(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]);
-
       calculator.transfer(new ReorderingTransfer({ id: "h", to: 1 }));
-
-      // prettier-ignore
       expect(calculator.read().ids).toEqual(["a", "h", "b", "c", "d", "e", "f", "g", "i", "j"]);
     });
   });

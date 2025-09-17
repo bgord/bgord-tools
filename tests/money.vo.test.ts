@@ -7,13 +7,11 @@ const roundDown = new RoundDown();
 
 describe("Money", () => {
   test("creates an empty instance", () => {
-    const money = new Money();
-    expect(money.getAmount()).toEqual(MoneyAmount.parse(0));
+    expect(new Money().getAmount()).toEqual(MoneyAmount.parse(0));
   });
 
   test("creates an instance with a value", () => {
-    const money = new Money(100);
-    expect(money.getAmount()).toEqual(MoneyAmount.parse(100));
+    expect(new Money(100).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
   test("throws an error when passing a float value", () => {
@@ -28,87 +26,65 @@ describe("Money", () => {
   });
 
   test("multiply() - integer", () => {
-    const money = new Money(100);
-    const factor = MoneyMultiplicationFactor.parse(5);
-
-    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(500));
+    expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(5)).getAmount()).toEqual(
+      MoneyAmount.parse(500),
+    );
   });
 
   test("multiply() - float", () => {
-    const money = new Money(100);
-    const factor = MoneyMultiplicationFactor.parse(1.5);
-
-    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(150));
+    expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+      MoneyAmount.parse(150),
+    );
   });
 
   test("subtract() - result more than zero", () => {
-    const money1 = new Money(100);
-    const money2 = new Money(20);
-
-    expect(money1.subtract(money2).getAmount()).toEqual(MoneyAmount.parse(80));
+    expect(new Money(100).subtract(new Money(20)).getAmount()).toEqual(MoneyAmount.parse(80));
   });
 
   test("subtract() - result zero", () => {
-    const money1 = new Money(100);
-    const money2 = new Money(100);
-
-    expect(money1.subtract(money2).getAmount()).toEqual(MoneyAmount.parse(0));
+    expect(new Money(100).subtract(new Money(100)).getAmount()).toEqual(MoneyAmount.parse(0));
   });
 
   test("subtract() - result less than zero", () => {
-    const money1 = new Money(100);
-    const money2 = new Money(120);
-
-    expect(() => money1.subtract(money2).getAmount()).toThrow("Less than zero");
+    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow("Less than zero");
   });
 
   test("multiply() - float - with default round-to-nearest rounding", () => {
-    const money = new Money(99);
-    const factor = MoneyMultiplicationFactor.parse(1.5);
-
-    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(149));
+    expect(new Money(99).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+      MoneyAmount.parse(149),
+    );
   });
 
   test("multiply() - float - with round-up rounding", () => {
-    const money = new Money(99, roundUp);
-    const factor = MoneyMultiplicationFactor.parse(1.5);
-
-    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(149));
+    expect(new Money(99, roundUp).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+      MoneyAmount.parse(149),
+    );
   });
 
   test("multiply() - float - with round-down rounding", () => {
-    const money = new Money(99, roundDown);
-    const factor = MoneyMultiplicationFactor.parse(1.5);
-
-    expect(money.multiply(factor).getAmount()).toEqual(MoneyAmount.parse(148));
+    expect(new Money(99, roundDown).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+      MoneyAmount.parse(148),
+    );
   });
 
   test("divide() - int", () => {
-    const money = new Money(99);
-    const factor = MoneyDivisionFactor.parse(1.5);
-
-    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(66));
+    expect(new Money(99).divide(MoneyDivisionFactor.parse(1.5)).getAmount()).toEqual(MoneyAmount.parse(66));
   });
 
   test("divide() - float - with default round-to-nearest rounding", () => {
-    const money = new Money(99);
-    const factor = MoneyDivisionFactor.parse(2);
-
-    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(50));
+    expect(new Money(99).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(MoneyAmount.parse(50));
   });
 
   test("divide() - float - with round-up rounding", () => {
-    const money = new Money(99, roundUp);
-    const factor = MoneyDivisionFactor.parse(2);
-
-    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(50));
+    expect(new Money(99, roundUp).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(
+      MoneyAmount.parse(50),
+    );
   });
 
   test("divide() - float - with round-down rounding", () => {
-    const money = new Money(99, roundDown);
-    const factor = MoneyDivisionFactor.parse(2);
-
-    expect(money.divide(factor).getAmount()).toEqual(MoneyAmount.parse(49));
+    expect(new Money(99, roundDown).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(
+      MoneyAmount.parse(49),
+    );
   });
 
   test("equals()", () => {
@@ -144,9 +120,7 @@ describe("Money", () => {
   });
 
   test("isZero()", () => {
-    const money = new Money();
-
-    expect(money.isZero()).toEqual(true);
+    expect(new Money().isZero()).toEqual(true);
   });
 
   test("format()", () => {
@@ -162,8 +136,6 @@ describe("Money", () => {
       [123456789, "1234567.89"], // Large value with cents
     ];
 
-    for (const [value, string] of cases) {
-      expect(new Money(value).format()).toEqual(string);
-    }
+    for (const [value, string] of cases) expect(new Money(value).format()).toEqual(string);
   });
 });
