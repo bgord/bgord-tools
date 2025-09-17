@@ -64,20 +64,8 @@ export class Weekday {
     return this.value === another.get().raw;
   }
 
-  isAfter(another: Weekday): boolean {
-    return this.value > another.get().raw;
-  }
-
-  isBefore(another: Weekday): boolean {
-    return this.value < another.get().raw;
-  }
-
   toIsoNumber(): number {
     return this.value === 0 ? 7 : this.value;
-  }
-
-  isWeekend(): boolean {
-    return this.value === 0 || this.value === 6;
   }
 
   isMonday(): boolean {

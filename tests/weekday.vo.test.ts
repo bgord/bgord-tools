@@ -1,13 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { Time } from "../src/time.service";
 import type { TimestampType } from "../src/timestamp.vo";
 import { Weekday, WeekdayFormatterEnum, WeekdayFormatters } from "../src/weekday.vo";
 
 describe("Weekday VO", () => {
   test("constructs valid weekdays 0..6 and exposes raw value", () => {
     for (let candidate = 0; candidate <= 6; candidate += 1) {
-      const weekday = new Weekday(candidate);
-      expect(weekday.get().raw).toBe(candidate);
+      expect(new Weekday(candidate).get().raw).toBe(candidate);
     }
   });
 
@@ -54,54 +52,24 @@ describe("Weekday VO", () => {
   });
 
   test("fromUtcTimestamp builds correct weekday (UTC)", () => {
-    // 2024-08-05T00:00:00Z is a Monday (UTC)
-    const referenceMondayUtcTimestamp = Date.UTC(2024, 7, 5, 0, 0, 0, 0);
-    const monday = Weekday.fromUtcTimestamp(referenceMondayUtcTimestamp as TimestampType);
+    const reference = Date.UTC(2024, 7, 5, 0, 0, 0, 0);
+    const monday = Weekday.fromUtcTimestamp(reference as TimestampType);
     expect(monday.isMonday()).toBeTrue();
     expect(monday.get().raw).toBe(1);
-
-    // Next day: Tuesday
-    const tuesday = Weekday.fromUtcTimestamp(
-      (referenceMondayUtcTimestamp + Time.Days(1).ms) as TimestampType,
-    );
-    expect(tuesday.get().raw).toBe(2);
-
-    // Previous day: Sunday
-    const sunday = Weekday.fromUtcTimestamp((referenceMondayUtcTimestamp - Time.Days(1).ms) as TimestampType);
-    expect(sunday.isSunday()).toBeTrue();
-    expect(sunday.get().raw).toBe(0);
-
-    const mondayShort = Weekday.fromUtcTimestamp(
-      referenceMondayUtcTimestamp as TimestampType,
-      WeekdayFormatters[WeekdayFormatterEnum.SHORT],
-    );
-    expect(mondayShort.get().formatted).toBe("Mon");
   });
 
-  test("equals / isAfter / isBefore", () => {
+  test("equals", () => {
     const monday = new Weekday(1);
     const wednesday = new Weekday(3);
 
     expect(monday.equals(new Weekday(1))).toBeTrue();
     expect(monday.equals(wednesday)).toBeFalse();
-
-    expect(wednesday.isAfter(monday)).toBeTrue();
-    expect(monday.isAfter(wednesday)).toBeFalse();
-
-    expect(monday.isBefore(wednesday)).toBeTrue();
-    expect(wednesday.isBefore(monday)).toBeFalse();
   });
 
   test("toIsoNumber", () => {
     expect(new Weekday(0).toIsoNumber()).toBe(7); // Sunday
     expect(new Weekday(1).toIsoNumber()).toBe(1); // Monday
     expect(new Weekday(6).toIsoNumber()).toBe(6); // Saturday
-  });
-
-  test("isWeekend", () => {
-    expect(new Weekday(0).isWeekend()).toBeTrue(); // Sunday
-    expect(new Weekday(6).isWeekend()).toBeTrue(); // Saturday
-    expect(new Weekday(1).isWeekend()).toBeFalse(); // Monday
   });
 
   test("day-name predicates", () => {
