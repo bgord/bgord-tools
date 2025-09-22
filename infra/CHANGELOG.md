@@ -1,4 +1,5 @@
 # Changelog
+- 2025-09-22 14:04 d8d9731 **step: update packages**
 ## 2025-09-17 12:04 v0.13.1
 - 2025-09-17 12:04 3125ca5 **0.13.1**
 - 2025-09-17 12:03 91b1430 **step: update packages**
@@ -7,6 +8,7 @@
 - 2025-09-17 11:19 b69842c **refactor: simplify weekday**
 - 2025-09-17 11:16 bc34b10 **refactor: move leap year check to year vo**
 - 2025-09-17 11:11 503c50b **step: add year from number**
+- 2025-09-17 10:04 ad44e39 **docs: generate CHANGELOG**
 - 2025-09-17 10:03 a852bd2 **docs: generate CHANGELOG**
 - 2025-09-17 10:03 760254e **docs: generate readme**
 - 2025-09-17 00:18 6967226 **step: add year**
