@@ -1,7 +1,10 @@
 # Changelog
+- 2025-09-23 10:55 2a8d42a **refactor: unify package-build script**
+- 2025-09-23 10:54 4fec559 **step: update packages**
 ## 2025-09-22 14:04 v0.13.2
 - 2025-09-22 14:04 d8d9731 **step: update packages**
 - 2025-09-22 14:04 977040b **0.13.2**
+- 2025-09-22 12:04 deb4d9b **docs: generate CHANGELOG**
 - 2025-09-22 12:04 6b8fd7d **docs: generate CHANGELOG**
 ## 2025-09-17 12:04 v0.13.1
 - 2025-09-17 12:04 3125ca5 **0.13.1**
