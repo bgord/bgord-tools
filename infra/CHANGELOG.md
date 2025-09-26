@@ -1,6 +1,9 @@
 # Changelog
+## 2025-09-26 11:36 v0.13.3
+- 2025-09-26 11:36 2e6d6cd **0.13.3**
 - 2025-09-26 11:31 cb407ed **step: update packages**
 - 2025-09-26 11:29 707596f **step: bump bgord/scripts**
+- 2025-09-26 09:31 ce54d97 **docs: generate CHANGELOG**
 - 2025-09-23 12:56 9308dd0 **step: bump bgord/scripts**
 - 2025-09-23 12:20 965c389 **step: bump bgord/scripts**
 - 2025-09-23 12:13 67a341b **step: bump bgord/scripts**
