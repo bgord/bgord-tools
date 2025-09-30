@@ -1,4 +1,4 @@
-import { endOfDay, startOfDay } from "date-fns";
+import { addDays, endOfDay, startOfDay } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Time } from "./time.service";
@@ -11,6 +11,21 @@ export class Day extends DateRange {
 
   toIsoId(): DayIsoIdType {
     return new Date(this.getStart() + Time.Hours(12).ms).toISOString().slice(0, 10) as DayIsoIdType;
+  }
+
+  previous(): Day {
+    const shifted = addDays(new Date(this.getStart()), -1).getTime();
+    return Day.fromTimestamp(Timestamp.parse(shifted));
+  }
+
+  next(): Day {
+    const shifted = addDays(new Date(this.getStart()), 1).getTime();
+    return Day.fromTimestamp(Timestamp.parse(shifted));
+  }
+
+  shift(count: number): Day {
+    const shifted = addDays(new Date(this.getStart()), count).getTime();
+    return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   static fromTimestamp(timestamp: TimestampType): Day {

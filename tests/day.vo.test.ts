@@ -4,10 +4,10 @@ import { Day } from "../src/day.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
+const timestamp = toMs("2025-07-22T12:00:00Z");
 
 describe("Day VO", () => {
   test("creates the correct range & ISO id from a mid-day timestamp", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z");
     const day = Day.fromTimestamp(timestamp);
 
     const expectedStart = Timestamp.parse(startOfDay(timestamp).getTime());
@@ -26,6 +26,19 @@ describe("Day VO", () => {
 
     expect(day.toIsoId()).toBe("2024-02-29");
     expect(day.contains(timestamp)).toBe(true);
+  });
+
+  test("next", () => {
+    expect(Day.fromTimestamp(timestamp).next().toIsoId()).toBe("2025-07-23");
+  });
+
+  test("previous", () => {
+    expect(Day.fromTimestamp(timestamp).previous().toIsoId()).toBe("2025-07-21");
+  });
+
+  test("shift", () => {
+    expect(Day.fromTimestamp(timestamp).shift(2).toIsoId()).toBe("2025-07-24");
+    expect(Day.fromTimestamp(timestamp).shift(-2).toIsoId()).toBe("2025-07-20");
   });
 
   test("round-trips ISO id → Day → ISO id", () => {
