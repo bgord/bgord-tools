@@ -1,8 +1,18 @@
 # Changelog
+- 2025-09-30 11:45 b8195f3 **refactor: simplify height**
+- 2025-09-30 11:24 7afa565 **refactor: rename image vo**
+- 2025-09-30 11:17 04d2f10 **refactor: simplify tests**
+- 2025-09-30 11:12 65278ff **refactor: simplify format**
+- 2025-09-30 11:06 367c512 **refactor: remove trim trailing zeros**
+- 2025-09-30 11:05 8882514 **refactor: simplify rounding naming**
+- 2025-09-30 11:03 e344a6c **refactor: simplify internal variable**
+- 2025-09-30 10:54 8ed3516 **step: update packages**
+- 2025-09-30 10:54 2f33bae **feature: add weight vo**
 ## 2025-09-26 11:36 v0.13.3
 - 2025-09-26 11:36 2e6d6cd **0.13.3**
 - 2025-09-26 11:31 cb407ed **step: update packages**
 - 2025-09-26 11:29 707596f **step: bump bgord/scripts**
+- 2025-09-26 09:37 9138ce4 **docs: generate CHANGELOG**
 - 2025-09-26 09:31 ce54d97 **docs: generate CHANGELOG**
 - 2025-09-23 12:56 9308dd0 **step: bump bgord/scripts**
 - 2025-09-23 12:20 965c389 **step: bump bgord/scripts**
