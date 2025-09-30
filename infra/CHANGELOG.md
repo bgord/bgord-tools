@@ -1,4 +1,7 @@
 # Changelog
+## 2025-09-30 11:57 v0.14.1
+- 2025-09-30 11:57 e6c29cb **0.14.1**
+## 2025-09-30 11:46 v0.14.0
 - 2025-09-30 11:46 a7616ed **0.14.0**
 - 2025-09-30 11:45 b8195f3 **refactor: simplify height**
 - 2025-09-30 11:24 7afa565 **refactor: rename image vo**
@@ -9,6 +12,7 @@
 - 2025-09-30 11:03 e344a6c **refactor: simplify internal variable**
 - 2025-09-30 10:54 8ed3516 **step: update packages**
 - 2025-09-30 10:54 2f33bae **feature: add weight vo**
+- 2025-09-30 09:48 ba16076 **docs: generate CHANGELOG**
 - 2025-09-30 09:45 d920509 **docs: generate readme**
 - 2025-09-30 09:45 9bb40f7 **docs: generate CHANGELOG**
 ## 2025-09-26 11:36 v0.13.3
