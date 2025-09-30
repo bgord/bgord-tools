@@ -1,4 +1,4 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, test } from "bun:test";
 import { ZodError } from "zod/v4";
 import { BasenameSchema } from "../src/basename.vo";
 
@@ -14,7 +14,7 @@ function expectZodIssue(input: string, expectedMsg: string) {
 }
 
 describe("BasenameSchema", () => {
-  it("accepts typical safe names", () => {
+  test("accepts typical safe names", () => {
     // @ts-expect-error
     expect(BasenameSchema.parse("avatar")).toBe("avatar");
     // @ts-expect-error
@@ -23,7 +23,7 @@ describe("BasenameSchema", () => {
     expect(BasenameSchema.parse(" a.b_c-d ")).toBe("a.b_c-d"); // trims
   });
 
-  it("accepts max length 128 and rejects 129", () => {
+  test("accepts max length 128 and rejects 129", () => {
     const ok = "a".repeat(128);
     // @ts-expect-error
     expect(BasenameSchema.parse(ok)).toBe(ok);
@@ -32,32 +32,32 @@ describe("BasenameSchema", () => {
     expectZodIssue(tooLong, "basename_too_long");
   });
 
-  it("rejects empty/whitespace", () => {
+  test("rejects empty/whitespace", () => {
     expectZodIssue("", "basename_empty");
     expectZodIssue("   ", "basename_empty");
   });
 
-  it("rejects slashes and backslashes", () => {
+  test("rejects slashes and backslashes", () => {
     expectZodIssue("a/b", "basename_slashes_forbidden");
     expectZodIssue("a\\b", "basename_slashes_forbidden");
   });
 
-  it("rejects control characters", () => {
+  test("rejects control characters", () => {
     expectZodIssue("line\nbreak", "basename_control_chars_forbidden");
     expectZodIssue("nul\u0000byte", "basename_control_chars_forbidden");
   });
 
-  it("rejects dotfiles and dot segments", () => {
+  test("rejects dotfiles and dot segments", () => {
     expectZodIssue(".", "basename_dot_segments_forbidden");
     expectZodIssue("..", "basename_dot_segments_forbidden");
     expectZodIssue(".env", "basename_dotfiles_forbidden");
   });
 
-  it("rejects trailing dot", () => {
+  test("rejects trailing dot", () => {
     expectZodIssue("name.", "basename_trailing_dot_forbidden");
   });
 
-  it("rejects disallowed characters (spaces, emoji, symbols)", () => {
+  test("rejects disallowed characters (spaces, emoji, symbols)", () => {
     expectZodIssue("name name", "basename_bad_chars");
     expectZodIssue("name🙂", "basename_bad_chars");
     expectZodIssue("name@", "basename_bad_chars");
