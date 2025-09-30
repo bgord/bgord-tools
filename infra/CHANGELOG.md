@@ -1,10 +1,13 @@
 # Changelog
 - 2025-09-30 22:44 ec60eea **feature: add age vo**
+- 2025-09-30 22:44 9c002fc **feature: add age vo**
 - 2025-09-30 21:32 0819367 **step: update packages**
 - 2025-09-30 21:31 6fd4902 **feature: add year previous/next/shift**
 - 2025-09-30 21:28 09d0fc7 **feature: add day previous/next/shift**
 - 2025-09-30 21:24 57ed74c **feature: add month previous/next/shift**
 - 2025-09-30 21:04 178d36f **feature: add week previous/next/shift**
+- 2025-09-30 20:44 7c721ad **docs: generate readme**
+- 2025-09-30 20:44 272d43e **docs: generate CHANGELOG**
 - 2025-09-30 19:32 e725517 **docs: generate CHANGELOG**
 - 2025-09-30 12:01 e881b05 **refactor: unify tests**
 ## 2025-09-30 11:57 v0.14.1
