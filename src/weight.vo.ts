@@ -49,25 +49,25 @@ export class Weight {
     return this.grams;
   }
 
-  toKilograms(roundingStrategy?: RoundingStrategy): number {
+  toKilograms(rounding?: RoundingStrategy): number {
     const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
-    return roundingStrategy ? roundingStrategy.round(kilograms) : kilograms;
+    return rounding ? rounding.round(kilograms) : kilograms;
   }
 
-  toPounds(roundingStrategy?: RoundingStrategy): number {
+  toPounds(rounding?: RoundingStrategy): number {
     const pounds = (this.grams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
-    return roundingStrategy ? roundingStrategy.round(pounds) : pounds;
+    return rounding ? rounding.round(pounds) : pounds;
   }
 
-  rounded(roundingStrategy: RoundingStrategy, unit: WeightUnit): Weight {
+  rounded(rounding: RoundingStrategy, unit: WeightUnit): Weight {
     if (unit === WeightUnit.kg) {
-      const roundedKilograms = NonNegativeNumericValue.parse(roundingStrategy.round(this.toKilograms()));
+      const roundedKilograms = NonNegativeNumericValue.parse(rounding.round(this.toKilograms()));
       const gramsRounded = Math.round(roundedKilograms * Weight.GRAMS_PER_KILOGRAM);
       NonNegativeIntegerGrams.parse(gramsRounded);
       return new Weight(gramsRounded);
     }
 
-    const roundedPounds = NonNegativeNumericValue.parse(roundingStrategy.round(this.toPounds()));
+    const roundedPounds = NonNegativeNumericValue.parse(rounding.round(this.toPounds()));
     const gramsRounded = Math.round(roundedPounds * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
     NonNegativeIntegerGrams.parse(gramsRounded);
     return new Weight(gramsRounded);
