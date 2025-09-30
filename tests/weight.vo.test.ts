@@ -37,9 +37,8 @@ describe("Weight VO (grams canonical)", () => {
 
   test("format() returns human strings with strategy, thinSpace and trim options", () => {
     const weight = Weight.fromKilograms(12.5);
-
-    expect(weight.format(WeightUnit.kg, { rounding: new RoundToDecimal(2) })).toBe("12.5 kg");
-    expect(weight.format(WeightUnit.lb, { rounding: new RoundToDecimal(1) })).toBe("27.6 lb");
+    expect(weight.format(WeightUnit.kg, new RoundToDecimal(2))).toBe("12.5 kg");
+    expect(weight.format(WeightUnit.lb, new RoundToDecimal(1))).toBe("27.6 lb");
   });
 
   test("arithmetic: add/subtract/multiply/divide keep integer grams invariant", () => {

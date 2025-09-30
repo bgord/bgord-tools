@@ -73,15 +73,12 @@ export class Weight {
     return new Weight(gramsRounded);
   }
 
-  format(unit: WeightUnit, options?: { rounding?: RoundingStrategy }): string {
-    const roundingStrategy = options?.rounding ?? new RoundToDecimal(2);
+  format(unit: WeightUnit, rounding: RoundingStrategy = new RoundToDecimal(2)): string {
+    const value = { [WeightUnit.kg]: this.toKilograms(rounding), [WeightUnit.lb]: this.toPounds(rounding) }[
+      unit
+    ];
 
-    const numericValue =
-      unit === WeightUnit.kg ? this.toKilograms(roundingStrategy) : this.toPounds(roundingStrategy);
-
-    const text = numericValue.toString();
-
-    return `${text} ${unit}`;
+    return `${value.toString()} ${unit}`;
   }
 
   add(other: Weight): Weight {
@@ -89,8 +86,8 @@ export class Weight {
   }
 
   subtract(other: Weight): Weight {
-    const next = this.grams - other.grams;
-    return new Weight(next < 0 ? 0 : next);
+    const result = this.grams - other.grams;
+    return new Weight(result < 0 ? 0 : result);
   }
 
   multiply(factor: number): Weight {
