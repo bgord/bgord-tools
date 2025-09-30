@@ -5,9 +5,10 @@ import { Week } from "../src/week.vo";
 
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 
+const timestamp = toMs("2025-07-22T12:00:00Z"); // Tuesday
+
 describe("Week VO", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z"); // Tuesday
     const week = Week.fromTimestamp(timestamp);
 
     const expectedStart = Timestamp.parse(startOfISOWeek(timestamp).getTime());
@@ -28,6 +29,19 @@ describe("Week VO", () => {
 
     expect(week.getStart()).toBe(Timestamp.parse(startOfISOWeek(timestamp).getTime()));
     expect(week.getEnd()).toBe(Timestamp.parse(endOfISOWeek(timestamp).getTime()));
+  });
+
+  test("next", () => {
+    expect(Week.fromTimestamp(timestamp).next().toIsoId()).toBe("2025-W31");
+  });
+
+  test("previous", () => {
+    expect(Week.fromTimestamp(timestamp).previous().toIsoId()).toBe("2025-W29");
+  });
+
+  test("shift", () => {
+    expect(Week.fromTimestamp(timestamp).shift(2).toIsoId()).toBe("2025-W32");
+    expect(Week.fromTimestamp(timestamp).shift(-2).toIsoId()).toBe("2025-W28");
   });
 
   test("round-trips via ISO id", () => {
