@@ -1,4 +1,10 @@
 # Changelog
+- 2025-09-30 21:32 0819367 **step: update packages**
+- 2025-09-30 21:31 6fd4902 **feature: add year previous/next/shift**
+- 2025-09-30 21:28 09d0fc7 **feature: add day previous/next/shift**
+- 2025-09-30 21:24 57ed74c **feature: add month previous/next/shift**
+- 2025-09-30 21:04 178d36f **feature: add week previous/next/shift**
+- 2025-09-30 12:01 e881b05 **refactor: unify tests**
 ## 2025-09-30 11:57 v0.14.1
 - 2025-09-30 11:57 e6c29cb **0.14.1**
 ## 2025-09-30 11:46 v0.14.0
@@ -12,6 +18,7 @@
 - 2025-09-30 11:03 e344a6c **refactor: simplify internal variable**
 - 2025-09-30 10:54 8ed3516 **step: update packages**
 - 2025-09-30 10:54 2f33bae **feature: add weight vo**
+- 2025-09-30 09:57 39bb3d4 **docs: generate CHANGELOG**
 - 2025-09-30 09:48 ba16076 **docs: generate CHANGELOG**
 - 2025-09-30 09:45 d920509 **docs: generate readme**
 - 2025-09-30 09:45 9bb40f7 **docs: generate CHANGELOG**
