@@ -46,6 +46,7 @@ src/
 ├── filename-from-string.vo.ts
 ├── filename-suffix.vo.ts
 ├── filename.vo.ts
+├── height.vo.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
 ├── iban.vo.ts
@@ -91,6 +92,7 @@ src/
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
 ├── weekday.vo.ts
+├── weight.vo.ts
 ├── year-iso-id.vo.ts
 ├── year.vo.ts
 └── z-score.service.ts
