@@ -1,3 +1,4 @@
+export * from "./age.vo";
 export * from "./api-key.vo";
 export * from "./basename.vo";
 export * from "./clock.vo";
