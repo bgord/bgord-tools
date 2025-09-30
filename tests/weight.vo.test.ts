@@ -40,9 +40,6 @@ describe("Weight VO (grams canonical)", () => {
 
     expect(weight.format(WeightUnit.kg, { rounding: new RoundToDecimal(2) })).toBe("12.5 kg");
     expect(weight.format(WeightUnit.lb, { rounding: new RoundToDecimal(1) })).toBe("27.6 lb");
-    expect(weight.format(WeightUnit.kg, { rounding: new RoundToDecimal(2), trimTrailingZeros: true })).toBe(
-      "12.5 kg",
-    );
   });
 
   test("arithmetic: add/subtract/multiply/divide keep integer grams invariant", () => {

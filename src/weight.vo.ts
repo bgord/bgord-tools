@@ -73,15 +73,13 @@ export class Weight {
     return new Weight(gramsRounded);
   }
 
-  format(unit: WeightUnit, options?: { rounding?: RoundingStrategy; trimTrailingZeros?: boolean }): string {
+  format(unit: WeightUnit, options?: { rounding?: RoundingStrategy }): string {
     const roundingStrategy = options?.rounding ?? new RoundToDecimal(2);
 
     const numericValue =
       unit === WeightUnit.kg ? this.toKilograms(roundingStrategy) : this.toPounds(roundingStrategy);
 
-    const text = options?.trimTrailingZeros
-      ? Number.parseFloat(numericValue.toString()).toString()
-      : numericValue.toString();
+    const text = numericValue.toString();
 
     return `${text} ${unit}`;
   }
