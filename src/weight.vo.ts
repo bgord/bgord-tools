@@ -18,7 +18,7 @@ export class Weight {
   private static readonly POUNDS_PER_KILOGRAM = 2.2046226218487757;
   private static readonly KILOGRAMS_PER_POUND = 1 / Weight.POUNDS_PER_KILOGRAM;
 
-  private constructor(private readonly valueGrams: number) {}
+  private constructor(private readonly grams: number) {}
 
   static fromKilograms(kilograms: number): Weight {
     NonNegativeNumericValue.parse(kilograms);
@@ -46,16 +46,16 @@ export class Weight {
   }
 
   toGrams(): number {
-    return this.valueGrams;
+    return this.grams;
   }
 
   toKilograms(roundingStrategy?: RoundingStrategy): number {
-    const kilograms = this.valueGrams / Weight.GRAMS_PER_KILOGRAM;
+    const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
     return roundingStrategy ? roundingStrategy.round(kilograms) : kilograms;
   }
 
   toPounds(roundingStrategy?: RoundingStrategy): number {
-    const pounds = (this.valueGrams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
+    const pounds = (this.grams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
     return roundingStrategy ? roundingStrategy.round(pounds) : pounds;
   }
 
@@ -87,63 +87,63 @@ export class Weight {
   }
 
   add(other: Weight): Weight {
-    return new Weight(this.valueGrams + other.valueGrams);
+    return new Weight(this.grams + other.grams);
   }
 
   subtract(other: Weight): Weight {
-    const next = this.valueGrams - other.valueGrams;
+    const next = this.grams - other.grams;
     return new Weight(next < 0 ? 0 : next);
   }
 
   multiply(factor: number): Weight {
     NonNegativeNumericValue.parse(factor);
-    const gramsRounded = Math.round(this.valueGrams * factor);
+    const gramsRounded = Math.round(this.grams * factor);
     NonNegativeIntegerGrams.parse(gramsRounded);
     return new Weight(gramsRounded);
   }
 
   divideByScalar(divisor: number): Weight {
     PositiveNumericValue.parse(divisor);
-    const gramsRounded = Math.round(this.valueGrams / divisor);
+    const gramsRounded = Math.round(this.grams / divisor);
     NonNegativeIntegerGrams.parse(gramsRounded);
     return new Weight(gramsRounded);
   }
 
   equals(other: Weight): boolean {
-    return this.valueGrams === other.valueGrams;
+    return this.grams === other.grams;
   }
 
   compare(other: Weight): -1 | 0 | 1 {
-    if (this.valueGrams === other.valueGrams) return 0;
-    return this.valueGrams < other.valueGrams ? -1 : 1;
+    if (this.grams === other.grams) return 0;
+    return this.grams < other.grams ? -1 : 1;
   }
 
   greaterThan(other: Weight): boolean {
-    return this.valueGrams > other.valueGrams;
+    return this.grams > other.grams;
   }
 
   greaterThanOrEqual(other: Weight): boolean {
-    return this.valueGrams >= other.valueGrams;
+    return this.grams >= other.grams;
   }
 
   lessThan(other: Weight): boolean {
-    return this.valueGrams < other.valueGrams;
+    return this.grams < other.grams;
   }
 
   lessThanOrEqual(other: Weight): boolean {
-    return this.valueGrams <= other.valueGrams;
+    return this.grams <= other.grams;
   }
 
   isZero(): boolean {
-    return this.valueGrams === 0;
+    return this.grams === 0;
   }
 
   isPositive(): boolean {
-    return this.valueGrams > 0;
+    return this.grams > 0;
   }
 
   toJSON(): { g: number } {
-    return { g: this.valueGrams };
+    return { g: this.grams };
   }
 
   static fromJSON(input: { g: number }): Weight {
