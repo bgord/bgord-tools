@@ -1,6 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.service";
+import { RoundToDecimal } from "../src/rounding.service";
 import { Weight, WeightUnit } from "../src/weight.vo";
+
+const oneDecimal = new RoundToDecimal(1);
+const twoDecimals = new RoundToDecimal(2);
+const threeDecimals = new RoundToDecimal(3);
 
 describe("Weight VO (grams canonical)", () => {
   test("creates from kilograms and stores exact integer grams", () => {
@@ -19,26 +23,14 @@ describe("Weight VO (grams canonical)", () => {
   });
 
   test("converts to kilograms/pounds with optional rounding strategy", () => {
-    const rounding = new RoundToDecimal(3);
-    expect(Weight.fromKilograms(10).toKilograms(rounding)).toBe(10.0);
-    expect(Weight.fromKilograms(10).toPounds(rounding)).toBe(22.046);
-  });
-
-  test("rounded() snaps in kg space and lb space, persists as grams", () => {
-    const weight = Weight.fromKilograms(20.3);
-
-    const snappedKg = weight.rounded(new RoundToNearest(), WeightUnit.kg);
-    expect(snappedKg.toGrams()).toBe(20_000);
-
-    const snappedLb = weight.rounded(new RoundDown(), WeightUnit.lb);
-    expect(snappedLb.toPounds(new RoundToDecimal(3))).toBe(44.0);
-    expect(snappedLb.toGrams()).toBe(19_958);
+    expect(Weight.fromKilograms(10).toKilograms(threeDecimals)).toBe(10.0);
+    expect(Weight.fromKilograms(10).toPounds(threeDecimals)).toBe(22.046);
   });
 
   test("format() returns human strings with strategy, thinSpace and trim options", () => {
     const weight = Weight.fromKilograms(12.5);
-    expect(weight.format(WeightUnit.kg, new RoundToDecimal(2))).toBe("12.5 kg");
-    expect(weight.format(WeightUnit.lb, new RoundToDecimal(1))).toBe("27.6 lb");
+    expect(weight.format(WeightUnit.kg, twoDecimals)).toBe("12.5 kg");
+    expect(weight.format(WeightUnit.lb, oneDecimal)).toBe("27.6 lb");
   });
 
   test("arithmetic: add/subtract/multiply/divide keep integer grams invariant", () => {
@@ -81,10 +73,9 @@ describe("Weight VO (grams canonical)", () => {
     expect(() => Weight.fromGrams(1_000).multiply(-1)).toThrow();
   });
 
-  test("rounding strategies are used only for read/snap, not storage", () => {
+  test("rounding strategies are used only for read, not storage", () => {
     const weight = Weight.fromKilograms(20.3333);
     expect(weight.toGrams()).toBe(20_333);
-    expect(weight.toKilograms(new RoundToDecimal(2))).toBe(20.33);
-    expect(weight.rounded(new RoundUp(), WeightUnit.kg).toGrams()).toBe(21_000);
+    expect(weight.toKilograms(twoDecimals)).toBe(20.33);
   });
 });

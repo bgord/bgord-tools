@@ -59,20 +59,6 @@ export class Weight {
     return rounding ? rounding.round(pounds) : pounds;
   }
 
-  rounded(rounding: RoundingStrategy, unit: WeightUnit): Weight {
-    if (unit === WeightUnit.kg) {
-      const roundedKilograms = NonNegativeNumericValue.parse(rounding.round(this.toKilograms()));
-      const gramsRounded = Math.round(roundedKilograms * Weight.GRAMS_PER_KILOGRAM);
-      NonNegativeIntegerGrams.parse(gramsRounded);
-      return new Weight(gramsRounded);
-    }
-
-    const roundedPounds = NonNegativeNumericValue.parse(rounding.round(this.toPounds()));
-    const gramsRounded = Math.round(roundedPounds * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
-  }
-
   format(unit: WeightUnit, rounding: RoundingStrategy = new RoundToDecimal(2)): string {
     const value = { [WeightUnit.kg]: this.toKilograms(rounding), [WeightUnit.lb]: this.toPounds(rounding) }[
       unit
