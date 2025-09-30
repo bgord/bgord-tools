@@ -6,9 +6,10 @@ import { Timestamp } from "../src/timestamp.vo";
 
 const toMs = (s: string) => Timestamp.parse(Date.parse(s));
 
+const timestamp = toMs("2025-07-22T12:00:00Z");
+
 describe("Month VO", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z");
     const month = Month.fromTimestamp(timestamp);
 
     expect(month.getStart()).toBe(Timestamp.parse(startOfMonth(timestamp).getTime()));
@@ -24,6 +25,19 @@ describe("Month VO", () => {
     expect(month.getStart()).toBe(Timestamp.parse(startOfMonth(timestamp).getTime()));
     expect(month.getEnd()).toBe(Timestamp.parse(endOfMonth(timestamp).getTime()));
     expect(month.toIsoId()).toBe("2025-12");
+  });
+
+  test("next", () => {
+    expect(Month.fromTimestamp(timestamp).next().toIsoId()).toBe("2025-08");
+  });
+
+  test("previous", () => {
+    expect(Month.fromTimestamp(timestamp).previous().toIsoId()).toBe("2025-06");
+  });
+
+  test("shift", () => {
+    expect(Month.fromTimestamp(timestamp).shift(2).toIsoId()).toBe("2025-09");
+    expect(Month.fromTimestamp(timestamp).shift(-2).toIsoId()).toBe("2025-05");
   });
 
   test("round-trips via ISO id", () => {
