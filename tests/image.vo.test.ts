@@ -1,54 +1,54 @@
 import { describe, expect, test } from "bun:test";
-import { Height, Width } from "../src/image.vo";
+import { ImageHeight, ImageWidth } from "../src/image.vo";
 
-describe("Width validator", () => {
+describe("ImageWidth validator", () => {
   test("should accept a positive integer", () => {
-    expect(Width.safeParse(100).success).toBe(true);
+    expect(ImageWidth.safeParse(100).success).toBe(true);
   });
 
   test("should reject zero", () => {
-    expect(Width.safeParse(0).success).toBe(false);
+    expect(ImageWidth.safeParse(0).success).toBe(false);
   });
 
   test("should reject negative numbers", () => {
-    expect(Width.safeParse(-42).success).toBe(false);
+    expect(ImageWidth.safeParse(-42).success).toBe(false);
   });
 
   test("should reject non-integer numbers", () => {
-    expect(Width.safeParse(3.14).success).toBe(false);
+    expect(ImageWidth.safeParse(3.14).success).toBe(false);
   });
 
   test("should reject non-number values", () => {
-    expect(Width.safeParse("100").success).toBe(false);
+    expect(ImageWidth.safeParse("100").success).toBe(false);
   });
 
   test("should reject a number over the max", () => {
-    expect(Width.safeParse(10_0001).success).toBe(false);
+    expect(ImageWidth.safeParse(10_0001).success).toBe(false);
   });
 });
 
-describe("Height validator", () => {
+describe("ImageHeight validator", () => {
   test("should accept a positive integer", () => {
-    expect(Height.safeParse(200).success).toBe(true);
+    expect(ImageHeight.safeParse(200).success).toBe(true);
   });
 
   test("should reject zero", () => {
-    expect(Height.safeParse(0).success).toBe(false);
+    expect(ImageHeight.safeParse(0).success).toBe(false);
   });
 
   test("should reject negative numbers", () => {
-    expect(Height.safeParse(-10).success).toBe(false);
+    expect(ImageHeight.safeParse(-10).success).toBe(false);
   });
 
   test("should reject non-integer numbers", () => {
-    expect(Height.safeParse(12.5).success).toBe(false);
+    expect(ImageHeight.safeParse(12.5).success).toBe(false);
   });
 
   test("should reject non-number values", () => {
-    expect(Height.safeParse(null).success).toBe(false);
+    expect(ImageHeight.safeParse(null).success).toBe(false);
   });
 
   test("should reject a number over the max", () => {
-    expect(Height.safeParse(10_0001).success).toBe(false);
+    expect(ImageHeight.safeParse(10_0001).success).toBe(false);
   });
 });

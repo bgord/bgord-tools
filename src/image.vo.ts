@@ -1,7 +1,7 @@
 import { z } from "zod/v4";
 
-export const Width = z.number().int().positive().max(10000).brand("Width");
-export type WidthType = z.infer<typeof Width>;
+export const ImageWidth = z.number().int().positive().max(10000).brand("image-width");
+export type WidthType = z.infer<typeof ImageWidth>;
 
-export const Height = z.number().int().positive().max(10000).brand("Height");
-export type HeightType = z.infer<typeof Height>;
+export const ImageHeight = z.number().int().positive().max(10000).brand("image-height");
+export type HeightType = z.infer<typeof ImageHeight>;
