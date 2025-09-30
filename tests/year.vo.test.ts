@@ -5,10 +5,10 @@ import { Year } from "../src/year.vo";
 import { YearIsoId } from "../src/year-iso-id.vo";
 
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → ms (UTC)
+const timestamp = toMs("2025-07-22T12:00:00Z");
 
 describe("Year VO", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z");
     const year = Year.fromTimestamp(timestamp);
 
     expect(year.getStart()).toBe(Timestamp.parse(startOfYear(timestamp).getTime()));
@@ -24,6 +24,19 @@ describe("Year VO", () => {
     expect(year.getStart()).toBe(Timestamp.parse(startOfYear(timestamp).getTime()));
     expect(year.getEnd()).toBe(Timestamp.parse(endOfYear(timestamp).getTime()));
     expect(year.toIsoId()).toBe("2025");
+  });
+
+  test("next", () => {
+    expect(Year.fromTimestamp(timestamp).next().toIsoId()).toBe("2026");
+  });
+
+  test("previous", () => {
+    expect(Year.fromTimestamp(timestamp).previous().toIsoId()).toBe("2024");
+  });
+
+  test("shift", () => {
+    expect(Year.fromTimestamp(timestamp).shift(2).toIsoId()).toBe("2027");
+    expect(Year.fromTimestamp(timestamp).shift(-2).toIsoId()).toBe("2023");
   });
 
   test("round-trips via ISO id", () => {

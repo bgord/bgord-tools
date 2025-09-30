@@ -1,4 +1,4 @@
-import { endOfYear, getYear, startOfYear } from "date-fns";
+import { addYears, endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
@@ -11,6 +11,21 @@ export class Year extends DateRange {
   isLeapYear(): boolean {
     const year = getYear(this.getStart());
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+
+  previous(): Year {
+    const shifted = addYears(new Date(this.getStart()), -1).getTime();
+    return Year.fromTimestamp(Timestamp.parse(shifted));
+  }
+
+  next(): Year {
+    const shifted = addYears(new Date(this.getStart()), 1).getTime();
+    return Year.fromTimestamp(Timestamp.parse(shifted));
+  }
+
+  shift(count: number): Year {
+    const shifted = addYears(new Date(this.getStart()), count).getTime();
+    return Year.fromTimestamp(Timestamp.parse(shifted));
   }
 
   static fromTimestamp(timestamp: TimestampType): Year {
