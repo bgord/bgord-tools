@@ -27,11 +27,11 @@ src/
 ├── age.vo.ts
 ├── api-key.vo.ts
 ├── basename.vo.ts
+├── clock-format.service.ts
 ├── clock.vo.ts
 ├── date-calculator.service.ts
 ├── date-formatter.service.ts
 ├── date-range.vo.ts
-├── dates-of-the-week.vo.ts
 ├── day-iso-id.vo.ts
 ├── day.vo.ts
 ├── directory-path-absolute.vo.ts
@@ -48,6 +48,7 @@ src/
 ├── filename-suffix.vo.ts
 ├── filename.vo.ts
 ├── height.vo.ts
+├── hour-format.service.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
 ├── iban.vo.ts
@@ -76,7 +77,8 @@ src/
 ├── relative-date.vo.ts
 ├── reordering.service.ts
 ├── revision.vo.ts
-├── rounding.service.ts
+├── rounding.adapter.ts
+├── rounding.port.ts
 ├── simple-linear-regression.service.ts
 ├── size.vo.ts
 ├── stepper.service.ts
