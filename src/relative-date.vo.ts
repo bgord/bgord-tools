@@ -11,7 +11,6 @@ export class RelativeDate {
 
   static falsy(timestampMs: Falsy<TimestampType>): RelativeDateType | null {
     if (!timestampMs) return null;
-
     return RelativeDate._format(timestampMs);
   }
 

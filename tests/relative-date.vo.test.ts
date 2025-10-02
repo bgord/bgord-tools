@@ -17,9 +17,9 @@ describe("RelativeDate", () => {
 
   describe("falsy", () => {
     test("returns null for falsy value", () => {
-      expect(RelativeDate.falsy(undefined)).toBeNull();
-      expect(RelativeDate.falsy(null)).toBeNull();
-      expect(RelativeDate.falsy(Timestamp.parse(0))).toBeNull();
+      expect(RelativeDate.falsy(undefined)).toEqual(null);
+      expect(RelativeDate.falsy(null)).toEqual(null);
+      expect(RelativeDate.falsy(Timestamp.parse(0))).toEqual(null);
     });
 
     test("formats a valid timestamp", () => {
