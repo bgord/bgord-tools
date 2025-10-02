@@ -1,6 +1,8 @@
 # Changelog
+- 2025-10-02 10:33 2387410 **step: update packages**
 ## 2025-10-01 11:09 v0.14.2
 - 2025-10-01 11:09 a51a1c5 **0.14.2**
+- 2025-10-01 09:09 1645a2c **docs: generate CHANGELOG**
 - 2025-09-30 22:44 ec60eea **feature: add age vo**
 - 2025-09-30 22:44 9c002fc **feature: add age vo**
 - 2025-09-30 21:32 0819367 **step: update packages**
