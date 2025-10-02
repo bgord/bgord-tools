@@ -1,76 +1,55 @@
 import { describe, expect, test } from "bun:test";
-import { Hour, HourFormatters } from "../src/hour.vo";
-import type { TimestampType } from "../src/timestamp.vo";
+import { Hour, HourValueError } from "../src/hour.vo";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("Hour", () => {
   test("throws for invalid hour values", () => {
-    expect(() => new Hour(-1)).toThrow("Invalid hour");
-    expect(() => new Hour(24)).toThrow("Invalid hour");
-    expect(() => new Hour(12.5)).toThrow("Invalid hour");
+    expect(() => new Hour(-1)).toThrow(HourValueError);
+    expect(() => new Hour(24)).toThrow(HourValueError);
+    expect(() => new Hour(12.5)).toThrow(HourValueError);
   });
 
   test("creates a valid Hour instance", () => {
-    expect(new Hour(5).get().raw).toBe(5);
+    expect(new Hour(5).get()).toBe(5);
   });
 
-  test("formats using default (TWENTY_FOUR_HOURS)", () => {
-    expect(new Hour(5).get().formatted).toBe("05");
-  });
-
-  test("formats using TWENTY_FOUR_HOURS_WO_PADDING", () => {
-    expect(new Hour(5, HourFormatters.TWENTY_FOUR_HOURS_WO_PADDING).get().formatted).toBe("5");
-  });
-
-  test("formats using AM_PM", () => {
-    expect(new Hour(5, HourFormatters.AM_PM).get().formatted).toBe("5 a.m.");
-    expect(new Hour(15, HourFormatters.AM_PM).get().formatted).toBe("3 p.m.");
-  });
-
-  test("formats using TWELVE_HOURS", () => {
-    expect(new Hour(15, HourFormatters.TWELVE_HOURS).get().formatted).toBe("03");
-    expect(new Hour(0, HourFormatters.TWELVE_HOURS).get().formatted).toBe("12");
-  });
-
-  test("formats using TWELVE_HOURS_WO_PADDING", () => {
-    expect(new Hour(15, HourFormatters.TWELVE_HOURS_WO_PADDING).get().formatted).toBe("3");
-    expect(new Hour(0, HourFormatters.TWELVE_HOURS_WO_PADDING).get().formatted).toBe("12");
-  });
-
-  test("get() supports overriding formatter", () => {
-    expect(new Hour(13).get(HourFormatters.AM_PM).formatted).toBe("1 p.m.");
+  test("default string formatting is 24h zero-padded", () => {
+    expect(new Hour(5).toString()).toBe("05");
+    expect(new Hour(13).toString()).toBe("13");
   });
 
   test("equals compares correctly", () => {
-    const a = new Hour(8);
-    const b = new Hour(8);
-    const c = new Hour(9);
-    expect(a.equals(b)).toBe(true);
-    expect(a.equals(c)).toBe(false);
+    const eightA = new Hour(8);
+    const eightB = new Hour(8);
+    const nine = new Hour(9);
+    expect(eightA.equals(eightB)).toBe(true);
+    expect(eightA.equals(nine)).toBe(false);
   });
 
   test("isAfter and isBefore work correctly", () => {
-    const a = new Hour(10);
-    const b = new Hour(9);
-    const c = new Hour(10);
+    const ten = new Hour(10);
+    const nine = new Hour(9);
+    const tenClone = new Hour(10);
 
-    expect(a.isAfter(b)).toBe(true);
-    expect(b.isBefore(a)).toBe(true);
-    expect(a.isBefore(c)).toBe(false);
+    expect(ten.isAfter(nine)).toBe(true);
+    expect(nine.isBefore(ten)).toBe(true);
+    expect(ten.isBefore(tenClone)).toBe(false);
   });
 
-  test("Hour.list() returns 24 items", () => {
+  test("Hour.list() returns cached 24 items", () => {
     const hours = Hour.list();
     expect(hours.length).toBe(24);
-    expect(hours[0].get().raw).toBe(0);
-    expect(hours[23].get().raw).toBe(23);
+    expect(hours[0].get()).toBe(0);
+    expect(hours[23].get()).toBe(23);
+    expect(Hour.list()).toBe(hours); // proves caching
   });
 
   test("Hour.ZERO and Hour.MAX are correct", () => {
-    expect(Hour.ZERO.get().raw).toBe(0);
-    expect(Hour.MAX.get().raw).toBe(23);
+    expect(Hour.ZERO.get()).toBe(0);
+    expect(Hour.MAX.get()).toBe(23);
   });
 
-  test("fromUtcTimestamp", () => {
-    expect(Hour.fromUtcTimestamp(1700000000000 as TimestampType).get().raw).toEqual(22);
+  test("fromEpochMs extracts UTC hour", () => {
+    expect(Hour.fromEpochMs(Timestamp.parse(1700000000000)).get()).toBe(22);
   });
 });
