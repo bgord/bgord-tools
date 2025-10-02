@@ -1,14 +1,16 @@
 import { describe, expect, test } from "bun:test";
-import { Timezone } from "../src/timezone.vo";
+import { Timezone, TimezoneError } from "../src/timezone.vo";
 
 describe("Timezone", () => {
-  test("valid timezones", () => {
-    const validTimezones = ["UTC", "America/New_York", "Europe/London", "Asia/Tokyo"];
-    for (const tz of validTimezones) expect(Timezone.safeParse(tz).success).toBe(true);
+  test("valid timezones parse", () => {
+    for (const timezone of ["UTC", "America/New_York", "Europe/London", "Asia/Tokyo"]) {
+      expect(() => Timezone.parse(timezone)).not.toThrow();
+    }
   });
 
-  test("invalid timezones", () => {
-    const invalidTimezones = ["invalid-timezone", "Moon/Base1", "GMT+25"];
-    for (const tz of invalidTimezones) expect(Timezone.safeParse(tz).success).toBe(false);
+  test("invalid timezones throw with the VO-specific error", () => {
+    for (const timezone of ["invalid-timezone", "Moon/Base1", "GMT+25"]) {
+      expect(() => Timezone.parse(timezone)).toThrow(TimezoneError.error);
+    }
   });
 });

@@ -1,5 +1,7 @@
 import { z } from "zod/v4";
 
+export const TimezoneError = { error: "timezone.invalid" } as const;
+
 export const Timezone = z
   .string()
   .min(1)
@@ -14,7 +16,8 @@ export const Timezone = z
         return false;
       }
     },
-    { message: "timezone.invalid" },
+    { message: TimezoneError.error },
   )
   .brand("Timezone");
+
 export type TimezoneType = z.infer<typeof Timezone>;
