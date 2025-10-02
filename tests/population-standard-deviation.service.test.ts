@@ -1,13 +1,20 @@
 import { describe, expect, test } from "bun:test";
-import { PopulationStandardDeviation } from "../src/population-standard-deviation.service";
+import {
+  PopulationStandardDeviation,
+  PopulationStandardDeviationMinValuesError,
+} from "../src/population-standard-deviation.service";
 
 describe("Standard Deviation Calculation", () => {
   test("throws an error for an empty set of values", () => {
-    expect(() => PopulationStandardDeviation.calculate([])).toThrow("At least two values are needed");
+    expect(() => PopulationStandardDeviation.calculate([])).toThrow(
+      PopulationStandardDeviationMinValuesError,
+    );
   });
 
   test("throws an error for a single value", () => {
-    expect(() => PopulationStandardDeviation.calculate([1])).toThrow("At least two values are needed");
+    expect(() => PopulationStandardDeviation.calculate([1])).toThrow(
+      PopulationStandardDeviationMinValuesError,
+    );
   });
 
   test("calculates standard deviation for two values", () => {
