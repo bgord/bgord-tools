@@ -1,9 +1,43 @@
 # Changelog
+- 2025-10-02 23:16 17da2cc **refactor: remove unused exports**
+- 2025-10-02 23:10 5226049 **refactor: improve relative date**
+- 2025-10-02 23:08 a2725ae **refactor: improve minmaxscaler**
+- 2025-10-02 23:01 2a70089 **refactor: improve money**
+- 2025-10-02 22:58 7c0da0a **refactor: improve language**
+- 2025-10-02 22:55 e630eb4 **refactor: improve image**
+- 2025-10-02 22:54 d2dd7a7 **refactor: remove dates of the week**
+- 2025-10-02 22:53 68d1dc6 **refactor: improve random**
+- 2025-10-02 22:51 ccf07d4 **refactor: improve mean**
+- 2025-10-02 22:49 4dfa841 **refactor: improve linear regression**
+- 2025-10-02 22:37 16b9a92 **refactor: improve outlier detector**
+- 2025-10-02 22:34 93b8ac6 **refactor: improve zscore**
+- 2025-10-02 22:32 9efefc0 **refactor: improve percentage**
+- 2025-10-02 22:30 ee1b853 **refactor: improve pop stand dev**
+- 2025-10-02 22:27 a714754 **refactor: improve iban mask**
+- 2025-10-02 22:20 832d364 **refactor: improve iban**
+- 2025-10-02 22:17 948d827 **refactor: improve visually**
+- 2025-10-02 22:14 7811222 **refactor: improve thousands separator**
+- 2025-10-02 22:12 2d5419c **refactor: improve timestamp**
+- 2025-10-02 22:10 2ed85d3 **refactor: improve timezones**
+- 2025-10-02 22:07 9fa2a23 **refactor: refactor stopwatch**
+- 2025-10-02 15:13 47f61bb **refactor: refactor rounding usage**
+- 2025-10-02 15:07 d79c312 **refactor: improve rounding**
+- 2025-10-02 14:56 8b15094 **refactor: improve email-mask**
+- 2025-10-02 14:52 5b5a4df **step: update packages**
+- 2025-10-02 12:14 c6f17b8 **refactor: unify tests**
+- 2025-10-02 12:09 d6bece9 **refactor: improve clock**
+- 2025-10-02 11:59 b0b9261 **refactor: improve hour**
+- 2025-10-02 11:50 977a342 **refactor: improve minute**
+- 2025-10-02 11:38 797da1f **refactor: improve sum**
+- 2025-10-02 11:29 83bfef2 **refactor: improve api-key**
+- 2025-10-02 11:09 c927f9b **refactor: improve age vo**
+- 2025-10-02 11:02 6d4f7d1 **step: ignore tmp**
 ## 2025-10-02 10:40 v0.14.3
 - 2025-10-02 10:40 b77612e **step: bump bgord/scripts**
 - 2025-10-02 10:40 27380e1 **0.14.3**
 - 2025-10-02 10:36 9bbc2a2 **refactor: simplify age vo**
 - 2025-10-02 10:33 2387410 **step: update packages**
+- 2025-10-02 08:41 2dafe0c **docs: generate CHANGELOG**
 - 2025-10-02 08:40 304b982 **docs: generate CHANGELOG**
 - 2025-10-02 08:39 14e37e7 **docs: generate CHANGELOG**
 - 2025-10-02 08:33 61a567e **docs: generate CHANGELOG**
