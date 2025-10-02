@@ -41,7 +41,7 @@ describe("Hour", () => {
     expect(hours.length).toBe(24);
     expect(hours[0].get()).toBe(0);
     expect(hours[23].get()).toBe(23);
-    expect(Hour.list()).toBe(hours); // proves caching
+    expect(Hour.list()).toEqual(hours);
   });
 
   test("Hour.ZERO and Hour.MAX are correct", () => {

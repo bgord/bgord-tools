@@ -1,20 +1,7 @@
-import { Hour, HourFormatters } from "./hour.vo";
+import { type ClockFormatter, ClockFormatters } from "./clock-format.service";
+import { Hour } from "./hour.vo";
 import { Minute } from "./minute.vo";
 import type { TimestampType } from "./timestamp.vo";
-
-export type ClockFormatter = (hour: Hour, minute: Minute) => string;
-
-enum ClockFormatterEnum {
-  TWENTY_FOUR_HOURS = "TWENTY_FOUR_HOURS",
-  TWELVE_HOURS = "TWELVE_HOURS",
-}
-
-export const ClockFormatters: Record<ClockFormatterEnum, ClockFormatter> = {
-  TWENTY_FOUR_HOURS: (hour, minute) => `${hour.get().formatted}:${minute.get().formatted}`,
-
-  TWELVE_HOURS: (hour, minute) =>
-    `${hour.get(HourFormatters.TWELVE_HOURS).formatted}:${minute.get().formatted}`,
-} as const;
 
 export class Clock {
   private readonly formatter: ClockFormatter;
@@ -27,48 +14,42 @@ export class Clock {
     this.formatter = (formatter as ClockFormatter) ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
-  static fromUtcTimestamp(timestamp: TimestampType, formatter?: ClockFormatter) {
-    const hour = Hour.fromUtcTimestamp(timestamp);
-    const minute = Minute.fromUtcTimestamp(timestamp);
+  static fromEpochMs(timestamp: TimestampType, formatter?: ClockFormatter): Clock {
+    const hour = Hour.fromEpochMs(timestamp);
+    const minute = Minute.fromEpochMs(timestamp);
     return new Clock(hour, minute, formatter);
   }
 
-  get(formatter?: ClockFormatter) {
-    const format = formatter ?? this.formatter;
+  get(): { hour: number; minute: number } {
+    return { hour: this.hour.get(), minute: this.minute.get() };
+  }
 
-    return {
-      raw: { hour: this.hour.get().raw, minute: this.minute.get().raw },
-      formatted: format(this.hour, this.minute),
-    };
+  format(formatter?: ClockFormatter): string {
+    const chosen = formatter ?? this.formatter;
+    return chosen(this.hour, this.minute);
+  }
+
+  toString(): string {
+    return this.format();
   }
 
   equals(another: Clock): boolean {
-    return (
-      this.hour.get().raw === another.get().raw.hour && this.minute.get().raw === another.get().raw.minute
-    );
+    return this.hour.get() === another.hour.get() && this.minute.get() === another.minute.get();
   }
 
   isAfter(another: Clock): boolean {
-    if (this.hour.get().raw > another.hour.get().raw) {
-      return true;
-    }
+    const thisHour = this.hour.get();
+    const otherHour = another.hour.get();
 
-    if (this.hour.get().raw === another.hour.get().raw && this.minute.get().raw > another.minute.get().raw) {
-      return true;
-    }
-
-    return false;
+    if (thisHour !== otherHour) return thisHour > otherHour;
+    return this.minute.get() > another.minute.get();
   }
 
   isBefore(another: Clock): boolean {
-    if (this.hour.get().raw < another.hour.get().raw) {
-      return true;
-    }
+    const thisHour = this.hour.get();
+    const otherHour = another.hour.get();
 
-    if (this.hour.get().raw === another.hour.get().raw && this.minute.get().raw < another.minute.get().raw) {
-      return true;
-    }
-
-    return false;
+    if (thisHour !== otherHour) return thisHour < otherHour;
+    return this.minute.get() < another.minute.get();
   }
 }

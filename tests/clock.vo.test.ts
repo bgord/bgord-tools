@@ -1,81 +1,72 @@
 import { describe, expect, test } from "bun:test";
-import { Clock, ClockFormatters } from "../src/clock.vo";
+import { Clock } from "../src/clock.vo";
+import { ClockFormatters } from "../src/clock-format.service";
 import { Hour } from "../src/hour.vo";
+import { HourFormatters } from "../src/hour-format.service";
 import { Minute } from "../src/minute.vo";
-import type { TimestampType } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("Clock", () => {
-  test("formats using default TWENTY_FOUR_HOURS", () => {
-    expect(new Clock(new Hour(9), new Minute(5)).get().formatted).toBe("09:05");
+  test("toString() defaults to 24h zero-padded", () => {
+    expect(new Clock(new Hour(9), new Minute(5)).toString()).toBe("09:05");
   });
 
-  test("formats using TWELVE_HOURS", () => {
-    expect(new Clock(new Hour(13), new Minute(30)).get(ClockFormatters.TWELVE_HOURS).formatted).toBe("01:30");
+  test("format(TWELVE_HOURS) formats hour in 12h and preserves minute padding", () => {
+    expect(new Clock(new Hour(13), new Minute(3)).format(ClockFormatters.TWELVE_HOURS)).toBe("01:03");
   });
 
-  test("formats using a custom formatter", () => {
-    const customFormatter = (h: Hour, m: Minute) => `Hour=${h.get().formatted}, Min=${m.get().formatted}`;
-    expect(new Clock(new Hour(15), new Minute(30)).get(customFormatter).formatted).toBe("Hour=15, Min=30");
+  test("format() supports a custom formatter", () => {
+    const clock = new Clock(new Hour(15), new Minute(30));
+    const customFormatter = (hour: Hour, minute: Minute) =>
+      `Hour=${hour.toString()}, Min=${minute.toString()}`;
+
+    expect(clock.format(customFormatter)).toBe("Hour=15, Min=30");
   });
 
-  test("equals returns true for same hour and minute", () => {
-    const c1 = new Clock(new Hour(10), new Minute(45));
-    const c2 = new Clock(new Hour(10), new Minute(45));
-    expect(c1.equals(c2)).toBe(true);
+  test("get() returns raw numeric hour and minute", () => {
+    expect(new Clock(new Hour(7), new Minute(8)).get()).toEqual({ hour: 7, minute: 8 });
   });
 
-  test("equals returns false for different hour or minute", () => {
-    const c1 = new Clock(new Hour(10), new Minute(45));
-    const c2 = new Clock(new Hour(11), new Minute(45));
-    const c3 = new Clock(new Hour(10), new Minute(46));
-
-    expect(c1.equals(c2)).toBe(false);
-    expect(c1.equals(c3)).toBe(false);
+  test("equals compares hour and minute", () => {
+    const a = new Clock(new Hour(10), new Minute(45));
+    const b = new Clock(new Hour(10), new Minute(45));
+    const c = new Clock(new Hour(11), new Minute(45));
+    const d = new Clock(new Hour(10), new Minute(46));
+    expect(a.equals(b)).toBe(true);
+    expect(a.equals(c)).toBe(false);
+    expect(a.equals(d)).toBe(false);
   });
 
-  test("isAfter returns true when hour is greater", () => {
-    const c1 = new Clock(new Hour(11), new Minute(0));
-    const c2 = new Clock(new Hour(10), new Minute(59));
-    expect(c1.isAfter(c2)).toBe(true);
+  test("isAfter handles hour and minute ordering", () => {
+    expect(new Clock(new Hour(11), new Minute(0)).isAfter(new Clock(new Hour(10), new Minute(59)))).toBe(
+      true,
+    );
+    expect(new Clock(new Hour(10), new Minute(30)).isAfter(new Clock(new Hour(10), new Minute(15)))).toBe(
+      true,
+    );
+    expect(new Clock(new Hour(9), new Minute(15)).isAfter(new Clock(new Hour(10), new Minute(0)))).toBe(
+      false,
+    );
   });
 
-  test("isAfter returns true when hour is same and minute is greater", () => {
-    const c1 = new Clock(new Hour(10), new Minute(30));
-    const c2 = new Clock(new Hour(10), new Minute(15));
-    expect(c1.isAfter(c2)).toBe(true);
+  test("isBefore handles hour and minute ordering", () => {
+    expect(new Clock(new Hour(8), new Minute(59)).isBefore(new Clock(new Hour(9), new Minute(0)))).toBe(true);
+    expect(new Clock(new Hour(9), new Minute(30)).isBefore(new Clock(new Hour(9), new Minute(45)))).toBe(
+      true,
+    );
+    expect(new Clock(new Hour(12), new Minute(30)).isBefore(new Clock(new Hour(12), new Minute(15)))).toBe(
+      false,
+    );
   });
 
-  test("isAfter returns false when not after", () => {
-    const c1 = new Clock(new Hour(9), new Minute(15));
-    const c2 = new Clock(new Hour(10), new Minute(0));
-    expect(c1.isAfter(c2)).toBe(false);
+  test("fromEpochMs uses UTC hour and minute", () => {
+    expect(Clock.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual({ hour: 22, minute: 13 });
   });
 
-  test("isBefore returns true when hour is less", () => {
-    const c1 = new Clock(new Hour(8), new Minute(59));
-    const c2 = new Clock(new Hour(9), new Minute(0));
-    expect(c1.isBefore(c2)).toBe(true);
-  });
-
-  test("isBefore returns true when hour is same and minute is less", () => {
-    const c1 = new Clock(new Hour(9), new Minute(30));
-    const c2 = new Clock(new Hour(9), new Minute(45));
-    expect(c1.isBefore(c2)).toBe(true);
-  });
-
-  test("isBefore returns false when not before", () => {
-    const c1 = new Clock(new Hour(12), new Minute(30));
-    const c2 = new Clock(new Hour(12), new Minute(15));
-    expect(c1.isBefore(c2)).toBe(false);
-  });
-
-  test("raw values from get() are correct", () => {
-    expect(new Clock(new Hour(7), new Minute(8)).get().raw).toEqual({ hour: 7, minute: 8 });
-  });
-
-  test("fromUtcTimestamp", () => {
-    const clock = Clock.fromUtcTimestamp(1700000000000 as TimestampType).get().raw;
-    expect(clock.hour).toEqual(22);
-    expect(clock.minute).toEqual(13);
+  test("composes HourFormatters with a custom Clock formatter", () => {
+    const clock = new Clock(new Hour(15), new Minute(7));
+    const composed = (hour: Hour, minute: Minute) =>
+      `${hour.format(HourFormatters.AM_PM)} @ ${minute.toString()} min`;
+    expect(clock.format(composed)).toBe("3 p.m. @ 07 min");
   });
 });
