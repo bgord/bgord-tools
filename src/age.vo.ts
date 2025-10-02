@@ -2,7 +2,9 @@ import { differenceInYears } from "date-fns";
 import { z } from "zod/v4";
 import type { TimestampType } from "./timestamp.vo";
 
-export const AgeValueError = { error: "invalid.age" };
+export const AgeValueError = { error: "invalid.age" } as const;
+export const InvalidBirthdateInFutureError = "invalid.birthdate_in_future" as const;
+export const InvalidBirthdateError = "invalid.birthdate" as const;
 
 export class Age {
   static readonly MIN = 1;
@@ -25,35 +27,43 @@ export class Age {
     return this.value === other.value ? 0 : this.value < other.value ? -1 : 1;
   }
 
-  equals(another: Age): boolean {
-    return this.compare(another) === 0;
+  equals(other: Age): boolean {
+    return this.value === other.value;
   }
 
-  isOlderThan(another: Age): boolean {
-    return this.compare(another) === 1;
+  isOlderThan(other: Age): boolean {
+    return this.value > other.value;
   }
 
-  isYoungerThan(another: Age): boolean {
-    return this.compare(another) === -1;
+  isYoungerThan(other: Age): boolean {
+    return this.value < other.value;
   }
 
-  isAdult(minAge: Age): boolean {
-    return this.equals(minAge) || this.isOlderThan(minAge);
+  isAdult(minimumAge: Age): boolean {
+    return this.value >= minimumAge.value;
   }
 
   static fromValue(candidate: number): Age {
     return new Age(Age.AgeValue.parse(candidate));
   }
 
-  static fromBirthdateTimestamp(params: { birthdate: TimestampType; now: TimestampType }): Age {
-    if (params.birthdate > params.now) throw new Error("invalid.birthdate_in_future");
+  static fromBirthdateEpochMs(params: { birthdate: TimestampType; now: TimestampType }): Age {
+    if (params.birthdate > params.now) throw new Error(InvalidBirthdateInFutureError);
     return Age.fromValue(differenceInYears(params.now, params.birthdate));
   }
 
   static fromBirthdate(params: { birthdate: string; now: TimestampType }): Age {
-    const birthdate = new Date(params.birthdate).getTime();
+    const birthdateMs = new Date(params.birthdate).getTime();
 
-    if (birthdate > params.now) throw new Error("invalid.birthdate_in_future");
-    return Age.fromValue(differenceInYears(params.now, birthdate));
+    if (birthdateMs > params.now) throw new Error(InvalidBirthdateInFutureError);
+    return Age.fromValue(differenceInYears(params.now, birthdateMs));
+  }
+
+  toJSON(): number {
+    return this.get();
+  }
+
+  toString(): string {
+    return String(this.value);
   }
 }
