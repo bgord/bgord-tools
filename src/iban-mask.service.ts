@@ -6,10 +6,15 @@ export class IbanMask {
   static censor(iban: IBAN): IbanMaskedType {
     const value = iban.format();
 
-    const start = value.slice(0, 4);
-    const middle = value.slice(5, -5).replace(/\d/g, "*");
+    const FIRST_SPACE_INDEX = 4;
+    const LAST_SPACE_START_INDEX = value.length - 5;
+
+    const start = value.slice(0, FIRST_SPACE_INDEX);
+    const middle = value.slice(FIRST_SPACE_INDEX + 1, LAST_SPACE_START_INDEX);
     const end = value.slice(-4);
 
-    return `${start} ${middle} ${end}`;
+    const maskedMiddle = middle.replace(/[A-Z0-9]/g, "*");
+
+    return `${start} ${maskedMiddle} ${end}`;
   }
 }
