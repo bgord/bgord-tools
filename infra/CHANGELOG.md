@@ -1,8 +1,10 @@
 # Changelog
 ## 2025-10-02 10:40 v0.14.3
+- 2025-10-02 10:40 b77612e **step: bump bgord/scripts**
 - 2025-10-02 10:40 27380e1 **0.14.3**
 - 2025-10-02 10:36 9bbc2a2 **refactor: simplify age vo**
 - 2025-10-02 10:33 2387410 **step: update packages**
+- 2025-10-02 08:40 304b982 **docs: generate CHANGELOG**
 - 2025-10-02 08:39 14e37e7 **docs: generate CHANGELOG**
 - 2025-10-02 08:33 61a567e **docs: generate CHANGELOG**
 ## 2025-10-01 11:09 v0.14.2
