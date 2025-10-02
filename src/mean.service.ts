@@ -2,12 +2,18 @@ import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 import { Sum } from "./sum.service";
 
+export const MeanEmptyValuesError = "mean.values.empty" as const;
+
 export class Mean {
-  static calculate(values: number[], rounding: RoundingPort = new RoundToDecimal(2)): number {
-    if (values.length === 0) throw new Error("Values should not be empty");
+  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToDecimal(2);
 
-    const mean = Sum.of(values) / values.length;
+  static calculate(values: number[], rounding?: RoundingPort): number {
+    if (values.length === 0) throw new Error(MeanEmptyValuesError);
 
-    return rounding.round(mean);
+    const sum = Sum.of(values);
+    const mean = sum / values.length;
+
+    const chosen = rounding ?? Mean.DEFAULT_ROUNDING;
+    return chosen.round(mean);
   }
 }
