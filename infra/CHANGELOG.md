@@ -1,5 +1,7 @@
 # Changelog
+- 2025-10-02 10:36 9bbc2a2 **refactor: simplify age vo**
 - 2025-10-02 10:33 2387410 **step: update packages**
+- 2025-10-02 08:33 61a567e **docs: generate CHANGELOG**
 ## 2025-10-01 11:09 v0.14.2
 - 2025-10-01 11:09 a51a1c5 **0.14.2**
 - 2025-10-01 09:09 1645a2c **docs: generate CHANGELOG**
