@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { Percentage } from "../src/percentage.service";
+import { Percentage, PercentageInvalidDenominatorError } from "../src/percentage.service";
 import { RoundUp } from "../src/rounding.adapter";
 
 describe("Percentage", () => {
   test("Percentage of an invalid denominator", () => {
-    expect(() => Percentage.of(2, 0)).toThrow("Invalid denominator");
+    expect(() => Percentage.of(2, 0)).toThrow(PercentageInvalidDenominatorError);
   });
 
   test("0 if the numerator is 0", () => {
