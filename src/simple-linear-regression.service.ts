@@ -1,57 +1,63 @@
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
-import { Sum } from "./sum.service";
 
 export type SLRPairType = { x: number; y: number };
 export type SLRParamsType = { a: number; b: number };
 export type SLRPredictionType = number;
 
-export class SimpleLinearRegression {
-  private readonly rounding: RoundingPort = new RoundToNearest();
+export const SLRMinPairsError = "slr.min.pairs" as const;
+export const SLRSumXTooBigError = "slr.sum.x.too.big" as const;
+export const SLRSumYTooBigError = "slr.sum.y.too.big" as const;
+export const SLRSumXSquaredTooBigError = "slr.sum.x.squared.too.big" as const;
+export const SLRSumXTimesYTooBigError = "slr.sum.x.times.y.too.big" as const;
+export const SLRModelCreationError = "slr.model.creation" as const;
 
-  constructor(
-    private readonly params: SLRParamsType,
-    rounding?: RoundingPort,
-  ) {
-    this.rounding = rounding ?? this.rounding;
+export class SimpleLinearRegression {
+  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();
+
+  private readonly params: SLRParamsType;
+  private readonly rounding: RoundingPort;
+
+  constructor(params: SLRParamsType, rounding?: RoundingPort) {
+    this.params = params;
+    this.rounding = rounding ?? SimpleLinearRegression.DEFAULT_ROUNDING;
   }
 
-  static fromPairs(pairs: SLRPairType[], rounding?: RoundingPort) {
-    const n = pairs.length;
+  static fromPairs(pairs: SLRPairType[], rounding?: RoundingPort): SimpleLinearRegression {
+    const count = pairs.length;
+    if (count < 2) throw new Error(SLRMinPairsError);
 
-    if (n < 2) throw new Error("At least two pairs needed");
+    let sumX = 0;
+    let sumY = 0;
+    let sumXX = 0;
+    let sumXY = 0;
 
-    const x = pairs.map((pair) => pair.x);
-    const y = pairs.map((pair) => pair.y);
-    const xx = x.map((x) => x ** 2);
-    const xy = pairs.map((pair) => pair.x * pair.y);
+    for (let index = 0; index < count; index++) {
+      const pair = pairs[index];
+      sumX += pair.x;
+      sumY += pair.y;
+      sumXX += pair.x * pair.x;
+      sumXY += pair.x * pair.y;
+    }
 
-    const sX = Sum.of(x);
-    if (sX >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x values is too big");
+    if (Math.abs(sumX) >= Number.MAX_SAFE_INTEGER) throw new Error(SLRSumXTooBigError);
+    if (Math.abs(sumY) >= Number.MAX_SAFE_INTEGER) throw new Error(SLRSumYTooBigError);
+    if (Math.abs(sumXY) >= Number.MAX_SAFE_INTEGER) throw new Error(SLRSumXTimesYTooBigError);
+    if (Math.abs(sumXX) >= Number.MAX_SAFE_INTEGER) throw new Error(SLRSumXSquaredTooBigError);
 
-    const sY = Sum.of(y);
-    if (sY >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of y values is too big");
+    const bDenominator = sumXX - sumX ** 2 / count;
+    if (bDenominator === 0) throw new Error(SLRModelCreationError);
 
-    const sSX = Sum.of(xx);
-    if (sSX >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x squared values is too big");
-
-    const sXY = Sum.of(xy);
-    if (sXY >= Number.MAX_SAFE_INTEGER) throw new Error("Sum of x times y values is too big");
-
-    const bDenominator = sSX - sX ** 2 / n;
-    if (bDenominator === 0) throw new Error("Unable to create the model");
-
-    const b = (sXY - (sX * sY) / n) / bDenominator;
-    const a = (sY - b * sX) / n;
+    const b = (sumXY - (sumX * sumY) / count) / bDenominator;
+    const a = (sumY - b * sumX) / count;
 
     return new SimpleLinearRegression({ a, b }, rounding);
   }
 
   predict(x: SLRPairType["x"], rounding?: RoundingPort): SLRPredictionType {
-    const chosen = rounding ?? this.rounding;
+    const chosenRounding = rounding ?? this.rounding;
     const prediction = this.params.b * x + this.params.a;
-
-    return chosen.round(prediction);
+    return chosenRounding.round(prediction);
   }
 
   inspect(): SimpleLinearRegression["params"] {
