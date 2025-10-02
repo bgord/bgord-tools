@@ -1,24 +1,26 @@
 import { z } from "zod/v4";
 
-// Basic IBAN format regex (2-letter country code + 2 digits + 11–30 alphanumerics)
+export const IBANError = { error: "invalid.iban.format" } as const;
+
+// 2-letter country code + 2 digits + 11–30 alphanumerics (overall 15–34 chars)
 const IBAN_REGEX = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/;
 
-const IBANValueSchema = z
-  .string()
+export const IBANValue = z
+  .string(IBANError)
   .trim()
   .toUpperCase()
   .transform((val) => val.replace(/\s+/g, ""))
-  .refine((iban) => IBAN_REGEX.test(iban), { message: "invalid.iban.format" });
+  .refine((iban) => IBAN_REGEX.test(iban), IBANError)
+  .brand("IBAN");
 
-type IBANValueType = z.infer<typeof IBANValueSchema>;
-
-type IBANCountryCode = string;
+export type IBANValueType = z.infer<typeof IBANValue>;
+export type IBANCountryCode = string;
 
 export class IBAN {
   private readonly value: IBANValueType;
 
   constructor(value: string) {
-    this.value = IBANValueSchema.parse(value);
+    this.value = IBANValue.parse(value);
   }
 
   toString(): IBANValueType {
