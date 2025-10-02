@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Height, HeightUnit } from "../src/height.vo";
-import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.service";
+import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.adapter";
 
 describe("Height VO (millimeters canonical)", () => {
   test("creates from centimeters and stores integer millimeters using strategy", () => {

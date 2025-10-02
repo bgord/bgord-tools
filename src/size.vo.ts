@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { RoundToDecimal } from "./rounding.service";
+import { RoundToDecimal } from "./rounding.adapter";
 
 export enum SizeUnit {
   b = "b",

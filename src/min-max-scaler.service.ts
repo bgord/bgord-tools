@@ -1,11 +1,12 @@
-import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
+import { RoundToDecimal } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 type MinMaxScalerValueType = number;
 type MinMaxScalerConfigType = {
   min: MinMaxScalerValueType;
   max: MinMaxScalerValueType;
   bound?: { lower: MinMaxScalerValueType; upper: MinMaxScalerValueType };
-  rounding?: RoundingStrategy;
+  rounding?: RoundingPort;
 };
 
 export class MinMaxScaler {
@@ -14,7 +15,7 @@ export class MinMaxScaler {
   private readonly lower: MinMaxScalerValueType;
   private readonly upper: MinMaxScalerValueType;
 
-  private readonly rounding: RoundingStrategy;
+  private readonly rounding: RoundingPort;
 
   constructor(config: MinMaxScalerConfigType) {
     const rounding = config.rounding ?? new RoundToDecimal(2);

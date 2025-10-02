@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Money, MoneyAmount, MoneyDivisionFactor, MoneyMultiplicationFactor } from "../src/money.vo";
-import { RoundDown, RoundUp } from "../src/rounding.service";
+import { RoundDown, RoundUp } from "../src/rounding.adapter";
 
 const roundUp = new RoundUp();
 const roundDown = new RoundDown();

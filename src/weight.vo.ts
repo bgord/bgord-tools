@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
-import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
+import { RoundToDecimal } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 const FiniteNumericValue = z.number().refine(Number.isFinite, { message: "Expected a finite number" });
 const NonNegativeNumericValue = FiniteNumericValue.min(0, { message: "Must be greater than or equal to 0" });
@@ -49,17 +50,17 @@ export class Weight {
     return this.grams;
   }
 
-  toKilograms(rounding?: RoundingStrategy): number {
+  toKilograms(rounding?: RoundingPort): number {
     const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
     return rounding ? rounding.round(kilograms) : kilograms;
   }
 
-  toPounds(rounding?: RoundingStrategy): number {
+  toPounds(rounding?: RoundingPort): number {
     const pounds = (this.grams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
     return rounding ? rounding.round(pounds) : pounds;
   }
 
-  format(unit: WeightUnit, rounding: RoundingStrategy = new RoundToDecimal(2)): string {
+  format(unit: WeightUnit, rounding: RoundingPort = new RoundToDecimal(2)): string {
     const value = { [WeightUnit.kg]: this.toKilograms(rounding), [WeightUnit.lb]: this.toPounds(rounding) }[
       unit
     ];

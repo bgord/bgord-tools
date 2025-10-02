@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { RoundToDecimal } from "../src/rounding.service";
+import { RoundToDecimal } from "../src/rounding.adapter";
 import { Weight, WeightUnit } from "../src/weight.vo";
 
 const oneDecimal = new RoundToDecimal(1);

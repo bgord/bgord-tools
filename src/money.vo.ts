@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
-import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
+import { RoundToNearest } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 export const MoneyAmount = z
   .number()
@@ -29,9 +30,9 @@ export class Money {
 
   private readonly amount: MoneyAmountType;
 
-  private readonly rounding: RoundingStrategy;
+  private readonly rounding: RoundingPort;
 
-  constructor(value: number = Money.ZERO, rounding?: RoundingStrategy) {
+  constructor(value: number = Money.ZERO, rounding?: RoundingPort) {
     this.amount = MoneyAmount.parse(value);
     this.rounding = rounding ?? new RoundToNearest();
   }

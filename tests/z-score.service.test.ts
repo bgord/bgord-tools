@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { RoundToNearest } from "../src/rounding.service";
+import { RoundToNearest } from "../src/rounding.adapter";
 import { ZScore } from "../src/z-score.service";
 
 describe("Z-score", () => {

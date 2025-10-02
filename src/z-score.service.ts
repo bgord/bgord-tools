@@ -1,6 +1,7 @@
 import { Mean } from "./mean.service";
 import { PopulationStandardDeviation } from "./population-standard-deviation.service";
-import { type RoundingStrategy, RoundToDecimal } from "./rounding.service";
+import { RoundToDecimal } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 export class ZScore {
   private readonly mean: number;
@@ -8,7 +9,7 @@ export class ZScore {
 
   constructor(
     values: number[],
-    private readonly rounding: RoundingStrategy = new RoundToDecimal(2),
+    private readonly rounding: RoundingPort = new RoundToDecimal(2),
   ) {
     if (values.length < 2) throw new Error("At least two values are needed");
 

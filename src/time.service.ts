@@ -1,4 +1,4 @@
-import { RoundToDecimal } from "./rounding.service";
+import { RoundToDecimal } from "./rounding.adapter";
 import type { TimestampType } from "./timestamp.vo";
 
 const rounding = new RoundToDecimal(2);

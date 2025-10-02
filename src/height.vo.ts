@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
-import { type RoundingStrategy, RoundToDecimal, RoundToNearest } from "./rounding.service";
+import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 const FiniteNumericValue = z.number().refine(Number.isFinite, { message: "Expected a finite number" });
 const NonNegativeNumericValue = FiniteNumericValue.min(0, { message: "Must be greater than or equal to 0" });
@@ -22,7 +23,7 @@ export class Height {
 
   private constructor(private readonly millimeters: number) {}
 
-  static fromCentimeters(centimeters: number, rounding: RoundingStrategy = new RoundToNearest()): Height {
+  static fromCentimeters(centimeters: number, rounding: RoundingPort = new RoundToNearest()): Height {
     NonNegativeNumericValue.parse(centimeters);
     const mmFloat = centimeters * Height.MILLIMETERS_PER_CENTIMETER;
     const mmRounded = rounding.round(mmFloat);
@@ -30,7 +31,7 @@ export class Height {
     return new Height(mmRounded);
   }
 
-  static fromFeetInches(feet: number, inches = 0, rounding: RoundingStrategy = new RoundToNearest()): Height {
+  static fromFeetInches(feet: number, inches = 0, rounding: RoundingPort = new RoundToNearest()): Height {
     NonNegativeNumericValue.parse(feet);
     NonNegativeNumericValue.parse(inches);
     const totalInches = feet * Height.INCHES_PER_FOOT + inches;
@@ -40,7 +41,7 @@ export class Height {
     return new Height(mmRounded);
   }
 
-  static fromMillimeters(millimeters: number, rounding: RoundingStrategy = new RoundToNearest()): Height {
+  static fromMillimeters(millimeters: number, rounding: RoundingPort = new RoundToNearest()): Height {
     NonNegativeNumericValue.parse(millimeters);
     const mmRounded = rounding.round(millimeters);
     NonNegativeIntegerMillimeters.parse(mmRounded);
@@ -55,12 +56,12 @@ export class Height {
     return this.millimeters;
   }
 
-  toCentimeters(rounding?: RoundingStrategy): number {
+  toCentimeters(rounding?: RoundingPort): number {
     const cm = this.millimeters / Height.MILLIMETERS_PER_CENTIMETER;
     return rounding ? rounding.round(cm) : cm;
   }
 
-  toFeetInches(rounding: RoundingStrategy = new RoundToNearest()): {
+  toFeetInches(rounding: RoundingPort = new RoundToNearest()): {
     feet: number;
     inches: number;
   } {
@@ -74,16 +75,16 @@ export class Height {
     return { feet, inches };
   }
 
-  format(unit: HeightUnit, roundingStrategy?: RoundingStrategy): string {
+  format(unit: HeightUnit, rounding?: RoundingPort): string {
     return {
       [HeightUnit.cm]: () => {
-        const rounding = roundingStrategy ?? new RoundToDecimal(1);
+        const chosen = rounding ?? new RoundToDecimal(1);
 
-        return `${this.toCentimeters(rounding)} cm`;
+        return `${this.toCentimeters(chosen)} cm`;
       },
       [HeightUnit.ft_in]: () => {
-        const rounding = roundingStrategy ?? new RoundToNearest();
-        const { feet, inches } = this.toFeetInches(rounding);
+        const chosen = rounding ?? new RoundToNearest();
+        const { feet, inches } = this.toFeetInches(chosen);
 
         return `${feet}′${inches}″`;
       },

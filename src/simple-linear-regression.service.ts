@@ -1,4 +1,5 @@
-import { type RoundingStrategy, RoundToNearest } from "./rounding.service";
+import { RoundToNearest } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 import { Sum } from "./sum.service";
 
 export type SLRPairType = { x: number; y: number };
@@ -6,16 +7,16 @@ export type SLRParamsType = { a: number; b: number };
 export type SLRPredictionType = number;
 
 export class SimpleLinearRegression {
-  private readonly rounding: RoundingStrategy = new RoundToNearest();
+  private readonly rounding: RoundingPort = new RoundToNearest();
 
   constructor(
     private readonly params: SLRParamsType,
-    rounding?: RoundingStrategy,
+    rounding?: RoundingPort,
   ) {
     this.rounding = rounding ?? this.rounding;
   }
 
-  static fromPairs(pairs: SLRPairType[], rounding?: RoundingStrategy) {
+  static fromPairs(pairs: SLRPairType[], rounding?: RoundingPort) {
     const n = pairs.length;
 
     if (n < 2) throw new Error("At least two pairs needed");
@@ -46,11 +47,11 @@ export class SimpleLinearRegression {
     return new SimpleLinearRegression({ a, b }, rounding);
   }
 
-  predict(x: SLRPairType["x"], strategy?: RoundingStrategy): SLRPredictionType {
-    const rounding = strategy ?? this.rounding;
+  predict(x: SLRPairType["x"], rounding?: RoundingPort): SLRPredictionType {
+    const chosen = rounding ?? this.rounding;
     const prediction = this.params.b * x + this.params.a;
 
-    return rounding.round(prediction);
+    return chosen.round(prediction);
   }
 
   inspect(): SimpleLinearRegression["params"] {
