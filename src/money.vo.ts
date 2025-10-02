@@ -2,68 +2,69 @@ import { z } from "zod/v4";
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
+export const MoneyAmountInvalidError = { error: "money.amount.invalid" } as const;
+export const MoneyMultiplicationFactorInvalidError = {
+  error: "money.multiplication-factor.invalid",
+} as const;
+export const MoneyDivisionFactorInvalidError = { error: "money.division-factor.invalid" } as const;
+export const MoneySubtractLessThanZeroError = "money.subtract.less.than.zero" as const;
+
 export const MoneyAmount = z
-  .number()
-  .int({ message: "money.amount.invalid" })
-  .min(0, { message: "money.amount.invalid" })
+  .number(MoneyAmountInvalidError)
+  .int(MoneyAmountInvalidError)
+  .min(0, MoneyAmountInvalidError)
   .brand("MoneyAmount");
 
 export type MoneyAmountType = z.infer<typeof MoneyAmount>;
 
 export const MoneyMultiplicationFactor = z
-  .number()
-  .min(0, { message: "money.multiplication-factor.invalid" })
+  .number(MoneyMultiplicationFactorInvalidError)
+  .min(0, MoneyMultiplicationFactorInvalidError)
   .brand("MoneyMultiplicationFactor");
 
 export type MoneyMultiplicationFactorType = z.infer<typeof MoneyMultiplicationFactor>;
 
 export const MoneyDivisionFactor = z
-  .number()
-  .min(0, { message: "money.division-factor.invalid" })
-  .refine((value) => value !== 0, { message: "money.division-factor.invalid" })
+  .number(MoneyDivisionFactorInvalidError)
+  .gt(0, MoneyDivisionFactorInvalidError)
   .brand("MoneyDivisionFactor");
 
 export type MoneyDivisionFactorType = z.infer<typeof MoneyDivisionFactor>;
 
 export class Money {
   private static readonly ZERO = 0;
+  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();
 
   private readonly amount: MoneyAmountType;
-
   private readonly rounding: RoundingPort;
 
   constructor(value: number = Money.ZERO, rounding?: RoundingPort) {
     this.amount = MoneyAmount.parse(value);
-    this.rounding = rounding ?? new RoundToNearest();
+    this.rounding = rounding ?? Money.DEFAULT_ROUNDING;
   }
 
   getAmount(): MoneyAmountType {
     return this.amount;
   }
 
-  add(money: Money) {
+  add(money: Money): Money {
     const result = this.rounding.round(this.amount + money.getAmount());
-
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
-  multiply(factor: MoneyMultiplicationFactorType) {
+  multiply(factor: MoneyMultiplicationFactorType): Money {
     const result = this.rounding.round(this.amount * factor);
-
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
-  subtract(money: Money) {
+  subtract(money: Money): Money {
     const result = this.rounding.round(this.amount - money.getAmount());
-
-    if (result < Money.ZERO) throw new Error("Less than zero");
-
+    if (result < Money.ZERO) throw new Error(MoneySubtractLessThanZeroError);
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
-  divide(factor: MoneyDivisionFactorType) {
+  divide(factor: MoneyDivisionFactorType): Money {
     const result = this.rounding.round(this.amount / factor);
-
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
@@ -84,13 +85,9 @@ export class Money {
   }
 
   format(): string {
-    const result = this.amount / 100;
-
-    const whole = Math.floor(result);
-
+    const whole = Math.floor(this.amount / 100);
     const fraction = this.amount % 100;
     const fractionFormatted = fraction.toString().padStart(2, "0");
-
     return `${whole}.${fractionFormatted}`;
   }
 }

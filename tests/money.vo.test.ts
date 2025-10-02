@@ -1,5 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { Money, MoneyAmount, MoneyDivisionFactor, MoneyMultiplicationFactor } from "../src/money.vo";
+import {
+  Money,
+  MoneyAmount,
+  MoneyDivisionFactor,
+  MoneyMultiplicationFactor,
+  MoneySubtractLessThanZeroError,
+} from "../src/money.vo";
 import { RoundDown, RoundUp } from "../src/rounding.adapter";
 
 const roundUp = new RoundUp();
@@ -21,17 +27,16 @@ describe("Money", () => {
   test("add()", () => {
     const money1 = new Money(100);
     const money2 = new Money();
-
     expect(money1.add(money2).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
-  test("multiply() - integer", () => {
+  test("multiply() - integer factor", () => {
     expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(5)).getAmount()).toEqual(
       MoneyAmount.parse(500),
     );
   });
 
-  test("multiply() - float", () => {
+  test("multiply() - float factor", () => {
     expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(150),
     );
@@ -46,53 +51,45 @@ describe("Money", () => {
   });
 
   test("subtract() - result less than zero", () => {
-    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow("Less than zero");
+    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow(MoneySubtractLessThanZeroError);
   });
 
-  test("multiply() - float - with default round-to-nearest rounding", () => {
+  test("multiply() - float factor - with default round-to-nearest rounding", () => {
     expect(new Money(99).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
-  test("multiply() - float - with round-up rounding", () => {
+  test("multiply() - float factor - with round-up rounding", () => {
     expect(new Money(99, roundUp).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
-  test("multiply() - float - with round-down rounding", () => {
+  test("multiply() - float factor - with round-down rounding", () => {
     expect(new Money(99, roundDown).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(148),
     );
   });
 
-  test("divide() - int", () => {
+  test("divide() - non-integer factor (1.5)", () => {
     expect(new Money(99).divide(MoneyDivisionFactor.parse(1.5)).getAmount()).toEqual(MoneyAmount.parse(66));
   });
 
-  test("divide() - float - with default round-to-nearest rounding", () => {
+  test("divide() - integer factor (2) - with default round-to-nearest rounding", () => {
     expect(new Money(99).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(MoneyAmount.parse(50));
   });
 
-  test("divide() - float - with round-up rounding", () => {
+  test("divide() - integer factor (2) - with round-up rounding", () => {
     expect(new Money(99, roundUp).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(
       MoneyAmount.parse(50),
     );
   });
 
-  test("divide() - float - with round-down rounding", () => {
+  test("divide() - integer factor (2) - with round-down rounding", () => {
     expect(new Money(99, roundDown).divide(MoneyDivisionFactor.parse(2)).getAmount()).toEqual(
       MoneyAmount.parse(49),
     );
-  });
-
-  test("equals()", () => {
-    const oneHundred = new Money(100);
-    const twoHundred = new Money(200);
-
-    expect(oneHundred.equals(oneHundred)).toEqual(true);
-    expect(oneHundred.equals(twoHundred)).toEqual(false);
   });
 
   test("equals()", () => {
@@ -125,17 +122,19 @@ describe("Money", () => {
 
   test("format()", () => {
     const cases: [number, string][] = [
-      [9999, "99.99"], // Standard case
-      [90, "0.90"], // Less than a dollar, two decimal places
-      [99, "0.99"], // Less than a dollar, two decimal places
-      [10209, "102.09"], // More than a dollar, two decimal places
-      [0, "0.00"], // Zero value
-      [1, "0.01"], // One cent
-      [100, "1.00"], // One dollar, no cents
-      [1000, "10.00"], // Ten dollars, no cents
-      [123456789, "1234567.89"], // Large value with cents
+      [9999, "99.99"],
+      [90, "0.90"],
+      [99, "0.99"],
+      [10209, "102.09"],
+      [0, "0.00"],
+      [1, "0.01"],
+      [100, "1.00"],
+      [1000, "10.00"],
+      [123456789, "1234567.89"],
     ];
 
-    for (const [value, string] of cases) expect(new Money(value).format()).toEqual(string);
+    for (const [value, string] of cases) {
+      expect(new Money(value).format()).toEqual(string);
+    }
   });
 });
