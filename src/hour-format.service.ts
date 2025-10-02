@@ -1,6 +1,6 @@
 export type HourFormatter = (value: number) => string;
 
-export enum HourFormatterEnum {
+enum HourFormatterEnum {
   TWENTY_FOUR_HOURS = "TWENTY_FOUR_HOURS",
   TWENTY_FOUR_HOURS_WO_PADDING = "TWENTY_FOUR_HOURS_WO_PADDING",
   AM_PM = "AM_PM",

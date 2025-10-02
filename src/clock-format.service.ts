@@ -4,7 +4,7 @@ import type { Minute } from "./minute.vo";
 
 export type ClockFormatter = (hour: Hour, minute: Minute) => string;
 
-export enum ClockFormatterEnum {
+enum ClockFormatterEnum {
   TWENTY_FOUR_HOURS = "TWENTY_FOUR_HOURS",
   TWELVE_HOURS = "TWELVE_HOURS",
 }
