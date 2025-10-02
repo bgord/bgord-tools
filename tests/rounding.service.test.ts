@@ -1,5 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.service";
+import {
+  RoundDown,
+  RoundingDecimalsError,
+  RoundToDecimal,
+  RoundToNearest,
+  RoundUp,
+} from "../src/rounding.adapter";
 
 describe("Rounding", () => {
   test("RoundToNearest rounds to the nearest integer", () => {
@@ -27,8 +33,6 @@ describe("Rounding", () => {
   });
 
   test("RoundToDecimal handles negative decimals", () => {
-    const rounding = new RoundToDecimal(-2);
-    expect(() => rounding.round(5678)).toThrow();
-    expect(() => rounding.round(3245)).toThrow();
+    expect(() => new RoundToDecimal(-2)).toThrow(RoundingDecimalsError);
   });
 });
