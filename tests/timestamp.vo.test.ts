@@ -9,7 +9,7 @@ describe("Timestamp (compact)", () => {
   });
 
   test("rejects invalid timestamps with VO error", () => {
-    const invalid: any[] = [
+    const invalid = [
       -1,
       123.45,
       Number.NaN,

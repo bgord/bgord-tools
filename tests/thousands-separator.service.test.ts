@@ -2,47 +2,29 @@ import { describe, expect, test } from "bun:test";
 import { ThousandsSeparator } from "../src/thousands-separator.service";
 
 describe("ThousandsSeparator", () => {
-  test("returns unchanged value when an int is smaller than 1000", () => {
-    expect(ThousandsSeparator.format(999)).toEqual("999");
+  const cases = [
+    [999, "999"],
+    [999.5, "999.5"],
+    [1000, "1 000"],
+    [1000.99, "1 000.99"],
+    [15000, "15 000"],
+    [15000.5, "15 000.5"],
+    [150000, "150 000"],
+    [150000.99, "150 000.99"],
+    [1500000, "1 500 000"],
+    [1500000.99, "1 500 000.99"],
+    [-1000, "-1 000"],
+    [-1500000.5, "-1 500 000.5"],
+  ] as const;
+
+  test("default separator (space)", () => {
+    for (const [value, expected] of cases) {
+      expect(ThousandsSeparator.format(value)).toEqual(expected);
+    }
   });
 
-  test("returns unchanged value when a float is smaller than 1000", () => {
-    expect(ThousandsSeparator.format(999.5)).toEqual("999.5");
-  });
-
-  test("returns 1 000", () => {
-    expect(ThousandsSeparator.format(1000)).toEqual("1 000");
-  });
-
-  test("returns 1 000.99", () => {
-    expect(ThousandsSeparator.format(1000.99)).toEqual("1 000.99");
-  });
-
-  test("returns 15 000", () => {
-    expect(ThousandsSeparator.format(15000)).toEqual("15 000");
-  });
-
-  test("returns 15 000.5", () => {
-    expect(ThousandsSeparator.format(15000.5)).toEqual("15 000.5");
-  });
-
-  test("returns 150 000", () => {
-    expect(ThousandsSeparator.format(150000)).toEqual("150 000");
-  });
-
-  test("returns 150 000.99", () => {
-    expect(ThousandsSeparator.format(150000.99)).toEqual("150 000.99");
-  });
-
-  test("returns 1 500 000", () => {
-    expect(ThousandsSeparator.format(1500000)).toEqual("1 500 000");
-  });
-
-  test("returns 1 500 000.99", () => {
-    expect(ThousandsSeparator.format(1500000.99)).toEqual("1 500 000.99");
-  });
-
-  test("uses a different separator", () => {
+  test("custom separator", () => {
     expect(ThousandsSeparator.format(150000.99, "_")).toEqual("150_000.99");
+    expect(ThousandsSeparator.format(-1234567.89, ",")).toEqual("-1,234,567.89");
   });
 });
