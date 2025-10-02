@@ -1,28 +1,32 @@
 import { describe, expect, test } from "bun:test";
-import { Random } from "../src/random.service";
+import {
+  Random,
+  RandomMaxNotIntegerError,
+  RandomMinEqualsMaxError,
+  RandomMinGreaterThanMaxError,
+  RandomMinNotIntegerError,
+} from "../src/random.service";
 
 describe("Random", () => {
   describe("validations", () => {
     test("invalid min", () => {
-      expect(() => Random.generate({ min: 1.5, max: 2 })).toThrow("Minimum value is not an integer");
+      expect(() => Random.generate({ min: 1.5, max: 2 })).toThrow(RandomMinNotIntegerError);
     });
 
     test("invalid max", () => {
-      expect(() => Random.generate({ min: 1, max: 2.5 })).toThrow("Maximum value is not an integer");
+      expect(() => Random.generate({ min: 1, max: 2.5 })).toThrow(RandomMaxNotIntegerError);
     });
 
     test("min equals max", () => {
-      expect(() => Random.generate({ min: 1, max: 1 })).toThrow("Minimum and maximum values cannot be equal");
+      expect(() => Random.generate({ min: 1, max: 1 })).toThrow(RandomMinEqualsMaxError);
     });
 
     test("min greater than max", () => {
-      expect(() => Random.generate({ min: 2, max: 1 })).toThrow(
-        "Minimum value cannot be greater than maximum value",
-      );
+      expect(() => Random.generate({ min: 2, max: 1 })).toThrow(RandomMinGreaterThanMaxError);
     });
 
     test("all zeros", () => {
-      expect(() => Random.generate({ min: 0, max: 0 })).toThrow("Minimum and maximum values cannot be equal");
+      expect(() => Random.generate({ min: 0, max: 0 })).toThrow(RandomMinEqualsMaxError);
     });
   });
 
