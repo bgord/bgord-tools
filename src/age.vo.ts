@@ -47,19 +47,13 @@ export class Age {
 
   static fromBirthdateTimestamp(params: { birthdate: TimestampType; now: TimestampType }): Age {
     if (params.birthdate > params.now) throw new Error("invalid.birthdate_in_future");
-
-    const years = differenceInYears(new Date(params.now), new Date(params.birthdate));
-
-    return Age.fromValue(years);
+    return Age.fromValue(differenceInYears(params.now, params.birthdate));
   }
 
   static fromBirthdate(params: { birthdate: string; now: TimestampType }): Age {
     const birthdate = new Date(params.birthdate).getTime();
 
     if (birthdate > params.now) throw new Error("invalid.birthdate_in_future");
-
-    const years = differenceInYears(new Date(params.now), new Date(birthdate));
-
-    return Age.fromValue(years);
+    return Age.fromValue(differenceInYears(params.now, birthdate));
   }
 }
