@@ -20,11 +20,9 @@ describe("ApiKey (smoke tests)", () => {
   });
 
   test("rejects non-hex content at length 64", () => {
-    // 'G' is not a hex character
     const nonHex = "A".repeat(63) + "G";
     expect(() => ApiKey.parse(nonHex)).toThrow();
 
-    // internal whitespace also fails the hex regex
     const midSpace = "a".repeat(32) + " " + "a".repeat(31);
     expect(() => ApiKey.parse(midSpace)).toThrow();
   });

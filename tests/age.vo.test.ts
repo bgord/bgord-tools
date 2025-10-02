@@ -51,18 +51,15 @@ describe("Age VO", () => {
 
   describe("isAdult", () => {
     test("treats exactly the same age as adult", () => {
-      const personAge = Age.fromValue(18);
-      expect(personAge.isAdult(Age.fromValue(18))).toEqual(true);
+      expect(Age.fromValue(18).isAdult(Age.fromValue(18))).toEqual(true);
     });
 
     test("treats older age as adult", () => {
-      const personAge = Age.fromValue(21);
-      expect(personAge.isAdult(Age.fromValue(18))).toEqual(true);
+      expect(Age.fromValue(21).isAdult(Age.fromValue(18))).toEqual(true);
     });
 
     test("treats younger age as not adult", () => {
-      const personAge = Age.fromValue(17);
-      expect(personAge.isAdult(Age.fromValue(18))).toEqual(false);
+      expect(Age.fromValue(17).isAdult(Age.fromValue(18))).toEqual(false);
     });
   });
 
@@ -176,7 +173,7 @@ describe("Age VO", () => {
   test("serializes to primitive via toJSON and toString", () => {
     const age = Age.fromValue(42);
 
-    expect(JSON.stringify({ age })).toBe('{"age":42}');
-    expect(String(age)).toBe("42");
+    expect(JSON.stringify({ age })).toEqual('{"age":42}');
+    expect(String(age)).toEqual("42");
   });
 });

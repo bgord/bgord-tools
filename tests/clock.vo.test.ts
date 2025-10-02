@@ -8,11 +8,11 @@ import { Timestamp } from "../src/timestamp.vo";
 
 describe("Clock", () => {
   test("toString() defaults to 24h zero-padded", () => {
-    expect(new Clock(new Hour(9), new Minute(5)).toString()).toBe("09:05");
+    expect(new Clock(new Hour(9), new Minute(5)).toString()).toEqual("09:05");
   });
 
   test("format(TWELVE_HOURS) formats hour in 12h and preserves minute padding", () => {
-    expect(new Clock(new Hour(13), new Minute(3)).format(ClockFormatters.TWELVE_HOURS)).toBe("01:03");
+    expect(new Clock(new Hour(13), new Minute(3)).format(ClockFormatters.TWELVE_HOURS)).toEqual("01:03");
   });
 
   test("format() supports a custom formatter", () => {
@@ -20,7 +20,7 @@ describe("Clock", () => {
     const customFormatter = (hour: Hour, minute: Minute) =>
       `Hour=${hour.toString()}, Min=${minute.toString()}`;
 
-    expect(clock.format(customFormatter)).toBe("Hour=15, Min=30");
+    expect(clock.format(customFormatter)).toEqual("Hour=15, Min=30");
   });
 
   test("get() returns raw numeric hour and minute", () => {
@@ -32,29 +32,32 @@ describe("Clock", () => {
     const b = new Clock(new Hour(10), new Minute(45));
     const c = new Clock(new Hour(11), new Minute(45));
     const d = new Clock(new Hour(10), new Minute(46));
-    expect(a.equals(b)).toBe(true);
-    expect(a.equals(c)).toBe(false);
-    expect(a.equals(d)).toBe(false);
+
+    expect(a.equals(b)).toEqual(true);
+    expect(a.equals(c)).toEqual(false);
+    expect(a.equals(d)).toEqual(false);
   });
 
   test("isAfter handles hour and minute ordering", () => {
-    expect(new Clock(new Hour(11), new Minute(0)).isAfter(new Clock(new Hour(10), new Minute(59)))).toBe(
+    expect(new Clock(new Hour(11), new Minute(0)).isAfter(new Clock(new Hour(10), new Minute(59)))).toEqual(
       true,
     );
-    expect(new Clock(new Hour(10), new Minute(30)).isAfter(new Clock(new Hour(10), new Minute(15)))).toBe(
+    expect(new Clock(new Hour(10), new Minute(30)).isAfter(new Clock(new Hour(10), new Minute(15)))).toEqual(
       true,
     );
-    expect(new Clock(new Hour(9), new Minute(15)).isAfter(new Clock(new Hour(10), new Minute(0)))).toBe(
+    expect(new Clock(new Hour(9), new Minute(15)).isAfter(new Clock(new Hour(10), new Minute(0)))).toEqual(
       false,
     );
   });
 
   test("isBefore handles hour and minute ordering", () => {
-    expect(new Clock(new Hour(8), new Minute(59)).isBefore(new Clock(new Hour(9), new Minute(0)))).toBe(true);
-    expect(new Clock(new Hour(9), new Minute(30)).isBefore(new Clock(new Hour(9), new Minute(45)))).toBe(
+    expect(new Clock(new Hour(8), new Minute(59)).isBefore(new Clock(new Hour(9), new Minute(0)))).toEqual(
       true,
     );
-    expect(new Clock(new Hour(12), new Minute(30)).isBefore(new Clock(new Hour(12), new Minute(15)))).toBe(
+    expect(new Clock(new Hour(9), new Minute(30)).isBefore(new Clock(new Hour(9), new Minute(45)))).toEqual(
+      true,
+    );
+    expect(new Clock(new Hour(12), new Minute(30)).isBefore(new Clock(new Hour(12), new Minute(15)))).toEqual(
       false,
     );
   });
@@ -67,6 +70,7 @@ describe("Clock", () => {
     const clock = new Clock(new Hour(15), new Minute(7));
     const composed = (hour: Hour, minute: Minute) =>
       `${hour.format(HourFormatters.AM_PM)} @ ${minute.toString()} min`;
-    expect(clock.format(composed)).toBe("3 p.m. @ 07 min");
+
+    expect(clock.format(composed)).toEqual("3 p.m. @ 07 min");
   });
 });

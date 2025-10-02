@@ -22,6 +22,7 @@ describe("Minute", () => {
     const tenA = new Minute(10);
     const tenB = new Minute(10);
     const eleven = new Minute(11);
+
     expect(tenA.equals(tenB)).toEqual(true);
     expect(tenA.equals(eleven)).toEqual(false);
   });
@@ -38,6 +39,7 @@ describe("Minute", () => {
 
   test("Minute.list() returns cached 60 items", () => {
     const list = Minute.list();
+
     expect(list.length).toEqual(60);
     expect(list[0].get()).toEqual(0);
     expect(list[59].get()).toEqual(59);
