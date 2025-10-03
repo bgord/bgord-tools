@@ -1,4 +1,4 @@
-import { BasenameSchema, type BasenameType } from "./basename.vo";
+import { Basename, type BasenameType } from "./basename.vo";
 import { ExtensionSchema, type ExtensionType } from "./extension.vo";
 import { FilenameFromStringSchema } from "./filename-from-string.vo";
 import { FilenameSuffixSchema, type FilenameSuffixSchemaType } from "./filename-suffix.vo";
@@ -10,7 +10,7 @@ export class Filename {
   ) {}
 
   static fromParts(basename: string, extension: string) {
-    return new Filename(BasenameSchema.parse(basename), ExtensionSchema.parse(extension));
+    return new Filename(Basename.parse(basename), ExtensionSchema.parse(extension));
   }
 
   static fromPartsSafe(basename: BasenameType, extension: ExtensionType) {
@@ -45,13 +45,13 @@ export class Filename {
 
   withSuffix(candidate: string): Filename {
     const suffix = FilenameSuffixSchema.parse(candidate);
-    const basename = BasenameSchema.parse(`${this.basename}${suffix}`);
+    const basename = Basename.parse(`${this.basename}${suffix}`);
 
     return new Filename(basename, this.extension);
   }
 
   withSuffixSafe(suffix: FilenameSuffixSchemaType): Filename {
-    const basename = BasenameSchema.parse(`${this.basename}${suffix}`);
+    const basename = Basename.parse(`${this.basename}${suffix}`);
 
     return new Filename(basename, this.extension);
   }

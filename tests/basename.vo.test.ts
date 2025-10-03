@@ -1,65 +1,95 @@
 import { describe, expect, test } from "bun:test";
-import { ZodError } from "zod/v4";
-import { BasenameSchema } from "../src/basename.vo";
+import {
+  Basename,
+  BasenameBadCharsError,
+  BasenameControlCharsForbiddenError,
+  BasenameDotfilesForbiddenError,
+  BasenameDotSegmentsForbiddenError,
+  BasenameEmptyError,
+  BasenameSlashesForbiddenError,
+  BasenameTooLongError,
+  BasenameTrailingDotForbiddenError,
+  BasenameTypeError,
+} from "../src/basename.vo";
 
-function expectZodIssue(input: string, expectedMsg: string) {
-  try {
-    BasenameSchema.parse(input);
-    throw new Error("Expected BasenameSchema to fail, but it passed");
-  } catch (err) {
-    expect(err instanceof ZodError).toBe(true);
-    const issue = (err as ZodError).issues[0];
-    expect(issue?.message).toBe(expectedMsg);
-  }
-}
-
-describe("BasenameSchema", () => {
-  test("accepts typical safe names", () => {
-    // @ts-expect-error
-    expect(BasenameSchema.parse("avatar")).toBe("avatar");
-    // @ts-expect-error
-    expect(BasenameSchema.parse("Report_v1.2-rc")).toBe("Report_v1.2-rc");
-    // @ts-expect-error
-    expect(BasenameSchema.parse(" a.b_c-d ")).toBe("a.b_c-d"); // trims
+describe("Basename", () => {
+  test("accepts 'avatar'", () => {
+    expect(Basename.safeParse("avatar").success).toEqual(true);
   });
 
-  test("accepts max length 128 and rejects 129", () => {
-    const ok = "a".repeat(128);
-    // @ts-expect-error
-    expect(BasenameSchema.parse(ok)).toBe(ok);
-
-    const tooLong = "a".repeat(129);
-    expectZodIssue(tooLong, "basename_too_long");
+  test("accepts 'Report_v1.2-rc'", () => {
+    expect(Basename.safeParse("Report_v1.2-rc").success).toEqual(true);
   });
 
-  test("rejects empty/whitespace", () => {
-    expectZodIssue("", "basename_empty");
-    expectZodIssue("   ", "basename_empty");
+  test("accepts and trims ' a.b_c-d '", () => {
+    expect(Basename.safeParse(" a.b_c-d ").success).toEqual(true);
   });
 
-  test("rejects slashes and backslashes", () => {
-    expectZodIssue("a/b", "basename_slashes_forbidden");
-    expectZodIssue("a\\b", "basename_slashes_forbidden");
+  test("accepts 128 chars", () => {
+    expect(Basename.safeParse("a".repeat(128)).success).toEqual(true);
   });
 
-  test("rejects control characters", () => {
-    expectZodIssue("line\nbreak", "basename_control_chars_forbidden");
-    expectZodIssue("nul\u0000byte", "basename_control_chars_forbidden");
+  test("rejects non-string (number)", () => {
+    expect(() => Basename.parse(42)).toThrow(BasenameTypeError);
   });
 
-  test("rejects dotfiles and dot segments", () => {
-    expectZodIssue(".", "basename_dot_segments_forbidden");
-    expectZodIssue("..", "basename_dot_segments_forbidden");
-    expectZodIssue(".env", "basename_dotfiles_forbidden");
+  test("rejects non-string (null)", () => {
+    expect(() => Basename.parse(null)).toThrow(BasenameTypeError);
   });
 
-  test("rejects trailing dot", () => {
-    expectZodIssue("name.", "basename_trailing_dot_forbidden");
+  test("rejects 129 chars", () => {
+    expect(() => Basename.parse("a".repeat(129))).toThrow(BasenameTooLongError);
   });
 
-  test("rejects disallowed characters (spaces, emoji, symbols)", () => {
-    expectZodIssue("name name", "basename_bad_chars");
-    expectZodIssue("name🙂", "basename_bad_chars");
-    expectZodIssue("name@", "basename_bad_chars");
+  test("rejects empty string", () => {
+    expect(() => Basename.parse("")).toThrow(BasenameEmptyError);
+  });
+
+  test("rejects whitespace-only string", () => {
+    expect(() => Basename.parse("   ")).toThrow(BasenameEmptyError);
+  });
+
+  test("rejects forward slash 'a/b'", () => {
+    expect(() => Basename.parse("a/b")).toThrow(BasenameSlashesForbiddenError);
+  });
+
+  test("rejects backslash 'a\\b'", () => {
+    expect(() => Basename.parse("a\\b")).toThrow(BasenameSlashesForbiddenError);
+  });
+
+  test("rejects control char 'line\\nbreak'", () => {
+    expect(() => Basename.parse("line\nbreak")).toThrow(BasenameControlCharsForbiddenError);
+  });
+
+  test("rejects control char 'nul\\u0000byte'", () => {
+    expect(() => Basename.parse("nul\u0000byte")).toThrow(BasenameControlCharsForbiddenError);
+  });
+
+  test("rejects '.'", () => {
+    expect(() => Basename.parse(".")).toThrow(BasenameDotSegmentsForbiddenError);
+  });
+
+  test("rejects '..'", () => {
+    expect(() => Basename.parse("..")).toThrow(BasenameDotSegmentsForbiddenError);
+  });
+
+  test("rejects dotfile '.env'", () => {
+    expect(() => Basename.parse(".env")).toThrow(BasenameDotfilesForbiddenError);
+  });
+
+  test("rejects trailing dot 'name.'", () => {
+    expect(() => Basename.parse("name.")).toThrow(BasenameTrailingDotForbiddenError);
+  });
+
+  test("rejects space 'name name'", () => {
+    expect(() => Basename.parse("name name")).toThrow(BasenameBadCharsError);
+  });
+
+  test("rejects emoji 'name🙂'", () => {
+    expect(() => Basename.parse("name🙂")).toThrow(BasenameBadCharsError);
+  });
+
+  test("rejects symbol 'name@'", () => {
+    expect(() => Basename.parse("name@")).toThrow(BasenameBadCharsError);
   });
 });

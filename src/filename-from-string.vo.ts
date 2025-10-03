@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { BasenameSchema } from "./basename.vo";
+import { Basename } from "./basename.vo";
 import { ExtensionSchema } from "./extension.vo";
 
 export const FilenameFromStringSchema = z
@@ -12,8 +12,8 @@ export const FilenameFromStringSchema = z
   // split and validate parts using existing schemas
   .transform((string) => {
     const index = string.lastIndexOf(".");
-    const base = BasenameSchema.parse(string.slice(0, index));
+    const basename = Basename.parse(string.slice(0, index));
     const extension = ExtensionSchema.parse(string.slice(index + 1));
-    return { basename: base, extension: extension };
+    return { basename, extension };
   });
 export type FilenameFromString = z.infer<typeof FilenameFromStringSchema>;

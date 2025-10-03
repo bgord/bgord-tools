@@ -1,18 +1,29 @@
 import { z } from "zod/v4";
 
-export const BasenameSchema = z
-  .string()
+export const BasenameTypeError = "basename.not.string" as const;
+export const BasenameEmptyError = "basename.empty" as const;
+export const BasenameTooLongError = "basename.too.long" as const;
+export const BasenameSlashesForbiddenError = "basename.slashes.forbidden" as const;
+export const BasenameControlCharsForbiddenError = "basename.control.chars.forbidden" as const;
+export const BasenameDotSegmentsForbiddenError = "basename.dot.segments.forbidden" as const;
+export const BasenameDotfilesForbiddenError = "basename.dotfiles.forbidden" as const;
+export const BasenameTrailingDotForbiddenError = "basename.trailing.dot.forbidden" as const;
+export const BasenameBadCharsError = "basename.bad.chars" as const;
+
+export const Basename = z
+  .string(BasenameTypeError)
   .trim()
-  .min(1, "basename_empty")
-  .max(128, "basename_too_long")
-  .refine((s) => !/[/\\]/.test(s), "basename_slashes_forbidden")
+  .min(1, BasenameEmptyError)
+  .max(128, BasenameTooLongError)
+  .refine((s) => !/[/\\]/.test(s), BasenameSlashesForbiddenError)
+  // dot-related checks: dot-segments first for specific errors…
   // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
-  .refine((s) => !/[\u0000-\u001F\u007F]/.test(s), "basename_control_chars_forbidden")
-  // check dot-segments FIRST so "." / ".." get the intended error
-  .refine((s) => s !== "." && s !== "..", "basename_dot_segments_forbidden")
-  // then disallow any other dotfile (".env", ".gitignore", etc.)
-  .refine((s) => !s.startsWith("."), "basename_dotfiles_forbidden")
-  .refine((s) => !s.endsWith("."), "basename_trailing_dot_forbidden")
-  .regex(/^[A-Za-z0-9._-]+$/, "basename_bad_chars")
-  .brand("basename");
-export type BasenameType = z.infer<typeof BasenameSchema>;
+  .refine((value) => !/[\u0000-\u001F\u007F]/.test(value), BasenameControlCharsForbiddenError)
+  .refine((value) => value !== "." && value !== "..", BasenameDotSegmentsForbiddenError)
+  // …then any other dotfile
+  .refine((value) => !value.startsWith("."), BasenameDotfilesForbiddenError)
+  .refine((value) => !value.endsWith("."), BasenameTrailingDotForbiddenError)
+  .regex(/^[A-Za-z0-9._-]+$/, BasenameBadCharsError)
+  .brand("Basename");
+
+export type BasenameType = z.infer<typeof Basename>;

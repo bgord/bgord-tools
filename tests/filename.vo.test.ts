@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { ZodError } from "zod/v4";
-import { BasenameSchema } from "../src/basename.vo";
+import { Basename } from "../src/basename.vo";
 import { ExtensionSchema } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
 import { FilenameSuffixSchema } from "../src/filename-suffix.vo";
@@ -12,7 +12,7 @@ describe("Filename", () => {
   });
 
   test("fromPartsSafe accepts branded values and returns 'name.ext'", () => {
-    const basename = BasenameSchema.parse("avatar");
+    const basename = Basename.parse("avatar");
     const extension = ExtensionSchema.parse("webp");
     const filename = Filename.fromPartsSafe(basename, extension).get();
     expect(filename).toBe("avatar.webp");
@@ -57,7 +57,7 @@ describe("Filename", () => {
 
   test("withBasename replaces only the basename", () => {
     const filename = Filename.fromString("avatar.webp");
-    const basename = BasenameSchema.parse("profile_v2");
+    const basename = Basename.parse("profile_v2");
     const updated = filename.withBasename(basename);
 
     expect(filename.get()).toBe("avatar.webp");
