@@ -8,21 +8,24 @@ export class Week extends DateRange {
     const year = getISOWeekYear(this.getStart());
     const week = getISOWeek(this.getStart()).toString().padStart(2, "0");
 
-    return `${year}-W${week}`;
+    return WeekIsoId.parse(`${year}-W${week}`);
   }
 
   previous(): Week {
     const shifted = addWeeks(new Date(this.getStart()), -1).getTime();
+
     return Week.fromTimestamp(Timestamp.parse(shifted));
   }
 
   next(): Week {
     const shifted = addWeeks(new Date(this.getStart()), 1).getTime();
+
     return Week.fromTimestamp(Timestamp.parse(shifted));
   }
 
   shift(count: number): Week {
     const shifted = addWeeks(new Date(this.getStart()), count).getTime();
+
     return Week.fromTimestamp(Timestamp.parse(shifted));
   }
 
@@ -39,7 +42,6 @@ export class Week extends DateRange {
 
   static fromIsoId(isoId: WeekIsoIdType): Week {
     const [yearPart, weekPart] = WeekIsoId.parse(isoId).split("-W");
-
     const year = Number(yearPart);
     const week = Number(weekPart);
 
