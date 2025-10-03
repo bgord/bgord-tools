@@ -1,5 +1,11 @@
 import { describe, expect, test } from "bun:test";
-import { ReorderingCalculator, ReorderingTransfer } from "../src/reordering.service";
+import {
+  ReorderingCalculator,
+  ReorderingCannotFindCurrentError,
+  ReorderingCannotFindItemError,
+  ReorderingCannotFindTargetError,
+  ReorderingTransfer,
+} from "../src/reordering.service";
 
 describe("Calculator", () => {
   describe("add()", () => {
@@ -19,7 +25,9 @@ describe("Calculator", () => {
     });
 
     test("throws when Item is not found", () => {
-      expect(() => ReorderingCalculator.fromArray(["a", "b", "c"]).delete("d")).toThrow("Cannot find Item");
+      expect(() => ReorderingCalculator.fromArray(["a", "b", "c"]).delete("d")).toThrow(
+        ReorderingCannotFindItemError,
+      );
     });
   });
 
@@ -82,14 +90,14 @@ describe("Calculator", () => {
     test("transfer error - cannot find current", () => {
       const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
       expect(() => calculator.transfer(new ReorderingTransfer({ id: "ddd", to: 1 }))).toThrow(
-        "Cannot find current Item",
+        ReorderingCannotFindCurrentError,
       );
     });
 
     test("transfer error - cannot find target", () => {
       const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
       expect(() => calculator.transfer(new ReorderingTransfer({ id: "ccc", to: 4 }))).toThrow(
-        "Cannot find target Item",
+        ReorderingCannotFindTargetError,
       );
     });
 

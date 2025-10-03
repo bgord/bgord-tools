@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { ReorderingPosition } from "../src/reordering.service";
+import { ReorderingPosition, ReorderingPositionError } from "../src/reordering.service";
 
 describe("ReorderingPosition VO", () => {
   test("validation errors", () => {
@@ -7,7 +7,7 @@ describe("ReorderingPosition VO", () => {
 
     for (const value of values) {
       // @ts-expect-error when Position value type is invalid
-      expect(() => new ReorderingPosition(value)).toThrow("Position is not a positive integer");
+      expect(() => new ReorderingPosition(value)).toThrow(ReorderingPositionError);
     }
   });
 });
