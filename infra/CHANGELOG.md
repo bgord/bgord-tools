@@ -1,4 +1,6 @@
 # Changelog
+## 2025-10-03 11:43 v0.15.2
+- 2025-10-03 11:43 f2461e5 **0.15.2**
 - 2025-10-03 11:42 e9d5b6e **fix: remove brand from language vo**
 ## 2025-10-03 11:39 v0.15.1
 - 2025-10-03 11:39 7582131 **0.15.1**
@@ -6,6 +8,7 @@
 ## 2025-10-03 11:37 v0.15.0
 - 2025-10-03 11:37 c387855 **0.15.0**
 - 2025-10-03 11:36 206f06e **refactor: improve formatting**
+- 2025-10-03 09:43 d052842 **docs: generate CHANGELOG**
 - 2025-10-03 09:39 ef1eea3 **docs: generate CHANGELOG**
 - 2025-10-03 09:39 19280d2 **docs: generate CHANGELOG**
 - 2025-10-03 09:37 1cccadc **docs: generate CHANGELOG**
