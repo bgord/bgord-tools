@@ -1,36 +1,57 @@
 import { describe, expect, test } from "bun:test";
-import { ZodError } from "zod/v4";
-import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
-
-function expectZodIssue(inputString: string, expectedMessage: string) {
-  try {
-    DirectoryPathRelativeSchema.parse(inputString);
-    throw new Error("Expected to fail, but it passed");
-  } catch (error) {
-    expect(error instanceof ZodError).toBe(true);
-    const issue = (error as ZodError).issues[0];
-    expect(issue?.message).toBe(expectedMessage);
-  }
-}
+import {
+  DirectoryPathRelativeSchema,
+  type DirectoryPathRelativeType,
+  RelDirBackslashForbiddenError,
+  RelDirBadSegmentsError,
+  RelDirControlCharsForbiddenError,
+  RelDirEmptyError,
+  RelDirMustNotStartWithSlashError,
+  RelDirTypeError,
+} from "../src/directory-path-relative.vo";
 
 describe("DirectoryPathRelativeSchema", () => {
-  test("accepts and returns a normalized relative directory", () => {
-    // @ts-expect-error
-    expect(DirectoryPathRelativeSchema.parse("users/avatars")).toBe("users/avatars");
-    // collapses double slashes and strips trailing slashes
-    // @ts-expect-error
-    expect(DirectoryPathRelativeSchema.parse("users//avatars/")).toBe("users/avatars");
+  test("accepts 'users/avatars' as-is", () => {
+    expect(DirectoryPathRelativeSchema.parse("users/avatars")).toEqual(
+      "users/avatars" as DirectoryPathRelativeType,
+    );
   });
 
-  test("rejects leading slash, backslash, control chars", () => {
-    expectZodIssue("/users/avatars", "rel_dir_must_not_start_with_slash");
-    expectZodIssue("users\\avatars", "rel_dir_backslash_forbidden");
-    expectZodIssue("users\navatars", "rel_dir_control_chars_forbidden");
+  test("normalizes 'users//avatars/' to 'users/avatars'", () => {
+    expect(DirectoryPathRelativeSchema.parse("users//avatars/")).toEqual(
+      "users/avatars" as DirectoryPathRelativeType,
+    );
   });
 
-  test("rejects empty (after trim) and dot segments", () => {
-    expectZodIssue("   ", "rel_dir_empty");
-    expectZodIssue("users/./avatars", "rel_dir_bad_segments");
-    expectZodIssue("users/../avatars", "rel_dir_bad_segments");
+  test("rejects leading slash '/users/avatars'", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("/users/avatars")).toThrow(
+      RelDirMustNotStartWithSlashError,
+    );
+  });
+
+  test("rejects backslash 'users\\avatars'", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users\\avatars")).toThrow(RelDirBackslashForbiddenError);
+  });
+
+  test("rejects control chars 'users\\navatars'", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users\navatars")).toThrow(
+      RelDirControlCharsForbiddenError,
+    );
+  });
+
+  test("rejects empty (after trim) '   '", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("   ")).toThrow(RelDirEmptyError);
+  });
+
+  test("rejects dot segment 'users/./avatars'", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users/./avatars")).toThrow(RelDirBadSegmentsError);
+  });
+
+  test("rejects dot segment 'users/../avatars'", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users/../avatars")).toThrow(RelDirBadSegmentsError);
+  });
+
+  test("rejects non-string (number)", () => {
+    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(RelDirTypeError);
   });
 });
