@@ -1,16 +1,18 @@
 import { z } from "zod/v4";
 
-export const ExtensionSchema = z
-  .string()
+export const ExtensionTypeError = "extension.not.string" as const;
+export const ExtensionEmptyError = "extension.empty" as const;
+export const ExtensionTooLongError = "extension.too.long" as const;
+export const ExtensionBadCharsError = "extension.bad.chars" as const;
+
+export const Extension = z
+  .string(ExtensionTypeError)
   .trim()
+  .toLowerCase()
   .transform((value) => (value.startsWith(".") ? value.slice(1) : value))
-  .transform((value) => value.toLowerCase())
-  .pipe(
-    z
-      .string()
-      .min(1, "extension_empty")
-      .max(16, "extension_too_long")
-      .regex(/^[a-z0-9]+$/, "extension_bad_chars"),
-  )
-  .brand("extension");
-export type ExtensionType = z.infer<typeof ExtensionSchema>;
+  .refine((value) => value.length >= 1, ExtensionEmptyError)
+  .refine((value) => value.length <= 16, ExtensionTooLongError)
+  .refine((value) => /^[a-z0-9]+$/.test(value), ExtensionBadCharsError)
+  .brand("Extension");
+
+export type ExtensionType = z.infer<typeof Extension>;

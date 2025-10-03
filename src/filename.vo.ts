@@ -1,5 +1,5 @@
 import { Basename, type BasenameType } from "./basename.vo";
-import { ExtensionSchema, type ExtensionType } from "./extension.vo";
+import { Extension, type ExtensionType } from "./extension.vo";
 import { FilenameFromStringSchema } from "./filename-from-string.vo";
 import { FilenameSuffixSchema, type FilenameSuffixSchemaType } from "./filename-suffix.vo";
 
@@ -10,7 +10,7 @@ export class Filename {
   ) {}
 
   static fromParts(basename: string, extension: string) {
-    return new Filename(Basename.parse(basename), ExtensionSchema.parse(extension));
+    return new Filename(Basename.parse(basename), Extension.parse(extension));
   }
 
   static fromPartsSafe(basename: BasenameType, extension: ExtensionType) {

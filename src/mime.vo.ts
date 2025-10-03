@@ -1,5 +1,5 @@
 import * as mime from "mime-types";
-import { ExtensionSchema, type ExtensionType } from "./extension.vo";
+import { Extension, type ExtensionType } from "./extension.vo";
 
 export type MimeRawType = string;
 type MimeTypeType = string;
@@ -35,7 +35,7 @@ export class Mime {
   }
 
   toExtension(): ExtensionType {
-    return ExtensionSchema.parse(mime.extension(this.raw));
+    return Extension.parse(mime.extension(this.raw));
   }
 }
 

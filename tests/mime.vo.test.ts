@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { ExtensionSchema } from "../src/extension.vo";
+import { Extension } from "../src/extension.vo";
 import { InvalidMimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {
@@ -53,6 +53,6 @@ describe("Mime", () => {
   });
 
   test("fromExtension", () => {
-    expect(Mime.fromExtension(ExtensionSchema.parse("pdf")).raw).toEqual("application/pdf");
+    expect(Mime.fromExtension(Extension.parse("pdf")).raw).toEqual("application/pdf");
   });
 });

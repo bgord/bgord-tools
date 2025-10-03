@@ -1,53 +1,70 @@
 import { describe, expect, test } from "bun:test";
-import { ZodError } from "zod/v4";
-import { ExtensionSchema } from "../src/extension.vo";
+import {
+  Extension,
+  ExtensionBadCharsError,
+  ExtensionEmptyError,
+  ExtensionTooLongError,
+  ExtensionTypeError,
+} from "../src/extension.vo";
 
-function expectZodIssue(input: string, expectedMsg: string) {
-  try {
-    ExtensionSchema.parse(input);
-    throw new Error("Expected ExtensionSchema to fail, but it passed");
-  } catch (err) {
-    expect(err instanceof ZodError).toBe(true);
-    const issue = (err as ZodError).issues[0];
-    expect(issue?.message).toBe(expectedMsg);
-  }
-}
-
-describe("ExtensionSchema", () => {
-  test("accepts simple lowercase extensions", () => {
-    // @ts-expect-error
-    expect(ExtensionSchema.parse("webp")).toBe("webp");
-    // @ts-expect-error
-    expect(ExtensionSchema.parse("jpg")).toBe("jpg");
-    // @ts-expect-error
-    expect(ExtensionSchema.parse("7z")).toBe("7z");
+describe("Extension", () => {
+  test("accepts 'webp'", () => {
+    expect(Extension.safeParse("webp").success).toEqual(true);
   });
 
-  test("strips a leading dot and lowercases", () => {
-    // @ts-expect-error
-    expect(ExtensionSchema.parse(".PNG")).toBe("png");
-    // @ts-expect-error
-    expect(ExtensionSchema.parse("  JpEg  ")).toBe("jpeg");
+  test("accepts 'jpg'", () => {
+    expect(Extension.safeParse("jpg").success).toEqual(true);
   });
 
-  test("rejects empty and single dot", () => {
-    expectZodIssue("", "extension_empty");
-    expectZodIssue(".", "extension_empty"); // '.' → '' after transform
+  test("accepts '7z'", () => {
+    expect(Extension.safeParse("7z").success).toEqual(true);
   });
 
-  test("enforces max length 16", () => {
-    const ok = "a".repeat(16);
-    // @ts-expect-error
-    expect(ExtensionSchema.parse(ok)).toBe(ok);
-
-    const tooLong = "a".repeat(17);
-    expectZodIssue(tooLong, "extension_too_long");
+  test("accepts and normalizes '.PNG'", () => {
+    expect(Extension.safeParse(".PNG").success).toEqual(true);
   });
 
-  test("rejects disallowed characters", () => {
-    expectZodIssue("web-p", "extension_bad_chars"); // hyphen not allowed
-    expectZodIssue("web p", "extension_bad_chars"); // space not allowed
-    expectZodIssue("webp!", "extension_bad_chars"); // punctuation not allowed
-    expectZodIssue("..png", "extension_bad_chars"); // after transform → ".png" (dot disallowed)
+  test("accepts and normalizes '  JpEg  '", () => {
+    expect(Extension.safeParse("  JpEg  ").success).toEqual(true);
+  });
+
+  test("rejects empty string", () => {
+    expect(() => Extension.parse("")).toThrow(ExtensionEmptyError);
+  });
+
+  test("rejects single dot '.' (becomes empty after normalize)", () => {
+    expect(() => Extension.parse(".")).toThrow(ExtensionEmptyError);
+  });
+
+  test("accepts length 16", () => {
+    expect(Extension.safeParse("a".repeat(16)).success).toEqual(true);
+  });
+
+  test("rejects length 17", () => {
+    expect(() => Extension.parse("a".repeat(17))).toThrow(ExtensionTooLongError);
+  });
+
+  test("rejects hyphen 'web-p'", () => {
+    expect(() => Extension.parse("web-p")).toThrow(ExtensionBadCharsError);
+  });
+
+  test("rejects space 'web p'", () => {
+    expect(() => Extension.parse("web p")).toThrow(ExtensionBadCharsError);
+  });
+
+  test("rejects punctuation 'webp!'", () => {
+    expect(() => Extension.parse("webp!")).toThrow(ExtensionBadCharsError);
+  });
+
+  test("rejects '..png' (normalizes to '.png', dot disallowed)", () => {
+    expect(() => Extension.parse("..png")).toThrow(ExtensionBadCharsError);
+  });
+
+  test("rejects non-string (number)", () => {
+    expect(() => Extension.parse(123)).toThrow(ExtensionTypeError);
+  });
+
+  test("rejects non-string (object)", () => {
+    expect(() => Extension.parse({})).toThrow(ExtensionTypeError);
   });
 });
