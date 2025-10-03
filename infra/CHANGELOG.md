@@ -1,4 +1,16 @@
 # Changelog
+- 2025-10-03 13:01 590e8ef **refactor: improve object key**
+- 2025-10-03 12:51 b39a357 **refactor: adjust dir path rel**
+- 2025-10-03 12:49 7d252e7 **refactor: adjust dir path abs**
+- 2025-10-03 12:45 7f06b54 **refactor: adjust file path**
+- 2025-10-03 12:41 788205f **refactor: adjust file path absolute**
+- 2025-10-03 12:36 aadc030 **refactor: adjust file path relative**
+- 2025-10-03 12:28 f4b5f8b **refactor: adjust filename**
+- 2025-10-03 12:24 614259b **refactor: adjust filename from string**
+- 2025-10-03 12:19 c77bdf5 **refactor: adjust filename suffix**
+- 2025-10-03 12:13 55b148c **refactor: adjust extension**
+- 2025-10-03 12:04 7d0a7a1 **refactor: adjust basename**
+- 2025-10-03 11:50 5249aac **refactor: improve revision**
 ## 2025-10-03 11:43 v0.15.2
 - 2025-10-03 11:43 f2461e5 **0.15.2**
 - 2025-10-03 11:42 e9d5b6e **fix: remove brand from language vo**
@@ -9,6 +21,7 @@
 - 2025-10-03 11:37 c387855 **0.15.0**
 - 2025-10-03 11:36 206f06e **refactor: improve formatting**
 - 2025-10-03 09:43 d052842 **docs: generate CHANGELOG**
+- 2025-10-03 09:43 4e2ea23 **docs: generate CHANGELOG**
 - 2025-10-03 09:39 ef1eea3 **docs: generate CHANGELOG**
 - 2025-10-03 09:39 19280d2 **docs: generate CHANGELOG**
 - 2025-10-03 09:37 1cccadc **docs: generate CHANGELOG**
