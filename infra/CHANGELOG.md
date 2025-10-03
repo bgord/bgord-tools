@@ -1,4 +1,7 @@
 # Changelog
+- 2025-10-03 23:33 5b29ab2 **refactor: test naming**
+- 2025-10-03 23:29 4d05c1d **refactor: unify formatting**
+- 2025-10-03 23:22 1150fdf **refactor: unify error handling**
 - 2025-10-03 23:09 612b5ba **refactor: improve reordering**
 - 2025-10-03 22:43 5022e1d **refactor: improve dll**
 - 2025-10-03 22:39 7346696 **refactor: improve weekday**
@@ -6,6 +9,8 @@
 - 2025-10-03 22:24 0fb6d66 **refactor: improve rate limiter**
 - 2025-10-03 21:35 a44869e **refactor: improve height**
 - 2025-10-03 21:24 060f376 **refactor: improve weight**
+- 2025-10-03 21:10 78690e2 **docs: generate readme**
+- 2025-10-03 21:10 334d19b **docs: generate CHANGELOG**
 - 2025-10-03 21:01 82113be **refactor: simplify streak calculator**
 - 2025-10-03 20:58 ac5c492 **refactor: simplify package version**
 - 2025-10-03 20:53 8de62b4 **refactor: improve time zone offset value**
