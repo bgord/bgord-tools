@@ -1,26 +1,21 @@
 import { Time } from "./time.service";
-import type { TimestampType } from "./timestamp.vo";
+import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 type GetStartOfDayTsInTzConfigType = { now: TimestampType; timeZoneOffsetMs: number };
 
 export class DateCalculator {
-  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType) {
-    const startOfDayUTC = new Date();
-    startOfDayUTC.setUTCHours(0, 0, 0, 0);
+  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): TimestampType {
+    const dayMs = Time.Days(1).ms;
 
-    const startOfDayInTimeZone = startOfDayUTC.getTime() + config.timeZoneOffsetMs;
+    // UTC midnight for the UTC date of `now`
+    const utcMidnight = Math.floor(config.now / dayMs) * dayMs;
 
-    const timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay =
-      (config.now - startOfDayInTimeZone) % Time.Days(1).ms;
+    // Candidate start of the local day (in UTC), anchored to the same UTC date
+    let start = utcMidnight + config.timeZoneOffsetMs;
 
-    if (timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay >= Time.Days(1).ms) {
-      return config.now - timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay + Time.Days(1).ms;
-    }
+    // If the candidate is in the future relative to `now`, it means local midnight was "yesterday" in UTC.
+    if (start > config.now) start -= dayMs;
 
-    if (timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay >= 0) {
-      return config.now - timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay;
-    }
-
-    return config.now - timeSinceNewDayInTimeZoneRelativeToUtcStartOfDay - Time.Days(1).ms;
+    return Timestamp.parse(start);
   }
 }
