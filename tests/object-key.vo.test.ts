@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { ObjectKey } from "../src/object-key.vo";
 
-describe("ObjectKey (VO)", () => {
+describe("ObjectKey", () => {
   test("accepts typical valid keys", () => {
     const valid = [
       "users/123/avatar.webp",

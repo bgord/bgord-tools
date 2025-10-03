@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Hour } from "../src/hour.vo";
 import { HourFormatters } from "../src/hour-format.service";
 
-describe("Hour", () => {
+describe("Hour formatter", () => {
   test("formats using TWENTY_FOUR_HOURS_WO_PADDING", () => {
     expect(new Hour(5).format(HourFormatters.TWENTY_FOUR_HOURS_WO_PADDING)).toEqual("5");
   });

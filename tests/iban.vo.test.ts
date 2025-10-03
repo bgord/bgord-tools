@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { IBAN, IBANError, type IBANValueType } from "../src/iban.vo";
 
-describe("IBAN (format-only)", () => {
+describe("IBAN", () => {
   test("normalizes and formats valid IBANs", () => {
     const cases: [string, string, string][] = [
       [

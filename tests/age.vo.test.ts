@@ -4,7 +4,7 @@ import { Timestamp, type TimestampType } from "../src/timestamp.vo";
 
 const toTimestamp = (ms: string) => Timestamp.parse(new Date(ms).getTime());
 
-describe("Age VO", () => {
+describe("Age", () => {
   describe("fromValue", () => {
     test("creates for minimum allowed age (1)", () => {
       expect(Age.fromValue(1).get()).toEqual(1);
@@ -119,7 +119,7 @@ describe("Age VO", () => {
     });
   });
 
-  describe("fromBirthdate (string)", () => {
+  describe("fromBirthdate", () => {
     test("computes age when birthday has already happened this year", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2000-09-01T00:00:00.000Z";

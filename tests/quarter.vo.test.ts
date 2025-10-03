@@ -4,7 +4,7 @@ import { Quarter } from "../src/quarter.vo";
 import { QuarterIsoId } from "../src/quarter-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
-describe("Quarter VO", () => {
+describe("Quarter", () => {
   test("creates the correct range & ISO id from a mid-quarter timestamp", () => {
     const timestamp = Timestamp.parse(Date.parse("2025-08-15T12:00:00Z")); // Q3 2025
     const quarter = Quarter.fromTimestamp(timestamp);

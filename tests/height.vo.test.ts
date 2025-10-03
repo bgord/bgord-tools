@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Height, HeightUnit } from "../src/height.vo";
 import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.adapter";
 
-describe("Height VO (millimeters canonical)", () => {
+describe("Height", () => {
   test("creates from centimeters and stores integer millimeters using strategy", () => {
     expect(Height.fromCentimeters(180).toMillimeters()).toBe(1800);
     expect(Height.fromCentimeters(180.04, new RoundDown()).toMillimeters()).toBe(1800);

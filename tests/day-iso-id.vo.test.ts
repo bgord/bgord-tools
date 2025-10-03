@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { DayIsoId } from "../src/day-iso-id.vo";
 
-describe("DayIsoId VO", () => {
+describe("DayIsoId", () => {
   test("accepts a normal mid-year day", () => {
     expect(DayIsoId.safeParse("2025-07-15").success).toEqual(true);
   });

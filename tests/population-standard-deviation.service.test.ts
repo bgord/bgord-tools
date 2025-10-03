@@ -4,7 +4,7 @@ import {
   PopulationStandardDeviationMinValuesError,
 } from "../src/population-standard-deviation.service";
 
-describe("Standard Deviation Calculation", () => {
+describe("Standard deviation", () => {
   test("throws an error for an empty set of values", () => {
     expect(() => PopulationStandardDeviation.calculate([])).toThrow(
       PopulationStandardDeviationMinValuesError,

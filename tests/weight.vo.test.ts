@@ -6,7 +6,7 @@ const oneDecimal = new RoundToDecimal(1);
 const twoDecimals = new RoundToDecimal(2);
 const threeDecimals = new RoundToDecimal(3);
 
-describe("Weight VO (grams canonical)", () => {
+describe("Weight", () => {
   test("creates from kilograms and stores exact integer grams", () => {
     expect(Weight.fromKilograms(0.1).toGrams()).toBe(100);
     expect(Weight.fromKilograms(0.333).toGrams()).toBe(333);

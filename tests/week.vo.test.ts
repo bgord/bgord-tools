@@ -6,7 +6,7 @@ import { Week } from "../src/week.vo";
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 const timestamp = toMs("2025-07-22T12:00:00Z"); // Tuesday
 
-describe("Week VO", () => {
+describe("Week", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
     const week = Week.fromTimestamp(timestamp);
 

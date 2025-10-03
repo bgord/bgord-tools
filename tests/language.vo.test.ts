@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Language } from "../src/language.vo";
 
-describe("Language (smoke tests)", () => {
+describe("Language", () => {
   test("accepts valid lowercase 2-letter ISO codes", () => {
     expect(Language.safeParse("en").success).toEqual(true);
     expect(Language.safeParse("es").success).toEqual(true);

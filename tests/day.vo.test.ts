@@ -5,7 +5,7 @@ import { Timestamp } from "../src/timestamp.vo";
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 const timestamp = toMs("2025-07-22T12:00:00Z");
 
-describe("Day VO", () => {
+describe("Day", () => {
   test("creates the correct range & ISO id from a mid-day timestamp (UTC)", () => {
     const day = Day.fromTimestamp(timestamp);
 

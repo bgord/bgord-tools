@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Timestamp, TimestampError } from "../src/timestamp.vo";
 
-describe("Timestamp (compact)", () => {
+describe("Timestamp", () => {
   test("accepts valid timestamps", () => {
     for (const value of [0, Date.now(), Number.MAX_SAFE_INTEGER]) {
       expect(Timestamp.safeParse(value).success).toEqual(true);

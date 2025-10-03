@@ -7,7 +7,7 @@ import { YearIsoId } from "../src/year-iso-id.vo";
 const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → ms (UTC)
 const timestamp = toMs("2025-07-22T12:00:00Z");
 
-describe("Year VO", () => {
+describe("Year", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
     const year = Year.fromTimestamp(timestamp);
 

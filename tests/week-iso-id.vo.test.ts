@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { WeekIsoId } from "../src/week-iso-id.vo";
 
-describe("WeekIsoId VO", () => {
+describe("WeekIsoId", () => {
   test("accepts a normal mid-year week", () => {
     expect(WeekIsoId.safeParse("2025-W30").success).toEqual(true);
   });

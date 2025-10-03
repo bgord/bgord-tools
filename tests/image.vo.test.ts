@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { ImageHeight, ImageWidth } from "../src/image.vo";
 
-describe("ImageWidth (smoke)", () => {
+describe("ImageWidth", () => {
   test("accepts a positive integer within max", () => {
     expect(ImageWidth.safeParse(100).success).toEqual(true);
   });

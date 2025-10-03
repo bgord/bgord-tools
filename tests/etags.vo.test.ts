@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { ETag, WeakETag } from "../src/etags.vo";
 import { RevisionValue } from "../src/revision.vo";
 
-describe("ETag class", () => {
+describe("ETag", () => {
   test("ETag fromHeader should create a valid ETag instance", () => {
     const value = "123";
     const etag = ETag.fromHeader(value);

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { ReorderingPosition, ReorderingPositionError } from "../src/reordering.service";
 
-describe("ReorderingPosition VO", () => {
+describe("ReorderingPosition", () => {
   test("validation errors", () => {
     const values = [-1, 2.5, "a"];
 

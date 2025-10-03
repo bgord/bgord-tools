@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import type { TimestampType } from "../src/timestamp.vo";
 import { Weekday, WeekdayFormatterEnum, WeekdayFormatters, WeekdayValueError } from "../src/weekday.vo";
 
-describe("Weekday VO", () => {
+describe("Weekday", () => {
   test("constructs valid weekdays 0..6 and exposes raw value", () => {
     for (let candidate = 0; candidate <= 6; candidate += 1) {
       expect(new Weekday(candidate).get()).toEqual(candidate);

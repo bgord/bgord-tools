@@ -8,7 +8,7 @@ const toMs = (s: string) => Timestamp.parse(Date.parse(s));
 
 const timestamp = toMs("2025-07-22T12:00:00Z");
 
-describe("Month VO", () => {
+describe("Month", () => {
   test("creates the correct range & ISO id from a mid-year timestamp", () => {
     const month = Month.fromTimestamp(timestamp);
 
