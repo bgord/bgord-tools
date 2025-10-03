@@ -1,41 +1,58 @@
 import { describe, expect, test } from "bun:test";
-import { ZodError } from "zod/v4";
-import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
-
-function expectZodIssue(inputString: string, expectedMessage: string) {
-  try {
-    DirectoryPathAbsoluteSchema.parse(inputString);
-    throw new Error("Expected DirectoryPathAbsoluteSchema to fail, but it passed");
-  } catch (error) {
-    expect(error instanceof ZodError).toBe(true);
-    const firstIssue = (error as ZodError).issues[0];
-    expect(firstIssue?.message).toBe(expectedMessage);
-  }
-}
+import {
+  AbsDirBackslashForbiddenError,
+  AbsDirBadSegmentsError,
+  AbsDirControlCharsForbiddenError,
+  AbsDirMustStartWithSlashError,
+  AbsDirTypeError,
+  DirectoryPathAbsoluteSchema,
+  type DirectoryPathAbsoluteType,
+} from "../src/directory-path-absolute.vo";
 
 describe("DirectoryPathAbsoluteSchema", () => {
-  test("accepts absolute directory paths and normalizes slashes", () => {
-    // @ts-expect-error
-    expect(DirectoryPathAbsoluteSchema.parse("/tmp/app/users")).toBe("/tmp/app/users");
-    // collapses multiple slashes and strips trailing slash
-    // @ts-expect-error
-    expect(DirectoryPathAbsoluteSchema.parse("/tmp//app///users/")).toBe("/tmp/app/users");
+  test("accepts '/tmp/app/users' as-is", () => {
+    expect(DirectoryPathAbsoluteSchema.parse("/tmp/app/users")).toEqual(
+      "/tmp/app/users" as DirectoryPathAbsoluteType,
+    );
   });
 
-  test("accepts root directory as-is", () => {
-    // @ts-expect-error
-    expect(DirectoryPathAbsoluteSchema.parse("/")).toBe("/");
+  test("normalizes '/tmp//app///users/' to '/tmp/app/users'", () => {
+    expect(DirectoryPathAbsoluteSchema.parse("/tmp//app///users/")).toEqual(
+      "/tmp/app/users" as DirectoryPathAbsoluteType,
+    );
   });
 
-  test("rejects relative paths, backslashes, and control characters", () => {
-    expectZodIssue("tmp/app", "abs_dir_must_start_with_slash");
-    expectZodIssue("/tmp\\app", "abs_dir_backslash_forbidden");
-    expectZodIssue("/tmp\napp", "abs_dir_control_chars_forbidden");
+  test("accepts root '/' as-is", () => {
+    expect(DirectoryPathAbsoluteSchema.parse("/")).toEqual("/" as DirectoryPathAbsoluteType);
   });
 
-  test("rejects dot segments and invalid segments", () => {
-    expectZodIssue("/tmp/../etc", "abs_dir_bad_segments");
-    expectZodIssue("/tmp/./users", "abs_dir_bad_segments");
-    expectZodIssue("/tmp/app/invalid segment", "abs_dir_bad_segments");
+  test("rejects relative path 'tmp/app'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("tmp/app")).toThrow(AbsDirMustStartWithSlashError);
+  });
+
+  test("rejects backslash '/tmp\\app'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("/tmp\\app")).toThrow(AbsDirBackslashForbiddenError);
+  });
+
+  test("rejects control chars '/tmp\\napp'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("/tmp\napp")).toThrow(AbsDirControlCharsForbiddenError);
+  });
+
+  test("rejects dot-segment '/tmp/../etc'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/../etc")).toThrow(AbsDirBadSegmentsError);
+  });
+
+  test("rejects dot-segment '/tmp/./users'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/./users")).toThrow(AbsDirBadSegmentsError);
+  });
+
+  test("rejects invalid segment '/tmp/app/invalid segment'", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/app/invalid segment")).toThrow(
+      AbsDirBadSegmentsError,
+    );
+  });
+
+  test("rejects non-string (number)", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse(42)).toThrow(AbsDirTypeError);
   });
 });
