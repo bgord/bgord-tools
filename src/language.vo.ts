@@ -5,7 +5,6 @@ export const LanguageError = { error: "invalid.language" } as const;
 export const Language = z
   .string(LanguageError)
   .length(2, LanguageError)
-  .regex(/^[a-z]{2}$/, LanguageError)
-  .brand("Language");
+  .regex(/^[a-z]{2}$/, LanguageError);
 
 export type LanguageType = z.infer<typeof Language>;
