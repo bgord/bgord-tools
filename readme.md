@@ -81,7 +81,6 @@ src/
 ├── rounding.port.ts
 ├── simple-linear-regression.service.ts
 ├── size.vo.ts
-├── stepper.service.ts
 ├── stopwatch.service.ts
 ├── streak-calculator.service.ts
 ├── sum.service.ts
