@@ -1,3 +1,4 @@
+// src/month.vo.ts
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
@@ -34,8 +35,13 @@ export class Month extends DateRange {
 
   static fromIsoId(iso: MonthIsoIdType): Month {
     const validated = MonthIsoId.parse(iso);
-    const startUtc = Date.parse(`${validated}-01T00:00:00.000Z`);
+    const year = Number(validated.slice(0, 4));
+    const monthIndex = Number(validated.slice(5, 7)) - 1;
 
-    return Month.fromTimestamp(Timestamp.parse(startUtc));
+    const startUtc = Date.UTC(year, monthIndex, 1);
+    const nextStartUtc = Date.UTC(year, monthIndex + 1, 1);
+    const endUtc = nextStartUtc - 1;
+
+    return new Month(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
   }
 }
