@@ -1,6 +1,6 @@
 import { Basename, type BasenameType } from "./basename.vo";
 import { Extension, type ExtensionType } from "./extension.vo";
-import { FilenameFromStringSchema } from "./filename-from-string.vo";
+import { FilenameFromString } from "./filename-from-string.vo";
 import { FilenameSuffix, type FilenameSuffixType } from "./filename-suffix.vo";
 
 export class Filename {
@@ -18,7 +18,7 @@ export class Filename {
   }
 
   static fromString(candidate: string) {
-    const { basename, extension } = FilenameFromStringSchema.parse(candidate);
+    const { basename, extension } = FilenameFromString.parse(candidate);
 
     return new Filename(basename, extension);
   }

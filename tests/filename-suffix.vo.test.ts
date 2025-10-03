@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import {
   FilenameSuffix,
-  FilenameSuffixTypeError,
   FilenameSuffixTooLongError,
+  FilenameSuffixTypeError,
 } from "../src/filename-suffix.vo";
 
 describe("FilenameSuffixSchema", () => {

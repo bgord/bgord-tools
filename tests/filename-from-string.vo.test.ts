@@ -1,32 +1,33 @@
 import { describe, expect, test } from "bun:test";
-import { ZodError } from "zod/v4";
-import { FilenameFromStringSchema } from "../src/filename-from-string.vo";
+import { FilenameFromString, FilenameInvalidError, FilenameTypeError } from "../src/filename-from-string.vo";
 
-describe("FilenameFromStringSchema (minimal)", () => {
-  test("parses valid 'name.ext' and normalizes extension", () => {
-    const parsed = FilenameFromStringSchema.parse("avatar.WEBP");
+describe("FilenameFromStringSchema", () => {
+  test("parses 'avatar.WEBP' and normalizes extension to lowercase", () => {
     // @ts-expect-error
-    expect(parsed.basename).toBe("avatar");
-    // @ts-expect-error
-    expect(parsed.extension).toBe("webp"); // normalized by ExtensionSchema
+    expect(FilenameFromString.parse("avatar.WEBP")).toEqual({ basename: "avatar", extension: "webp" });
   });
 
-  test("trims and handles spaced input", () => {
-    const parsed = FilenameFromStringSchema.parse("  report .PNG ");
+  test("trims and parses '  report .PNG '", () => {
     // @ts-expect-error
-    expect(parsed.basename).toBe("report");
-    // @ts-expect-error
-    expect(parsed.extension).toBe("png");
+    expect(FilenameFromString.parse("  report .PNG ")).toEqual({
+      basename: "report",
+      extension: "png",
+    });
   });
 
-  test("rejects strings without a proper dot-separated extension", () => {
-    expect(() => FilenameFromStringSchema.parse("avatar")).toThrow(ZodError);
+  test("rejects missing extension 'avatar'", () => {
+    expect(() => FilenameFromString.parse("avatar")).toThrow(FilenameInvalidError);
+  });
 
-    try {
-      FilenameFromStringSchema.parse("avatar");
-    } catch (e) {
-      const err = e as ZodError;
-      expect(err.issues[0]?.message).toBe("filename_invalid");
-    }
+  test("rejects leading dot only '.png' (no basename)", () => {
+    expect(() => FilenameFromString.parse(".png")).toThrow(FilenameInvalidError);
+  });
+
+  test("rejects trailing dot 'name.' (no extension)", () => {
+    expect(() => FilenameFromString.parse("name.")).toThrow(FilenameInvalidError);
+  });
+
+  test("rejects non-string (number)", () => {
+    expect(() => FilenameFromString.parse(123)).toThrow(FilenameTypeError);
   });
 });
