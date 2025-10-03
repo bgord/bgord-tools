@@ -1,4 +1,3 @@
-import { addDays, endOfDay, startOfDay } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Time } from "./time.service";
@@ -10,28 +9,35 @@ export class Day extends DateRange {
   }
 
   toIsoId(): DayIsoIdType {
-    return new Date(this.getStart() + Time.Hours(12).ms).toISOString().slice(0, 10) as DayIsoIdType;
+    const midday = this.getStart() + Time.Hours(12).ms;
+
+    return new Date(midday).toISOString().slice(0, 10) as DayIsoIdType;
   }
 
   previous(): Day {
-    const shifted = addDays(new Date(this.getStart()), -1).getTime();
+    const shifted = this.getStart() - Time.Days(1).ms;
+
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   next(): Day {
-    const shifted = addDays(new Date(this.getStart()), 1).getTime();
+    const shifted = this.getStart() + Time.Days(1).ms;
+
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   shift(count: number): Day {
-    const shifted = addDays(new Date(this.getStart()), count).getTime();
+    const shifted = this.getStart() + count * Time.Days(1).ms;
+
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   static fromTimestamp(timestamp: TimestampType): Day {
-    const start = Timestamp.parse(startOfDay(timestamp).getTime());
-    const end = Timestamp.parse(endOfDay(timestamp).getTime());
-    return new Day(start, end);
+    const date = new Date(timestamp);
+    const startUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+    const endUtc = startUtc + Time.Days(1).ms - 1;
+
+    return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
   }
 
   static fromNow(now: TimestampType): Day {
@@ -40,8 +46,9 @@ export class Day extends DateRange {
 
   static fromIsoId(isoId: DayIsoIdType): Day {
     const [year, month, day] = DayIsoId.parse(isoId).split("-").map(Number);
+    const startUtc = Date.UTC(year, month - 1, day);
+    const endUtc = startUtc + Time.Days(1).ms - 1;
 
-    const reference = new Date(Date.UTC(year, month - 1, day));
-    return Day.fromTimestamp(Timestamp.parse(reference.getTime()));
+    return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
   }
 }
