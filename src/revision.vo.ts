@@ -1,27 +1,36 @@
 import { z } from "zod/v4";
 import type { ETag, WeakETag } from "./etags.vo";
 
-export const RevisionValue = z.number().int().min(0);
+export const RevisionValueError = { error: "invalid.revision.value" } as const;
+
+export const RevisionValue = z
+  .number(RevisionValueError)
+  .int(RevisionValueError)
+  .min(0, RevisionValueError)
+  .brand("RevisionValue");
+
 export type RevisionValueType = z.infer<typeof RevisionValue>;
 
+export const RevisionInvalidErrorMessage = "revision.invalid" as const;
+export const RevisionMismatchErrorMessage = "revision.mismatch" as const;
+
 export class Revision {
+  static readonly INITIAL: RevisionValueType = RevisionValue.parse(0);
+
   readonly value: RevisionValueType;
-  static initial: RevisionValueType = 0;
 
   constructor(value: unknown) {
     const result = RevisionValue.safeParse(value);
-
     if (!result.success) throw new InvalidRevisionError();
-
     this.value = result.data;
   }
 
-  matches(another: RevisionValueType): boolean {
+  equals(another: RevisionValueType): boolean {
     return this.value === another;
   }
 
   validate(another: RevisionValueType): void {
-    if (!this.matches(another)) throw new RevisionMismatchError();
+    if (!this.equals(another)) throw new RevisionMismatchError();
   }
 
   next(): Revision {
@@ -41,14 +50,14 @@ export class Revision {
 
 export class RevisionMismatchError extends Error {
   constructor() {
-    super();
+    super(RevisionMismatchErrorMessage);
     Object.setPrototypeOf(this, RevisionMismatchError.prototype);
   }
 }
 
 export class InvalidRevisionError extends Error {
   constructor() {
-    super();
+    super(RevisionInvalidErrorMessage);
     Object.setPrototypeOf(this, InvalidRevisionError.prototype);
   }
 }

@@ -2,58 +2,55 @@ import { describe, expect, test } from "bun:test";
 import { ETag, WeakETag } from "../src/etags.vo";
 import { InvalidRevisionError, Revision, RevisionMismatchError, RevisionValue } from "../src/revision.vo";
 
-describe("Revision class", () => {
-  test("Revision constructor should create a valid Revision instance", () => {
-    const revisionValue = RevisionValue.parse(0);
-    const revision = new Revision(revisionValue);
-    expect(revision.value).toBe(revisionValue);
+describe("Revision", () => {
+  test("constructor creates a valid instance", () => {
+    const value = RevisionValue.parse(0);
+    const revision = new Revision(value);
+    expect(revision.value).toEqual(value);
   });
 
-  test("Revision constructor should throw InvalidRevisionError for invalid input", () => {
+  test("constructor throws InvalidRevisionError for invalid input", () => {
     expect(() => new Revision("invalid")).toThrowError(InvalidRevisionError);
   });
 
-  test("Revision matches should correctly compare two Revision instances", () => {
-    const revision1 = new Revision(123);
-    const revision2 = new Revision(123);
-    const revision3 = new Revision(456);
-    expect(revision1.matches(revision2.value)).toBe(true);
-    expect(revision1.matches(revision3.value)).toBe(false);
+  test("equals compares revisions", () => {
+    const r1 = new Revision(123);
+    const r2 = new Revision(123);
+    const r3 = new Revision(456);
+
+    expect(r1.equals(r2.value)).toEqual(true);
+    expect(r1.equals(r3.value)).toEqual(false);
   });
 
-  test("Revision validate should throw RevisionMismatchError for mismatched revisions", () => {
-    const revision1 = new Revision(123);
-    const revision2 = new Revision(456);
-    expect(() => revision1.validate(revision2.value)).toThrowError(RevisionMismatchError);
+  test("validate throws RevisionMismatchError for mismatched revisions", () => {
+    const r1 = new Revision(123);
+    const r2 = new Revision(456);
+    expect(() => r1.validate(r2.value)).toThrowError(RevisionMismatchError);
   });
 
-  test("Revision increment should create a new Revision with incremented value", () => {
+  test("next returns a new Revision with incremented value", () => {
     const revision = new Revision(123);
-    const incrementedRevision = revision.next();
-    expect(incrementedRevision.value).toBe(RevisionValue.parse(revision.value + 1));
+    const incremented = revision.next();
+    expect(incremented.value).toEqual(RevisionValue.parse(revision.value + 1));
   });
 
-  test("Revision fromETag should create a valid Revision instance from ETag", () => {
+  test("fromETag creates a valid Revision instance", () => {
     const etag = ETag.fromHeader("123");
     const revision = Revision.fromETag(etag);
-    // @ts-expect-error
-    expect(revision.value).toBe(etag.revision);
+    expect(revision.value).toEqual(RevisionValue.parse(123));
   });
 
-  test("Revision fromETag should throw InvalidRevisionError for null ETag", () => {
+  test("fromETag throws InvalidRevisionError for null", () => {
     expect(() => Revision.fromETag(null)).toThrowError(InvalidRevisionError);
   });
 
-  test("Revision fromWeakETag should create a valid Revision instance from WeakETag", () => {
-    const weakEtag = WeakETag.fromHeader("W/123");
-    const revision = Revision.fromWeakETag(weakEtag);
-
-    expect(revision.value).toEqual(RevisionValue.parse(weakEtag?.revision));
+  test("fromWeakETag creates a valid Revision instance", () => {
+    const weak = WeakETag.fromHeader("W/123");
+    const revision = Revision.fromWeakETag(weak);
+    expect(revision.value).toEqual(RevisionValue.parse(123));
   });
 
-  test("Revision fromWeakETag should throw InvalidRevisionError for null WeakETag", () => {
-    const weakEtag = null;
-
-    expect(() => Revision.fromWeakETag(weakEtag)).toThrowError(InvalidRevisionError);
+  test("fromWeakETag throws InvalidRevisionError for null", () => {
+    expect(() => Revision.fromWeakETag(null)).toThrowError(InvalidRevisionError);
   });
 });
