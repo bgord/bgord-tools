@@ -1,11 +1,13 @@
 import type { TimestampType } from "./timestamp.vo";
 
+export const DateRangeInvalidError = "invalid.date.range" as const;
+
 export class DateRange {
   constructor(
     private readonly start: TimestampType,
     private readonly end: TimestampType,
   ) {
-    if (start > end) throw new Error("Invalid date range");
+    if (start > end) throw new Error(DateRangeInvalidError);
   }
 
   getStart(): TimestampType {
