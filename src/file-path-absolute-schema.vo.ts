@@ -2,14 +2,21 @@ import { z } from "zod/v4";
 import { DirectoryPathAbsoluteSchema } from "./directory-path-absolute.vo";
 import { Filename } from "./filename.vo";
 
+export const AbsFilePathTypeError = "abs.file.path.not.string" as const;
+export const AbsFilePathMustStartWithSlashError = "abs_file_path_must_start_with_slash" as const;
+export const AbsFilePathBackslashForbiddenError = "abs_file_path_backslash_forbidden" as const;
+export const AbsFilePathMissingFilenameError = "abs_file_path_missing_filename" as const;
+
 export const FilePathAbsoluteSchema = z
-  .string()
+  .string(AbsFilePathTypeError)
   .trim()
-  .refine((value) => value.startsWith("/"), "abs_file_path_must_start_with_slash")
-  .refine((value) => !value.includes("\\"), "abs_file_path_backslash_forbidden")
-  .transform((value) => value.replace(/\/{2,}/g, "/")) // collapse //
-  .transform((value) => (value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value)) // keep "/" as-is
-  .refine((value) => value !== "/", "abs_file_path_missing_filename")
+  .refine((value) => value.startsWith("/"), AbsFilePathMustStartWithSlashError)
+  .refine((value) => !value.includes("\\"), AbsFilePathBackslashForbiddenError)
+  // collapse duplicate slashes
+  .transform((value) => value.replace(/\/{2,}/g, "/"))
+  // keep "/" as-is; otherwise remove a trailing slash
+  .transform((value) => (value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value))
+  .refine((value) => value !== "/", AbsFilePathMissingFilenameError)
   .transform((normalized) => {
     const lastSlashIndex = normalized.lastIndexOf("/");
     const directoryCandidate = lastSlashIndex === 0 ? "/" : normalized.slice(0, lastSlashIndex);
@@ -20,3 +27,5 @@ export const FilePathAbsoluteSchema = z
 
     return { directory, filename };
   });
+
+export type FilePathAbsoluteType = z.infer<typeof FilePathAbsoluteSchema>;
