@@ -9,6 +9,8 @@ export enum WeekdayFormatterEnum {
   ZERO_BASED_NUMBER = "ZERO_BASED_NUMBER", // Sunday=0 ... Saturday=6 (JS)
 }
 
+export const WeekdayValueError = "invalid.weekday" as const;
+
 const FULL_NAMES: readonly string[] = [
   "Sunday",
   "Monday",
@@ -29,8 +31,10 @@ export const WeekdayFormatters: Record<WeekdayFormatterEnum, WeekdayFormatter> =
 } as const;
 
 export class Weekday {
+  // 0..6 (Sun..Sat)
   private readonly value: number;
 
+  // default formatter used by toString()/format() when no runtime formatter given
   private readonly formatter: WeekdayFormatter;
 
   static readonly SUNDAY = new Weekday(0);
@@ -42,28 +46,35 @@ export class Weekday {
   static readonly SATURDAY = new Weekday(6);
 
   constructor(candidate: number, formatter?: WeekdayFormatter) {
-    if (!Number.isInteger(candidate)) throw new Error("Invalid weekday");
-    if (candidate < 0) throw new Error("Invalid weekday");
-    if (candidate > 6) throw new Error("Invalid weekday");
+    if (!Number.isInteger(candidate) || candidate < 0 || candidate > 6) throw new Error(WeekdayValueError);
 
     this.value = candidate;
-    this.formatter = (formatter as WeekdayFormatter) ?? WeekdayFormatters.FULL;
+    this.formatter = formatter ?? WeekdayFormatters.FULL;
   }
 
   static fromUtcTimestamp(timestamp: TimestampType, formatter?: WeekdayFormatter): Weekday {
-    const day = new Date(timestamp).getUTCDay(); // 0..6
-    return new Weekday(day, formatter);
+    const dayZeroBased = new Date(timestamp).getUTCDay(); // 0..6
+    return new Weekday(dayZeroBased, formatter);
   }
 
-  get(formatter?: WeekdayFormatter) {
-    const format = formatter ?? this.formatter;
-    return { raw: this.value, formatted: format(this.value) };
+  get(): number {
+    return this.value;
+  }
+
+  format(formatter?: WeekdayFormatter): string {
+    const chosen = formatter ?? this.formatter;
+    return chosen(this.value);
+  }
+
+  toString(): string {
+    return this.format(WeekdayFormatters.FULL);
   }
 
   equals(another: Weekday): boolean {
-    return this.value === another.get().raw;
+    return this.value === another.value;
   }
 
+  /** ISO-8601 weekday number: Monday=1 ... Sunday=7 */
   toIsoNumber(): number {
     return this.value === 0 ? 7 : this.value;
   }
@@ -90,11 +101,12 @@ export class Weekday {
     return this.value === 0;
   }
 
-  static list(formatter?: WeekdayFormatter): Weekday[] {
-    return Array.from({ length: 7 }).map((_, index) => new Weekday(index, formatter));
+  static list(formatter?: WeekdayFormatter): readonly Weekday[] {
+    const chosen = formatter ?? undefined;
+    return Array.from({ length: 7 }, (_, index) => new Weekday(index, chosen));
   }
 
-  static listMondayFirst(formatter?: WeekdayFormatter): Weekday[] {
+  static listMondayFirst(formatter?: WeekdayFormatter): readonly Weekday[] {
     const days = Weekday.list(formatter);
     return [...days.slice(1), days[0]];
   }
