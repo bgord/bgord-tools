@@ -3,6 +3,9 @@ import { DateRange } from "./date-range.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
+export const YearInvalidIntegerError = "year.invalid_integer" as const;
+export const YearOutOfRangeError = "year.out_of_range" as const;
+
 export class Year extends DateRange {
   toIsoId(): YearIsoIdType {
     return String(getYear(this.getStart())) as YearIsoIdType;
@@ -31,6 +34,7 @@ export class Year extends DateRange {
   static fromTimestamp(timestamp: TimestampType): Year {
     const start = Timestamp.parse(startOfYear(timestamp).getTime());
     const end = Timestamp.parse(endOfYear(timestamp).getTime());
+
     return new Year(start, end);
   }
 
@@ -39,9 +43,11 @@ export class Year extends DateRange {
   }
 
   static fromNumber(value: number): Year {
-    if (!Number.isInteger(value)) throw new Error("year.invalid_integer");
-    if (value < 0 || value > 9999) throw new Error("year.out_of_range");
+    if (!Number.isInteger(value)) throw new Error(YearInvalidIntegerError);
+    if (value < 0 || value > 9999) throw new Error(YearOutOfRangeError);
+
     const reference = Timestamp.parse(Date.UTC(value, 0, 1, 0, 0, 0, 0));
+
     return Year.fromTimestamp(reference);
   }
 
