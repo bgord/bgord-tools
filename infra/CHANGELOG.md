@@ -1,8 +1,11 @@
 # Changelog
+## 2025-10-03 11:39 v0.15.1
+- 2025-10-03 11:39 7582131 **0.15.1**
 - 2025-10-03 11:39 5d62131 **fix: allow api-key non-hex chars**
 ## 2025-10-03 11:37 v0.15.0
 - 2025-10-03 11:37 c387855 **0.15.0**
 - 2025-10-03 11:36 206f06e **refactor: improve formatting**
+- 2025-10-03 09:39 19280d2 **docs: generate CHANGELOG**
 - 2025-10-03 09:37 1cccadc **docs: generate CHANGELOG**
 - 2025-10-03 09:36 deaab08 **docs: generate CHANGELOG**
 - 2025-10-02 23:16 17da2cc **refactor: remove unused exports**
