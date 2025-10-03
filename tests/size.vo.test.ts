@@ -50,16 +50,16 @@ describe("Size", () => {
     expect(Size.fromGB(0.75).toBytes()).toEqual(SizeValue.parse(805306368));
   });
 
-  test("Comparison function", () => {
-    expect(Size.fromGB(1).isGreaterThan(Size.fromMB(1))).toBeTruthy();
+  test("Comparison greater-than is true when larger", () => {
+    expect(Size.fromGB(1).isGreaterThan(Size.fromMB(1))).toEqual(true);
   });
 
-  test("Comparison function", () => {
-    expect(Size.fromMB(1).isGreaterThan(Size.fromMB(1))).toBeFalsy();
+  test("Comparison greater-than is false when equal", () => {
+    expect(Size.fromMB(1).isGreaterThan(Size.fromMB(1))).toEqual(false);
   });
 
   describe("format", () => {
-    test("should return formatted bytes", () => {
+    test("formats bytes source", () => {
       const value = Size.fromBytes(1024);
       expect(value.format(SizeUnit.b)).toEqual("1024 b");
       expect(value.format(SizeUnit.kB)).toEqual("1 kB");
@@ -67,7 +67,7 @@ describe("Size", () => {
       expect(value.format(SizeUnit.GB)).toEqual("0 GB");
     });
 
-    test("should return formatted kB", () => {
+    test("formats kB source", () => {
       const value = Size.fromKb(512);
       expect(value.format(SizeUnit.b)).toEqual("524288 b");
       expect(value.format(SizeUnit.kB)).toEqual("512 kB");
@@ -75,7 +75,7 @@ describe("Size", () => {
       expect(value.format(SizeUnit.GB)).toEqual("0 GB");
     });
 
-    test("should return formatted MB", () => {
+    test("formats MB source", () => {
       const value = Size.fromMB(128);
       expect(value.format(SizeUnit.b)).toEqual("134217728 b");
       expect(value.format(SizeUnit.kB)).toEqual("131072 kB");
@@ -83,7 +83,7 @@ describe("Size", () => {
       expect(value.format(SizeUnit.GB)).toEqual("0.13 GB");
     });
 
-    test("should return formatted GB", () => {
+    test("formats GB source", () => {
       const value = Size.fromGB(2);
       expect(value.format(SizeUnit.b)).toEqual("2147483648 b");
       expect(value.format(SizeUnit.kB)).toEqual("2097152 kB");

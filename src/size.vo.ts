@@ -15,16 +15,14 @@ type SizeConfigType = { unit: SizeUnit; value: number };
 
 export class Size {
   private readonly unit: SizeUnit;
-
   private readonly value: SizeValueType;
-
   private readonly bytes: SizeValueType;
 
   private static readonly KB_MULTIPLIER = 1024;
-
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
-
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
+
+  private static readonly ROUNDER = new RoundToDecimal(2);
 
   constructor(config: SizeConfigType) {
     this.unit = config.unit;
@@ -60,28 +58,23 @@ export class Size {
     return this.bytes;
   }
 
-  isGreaterThan(another: Size) {
+  isGreaterThan(another: Size): boolean {
     return this.bytes > another.toBytes();
   }
 
   format(unit: SizeUnit): string {
-    const rounding = new RoundToDecimal(2);
-
     switch (unit) {
       case SizeUnit.kB: {
-        const kbs = rounding.round(this.bytes / Size.KB_MULTIPLIER);
-
-        return `${kbs} ${SizeUnit.kB}`;
+        const kilobytes = Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER);
+        return `${kilobytes} ${SizeUnit.kB}`;
       }
       case SizeUnit.MB: {
-        const mbs = rounding.round(this.bytes / Size.MB_MULTIPLIER);
-
-        return `${mbs} ${SizeUnit.MB}`;
+        const megabytes = Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER);
+        return `${megabytes} ${SizeUnit.MB}`;
       }
       case SizeUnit.GB: {
-        const gbs = rounding.round(this.bytes / Size.GB_MULTIPLIER);
-
-        return `${gbs} ${SizeUnit.GB}`;
+        const gigabytes = Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER);
+        return `${gigabytes} ${SizeUnit.GB}`;
       }
       default: {
         // SizeUnit.b
