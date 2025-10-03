@@ -15,6 +15,7 @@ export class OutlierDetector {
 
   isInlier(value: number): boolean {
     const score = this.zScore.calculate(value);
+
     return Math.abs(score) <= this.threshold;
   }
 }

@@ -22,9 +22,7 @@ export const RoundingDecimalsError = "invalid.rounding.decimals" as const;
 
 export class RoundToDecimal implements RoundingPort {
   constructor(private readonly decimals: number) {
-    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 100) {
-      throw new Error(RoundingDecimalsError);
-    }
+    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 100) throw new Error(RoundingDecimalsError);
   }
 
   round(value: number): number {

@@ -11,9 +11,11 @@ export const PackageVersionValue = z
   .regex(/^v(\d+)\.(\d+)\.(\d+)$/, PackageVersionError)
   .transform((value) => {
     const match = /^v(\d+)\.(\d+)\.(\d+)$/.exec(value)!;
+
     const major = Number(match[1]);
     const minor = Number(match[2]);
     const patch = Number(match[3]);
+
     return { major, minor, patch };
   })
   .brand("PackageVersionValue");

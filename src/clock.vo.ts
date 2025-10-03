@@ -17,6 +17,7 @@ export class Clock {
   static fromEpochMs(timestamp: TimestampType, formatter?: ClockFormatter): Clock {
     const hour = Hour.fromEpochMs(timestamp);
     const minute = Minute.fromEpochMs(timestamp);
+
     return new Clock(hour, minute, formatter);
   }
 

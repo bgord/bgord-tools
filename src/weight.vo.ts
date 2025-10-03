@@ -38,6 +38,7 @@ export class Weight {
     const kilogramsParsed = WeightQuantityNumber.parse(kilograms);
     const gramsRounded = Math.round(kilogramsParsed * Weight.GRAMS_PER_KILOGRAM);
     const grams = CanonicalGramsInteger.parse(gramsRounded);
+
     return new Weight(grams);
   }
 
@@ -45,6 +46,7 @@ export class Weight {
     const poundsParsed = WeightQuantityNumber.parse(pounds);
     const gramsRounded = Math.round(poundsParsed * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
     const grams = CanonicalGramsInteger.parse(gramsRounded);
+
     return new Weight(grams);
   }
 
@@ -52,6 +54,7 @@ export class Weight {
     const gramsParsed = WeightQuantityNumber.parse(grams);
     const gramsRounded = Math.round(gramsParsed);
     const integerGrams = CanonicalGramsInteger.parse(gramsRounded);
+
     return new Weight(integerGrams);
   }
 
@@ -65,16 +68,19 @@ export class Weight {
 
   toKilograms(rounding?: RoundingPort): number {
     const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
+
     return rounding ? rounding.round(kilograms) : kilograms;
   }
 
   toPounds(rounding?: RoundingPort): number {
     const pounds = (this.grams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
+
     return rounding ? rounding.round(pounds) : pounds;
   }
 
   format(unit: WeightUnit, rounding: RoundingPort = new RoundToDecimal(2)): string {
     const value = unit === WeightUnit.kg ? this.toKilograms(rounding) : this.toPounds(rounding);
+
     return `${value.toString()} ${unit}`;
   }
 
@@ -84,6 +90,7 @@ export class Weight {
 
   subtract(other: Weight): Weight {
     const result = this.grams - other.grams;
+
     return new Weight(result < 0 ? 0 : result);
   }
 
@@ -91,6 +98,7 @@ export class Weight {
     const factorParsed = WeightQuantityNumber.parse(factor);
     const gramsRounded = Math.round(this.grams * factorParsed);
     const grams = CanonicalGramsInteger.parse(gramsRounded);
+
     return new Weight(grams);
   }
 
@@ -98,6 +106,7 @@ export class Weight {
     const divisorParsed = DivisionScalarNumber.parse(divisor);
     const gramsRounded = Math.round(this.grams / divisorParsed);
     const grams = CanonicalGramsInteger.parse(gramsRounded);
+
     return new Weight(grams);
   }
 

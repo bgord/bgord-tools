@@ -103,11 +103,13 @@ export class Weekday {
 
   static list(formatter?: WeekdayFormatter): readonly Weekday[] {
     const chosen = formatter ?? undefined;
+
     return Array.from({ length: 7 }, (_, index) => new Weekday(index, chosen));
   }
 
   static listMondayFirst(formatter?: WeekdayFormatter): readonly Weekday[] {
     const days = Weekday.list(formatter);
+
     return [...days.slice(1), days[0]];
   }
 }

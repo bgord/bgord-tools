@@ -38,6 +38,7 @@ export class Height {
     const millimetersFloat = validatedCentimeters * Height.MILLIMETERS_PER_CENTIMETER;
     const millimetersRounded = rounding.round(millimetersFloat);
     const validatedMillimeters = HeightCanonicalMillimeters.parse(millimetersRounded);
+
     return new Height(validatedMillimeters);
   }
 
@@ -48,6 +49,7 @@ export class Height {
     const millimetersFloat = totalInches * Height.MILLIMETERS_PER_INCH;
     const millimetersRounded = rounding.round(millimetersFloat);
     const validatedMillimeters = HeightCanonicalMillimeters.parse(millimetersRounded);
+
     return new Height(validatedMillimeters);
   }
 
@@ -55,6 +57,7 @@ export class Height {
     const validatedMillimetersInput = HeightNonNegativeQuantity.parse(millimeters);
     const millimetersRounded = rounding.round(validatedMillimetersInput);
     const validatedMillimeters = HeightCanonicalMillimeters.parse(millimetersRounded);
+
     return new Height(validatedMillimeters);
   }
 
@@ -72,10 +75,8 @@ export class Height {
 
   toCentimeters(rounding?: RoundingPort): number {
     const centimeters = this.millimeters / Height.MILLIMETERS_PER_CENTIMETER;
-    if (rounding) {
-      const roundedCentimeters = rounding.round(centimeters);
-      return roundedCentimeters;
-    }
+
+    if (rounding) return rounding.round(centimeters);
     return centimeters;
   }
 
@@ -94,11 +95,13 @@ export class Height {
     if (unit === HeightUnit.cm) {
       const chosen = rounding ?? new RoundToDecimal(1);
       const value = this.toCentimeters(chosen);
+
       return `${value} cm`;
     }
 
     const chosen = rounding ?? new RoundToNearest();
     const parts = this.toFeetInches(chosen);
+
     return `${parts.feet}′${parts.inches}″`;
   }
 

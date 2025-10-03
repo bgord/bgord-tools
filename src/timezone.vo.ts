@@ -7,9 +7,7 @@ export const Timezone = z
   .min(1, TimezoneError)
   .refine((value) => {
     try {
-      const date = new Date();
-      const formatter = new Intl.DateTimeFormat("en-US", { timeZone: value });
-      formatter.format(date);
+      new Intl.DateTimeFormat("en-US", { timeZone: value }).format(new Date());
       return true;
     } catch (_error) {
       return false;

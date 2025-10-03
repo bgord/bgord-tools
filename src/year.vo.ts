@@ -13,21 +13,25 @@ export class Year extends DateRange {
 
   isLeapYear(): boolean {
     const year = getYear(this.getStart());
+
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
 
   previous(): Year {
     const shifted = addYears(new Date(this.getStart()), -1).getTime();
+
     return Year.fromTimestamp(Timestamp.parse(shifted));
   }
 
   next(): Year {
     const shifted = addYears(new Date(this.getStart()), 1).getTime();
+
     return Year.fromTimestamp(Timestamp.parse(shifted));
   }
 
   shift(count: number): Year {
     const shifted = addYears(new Date(this.getStart()), count).getTime();
+
     return Year.fromTimestamp(Timestamp.parse(shifted));
   }
 

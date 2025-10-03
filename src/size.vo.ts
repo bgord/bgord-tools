@@ -65,16 +65,13 @@ export class Size {
   format(unit: SizeUnit): string {
     switch (unit) {
       case SizeUnit.kB: {
-        const kilobytes = Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER);
-        return `${kilobytes} ${SizeUnit.kB}`;
+        return `${Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnit.kB}`;
       }
       case SizeUnit.MB: {
-        const megabytes = Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER);
-        return `${megabytes} ${SizeUnit.MB}`;
+        return `${Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnit.MB}`;
       }
       case SizeUnit.GB: {
-        const gigabytes = Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER);
-        return `${gigabytes} ${SizeUnit.GB}`;
+        return `${Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnit.GB}`;
       }
       default: {
         // SizeUnit.b

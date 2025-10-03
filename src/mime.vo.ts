@@ -32,8 +32,8 @@ export class Mime {
     if (this.raw === another.raw) return true;
 
     const typeMatches = this.type === another.type || this.type === "*";
-    if (!typeMatches) return false;
 
+    if (!typeMatches) return false;
     return this.subtype === another.subtype || this.subtype === "*";
   }
 
