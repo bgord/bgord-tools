@@ -1,18 +1,16 @@
 import { z } from "zod/v4";
 
-export const QuarterIsoId = z
-  .string()
-  .regex(/^\d{4}-Q[1-4]$/)
-  .refine(
-    (value) => {
-      const [y, q] = value.split("-Q");
-      const year = Number(y);
-      const quarter = Number(q);
+export const QuarterIsoIdError = { error: "quarter-iso-id.invalid" } as const;
 
-      return (
-        y.length === 4 && Number.isInteger(year) && Number.isInteger(quarter) && quarter >= 1 && quarter <= 4
-      );
-    },
-    { message: "quarter-iso-id.invalid" },
-  );
+export const QuarterIsoId = z
+  .string(QuarterIsoIdError)
+  .regex(/^\d{4}-Q[1-4]$/, QuarterIsoIdError)
+  .refine((value) => {
+    const [yearPart, quarterPart] = value.split("-Q");
+    const year = Number(yearPart);
+    const quarter = Number(quarterPart);
+
+    return Number.isInteger(year) && Number.isInteger(quarter) && quarter >= 1 && quarter <= 4;
+  }, QuarterIsoIdError);
+
 export type QuarterIsoIdType = z.infer<typeof QuarterIsoId>;
