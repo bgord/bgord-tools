@@ -504,8 +504,7 @@ describe("DLL", () => {
       if (index === 0) expect(node.data).toEqual(firstToken);
       if (index === 1) expect(node.data).toEqual(secondToken);
       if (index === 2) expect(node.data).toEqual(thirdToken);
-
-      index++;
+      index += 1;
     }
   });
 });
