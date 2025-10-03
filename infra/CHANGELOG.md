@@ -1,4 +1,31 @@
 # Changelog
+- 2025-10-03 23:09 612b5ba **refactor: improve reordering**
+- 2025-10-03 22:43 5022e1d **refactor: improve dll**
+- 2025-10-03 22:39 7346696 **refactor: improve weekday**
+- 2025-10-03 22:35 37d4840 **refactor: improve pagination**
+- 2025-10-03 22:24 0fb6d66 **refactor: improve rate limiter**
+- 2025-10-03 21:35 a44869e **refactor: improve height**
+- 2025-10-03 21:24 060f376 **refactor: improve weight**
+- 2025-10-03 21:01 82113be **refactor: simplify streak calculator**
+- 2025-10-03 20:58 ac5c492 **refactor: simplify package version**
+- 2025-10-03 20:53 8de62b4 **refactor: improve time zone offset value**
+- 2025-10-03 20:50 cfcca85 **refactor: improve time**
+- 2025-10-03 20:44 d7edea3 **refactor: improve size**
+- 2025-10-03 20:44 103801b **refactor: remove stepper**
+- 2025-10-03 20:40 f37a25d **refactor: improve mime**
+- 2025-10-03 17:06 bf1589a **refactor: improve date calculator**
+- 2025-10-03 17:01 fcc0f08 **refactor: improve year**
+- 2025-10-03 16:59 e1043e9 **refactor: improve year iso id**
+- 2025-10-03 16:56 122ccb4 **refactor: improve quarter**
+- 2025-10-03 13:50 adda19e **refactor: improve month**
+- 2025-10-03 13:48 70b0688 **refactor: improve quarter iso id**
+- 2025-10-03 13:46 d35e712 **refactor: improve month**
+- 2025-10-03 13:15 878de02 **refactor: improve month iso id**
+- 2025-10-03 13:14 054f83f **refactor: improve week**
+- 2025-10-03 13:13 937ce53 **refactor: improve week iso id**
+- 2025-10-03 13:10 bde19db **refactor: improve day**
+- 2025-10-03 13:09 b67fa69 **refactor: improve day iso id**
+- 2025-10-03 13:04 ec68d83 **refactor: improve date range**
 - 2025-10-03 13:01 590e8ef **refactor: improve object key**
 - 2025-10-03 12:51 b39a357 **refactor: adjust dir path rel**
 - 2025-10-03 12:49 7d252e7 **refactor: adjust dir path abs**
@@ -20,6 +47,7 @@
 ## 2025-10-03 11:37 v0.15.0
 - 2025-10-03 11:37 c387855 **0.15.0**
 - 2025-10-03 11:36 206f06e **refactor: improve formatting**
+- 2025-10-03 11:01 928bb02 **docs: generate CHANGELOG**
 - 2025-10-03 09:43 d052842 **docs: generate CHANGELOG**
 - 2025-10-03 09:43 4e2ea23 **docs: generate CHANGELOG**
 - 2025-10-03 09:39 ef1eea3 **docs: generate CHANGELOG**
