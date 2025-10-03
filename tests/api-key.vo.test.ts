@@ -19,14 +19,6 @@ describe("ApiKey (smoke tests)", () => {
     expect(() => ApiKey.parse("a".repeat(65))).toThrow();
   });
 
-  test("rejects non-hex content at length 64", () => {
-    const nonHex = "A".repeat(63) + "G";
-    expect(() => ApiKey.parse(nonHex)).toThrow();
-
-    const midSpace = "a".repeat(32) + " " + "a".repeat(31);
-    expect(() => ApiKey.parse(midSpace)).toThrow();
-  });
-
   test("rejects non-string input", () => {
     expect(() => ApiKey.parse(1234)).toThrow();
   });

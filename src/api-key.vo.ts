@@ -6,7 +6,7 @@ export const ApiKey = z
   .string(ApiKeyError)
   .trim()
   .length(64, ApiKeyError)
-  .regex(/^[0-9a-f]{64}$/i, ApiKeyError)
+  .regex(/^[0-9a-zA-Z]{64}$/i, ApiKeyError)
   .brand("ApiKey");
 
 export type ApiKeyType = z.infer<typeof ApiKey>;
