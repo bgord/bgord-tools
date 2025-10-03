@@ -53,7 +53,6 @@ export * from "./rounding.adapter";
 export * from "./rounding.port";
 export * from "./simple-linear-regression.service";
 export * from "./size.vo";
-export * from "./stepper.service";
 export * from "./stopwatch.service";
 export * from "./streak-calculator.service";
 export * from "./sum.service";
