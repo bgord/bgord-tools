@@ -4,7 +4,7 @@ import { MonthIsoId } from "../src/month-iso-id.vo";
 describe("MonthIsoId", () => {
   test("accepts valid YYYY-MM values", () => {
     const months = ["0000-01", "1970-01", "1999-12", "2024-02", "2025-10", "9999-12"];
-    for (const month of months) expect(MonthIsoId.safeParse(month).success).toBe(true);
+    for (const month of months) expect(MonthIsoId.safeParse(month).success).toEqual(true);
   });
 
   test("rejects structurally invalid strings (regex mismatch)", () => {
@@ -22,11 +22,11 @@ describe("MonthIsoId", () => {
       "10000-01",
       "",
     ];
-    for (const sample of invalidFormat) expect(MonthIsoId.safeParse(sample).success).toBe(false);
+    for (const sample of invalidFormat) expect(MonthIsoId.safeParse(sample).success).toEqual(false);
   });
 
   test("rejects semantically invalid months but matching the regex", () => {
     const months = ["2023-00", "2023-13"];
-    for (const month of months) expect(MonthIsoId.safeParse(month).success).toBe(false);
+    for (const month of months) expect(MonthIsoId.safeParse(month).success).toEqual(false);
   });
 });
