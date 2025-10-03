@@ -11,48 +11,48 @@ describe("ObjectKey (VO)", () => {
       "avatar.webp", // single-segment key is allowed
     ];
 
-    for (const key of valid) expect(ObjectKey.safeParse(key).success).toBe(true);
+    for (const key of valid) expect(ObjectKey.safeParse(key).success).toEqual(true);
   });
 
   test("trims whitespace", () => {
-    expect(ObjectKey.safeParse("   users/u/avatar.webp  ").success).toBe(true);
+    expect(ObjectKey.safeParse("   users/u/avatar.webp  ").success).toEqual(true);
   });
 
   test("rejects leading slash", () => {
-    expect(ObjectKey.safeParse("/users/u/avatar.webp").success).toBe(false);
+    expect(ObjectKey.safeParse("/users/u/avatar.webp").success).toEqual(false);
   });
 
   test("rejects backslashes", () => {
-    expect(ObjectKey.safeParse("users\\u\\avatar.webp").success).toBe(false);
+    expect(ObjectKey.safeParse("users\\u\\avatar.webp").success).toEqual(false);
   });
 
   test("rejects control characters", () => {
-    expect(ObjectKey.safeParse("users/\u0000/avatar.webp").success).toBe(false);
+    expect(ObjectKey.safeParse("users/\u0000/avatar.webp").success).toEqual(false);
   });
 
   test("rejects empty string", () => {
-    expect(ObjectKey.safeParse("").success).toBe(false);
+    expect(ObjectKey.safeParse("").success).toEqual(false);
   });
 
   test("rejects trailing slash (empty last segment)", () => {
-    expect(ObjectKey.safeParse("users/u/").success).toBe(false);
+    expect(ObjectKey.safeParse("users/u/").success).toEqual(false);
   });
 
   test("rejects dot and dotdot segments", () => {
     const bad = ["users/./avatar.webp", "users/../avatar.webp"];
-    for (const key of bad) expect(ObjectKey.safeParse(key).success).toBe(false);
+    for (const key of bad) expect(ObjectKey.safeParse(key).success).toEqual(false);
   });
 
   test("rejects uppercase letters in any segment", () => {
     const bad = ["Users/u/avatar.webp", "users/U/avatar.webp", "users/u/Avatar.webp"];
-    for (const key of bad) expect(ObjectKey.safeParse(key).success).toBe(false);
+    for (const key of bad) expect(ObjectKey.safeParse(key).success).toEqual(false);
   });
 
   test("rejects consecutive slashes (empty segment)", () => {
-    expect(ObjectKey.safeParse("users//avatar.webp").success).toBe(false);
+    expect(ObjectKey.safeParse("users//avatar.webp").success).toEqual(false);
   });
 
   test("rejects spaces in segments", () => {
-    expect(ObjectKey.safeParse("users/user id/avatar.webp").success).toBe(false);
+    expect(ObjectKey.safeParse("users/user id/avatar.webp").success).toEqual(false);
   });
 });
