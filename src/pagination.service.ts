@@ -1,16 +1,29 @@
 import { z } from "zod/v4";
 
-const Take = z.number().int().gte(0);
+const PaginationTakeError = "pagination.take.invalid" as const;
+const PaginationSkipError = "pagination.skip.invalid" as const;
+const PaginationPageError = "pagination.page.invalid" as const;
+
+const Take = z
+  .number({ message: PaginationTakeError })
+  .int({ message: PaginationTakeError })
+  .gte(1, { message: PaginationTakeError });
+
 type TakeType = z.infer<typeof Take>;
 
-const Skip = z.number().int().gte(0);
+const Skip = z
+  .number({ message: PaginationSkipError })
+  .int({ message: PaginationSkipError })
+  .gte(0, { message: PaginationSkipError });
+
 type SkipType = z.infer<typeof Skip>;
 
 const Page = z.coerce
-  .number()
-  .int()
+  .number({ message: PaginationPageError })
+  .int({ message: PaginationPageError })
   .transform((value) => (value <= 0 ? 1 : value))
   .default(1);
+
 export type PageType = z.infer<typeof Page>;
 
 export type PaginationType = { values: { take: TakeType; skip: SkipType }; page: PageType };
@@ -46,16 +59,11 @@ export class Pagination {
   }
 
   static isExhausted(config: PaginationExhaustedConfig): ExhaustedType {
-    const lastPage = Pagination.getLastPage(config);
-    const currentPage = config.pagination.page;
-
-    return lastPage <= currentPage;
+    return Pagination.getLastPage(config) <= config.pagination.page;
   }
 
   private static getLastPage(config: PaginationExhaustedConfig): PageType {
-    const lastPage = Math.ceil(config.total / config.pagination.values.take);
-
-    return Page.parse(lastPage);
+    return Page.parse(Math.ceil(config.total / config.pagination.values.take));
   }
 
   static empty = {
@@ -70,8 +78,8 @@ export class Pagination {
     },
   };
 
-  static getFirstPage({ take }: { take: TakeType }): PaginationType {
-    return { values: { take, skip: Skip.parse(0) }, page: Page.parse(1) };
+  static getFirstPage(input: { take: TakeType }): PaginationType {
+    return { values: { take: Take.parse(input.take), skip: Skip.parse(0) }, page: Page.parse(1) };
   }
 }
 
