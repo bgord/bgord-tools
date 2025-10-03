@@ -1,9 +1,13 @@
 import { z } from "zod/v4";
 
-export const FilenameSuffixSchema = z
-  .string()
+export const FilenameSuffixTypeError = "suffix.not.string" as const;
+export const FilenameSuffixTooLongError = "suffix_too_long" as const;
+
+export const FilenameSuffix = z
+  .string(FilenameSuffixTypeError)
   .trim()
   .transform((value) => value.replace(/[^A-Za-z0-9_-]/g, ""))
-  .pipe(z.string().max(32, "suffix_too_long"))
+  .refine((value) => value.length <= 32, FilenameSuffixTooLongError)
   .brand("basename_suffix");
-export type FilenameSuffixSchemaType = z.infer<typeof FilenameSuffixSchema>;
+
+export type FilenameSuffixType = z.infer<typeof FilenameSuffix>;

@@ -1,27 +1,40 @@
 import { describe, expect, test } from "bun:test";
-import { FilenameSuffixSchema } from "../src/filename-suffix.vo";
+import {
+  FilenameSuffix,
+  FilenameSuffixTypeError,
+  FilenameSuffixTooLongError,
+} from "../src/filename-suffix.vo";
 
 describe("FilenameSuffixSchema", () => {
-  test("keeps valid characters as-is", () => {
-    // @ts-expect-error
-    expect(FilenameSuffixSchema.parse("-sm")).toBe("-sm");
-    // @ts-expect-error
-    expect(FilenameSuffixSchema.parse("_v2")).toBe("_v2");
-    // @ts-expect-error
-    expect(FilenameSuffixSchema.parse(" rc1 ")).toBe("rc1");
+  test("accepts '-sm'", () => {
+    expect(FilenameSuffix.safeParse("-sm").success).toEqual(true);
   });
 
-  test("sanitizes by stripping disallowed characters", () => {
-    // @ts-expect-error
-    expect(FilenameSuffixSchema.parse(" /@!🙂 ")).toBe("");
+  test("accepts '_v2'", () => {
+    expect(FilenameSuffix.safeParse("_v2").success).toEqual(true);
   });
 
-  test("enforces max length after sanitization", () => {
-    const longSanitized = "x".repeat(33);
-    expect(() => FilenameSuffixSchema.parse(longSanitized)).toThrow(/"suffix_too_long"/);
+  test("accepts and trims ' rc1 '", () => {
+    expect(FilenameSuffix.safeParse(" rc1 ").success).toEqual(true);
+  });
 
-    const withinLimit = "x".repeat(32);
-    // @ts-expect-error
-    expect(FilenameSuffixSchema.parse(withinLimit)).toBe(withinLimit);
+  test("sanitizes disallowed characters ' /@!🙂 ' (becomes empty and still valid)", () => {
+    expect(FilenameSuffix.safeParse(" /@!🙂 ").success).toEqual(true);
+  });
+
+  test("rejects length 33 after sanitization", () => {
+    expect(() => FilenameSuffix.parse("x".repeat(33))).toThrow(FilenameSuffixTooLongError);
+  });
+
+  test("accepts boundary length 32", () => {
+    expect(FilenameSuffix.safeParse("x".repeat(32)).success).toEqual(true);
+  });
+
+  test("rejects non-string (number)", () => {
+    expect(() => FilenameSuffix.parse(123)).toThrow(FilenameSuffixTypeError);
+  });
+
+  test("rejects non-string (null)", () => {
+    expect(() => FilenameSuffix.parse(null)).toThrow(FilenameSuffixTypeError);
   });
 });
