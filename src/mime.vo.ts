@@ -5,6 +5,9 @@ export type MimeRawType = string;
 type MimeTypeType = string;
 type MimeSubtypeType = string;
 
+export const InvalidMimeErrorMessage = "invalid.mime" as const;
+export const NotAcceptedMimeErrorMessage = "mime.not.accepted" as const;
+
 export class Mime {
   readonly raw: MimeRawType;
   readonly type: MimeTypeType;
@@ -41,17 +44,17 @@ export class Mime {
 
 export class InvalidMimeError extends Error {
   constructor() {
-    super();
+    super(InvalidMimeErrorMessage);
     Object.setPrototypeOf(this, InvalidMimeError.prototype);
   }
 }
 
 export class NotAcceptedMimeError extends Error {
   mime: MimeRawType;
-  constructor(mime: MimeRawType) {
-    super();
+  constructor(mimeValue: MimeRawType) {
+    super(NotAcceptedMimeErrorMessage);
     Object.setPrototypeOf(this, NotAcceptedMimeError.prototype);
-    this.mime = mime;
+    this.mime = mimeValue;
   }
 }
 
