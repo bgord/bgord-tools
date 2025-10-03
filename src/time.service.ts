@@ -12,75 +12,74 @@ interface TimeResultInterface {
 
   isAfter(another: TimeResultInterface): boolean;
   isBefore(another: TimeResultInterface): boolean;
+
+  add(another: TimeResultInterface): TimeResultInterface;
+  subtract(another: TimeResultInterface): TimeResultInterface;
 }
 
 export class TimeResult implements TimeResultInterface {
-  constructor(
-    readonly days: number,
-    readonly hours: number,
-    readonly minutes: number,
-    readonly seconds: number,
-    readonly ms: TimestampType,
-  ) {}
+  private readonly valueMs: TimestampType;
+
+  constructor(ms: TimestampType) {
+    this.valueMs = ms;
+  }
+
+  get days(): number {
+    return rounding.round(this.valueMs / 86_400_000);
+  }
+
+  get hours(): number {
+    return rounding.round(this.valueMs / 3_600_000);
+  }
+
+  get minutes(): number {
+    return rounding.round(this.valueMs / 60_000);
+  }
+
+  get seconds(): number {
+    return rounding.round(this.valueMs / 1_000);
+  }
+
+  get ms(): TimestampType {
+    return this.valueMs;
+  }
 
   isAfter(another: TimeResultInterface): boolean {
-    return this.ms > another.ms;
+    return this.valueMs > another.ms;
   }
 
   isBefore(another: TimeResultInterface): boolean {
-    return this.ms < another.ms;
+    return this.valueMs < another.ms;
+  }
+
+  add(another: TimeResultInterface): TimeResultInterface {
+    return new TimeResult((this.valueMs + another.ms) as TimestampType);
+  }
+
+  subtract(another: TimeResultInterface): TimeResultInterface {
+    return new TimeResult((this.valueMs - another.ms) as TimestampType);
   }
 }
 
 export class Time {
   static Days(value: number): TimeResultInterface {
-    return new TimeResult(
-      value,
-      value * 24,
-      value * 24 * 60,
-      value * 24 * 60 * 60,
-      (value * 24 * 60 * 60 * 1000) as TimestampType,
-    );
+    return new TimeResult((value * 86_400_000) as TimestampType);
   }
 
   static Hours(value: number): TimeResultInterface {
-    return new TimeResult(
-      rounding.round(value / 24),
-      value,
-      value * 60,
-      value * 60 * 60,
-      (value * 60 * 60 * 1000) as TimestampType,
-    );
+    return new TimeResult((value * 3_600_000) as TimestampType);
   }
 
   static Minutes(value: number): TimeResultInterface {
-    return new TimeResult(
-      rounding.round(value / 60 / 24),
-      rounding.round(value / 60),
-      value,
-      value * 60,
-      (value * 60 * 1000) as TimestampType,
-    );
+    return new TimeResult((value * 60_000) as TimestampType);
   }
 
   static Seconds(value: number): TimeResultInterface {
-    return new TimeResult(
-      rounding.round(value / 60 / 60 / 24),
-      rounding.round(value / 60 / 60),
-      rounding.round(value / 60),
-      value,
-      (value * 1000) as TimestampType,
-    );
+    return new TimeResult((value * 1_000) as TimestampType);
   }
 
   static Ms(value: number): TimeResultInterface {
-    return new TimeResult(
-      rounding.round(value / 1000 / 60 / 60 / 24),
-      rounding.round(value / 1000 / 60 / 60),
-      rounding.round(value / 1000 / 60),
-      rounding.round(value / 1000),
-      value as TimestampType,
-    );
+    return new TimeResult(value as TimestampType);
   }
 
   static Now(now: TimestampType) {
@@ -88,7 +87,6 @@ export class Time {
       Minus(time: TimeResultInterface): TimeResultInterface {
         return Time.Ms(now - time.ms);
       },
-
       Add(time: TimeResultInterface): TimeResultInterface {
         return Time.Ms(now + time.ms);
       },
