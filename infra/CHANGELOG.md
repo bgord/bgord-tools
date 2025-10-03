@@ -1,4 +1,5 @@
 # Changelog
+- 2025-10-03 11:36 206f06e **refactor: improve formatting**
 - 2025-10-02 23:16 17da2cc **refactor: remove unused exports**
 - 2025-10-02 23:10 5226049 **refactor: improve relative date**
 - 2025-10-02 23:08 a2725ae **refactor: improve minmaxscaler**
@@ -20,6 +21,8 @@
 - 2025-10-02 22:12 2d5419c **refactor: improve timestamp**
 - 2025-10-02 22:10 2ed85d3 **refactor: improve timezones**
 - 2025-10-02 22:07 9fa2a23 **refactor: refactor stopwatch**
+- 2025-10-02 21:17 e33c12d **docs: generate CHANGELOG**
+- 2025-10-02 21:17 300df36 **docs: generate readme**
 - 2025-10-02 15:13 47f61bb **refactor: refactor rounding usage**
 - 2025-10-02 15:07 d79c312 **refactor: improve rounding**
 - 2025-10-02 14:56 8b15094 **refactor: improve email-mask**
