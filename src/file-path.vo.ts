@@ -10,21 +10,23 @@ export class FilePathRelative {
     private readonly filename: Filename,
   ) {}
 
-  static fromParts(directoryCandidate: string, filename: Filename) {
+  static fromParts(directoryCandidate: string, filename: Filename): FilePathRelative {
     const directory = DirectoryPathRelativeSchema.parse(directoryCandidate);
+
     return new FilePathRelative(directory, filename);
   }
 
-  static fromPartsSafe(directory: DirectoryPathRelativeType, filename: Filename) {
+  static fromPartsSafe(directory: DirectoryPathRelativeType, filename: Filename): FilePathRelative {
     return new FilePathRelative(directory, filename);
   }
 
   static fromString(pathCandidate: string): FilePathRelative {
-    const { directory, filename } = FilePathRelativeSchema.parse(pathCandidate);
-    return new FilePathRelative(directory, filename);
+    const parsed = FilePathRelativeSchema.parse(pathCandidate);
+
+    return new FilePathRelative(parsed.directory, parsed.filename);
   }
 
-  get() {
+  get(): string {
     return `${this.directory}/${this.filename.get()}`;
   }
 
@@ -55,22 +57,24 @@ export class FilePathAbsolute {
     private readonly filename: Filename,
   ) {}
 
-  static fromParts(directoryCandidate: string, filename: Filename) {
+  static fromParts(directoryCandidate: string, filename: Filename): FilePathAbsolute {
     const directory = DirectoryPathAbsoluteSchema.parse(directoryCandidate);
+
     return new FilePathAbsolute(directory, filename);
   }
 
-  static fromPartsSafe(directory: DirectoryPathAbsoluteType, filename: Filename) {
+  static fromPartsSafe(directory: DirectoryPathAbsoluteType, filename: Filename): FilePathAbsolute {
     return new FilePathAbsolute(directory, filename);
   }
 
   static fromString(pathCandidate: string): FilePathAbsolute {
-    const { directory, filename } = FilePathAbsoluteSchema.parse(pathCandidate);
-    return new FilePathAbsolute(directory, filename);
+    const parsed = FilePathAbsoluteSchema.parse(pathCandidate);
+
+    return new FilePathAbsolute(parsed.directory, parsed.filename);
   }
 
-  get() {
-    if (this.directory === ("/" as DirectoryPathAbsoluteType)) return `/${this.filename.get()}`;
+  get(): string {
+    if (this.directory === "/") return `/${this.filename.get()}`;
     return `${this.directory}/${this.filename.get()}`;
   }
 
