@@ -2,17 +2,30 @@ import { z } from "zod/v4";
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-const FiniteNumericValue = z.number().refine(Number.isFinite, { message: "Expected a finite number" });
-const NonNegativeNumericValue = FiniteNumericValue.min(0, { message: "Must be greater than or equal to 0" });
-const PositiveNumericValue = FiniteNumericValue.gt(0, { message: "Must be greater than 0" });
-const NonNegativeIntegerGrams = FiniteNumericValue.int().min(0, {
-  message: "Grams must be an integer greater than or equal to 0",
-});
-
 export enum WeightUnit {
   kg = "kg",
   lb = "lb",
 }
+
+export const WeightNonFiniteError = { message: "weight.non_finite" } as const;
+export const WeightNegativeError = { message: "weight.negative" } as const;
+export const WeightNonPositiveError = { message: "weight.non_positive" } as const;
+export const WeightGramsNonNegativeError = { message: "weight.grams_non_negative" } as const;
+
+const WeightQuantityNumber = z
+  .number(WeightNonFiniteError)
+  .refine(Number.isFinite, WeightNonFiniteError)
+  .min(0, WeightNegativeError);
+
+const DivisionScalarNumber = z
+  .number(WeightNonFiniteError)
+  .refine(Number.isFinite, WeightNonFiniteError)
+  .gt(0, WeightNonPositiveError);
+
+const CanonicalGramsInteger = z
+  .number(WeightGramsNonNegativeError)
+  .int(WeightGramsNonNegativeError)
+  .min(0, WeightGramsNonNegativeError);
 
 export class Weight {
   private static readonly GRAMS_PER_KILOGRAM = 1_000;
@@ -22,24 +35,24 @@ export class Weight {
   private constructor(private readonly grams: number) {}
 
   static fromKilograms(kilograms: number): Weight {
-    NonNegativeNumericValue.parse(kilograms);
-    const gramsRounded = Math.round(kilograms * Weight.GRAMS_PER_KILOGRAM);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
+    const kilogramsParsed = WeightQuantityNumber.parse(kilograms);
+    const gramsRounded = Math.round(kilogramsParsed * Weight.GRAMS_PER_KILOGRAM);
+    const grams = CanonicalGramsInteger.parse(gramsRounded);
+    return new Weight(grams);
   }
 
   static fromPounds(pounds: number): Weight {
-    NonNegativeNumericValue.parse(pounds);
-    const gramsRounded = Math.round(pounds * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
+    const poundsParsed = WeightQuantityNumber.parse(pounds);
+    const gramsRounded = Math.round(poundsParsed * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
+    const grams = CanonicalGramsInteger.parse(gramsRounded);
+    return new Weight(grams);
   }
 
   static fromGrams(grams: number): Weight {
-    NonNegativeNumericValue.parse(grams);
-    const gramsRounded = Math.round(grams);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
+    const gramsParsed = WeightQuantityNumber.parse(grams);
+    const gramsRounded = Math.round(gramsParsed);
+    const integerGrams = CanonicalGramsInteger.parse(gramsRounded);
+    return new Weight(integerGrams);
   }
 
   static zero(): Weight {
@@ -61,10 +74,7 @@ export class Weight {
   }
 
   format(unit: WeightUnit, rounding: RoundingPort = new RoundToDecimal(2)): string {
-    const value = { [WeightUnit.kg]: this.toKilograms(rounding), [WeightUnit.lb]: this.toPounds(rounding) }[
-      unit
-    ];
-
+    const value = unit === WeightUnit.kg ? this.toKilograms(rounding) : this.toPounds(rounding);
     return `${value.toString()} ${unit}`;
   }
 
@@ -78,17 +88,17 @@ export class Weight {
   }
 
   multiply(factor: number): Weight {
-    NonNegativeNumericValue.parse(factor);
-    const gramsRounded = Math.round(this.grams * factor);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
+    const factorParsed = WeightQuantityNumber.parse(factor);
+    const gramsRounded = Math.round(this.grams * factorParsed);
+    const grams = CanonicalGramsInteger.parse(gramsRounded);
+    return new Weight(grams);
   }
 
   divideByScalar(divisor: number): Weight {
-    PositiveNumericValue.parse(divisor);
-    const gramsRounded = Math.round(this.grams / divisor);
-    NonNegativeIntegerGrams.parse(gramsRounded);
-    return new Weight(gramsRounded);
+    const divisorParsed = DivisionScalarNumber.parse(divisor);
+    const gramsRounded = Math.round(this.grams / divisorParsed);
+    const grams = CanonicalGramsInteger.parse(gramsRounded);
+    return new Weight(grams);
   }
 
   equals(other: Weight): boolean {
