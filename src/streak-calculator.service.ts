@@ -1,4 +1,4 @@
-import { format, isAfter, isEqual, subDays } from "date-fns";
+import { format, subDays } from "date-fns";
 
 type DateType = string;
 export type StreakType = { cutoff: DateType; dates: DateType[]; streak: number };
@@ -6,32 +6,27 @@ export type StreakType = { cutoff: DateType; dates: DateType[]; streak: number }
 export class StreakCalculator {
   private readonly cutoff: DateType;
 
-  constructor() {
-    const today = new Date();
-    this.cutoff = StreakCalculator.format(today);
+  constructor(now: Date = new Date()) {
+    this.cutoff = StreakCalculator.format(now);
   }
 
-  calculate(_dates: DateType[]): StreakType {
-    const dates = Array.from(new Set(_dates));
+  calculate(inputDates: DateType[]): StreakType {
+    const dates = Array.from(new Set(inputDates));
+    const datesSet = new Set(dates);
 
     let streak = 0;
-    let streakTail = this.cutoff;
+    let cursor = this.cutoff;
 
-    for (let i = 0; i < dates.length; i++) {
-      const date = dates[i] as string;
-
-      if (isAfter(date, streakTail)) continue;
-
-      if (isEqual(streakTail, date) || isAfter(date, streakTail)) {
-        streakTail = StreakCalculator.format(subDays(date, 1));
-        streak++;
-      } else break;
+    while (datesSet.has(cursor)) {
+      streak++;
+      const cursorDate = new Date(`${cursor}T00:00:00Z`);
+      cursor = StreakCalculator.format(subDays(cursorDate, 1));
     }
 
     return { cutoff: this.cutoff, dates, streak };
   }
 
-  static format(date: Parameters<typeof format>[0]): DateType {
+  static format(date: Date | number): DateType {
     return format(date, "yyyy-MM-dd");
   }
 }
