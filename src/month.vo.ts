@@ -1,4 +1,3 @@
-import { addMonths, endOfMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
@@ -9,24 +8,24 @@ export class Month extends DateRange {
   }
 
   previous(): Month {
-    const shifted = addMonths(new Date(this.getStart()), -1).getTime();
-    return Month.fromTimestamp(Timestamp.parse(shifted));
+    return Month.fromTimestamp(Timestamp.parse(this.getStart() - 1));
   }
 
   next(): Month {
-    const shifted = addMonths(new Date(this.getStart()), 1).getTime();
-    return Month.fromTimestamp(Timestamp.parse(shifted));
+    return Month.fromTimestamp(Timestamp.parse(this.getEnd() + 1));
   }
 
   shift(count: number): Month {
-    const shifted = addMonths(new Date(this.getStart()), count).getTime();
-    return Month.fromTimestamp(Timestamp.parse(shifted));
+    const date = new Date(this.getStart());
+    date.setUTCMonth(date.getUTCMonth() + count);
+
+    return Month.fromTimestamp(Timestamp.parse(date.getTime()));
   }
 
   static fromTimestamp(timestamp: TimestampType): Month {
-    const start = Timestamp.parse(startOfMonth(timestamp).getTime());
-    const end = Timestamp.parse(endOfMonth(timestamp).getTime());
-    return new Month(start, end);
+    const isoMonth = new Date(timestamp).toISOString().slice(0, 7) as MonthIsoIdType;
+
+    return Month.fromIsoId(isoMonth);
   }
 
   static fromNow(now: TimestampType): Month {
@@ -34,8 +33,9 @@ export class Month extends DateRange {
   }
 
   static fromIsoId(iso: MonthIsoIdType): Month {
-    const [year, month] = MonthIsoId.parse(iso).split("-").map(Number);
-    const reference = new Date(Date.UTC(year, month - 1, 1));
-    return Month.fromTimestamp(Timestamp.parse(reference.getTime()));
+    const validated = MonthIsoId.parse(iso);
+    const startUtc = Date.parse(`${validated}-01T00:00:00.000Z`);
+
+    return Month.fromTimestamp(Timestamp.parse(startUtc));
   }
 }
