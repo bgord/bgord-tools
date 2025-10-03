@@ -9,21 +9,20 @@ export class Filename {
     private readonly extension: ExtensionType,
   ) {}
 
-  static fromParts(basename: string, extension: string) {
+  static fromParts(basename: string, extension: string): Filename {
     return new Filename(Basename.parse(basename), Extension.parse(extension));
   }
 
-  static fromPartsSafe(basename: BasenameType, extension: ExtensionType) {
+  static fromPartsSafe(basename: BasenameType, extension: ExtensionType): Filename {
     return new Filename(basename, extension);
   }
 
-  static fromString(candidate: string) {
+  static fromString(candidate: string): Filename {
     const { basename, extension } = FilenameFromString.parse(candidate);
-
     return new Filename(basename, extension);
   }
 
-  get() {
+  get(): string {
     return `${this.basename}.${this.extension}`;
   }
 
