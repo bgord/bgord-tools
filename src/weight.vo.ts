@@ -7,10 +7,10 @@ export enum WeightUnit {
   lb = "lb",
 }
 
-export const WeightNonFiniteError = { message: "weight.non_finite" } as const;
-export const WeightNegativeError = { message: "weight.negative" } as const;
-export const WeightNonPositiveError = { message: "weight.non_positive" } as const;
-export const WeightGramsNonNegativeError = { message: "weight.grams_non_negative" } as const;
+export const WeightNonFiniteError = { error: "weight.non_finite" } as const;
+export const WeightNegativeError = { error: "weight.negative" } as const;
+export const WeightNonPositiveError = { error: "weight.non_positive" } as const;
+export const WeightGramsNonNegativeError = { error: "weight.grams_non_negative" } as const;
 
 const WeightQuantityNumber = z
   .number(WeightNonFiniteError)

@@ -26,7 +26,7 @@ describe("Calculator", () => {
 
     test("throws when Item is not found", () => {
       expect(() => ReorderingCalculator.fromArray(["a", "b", "c"]).delete("d")).toThrow(
-        ReorderingCannotFindItemError,
+        ReorderingCannotFindItemError.error,
       );
     });
   });
@@ -90,14 +90,14 @@ describe("Calculator", () => {
     test("transfer error - cannot find current", () => {
       const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
       expect(() => calculator.transfer(new ReorderingTransfer({ id: "ddd", to: 1 }))).toThrow(
-        ReorderingCannotFindCurrentError,
+        ReorderingCannotFindCurrentError.error,
       );
     });
 
     test("transfer error - cannot find target", () => {
       const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
       expect(() => calculator.transfer(new ReorderingTransfer({ id: "ccc", to: 4 }))).toThrow(
-        ReorderingCannotFindTargetError,
+        ReorderingCannotFindTargetError.error,
       );
     });
 

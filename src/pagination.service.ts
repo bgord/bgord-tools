@@ -1,26 +1,20 @@
 import { z } from "zod/v4";
 
-const PaginationTakeError = "pagination.take.invalid" as const;
-const PaginationSkipError = "pagination.skip.invalid" as const;
-const PaginationPageError = "pagination.page.invalid" as const;
+const PaginationTakeError = { error: "pagination.take.invalid" } as const;
+const PaginationSkipError = { error: "pagination.skip.invalid" } as const;
+const PaginationPageError = { error: "pagination.page.invalid" } as const;
 
-const Take = z
-  .number({ message: PaginationTakeError })
-  .int({ message: PaginationTakeError })
-  .gte(1, { message: PaginationTakeError });
+const Take = z.number(PaginationTakeError).int(PaginationTakeError).gte(1, PaginationTakeError);
 
 type TakeType = z.infer<typeof Take>;
 
-const Skip = z
-  .number({ message: PaginationSkipError })
-  .int({ message: PaginationSkipError })
-  .gte(0, { message: PaginationSkipError });
+const Skip = z.number(PaginationSkipError).int(PaginationSkipError).gte(0, PaginationSkipError);
 
 type SkipType = z.infer<typeof Skip>;
 
 const Page = z.coerce
-  .number({ message: PaginationPageError })
-  .int({ message: PaginationPageError })
+  .number(PaginationPageError)
+  .int(PaginationPageError)
   .transform((value) => (value <= 0 ? 1 : value))
   .default(1);
 

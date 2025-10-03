@@ -2,10 +2,10 @@ import { z } from "zod/v4";
 import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-const NonFiniteNumberError = { message: "number.non_finite" } as const;
-const NumberNegativeError = { message: "number.negative" } as const;
-const MillimetersIntegerNonNegativeError = { message: "millimeters.integer_non_negative" } as const;
-const IntegerNonNegativeError = { message: "integer.non_negative" } as const;
+const NonFiniteNumberError = { error: "number.non_finite" } as const;
+const NumberNegativeError = { error: "number.negative" } as const;
+const MillimetersIntegerNonNegativeError = { error: "millimeters.integer_non_negative" } as const;
+const IntegerNonNegativeError = { error: "integer.non_negative" } as const;
 
 const HeightFiniteNumber = z.number(NonFiniteNumberError).refine(Number.isFinite, NonFiniteNumberError);
 

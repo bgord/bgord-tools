@@ -1,23 +1,25 @@
 import { z } from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 
-export const ReorderingPositionError = "reordering.position.invalid" as const;
-export const ReorderingCannotFindItemError = "reordering.item.not_found" as const;
-export const ReorderingCannotFindCurrentError = "reordering.current_item.not_found" as const;
-export const ReorderingCannotFindTargetError = "reordering.target_item.not_found" as const;
+export const ReorderingPositionError = { error: "reordering.position.invalid" } as const;
+export const ReorderingCannotFindItemError = { error: "reordering.item.not_found" } as const;
+export const ReorderingCannotFindCurrentError = { error: "reordering.current_item.not_found" } as const;
+export const ReorderingCannotFindTargetError = { error: "reordering.target_item.not_found" } as const;
+export const ReorderingCorrelationIdError = { error: "reordering.correlation_id.invalid" } as const;
+export const ReorderingItemIdError = { error: "reordering.item_id.invalid" } as const;
 
 export const ReorderingItemPositionValue = z
-  .number({ message: ReorderingPositionError })
-  .int({ message: ReorderingPositionError })
-  .min(0, { message: ReorderingPositionError });
+  .number(ReorderingPositionError)
+  .int(ReorderingPositionError)
+  .min(0, ReorderingPositionError);
 export type ReorderingItemPositionValueType = z.infer<typeof ReorderingItemPositionValue>;
 
-export const ReorderingCorrelationId = z.string({ message: "reordering.correlation_id.invalid" }).min(1, {
-  message: "reordering.correlation_id.invalid",
-});
+export const ReorderingCorrelationId = z
+  .string(ReorderingCorrelationIdError)
+  .min(1, ReorderingCorrelationIdError);
 export type ReorderingCorrelationIdType = z.infer<typeof ReorderingCorrelationId>;
 
-export const ReorderingItemId = z.string({ message: "reordering.item_id.invalid" }); // keep flexible; tests use plain strings
+export const ReorderingItemId = z.string(ReorderingItemIdError);
 export type ReorderingItemIdType = z.infer<typeof ReorderingItemId>;
 
 export const Reordering = z.object({
@@ -34,9 +36,8 @@ export class ReorderingPosition {
 
   constructor(value: ReorderingItemPositionValueType) {
     const parsed = ReorderingItemPositionValue.safeParse(value);
-    if (!parsed.success) {
-      throw new Error(ReorderingPositionError);
-    }
+    if (!parsed.success) throw new Error(ReorderingPositionError.error);
+
     this.value = value;
   }
 
@@ -107,7 +108,7 @@ export class ReorderingCalculator {
 
   delete(id: ReorderingItem["id"]) {
     const node = this.dll.find((x) => x.data.eq(id));
-    if (!node) throw new Error(ReorderingCannotFindItemError);
+    if (!node) throw new Error(ReorderingCannotFindItemError.error);
 
     this.dll.remove(node);
     this.recalculate();
@@ -115,10 +116,10 @@ export class ReorderingCalculator {
 
   transfer(transfer: ReorderingTransfer): ReturnType<ReorderingCalculator["read"]> {
     const current = this.dll.find((node) => node.data.eq(transfer.id));
-    if (!current) throw new Error(ReorderingCannotFindCurrentError);
+    if (!current) throw new Error(ReorderingCannotFindCurrentError.error);
 
     const target = this.dll.find((node) => node.data.position.eq(transfer.to));
-    if (!target) throw new Error(ReorderingCannotFindTargetError);
+    if (!target) throw new Error(ReorderingCannotFindTargetError.error);
 
     const direction = transfer.getDirection(current.data.position);
     if (direction === ReorderingTransferDirection.noop) return this.read();
@@ -143,8 +144,6 @@ export class ReorderingCalculator {
   }
 
   private recalculate() {
-    // Faster than rebuilding the whole list: re-index in place.
-    // We replace each node's data with a new ReorderingItem carrying the updated position.
     let index = 0;
     for (const node of this.dll) {
       const id = node.data.id;

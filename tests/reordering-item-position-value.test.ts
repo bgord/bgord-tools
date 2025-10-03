@@ -7,7 +7,7 @@ describe("ReorderingPosition VO", () => {
 
     for (const value of values) {
       // @ts-expect-error when Position value type is invalid
-      expect(() => new ReorderingPosition(value)).toThrow(ReorderingPositionError);
+      expect(() => new ReorderingPosition(value)).toThrow(ReorderingPositionError.error);
     }
   });
 });
