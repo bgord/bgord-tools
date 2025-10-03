@@ -25,6 +25,7 @@ export class SimpleLinearRegression {
 
   static fromPairs(pairs: SLRPairType[], rounding?: RoundingPort): SimpleLinearRegression {
     const count = pairs.length;
+
     if (count < 2) throw new Error(SLRMinPairsError);
 
     let sumX = 0;
@@ -46,6 +47,7 @@ export class SimpleLinearRegression {
     if (Math.abs(sumXX) >= Number.MAX_SAFE_INTEGER) throw new Error(SLRSumXSquaredTooBigError);
 
     const bDenominator = sumXX - sumX ** 2 / count;
+
     if (bDenominator === 0) throw new Error(SLRModelCreationError);
 
     const b = (sumXY - (sumX * sumY) / count) / bDenominator;
@@ -55,9 +57,10 @@ export class SimpleLinearRegression {
   }
 
   predict(x: SLRPairType["x"], rounding?: RoundingPort): SLRPredictionType {
-    const chosenRounding = rounding ?? this.rounding;
+    const chosen = rounding ?? this.rounding;
     const prediction = this.params.b * x + this.params.a;
-    return chosenRounding.round(prediction);
+
+    return chosen.round(prediction);
   }
 
   inspect(): SimpleLinearRegression["params"] {

@@ -6,6 +6,6 @@ export const Language = z
   .string(LanguageError)
   .length(2, LanguageError)
   .regex(/^[a-z]{2}$/, LanguageError)
-  .brand("language");
+  .brand("Language");
 
 export type LanguageType = z.infer<typeof Language>;

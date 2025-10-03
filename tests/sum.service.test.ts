@@ -17,15 +17,10 @@ describe("Sum", () => {
     const naive = Sum.of(values);
     const precise = Sum.precise(values);
 
-    const expected = 1e12 + 1; // 1000 * 1e-3
+    const expected = 1e12 + 1;
 
-    // Precise should be extremely close
     expect(precise).toBeCloseTo(expected, 9);
-
-    // Naive is close-ish but looser tolerance
     expect(naive).toBeCloseTo(expected, 1);
-
-    // And precise should be at least as accurate as naive
     expect(Math.abs(precise - expected)).toBeLessThanOrEqual(Math.abs(naive - expected));
   });
 });

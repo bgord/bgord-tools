@@ -102,7 +102,7 @@ describe("Age VO", () => {
 
     test("rejects ages above MAX when derived from birthdate", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
-      const veryOldBirthdateTimestamp = -5364662400000 as TimestampType; // "1800-01-01T00:00:00.000Z"
+      const veryOldBirthdateTimestamp = -5364662400000 as TimestampType;
 
       expect(() =>
         Age.fromBirthdateEpochMs({ birthdate: veryOldBirthdateTimestamp, now: nowTimestamp }),

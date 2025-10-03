@@ -49,22 +49,26 @@ export class Money {
 
   add(money: Money): Money {
     const result = this.rounding.round(this.amount + money.getAmount());
+
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
   multiply(factor: MoneyMultiplicationFactorType): Money {
     const result = this.rounding.round(this.amount * factor);
+
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
   subtract(money: Money): Money {
     const result = this.rounding.round(this.amount - money.getAmount());
+
     if (result < Money.ZERO) throw new Error(MoneySubtractLessThanZeroError);
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
   divide(factor: MoneyDivisionFactorType): Money {
     const result = this.rounding.round(this.amount / factor);
+
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
@@ -88,6 +92,7 @@ export class Money {
     const whole = Math.floor(this.amount / 100);
     const fraction = this.amount % 100;
     const fractionFormatted = fraction.toString().padStart(2, "0");
+
     return `${whole}.${fractionFormatted}`;
   }
 }

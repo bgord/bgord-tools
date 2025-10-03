@@ -14,6 +14,7 @@ export class Mean {
     const mean = sum / values.length;
 
     const chosen = rounding ?? Mean.DEFAULT_ROUNDING;
+
     return chosen.round(mean);
   }
 }
