@@ -3,11 +3,7 @@ import type { ETag, WeakETag } from "./etags.vo";
 
 export const RevisionValueError = { error: "invalid.revision.value" } as const;
 
-export const RevisionValue = z
-  .number(RevisionValueError)
-  .int(RevisionValueError)
-  .min(0, RevisionValueError)
-  .brand("RevisionValue");
+export const RevisionValue = z.number(RevisionValueError).int(RevisionValueError).min(0, RevisionValueError);
 
 export type RevisionValueType = z.infer<typeof RevisionValue>;
 
