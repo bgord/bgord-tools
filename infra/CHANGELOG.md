@@ -1,9 +1,11 @@
 # Changelog
+- 2025-10-04 19:37 0b28042 **refactor: remove brand from revision value**
 ## 2025-10-04 19:10 v0.16.1
 - 2025-10-04 19:10 4e35b60 **0.16.1**
 - 2025-10-04 19:09 2f9869f **fix: export time result interface**
 ## 2025-10-04 18:51 v0.16.0
 - 2025-10-04 18:51 615082c **0.16.0**
+- 2025-10-04 17:10 fd1630a **docs: generate CHANGELOG**
 - 2025-10-04 17:09 6a30d59 **docs: generate CHANGELOG**
 - 2025-10-04 16:51 e3cb39a **docs: generate CHANGELOG**
 - 2025-10-03 23:33 5b29ab2 **refactor: test naming**
