@@ -3,7 +3,7 @@ import type { TimestampType } from "./timestamp.vo";
 
 const rounding = new RoundToDecimal(2);
 
-interface TimeResultInterface {
+export interface TimeResultInterface {
   readonly days: number;
   readonly hours: number;
   readonly minutes: number;
