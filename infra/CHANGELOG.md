@@ -1,6 +1,8 @@
 # Changelog
+- 2025-10-04 19:09 2f9869f **fix: export time result interface**
 ## 2025-10-04 18:51 v0.16.0
 - 2025-10-04 18:51 615082c **0.16.0**
+- 2025-10-04 16:51 e3cb39a **docs: generate CHANGELOG**
 - 2025-10-03 23:33 5b29ab2 **refactor: test naming**
 - 2025-10-03 23:29 4d05c1d **refactor: unify formatting**
 - 2025-10-03 23:22 1150fdf **refactor: unify error handling**
