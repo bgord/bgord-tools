@@ -1,6 +1,6 @@
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
-import { Time } from "./time.service";
+import { Duration } from "./duration.service";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 export class Day extends DateRange {
@@ -9,25 +9,25 @@ export class Day extends DateRange {
   }
 
   toIsoId(): DayIsoIdType {
-    const midday = this.getStart() + Time.Hours(12).ms;
+    const midday = this.getStart() + Duration.Hours(12).ms;
 
     return new Date(midday).toISOString().slice(0, 10) as DayIsoIdType;
   }
 
   previous(): Day {
-    const shifted = this.getStart() - Time.Days(1).ms;
+    const shifted = this.getStart() - Duration.Days(1).ms;
 
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   next(): Day {
-    const shifted = this.getStart() + Time.Days(1).ms;
+    const shifted = this.getStart() + Duration.Days(1).ms;
 
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
 
   shift(count: number): Day {
-    const shifted = this.getStart() + count * Time.Days(1).ms;
+    const shifted = this.getStart() + count * Duration.Days(1).ms;
 
     return Day.fromTimestamp(Timestamp.parse(shifted));
   }
@@ -35,7 +35,7 @@ export class Day extends DateRange {
   static fromTimestamp(timestamp: TimestampType): Day {
     const date = new Date(timestamp);
     const startUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-    const endUtc = startUtc + Time.Days(1).ms - 1;
+    const endUtc = startUtc + Duration.Days(1).ms - 1;
 
     return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
   }
@@ -47,7 +47,7 @@ export class Day extends DateRange {
   static fromIsoId(isoId: DayIsoIdType): Day {
     const [year, month, day] = DayIsoId.parse(isoId).split("-").map(Number);
     const startUtc = Date.UTC(year, month - 1, day);
-    const endUtc = startUtc + Time.Days(1).ms - 1;
+    const endUtc = startUtc + Duration.Days(1).ms - 1;
 
     return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
   }

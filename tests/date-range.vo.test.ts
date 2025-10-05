@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { DateRange, DateRangeInvalidError } from "../src/date-range.vo";
-import { Time } from "../src/time.service";
+import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 
 const START = Timestamp.parse(1_700_000_000_000); // ≈ 2023-11-14T06:40:00Z
-const END = Timestamp.parse(START + Time.Seconds(1).ms);
+const END = Timestamp.parse(START + Duration.Seconds(1).ms);
 
 const range = new DateRange(START, END);
 

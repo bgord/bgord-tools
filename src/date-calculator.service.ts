@@ -1,11 +1,11 @@
-import { Time } from "./time.service";
+import { Duration } from "./duration.service";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 type GetStartOfDayTsInTzConfigType = { now: TimestampType; timeZoneOffsetMs: number };
 
 export class DateCalculator {
   static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): TimestampType {
-    const dayMs = Time.Days(1).ms;
+    const dayMs = Duration.Days(1).ms;
 
     // UTC midnight for the UTC date of `now`
     const utcMidnight = Math.floor(config.now / dayMs) * dayMs;

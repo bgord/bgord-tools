@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 import { DateCalculator } from "../src/date-calculator.service";
-import { Time } from "../src/time.service";
+import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("DateCalculator", () => {
@@ -16,7 +16,7 @@ describe("DateCalculator", () => {
 
   test("returns start of day for UTC+2 timezone", () => {
     const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
-    const offset = Time.Hours(2).ms; // +2 hours
+    const offset = Duration.Hours(2).ms; // +2 hours
     const result = DateCalculator.getStartOfDayTsInTz({ now, timeZoneOffsetMs: offset });
 
     // Local day = 2024-06-01 (because 12:00Z is 14:00 local).
@@ -27,7 +27,7 @@ describe("DateCalculator", () => {
 
   test("returns start of day for UTC-5 timezone", () => {
     const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
-    const offset = -Time.Hours(5).ms; // -5 hours
+    const offset = -Duration.Hours(5).ms; // -5 hours
     const result = DateCalculator.getStartOfDayTsInTz({ now, timeZoneOffsetMs: offset });
 
     // Local day = 2024-06-01 (because 12:00Z is 07:00 local).
