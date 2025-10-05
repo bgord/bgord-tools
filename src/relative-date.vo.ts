@@ -5,13 +5,13 @@ import type { Falsy } from "./ts-utils";
 type RelativeDateType = { raw: TimestampType; relative: string };
 
 export class RelativeDate {
-  static truthy(timestampMs: TimestampType): RelativeDateType {
-    return RelativeDate._format(timestampMs);
+  static truthy(timestamp: TimestampType): RelativeDateType {
+    return RelativeDate._format(timestamp);
   }
 
-  static falsy(timestampMs: Falsy<TimestampType>): RelativeDateType | null {
-    if (!timestampMs) return null;
-    return RelativeDate._format(timestampMs);
+  static falsy(timestamp: Falsy<TimestampType>): RelativeDateType | null {
+    if (!timestamp) return null;
+    return RelativeDate._format(timestamp);
   }
 
   private static _format(timestampMs: TimestampType): RelativeDateType {

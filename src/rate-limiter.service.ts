@@ -1,14 +1,14 @@
-import { Timestamp, type TimestampType } from "./timestamp.vo";
+import { Duration } from "./duration.service";
+import type { TimestampType } from "./timestamp.vo";
 
-type RateLimiterOptionsType = { ms: TimestampType };
 type RateLimiterResultSuccessType = { allowed: true };
-type RateLimiterResultErrorType = { allowed: false; remainingMs: TimestampType };
+type RateLimiterResultErrorType = { allowed: false; remaining: Duration };
 type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
 export class RateLimiter {
   private lastInvocationTimestampMs: TimestampType | null = null;
 
-  constructor(private readonly options: RateLimiterOptionsType) {}
+  constructor(private readonly duration: Duration) {}
 
   verify(currentTimestampMs: TimestampType): RateLimiterResultType {
     if (this.lastInvocationTimestampMs == null) {
@@ -17,7 +17,7 @@ export class RateLimiter {
       return { allowed: true };
     }
 
-    const nextAllowedTimestampMs = this.lastInvocationTimestampMs + this.options.ms;
+    const nextAllowedTimestampMs = this.lastInvocationTimestampMs + this.duration.ms;
 
     if (nextAllowedTimestampMs <= currentTimestampMs) {
       this.lastInvocationTimestampMs = currentTimestampMs;
@@ -25,8 +25,7 @@ export class RateLimiter {
     }
 
     const remainingDelta = nextAllowedTimestampMs - currentTimestampMs;
-    const remainingMs = Timestamp.parse(remainingDelta);
 
-    return { allowed: false, remainingMs };
+    return { allowed: false, remaining: Duration.Ms(remainingDelta) };
   }
 }

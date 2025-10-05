@@ -1,3 +1,4 @@
+import { Duration } from "./duration.service";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 enum StopwatchState {
@@ -7,7 +8,7 @@ enum StopwatchState {
 
 export const StopwatchStateError = "stopwatch.already.stopped" as const;
 
-export type StopwatchResultType = { durationMs: TimestampType };
+export type StopwatchResultType = Duration;
 
 export class Stopwatch {
   private state: StopwatchState = StopwatchState.started;
@@ -19,6 +20,6 @@ export class Stopwatch {
 
     this.state = StopwatchState.stopped;
 
-    return { durationMs: Timestamp.parse(Date.now() - this.startMs) };
+    return Duration.Ms(Timestamp.parse(Date.now() - this.startMs));
   }
 }

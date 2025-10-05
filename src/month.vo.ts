@@ -1,4 +1,3 @@
-// src/month.vo.ts
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
