@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Duration } from "../src/duration.service";
+import { Duration, DurationMsError, DurationMsSchema } from "../src/duration.service";
 import type { TimestampType } from "../src/timestamp.vo";
 
 describe("Duration", () => {
@@ -10,7 +10,7 @@ describe("Duration", () => {
       expect(days.hours).toEqual(48);
       expect(days.minutes).toEqual(2880);
       expect(days.seconds).toEqual(172800);
-      expect(days.ms).toEqual(172800000 as TimestampType);
+      expect(days.ms).toEqual(DurationMsSchema.parse(172800000));
     });
   });
 
@@ -21,7 +21,7 @@ describe("Duration", () => {
       expect(hours.hours).toEqual(3);
       expect(hours.minutes).toEqual(180);
       expect(hours.seconds).toEqual(10800);
-      expect(hours.ms).toEqual(10800000 as TimestampType);
+      expect(hours.ms).toEqual(DurationMsSchema.parse(10800000));
     });
   });
 
@@ -32,7 +32,7 @@ describe("Duration", () => {
       expect(minutes.hours).toEqual(0.5);
       expect(minutes.minutes).toEqual(30);
       expect(minutes.seconds).toEqual(1800);
-      expect(minutes.ms).toEqual(1800000 as TimestampType);
+      expect(minutes.ms).toEqual(DurationMsSchema.parse(1800000));
     });
   });
 
@@ -43,7 +43,7 @@ describe("Duration", () => {
       expect(seconds.hours).toEqual(0.03);
       expect(seconds.minutes).toEqual(2);
       expect(seconds.seconds).toEqual(120);
-      expect(seconds.ms).toEqual(120000 as TimestampType);
+      expect(seconds.ms).toEqual(DurationMsSchema.parse(120000));
     });
   });
 
@@ -54,19 +54,19 @@ describe("Duration", () => {
       expect(ms.hours).toEqual(0);
       expect(ms.minutes).toEqual(0.01);
       expect(ms.seconds).toEqual(0.5);
-      expect(ms.ms).toEqual(500 as TimestampType);
+      expect(ms.ms).toEqual(DurationMsSchema.parse(500));
     });
   });
 
   describe("Now", () => {
     test("minus", () => {
       const result = Duration.Now(1700000000000 as TimestampType).Minus(Duration.Ms(500));
-      expect(result.ms).toEqual(1699999999500 as TimestampType);
+      expect(result.ms).toEqual(DurationMsSchema.parse(1699999999500));
     });
 
     test("add", () => {
       const result = Duration.Now(1700000000000 as TimestampType).Add(Duration.Ms(500));
-      expect(result.ms).toEqual(1700000000500 as TimestampType);
+      expect(result.ms).toEqual(DurationMsSchema.parse(1700000000500));
     });
   });
 
@@ -90,5 +90,10 @@ describe("Duration", () => {
       expect(added.seconds).toEqual(15);
       expect(subtracted.seconds).toEqual(7);
     });
+  });
+
+  describe("DurationMsSchema", () => {
+    expect(() => DurationMsSchema.parse("a")).toThrow(DurationMsError.error);
+    expect(() => DurationMsSchema.parse(1.5)).toThrow(DurationMsError.error);
   });
 });

@@ -1,5 +1,16 @@
+import { z } from "zod/v4";
 import { RoundToDecimal } from "./rounding.adapter";
 import type { TimestampType } from "./timestamp.vo";
+
+export const DurationMsError = { error: "duration.invalid" };
+
+export const DurationMsSchema = z
+  .number(DurationMsError)
+  .int(DurationMsError)
+  .refine(Number.isFinite, DurationMsError)
+  .brand("DurationMs");
+
+export type DurationMsType = z.infer<typeof DurationMsSchema>;
 
 const rounding = new RoundToDecimal(2);
 
@@ -8,7 +19,7 @@ export interface DurationResultInterface {
   readonly hours: number;
   readonly minutes: number;
   readonly seconds: number;
-  readonly ms: TimestampType;
+  readonly ms: DurationMsType;
 
   isAfter(another: DurationResultInterface): boolean;
   isBefore(another: DurationResultInterface): boolean;
@@ -18,10 +29,10 @@ export interface DurationResultInterface {
 }
 
 export class DurationResult implements DurationResultInterface {
-  private readonly valueMs: TimestampType;
+  private readonly valueMs: DurationMsType;
 
-  constructor(ms: TimestampType) {
-    this.valueMs = ms;
+  constructor(candidate: number) {
+    this.valueMs = DurationMsSchema.parse(candidate);
   }
 
   get days(): number {
@@ -40,7 +51,7 @@ export class DurationResult implements DurationResultInterface {
     return rounding.round(this.valueMs / 1_000);
   }
 
-  get ms(): TimestampType {
+  get ms(): DurationMsType {
     return this.valueMs;
   }
 
@@ -53,33 +64,33 @@ export class DurationResult implements DurationResultInterface {
   }
 
   add(another: DurationResultInterface): DurationResultInterface {
-    return new DurationResult((this.valueMs + another.ms) as TimestampType);
+    return new DurationResult(this.valueMs + another.ms);
   }
 
   subtract(another: DurationResultInterface): DurationResultInterface {
-    return new DurationResult((this.valueMs - another.ms) as TimestampType);
+    return new DurationResult(this.valueMs - another.ms);
   }
 }
 
 export class Duration {
   static Days(value: number): DurationResultInterface {
-    return new DurationResult((value * 86_400_000) as TimestampType);
+    return new DurationResult(value * 86_400_000);
   }
 
   static Hours(value: number): DurationResultInterface {
-    return new DurationResult((value * 3_600_000) as TimestampType);
+    return new DurationResult(value * 3_600_000);
   }
 
   static Minutes(value: number): DurationResultInterface {
-    return new DurationResult((value * 60_000) as TimestampType);
+    return new DurationResult(value * 60_000);
   }
 
   static Seconds(value: number): DurationResultInterface {
-    return new DurationResult((value * 1_000) as TimestampType);
+    return new DurationResult(value * 1_000);
   }
 
   static Ms(value: number): DurationResultInterface {
-    return new DurationResult(value as TimestampType);
+    return new DurationResult(value);
   }
 
   static Now(now: TimestampType) {
