@@ -1,7 +1,11 @@
 # Changelog
+## 2025-10-05 23:32 v0.17.0
+- 2025-10-05 23:32 58784d1 **0.17.0**
 - 2025-10-05 23:26 5b9ffd8 **refactor: simplify duration**
 - 2025-10-05 23:00 31b5938 **refactor: add duration ms schema**
 - 2025-10-05 22:40 a9fc980 **refactor: rename time to duration**
+- 2025-10-05 21:30 b59a321 **docs: generate readme**
+- 2025-10-05 21:30 31233d6 **docs: generate CHANGELOG**
 ## 2025-10-04 19:38 v0.16.2
 - 2025-10-04 19:38 38e22ac **0.16.2**
 - 2025-10-04 19:37 0b28042 **refactor: remove brand from revision value**
