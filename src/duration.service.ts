@@ -1,8 +1,9 @@
 import { z } from "zod/v4";
 import { RoundToDecimal } from "./rounding.adapter";
-import type { TimestampType } from "./timestamp.vo";
+import type { RoundingPort } from "./rounding.port";
+import { Timestamp, type TimestampType } from "./timestamp.vo";
 
-export const DurationMsError = { error: "duration.invalid" };
+export const DurationMsError = { error: "duration.invalid" } as const;
 
 export const DurationMsSchema = z
   .number(DurationMsError)
@@ -12,95 +13,78 @@ export const DurationMsSchema = z
 
 export type DurationMsType = z.infer<typeof DurationMsSchema>;
 
-const rounding = new RoundToDecimal(2);
-
-export interface DurationResultInterface {
-  readonly days: number;
-  readonly hours: number;
-  readonly minutes: number;
-  readonly seconds: number;
-  readonly ms: DurationMsType;
-
-  isAfter(another: DurationResultInterface): boolean;
-  isBefore(another: DurationResultInterface): boolean;
-
-  add(another: DurationResultInterface): DurationResultInterface;
-  subtract(another: DurationResultInterface): DurationResultInterface;
-}
-
-export class DurationResult implements DurationResultInterface {
+export class Duration {
+  private static readonly rounding: RoundingPort = new RoundToDecimal(2);
   private readonly valueMs: DurationMsType;
 
-  constructor(candidate: number) {
-    this.valueMs = DurationMsSchema.parse(candidate);
+  private static readonly MS_IN_SECOND = 1_000;
+  private static readonly MS_IN_MINUTE = 60_000;
+  private static readonly MS_IN_HOUR = 3_600_000;
+  private static readonly MS_IN_DAY = 86_400_000;
+
+  private constructor(candidateMs: number) {
+    this.valueMs = DurationMsSchema.parse(candidateMs);
+  }
+
+  static Days(value: number): Duration {
+    return new Duration(value * Duration.MS_IN_DAY);
+  }
+  static Hours(value: number): Duration {
+    return new Duration(value * Duration.MS_IN_HOUR);
+  }
+  static Minutes(value: number): Duration {
+    return new Duration(value * Duration.MS_IN_MINUTE);
+  }
+  static Seconds(value: number): Duration {
+    return new Duration(value * Duration.MS_IN_SECOND);
+  }
+  static Ms(value: number): Duration {
+    return new Duration(value);
   }
 
   get days(): number {
-    return rounding.round(this.valueMs / 86_400_000);
+    return Duration.rounding.round(this.valueMs / Duration.MS_IN_DAY);
   }
-
   get hours(): number {
-    return rounding.round(this.valueMs / 3_600_000);
+    return Duration.rounding.round(this.valueMs / Duration.MS_IN_HOUR);
   }
-
   get minutes(): number {
-    return rounding.round(this.valueMs / 60_000);
+    return Duration.rounding.round(this.valueMs / Duration.MS_IN_MINUTE);
   }
-
   get seconds(): number {
-    return rounding.round(this.valueMs / 1_000);
+    return Duration.rounding.round(this.valueMs / Duration.MS_IN_SECOND);
   }
-
   get ms(): DurationMsType {
     return this.valueMs;
   }
 
-  isAfter(another: DurationResultInterface): boolean {
-    return this.valueMs > another.ms;
+  isLongerThan(another: Duration): boolean {
+    return this.valueMs > another.valueMs;
+  }
+  isShorterThan(another: Duration): boolean {
+    return this.valueMs < another.valueMs;
   }
 
-  isBefore(another: DurationResultInterface): boolean {
-    return this.valueMs < another.ms;
+  equals(other: Duration): boolean {
+    return this.valueMs === other.valueMs;
   }
-
-  add(another: DurationResultInterface): DurationResultInterface {
-    return new DurationResult(this.valueMs + another.ms);
+  add(another: Duration): Duration {
+    return Duration.Ms(this.valueMs + another.valueMs);
   }
-
-  subtract(another: DurationResultInterface): DurationResultInterface {
-    return new DurationResult(this.valueMs - another.ms);
+  subtract(another: Duration): Duration {
+    return Duration.Ms(this.valueMs - another.valueMs);
   }
 }
 
-export class Duration {
-  static Days(value: number): DurationResultInterface {
-    return new DurationResult(value * 86_400_000);
-  }
-
-  static Hours(value: number): DurationResultInterface {
-    return new DurationResult(value * 3_600_000);
-  }
-
-  static Minutes(value: number): DurationResultInterface {
-    return new DurationResult(value * 60_000);
-  }
-
-  static Seconds(value: number): DurationResultInterface {
-    return new DurationResult(value * 1_000);
-  }
-
-  static Ms(value: number): DurationResultInterface {
-    return new DurationResult(value);
-  }
-
-  static Now(now: TimestampType) {
+export const Time = {
+  Now(now: TimestampType) {
     return {
-      Minus(time: DurationResultInterface): DurationResultInterface {
-        return Duration.Ms(now - time.ms);
+      Add(duration: Duration): TimestampType {
+        return Timestamp.parse(now + duration.ms);
       },
-      Add(time: DurationResultInterface): DurationResultInterface {
-        return Duration.Ms(now + time.ms);
+      Minus(duration: Duration): TimestampType {
+        return Timestamp.parse(now - duration.ms);
       },
     };
-  }
-}
+  },
+};
