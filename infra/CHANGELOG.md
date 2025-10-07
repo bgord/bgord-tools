@@ -1,4 +1,5 @@
 # Changelog
+- 2025-10-07 20:17 5289268 **step: update packages**
 ## 2025-10-05 23:48 v0.17.1
 - 2025-10-05 23:48 1625137 **0.17.1**
 - 2025-10-05 23:47 c2d3be8 **refactor: use duration in place of timestamp**
@@ -7,6 +8,7 @@
 - 2025-10-05 23:26 5b9ffd8 **refactor: simplify duration**
 - 2025-10-05 23:00 31b5938 **refactor: add duration ms schema**
 - 2025-10-05 22:40 a9fc980 **refactor: rename time to duration**
+- 2025-10-05 21:49 68d4e0b **docs: generate CHANGELOG**
 - 2025-10-05 21:47 3fd0a70 **docs: generate CHANGELOG**
 - 2025-10-05 21:32 7e9db2a **docs: generate CHANGELOG**
 - 2025-10-05 21:30 b59a321 **docs: generate readme**
