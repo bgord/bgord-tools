@@ -1,5 +1,8 @@
 # Changelog
+## 2025-10-07 20:23 v0.17.2
+- 2025-10-07 20:23 8e452fe **0.17.2**
 - 2025-10-07 20:17 5289268 **step: update packages**
+- 2025-10-07 18:18 4fd0961 **docs: generate CHANGELOG**
 ## 2025-10-05 23:48 v0.17.1
 - 2025-10-05 23:48 1625137 **0.17.1**
 - 2025-10-05 23:47 c2d3be8 **refactor: use duration in place of timestamp**
