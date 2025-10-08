@@ -8,6 +8,8 @@ export const ExtensionBadCharsError = "extension.bad.chars" as const;
 // Lowercase letters and digits allowed
 const ExtensionWhitelist = /^[a-z0-9]+$/;
 
+const LEADING_DOT_FILE = /^\./;
+
 export const Extension = z
   .string(ExtensionTypeError)
   .trim()
@@ -15,7 +17,7 @@ export const Extension = z
   .min(2, ExtensionEmptyError)
   .max(16, ExtensionTooLongError)
   // Transform ".png" -> "png"
-  .transform((value) => value.replace(/^\./, ""))
+  .transform((value) => value.replace(LEADING_DOT_FILE, ""))
   .refine((value) => ExtensionWhitelist.test(value), ExtensionBadCharsError)
   .brand("Extension");
 
