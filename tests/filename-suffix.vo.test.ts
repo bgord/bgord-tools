@@ -18,8 +18,12 @@ describe("FilenameSuffixSchema", () => {
     expect(FilenameSuffix.safeParse(" rc1 ").success).toEqual(true);
   });
 
-  test("sanitizes disallowed characters ' /@!🙂 ' (becomes empty and still valid)", () => {
-    expect(FilenameSuffix.safeParse(" /@!🙂 ").success).toEqual(true);
+  test("rejects empty", () => {
+    expect(FilenameSuffix.safeParse("").success).toEqual(false);
+  });
+
+  test("rejects disallowed characters ' /@!🙂 '", () => {
+    expect(FilenameSuffix.safeParse(" /@!🙂 ").success).toEqual(false);
   });
 
   test("rejects length 33 after sanitization", () => {

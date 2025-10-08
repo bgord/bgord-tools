@@ -3,7 +3,7 @@ import { Basename, type BasenameType } from "../src/basename.vo";
 import { Extension, type ExtensionType } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
 import { FilenameInvalidError, FilenameTypeError } from "../src/filename-from-string.vo";
-import { FilenameSuffix } from "../src/filename-suffix.vo";
+import { FilenameSuffix, FilenameSuffixEmptyError } from "../src/filename-suffix.vo";
 
 describe("Filename", () => {
   test("fromParts returns 'name.ext' and normalizes the extension", () => {
@@ -62,13 +62,12 @@ describe("Filename", () => {
     expect(updated.get()).toEqual("profile_v2.webp");
   });
 
-  test("withSuffix appends a sanitized suffix before the extension", () => {
-    const filename = Filename.fromString("avatar.webp");
-    const updated = filename.withSuffix("-sm");
-    expect(updated.get()).toEqual("avatar-sm.webp");
+  test("withSuffix appends a suffix before the extension", () => {
+    expect(Filename.fromString("avatar.webp").withSuffix("-sm").get()).toEqual("avatar-sm.webp");
+  });
 
-    const unchanged = filename.withSuffix(" /@!🙂 ");
-    expect(unchanged.get()).toEqual("avatar.webp");
+  test("withSuffix rejects empty suffix", () => {
+    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameSuffixEmptyError);
   });
 
   test("withSuffixSafe appends a suffix before the extension", () => {

@@ -1,13 +1,19 @@
 import { z } from "zod/v4";
 
 export const FilenameSuffixTypeError = "suffix.not.string" as const;
-export const FilenameSuffixTooLongError = "suffix_too_long" as const;
+export const FilenameSuffixEmptyError = "suffix.empty" as const;
+export const FilenameSuffixTooLongError = "suffix.too.long" as const;
+export const FilenameSuffixBadCharsError = "suffix.bad.chars" as const;
+
+// Letters, digits, underscores, and hyphens allowed
+const FilenameSuffixWhitelist = /^[a-zA-Z0-9_-]+$/;
 
 export const FilenameSuffix = z
   .string(FilenameSuffixTypeError)
   .trim()
-  .transform((value) => value.replace(/[^A-Za-z0-9_-]/g, ""))
-  .refine((value) => value.length <= 32, FilenameSuffixTooLongError)
-  .brand("basename_suffix");
+  .min(1, FilenameSuffixEmptyError)
+  .max(32, FilenameSuffixTooLongError)
+  .regex(FilenameSuffixWhitelist, FilenameSuffixBadCharsError)
+  .brand("FilenameSuffix");
 
 export type FilenameSuffixType = z.infer<typeof FilenameSuffix>;
