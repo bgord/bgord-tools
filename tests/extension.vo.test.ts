@@ -32,6 +32,10 @@ describe("Extension", () => {
     expect(() => Extension.parse("")).toThrow(ExtensionEmptyError);
   });
 
+  test("rejects single char", () => {
+    expect(() => Extension.parse("a")).toThrow(ExtensionEmptyError);
+  });
+
   test("rejects single dot '.' (becomes empty after normalize)", () => {
     expect(() => Extension.parse(".")).toThrow(ExtensionEmptyError);
   });
