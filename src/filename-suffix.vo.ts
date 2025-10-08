@@ -6,14 +6,14 @@ export const FilenameSuffixTooLongError = "suffix.too.long" as const;
 export const FilenameSuffixBadCharsError = "suffix.bad.chars" as const;
 
 // Letters, digits, underscores, and hyphens allowed
-const FilenameSuffixWhitelist = /^[a-zA-Z0-9_-]+$/;
+const FILENAME_SUFFIX_WHITELIST = /^[a-zA-Z0-9_-]+$/;
 
 export const FilenameSuffix = z
   .string(FilenameSuffixTypeError)
   .trim()
   .min(1, FilenameSuffixEmptyError)
   .max(32, FilenameSuffixTooLongError)
-  .regex(FilenameSuffixWhitelist, FilenameSuffixBadCharsError)
+  .regex(FILENAME_SUFFIX_WHITELIST, FilenameSuffixBadCharsError)
   .brand("FilenameSuffix");
 
 export type FilenameSuffixType = z.infer<typeof FilenameSuffix>;

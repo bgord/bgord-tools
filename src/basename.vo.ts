@@ -9,7 +9,7 @@ export const BasenameTrailingDotForbiddenError = "basename.trailing.dot.forbidde
 export const BasenameBadCharsError = "basename.bad.chars" as const;
 
 // Letters, digits, dots, underscores, and hyphens allowed
-const BasenameWhitelist = /^[a-zA-Z0-9._-]+$/;
+const BASENAME_WHITELIST = /^[a-zA-Z0-9._-]+$/;
 
 const SEGMENTS = [".", ".."];
 
@@ -24,7 +24,7 @@ export const Basename = z
   .refine((value) => !value.startsWith("."), BasenameDotfilesForbiddenError)
   // Reject trailing dot like "picture." to avoid extension collision
   .refine((value) => !value.endsWith("."), BasenameTrailingDotForbiddenError)
-  .regex(BasenameWhitelist, BasenameBadCharsError)
+  .regex(BASENAME_WHITELIST, BasenameBadCharsError)
   .brand("Basename");
 
 export type BasenameType = z.infer<typeof Basename>;
