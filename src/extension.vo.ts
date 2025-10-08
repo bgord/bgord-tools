@@ -5,14 +5,18 @@ export const ExtensionEmptyError = "extension.empty" as const;
 export const ExtensionTooLongError = "extension.too.long" as const;
 export const ExtensionBadCharsError = "extension.bad.chars" as const;
 
+// Lowercase letters and digits allowed
+const ExtensionWhitelist = /^[a-z0-9]+$/;
+
 export const Extension = z
   .string(ExtensionTypeError)
   .trim()
   .toLowerCase()
-  .transform((value) => (value.startsWith(".") ? value.slice(1) : value))
-  .refine((value) => value.length >= 1, ExtensionEmptyError)
-  .refine((value) => value.length <= 16, ExtensionTooLongError)
-  .refine((value) => /^[a-z0-9]+$/.test(value), ExtensionBadCharsError)
+  .min(2, ExtensionEmptyError)
+  .max(16, ExtensionTooLongError)
+  // Transform ".png" -> "png"
+  .transform((value) => value.replace(/^\./, ""))
+  .refine((value) => ExtensionWhitelist.test(value), ExtensionBadCharsError)
   .brand("Extension");
 
 export type ExtensionType = z.infer<typeof Extension>;

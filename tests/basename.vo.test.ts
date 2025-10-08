@@ -2,11 +2,9 @@ import { describe, expect, test } from "bun:test";
 import {
   Basename,
   BasenameBadCharsError,
-  BasenameControlCharsForbiddenError,
   BasenameDotfilesForbiddenError,
   BasenameDotSegmentsForbiddenError,
   BasenameEmptyError,
-  BasenameSlashesForbiddenError,
   BasenameTooLongError,
   BasenameTrailingDotForbiddenError,
   BasenameTypeError,
@@ -50,19 +48,19 @@ describe("Basename", () => {
   });
 
   test("rejects forward slash 'a/b'", () => {
-    expect(() => Basename.parse("a/b")).toThrow(BasenameSlashesForbiddenError);
+    expect(() => Basename.parse("a/b")).toThrow(BasenameBadCharsError);
   });
 
   test("rejects backslash 'a\\b'", () => {
-    expect(() => Basename.parse("a\\b")).toThrow(BasenameSlashesForbiddenError);
+    expect(() => Basename.parse("a\\b")).toThrow(BasenameBadCharsError);
   });
 
   test("rejects control char 'line\\nbreak'", () => {
-    expect(() => Basename.parse("line\nbreak")).toThrow(BasenameControlCharsForbiddenError);
+    expect(() => Basename.parse("line\nbreak")).toThrow(BasenameBadCharsError);
   });
 
   test("rejects control char 'nul\\u0000byte'", () => {
-    expect(() => Basename.parse("nul\u0000byte")).toThrow(BasenameControlCharsForbiddenError);
+    expect(() => Basename.parse("nul\u0000byte")).toThrow(BasenameBadCharsError);
   });
 
   test("rejects '.'", () => {
