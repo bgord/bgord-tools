@@ -4,16 +4,16 @@ export class Sum {
   }
 
   static precise(values: readonly number[]): number {
-    let runningTotal = 0;
-    let roundingCompensation = 0;
+    let sum = 0;
+    let compensation = 0;
 
-    for (const currentValue of values) {
-      const correctedAddend = currentValue - roundingCompensation;
-      const tentativeTotal = runningTotal + correctedAddend;
-      roundingCompensation = tentativeTotal - runningTotal - correctedAddend;
-      runningTotal = tentativeTotal;
+    for (const value of values) {
+      const adjusted = value - compensation;
+      const temporary = sum + adjusted;
+      compensation = temporary - sum - adjusted;
+      sum = temporary;
     }
 
-    return runningTotal;
+    return sum;
   }
 }
