@@ -1,14 +1,13 @@
 import { ZScore } from "./z-score.service";
 
-// TODO
-export const OutlierDetectorMinValuesError = "outlier.detector.min.values" as const;
+export const OutlierDetectorError = { NotEnoughValues: "outlier.detector.not.enough.values" } as const;
 
 export class OutlierDetector {
   private readonly zScore: ZScore;
   private readonly threshold: number;
 
   constructor(values: number[], threshold: number) {
-    if (values.length < 2) throw new Error(OutlierDetectorMinValuesError);
+    if (values.length < 2) throw new Error(OutlierDetectorError.NotEnoughValues);
 
     this.zScore = new ZScore(values);
     this.threshold = Math.abs(threshold);
