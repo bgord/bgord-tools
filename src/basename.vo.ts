@@ -1,12 +1,14 @@
 import { z } from "zod/v4";
 
-export const BasenameTypeError = "basename.not.string" as const;
-export const BasenameEmptyError = "basename.empty" as const;
-export const BasenameTooLongError = "basename.too.long" as const;
-export const BasenameDotSegmentsForbiddenError = "basename.dot.segments.forbidden" as const;
-export const BasenameDotfilesForbiddenError = "basename.dotfiles.forbidden" as const;
-export const BasenameTrailingDotForbiddenError = "basename.trailing.dot.forbidden" as const;
-export const BasenameBadCharsError = "basename.bad.chars" as const;
+export const BasenameError = {
+  Type: "basename.type",
+  Empty: "basename.empty",
+  TooLong: "basename.too.long",
+  DotSegments: "basename.dot.segments",
+  Dotfiles: "basename.dotfiles",
+  TrailingDot: "basename.trailing.dot",
+  BadChars: "basename.bad.chars",
+} as const;
 
 // Letters, digits, dots, underscores, and hyphens allowed
 const BASENAME_WHITELIST = /^[a-zA-Z0-9._-]+$/;
@@ -14,17 +16,17 @@ const BASENAME_WHITELIST = /^[a-zA-Z0-9._-]+$/;
 const SEGMENTS = [".", ".."];
 
 export const Basename = z
-  .string(BasenameTypeError)
+  .string(BasenameError.Type)
   .trim()
-  .min(1, BasenameEmptyError)
-  .max(128, BasenameTooLongError)
+  .min(1, BasenameError.Empty)
+  .max(128, BasenameError.TooLong)
   // Reject "." and ".." as a filename to avoid directory traversal
-  .refine((value) => !SEGMENTS.includes(value), BasenameDotSegmentsForbiddenError)
+  .refine((value) => !SEGMENTS.includes(value), BasenameError.DotSegments)
   // Reject dotfiles like ".env"
-  .refine((value) => !value.startsWith("."), BasenameDotfilesForbiddenError)
+  .refine((value) => !value.startsWith("."), BasenameError.Dotfiles)
   // Reject trailing dot like "picture." to avoid extension collision
-  .refine((value) => !value.endsWith("."), BasenameTrailingDotForbiddenError)
-  .regex(BASENAME_WHITELIST, BasenameBadCharsError)
+  .refine((value) => !value.endsWith("."), BasenameError.TrailingDot)
+  .regex(BASENAME_WHITELIST, BasenameError.BadChars)
   .brand("Basename");
 
 export type BasenameType = z.infer<typeof Basename>;
