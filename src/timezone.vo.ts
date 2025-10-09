@@ -1,18 +1,24 @@
 import { z } from "zod/v4";
 
-export const TimezoneError = { error: "timezone.invalid" } as const;
+export const TimezoneError = {
+  Type: "timezone.type",
+  Empty: "timezone.empty",
+  TooLong: "timezone.too.long",
+  Invalid: "timezone.invalid",
+} as const;
 
 export const Timezone = z
-  .string(TimezoneError)
-  .min(1, TimezoneError)
+  .string(TimezoneError.Type)
+  .min(1, TimezoneError.Empty)
+  .max(128, TimezoneError.TooLong)
   .refine((value) => {
     try {
       new Intl.DateTimeFormat("en-US", { timeZone: value }).format(new Date());
       return true;
-    } catch (_error) {
+    } catch {
       return false;
     }
-  }, TimezoneError)
+  }, TimezoneError.Invalid)
   .brand("Timezone");
 
 export type TimezoneType = z.infer<typeof Timezone>;
