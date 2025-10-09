@@ -1,11 +1,18 @@
 import { getISOWeeksInYear } from "date-fns";
 import { z } from "zod/v4";
 
-export const WeekIsoIdError = { error: "week-iso-id.invalid" } as const;
+export const WeekIsoIdError = {
+  Type: "week.iso.id.type",
+  BadChars: "week.iso.id.bad.chars",
+  Invalid: "week.iso.id.invalid",
+} as const;
+
+// Four digits, hypen, W, followed by two digits
+const WEEK_ISO_ID_CHARS_WHITELIST = /^\d{4}-W\d{2}$/;
 
 export const WeekIsoId = z
-  .string(WeekIsoIdError)
-  .regex(/^\d{4}-W\d{2}$/, WeekIsoIdError)
+  .string(WeekIsoIdError.Type)
+  .regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars)
   .refine((value) => {
     const [yearPart, weekPart] = value.split("-W");
 
@@ -17,6 +24,6 @@ export const WeekIsoId = z
     const weeksInYear = getISOWeeksInYear(new Date(Date.UTC(year, 0, 4)));
 
     return week <= weeksInYear;
-  }, WeekIsoIdError);
+  }, WeekIsoIdError.Invalid);
 
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;
