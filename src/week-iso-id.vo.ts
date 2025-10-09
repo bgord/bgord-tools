@@ -14,12 +14,9 @@ export const WeekIsoId = z
   .string(WeekIsoIdError.Type)
   .regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars)
   .refine((value) => {
-    const [yearPart, weekPart] = value.split("-W");
+    const [year, week] = value.split("-W").map(Number);
 
-    const year = Number(yearPart);
-    const week = Number(weekPart);
-
-    if (!(Number.isInteger(year) && Number.isInteger(week)) || week < 1) return false;
+    if (week < 1) return false;
 
     const weeksInYear = getISOWeeksInYear(new Date(Date.UTC(year, 0, 4)));
 
