@@ -1,24 +1,14 @@
 import { differenceInYears } from "date-fns";
-import { z } from "zod/v4";
+import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
 import type { TimestampType } from "./timestamp.vo";
 
-// TODO
-export const AgeValueError = { error: "invalid.age" } as const;
-export const InvalidBirthdateInFutureError = "invalid.birthdate_in_future" as const;
-export const InvalidBirthdateError = "invalid.birthdate" as const;
+export const AgeError = { FutureBirthdate: "age.future.birthdate" } as const;
 
 export class Age {
-  static readonly MIN = 1;
-  static readonly MAX = 130;
+  static readonly MIN = AgeYearsConstraints.min;
+  static readonly MAX = AgeYearsConstraints.max;
 
-  static readonly AgeValue = z
-    .number(AgeValueError)
-    .int(AgeValueError)
-    .min(Age.MIN, AgeValueError)
-    .max(Age.MAX, AgeValueError)
-    .brand("AgeValue");
-
-  private constructor(private readonly value: z.infer<typeof Age.AgeValue>) {}
+  private constructor(private readonly value: AgeYearsType) {}
 
   get(): number {
     return this.value as number;
@@ -45,18 +35,18 @@ export class Age {
   }
 
   static fromValue(candidate: number): Age {
-    return new Age(Age.AgeValue.parse(candidate));
+    return new Age(AgeYears.parse(candidate));
   }
 
   static fromBirthdateEpochMs(params: { birthdate: TimestampType; now: TimestampType }): Age {
-    if (params.birthdate > params.now) throw new Error(InvalidBirthdateInFutureError);
+    if (params.birthdate > params.now) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(params.now, params.birthdate));
   }
 
   static fromBirthdate(params: { birthdate: string; now: TimestampType }): Age {
     const birthdateMs = new Date(params.birthdate).getTime();
 
-    if (birthdateMs > params.now) throw new Error(InvalidBirthdateInFutureError);
+    if (birthdateMs > params.now) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(params.now, birthdateMs));
   }
 

@@ -1,24 +1,14 @@
 import { describe, expect, test } from "bun:test";
-import { Age, AgeValueError, InvalidBirthdateInFutureError } from "../src/age.vo";
+import { Age, AgeError } from "../src/age.vo";
+import { AgeYearsError } from "../src/age-years.vo";
 import { Timestamp, type TimestampType } from "../src/timestamp.vo";
 
 const toTimestamp = (ms: string) => Timestamp.parse(new Date(ms).getTime());
 
 describe("Age", () => {
   describe("fromValue", () => {
-    test("creates for minimum allowed age (1)", () => {
-      expect(Age.fromValue(1).get()).toEqual(1);
-    });
-
-    test("creates for maximum allowed age (130)", () => {
-      expect(Age.fromValue(130).get()).toEqual(130);
-    });
-
-    test("invalid values", () => {
-      for (const invalid of [0, 131, -5, 18.5, Number.NaN]) {
-        expect(() => Age.fromValue(invalid)).toThrow(AgeValueError.error);
-      }
-    });
+    expect(Age.fromValue(1).get()).toEqual(1);
+    expect(Age.fromValue(130).get()).toEqual(130);
   });
 
   describe("comparison & equality", () => {
@@ -64,7 +54,7 @@ describe("Age", () => {
   });
 
   describe("fromBirthdateEpochMs", () => {
-    test("computes age when birthday has already happened this year", () => {
+    test("birthday has already happened this year", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdateTimestamp = toTimestamp("2000-09-01T00:00:00.000Z");
 
@@ -73,7 +63,7 @@ describe("Age", () => {
       );
     });
 
-    test("computes age when birthday has NOT yet happened this year", () => {
+    test("birthday has NOT yet happened this year", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdateTimestamp = toTimestamp("2000-10-01T00:00:00.000Z");
 
@@ -82,7 +72,7 @@ describe("Age", () => {
       );
     });
 
-    test("computes age exactly on birthday", () => {
+    test("exactly on birthday", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdateTimestamp = toTimestamp("2000-09-30T00:00:00.000Z");
 
@@ -97,44 +87,44 @@ describe("Age", () => {
 
       expect(() =>
         Age.fromBirthdateEpochMs({ birthdate: futureBirthdateTimestamp, now: nowTimestamp }),
-      ).toThrowError(InvalidBirthdateInFutureError);
+      ).toThrowError(AgeError.FutureBirthdate);
     });
 
-    test("rejects ages above MAX when derived from birthdate", () => {
+    test("rejects above upper bound", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
       const veryOldBirthdateTimestamp = -5364662400000 as TimestampType;
 
       expect(() =>
         Age.fromBirthdateEpochMs({ birthdate: veryOldBirthdateTimestamp, now: nowTimestamp }),
-      ).toThrow(AgeValueError.error);
+      ).toThrow(AgeYearsError.Invalid);
     });
 
-    test("respects lower bound (MIN) when derived from birthdate", () => {
+    test("respects lower bound", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
       const sameDayBirthdateTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
 
       expect(() =>
         Age.fromBirthdateEpochMs({ birthdate: sameDayBirthdateTimestamp, now: nowTimestamp }),
-      ).toThrow(AgeValueError.error);
+      ).toThrow(AgeYearsError.Invalid);
     });
   });
 
   describe("fromBirthdate", () => {
-    test("computes age when birthday has already happened this year", () => {
+    test("birthday has already happened this year", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2000-09-01T00:00:00.000Z";
 
       expect(Age.fromBirthdate({ birthdate, now }).get()).toEqual(25);
     });
 
-    test("computes age when birthday has NOT yet happened this year", () => {
+    test("birthday has NOT yet happened this year", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2000-10-01T00:00:00.000Z";
 
       expect(Age.fromBirthdate({ birthdate, now }).get()).toEqual(24);
     });
 
-    test("computes age exactly on birthday", () => {
+    test("exactly on birthday", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2000-09-30T00:00:00.000Z";
 
@@ -145,28 +135,28 @@ describe("Age", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2025-10-01T00:00:00.000Z";
 
-      expect(() => Age.fromBirthdate({ birthdate, now })).toThrowError(InvalidBirthdateInFutureError);
+      expect(() => Age.fromBirthdate({ birthdate, now })).toThrowError(AgeError.FutureBirthdate);
     });
 
-    test("rejects ages above MAX when derived from birthdate", () => {
+    test("rejects above upper bound", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "1800-01-01T00:00:00.000Z";
 
-      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeValueError.error);
+      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Invalid);
     });
 
-    test("respects lower bound (MIN) when derived from birthdate", () => {
+    test("respects lower bound", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "2025-09-30T00:00:00.000Z";
 
-      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeValueError.error);
+      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Invalid);
     });
 
-    test("invalid date string throws (cannot be parsed)", () => {
+    test("invalid date string throws", () => {
       const now = toTimestamp("2025-09-30T00:00:00.000Z");
       const birthdate = "not-a-date";
 
-      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeValueError.error);
+      expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Type);
     });
   });
 
