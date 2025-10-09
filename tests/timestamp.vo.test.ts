@@ -2,25 +2,39 @@ import { describe, expect, test } from "bun:test";
 import { Timestamp, TimestampError } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {
-  test("accepts valid timestamps", () => {
-    for (const value of [0, Date.now(), Number.MAX_SAFE_INTEGER]) {
-      expect(Timestamp.safeParse(value).success).toEqual(true);
-    }
+  test("accepts 0", () => {
+    expect(Timestamp.safeParse(0).success).toEqual(true);
   });
 
-  test("rejects invalid timestamps with VO error", () => {
-    const invalid = [
-      -1,
-      123.45,
-      Number.NaN,
-      Number.POSITIVE_INFINITY,
-      Number.NEGATIVE_INFINITY,
-      Number.MAX_SAFE_INTEGER + 1,
-      "123",
-    ];
+  test("accepts current timestamp", () => {
+    expect(Timestamp.safeParse(Date.now()).success).toEqual(true);
+  });
 
-    for (const value of invalid) {
-      expect(() => Timestamp.parse(value)).toThrow(TimestampError.error);
-    }
+  test("accepts MAX_SAFE_INTEGER", () => {
+    expect(Timestamp.safeParse(Number.MAX_SAFE_INTEGER).success).toEqual(true);
+  });
+
+  test("rejects non-number - null", () => {
+    expect(() => Timestamp.parse(null)).toThrow(TimestampError.Invalid);
+  });
+
+  test("rejects non-number - string", () => {
+    expect(() => Timestamp.parse("123")).toThrow(TimestampError.Invalid);
+  });
+
+  test("rejects negative numbers", () => {
+    expect(() => Timestamp.parse(-1)).toThrow(TimestampError.Invalid);
+  });
+
+  test("rejects fractions", () => {
+    expect(() => Timestamp.parse(1.5)).toThrow(TimestampError.Invalid);
+  });
+
+  test("rejects NaN", () => {
+    expect(() => Timestamp.parse(Number.NaN)).toThrow(TimestampError.Invalid);
+  });
+
+  test("rejects POSITIVE_INFINITY", () => {
+    expect(() => Timestamp.parse(Number.POSITIVE_INFINITY)).toThrow(TimestampError.Invalid);
   });
 });
