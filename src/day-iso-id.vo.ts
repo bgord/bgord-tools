@@ -17,6 +17,7 @@ export const DayIsoId = z
     // TODO
     (value) => isValid(parseISO(value)) && value === parseISO(value).toISOString().slice(0, 10),
     DayIsoIdError.InvalidDate,
-  );
+  )
+  .brand("DayIsoId");
 
 export type DayIsoIdType = z.infer<typeof DayIsoId>;

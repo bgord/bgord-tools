@@ -7,7 +7,7 @@ export const QuarterIsoIdError = {
 
 export const QuarterIsoId = z
   .string(QuarterIsoIdError.Type)
-  .regex(/^\d{4}-Q[1-4]$/, QuarterIsoIdError.BadChars);
+  .regex(/^\d{4}-Q[1-4]$/, QuarterIsoIdError.BadChars)
+  .brand("QuarterIsoId");
 
-// TODO
 export type QuarterIsoIdType = z.infer<typeof QuarterIsoId>;
