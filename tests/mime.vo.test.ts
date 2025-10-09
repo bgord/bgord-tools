@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Extension } from "../src/extension.vo";
-import { MimeError, Mime } from "../src/mime.vo";
+import { Mime } from "../src/mime.vo";
+import { MimeValueError } from "../src/mime-value.vo";
 
 describe("Mime", () => {
   test("creates a Mime instance with valid input", () => {
@@ -11,18 +12,11 @@ describe("Mime", () => {
     expect(mime.subtype).toEqual("plain");
   });
 
-  test("allows parameters to remain in raw value", () => {
-    const mime = new Mime("text/html; charset=utf-8");
-
-    expect(mime.type).toEqual("text");
-    expect(mime.subtype).toEqual("html; charset=utf-8");
-  });
-
   test("throws InvalidMimeError for invalid input", () => {
-    expect(() => new Mime("")).toThrow(MimeError.Invalid);
-    expect(() => new Mime("/subtype")).toThrow(MimeError.Invalid);
-    expect(() => new Mime("type/")).toThrow(MimeError.Invalid);
-    expect(() => new Mime("no-slash")).toThrow(MimeError.Invalid);
+    expect(() => new Mime("")).toThrow(MimeValueError.Invalid);
+    expect(() => new Mime("/subtype")).toThrow(MimeValueError.Invalid);
+    expect(() => new Mime("type/")).toThrow(MimeValueError.Invalid);
+    expect(() => new Mime("no-slash")).toThrow(MimeValueError.Invalid);
   });
 
   test("correctly checks wildcard satisfaction rules", () => {

@@ -1,21 +1,15 @@
 import * as mime from "mime-types";
 import { Extension, type ExtensionType } from "./extension.vo";
+import { MimeValue } from "./mime-value.vo";
 
-// TODO
-type MimeTypeType = string;
-type MimeSubtypeType = string;
-
-export const MimeError = { Invalid: "mime.invalid", NotAccepted: "mime.not.accepted" } as const;
+export const MimeError = { NotAccepted: "mime.not.accepted" } as const;
 
 export class Mime {
-  readonly type: MimeTypeType;
-  readonly subtype: MimeSubtypeType;
+  readonly type: string;
+  readonly subtype: string;
 
   constructor(candidate: string) {
-    const [type, subtype] = candidate.split("/");
-
-    if (typeof type !== "string" || type.length === 0) throw new Error(MimeError.Invalid);
-    if (typeof subtype !== "string" || subtype.length === 0) throw new Error(MimeError.Invalid);
+    const { type, subtype } = MimeValue.parse(candidate);
 
     this.type = type;
     this.subtype = subtype;
