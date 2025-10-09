@@ -1,15 +1,21 @@
 import { z } from "zod/v4";
 
-export const MonthIsoIdError = { error: "month-iso-id.invalid" } as const;
+export const MonthIsoIdError = {
+  Type: "month.iso.id.type",
+  BadChars: "month.iso.id.bad.chars",
+  Invalid: "month.iso.id.invalid",
+} as const;
+
+// Four digits, hyphen, two digits
+const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;
 
 export const MonthIsoId = z
-  .string(MonthIsoIdError)
-  .regex(/^\d{4}-\d{2}$/, MonthIsoIdError)
+  .string(MonthIsoIdError.Type)
+  .regex(MONTH_ISO_ID_CHARS_WHITELIST, MonthIsoIdError.BadChars)
   .refine((value) => {
-    const year = Number(value.slice(0, 4));
-    const month = Number(value.slice(5, 7));
+    const month = value.split("-").map(Number)[1];
 
-    return Number.isInteger(year) && Number.isInteger(month) && month >= 1 && month <= 12;
-  }, MonthIsoIdError);
+    return month >= 1 && month <= 12;
+  }, MonthIsoIdError.Invalid);
 
 export type MonthIsoIdType = z.infer<typeof MonthIsoId>;

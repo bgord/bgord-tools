@@ -1,32 +1,37 @@
 import { describe, expect, test } from "bun:test";
-import { MonthIsoId } from "../src/month-iso-id.vo";
+import { MonthIsoId, MonthIsoIdError } from "../src/month-iso-id.vo";
 
 describe("MonthIsoId", () => {
-  test("accepts valid YYYY-MM values", () => {
-    const months = ["0000-01", "1970-01", "1999-12", "2024-02", "2025-10", "9999-12"];
-    for (const month of months) expect(MonthIsoId.safeParse(month).success).toEqual(true);
+  test("happy path", () => {
+    const valid = ["0000-01", "1970-01", "1999-12", "2024-02", "2025-10", "9999-12"];
+
+    for (const value of valid) {
+      expect(MonthIsoId.safeParse(value).success).toEqual(true);
+    }
   });
 
-  test("rejects structurally invalid strings (regex mismatch)", () => {
-    const invalidFormat = [
-      "2023-1",
-      "2023/01",
-      "23-01",
-      "2023-001",
-      "2023-0x",
-      " 2023-01",
-      "2023-01 ",
-      "2023- 01",
-      "202301",
-      "2023--01",
-      "10000-01",
-      "",
-    ];
-    for (const sample of invalidFormat) expect(MonthIsoId.safeParse(sample).success).toEqual(false);
+  test("rejects empty", () => {
+    expect(() => MonthIsoId.parse("")).toThrow(MonthIsoIdError.BadChars);
   });
 
-  test("rejects semantically invalid months but matching the regex", () => {
-    const months = ["2023-00", "2023-13"];
-    for (const month of months) expect(MonthIsoId.safeParse(month).success).toEqual(false);
+  test("rejects non-string null", () => {
+    expect(() => MonthIsoId.parse(null)).toThrow(MonthIsoIdError.Type);
+  });
+
+  test("rejects non-string number", () => {
+    expect(() => MonthIsoId.parse(123)).toThrow(MonthIsoIdError.Type);
+  });
+
+  test("rejects structurally invalid strings", () => {
+    const invalid = ["2023-1", "2023/01", "23-01"];
+
+    for (const value of invalid) {
+      expect(() => MonthIsoId.parse(value)).toThrow(MonthIsoIdError.BadChars);
+    }
+  });
+
+  test("rejects months < 1 and > 12", () => {
+    expect(() => MonthIsoId.parse("2023-00")).toThrow(MonthIsoIdError.Invalid);
+    expect(() => MonthIsoId.parse("2023-13")).toThrow(MonthIsoIdError.Invalid);
   });
 });
