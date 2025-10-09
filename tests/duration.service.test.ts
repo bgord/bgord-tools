@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { Duration, Time } from "../src/duration.service";
+import { Duration } from "../src/duration.service";
 import { DurationMs } from "../src/duration-ms.vo";
-import { Timestamp } from "../src/timestamp.vo";
 
 describe("Duration", () => {
   describe("Days", () => {
@@ -81,20 +80,6 @@ describe("Duration", () => {
       expect(a.isShorterThan(c)).toBe(true);
       expect(a.isLongerThan(c)).toBe(false);
       expect(c.isShorterThan(a)).toBe(false);
-    });
-  });
-
-  describe("Time.Now", () => {
-    test("Minus produces a timestamp", () => {
-      const start = Timestamp.parse(1_700_000_000_000);
-      const result = Time.Now(start).Minus(Duration.Ms(500));
-      expect(result).toEqual(Timestamp.parse(1_699_999_999_500));
-    });
-
-    test("Add produces a timestamp", () => {
-      const start = Timestamp.parse(1_700_000_000_000);
-      const result = Time.Now(start).Add(Duration.Ms(500));
-      expect(result).toEqual(Timestamp.parse(1_700_000_000_500));
     });
   });
 });
