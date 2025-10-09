@@ -12,6 +12,9 @@ export class IBAN {
   }
 
   format(): string {
+    // (.{4}) - capture any four characters
+    // (?=.) - positive lookahead, at least one more character after the match
+    // "$1 " - replace each match with the group and a space
     return this.value.replace(/(.{4})(?=.)/g, "$1 ");
   }
 
