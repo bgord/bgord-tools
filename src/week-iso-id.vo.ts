@@ -21,7 +21,7 @@ export const WeekIsoId = z
     const weeksInYear = getISOWeeksInYear(new Date(Date.UTC(year, 0, 4)));
 
     return week <= weeksInYear;
-  }, WeekIsoIdError.Invalid);
+  }, WeekIsoIdError.Invalid)
+  .brand("WeekIsoId");
 
-// TODO
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;
