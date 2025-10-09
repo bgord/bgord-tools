@@ -1,11 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import {
-  Extension,
-  ExtensionBadCharsError,
-  ExtensionEmptyError,
-  ExtensionTooLongError,
-  ExtensionTypeError,
-} from "../src/extension.vo";
+import { Extension, ExtensionError } from "../src/extension.vo";
 
 describe("Extension", () => {
   test("accepts 'webp'", () => {
@@ -29,15 +23,15 @@ describe("Extension", () => {
   });
 
   test("rejects empty string", () => {
-    expect(() => Extension.parse("")).toThrow(ExtensionEmptyError);
+    expect(() => Extension.parse("")).toThrow(ExtensionError.Empty);
   });
 
   test("rejects single char", () => {
-    expect(() => Extension.parse("a")).toThrow(ExtensionEmptyError);
+    expect(() => Extension.parse("a")).toThrow(ExtensionError.Empty);
   });
 
   test("rejects single dot '.' (becomes empty after normalize)", () => {
-    expect(() => Extension.parse(".")).toThrow(ExtensionEmptyError);
+    expect(() => Extension.parse(".")).toThrow(ExtensionError.Empty);
   });
 
   test("accepts length 16", () => {
@@ -45,30 +39,30 @@ describe("Extension", () => {
   });
 
   test("rejects length 17", () => {
-    expect(() => Extension.parse("a".repeat(17))).toThrow(ExtensionTooLongError);
+    expect(() => Extension.parse("a".repeat(17))).toThrow(ExtensionError.TooLong);
   });
 
   test("rejects hyphen 'web-p'", () => {
-    expect(() => Extension.parse("web-p")).toThrow(ExtensionBadCharsError);
+    expect(() => Extension.parse("web-p")).toThrow(ExtensionError.BadChars);
   });
 
   test("rejects space 'web p'", () => {
-    expect(() => Extension.parse("web p")).toThrow(ExtensionBadCharsError);
+    expect(() => Extension.parse("web p")).toThrow(ExtensionError.BadChars);
   });
 
   test("rejects punctuation 'webp!'", () => {
-    expect(() => Extension.parse("webp!")).toThrow(ExtensionBadCharsError);
+    expect(() => Extension.parse("webp!")).toThrow(ExtensionError.BadChars);
   });
 
   test("rejects '..png' (normalizes to '.png', dot disallowed)", () => {
-    expect(() => Extension.parse("..png")).toThrow(ExtensionBadCharsError);
+    expect(() => Extension.parse("..png")).toThrow(ExtensionError.BadChars);
   });
 
   test("rejects non-string (number)", () => {
-    expect(() => Extension.parse(123)).toThrow(ExtensionTypeError);
+    expect(() => Extension.parse(123)).toThrow(ExtensionError.Type);
   });
 
   test("rejects non-string (object)", () => {
-    expect(() => Extension.parse({})).toThrow(ExtensionTypeError);
+    expect(() => Extension.parse({})).toThrow(ExtensionError.Type);
   });
 });
