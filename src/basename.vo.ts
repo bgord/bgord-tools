@@ -13,7 +13,7 @@ export const BasenameError = {
 // Letters, digits, dots, underscores, and hyphens allowed
 const BASENAME_WHITELIST = /^[a-zA-Z0-9._-]+$/;
 
-const SEGMENTS = [".", ".."];
+const DOT_SEGMENTS = [".", ".."];
 
 export const Basename = z
   .string(BasenameError.Type)
@@ -21,7 +21,7 @@ export const Basename = z
   .min(1, BasenameError.Empty)
   .max(128, BasenameError.TooLong)
   // Reject "." and ".." as a filename to avoid directory traversal
-  .refine((value) => !SEGMENTS.includes(value), BasenameError.DotSegments)
+  .refine((value) => !DOT_SEGMENTS.includes(value), BasenameError.DotSegments)
   // Reject dotfiles like ".env"
   .refine((value) => !value.startsWith("."), BasenameError.Dotfiles)
   // Reject trailing dot like "picture." to avoid extension collision

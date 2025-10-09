@@ -1,31 +1,34 @@
 import { z } from "zod/v4";
 
-// TODO
-export const ObjectKeyMustNotStartWithSlashError = "obj_key_must_not_start_with_slash" as const;
-export const ObjectKeyBackslashForbiddenError = "obj_key_backslash_forbidden" as const;
-export const ObjectKeyControlCharsForbiddenError = "obj_key_control_chars_forbidden" as const;
-export const ObjectKeyEmptyError = "obj_key_empty" as const;
-export const ObjectKeyBadSegmentsError = "obj_key_bad_segments" as const;
+export const ObjectKeyError = {
+  Type: "object.key.type",
+  LeadingSlash: "object.key.leading.slash",
+  Empty: "object.key.empty",
+  TooLong: "object.key.too.long",
+  BadChars: "object.key.bad.chars",
+  DotSegments: "object.key.dot.segments",
+} as const;
 
-// biome-ignore lint: lint/suspicious/noControlCharactersInRegex
-const CONTROL_CHARS_REGEX = /[\u0000-\u001F\u007F]/;
-const SEGMENT_ALLOWED_REGEX = /^[a-z0-9._-]+$/;
+// Lowercase letters, digits, dots, underscores, and hyphens
+const OBJECT_KEY_SEGMENT_CHARS_WHITELIST = /^[a-z0-9._-]+$/;
+
+const DOT_SEGMENTS = [".", ".."];
 
 export const ObjectKey = z
-  .string()
-  .trim()
-  // fastest early exits first:
-  .refine((value) => value.length > 0, ObjectKeyEmptyError)
-  .refine((value) => !value.startsWith("/"), ObjectKeyMustNotStartWithSlashError)
-  .refine((value) => !value.includes("\\"), ObjectKeyBackslashForbiddenError)
-  .refine((value) => !CONTROL_CHARS_REGEX.test(value), ObjectKeyControlCharsForbiddenError)
+  .string(ObjectKeyError.Type)
+  .min(1, ObjectKeyError.Empty)
+  .max(256, ObjectKeyError.TooLong)
+  .refine((value) => !value.startsWith("/"), ObjectKeyError.LeadingSlash)
+  // Allow only known characters for users/avatars/1234567890/avatar.png segments
   .refine(
-    (value) =>
-      value
-        .split("/")
-        .every((segment) => SEGMENT_ALLOWED_REGEX.test(segment) && segment !== "." && segment !== ".."),
-    ObjectKeyBadSegmentsError,
+    (value) => value.split("/").every((segment) => OBJECT_KEY_SEGMENT_CHARS_WHITELIST.test(segment)),
+    ObjectKeyError.BadChars,
   )
-  .brand("object_key");
+  // Reject object keys like users/./avatar.png or users/../avatar.png
+  .refine(
+    (value) => value.split("/").every((segment) => !DOT_SEGMENTS.includes(segment)),
+    ObjectKeyError.DotSegments,
+  )
+  .brand("ObjectKey");
 
 export type ObjectKeyType = z.infer<typeof ObjectKey>;
