@@ -4,7 +4,7 @@ import type { RoundingPort } from "./rounding.port";
 
 export class Duration {
   private static readonly rounding: RoundingPort = new RoundToDecimal(2);
-  private readonly valueMs: DurationMsType;
+  private readonly internal: DurationMsType;
 
   private static readonly MS_IN_SECOND = 1_000;
   private static readonly MS_IN_MINUTE = 60 * Duration.MS_IN_SECOND;
@@ -12,7 +12,7 @@ export class Duration {
   private static readonly MS_IN_DAY = 24 * Duration.MS_IN_HOUR;
 
   private constructor(candidateMs: number) {
-    this.valueMs = DurationMs.parse(candidateMs);
+    this.internal = DurationMs.parse(candidateMs);
   }
 
   static Days(value: number): Duration {
@@ -32,35 +32,35 @@ export class Duration {
   }
 
   get days(): number {
-    return Duration.rounding.round(this.valueMs / Duration.MS_IN_DAY);
+    return Duration.rounding.round(this.internal / Duration.MS_IN_DAY);
   }
   get hours(): number {
-    return Duration.rounding.round(this.valueMs / Duration.MS_IN_HOUR);
+    return Duration.rounding.round(this.internal / Duration.MS_IN_HOUR);
   }
   get minutes(): number {
-    return Duration.rounding.round(this.valueMs / Duration.MS_IN_MINUTE);
+    return Duration.rounding.round(this.internal / Duration.MS_IN_MINUTE);
   }
   get seconds(): number {
-    return Duration.rounding.round(this.valueMs / Duration.MS_IN_SECOND);
+    return Duration.rounding.round(this.internal / Duration.MS_IN_SECOND);
   }
   get ms(): DurationMsType {
-    return this.valueMs;
+    return this.internal;
   }
 
   isLongerThan(another: Duration): boolean {
-    return this.valueMs > another.valueMs;
+    return this.internal > another.internal;
   }
   isShorterThan(another: Duration): boolean {
-    return this.valueMs < another.valueMs;
+    return this.internal < another.internal;
   }
 
   equals(other: Duration): boolean {
-    return this.valueMs === other.valueMs;
+    return this.internal === other.internal;
   }
   add(another: Duration): Duration {
-    return Duration.Ms(this.valueMs + another.valueMs);
+    return Duration.Ms(this.internal + another.internal);
   }
   subtract(another: Duration): Duration {
-    return Duration.Ms(this.valueMs - another.valueMs);
+    return Duration.Ms(this.internal - another.internal);
   }
 }

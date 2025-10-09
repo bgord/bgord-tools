@@ -7,10 +7,7 @@ type EmailMaskedType = string;
 
 export class EmailMask {
   static censor(email: EmailType): EmailMaskedType {
-    const [beforeAt, afterAt] = email.split("@");
-
-    const local = beforeAt as string;
-    const domain = afterAt as string;
+    const [local, domain] = email.split("@").map(String);
 
     if (local.length <= 2) {
       return `${"*".repeat(local.length)}@${domain}`;
