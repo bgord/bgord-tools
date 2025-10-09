@@ -33,6 +33,7 @@ export * from "./mime.vo";
 export * from "./mime-types.vo";
 export * from "./min-max-scaler.service";
 export * from "./minute.vo";
+export * from "./minute-schema.vo";
 export * from "./money.vo";
 export * from "./month.vo";
 export * from "./month-iso-id.vo";

@@ -1,15 +1,16 @@
 import { describe, expect, test } from "bun:test";
-import { Minute, MinuteValueError } from "../src/minute.vo";
+import { Minute } from "../src/minute.vo";
+import { MinuteSchemaError } from "../src/minute-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Minute", () => {
   test("throws for invalid minute values", () => {
-    expect(() => new Minute(-1)).toThrow(MinuteValueError);
-    expect(() => new Minute(60)).toThrow(MinuteValueError);
-    expect(() => new Minute(12.5)).toThrow(MinuteValueError);
+    expect(() => new Minute(12.5)).toThrow(MinuteSchemaError.Type);
+    expect(() => new Minute(-1)).toThrow(MinuteSchemaError.Invalid);
+    expect(() => new Minute(60)).toThrow(MinuteSchemaError.Invalid);
   });
 
-  test("creates a valid Minute instance", () => {
+  test("happy path", () => {
     expect(new Minute(5).get()).toEqual(5);
   });
 
@@ -18,7 +19,7 @@ describe("Minute", () => {
     expect(new Minute(12).toString()).toEqual("12");
   });
 
-  test("equals compares correctly", () => {
+  test("equals", () => {
     const tenA = new Minute(10);
     const tenB = new Minute(10);
     const eleven = new Minute(11);
@@ -27,7 +28,7 @@ describe("Minute", () => {
     expect(tenA.equals(eleven)).toEqual(false);
   });
 
-  test("isAfter and isBefore work correctly", () => {
+  test("isAfter and isBefore", () => {
     const fifteen = new Minute(15);
     const ten = new Minute(10);
     const fifteenClone = new Minute(15);
@@ -37,7 +38,7 @@ describe("Minute", () => {
     expect(fifteen.isBefore(fifteenClone)).toEqual(false);
   });
 
-  test("Minute.list() returns cached 60 items", () => {
+  test("Minute.list()", () => {
     const list = Minute.list();
 
     expect(list.length).toEqual(60);
@@ -45,7 +46,7 @@ describe("Minute", () => {
     expect(list[59].get()).toEqual(59);
   });
 
-  test("Minute.ZERO and Minute.MAX return correct values", () => {
+  test("Minute.ZERO and Minute.MAX", () => {
     expect(Minute.ZERO.get()).toEqual(0);
     expect(Minute.MAX.get()).toEqual(59);
   });

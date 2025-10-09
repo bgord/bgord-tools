@@ -1,26 +1,21 @@
+import { MinuteSchema, type MinuteSchemaType } from "./minute-schema.vo";
 import type { TimestampType } from "./timestamp.vo";
 
-// TODO
-export const MinuteValueError = "invalid.minute" as const;
-
 export class Minute {
-  private readonly value: number;
+  private readonly value: MinuteSchemaType;
 
   static readonly ZERO = new Minute(0);
   static readonly MAX = new Minute(59);
 
   constructor(candidate: number) {
-    if (!Number.isInteger(candidate) || candidate < 0 || candidate >= 60) {
-      throw new Error(MinuteValueError);
-    }
-    this.value = candidate;
+    this.value = MinuteSchema.parse(candidate);
   }
 
   static fromEpochMs(timestamp: TimestampType): Minute {
     return new Minute(new Date(timestamp).getUTCMinutes());
   }
 
-  get(): number {
+  get(): MinuteSchemaType {
     return this.value;
   }
 
