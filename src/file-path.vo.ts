@@ -4,6 +4,7 @@ import { FilePathAbsoluteSchema } from "./file-path-absolute-schema.vo";
 import { FilePathRelativeSchema } from "./file-path-relative-schema.vo";
 import type { Filename } from "./filename.vo";
 
+// TODO
 export class FilePathRelative {
   private constructor(
     private readonly directory: DirectoryPathRelativeType,

@@ -2,6 +2,7 @@ import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 import { Sum } from "./sum.service";
 
+// TODO
 export const MeanEmptyValuesError = "mean.values.empty" as const;
 
 export class Mean {

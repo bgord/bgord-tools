@@ -2,6 +2,7 @@ import { z } from "zod/v4";
 import { DirectoryPathRelativeSchema } from "./directory-path-relative.vo";
 import { Filename } from "./filename.vo";
 
+// TODO
 export const RelFilePathTypeError = "rel.file.path.not.string" as const;
 export const RelFilePathMustNotStartWithSlashError = "rel_file_path_must_not_start_with_slash" as const;
 export const RelFilePathBackslashForbiddenError = "rel_file_path_backslash_forbidden" as const;

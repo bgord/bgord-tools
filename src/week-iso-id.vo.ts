@@ -23,4 +23,5 @@ export const WeekIsoId = z
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid);
 
+// TODO
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;

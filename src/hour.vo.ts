@@ -1,6 +1,7 @@
 import { type HourFormatter, HourFormatters } from "./hour-format.service";
 import type { TimestampType } from "./timestamp.vo";
 
+// TODO
 export const HourValueError = "invalid.hour" as const;
 
 export class Hour {

@@ -3,6 +3,7 @@ import { DateRange } from "./date-range.vo";
 import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
+// TODO
 export class Quarter extends DateRange {
   toIsoId(): QuarterIsoIdType {
     const year = getYear(this.getStart());

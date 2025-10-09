@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 import type { ETag, WeakETag } from "./etags.vo";
 
+// TODO
 export const RevisionValueError = { error: "invalid.revision.value" } as const;
 
 export const RevisionValue = z.number(RevisionValueError).int(RevisionValueError).min(0, RevisionValueError);

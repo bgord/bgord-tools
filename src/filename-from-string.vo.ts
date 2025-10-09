@@ -2,6 +2,7 @@ import { z } from "zod/v4";
 import { Basename } from "./basename.vo";
 import { Extension } from "./extension.vo";
 
+// TODO
 export const FilenameTypeError = "filename.not.string" as const;
 export const FilenameInvalidError = "filename.invalid" as const;
 

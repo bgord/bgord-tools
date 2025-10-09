@@ -1,5 +1,6 @@
 import type { TimestampType } from "./timestamp.vo";
 
+// TODO
 export type WeekdayFormatter = (value: Weekday["value"]) => string;
 
 export enum WeekdayFormatterEnum {

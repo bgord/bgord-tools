@@ -1,6 +1,7 @@
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
+// TODO
 export type SLRPairType = { x: number; y: number };
 export type SLRParamsType = { a: number; b: number };
 export type SLRPredictionType = number;

@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 
+// TODO
 export const ReorderingPositionError = { error: "reordering.position.invalid" } as const;
 export const ReorderingCannotFindItemError = { error: "reordering.item.not_found" } as const;
 export const ReorderingCannotFindCurrentError = { error: "reordering.current_item.not_found" } as const;

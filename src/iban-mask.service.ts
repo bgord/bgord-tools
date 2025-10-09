@@ -2,6 +2,7 @@ import type { IBAN } from "./iban.vo";
 
 type IbanMaskedType = string;
 
+// TODO
 export class IbanMask {
   static censor(iban: IBAN): IbanMaskedType {
     const value = iban.format();

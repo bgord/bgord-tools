@@ -1,6 +1,7 @@
 import { Duration } from "./duration.service";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
+// TODO
 type GetStartOfDayTsInTzConfigType = { now: TimestampType; timeZoneOffsetMs: number };
 
 export class DateCalculator {

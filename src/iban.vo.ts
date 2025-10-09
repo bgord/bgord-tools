@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
 
+// TODO
 export const IBANError = { error: "invalid.iban.format" } as const;
 
 // 2-letter country code + 2 digits + 11–30 alphanumerics (overall 15–34 chars)

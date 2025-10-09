@@ -1,6 +1,7 @@
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
+// TODO
 type MinMaxScalerValueType = number;
 
 type MinMaxScalerConfigType = {

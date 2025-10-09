@@ -2,6 +2,7 @@ import { differenceInYears } from "date-fns";
 import { z } from "zod/v4";
 import type { TimestampType } from "./timestamp.vo";
 
+// TODO
 export const AgeValueError = { error: "invalid.age" } as const;
 export const InvalidBirthdateInFutureError = "invalid.birthdate_in_future" as const;
 export const InvalidBirthdateError = "invalid.birthdate" as const;

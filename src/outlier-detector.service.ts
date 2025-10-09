@@ -1,5 +1,6 @@
 import { ZScore } from "./z-score.service";
 
+// TODO
 export const OutlierDetectorMinValuesError = "outlier.detector.min.values" as const;
 
 export class OutlierDetector {

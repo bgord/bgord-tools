@@ -3,6 +3,7 @@ import { Extension, type ExtensionType } from "./extension.vo";
 import { FilenameFromString } from "./filename-from-string.vo";
 import { FilenameSuffix, type FilenameSuffixType } from "./filename-suffix.vo";
 
+// TODO
 export class Filename {
   private constructor(
     private readonly basename: BasenameType,

@@ -21,6 +21,7 @@ export class RateLimiter {
 
     if (nextAllowedTimestampMs <= currentTimestampMs) {
       this.lastInvocationTimestampMs = currentTimestampMs;
+
       return { allowed: true };
     }
 

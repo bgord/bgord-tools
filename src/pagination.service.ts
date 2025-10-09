@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
 
+// TODO
 const PaginationTakeError = { error: "pagination.take.invalid" } as const;
 const PaginationSkipError = { error: "pagination.skip.invalid" } as const;
 const PaginationPageError = { error: "pagination.page.invalid" } as const;

@@ -1,6 +1,7 @@
 import { z } from "zod/v4";
 import { RoundToDecimal } from "./rounding.adapter";
 
+// TODO
 export enum SizeUnit {
   b = "b",
   kB = "kB",

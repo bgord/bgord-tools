@@ -3,6 +3,7 @@ import { DateRange } from "./date-range.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
+// TODO
 export class Week extends DateRange {
   toIsoId(): WeekIsoIdType {
     const year = getISOWeekYear(this.getStart());

@@ -1,5 +1,6 @@
 import type { TimestampType } from "./timestamp.vo";
 
+// TODO
 export const MinuteValueError = "invalid.minute" as const;
 
 export class Minute {

@@ -1,5 +1,6 @@
 type RandomGenerateConfigType = { min: number; max: number };
 
+// TODO
 export const RandomMinNotIntegerError = "random.min.not.integer" as const;
 export const RandomMaxNotIntegerError = "random.max.not.integer" as const;
 export const RandomMinEqualsMaxError = "random.min.equals.max" as const;

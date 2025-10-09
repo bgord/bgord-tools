@@ -18,6 +18,7 @@ export class RoundDown implements RoundingPort {
   }
 }
 
+// TODO
 export const RoundingDecimalsError = "invalid.rounding.decimals" as const;
 
 export class RoundToDecimal implements RoundingPort {

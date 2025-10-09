@@ -3,6 +3,7 @@ import { DateRange } from "./date-range.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
+// TODO
 export const YearInvalidIntegerError = "year.invalid_integer" as const;
 export const YearOutOfRangeError = "year.out_of_range" as const;
 

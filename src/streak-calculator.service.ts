@@ -1,5 +1,6 @@
 import { format, subDays } from "date-fns";
 
+// TODO
 type DateType = string;
 export type StreakType = { cutoff: DateType; dates: DateType[]; streak: number };
 

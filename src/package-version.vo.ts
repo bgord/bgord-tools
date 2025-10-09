@@ -1,5 +1,6 @@
 import { z } from "zod/v4";
 
+// TODO
 type MajorType = number;
 type MinorType = number;
 type PatchType = number;

@@ -2,6 +2,7 @@ import { z } from "zod/v4";
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
+// TODO
 export const MoneyAmountInvalidError = { error: "money.amount.invalid" } as const;
 export const MoneyMultiplicationFactorInvalidError = {
   error: "money.multiplication-factor.invalid",

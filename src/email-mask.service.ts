@@ -13,6 +13,7 @@ export class EmailMask {
       return `${"*".repeat(local.length)}@${domain}`;
     }
 
+    // TODO
     const censoredLocal = `${local.at(0)}${"*".repeat(local.length - 2)}${local.at(-1)}`;
 
     return `${censoredLocal}@${domain}`;

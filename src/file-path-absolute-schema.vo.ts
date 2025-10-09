@@ -2,6 +2,7 @@ import { z } from "zod/v4";
 import { DirectoryPathAbsoluteSchema } from "./directory-path-absolute.vo";
 import { Filename } from "./filename.vo";
 
+// TODO
 export const AbsFilePathTypeError = "abs.file.path.not.string" as const;
 export const AbsFilePathMustStartWithSlashError = "abs_file_path_must_start_with_slash" as const;
 export const AbsFilePathBackslashForbiddenError = "abs_file_path_backslash_forbidden" as const;

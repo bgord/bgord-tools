@@ -1,6 +1,7 @@
 import * as mime from "mime-types";
 import { Extension, type ExtensionType } from "./extension.vo";
 
+// TODO
 export type MimeRawType = string;
 type MimeTypeType = string;
 type MimeSubtypeType = string;

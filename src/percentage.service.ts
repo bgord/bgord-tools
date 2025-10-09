@@ -1,6 +1,7 @@
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
+// TODO
 export const PercentageInvalidDenominatorError = "percentage.invalid.denominator" as const;
 
 export class Percentage {
