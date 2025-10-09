@@ -17,7 +17,7 @@ describe("ThousandsSeparator", () => {
     [-1500000.5, "-1 500 000.5"],
   ] as const;
 
-  test("default separator (space)", () => {
+  test("default separator", () => {
     for (const [value, expected] of cases) {
       expect(ThousandsSeparator.format(value)).toEqual(expected);
     }
