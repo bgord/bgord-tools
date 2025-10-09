@@ -1,25 +1,33 @@
 import { describe, expect, test } from "bun:test";
 import { ApiKey, ApiKeyError } from "../src/api-key.vo";
 
-const validLower = "a".repeat(64);
-const validUpper = "A".repeat(64);
-
 describe("ApiKey", () => {
-  test("accepts a 64-char hex string", () => {
-    expect(() => ApiKey.parse(validLower)).not.toThrow();
-    expect(() => ApiKey.parse(validUpper)).not.toThrow();
+  test("accepts a 64-char string", () => {
+    expect(ApiKey.safeParse("a".repeat(64)).success).toEqual(true);
+    expect(ApiKey.safeParse("A".repeat(64)).success).toEqual(true);
   });
 
-  test("accepts valid key with surrounding whitespace (trimmed)", () => {
-    expect(() => ApiKey.parse(`  ${validLower}  `)).not.toThrow();
+  test("accepts a 64-char string trimmed", () => {
+    expect(() => ApiKey.parse(`  ${"a".repeat(64)}  `)).not.toThrow();
   });
 
-  test("rejects wrong length", () => {
-    expect(() => ApiKey.parse("a".repeat(63))).toThrow(ApiKeyError.error);
-    expect(() => ApiKey.parse("a".repeat(65))).toThrow(ApiKeyError.error);
+  test("rejects non-string input - number", () => {
+    expect(() => ApiKey.parse(123)).toThrow(ApiKeyError.Type);
   });
 
-  test("rejects non-string input", () => {
-    expect(() => ApiKey.parse(1234)).toThrow(ApiKeyError.error);
+  test("rejects non-string input - null", () => {
+    expect(() => ApiKey.parse(null)).toThrow(ApiKeyError.Type);
+  });
+
+  test("rejects empty", () => {
+    expect(() => ApiKey.parse("")).toThrow(ApiKeyError.Length);
+  });
+
+  test("rejects too long", () => {
+    expect(() => ApiKey.parse(`${"a".repeat(64)}abc`)).toThrow(ApiKeyError.Length);
+  });
+
+  test("rejects bad chars", () => {
+    expect(() => ApiKey.parse(`${"a".repeat(63)}!`)).toThrow(ApiKeyError.BadChars);
   });
 });
