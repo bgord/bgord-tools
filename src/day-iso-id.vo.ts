@@ -8,7 +8,7 @@ export const DayIsoIdError = {
 } as const;
 
 // Four digits, hyphen, two digits, hyphen, two digits
-export const DAY_ISO_ID_CHARS_WHITEILST = /^\d{4}-\d{2}-\d{2}$/;
+export const DAY_ISO_ID_CHARS_WHITEILST = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 
 export const DayIsoId = z
   .string(DayIsoIdError.Type)
