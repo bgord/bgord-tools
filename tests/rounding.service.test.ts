@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
   RoundDown,
-  RoundingDecimalsError,
+  RoundingDecimalError,
   RoundToDecimal,
   RoundToNearest,
   RoundUp,
@@ -32,7 +32,10 @@ describe("Rounding", () => {
     expect(rounding.round(3.245)).toBe(3.25);
   });
 
-  test("RoundToDecimal handles negative decimals", () => {
-    expect(() => new RoundToDecimal(-2)).toThrow(RoundingDecimalsError);
+  test("RoundToDecimal handles invalid decimals", () => {
+    expect(() => new RoundToDecimal(-1)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundToDecimal(0)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundToDecimal(1.5)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundToDecimal(101)).toThrow(RoundingDecimalError.Invalid);
   });
 });

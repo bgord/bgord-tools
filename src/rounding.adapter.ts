@@ -1,3 +1,4 @@
+import { z } from "zod/v4";
 import type { RoundingPort } from "./rounding.port";
 
 export class RoundToNearest implements RoundingPort {
@@ -18,12 +19,23 @@ export class RoundDown implements RoundingPort {
   }
 }
 
-// TODO
-export const RoundingDecimalsError = "invalid.rounding.decimals" as const;
+export const RoundingDecimalError = {
+  Type: "rounding.decimal.type",
+  Invalid: "rounding.decimal.invalid",
+} as const;
+
+export const RoundingDecimal = z
+  .number(RoundingDecimalError.Type)
+  .int(RoundingDecimalError.Invalid)
+  .min(1, RoundingDecimalError.Invalid)
+  .max(100, RoundingDecimalError.Invalid)
+  .brand("RoundingDecimal");
 
 export class RoundToDecimal implements RoundingPort {
-  constructor(private readonly decimals: number) {
-    if (!Number.isInteger(decimals) || decimals < 0 || decimals > 100) throw new Error(RoundingDecimalsError);
+  private readonly decimals: number;
+
+  constructor(candidate: number) {
+    this.decimals = RoundingDecimal.parse(candidate);
   }
 
   round(value: number): number {
