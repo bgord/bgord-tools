@@ -1,13 +1,4 @@
-import { z } from "zod/v4";
-
-// TODO
-export enum FeatureFlagEnum {
-  yes = "yes",
-  no = "no",
-}
-
-export const FeatureFlagValue = z.enum(FeatureFlagEnum);
-export type FeatureFlagValueType = z.infer<typeof FeatureFlagValue>;
+import { FeatureFlagEnum, type FeatureFlagValueType } from "./feature-flag-value.vo";
 
 export class FeatureFlag {
   static isEnabled(flag: FeatureFlagValueType): boolean {

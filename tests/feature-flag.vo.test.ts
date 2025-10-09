@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { FeatureFlag, FeatureFlagEnum } from "../src/feature-flag.vo";
+import { FeatureFlag } from "../src/feature-flag.vo";
+import { FeatureFlagEnum } from "../src/feature-flag-value.vo";
 
 describe("FeatureFlag", () => {
   test("isEnabled", () => {
