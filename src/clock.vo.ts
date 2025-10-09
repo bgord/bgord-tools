@@ -27,6 +27,7 @@ export class Clock {
 
   format(formatter?: ClockFormatter): string {
     const chosen = formatter ?? this.formatter;
+
     return chosen(this.hour, this.minute);
   }
 
@@ -39,18 +40,12 @@ export class Clock {
   }
 
   isAfter(another: Clock): boolean {
-    const thisHour = this.hour.get();
-    const otherHour = another.hour.get();
-
-    if (thisHour !== otherHour) return thisHour > otherHour;
+    if (this.hour.get() !== another.hour.get()) return this.hour.get() > another.hour.get();
     return this.minute.get() > another.minute.get();
   }
 
   isBefore(another: Clock): boolean {
-    const thisHour = this.hour.get();
-    const otherHour = another.hour.get();
-
-    if (thisHour !== otherHour) return thisHour < otherHour;
+    if (this.hour.get() !== another.hour.get()) return this.hour.get() < another.hour.get();
     return this.minute.get() < another.minute.get();
   }
 }

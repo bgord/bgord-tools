@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DateRange, DateRangeInvalidError } from "../src/date-range.vo";
+import { DateRange, DateRangeError } from "../src/date-range.vo";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 
@@ -10,7 +10,7 @@ const range = new DateRange(START, END);
 
 describe("DateRange", () => {
   test("throws when start > end", () => {
-    expect(() => new DateRange(END, START)).toThrow(DateRangeInvalidError);
+    expect(() => new DateRange(END, START)).toThrow(DateRangeError.Invalid);
   });
 
   test("returns the exact start timestamp", () => {

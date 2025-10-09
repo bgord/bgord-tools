@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
-import { DurationMsSchema } from "../src/duration.service";
+import { DurationMs } from "../src/duration-ms.vo";
 import { Stopwatch, StopwatchStateError } from "../src/stopwatch.service";
 import { Timestamp } from "../src/timestamp.vo";
 
@@ -13,7 +13,7 @@ describe("Stopwatch", () => {
     const stopwatch = new Stopwatch(T0);
     setSystemTime(T0 + 500);
 
-    expect(stopwatch.stop().ms).toBe(DurationMsSchema.parse(500));
+    expect(stopwatch.stop().ms).toEqual(DurationMs.parse(500));
   });
 
   test("throws if stop is called twice", () => {

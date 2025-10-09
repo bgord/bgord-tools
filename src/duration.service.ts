@@ -1,17 +1,7 @@
-import { z } from "zod/v4";
+import { DurationMs, type DurationMsType } from "./duration-ms.vo";
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
-
-export const DurationMsError = { error: "duration.invalid" } as const;
-
-export const DurationMsSchema = z
-  .number(DurationMsError)
-  .int(DurationMsError)
-  .refine(Number.isFinite, DurationMsError)
-  .brand("DurationMs");
-
-export type DurationMsType = z.infer<typeof DurationMsSchema>;
 
 export class Duration {
   private static readonly rounding: RoundingPort = new RoundToDecimal(2);
@@ -23,7 +13,7 @@ export class Duration {
   private static readonly MS_IN_DAY = 86_400_000;
 
   private constructor(candidateMs: number) {
-    this.valueMs = DurationMsSchema.parse(candidateMs);
+    this.valueMs = DurationMs.parse(candidateMs);
   }
 
   static Days(value: number): Duration {
