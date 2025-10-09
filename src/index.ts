@@ -58,7 +58,6 @@ export * from "./rounding.port";
 export * from "./simple-linear-regression.service";
 export * from "./size.vo";
 export * from "./stopwatch.service";
-export * from "./streak-calculator.service";
 export * from "./sum.service";
 export * from "./thousands-separator.service";
 export * from "./time.service";
