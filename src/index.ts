@@ -27,6 +27,7 @@ export * from "./hour.vo";
 export * from "./hour-schema.vo";
 export * from "./iban.vo";
 export * from "./iban-mask.service";
+export * from "./iban-schema.vo";
 export * from "./image.vo";
 export * from "./language.vo";
 export * from "./mean.service";
