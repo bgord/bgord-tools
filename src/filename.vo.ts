@@ -3,7 +3,6 @@ import { Extension, type ExtensionType } from "./extension.vo";
 import { FilenameFromString } from "./filename-from-string.vo";
 import { FilenameSuffix, type FilenameSuffixType } from "./filename-suffix.vo";
 
-// TODO
 export class Filename {
   private constructor(
     private readonly basename: BasenameType,
@@ -19,8 +18,9 @@ export class Filename {
   }
 
   static fromString(candidate: string): Filename {
-    const { basename, extension } = FilenameFromString.parse(candidate);
-    return new Filename(basename, extension);
+    const filename = FilenameFromString.parse(candidate);
+
+    return new Filename(filename.basename, filename.extension);
   }
 
   get(): string {
@@ -45,14 +45,14 @@ export class Filename {
 
   withSuffix(candidate: string): Filename {
     const suffix = FilenameSuffix.parse(candidate);
-    const basename = Basename.parse(`${this.basename}${suffix}`);
+    const changedBasename = Basename.parse(`${this.basename}${suffix}`);
 
-    return new Filename(basename, this.extension);
+    return new Filename(changedBasename, this.extension);
   }
 
   withSuffixSafe(suffix: FilenameSuffixType): Filename {
-    const basename = Basename.parse(`${this.basename}${suffix}`);
+    const changedBasename = Basename.parse(`${this.basename}${suffix}`);
 
-    return new Filename(basename, this.extension);
+    return new Filename(changedBasename, this.extension);
   }
 }
