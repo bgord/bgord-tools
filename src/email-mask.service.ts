@@ -1,20 +1,14 @@
-import { z } from "zod/v4";
-
-export const Email = z.email().brand("Email");
-export type EmailType = z.infer<typeof Email>;
-
-type EmailMaskedType = string;
-
 export class EmailMask {
-  static censor(email: EmailType): EmailMaskedType {
-    const [local, domain] = email.split("@").map(String);
+  static censor(email: string): string {
+    const [local, domain] = email.split("@");
 
-    if (local.length <= 2) {
-      return `${"*".repeat(local.length)}@${domain}`;
-    }
+    if (local.length <= 2) return `${"*".repeat(local.length)}@${domain}`;
 
-    // TODO
-    const censoredLocal = `${local.at(0)}${"*".repeat(local.length - 2)}${local.at(-1)}`;
+    const firstCharacter = local.at(0);
+    const censoredPart = "*".repeat(local.length - 2);
+    const lastCharacter = local.at(-1);
+
+    const censoredLocal = `${firstCharacter}${censoredPart}${lastCharacter}`;
 
     return `${censoredLocal}@${domain}`;
   }
