@@ -16,6 +16,7 @@ export const MonthIsoId = z
     const month = value.split("-").map(Number)[1];
 
     return month >= 1 && month <= 12;
-  }, MonthIsoIdError.Invalid);
+  }, MonthIsoIdError.Invalid)
+  .brand("MonthIsoId");
 
 export type MonthIsoIdType = z.infer<typeof MonthIsoId>;
