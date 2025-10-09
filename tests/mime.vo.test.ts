@@ -1,32 +1,28 @@
 import { describe, expect, test } from "bun:test";
 import { Extension } from "../src/extension.vo";
-import { InvalidMimeError, Mime } from "../src/mime.vo";
+import { MimeError, Mime } from "../src/mime.vo";
 
 describe("Mime", () => {
   test("creates a Mime instance with valid input", () => {
-    const plainText = "text/plain";
-    const mime = new Mime(plainText);
+    const mime = new Mime("text/plain");
 
     expect(mime).toBeDefined();
-    expect(mime.raw).toEqual(plainText);
     expect(mime.type).toEqual("text");
     expect(mime.subtype).toEqual("plain");
   });
 
-  test("allows parameters to remain in raw value (no normalization)", () => {
-    const raw = "text/html; charset=utf-8";
-    const mime = new Mime(raw);
+  test("allows parameters to remain in raw value", () => {
+    const mime = new Mime("text/html; charset=utf-8");
 
-    expect(mime.raw).toEqual(raw);
     expect(mime.type).toEqual("text");
     expect(mime.subtype).toEqual("html; charset=utf-8");
   });
 
   test("throws InvalidMimeError for invalid input", () => {
-    expect(() => new Mime("")).toThrow(InvalidMimeError);
-    expect(() => new Mime("/subtype")).toThrow(InvalidMimeError);
-    expect(() => new Mime("type/")).toThrow(InvalidMimeError);
-    expect(() => new Mime("no-slash")).toThrow(InvalidMimeError);
+    expect(() => new Mime("")).toThrow(MimeError.Invalid);
+    expect(() => new Mime("/subtype")).toThrow(MimeError.Invalid);
+    expect(() => new Mime("type/")).toThrow(MimeError.Invalid);
+    expect(() => new Mime("no-slash")).toThrow(MimeError.Invalid);
   });
 
   test("correctly checks wildcard satisfaction rules", () => {
@@ -62,6 +58,10 @@ describe("Mime", () => {
   });
 
   test("fromExtension creates a mime from an extension", () => {
-    expect(Mime.fromExtension(Extension.parse("pdf")).raw).toEqual("application/pdf");
+    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
+  });
+
+  test("toString", () => {
+    expect(new Mime("text/plain").toString()).toEqual("text/plain");
   });
 });
