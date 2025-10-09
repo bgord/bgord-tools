@@ -1,10 +1,13 @@
 import { z } from "zod/v4";
 
-export const LanguageError = { error: "invalid.language" } as const;
+export const LanguageError = { Type: "language.type", BadChars: "language.bad.chars" } as const;
+
+// Two lowercase letters
+const LANGUAGE_CHARS_WHITELIST = /^[a-z]{2}$/;
 
 export const Language = z
-  .string(LanguageError)
-  .length(2, LanguageError)
-  .regex(/^[a-z]{2}$/, LanguageError);
+  .string(LanguageError.Type)
+  .toLowerCase()
+  .regex(LANGUAGE_CHARS_WHITELIST, LanguageError.BadChars);
 
 export type LanguageType = z.infer<typeof Language>;

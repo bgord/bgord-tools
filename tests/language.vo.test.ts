@@ -1,26 +1,32 @@
 import { describe, expect, test } from "bun:test";
-import { Language } from "../src/language.vo";
+import { Language, LanguageError } from "../src/language.vo";
 
 describe("Language", () => {
-  test("accepts valid lowercase 2-letter ISO codes", () => {
+  test("happy path", () => {
     expect(Language.safeParse("en").success).toEqual(true);
     expect(Language.safeParse("es").success).toEqual(true);
     expect(Language.safeParse("pl").success).toEqual(true);
   });
 
-  test("rejects uppercase codes", () => {
-    expect(Language.safeParse("EN").success).toEqual(false);
-    expect(Language.safeParse("FR").success).toEqual(false);
+  test("convers upper to lowercase", () => {
+    expect(Language.safeParse("EN").success).toEqual(true);
+    expect(Language.safeParse("FR").success).toEqual(true);
   });
 
-  test("rejects codes that are not exactly length 2", () => {
-    expect(Language.safeParse("e").success).toEqual(false);
-    expect(Language.safeParse("eng").success).toEqual(false);
+  test("rejects empty", () => {
+    expect(() => Language.parse("")).toThrow(LanguageError.BadChars);
   });
 
-  test("rejects non-alphabetic characters and non-string inputs", () => {
-    expect(Language.safeParse("e1").success).toEqual(false);
-    expect(Language.safeParse("--").success).toEqual(false);
-    expect(Language.safeParse(42).success).toEqual(false);
+  test("rejects non-string null", () => {
+    expect(() => Language.parse(null)).toThrow(LanguageError.Type);
+  });
+
+  test("rejects non-string number", () => {
+    expect(() => Language.parse(123)).toThrow(LanguageError.Type);
+  });
+
+  test("rejects strings < 1 and > 2", () => {
+    expect(() => Language.parse("e")).toThrow(LanguageError.BadChars);
+    expect(() => Language.parse("eng")).toThrow(LanguageError.BadChars);
   });
 });
