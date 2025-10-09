@@ -6,7 +6,7 @@ enum StopwatchState {
   stopped = "stopped",
 }
 
-export const StopwatchStateError = "stopwatch.already.stopped" as const;
+export const StopwatchError = { AlreadyStopped: "stopwatch.already.stopped" } as const;
 
 export type StopwatchResultType = Duration;
 
@@ -16,7 +16,7 @@ export class Stopwatch {
   constructor(private readonly startMs: TimestampType) {}
 
   stop(): StopwatchResultType {
-    if (this.state === StopwatchState.stopped) throw new Error(StopwatchStateError);
+    if (this.state === StopwatchState.stopped) throw new Error(StopwatchError.AlreadyStopped);
 
     this.state = StopwatchState.stopped;
 

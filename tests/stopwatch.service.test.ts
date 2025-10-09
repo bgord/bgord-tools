@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 import { DurationMs } from "../src/duration-ms.vo";
-import { Stopwatch, StopwatchStateError } from "../src/stopwatch.service";
+import { Stopwatch, StopwatchError } from "../src/stopwatch.service";
 import { Timestamp } from "../src/timestamp.vo";
 
 const T0 = Timestamp.parse(1_000_000);
@@ -21,6 +21,6 @@ describe("Stopwatch", () => {
     setSystemTime(T0 + 100);
 
     stopwatch.stop();
-    expect(() => stopwatch.stop()).toThrow(StopwatchStateError);
+    expect(() => stopwatch.stop()).toThrow(StopwatchError.AlreadyStopped);
   });
 });
