@@ -1,7 +1,34 @@
 # Changelog
+- 2025-10-09 13:55 3f1148a **step: add missing exports**
+- 2025-10-09 13:54 cdd830b **step: add todos**
+- 2025-10-09 13:42 c05449c **refactor: unify duration**
+- 2025-10-09 13:41 7719e43 **refactor: extract time service**
+- 2025-10-09 13:39 d5e897b **refactor: unify stopwatch**
+- 2025-10-09 13:38 4311016 **refactor: extract duration ms vo**
+- 2025-10-09 13:20 b848116 **refactor: simplify image vo**
+- 2025-10-09 13:14 0620fb4 **refactor: simplify language**
+- 2025-10-09 13:10 792a0aa **refactor: simplify month iso id**
+- 2025-10-09 13:03 8bdc78d **refactor: unify timestamp**
+- 2025-10-09 12:53 245dc4d **refactor: unify timezone**
+- 2025-10-09 12:49 593bef7 **refactor: simplify week iso id**
+- 2025-10-09 12:46 1b40ee6 **refactor: unify quarter-iso-id error handling**
+- 2025-10-09 12:39 fa5caa6 **refactor: unify week-iso-id error handling**
+- 2025-10-09 12:32 848ecda **refactor: unify year-iso-id error handling**
+- 2025-10-09 12:25 09ce044 **refactor: unify day-iso-id error handling**
+- 2025-10-09 12:20 534efcd **refactor: unify api-key error handling**
+- 2025-10-09 12:14 f24e23a **refactor: unify filename suffix error handling**
+- 2025-10-09 12:09 f9b083e **refactor: unify basename error handling**
+- 2025-10-09 12:03 d26cf6d **refactor: unify extension error handling**
+- 2025-10-08 17:08 3777a2d **refactor: simplify filename from string**
+- 2025-10-08 16:52 f6b9631 **step: add test for single char extension**
+- 2025-10-08 16:46 82933f0 **refactor: capitalise regex vars**
+- 2025-10-08 16:45 178a1a7 **refactor: simplify leading dot file in extension**
+- 2025-10-08 16:35 b819b98 **refactor: simplify filename suffix**
+- 2025-10-08 15:57 ae1e669 **refactor: simplify extension**
 ## 2025-10-07 20:23 v0.17.2
 - 2025-10-07 20:23 8e452fe **0.17.2**
 - 2025-10-07 20:17 5289268 **step: update packages**
+- 2025-10-07 18:23 2521d79 **docs: generate CHANGELOG**
 - 2025-10-07 18:18 4fd0961 **docs: generate CHANGELOG**
 ## 2025-10-05 23:48 v0.17.1
 - 2025-10-05 23:48 1625137 **0.17.1**
