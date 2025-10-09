@@ -3,8 +3,7 @@ import { PopulationStandardDeviation } from "./population-standard-deviation.ser
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-// TODO
-export const ZScoreMinValuesError = "zscore.min.values" as const;
+export const ZScoreError = { NotEnoughValues: "z.score.not.enough.values" } as const;
 
 export class ZScore {
   private readonly mean: number;
@@ -14,8 +13,9 @@ export class ZScore {
     values: number[],
     private readonly rounding: RoundingPort = new RoundToDecimal(2),
   ) {
-    if (values.length < 2) throw new Error(ZScoreMinValuesError);
+    if (values.length < 2) throw new Error(ZScoreError.NotEnoughValues);
 
+    // TODO: VOs?
     this.mean = Mean.calculate(values);
     this.standardDeviation = PopulationStandardDeviation.calculate(values);
   }

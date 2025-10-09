@@ -1,14 +1,14 @@
 import { describe, expect, test } from "bun:test";
 import { RoundToNearest } from "../src/rounding.adapter";
-import { ZScore, ZScoreMinValuesError } from "../src/z-score.service";
+import { ZScore, ZScoreError } from "../src/z-score.service";
 
 describe("Z-score", () => {
   test("throws for empty values array", () => {
-    expect(() => new ZScore([])).toThrow(ZScoreMinValuesError);
+    expect(() => new ZScore([])).toThrow(ZScoreError.NotEnoughValues);
   });
 
   test("throws for one value", () => {
-    expect(() => new ZScore([1])).toThrow(ZScoreMinValuesError);
+    expect(() => new ZScore([1])).toThrow(ZScoreError.NotEnoughValues);
   });
 
   test("works for two values", () => {
