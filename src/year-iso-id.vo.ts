@@ -1,10 +1,13 @@
 import { z } from "zod/v4";
 
-export const YearIsoIdError = { error: "year-iso-id.invalid" } as const;
+export const YearIsoIdError = { Type: "year.iso.id.type", BadChars: "year.iso.id.bad.chars" } as const;
+
+// Four digits
+const YEAR_ISO_ID_CHARS_WHITELIST = /^\d{4}$/;
 
 export const YearIsoId = z
-  .string(YearIsoIdError)
-  .regex(/^\d{4}$/, YearIsoIdError)
-  .refine((value) => Number.isInteger(Number(value)), YearIsoIdError);
+  .string(YearIsoIdError.Type)
+  .regex(YEAR_ISO_ID_CHARS_WHITELIST, YearIsoIdError.BadChars)
+  .brand("YearIsoId");
 
 export type YearIsoIdType = z.infer<typeof YearIsoId>;

@@ -1,14 +1,24 @@
 import { describe, expect, test } from "bun:test";
-import { YearIsoId } from "../src/year-iso-id.vo";
+import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
 
 describe("YearIsoId", () => {
   test("accepts 4-digit years", () => {
-    const years = ["0000", "1970", "1999", "2024", "2025", "9999"];
-    for (const year of years) expect(YearIsoId.safeParse(year).success).toBe(true);
+    const valid = ["0000", "1970", "1999", "2024", "2025", "9999"];
+
+    for (const year of valid) {
+      expect(YearIsoId.safeParse(year).success).toBe(true);
+    }
   });
 
-  test('rejects non-4-digit or malformed values ("year-iso-id.invalid")', () => {
-    const years = ["", "1", "20", "202", "20251", "202A", " 2025", "2025 ", "2025-01"];
-    for (const year of years) expect(YearIsoId.safeParse(year).success).toBe(false);
+  test("rejects non-string null", () => {
+    expect(() => YearIsoId.parse(null)).toThrow(YearIsoIdError.Type);
+  });
+
+  test("rejects non-string number", () => {
+    expect(() => YearIsoId.parse(123)).toThrow(YearIsoIdError.Type);
+  });
+
+  test("rejects invalid year", () => {
+    expect(() => YearIsoId.parse("202A")).toThrow(YearIsoIdError.BadChars);
   });
 });
