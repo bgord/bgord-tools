@@ -3,7 +3,7 @@ import { Basename, type BasenameType } from "../src/basename.vo";
 import { Extension, type ExtensionType } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
 import { FilenameInvalidError, FilenameTypeError } from "../src/filename-from-string.vo";
-import { FilenameSuffix, FilenameSuffixEmptyError } from "../src/filename-suffix.vo";
+import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
 
 describe("Filename", () => {
   test("fromParts returns 'name.ext' and normalizes the extension", () => {
@@ -67,7 +67,7 @@ describe("Filename", () => {
   });
 
   test("withSuffix rejects empty suffix", () => {
-    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameSuffixEmptyError);
+    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameSuffixError.Empty);
   });
 
   test("withSuffixSafe appends a suffix before the extension", () => {

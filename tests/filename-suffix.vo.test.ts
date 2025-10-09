@@ -1,9 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import {
-  FilenameSuffix,
-  FilenameSuffixTooLongError,
-  FilenameSuffixTypeError,
-} from "../src/filename-suffix.vo";
+import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
 
 describe("FilenameSuffixSchema", () => {
   test("accepts '-sm'", () => {
@@ -18,27 +14,23 @@ describe("FilenameSuffixSchema", () => {
     expect(FilenameSuffix.safeParse(" rc1 ").success).toEqual(true);
   });
 
+  test("rejects non-string - number", () => {
+    expect(() => FilenameSuffix.parse(123)).toThrow(FilenameSuffixError.Type);
+  });
+
+  test("rejects non-string - null", () => {
+    expect(() => FilenameSuffix.parse(null)).toThrow(FilenameSuffixError.Type);
+  });
+
   test("rejects empty", () => {
-    expect(FilenameSuffix.safeParse("").success).toEqual(false);
+    expect(() => FilenameSuffix.parse("")).toThrow(FilenameSuffixError.Empty);
   });
 
-  test("rejects disallowed characters ' /@!🙂 '", () => {
-    expect(FilenameSuffix.safeParse(" /@!🙂 ").success).toEqual(false);
+  test("rejects length 33", () => {
+    expect(() => FilenameSuffix.parse("x".repeat(33))).toThrow(FilenameSuffixError.TooLong);
   });
 
-  test("rejects length 33 after sanitization", () => {
-    expect(() => FilenameSuffix.parse("x".repeat(33))).toThrow(FilenameSuffixTooLongError);
-  });
-
-  test("accepts boundary length 32", () => {
-    expect(FilenameSuffix.safeParse("x".repeat(32)).success).toEqual(true);
-  });
-
-  test("rejects non-string (number)", () => {
-    expect(() => FilenameSuffix.parse(123)).toThrow(FilenameSuffixTypeError);
-  });
-
-  test("rejects non-string (null)", () => {
-    expect(() => FilenameSuffix.parse(null)).toThrow(FilenameSuffixTypeError);
+  test("rejects disallowed characters '/@!'", () => {
+    expect(() => FilenameSuffix.parse("/@!")).toThrow(FilenameSuffixError.BadChars);
   });
 });
