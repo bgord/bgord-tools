@@ -1,19 +1,19 @@
 import { describe, expect, test } from "bun:test";
 import {
   PopulationStandardDeviation,
-  PopulationStandardDeviationMinValuesError,
+  PopulationStandardDeviationError,
 } from "../src/population-standard-deviation.service";
 
 describe("Standard deviation", () => {
   test("throws an error for an empty set of values", () => {
     expect(() => PopulationStandardDeviation.calculate([])).toThrow(
-      PopulationStandardDeviationMinValuesError,
+      PopulationStandardDeviationError.NotEnoughValues,
     );
   });
 
   test("throws an error for a single value", () => {
     expect(() => PopulationStandardDeviation.calculate([1])).toThrow(
-      PopulationStandardDeviationMinValuesError,
+      PopulationStandardDeviationError.NotEnoughValues,
     );
   });
 
