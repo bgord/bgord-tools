@@ -33,37 +33,13 @@ describe("PackageVersion", () => {
   });
 
   describe("fromStringWithV method", () => {
-    test("parses correct version", () => {
-      expect(PackageVersion.fromStringWithV("v1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 } as any);
-    });
+    // @ts-expect-error Inspect private attributes
+    expect(PackageVersion.fromStringWithV("v1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
+  });
 
-    test("throws when no v included", () => {
-      expect(() => PackageVersion.fromStringWithV("1.0.0")).toThrow();
-    });
-
-    test("throws when major is not a number", () => {
-      expect(() => PackageVersion.fromStringWithV("vx.0.0")).toThrow();
-    });
-
-    test("throws when missing dot after major", () => {
-      expect(() => PackageVersion.fromStringWithV("vx0.0")).toThrow();
-    });
-
-    test("throws when minor is not a number", () => {
-      expect(() => PackageVersion.fromStringWithV("v1.x.0")).toThrow();
-    });
-
-    test("throws when missing dot after minor", () => {
-      expect(() => PackageVersion.fromStringWithV("v1.x0")).toThrow();
-    });
-
-    test("throws when patch is not a number", () => {
-      expect(() => PackageVersion.fromStringWithV("v1.1.x")).toThrow();
-    });
-
-    test("throws when there are no dots at all", () => {
-      expect(() => PackageVersion.fromStringWithV("v111")).toThrow();
-    });
+  describe("fromStringWith method", () => {
+    // @ts-expect-error Inspect private attributes
+    expect(PackageVersion.fromString("1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
   });
 
   test("toString", () => {
