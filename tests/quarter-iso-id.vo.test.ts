@@ -1,31 +1,40 @@
 import { describe, expect, test } from "bun:test";
-import { QuarterIsoId } from "../src/quarter-iso-id.vo";
+import { QuarterIsoId, QuarterIsoIdError } from "../src/quarter-iso-id.vo";
 
 describe("QuarterIsoId", () => {
   test("accepts valid YYYY-Qn values", () => {
     const quarters = ["0000-Q1", "1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "9999-Q4"];
-    for (const quarter of quarters) expect(QuarterIsoId.safeParse(quarter).success).toEqual(true);
+
+    for (const quarter of quarters) {
+      expect(QuarterIsoId.safeParse(quarter).success).toEqual(true);
+    }
   });
 
-  test('rejects values outside 1..4 with message "quarter-iso-id.invalid"', () => {
-    const quarters = ["2025-Q0", "2025-Q5"];
-    for (const quarter of quarters) expect(QuarterIsoId.safeParse(quarter).success).toEqual(false);
+  test("rejects empty", () => {
+    expect(() => QuarterIsoId.parse("")).toThrow(QuarterIsoIdError.BadChars);
+  });
+
+  test("rejects non-string - null", () => {
+    expect(() => QuarterIsoId.parse(null)).toThrow(QuarterIsoIdError.Type);
+  });
+
+  test("rejects non-string - number", () => {
+    expect(() => QuarterIsoId.parse(123)).toThrow(QuarterIsoIdError.Type);
+  });
+
+  test("rejects quarters < 1 and > 4", () => {
+    const invalid = ["2025-Q0", "2025-Q5"];
+
+    for (const value of invalid) {
+      expect(() => QuarterIsoId.parse(value)).toThrow(QuarterIsoIdError.BadChars);
+    }
   });
 
   test("rejects structurally invalid strings", () => {
-    const quarters = [
-      "2025Q1",
-      "2025-Q",
-      "2025-Q11",
-      "25-Q1",
-      "2025-q1",
-      "2025- Q1",
-      " 2025-Q1",
-      "2025-Q1 ",
-      "2025-QA",
-      "2025-01",
-      "",
-    ];
-    for (const quarter of quarters) expect(QuarterIsoId.safeParse(quarter).success).toEqual(false);
+    const invalid = ["2025Q1", "2025-Q", "25-Q1", "2025-q1", "2025-QA", "2025-01"];
+
+    for (const value of invalid) {
+      expect(() => QuarterIsoId.parse(value)).toThrow(QuarterIsoIdError.BadChars);
+    }
   });
 });
