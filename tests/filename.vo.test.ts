@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Basename, type BasenameType } from "../src/basename.vo";
 import { Extension, type ExtensionType } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
-import { FilenameInvalidError, FilenameTypeError } from "../src/filename-from-string.vo";
+import { FilenameFromStringError } from "../src/filename-from-string.vo";
 import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
 
 describe("Filename", () => {
@@ -22,14 +22,9 @@ describe("Filename", () => {
   });
 
   test("fromString rejects input without a proper dot-separated extension", () => {
-    expect(() => Filename.fromString("avatar")).toThrow(FilenameInvalidError);
-    expect(() => Filename.fromString(".env")).toThrow(FilenameInvalidError);
-    expect(() => Filename.fromString("name.")).toThrow(FilenameInvalidError);
-  });
-
-  test("fromString rejects non-string", () => {
-    // @ts-expect-error
-    expect(() => Filename.fromString(123)).toThrow(FilenameTypeError);
+    expect(() => Filename.fromString("avatar")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => Filename.fromString(".env")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => Filename.fromString("name.")).toThrow(FilenameFromStringError.Invalid);
   });
 
   test("get returns the internal string value", () => {

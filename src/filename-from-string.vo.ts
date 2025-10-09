@@ -2,9 +2,10 @@ import { z } from "zod/v4";
 import { Basename } from "./basename.vo";
 import { Extension } from "./extension.vo";
 
-// TODO
-export const FilenameTypeError = "filename.not.string" as const;
-export const FilenameInvalidError = "filename.invalid" as const;
+export const FilenameFromStringError = {
+  Type: "filename.from.string.type",
+  Invalid: "filename.from.string.Invalid",
+} as const;
 
 // .+ at least one character, advances to the last dot
 // .
@@ -12,9 +13,8 @@ export const FilenameInvalidError = "filename.invalid" as const;
 const DOT_WITH_SIDES = /^.+\..+$/;
 
 export const FilenameFromString = z
-  .string(FilenameTypeError)
-  .trim()
-  .regex(DOT_WITH_SIDES, FilenameInvalidError)
+  .string(FilenameFromStringError.Type)
+  .regex(DOT_WITH_SIDES, FilenameFromStringError.Invalid)
   .transform((value) => {
     const index = value.lastIndexOf(".");
 
