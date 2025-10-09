@@ -1,12 +1,12 @@
 import { Duration } from "./duration.service";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
+export const StopwatchError = { AlreadyStopped: "stopwatch.already.stopped" } as const;
+
 enum StopwatchState {
   started = "started",
   stopped = "stopped",
 }
-
-export const StopwatchError = { AlreadyStopped: "stopwatch.already.stopped" } as const;
 
 export type StopwatchResultType = Duration;
 
