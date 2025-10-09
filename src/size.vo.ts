@@ -1,23 +1,18 @@
-import { z } from "zod/v4";
 import { RoundToDecimal } from "./rounding.adapter";
+import { SizeBytes, type SizeBytesType } from "./size-bytes.vo";
 
-// TODO
-enum SizeUnit {
+enum SizeUnitEnum {
   b = "b",
   kB = "kB",
   MB = "MB",
   GB = "GB",
 }
 
-export const SizeValue = z.number().positive().brand("SizeValue");
-type SizeValueType = z.infer<typeof SizeValue>;
-
-type SizeConfigType = { unit: SizeUnit; value: number };
+type SizeConfigType = { unit: SizeUnitEnum; value: number };
 
 export class Size {
-  private readonly unit: SizeUnit;
-  private readonly value: SizeValueType;
-  private readonly bytes: SizeValueType;
+  private readonly unit: SizeUnitEnum;
+  private readonly bytes: SizeBytesType;
 
   private static readonly KB_MULTIPLIER = 1024;
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
@@ -27,35 +22,30 @@ export class Size {
 
   constructor(config: SizeConfigType) {
     this.unit = config.unit;
-    this.value = SizeValue.parse(config.value);
-    this.bytes = this.calculateBytes();
+    this.bytes = this.calculateBytes(config.value, config.unit);
   }
 
-  static fromBytes(candidate: number): Size {
-    const value = SizeValue.parse(candidate);
-    return new Size({ value, unit: SizeUnit.b });
+  static fromBytes(value: number): Size {
+    return new Size({ value, unit: SizeUnitEnum.b });
   }
 
-  static fromKb(candidate: number): Size {
-    const value = SizeValue.parse(candidate);
-    return new Size({ value, unit: SizeUnit.kB });
+  static fromKb(value: number): Size {
+    return new Size({ value, unit: SizeUnitEnum.kB });
   }
 
-  static fromMB(candidate: number): Size {
-    const value = SizeValue.parse(candidate);
-    return new Size({ value, unit: SizeUnit.MB });
+  static fromMB(value: number): Size {
+    return new Size({ value, unit: SizeUnitEnum.MB });
   }
 
-  static fromGB(candidate: number): Size {
-    const value = SizeValue.parse(candidate);
-    return new Size({ value, unit: SizeUnit.GB });
+  static fromGB(value: number): Size {
+    return new Size({ value, unit: SizeUnitEnum.GB });
   }
 
   toString(): string {
-    return `${this.value} ${this.unit}`;
+    return this.format(this.unit);
   }
 
-  toBytes(): SizeValueType {
+  toBytes(): SizeBytesType {
     return this.bytes;
   }
 
@@ -63,41 +53,35 @@ export class Size {
     return this.bytes > another.toBytes();
   }
 
-  format(unit: SizeUnit): string {
+  format(unit: SizeUnitEnum): string {
     switch (unit) {
-      case SizeUnit.kB: {
-        return `${Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnit.kB}`;
-      }
-      case SizeUnit.MB: {
-        return `${Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnit.MB}`;
-      }
-      case SizeUnit.GB: {
-        return `${Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnit.GB}`;
-      }
-      default: {
-        // SizeUnit.b
-        return `${this.bytes} ${SizeUnit.b}`;
-      }
+      case SizeUnitEnum.kB:
+        return `${Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnitEnum.kB}`;
+      case SizeUnitEnum.MB:
+        return `${Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnitEnum.MB}`;
+      case SizeUnitEnum.GB:
+        return `${Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnitEnum.GB}`;
+      default:
+        return `${this.bytes} ${SizeUnitEnum.b}`;
     }
   }
 
-  static toBytes(config: SizeConfigType): SizeValueType {
+  static toBytes(config: SizeConfigType): SizeBytesType {
     return new Size(config).toBytes();
   }
 
-  static unit = SizeUnit;
+  static unit = SizeUnitEnum;
 
-  private calculateBytes(): SizeValueType {
-    switch (this.unit) {
-      case SizeUnit.kB:
-        return SizeValue.parse(this.value * Size.KB_MULTIPLIER);
-      case SizeUnit.MB:
-        return SizeValue.parse(this.value * Size.MB_MULTIPLIER);
-      case SizeUnit.GB:
-        return SizeValue.parse(this.value * Size.GB_MULTIPLIER);
+  private calculateBytes(value: number, unit: SizeUnitEnum): SizeBytesType {
+    switch (unit) {
+      case SizeUnitEnum.kB:
+        return SizeBytes.parse(value * Size.KB_MULTIPLIER);
+      case SizeUnitEnum.MB:
+        return SizeBytes.parse(value * Size.MB_MULTIPLIER);
+      case SizeUnitEnum.GB:
+        return SizeBytes.parse(value * Size.GB_MULTIPLIER);
       default:
-        // SizeUnit.b
-        return this.value;
+        return SizeBytes.parse(value);
     }
   }
 }

@@ -1,0 +1,11 @@
+import { z } from "zod/v4";
+
+export const SizeBytesError = { Invalid: "size.bytes.invalid" } as const;
+
+export const SizeBytes = z
+  .number(SizeBytesError.Invalid)
+  .int(SizeBytesError.Invalid)
+  .gte(0, SizeBytesError.Invalid)
+  .brand("SizeBytes");
+
+export type SizeBytesType = z.infer<typeof SizeBytes>;
