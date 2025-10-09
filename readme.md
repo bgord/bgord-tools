@@ -37,6 +37,7 @@ src/
 ├── directory-path-absolute.vo.ts
 ├── directory-path-relative.vo.ts
 ├── dll.service.ts
+├── duration-ms.vo.ts
 ├── duration.service.ts
 ├── email-mask.service.ts
 ├── etags.vo.ts
@@ -87,6 +88,7 @@ src/
 ├── sum.service.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
+├── time.service.ts
 ├── timestamp.vo.ts
 ├── timezone.vo.ts
 ├── ts-utils.ts
