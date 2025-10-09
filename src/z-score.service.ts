@@ -15,7 +15,6 @@ export class ZScore {
   ) {
     if (values.length < 2) throw new Error(ZScoreError.NotEnoughValues);
 
-    // TODO: VOs?
     this.mean = Mean.calculate(values);
     this.standardDeviation = PopulationStandardDeviation.calculate(values);
   }
