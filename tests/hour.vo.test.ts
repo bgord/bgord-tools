@@ -1,12 +1,13 @@
 import { describe, expect, test } from "bun:test";
-import { Hour, HourValueError } from "../src/hour.vo";
+import { Hour } from "../src/hour.vo";
+import { HourSchemaError } from "../src/hour-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Hour", () => {
   test("throws for invalid hour values", () => {
-    expect(() => new Hour(-1)).toThrow(HourValueError);
-    expect(() => new Hour(24)).toThrow(HourValueError);
-    expect(() => new Hour(12.5)).toThrow(HourValueError);
+    expect(() => new Hour(12.5)).toThrow(HourSchemaError.Type);
+    expect(() => new Hour(-1)).toThrow(HourSchemaError.Invalid);
+    expect(() => new Hour(24)).toThrow(HourSchemaError.Invalid);
   });
 
   test("creates a valid Hour instance", () => {

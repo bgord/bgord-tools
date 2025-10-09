@@ -1,27 +1,22 @@
 import { type HourFormatter, HourFormatters } from "./hour-format.service";
+import { HourSchema, type HourSchemaType } from "./hour-schema.vo";
 import type { TimestampType } from "./timestamp.vo";
 
-// TODO
-export const HourValueError = "invalid.hour" as const;
-
 export class Hour {
-  private readonly value: number;
+  private readonly value: HourSchemaType;
 
   static readonly ZERO = new Hour(0);
   static readonly MAX = new Hour(23);
 
   constructor(candidate: number) {
-    if (!Number.isInteger(candidate) || candidate < 0 || candidate >= 24) {
-      throw new Error(HourValueError);
-    }
-    this.value = candidate;
+    this.value = HourSchema.parse(candidate);
   }
 
   static fromEpochMs(timestamp: TimestampType): Hour {
     return new Hour(new Date(timestamp).getUTCHours());
   }
 
-  get(): number {
+  get(): HourSchemaType {
     return this.value;
   }
 
