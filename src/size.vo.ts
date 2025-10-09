@@ -25,19 +25,19 @@ export class Size {
     this.bytes = this.calculateBytes(config.value, config.unit);
   }
 
-  static fromBytes(value: number): Size {
+  static fromBytes(value: SizeConfigType["value"]): Size {
     return new Size({ value, unit: SizeUnitEnum.b });
   }
 
-  static fromKb(value: number): Size {
+  static fromKb(value: SizeConfigType["value"]): Size {
     return new Size({ value, unit: SizeUnitEnum.kB });
   }
 
-  static fromMB(value: number): Size {
+  static fromMB(value: SizeConfigType["value"]): Size {
     return new Size({ value, unit: SizeUnitEnum.MB });
   }
 
-  static fromGB(value: number): Size {
+  static fromGB(value: SizeConfigType["value"]): Size {
     return new Size({ value, unit: SizeUnitEnum.GB });
   }
 
@@ -72,7 +72,7 @@ export class Size {
 
   static unit = SizeUnitEnum;
 
-  private calculateBytes(value: number, unit: SizeUnitEnum): SizeBytesType {
+  private calculateBytes(value: SizeConfigType["value"], unit: SizeUnitEnum): SizeBytesType {
     switch (unit) {
       case SizeUnitEnum.kB:
         return SizeBytes.parse(value * Size.KB_MULTIPLIER);
