@@ -1,3 +1,4 @@
+import { formatISO } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
@@ -11,8 +12,7 @@ export class Day extends DateRange {
   toIsoId(): DayIsoIdType {
     const midday = this.getStart() + Duration.Hours(12).ms;
 
-    // TODO
-    return new Date(midday).toISOString().slice(0, 10) as DayIsoIdType;
+    return DayIsoId.parse(formatISO(midday, { representation: "date" }));
   }
 
   previous(): Day {
@@ -34,8 +34,8 @@ export class Day extends DateRange {
   }
 
   static fromTimestamp(timestamp: TimestampType): Day {
-    // TODO
     const date = new Date(timestamp);
+
     const startUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
     const endUtc = startUtc + Duration.Days(1).ms - 1;
 
@@ -47,8 +47,8 @@ export class Day extends DateRange {
   }
 
   static fromIsoId(isoId: DayIsoIdType): Day {
-    // TODO
     const [year, month, day] = DayIsoId.parse(isoId).split("-").map(Number);
+
     const startUtc = Date.UTC(year, month - 1, day);
     const endUtc = startUtc + Duration.Days(1).ms - 1;
 

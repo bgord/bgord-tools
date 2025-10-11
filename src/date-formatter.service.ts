@@ -15,7 +15,7 @@ export class DateFormatters {
     return format(date, "MM/dd");
   }
 
-  static relative(date: DateFormattersInputType) {
+  static relative(date: DateFormattersInputType): string {
     return formatDistanceToNow(date, { addSuffix: true });
   }
 }
