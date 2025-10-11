@@ -7,3 +7,5 @@ export const MoneyAmount = z
   .int(MoneyAmountError.Type)
   .min(0, MoneyAmountError.Invalid)
   .brand("MoneyAmount");
+
+export type MoneyAmountType = z.infer<typeof MoneyAmount>;

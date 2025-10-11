@@ -1,4 +1,5 @@
 import { z } from "zod/v4";
+import { MoneyAmount, type MoneyAmountType } from "./money-amount.vo";
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
@@ -9,14 +10,6 @@ export const MoneyMultiplicationFactorInvalidError = {
 } as const;
 export const MoneyDivisionFactorInvalidError = { error: "money.division-factor.invalid" } as const;
 export const MoneySubtractLessThanZeroError = "money.subtract.less.than.zero" as const;
-
-export const MoneyAmount = z
-  .number(MoneyAmountInvalidError)
-  .int(MoneyAmountInvalidError)
-  .min(0, MoneyAmountInvalidError)
-  .brand("MoneyAmount");
-
-export type MoneyAmountType = z.infer<typeof MoneyAmount>;
 
 export const MoneyMultiplicationFactor = z
   .number(MoneyMultiplicationFactorInvalidError)
@@ -92,8 +85,7 @@ export class Money {
   format(): string {
     const whole = Math.floor(this.amount / 100);
     const fraction = this.amount % 100;
-    const fractionFormatted = fraction.toString().padStart(2, "0");
 
-    return `${whole}.${fractionFormatted}`;
+    return `${whole}.${fraction.toString().padStart(2, "0")}`;
   }
 }
