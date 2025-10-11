@@ -13,8 +13,6 @@ export class Mean {
     const sum = Sum.of(values);
     const mean = sum / values.length;
 
-    const chosen = rounding ?? Mean.DEFAULT_ROUNDING;
-
-    return chosen.round(mean);
+    return (rounding ?? Mean.DEFAULT_ROUNDING).round(mean);
   }
 }
