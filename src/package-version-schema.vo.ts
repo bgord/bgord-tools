@@ -14,11 +14,7 @@ export const PackageVersionSchema = z
   .transform((value) => {
     const match = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(value)!;
 
-    const major = Number(match[1]);
-    const minor = Number(match[2]);
-    const patch = Number(match[3]);
-
-    return { major, minor, patch };
+    return { major: Number(match[1]), minor: Number(match[2]), patch: Number(match[3]) };
   })
   .brand("PackageVersionSchema");
 
