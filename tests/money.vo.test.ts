@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Money, MoneySubtractLessThanZeroError } from "../src/money.vo";
+import { Money, MoneyError } from "../src/money.vo";
 import { MoneyAmount } from "../src/money-amount.vo";
 import { MoneyDivisionFactor } from "../src/money-division-factor.vo";
 import { MoneyMultiplicationFactor } from "../src/money-multiplication-factor.vo";
@@ -48,7 +48,9 @@ describe("Money", () => {
   });
 
   test("subtract() - result less than zero", () => {
-    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow(MoneySubtractLessThanZeroError);
+    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow(
+      MoneyError.SubtractResultLessThanZero,
+    );
   });
 
   test("multiply() - float factor - with default round-to-nearest rounding", () => {

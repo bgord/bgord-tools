@@ -4,12 +4,7 @@ import type { MoneyMultiplicationFactorType } from "./money-multiplication-facto
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-// TODO
-export const MoneyAmountInvalidError = { error: "money.amount.invalid" } as const;
-export const MoneyMultiplicationFactorInvalidError = {
-  error: "money.multiplication-factor.invalid",
-} as const;
-export const MoneySubtractLessThanZeroError = "money.subtract.less.than.zero" as const;
+export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" } as const;
 
 export class Money {
   private static readonly ZERO = 0;
@@ -42,7 +37,7 @@ export class Money {
   subtract(money: Money): Money {
     const result = this.rounding.round(this.amount - money.getAmount());
 
-    if (result < Money.ZERO) throw new Error(MoneySubtractLessThanZeroError);
+    if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
