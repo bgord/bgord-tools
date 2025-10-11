@@ -1,8 +1,4 @@
-import { z } from "zod/v4";
-
-// TODO
-const RevisionValue = z.number().int().min(0);
-type RevisionValueType = z.infer<typeof RevisionValue>;
+import { RevisionValue, type RevisionValueType } from "./revision-value.vo";
 
 type ETagValueType = string;
 
@@ -29,6 +25,8 @@ export class ETag {
 
 export type WeakETagValueType = string;
 
+export const WeakETagError = { Invalid: "weak.etag.invalid" } as const;
+
 export class WeakETag {
   static HEADER_NAME = "ETag";
 
@@ -41,7 +39,7 @@ export class WeakETag {
   }
 
   static fromHeader(value?: WeakETagValueType): WeakETag | null {
-    if (!value?.startsWith("W/")) throw Error("Invalid WeakETag");
+    if (!value?.startsWith("W/")) throw new Error(WeakETagError.Invalid);
 
     const candidate = Number(value.split("W/")[1]);
 

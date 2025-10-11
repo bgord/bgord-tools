@@ -1,15 +1,7 @@
-import { z } from "zod/v4";
 import type { ETag, WeakETag } from "./etags.vo";
+import { RevisionValue, type RevisionValueType } from "./revision-value.vo";
 
-// TODO
-export const RevisionValueError = { error: "invalid.revision.value" } as const;
-
-export const RevisionValue = z.number(RevisionValueError).int(RevisionValueError).min(0, RevisionValueError);
-
-export type RevisionValueType = z.infer<typeof RevisionValue>;
-
-export const RevisionInvalidErrorMessage = "revision.invalid" as const;
-export const RevisionMismatchErrorMessage = "revision.mismatch" as const;
+export const RevisionError = { Missing: "revision.missing", Mismatch: "revision.mismatch" } as const;
 
 export class Revision {
   static readonly INITIAL: RevisionValueType = RevisionValue.parse(0);
@@ -17,9 +9,7 @@ export class Revision {
   readonly value: RevisionValueType;
 
   constructor(value: unknown) {
-    const result = RevisionValue.safeParse(value);
-    if (!result.success) throw new InvalidRevisionError();
-    this.value = result.data;
+    this.value = RevisionValue.parse(value);
   }
 
   equals(another: RevisionValueType): boolean {
@@ -27,7 +17,7 @@ export class Revision {
   }
 
   validate(another: RevisionValueType): void {
-    if (!this.equals(another)) throw new RevisionMismatchError();
+    if (!this.equals(another)) throw new Error(RevisionError.Mismatch);
   }
 
   next(): Revision {
@@ -35,26 +25,12 @@ export class Revision {
   }
 
   static fromETag(etag: ETag | null): Revision {
-    if (!etag) throw new InvalidRevisionError();
+    if (!etag) throw new Error(RevisionError.Missing);
     return new Revision(etag.revision);
   }
 
   static fromWeakETag(weakEtag: WeakETag | null): Revision {
-    if (!weakEtag) throw new InvalidRevisionError();
+    if (!weakEtag) throw new Error(RevisionError.Missing);
     return new Revision(weakEtag.revision);
-  }
-}
-
-export class RevisionMismatchError extends Error {
-  constructor() {
-    super(RevisionMismatchErrorMessage);
-    Object.setPrototypeOf(this, RevisionMismatchError.prototype);
-  }
-}
-
-export class InvalidRevisionError extends Error {
-  constructor() {
-    super(RevisionInvalidErrorMessage);
-    Object.setPrototypeOf(this, InvalidRevisionError.prototype);
   }
 }
