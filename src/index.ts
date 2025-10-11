@@ -58,6 +58,7 @@ export * from "./rate-limiter.service";
 export * from "./relative-date.vo";
 export * from "./reordering.service";
 export * from "./revision.vo";
+export * from "./revision-value.vo";
 export * from "./rounding.adapter";
 export * from "./rounding.port";
 export * from "./size.vo";
