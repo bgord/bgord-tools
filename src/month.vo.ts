@@ -1,4 +1,4 @@
-import { endOfMonth, format, startOfMonth } from "date-fns";
+import { endOfMonth, format, setMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
@@ -35,14 +35,10 @@ export class Month extends DateRange {
   }
 
   static fromIsoId(iso: MonthIsoIdType): Month {
-    const validated = MonthIsoId.parse(iso);
-    const year = Number(validated.slice(0, 4));
-    const monthIndex = Number(validated.slice(5, 7)) - 1;
+    const [year, month] = MonthIsoId.parse(iso).split("-").map(Number);
 
-    const startUtc = Date.UTC(year, monthIndex, 1);
-    const nextStartUtc = Date.UTC(year, monthIndex + 1, 1);
-    const endUtc = nextStartUtc - 1;
+    const reference = setMonth(Date.UTC(year), month - 1).getTime();
 
-    return new Month(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
+    return Month.fromTimestamp(Timestamp.parse(reference));
   }
 }
