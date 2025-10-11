@@ -21,4 +21,8 @@ describe("YearIsoId", () => {
   test("rejects invalid year", () => {
     expect(() => YearIsoId.parse("202A")).toThrow(YearIsoIdError.BadChars);
   });
+
+  test("rejects 5 digits year", () => {
+    expect(() => YearIsoId.parse("202A")).toThrow(YearIsoIdError.BadChars);
+  });
 });
