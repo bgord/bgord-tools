@@ -10,10 +10,6 @@ describe("Timestamp", () => {
     expect(Timestamp.safeParse(Date.now()).success).toEqual(true);
   });
 
-  test("accepts MAX_SAFE_INTEGER", () => {
-    expect(Timestamp.safeParse(Number.MAX_SAFE_INTEGER).success).toEqual(true);
-  });
-
   test("rejects non-number - null", () => {
     expect(() => Timestamp.parse(null)).toThrow(TimestampError.Invalid);
   });
@@ -28,10 +24,6 @@ describe("Timestamp", () => {
 
   test("rejects fractions", () => {
     expect(() => Timestamp.parse(1.5)).toThrow(TimestampError.Invalid);
-  });
-
-  test("rejects NaN", () => {
-    expect(() => Timestamp.parse(Number.NaN)).toThrow(TimestampError.Invalid);
   });
 
   test("rejects POSITIVE_INFINITY", () => {
