@@ -11,7 +11,7 @@ export class Clock {
     private readonly minute: Minute,
     formatter?: ClockFormatter,
   ) {
-    this.formatter = (formatter as ClockFormatter) ?? ClockFormatters.TWENTY_FOUR_HOURS;
+    this.formatter = formatter ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
   static fromEpochMs(timestamp: TimestampType, formatter?: ClockFormatter): Clock {
@@ -25,10 +25,8 @@ export class Clock {
     return { hour: this.hour.get(), minute: this.minute.get() };
   }
 
-  format(formatter?: ClockFormatter): string {
-    const chosen = formatter ?? this.formatter;
-
-    return chosen(this.hour, this.minute);
+  format(): string {
+    return this.formatter(this.hour, this.minute);
   }
 
   toString(): string {

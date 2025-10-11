@@ -12,15 +12,7 @@ describe("Clock", () => {
   });
 
   test("format(TWELVE_HOURS) formats hour in 12h and preserves minute padding", () => {
-    expect(new Clock(new Hour(13), new Minute(3)).format(ClockFormatters.TWELVE_HOURS)).toEqual("01:03");
-  });
-
-  test("format() supports a custom formatter", () => {
-    const clock = new Clock(new Hour(15), new Minute(30));
-    const customFormatter = (hour: Hour, minute: Minute) =>
-      `Hour=${hour.toString()}, Min=${minute.toString()}`;
-
-    expect(clock.format(customFormatter)).toEqual("Hour=15, Min=30");
+    expect(new Clock(new Hour(13), new Minute(3), ClockFormatters.TWELVE_HOURS).format()).toEqual("01:03");
   });
 
   test("get() returns raw numeric hour and minute", () => {
@@ -67,10 +59,11 @@ describe("Clock", () => {
   });
 
   test("composes HourFormatters with a custom Clock formatter", () => {
-    const clock = new Clock(new Hour(15), new Minute(7));
     const composed = (hour: Hour, minute: Minute) =>
       `${hour.format(HourFormatters.AM_PM)} @ ${minute.toString()} min`;
 
-    expect(clock.format(composed)).toEqual("3 p.m. @ 07 min");
+    const clock = new Clock(new Hour(15), new Minute(7), composed);
+
+    expect(clock.format()).toEqual("3 p.m. @ 07 min");
   });
 });
