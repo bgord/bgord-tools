@@ -1,6 +1,5 @@
 import type { TimestampType } from "./timestamp.vo";
 
-// TODO
 export type WeekdayFormatter = (value: Weekday["value"]) => string;
 
 export enum WeekdayFormatterEnum {
@@ -62,13 +61,12 @@ export class Weekday {
     return this.value;
   }
 
-  format(formatter?: WeekdayFormatter): string {
-    const chosen = formatter ?? this.formatter;
-    return chosen(this.value);
+  format(): string {
+    return this.formatter(this.value);
   }
 
   toString(): string {
-    return this.format(WeekdayFormatters.FULL);
+    return this.format();
   }
 
   equals(another: Weekday): boolean {
@@ -103,14 +101,12 @@ export class Weekday {
   }
 
   static list(formatter?: WeekdayFormatter): readonly Weekday[] {
-    const chosen = formatter ?? undefined;
-
-    return Array.from({ length: 7 }, (_, index) => new Weekday(index, chosen));
+    return Array.from({ length: 7 }, (_, index) => new Weekday(index, formatter));
   }
 
   static listMondayFirst(formatter?: WeekdayFormatter): readonly Weekday[] {
-    const days = Weekday.list(formatter);
+    const [Sunday, ...rest] = Weekday.list(formatter);
 
-    return [...days.slice(1), days[0]];
+    return [...rest, Sunday];
   }
 }

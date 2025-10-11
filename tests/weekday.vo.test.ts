@@ -37,13 +37,6 @@ describe("Weekday", () => {
     expect(weekday.format()).toEqual("Mon");
   });
 
-  test("runtime formatter argument overrides default", () => {
-    const weekday = new Weekday(1, WeekdayFormatters[WeekdayFormatterEnum.SHORT]);
-    expect(weekday.format(WeekdayFormatters[WeekdayFormatterEnum.FULL])).toEqual("Monday");
-    expect(weekday.format(WeekdayFormatters[WeekdayFormatterEnum.ZERO_BASED_NUMBER])).toEqual("1");
-    expect(weekday.format(WeekdayFormatters[WeekdayFormatterEnum.ISO_NUMBER])).toEqual("1");
-  });
-
   test("formatters produce expected values", () => {
     expect(WeekdayFormatters.FULL(0)).toEqual("Sunday");
     expect(WeekdayFormatters.SHORT(3)).toEqual("Wed");
