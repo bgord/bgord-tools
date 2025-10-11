@@ -25,8 +25,8 @@ export class Quarter extends DateRange {
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
     const [year, quarter] = QuarterIsoId.parse(isoId).split("-Q").map(Number);
 
-    const reference = setQuarter(Date.UTC(year), quarter);
+    const reference = setQuarter(Date.UTC(year), quarter).getTime();
 
-    return Quarter.fromTimestamp(Timestamp.parse(reference.getTime()));
+    return Quarter.fromTimestamp(Timestamp.parse(reference));
   }
 }

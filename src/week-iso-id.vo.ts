@@ -15,7 +15,7 @@ export const WeekIsoId = z
   .regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars)
   .refine((value) => {
     const [year, week] = value.split("-W").map(Number);
-    // January 4th is guaranteed to be in the first week of a new year
+    // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
     const weeksInYear = getISOWeeksInYear(Date.UTC(year, 0, 4));
 
     if (week < 1) return false;
