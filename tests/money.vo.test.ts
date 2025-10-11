@@ -1,11 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import {
-  Money,
-  MoneyDivisionFactor,
-  MoneyMultiplicationFactor,
-  MoneySubtractLessThanZeroError,
-} from "../src/money.vo";
+import { Money, MoneyMultiplicationFactor, MoneySubtractLessThanZeroError } from "../src/money.vo";
 import { MoneyAmount } from "../src/money-amount.vo";
+import { MoneyDivisionFactor } from "../src/money-division-factor.vo";
 import { RoundDown, RoundUp } from "../src/rounding.adapter";
 
 const roundUp = new RoundUp();

@@ -37,6 +37,8 @@ export * from "./min-max-scaler.service";
 export * from "./minute.vo";
 export * from "./minute-schema.vo";
 export * from "./money.vo";
+export * from "./money-amount.vo";
+export * from "./money-division-factor.vo";
 export * from "./month.vo";
 export * from "./month-iso-id.vo";
 export * from "./noop.service";
