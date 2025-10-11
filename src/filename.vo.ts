@@ -45,14 +45,14 @@ export class Filename {
 
   withSuffix(candidate: string): Filename {
     const suffix = FilenameSuffix.parse(candidate);
-    const changedBasename = Basename.parse(`${this.basename}${suffix}`);
+    const basename = Basename.parse(`${this.basename}${suffix}`);
 
-    return new Filename(changedBasename, this.extension);
+    return new Filename(basename, this.extension);
   }
 
   withSuffixSafe(suffix: FilenameSuffixType): Filename {
-    const changedBasename = Basename.parse(`${this.basename}${suffix}`);
+    const basename = Basename.parse(`${this.basename}${suffix}`);
 
-    return new Filename(changedBasename, this.extension);
+    return new Filename(basename, this.extension);
   }
 }
