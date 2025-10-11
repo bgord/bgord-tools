@@ -16,15 +16,11 @@ export class Day extends DateRange {
   }
 
   previous(): Day {
-    const timestamp = this.getStart() - Duration.Days(1).ms;
-
-    return Day.fromTimestamp(Timestamp.parse(timestamp));
+    return this.shift(-1);
   }
 
   next(): Day {
-    const timestamp = this.getStart() + Duration.Days(1).ms;
-
-    return Day.fromTimestamp(Timestamp.parse(timestamp));
+    return this.shift(1);
   }
 
   shift(count: number): Day {

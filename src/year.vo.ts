@@ -19,15 +19,11 @@ export class Year extends DateRange {
   }
 
   previous(): Year {
-    const shifted = addYears(new Date(this.getStart()), -1).getTime();
-
-    return Year.fromTimestamp(Timestamp.parse(shifted));
+    return this.shift(-1);
   }
 
   next(): Year {
-    const shifted = addYears(new Date(this.getStart()), 1).getTime();
-
-    return Year.fromTimestamp(Timestamp.parse(shifted));
+    return this.shift(1);
   }
 
   shift(count: number): Year {

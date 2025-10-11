@@ -9,11 +9,11 @@ export class Month extends DateRange {
   }
 
   previous(): Month {
-    return Month.fromTimestamp(Timestamp.parse(this.getStart() - 1));
+    return this.shift(-1);
   }
 
   next(): Month {
-    return Month.fromTimestamp(Timestamp.parse(this.getEnd() + 1));
+    return this.shift(1);
   }
 
   shift(count: number): Month {
