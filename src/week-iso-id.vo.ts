@@ -15,11 +15,10 @@ export const WeekIsoId = z
   .regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars)
   .refine((value) => {
     const [year, week] = value.split("-W").map(Number);
+    // January 4th is guaranteed to be in the first week of a new year
+    const weeksInYear = getISOWeeksInYear(Date.UTC(year, 0, 4));
 
     if (week < 1) return false;
-
-    const weeksInYear = getISOWeeksInYear(new Date(Date.UTC(year, 0, 4)));
-
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid)
   .brand("WeekIsoId");
