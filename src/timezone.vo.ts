@@ -13,7 +13,7 @@ export const Timezone = z
   .max(128, TimezoneError.TooLong)
   .refine((value) => {
     try {
-      new Intl.DateTimeFormat("en-US", { timeZone: value }).format(new Date());
+      new Intl.DateTimeFormat("en-US", { timeZone: value }).format(Date.now());
       return true;
     } catch {
       return false;
