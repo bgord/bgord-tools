@@ -11,7 +11,6 @@ const API_KEY_CHARS_WHITELIST = /^[a-zA-Z0-9]{64}$/;
 
 export const ApiKey = z
   .string(ApiKeyError.Type)
-  .trim()
   .length(64, ApiKeyError.Length)
   .regex(API_KEY_CHARS_WHITELIST, ApiKeyError.BadChars)
   .brand("ApiKey");

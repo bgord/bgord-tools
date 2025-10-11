@@ -7,10 +7,6 @@ describe("ApiKey", () => {
     expect(ApiKey.safeParse("A".repeat(64)).success).toEqual(true);
   });
 
-  test("accepts a 64-char string trimmed", () => {
-    expect(() => ApiKey.parse(`  ${"a".repeat(64)}  `)).not.toThrow();
-  });
-
   test("rejects non-string input - number", () => {
     expect(() => ApiKey.parse(123)).toThrow(ApiKeyError.Type);
   });
