@@ -1,15 +1,25 @@
 import { describe, expect, test } from "bun:test";
-import {
-  MinMaxEmptyArrayError,
-  MinMaxInvalidBoundError,
-  MinMaxInvalidMinMaxError,
-  MinMaxScaledOutOfBoundsError,
-  MinMaxScaler,
-  MinMaxValueOutOfRangeError,
-} from "../src/min-max-scaler.service";
+import { MinMaxScaler, MinMaxScalerError } from "../src/min-max-scaler.service";
 
 describe("MinMaxScaler", () => {
   describe("scale", () => {
+    test("scales a value within the default bound", () => {
+      const scaler = new MinMaxScaler({ min: 0, max: 100 });
+
+      const original = 50;
+      const scaled = 0.5;
+
+      const result = scaler.scale(original);
+      expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
+
+      expect(scaler.descale(result.scaled)).toEqual({
+        isLowerBound: false,
+        isUpperBound: false,
+        original,
+        scaled,
+      });
+    });
+
     test("scales a value within a custom bound", () => {
       const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
@@ -27,7 +37,7 @@ describe("MinMaxScaler", () => {
       });
     });
 
-    test("scales with 2-decimal rounding inside custom [0,9] bound", () => {
+    test("scales a value within a custom bound - 2 decimals rounding", () => {
       const scaler = new MinMaxScaler({ min: 0, max: 27, bound: { lower: 0, upper: 9 } });
 
       const original = 5;
@@ -40,23 +50,6 @@ describe("MinMaxScaler", () => {
         isLowerBound: false,
         isUpperBound: false,
         original: 5.01,
-        scaled,
-      });
-    });
-
-    test("scales with default bound [0,1]", () => {
-      const scaler = new MinMaxScaler({ min: 0, max: 100 });
-
-      const original = 50;
-      const scaled = 0.5;
-
-      const result = scaler.scale(original);
-      expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
-
-      expect(scaler.descale(result.scaled)).toEqual({
-        isLowerBound: false,
-        isUpperBound: false,
-        original,
         scaled,
       });
     });
@@ -95,7 +88,7 @@ describe("MinMaxScaler", () => {
       });
     });
 
-    test("handles min = max (degenerate range)", () => {
+    test("handles min equal to max", () => {
       const scaler = new MinMaxScaler({ min: 100, max: 100, bound: { lower: 10, upper: 20 } });
 
       const original = 100;
@@ -112,38 +105,40 @@ describe("MinMaxScaler", () => {
       });
     });
 
-    test("throws for invalid min/max config (min > max)", () => {
+    test("throws for invalid min/max config", () => {
       expect(() => new MinMaxScaler({ min: 100, max: 0, bound: { lower: 0, upper: 10 } })).toThrow(
-        MinMaxInvalidMinMaxError,
+        MinMaxScalerError.InvalidMinMax,
       );
     });
 
-    test("throws for invalid bound config (lower >= upper)", () => {
+    test("throws for invalid bound config", () => {
       expect(() => new MinMaxScaler({ min: 0, max: 10, bound: { lower: 20, upper: 10 } })).toThrow(
-        MinMaxInvalidBoundError,
+        MinMaxScalerError.InvalidBound,
       );
       expect(() => new MinMaxScaler({ min: 0, max: 10, bound: { lower: 10, upper: 10 } })).toThrow(
-        MinMaxInvalidBoundError,
+        MinMaxScalerError.InvalidBound,
       );
     });
 
-    test("throws when value is out of [min, max] range", () => {
-      expect(() => new MinMaxScaler({ min: 0, max: 10 }).scale(15)).toThrow(MinMaxValueOutOfRangeError);
+    test("throws when value is out of configured range", () => {
+      expect(() => new MinMaxScaler({ min: 0, max: 10 }).scale(15)).toThrow(
+        MinMaxScalerError.ValueOutOfRange,
+      );
     });
   });
 
   describe("descale", () => {
-    test("throws when scaled value is out of [lower, upper] bounds", () => {
+    test("throws when scaled value is out of bounds", () => {
       const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
-      expect(() => scaler.descale(5)).toThrow(MinMaxScaledOutOfBoundsError);
-      expect(() => scaler.descale(25)).toThrow(MinMaxScaledOutOfBoundsError);
+      expect(() => scaler.descale(5)).toThrow(MinMaxScalerError.ScaledOutOfBounds);
+      expect(() => scaler.descale(25)).toThrow(MinMaxScalerError.ScaledOutOfBounds);
     });
   });
 
   describe("getMinMax", () => {
-    test("throws for empty arrays", () => {
-      expect(() => MinMaxScaler.getMinMax([] as number[])).toThrow(MinMaxEmptyArrayError);
+    test("throws for an empty array", () => {
+      expect(() => MinMaxScaler.getMinMax([])).toThrow(MinMaxScalerError.EmptyArray);
     });
 
     test("returns min and max for single-value arrays", () => {
