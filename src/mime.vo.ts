@@ -20,9 +20,7 @@ export class Mime {
   }
 
   isSatisfiedBy(another: Mime): boolean {
-    const typeMatches = this.type === another.type || this.type === "*";
-
-    if (!typeMatches) return false;
+    if (!(this.type === another.type || this.type === "*")) return false;
     return this.subtype === another.subtype || this.subtype === "*";
   }
 
