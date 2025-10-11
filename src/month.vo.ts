@@ -1,11 +1,11 @@
+import { format } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
-// TODO
 export class Month extends DateRange {
   toIsoId(): MonthIsoIdType {
-    return MonthIsoId.parse(new Date(this.getStart()).toISOString().slice(0, 7));
+    return MonthIsoId.parse(format(this.getStart(), "yyyy-MM"));
   }
 
   previous(): Month {

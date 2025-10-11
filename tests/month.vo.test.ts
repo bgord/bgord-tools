@@ -44,6 +44,7 @@ describe("Month", () => {
     const ids = ["1970-01", "1999-12", "2024-02", "2025-12", "2026-01"].map((value) =>
       MonthIsoId.parse(value),
     );
+
     for (const id of ids) {
       const parsed = MonthIsoId.parse(id);
       const month = Month.fromIsoId(parsed);
@@ -61,6 +62,7 @@ describe("Month", () => {
   test("contains() returns false for timestamps outside the month", () => {
     const timestamp = toMs("2025-07-22T12:00:00Z");
     const month = Month.fromTimestamp(timestamp);
+
     expect(month.contains(Timestamp.parse(month.getStart() - 1))).toEqual(false);
     expect(month.contains(Timestamp.parse(month.getEnd() + 1))).toEqual(false);
   });
