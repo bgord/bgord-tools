@@ -20,7 +20,7 @@ describe("FilePathRelative", () => {
   test("rebases to a new relative directory", () => {
     expect(
       FilePathRelative.fromParts("users/avatars", Filename.fromString("avatar.webp"))
-        .withDirectoryRelative(DirectoryPathRelativeSchema.parse("users/pictures"))
+        .withDirectory(DirectoryPathRelativeSchema.parse("users/pictures"))
         .get(),
     ).toEqual("users/pictures/avatar.webp");
   });
@@ -68,7 +68,7 @@ describe("FilePathAbsolute", () => {
   test("rebases to a new absolute directory", () => {
     expect(
       FilePathAbsolute.fromParts("/tmp/app/users", Filename.fromString("avatar.webp"))
-        .withDirectoryAbsolute(DirectoryPathAbsoluteSchema.parse("/var/lib/app/users"))
+        .withDirectory(DirectoryPathAbsoluteSchema.parse("/var/lib/app/users"))
         .get(),
     ).toEqual("/var/lib/app/users/avatar.webp");
   });

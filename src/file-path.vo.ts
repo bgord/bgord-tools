@@ -4,7 +4,6 @@ import { FilePathAbsoluteSchema } from "./file-path-absolute-schema.vo";
 import { FilePathRelativeSchema } from "./file-path-relative-schema.vo";
 import type { Filename } from "./filename.vo";
 
-// TODO
 export class FilePathRelative {
   private constructor(
     private readonly directory: DirectoryPathRelativeType,
@@ -21,10 +20,10 @@ export class FilePathRelative {
     return new FilePathRelative(directory, filename);
   }
 
-  static fromString(pathCandidate: string): FilePathRelative {
-    const parsed = FilePathRelativeSchema.parse(pathCandidate);
+  static fromString(candidate: string): FilePathRelative {
+    const schema = FilePathRelativeSchema.parse(candidate);
 
-    return new FilePathRelative(parsed.directory, parsed.filename);
+    return new FilePathRelative(schema.directory, schema.filename);
   }
 
   get(): string {
@@ -39,7 +38,7 @@ export class FilePathRelative {
     return this.filename;
   }
 
-  withDirectoryRelative(newDirectory: DirectoryPathRelativeType): FilePathRelative {
+  withDirectory(newDirectory: DirectoryPathRelativeType): FilePathRelative {
     return new FilePathRelative(newDirectory, this.filename);
   }
 
@@ -68,10 +67,10 @@ export class FilePathAbsolute {
     return new FilePathAbsolute(directory, filename);
   }
 
-  static fromString(pathCandidate: string): FilePathAbsolute {
-    const parsed = FilePathAbsoluteSchema.parse(pathCandidate);
+  static fromString(candidate: string): FilePathAbsolute {
+    const schema = FilePathAbsoluteSchema.parse(candidate);
 
-    return new FilePathAbsolute(parsed.directory, parsed.filename);
+    return new FilePathAbsolute(schema.directory, schema.filename);
   }
 
   get(): string {
@@ -87,7 +86,7 @@ export class FilePathAbsolute {
     return this.filename;
   }
 
-  withDirectoryAbsolute(newDirectory: DirectoryPathAbsoluteType): FilePathAbsolute {
+  withDirectory(newDirectory: DirectoryPathAbsoluteType): FilePathAbsolute {
     return new FilePathAbsolute(newDirectory, this.filename);
   }
 
