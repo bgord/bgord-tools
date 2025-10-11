@@ -23,7 +23,7 @@ export class Money {
   }
 
   add(money: Money): Money {
-    const result = this.rounding.round(this.amount + money.getAmount());
+    const result = this.amount + money.getAmount();
 
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
@@ -35,7 +35,7 @@ export class Money {
   }
 
   subtract(money: Money): Money {
-    const result = this.rounding.round(this.amount - money.getAmount());
+    const result = this.amount - money.getAmount();
 
     if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
     return new Money(MoneyAmount.parse(result), this.rounding);
