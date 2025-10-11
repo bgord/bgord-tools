@@ -1,6 +1,4 @@
-import type { MimeRawType } from "./mime.vo";
-
-export const MIME_TYPES: Record<string, MimeRawType[]> = {
+export const MIME_TYPES: Record<string, string[]> = {
   wildcard: ["*/*"],
   jpeg: ["image/jpeg"],
   png: ["image/png"],
