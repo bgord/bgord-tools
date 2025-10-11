@@ -5,7 +5,7 @@ import { Timestamp, type TimestampType } from "./timestamp.vo";
 // TODO
 export class Month extends DateRange {
   toIsoId(): MonthIsoIdType {
-    return new Date(this.getStart()).toISOString().slice(0, 7) as MonthIsoIdType;
+    return MonthIsoId.parse(new Date(this.getStart()).toISOString().slice(0, 7));
   }
 
   previous(): Month {
