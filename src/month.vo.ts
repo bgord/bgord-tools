@@ -1,4 +1,4 @@
-import { endOfMonth, format, setMonth, startOfMonth } from "date-fns";
+import { endOfMonth, format, getMonth, setMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
@@ -17,10 +17,9 @@ export class Month extends DateRange {
   }
 
   shift(count: number): Month {
-    const date = new Date(this.getStart());
-    date.setUTCMonth(date.getUTCMonth() + count);
+    const shifted = setMonth(this.getStart(), getMonth(this.getStart()) + count).getTime();
 
-    return Month.fromTimestamp(Timestamp.parse(date.getTime()));
+    return Month.fromTimestamp(Timestamp.parse(shifted));
   }
 
   static fromTimestamp(timestamp: TimestampType): Month {
