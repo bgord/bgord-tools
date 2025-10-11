@@ -1,18 +1,17 @@
 import { format, formatDistanceToNow } from "date-fns";
 
-type FormattedDateType = string;
 type DateFormattersInputType = Parameters<typeof format>[0];
 
 export class DateFormatters {
-  static datetime(date: DateFormattersInputType): FormattedDateType {
+  static datetime(date: DateFormattersInputType): string {
     return format(date, "yyyy/MM/dd HH:mm");
   }
 
-  static date(date: DateFormattersInputType): FormattedDateType {
+  static date(date: DateFormattersInputType): string {
     return format(date, "yyyy/MM/dd");
   }
 
-  static monthDay(date: DateFormattersInputType): FormattedDateType {
+  static monthDay(date: DateFormattersInputType): string {
     return format(date, "MM/dd");
   }
 
