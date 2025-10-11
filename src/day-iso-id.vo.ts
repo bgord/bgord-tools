@@ -13,11 +13,7 @@ export const DAY_ISO_ID_CHARS_WHITEILST = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 export const DayIsoId = z
   .string(DayIsoIdError.Type)
   .regex(DAY_ISO_ID_CHARS_WHITEILST, DayIsoIdError.BadChars)
-  .refine(
-    // TODO
-    (value) => isValid(parseISO(value)) && value === parseISO(value).toISOString().slice(0, 10),
-    DayIsoIdError.InvalidDate,
-  )
+  .refine((value) => isValid(parseISO(value)), DayIsoIdError.InvalidDate)
   .brand("DayIsoId");
 
 export type DayIsoIdType = z.infer<typeof DayIsoId>;
