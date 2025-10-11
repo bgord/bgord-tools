@@ -1,10 +1,6 @@
 type RandomGenerateConfigType = { min: number; max: number };
 
-// TODO
-export const RandomMinNotIntegerError = "random.min.not.integer" as const;
-export const RandomMaxNotIntegerError = "random.max.not.integer" as const;
-export const RandomMinEqualsMaxError = "random.min.equals.max" as const;
-export const RandomMinGreaterThanMaxError = "random.min.greater.than.max" as const;
+export const RandomError = { MinMax: "random.min.max" } as const;
 
 export class Random {
   private static readonly DEFAULT_MIN = 0;
@@ -14,10 +10,8 @@ export class Random {
     const min = config ? config.min : Random.DEFAULT_MIN;
     const max = config ? config.max : Random.DEFAULT_MAX;
 
-    if (!Number.isInteger(min)) throw new Error(RandomMinNotIntegerError);
-    if (!Number.isInteger(max)) throw new Error(RandomMaxNotIntegerError);
-    if (min === max) throw new Error(RandomMinEqualsMaxError);
-    if (min > max) throw new Error(RandomMinGreaterThanMaxError);
+    if (min === max) throw new Error(RandomError.MinMax);
+    if (min > max) throw new Error(RandomError.MinMax);
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
