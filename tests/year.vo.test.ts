@@ -13,7 +13,7 @@ describe("Year", () => {
 
     expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(timestamp).getTime()));
     expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(timestamp).getTime()));
-    expect(year.toIsoId()).toEqual("2025");
+    expect(year.toIsoId()).toEqual(YearIsoId.parse("2025"));
     expect(year.contains(timestamp)).toEqual(true);
   });
 
@@ -23,24 +23,24 @@ describe("Year", () => {
 
     expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(ts).getTime()));
     expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(ts).getTime()));
-    expect(year.toIsoId()).toEqual("2025");
+    expect(year.toIsoId()).toEqual(YearIsoId.parse("2025"));
   });
 
   test("next", () => {
-    expect(Year.fromTimestamp(timestamp).next().toIsoId()).toEqual("2026");
+    expect(Year.fromTimestamp(timestamp).next().toIsoId()).toEqual(YearIsoId.parse("2026"));
   });
 
   test("previous", () => {
-    expect(Year.fromTimestamp(timestamp).previous().toIsoId()).toEqual("2024");
+    expect(Year.fromTimestamp(timestamp).previous().toIsoId()).toEqual(YearIsoId.parse("2024"));
   });
 
   test("shift", () => {
-    expect(Year.fromTimestamp(timestamp).shift(2).toIsoId()).toEqual("2027");
-    expect(Year.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual("2023");
+    expect(Year.fromTimestamp(timestamp).shift(2).toIsoId()).toEqual(YearIsoId.parse("2027"));
+    expect(Year.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual(YearIsoId.parse("2023"));
   });
 
   test("round-trips via ISO id", () => {
-    const ids = ["1970", "1999", "2024", "2025", "2026"];
+    const ids = ["1970", "1999", "2024", "2025", "2026"].map((value) => YearIsoId.parse(value));
     for (const id of ids) {
       const parsed = YearIsoId.parse(id);
       const year = Year.fromIsoId(parsed);
@@ -52,10 +52,10 @@ describe("Year", () => {
     const samples = [1970, 1999, 2024, 2025, 2026];
     for (const value of samples) {
       const a = Year.fromNumber(value);
-      const b = Year.fromIsoId(String(value));
+      const b = Year.fromIsoId(YearIsoId.parse(String(value)));
 
-      expect(a.toIsoId()).toEqual(String(value));
-      expect(b.toIsoId()).toEqual(String(value));
+      expect(a.toIsoId()).toEqual(YearIsoId.parse(String(value)));
+      expect(b.toIsoId()).toEqual(YearIsoId.parse(String(value)));
       expect(a.getStart()).toEqual(b.getStart());
       expect(a.getEnd()).toEqual(b.getEnd());
       expect(a.equals(b)).toEqual(true);

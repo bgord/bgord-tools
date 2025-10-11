@@ -9,7 +9,7 @@ export const YearOutOfRangeError = "year.out_of_range" as const;
 
 export class Year extends DateRange {
   toIsoId(): YearIsoIdType {
-    return String(getYear(this.getStart())) as YearIsoIdType;
+    return YearIsoId.parse(String(getYear(this.getStart())));
   }
 
   isLeapYear(): boolean {
@@ -27,7 +27,7 @@ export class Year extends DateRange {
   }
 
   shift(count: number): Year {
-    const shifted = addYears(new Date(this.getStart()), count).getTime();
+    const shifted = addYears(this.getStart(), count).getTime();
 
     return Year.fromTimestamp(Timestamp.parse(shifted));
   }
@@ -43,11 +43,11 @@ export class Year extends DateRange {
     return Year.fromTimestamp(now);
   }
 
-  static fromNumber(value: number): Year {
-    if (!Number.isInteger(value)) throw new Error(YearInvalidIntegerError);
-    if (value < 0 || value > 9999) throw new Error(YearOutOfRangeError);
+  static fromNumber(candidate: number): Year {
+    if (!Number.isInteger(candidate)) throw new Error(YearInvalidIntegerError);
+    if (candidate < 0 || candidate > 9999) throw new Error(YearOutOfRangeError);
 
-    const reference = Timestamp.parse(Date.UTC(value, 0, 1, 0, 0, 0, 0));
+    const reference = Timestamp.parse(Date.UTC(candidate));
 
     return Year.fromTimestamp(reference);
   }
