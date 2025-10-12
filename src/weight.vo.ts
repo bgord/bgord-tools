@@ -1,4 +1,5 @@
 import { z } from "zod/v4";
+import type { DivisionFactorType } from "./division-factor.vo";
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
@@ -17,11 +18,6 @@ const WeightQuantityNumber = z
   .number(WeightNonFiniteError)
   .refine(Number.isFinite, WeightNonFiniteError)
   .min(0, WeightNegativeError);
-
-const DivisionScalarNumber = z
-  .number(WeightNonFiniteError)
-  .refine(Number.isFinite, WeightNonFiniteError)
-  .gt(0, WeightNonPositiveError);
 
 const CanonicalGramsInteger = z
   .number(WeightGramsNonNegativeError)
@@ -103,9 +99,8 @@ export class Weight {
     return new Weight(grams);
   }
 
-  divideByScalar(divisor: number): Weight {
-    const divisorParsed = DivisionScalarNumber.parse(divisor);
-    const gramsRounded = Math.round(this.grams / divisorParsed);
+  divideByScalar(divisor: DivisionFactorType): Weight {
+    const gramsRounded = Math.round(this.grams / divisor);
     const grams = CanonicalGramsInteger.parse(gramsRounded);
 
     return new Weight(grams);

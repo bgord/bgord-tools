@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
+import { DivisionFactor } from "../src/division-factor.vo";
 import { Money, MoneyError } from "../src/money.vo";
 import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
-import { DivisionFactor } from "../src/division-factor.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundDown, RoundUp } from "../src/rounding.adapter";
 
