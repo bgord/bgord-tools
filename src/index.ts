@@ -49,6 +49,7 @@ export * from "./object-key.vo";
 export * from "./outlier-detector.service";
 export * from "./package-version.vo";
 export * from "./pagination.service";
+export * from "./pagination-take.vo";
 export * from "./percentage.service";
 export * from "./population-standard-deviation.service";
 export * from "./quarter.vo";

@@ -1,13 +1,10 @@
 import { z } from "zod/v4";
+import { Take, type TakeType } from "./pagination-take.vo";
+import { RoundUp } from "./rounding.adapter";
 
 // TODO
-const PaginationTakeError = { error: "pagination.take.invalid" } as const;
 const PaginationSkipError = { error: "pagination.skip.invalid" } as const;
 const PaginationPageError = { error: "pagination.page.invalid" } as const;
-
-const Take = z.number(PaginationTakeError).int(PaginationTakeError).gte(1, PaginationTakeError);
-
-type TakeType = z.infer<typeof Take>;
 
 const Skip = z.number(PaginationSkipError).int(PaginationSkipError).gte(0, PaginationSkipError);
 
@@ -58,7 +55,7 @@ export class Pagination {
   }
 
   private static getLastPage(config: PaginationExhaustedConfig): PageType {
-    return Page.parse(Math.ceil(config.total / config.pagination.values.take));
+    return Page.parse(new RoundUp().round(config.total / config.pagination.values.take));
   }
 
   static empty = {
