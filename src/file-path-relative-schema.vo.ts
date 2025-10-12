@@ -2,22 +2,23 @@ import { z } from "zod/v4";
 import { DirectoryPathRelativeSchema } from "./directory-path-relative.vo";
 import { Filename } from "./filename.vo";
 
-// TODO
-export const RelFilePathTypeError = "rel.file.path.not.string" as const;
-export const RelFilePathMustNotStartWithSlashError = "rel_file_path_must_not_start_with_slash" as const;
-export const RelFilePathBackslashForbiddenError = "rel_file_path_backslash_forbidden" as const;
-export const RelFilePathRequiresDirectoryError = "rel_file_path_requires_directory" as const;
+export const FilePathRelativeSchemaError = {
+  Type: "file.path.relative.type",
+  LeadingSlash: "file.path.relative.leading.slash",
+  BackslashForbidden: "file.path.relative.backslash.forbidden",
+  RequiresDirectory: "file.path.relative.requires.directory",
+  Empty: "file.path.relative.empty",
+} as const;
 
 export const FilePathRelativeSchema = z
-  .string(RelFilePathTypeError)
-  .trim()
-  .refine((value) => !value.startsWith("/"), RelFilePathMustNotStartWithSlashError)
-  .refine((value) => !value.includes("\\"), RelFilePathBackslashForbiddenError)
-  // collapse duplicate slashes, then trim leading/trailing slashes
-  .transform((value) => value.replace(/\/{2,}/g, "/").replace(/^\/+|\/+$/g, ""))
-  .refine((value) => value.includes("/"), RelFilePathRequiresDirectoryError)
+  .string(FilePathRelativeSchemaError.Type)
+  .min(1, FilePathRelativeSchemaError.Empty)
+  .refine((value) => !value.startsWith("/"), FilePathRelativeSchemaError.LeadingSlash)
+  .refine((value) => !value.includes("\\"), FilePathRelativeSchemaError.BackslashForbidden)
+  .refine((value) => value.includes("/"), FilePathRelativeSchemaError.RequiresDirectory)
   .transform((normalized) => {
     const lastSlashIndex = normalized.lastIndexOf("/");
+
     const directoryCandidate = normalized.slice(0, lastSlashIndex);
     const filenameCandidate = normalized.slice(lastSlashIndex + 1);
 
