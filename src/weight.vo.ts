@@ -1,58 +1,25 @@
-import { z } from "zod/v4";
 import type { DivisionFactorType } from "./division-factor.vo";
-import { RoundToDecimal } from "./rounding.adapter";
+import type { MultiplicationFactorType } from "./multiplication-factor.vo";
+import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
-
-// TODO
-export enum WeightUnit {
-  kg = "kg",
-  lb = "lb",
-}
-
-export const WeightNonFiniteError = { error: "weight.non_finite" } as const;
-export const WeightNegativeError = { error: "weight.negative" } as const;
-export const WeightNonPositiveError = { error: "weight.non_positive" } as const;
-export const WeightGramsNonNegativeError = { error: "weight.grams_non_negative" } as const;
-
-const WeightQuantityNumber = z
-  .number(WeightNonFiniteError)
-  .refine(Number.isFinite, WeightNonFiniteError)
-  .min(0, WeightNegativeError);
-
-const CanonicalGramsInteger = z
-  .number(WeightGramsNonNegativeError)
-  .int(WeightGramsNonNegativeError)
-  .min(0, WeightGramsNonNegativeError);
+import { WeightGrams } from "./weight-grams.vo";
 
 export class Weight {
   private static readonly GRAMS_PER_KILOGRAM = 1_000;
-  private static readonly POUNDS_PER_KILOGRAM = 2.2046226218487757;
-  private static readonly KILOGRAMS_PER_POUND = 1 / Weight.POUNDS_PER_KILOGRAM;
 
-  private constructor(private readonly grams: number) {}
+  private constructor(
+    private readonly grams: number,
+    private readonly rounding: RoundingPort = new RoundToNearest(),
+  ) {}
 
-  static fromKilograms(kilograms: number): Weight {
-    const kilogramsParsed = WeightQuantityNumber.parse(kilograms);
-    const gramsRounded = Math.round(kilogramsParsed * Weight.GRAMS_PER_KILOGRAM);
-    const grams = CanonicalGramsInteger.parse(gramsRounded);
+  static fromKilograms(kilograms: number, rounding: RoundingPort = new RoundToNearest()): Weight {
+    const grams = rounding.round(kilograms * Weight.GRAMS_PER_KILOGRAM);
 
-    return new Weight(grams);
+    return new Weight(WeightGrams.parse(grams), rounding);
   }
 
-  static fromPounds(pounds: number): Weight {
-    const poundsParsed = WeightQuantityNumber.parse(pounds);
-    const gramsRounded = Math.round(poundsParsed * Weight.KILOGRAMS_PER_POUND * Weight.GRAMS_PER_KILOGRAM);
-    const grams = CanonicalGramsInteger.parse(gramsRounded);
-
-    return new Weight(grams);
-  }
-
-  static fromGrams(grams: number): Weight {
-    const gramsParsed = WeightQuantityNumber.parse(grams);
-    const gramsRounded = Math.round(gramsParsed);
-    const integerGrams = CanonicalGramsInteger.parse(gramsRounded);
-
-    return new Weight(integerGrams);
+  static fromGrams(grams: number, rounding: RoundingPort = new RoundToNearest()): Weight {
+    return new Weight(WeightGrams.parse(grams), rounding);
   }
 
   static zero(): Weight {
@@ -63,22 +30,14 @@ export class Weight {
     return this.grams;
   }
 
-  toKilograms(rounding?: RoundingPort): number {
+  toKilograms(): number {
     const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
 
-    return rounding ? rounding.round(kilograms) : kilograms;
+    return this.rounding.round(kilograms);
   }
 
-  toPounds(rounding?: RoundingPort): number {
-    const pounds = (this.grams / Weight.GRAMS_PER_KILOGRAM) * Weight.POUNDS_PER_KILOGRAM;
-
-    return rounding ? rounding.round(pounds) : pounds;
-  }
-
-  format(unit: WeightUnit, rounding: RoundingPort = new RoundToDecimal(2)): string {
-    const value = unit === WeightUnit.kg ? this.toKilograms(rounding) : this.toPounds(rounding);
-
-    return `${value.toString()} ${unit}`;
+  format(): string {
+    return `${this.toKilograms()} kg`;
   }
 
   add(other: Weight): Weight {
@@ -91,19 +50,16 @@ export class Weight {
     return new Weight(result < 0 ? 0 : result);
   }
 
-  multiply(factor: number): Weight {
-    const factorParsed = WeightQuantityNumber.parse(factor);
-    const gramsRounded = Math.round(this.grams * factorParsed);
-    const grams = CanonicalGramsInteger.parse(gramsRounded);
+  multiply(factor: MultiplicationFactorType): Weight {
+    const grams = this.rounding.round(this.grams * factor);
 
-    return new Weight(grams);
+    return new Weight(WeightGrams.parse(grams));
   }
 
-  divideByScalar(divisor: DivisionFactorType): Weight {
-    const gramsRounded = Math.round(this.grams / divisor);
-    const grams = CanonicalGramsInteger.parse(gramsRounded);
+  divide(divisor: DivisionFactorType): Weight {
+    const grams = this.rounding.round(this.grams / divisor);
 
-    return new Weight(grams);
+    return new Weight(WeightGrams.parse(grams));
   }
 
   equals(other: Weight): boolean {
@@ -135,15 +91,7 @@ export class Weight {
     return this.grams === 0;
   }
 
-  isPositive(): boolean {
-    return this.grams > 0;
-  }
-
   toJSON(): { g: number } {
     return { g: this.grams };
-  }
-
-  static fromJSON(input: { g: number }): Weight {
-    return Weight.fromGrams(input.g);
   }
 }
