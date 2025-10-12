@@ -24,6 +24,7 @@ Run the tests
 
 ```
 src/
+├── age-years.vo.ts
 ├── age.vo.ts
 ├── api-key.vo.ts
 ├── basename.vo.ts
@@ -36,12 +37,14 @@ src/
 ├── day.vo.ts
 ├── directory-path-absolute.vo.ts
 ├── directory-path-relative.vo.ts
+├── division-factor.vo.ts
 ├── dll.service.ts
 ├── duration-ms.vo.ts
 ├── duration.service.ts
 ├── email-mask.service.ts
 ├── etags.vo.ts
 ├── extension.vo.ts
+├── feature-flag-value.vo.ts
 ├── feature-flag.vo.ts
 ├── file-path-absolute-schema.vo.ts
 ├── file-path-relative-schema.vo.ts
@@ -49,26 +52,38 @@ src/
 ├── filename-from-string.vo.ts
 ├── filename-suffix.vo.ts
 ├── filename.vo.ts
+├── height-milimiters.vo.ts
 ├── height.vo.ts
 ├── hour-format.service.ts
+├── hour-schema.vo.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
+├── iban-schema.vo.ts
 ├── iban.vo.ts
 ├── image.vo.ts
 ├── language.vo.ts
+├── linear-regression.service.ts
 ├── mean.service.ts
 ├── mime-types.vo.ts
+├── mime-value.vo.ts
 ├── mime.vo.ts
 ├── min-max-scaler.service.ts
+├── minute-schema.vo.ts
 ├── minute.vo.ts
+├── money-amount.vo.ts
 ├── money.vo.ts
 ├── month-iso-id.vo.ts
 ├── month.vo.ts
+├── multiplication-factor.vo.ts
 ├── noop.service.ts
 ├── notification-template.vo.ts
 ├── object-key.vo.ts
 ├── outlier-detector.service.ts
+├── package-version-schema.vo.ts
 ├── package-version.vo.ts
+├── pagination-page.vo.ts
+├── pagination-skip.vo.ts
+├── pagination-take.vo.ts
 ├── pagination.service.ts
 ├── percentage.service.ts
 ├── population-standard-deviation.service.ts
@@ -77,14 +92,15 @@ src/
 ├── random.service.ts
 ├── rate-limiter.service.ts
 ├── relative-date.vo.ts
+├── reordering-item-position-value.vo.ts
 ├── reordering.service.ts
+├── revision-value.vo.ts
 ├── revision.vo.ts
 ├── rounding.adapter.ts
 ├── rounding.port.ts
-├── simple-linear-regression.service.ts
+├── size-bytes.vo.ts
 ├── size.vo.ts
 ├── stopwatch.service.ts
-├── streak-calculator.service.ts
 ├── sum.service.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
@@ -96,6 +112,7 @@ src/
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
 ├── weekday.vo.ts
+├── weight-grams.vo.ts
 ├── weight.vo.ts
 ├── year-iso-id.vo.ts
 ├── year.vo.ts
