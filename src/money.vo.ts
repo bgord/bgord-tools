@@ -1,7 +1,7 @@
 import type { DivisionFactorType } from "./division-factor.vo";
 import { MoneyAmount, type MoneyAmountType } from "./money-amount.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
-import { RoundToNearest } from "./rounding.adapter";
+import { RoundDown, RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
 export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" } as const;
@@ -64,7 +64,7 @@ export class Money {
   }
 
   format(): string {
-    const whole = Math.floor(this.amount / 100);
+    const whole = new RoundDown().round(this.amount / 100);
     const fraction = this.amount % 100;
 
     return `${whole}.${fraction.toString().padStart(2, "0")}`;

@@ -1,3 +1,5 @@
+import { RoundDown } from "./rounding.adapter";
+
 type RandomGenerateConfigType = { min: number; max: number };
 
 export const RandomError = { MinMax: "random.min.max" } as const;
@@ -13,6 +15,6 @@ export class Random {
     if (min === max) throw new Error(RandomError.MinMax);
     if (min > max) throw new Error(RandomError.MinMax);
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return new RoundDown().round(Math.random() * (max - min + 1)) + min;
   }
 }

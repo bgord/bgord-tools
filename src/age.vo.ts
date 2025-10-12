@@ -43,11 +43,11 @@ export class Age {
     return Age.fromValue(differenceInYears(params.now, params.birthdate));
   }
 
-  static fromBirthdate(params: { birthdate: string; now: TimestampType }): Age {
-    const birthdateMs = new Date(params.birthdate).getTime();
+  static fromBirthdate(candidate: { birthdate: string; now: TimestampType }): Age {
+    const birthdateMs = new Date(candidate.birthdate).getTime();
 
-    if (birthdateMs > params.now) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(params.now, birthdateMs));
+    if (birthdateMs > candidate.now) throw new Error(AgeError.FutureBirthdate);
+    return Age.fromValue(differenceInYears(candidate.now, birthdateMs));
   }
 
   toJSON(): number {
