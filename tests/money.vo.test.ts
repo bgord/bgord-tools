@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { Money, MoneyError } from "../src/money.vo";
 import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
-import { MoneyDivisionFactor } from "../src/money-division-factor.vo";
-import { MoneyMultiplicationFactor } from "../src/money-multiplication-factor.vo";
+import { DivisionFactor } from "../src/division-factor.vo";
+import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundDown, RoundUp } from "../src/rounding.adapter";
 
 const roundUp = new RoundUp();
@@ -27,13 +27,13 @@ describe("Money", () => {
   });
 
   test("multiply - integer factor", () => {
-    expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(5)).getAmount()).toEqual(
+    expect(new Money(100).multiply(MultiplicationFactor.parse(5)).getAmount()).toEqual(
       MoneyAmount.parse(500),
     );
   });
 
   test("multiply - float factor", () => {
-    expect(new Money(100).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(new Money(100).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(150),
     );
   });
@@ -53,35 +53,35 @@ describe("Money", () => {
   });
 
   test("multiply - float factor - default round-to-nearest", () => {
-    expect(new Money(99).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(new Money(99).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
   test("multiply - float factor - round-up", () => {
-    expect(new Money(99, roundUp).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(new Money(99, roundUp).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
   test("multiply - float factor - round-down", () => {
-    expect(new Money(99, roundDown).multiply(MoneyMultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(new Money(99, roundDown).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(148),
     );
   });
 
   test("divide - float factor - default round-to-nearest", () => {
-    expect(new Money(98).divide(MoneyDivisionFactor.parse(2.5)).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(new Money(98).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("divide - float factor - round-up", () => {
-    expect(new Money(98, roundUp).divide(MoneyDivisionFactor.parse(2.5)).getAmount()).toEqual(
+    expect(new Money(98, roundUp).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
       MoneyAmount.parse(40),
     );
   });
 
   test("divide - float factor - round-down", () => {
-    expect(new Money(98, roundDown).divide(MoneyDivisionFactor.parse(2.5)).getAmount()).toEqual(
+    expect(new Money(98, roundDown).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
       MoneyAmount.parse(39),
     );
   });

@@ -1,6 +1,6 @@
+import type { DivisionFactorType } from "./division-factor.vo";
 import { MoneyAmount, type MoneyAmountType } from "./money-amount.vo";
-import type { MoneyDivisionFactorType } from "./money-division-factor.vo";
-import type { MoneyMultiplicationFactorType } from "./money-multiplication-factor.vo";
+import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
@@ -28,7 +28,7 @@ export class Money {
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
-  multiply(factor: MoneyMultiplicationFactorType): Money {
+  multiply(factor: MultiplicationFactorType): Money {
     const result = this.rounding.round(this.amount * factor);
 
     return new Money(MoneyAmount.parse(result), this.rounding);
@@ -41,7 +41,7 @@ export class Money {
     return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
-  divide(factor: MoneyDivisionFactorType): Money {
+  divide(factor: DivisionFactorType): Money {
     const result = this.rounding.round(this.amount / factor);
 
     return new Money(MoneyAmount.parse(result), this.rounding);
