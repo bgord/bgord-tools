@@ -1,34 +1,37 @@
 import { z } from "zod/v4";
 
 export const DirectoryPathAbsoluteError = {
-  AbsDirTypeError: "abs_dir.not.string",
-  AbsDirMustStartWithSlashError: "abs_dir_must_start_with_slash",
-  AbsDirBackslashForbiddenError: "abs_dir_backslash_forbidden",
-  AbsDirControlCharsForbiddenError: "abs_dir_control_chars_forbidden",
-  AbsDirBadSegmentsError: "abs_dir_bad_segments",
+  Type: "directory.path.absolue.type",
+  LeadingSlash: "directory.path.absolue.leading.slash",
+  TrailingSlash: "directory.path.absolue.trailing.slash",
+  BadSegments: "directory.path.absolue.bad.segments",
+  Empty: "directory.path.absolue.empty",
+  TooLong: "directory.path.absolue.too.long",
 } as const;
 
+// Letters, digits, dots, underscores, and hyphens
+export const DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST = /^[a-zA-Z0-9._-]+$/;
+
+const DOT_SEGMENTS = [".", ".."];
+
 export const DirectoryPathAbsoluteSchema = z
-  .string(DirectoryPathAbsoluteError.AbsDirTypeError)
-  .trim()
-  .refine((value) => value.startsWith("/"), DirectoryPathAbsoluteError.AbsDirMustStartWithSlashError)
-  .refine((value) => !value.includes("\\"), DirectoryPathAbsoluteError.AbsDirBackslashForbiddenError)
-  // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
-  .refine(
-    (value) => !/[\u0000-\u001F\u007F]/.test(value),
-    DirectoryPathAbsoluteError.AbsDirControlCharsForbiddenError,
-  )
-  // collapse duplicate slashes, then drop trailing slash unless it's the root "/"
-  .transform((value) => value.replace(/\/{2,}/g, "/"))
-  .transform((value) => (value !== "/" && value.endsWith("/") ? value.slice(0, -1) : value))
+  .string(DirectoryPathAbsoluteError.Type)
+  .min(1, DirectoryPathAbsoluteError.Empty)
+  .max(512, DirectoryPathAbsoluteError.TooLong)
+  .refine((value) => value.startsWith("/"), DirectoryPathAbsoluteError.LeadingSlash)
+  .refine((value) => (value === "/" ? true : !value.endsWith("/")), DirectoryPathAbsoluteError.TrailingSlash)
   .refine((value) => {
     if (value === "/") return true;
+
     const segments = value.slice(1).split("/");
+
     return segments.every(
       (segment) =>
-        segment.length > 0 && /^[A-Za-z0-9._-]+$/.test(segment) && segment !== "." && segment !== "..",
+        segment.length > 0 &&
+        DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST.test(segment) &&
+        !DOT_SEGMENTS.includes(segment),
     );
-  }, DirectoryPathAbsoluteError.AbsDirBadSegmentsError)
+  }, DirectoryPathAbsoluteError.BadSegments)
   .brand("DirectoryPathAbsolute");
 
 export type DirectoryPathAbsoluteType = z.infer<typeof DirectoryPathAbsoluteSchema>;
