@@ -18,10 +18,6 @@ describe("Extension", () => {
     expect(Extension.safeParse(".PNG").success).toEqual(true);
   });
 
-  test("accepts and normalizes '  JpEg  '", () => {
-    expect(Extension.safeParse("  JpEg  ").success).toEqual(true);
-  });
-
   test("rejects empty string", () => {
     expect(() => Extension.parse("")).toThrow(ExtensionError.Empty);
   });

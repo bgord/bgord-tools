@@ -10,10 +10,6 @@ describe("FilenameSuffixSchema", () => {
     expect(FilenameSuffix.safeParse("_v2").success).toEqual(true);
   });
 
-  test("accepts and trims ' rc1 '", () => {
-    expect(FilenameSuffix.safeParse(" rc1 ").success).toEqual(true);
-  });
-
   test("rejects non-string - number", () => {
     expect(() => FilenameSuffix.parse(123)).toThrow(FilenameSuffixError.Type);
   });

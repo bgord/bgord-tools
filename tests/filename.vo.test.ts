@@ -7,7 +7,7 @@ import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
 
 describe("Filename", () => {
   test("fromParts returns 'name.ext' and normalizes the extension", () => {
-    expect(Filename.fromParts("report", " .PNG ").get()).toEqual("report.png");
+    expect(Filename.fromParts("report", ".PNG").get()).toEqual("report.png");
   });
 
   test("fromPartsSafe accepts branded values and returns 'name.ext'", () => {
@@ -15,10 +15,6 @@ describe("Filename", () => {
     const extension = Extension.parse("webp");
 
     expect(Filename.fromPartsSafe(basename, extension).get()).toEqual("avatar.webp");
-  });
-
-  test("fromString parses 'name.ext' and normalizes the extension", () => {
-    expect(Filename.fromString("  image .WEBP ").get()).toEqual("image.webp");
   });
 
   test("fromString rejects input without a proper dot-separated extension", () => {

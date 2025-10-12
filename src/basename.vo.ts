@@ -17,7 +17,6 @@ const DOT_SEGMENTS = [".", ".."];
 
 export const Basename = z
   .string(BasenameError.Type)
-  .trim()
   .min(1, BasenameError.Empty)
   .max(128, BasenameError.TooLong)
   // Reject "." and ".." as a filename to avoid directory traversal

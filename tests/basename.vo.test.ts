@@ -10,10 +10,6 @@ describe("Basename", () => {
     expect(Basename.safeParse("Report_v1.2-rc").success).toEqual(true);
   });
 
-  test("accepts and trims ' a.b_c-d '", () => {
-    expect(Basename.safeParse(" a.b_c-d ").success).toEqual(true);
-  });
-
   test("accepts 128 chars", () => {
     expect(Basename.safeParse("a".repeat(128)).success).toEqual(true);
   });
@@ -32,10 +28,6 @@ describe("Basename", () => {
 
   test("rejects empty string", () => {
     expect(() => Basename.parse("")).toThrow(BasenameError.Empty);
-  });
-
-  test("rejects whitespace-only string", () => {
-    expect(() => Basename.parse("   ")).toThrow(BasenameError.Empty);
   });
 
   test("rejects forward slash 'a/b'", () => {

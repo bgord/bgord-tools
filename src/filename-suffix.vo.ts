@@ -12,7 +12,6 @@ const FILENAME_SUFFIX_WHITELIST = /^[a-zA-Z0-9_-]+$/;
 
 export const FilenameSuffix = z
   .string(FilenameSuffixError.Type)
-  .trim()
   .min(1, FilenameSuffixError.Empty)
   .max(32, FilenameSuffixError.TooLong)
   .regex(FILENAME_SUFFIX_WHITELIST, FilenameSuffixError.BadChars)

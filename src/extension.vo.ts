@@ -14,7 +14,6 @@ const LEADING_DOT_FILE = /^\./;
 
 export const Extension = z
   .string(ExtensionError.Type)
-  .trim()
   .toLowerCase()
   .min(2, ExtensionError.Empty)
   .max(16, ExtensionError.TooLong)
