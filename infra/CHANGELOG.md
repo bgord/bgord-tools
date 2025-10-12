@@ -1,4 +1,95 @@
 # Changelog
+- 2025-10-12 22:31 4225b9c **step: cleanup exports**
+- 2025-10-12 22:28 ee09f69 **step: update packages**
+- 2025-10-12 22:21 03e9665 **refactor: improve reordering**
+- 2025-10-12 21:55 caa53ec **refactor: improve weight**
+- 2025-10-12 21:38 1791134 **refactor: use division scalar**
+- 2025-10-12 21:37 9267f4b **refactor: rename division and multiplication factor**
+- 2025-10-12 21:26 997876e **refactor: improve height**
+- 2025-10-12 20:50 27c7ee9 **refactor: improve file path relative**
+- 2025-10-12 20:39 7a979e7 **refactor: improve file path absolute**
+- 2025-10-12 20:13 a04dc0c **refactor: improve dir path relative**
+- 2025-10-12 20:05 390488e **refactor: improve dir path absolute**
+- 2025-10-12 19:43 2c3de45 **refactor: extract dir path abs error**
+- 2025-10-12 19:40 0377c0b **refactor: extract pagination page**
+- 2025-10-12 19:35 9d9a33f **refactor: extract pagination skip**
+- 2025-10-12 19:31 618d30a **refactor: extract pagination take**
+- 2025-10-11 15:35 06bc84a **fix: revision**
+- 2025-10-11 15:22 e4081f9 **refactor: extract revision value**
+- 2025-10-11 15:20 03cb03e **refactor: simplify month shift**
+- 2025-10-11 15:17 4666723 **refactor: simplify month from iso id**
+- 2025-10-11 15:07 3f3d6bb **refactor: simplify month from timestamp**
+- 2025-10-11 15:05 566e587 **refactor: simplify month to iso id**
+- 2025-10-11 15:03 75b47bf **fix: as iso id**
+- 2025-10-11 15:02 f9e65c8 **refactor: simplify month tests**
+- 2025-10-11 14:51 069d993 **refactor: simplify weekday**
+- 2025-10-11 14:47 dc66c87 **refactor: improve year**
+- 2025-10-11 14:31 93c73f6 **refactor: simplify year**
+- 2025-10-11 14:26 59d2dd9 **refactor: simplify shifts**
+- 2025-10-11 14:25 48ed94b **refactor: simplify week**
+- 2025-10-11 14:20 8d4a36e **refactor: simplify week iso id**
+- 2025-10-11 14:17 5133066 **refactor: simplify timezone**
+- 2025-10-11 14:16 d9073f0 **refactor: simplify timezone offset value**
+- 2025-10-11 14:12 60fcac6 **refactor: simplify linear regression**
+- 2025-10-11 14:05 d8392d3 **refactor: simplify rate limiter**
+- 2025-10-11 14:04 9c0a3fe **refactor: simplify random**
+- 2025-10-11 13:59 f46eddb **refactor: simplify quarter**
+- 2025-10-11 13:57 462a161 **refactor: simplify psd**
+- 2025-10-11 13:56 a461aac **refactor: simplify package version schema**
+- 2025-10-11 13:53 2a85f5f **refactor: simplify mime**
+- 2025-10-11 13:52 e93934b **refactor: simplify mean**
+- 2025-10-11 13:52 84adb72 **refactor: simplify filename**
+- 2025-10-11 13:52 73316a7 **refactor: simplify mime value**
+- 2025-10-11 13:49 f097e8f **refactor: simplify file-path**
+- 2025-10-11 13:36 cb3a7d0 **refactor: simplify day to iso id**
+- 2025-10-11 13:32 2ceccba **refactor: simplify date-formatter**
+- 2025-10-11 13:31 0fc3e9b **refactor: simplify clock**
+- 2025-10-11 13:29 d248893 **refactor: remove trimming from api-key**
+- 2025-10-11 13:26 b00fcfc **refactor: simplify day-iso-id**
+- 2025-10-11 13:19 2bcfa90 **refactor: unify min max scaler**
+- 2025-10-11 13:05 c569d5b **refactor: unify money vo tests**
+- 2025-10-11 12:57 0f3b202 **refactor: do not use rounding in money add/subtract operations**
+- 2025-10-11 12:56 5710495 **refactor: unify money**
+- 2025-10-11 12:53 ae6a232 **refactor: extract money multiplication factor**
+- 2025-10-11 12:50 6e6d682 **refactor: extract money division factor**
+- 2025-10-11 12:41 83cf048 **refactor: use money amount in money**
+- 2025-10-11 12:39 5c076ec **fix: missing import**
+- 2025-10-11 12:31 d0f6f87 **refactor: extract money amount vo**
+- 2025-10-11 12:30 e6a3d40 **refactor: simplify timestamp tests**
+- 2025-10-10 00:17 831d073 **refactor: simplify mime vo**
+- 2025-10-10 00:16 c1e1768 **refactor: extract mime value**
+- 2025-10-10 00:02 19baabd **refactor: simplify mime**
+- 2025-10-09 23:19 66defe4 **refactor: simplify iban mask**
+- 2025-10-09 23:07 0c63488 **refactor: unify filename**
+- 2025-10-09 23:06 4334996 **refactor: unify filename from string**
+- 2025-10-09 22:58 d05747b **refactor: simlify feature flag**
+- 2025-10-09 22:53 ae6e17b **refactor: simlify email mask**
+- 2025-10-09 22:48 7ee4ce2 **refactor: simlify date calculator**
+- 2025-10-09 22:42 5aa51f3 **refactor: simlify age-years**
+- 2025-10-09 22:28 22e07dc **step: explain the iban in the format method**
+- 2025-10-09 22:23 42b2112 **refactor: simplify outlier detector**
+- 2025-10-09 22:20 1b56f3c **refactor: simplify percentage**
+- 2025-10-09 22:16 0aacc0e **refactor: unify rounding decimals**
+- 2025-10-09 22:02 c90fd3b **refactor: simplify size service**
+- 2025-10-09 22:00 74aa4e4 **refactor: simplify sum service**
+- 2025-10-09 21:57 de6992e **step: explain thousands separator**
+- 2025-10-09 21:47 19becff **refactor: adjust package version vo tests**
+- 2025-10-09 21:43 4eb0d5d **refactor: extract package-version-schema**
+- 2025-10-09 21:30 420f006 **refactor: remove todo**
+- 2025-10-09 16:07 9695082 **refactor: simplify iban**
+- 2025-10-09 15:53 a2e1444 **refactor: simplify size**
+- 2025-10-09 15:43 0a56f6e **refactor: simplify size.unit**
+- 2025-10-09 15:39 5392ce0 **refactor: remove streak calculator**
+- 2025-10-09 15:33 b1b4438 **fix: timestamp error**
+- 2025-10-09 15:25 eb305b8 **refactor: unify hour vo**
+- 2025-10-09 15:21 3955213 **refactor: unify minute vo**
+- 2025-10-09 15:12 17bae95 **refactor: unify object key**
+- 2025-10-09 14:21 a7febdb **step: add month iso id**
+- 2025-10-09 14:21 6ccd617 **step: add brands**
+- 2025-10-09 14:20 4d41030 **refactor: unify mean**
+- 2025-10-09 14:20 3bc8d31 **step: add week iso id brand**
+- 2025-10-09 14:18 3bc62df **refactor: unify psd**
+- 2025-10-09 14:17 c0c8e92 **refactor: unify zscore**
 - 2025-10-09 13:55 3f1148a **step: add missing exports**
 - 2025-10-09 13:54 cdd830b **step: add todos**
 - 2025-10-09 13:42 c05449c **refactor: unify duration**
@@ -19,6 +110,8 @@
 - 2025-10-09 12:14 f24e23a **refactor: unify filename suffix error handling**
 - 2025-10-09 12:09 f9b083e **refactor: unify basename error handling**
 - 2025-10-09 12:03 d26cf6d **refactor: unify extension error handling**
+- 2025-10-09 11:55 8948c32 **docs: generate CHANGELOG**
+- 2025-10-09 11:55 254d724 **docs: generate readme**
 - 2025-10-08 17:08 3777a2d **refactor: simplify filename from string**
 - 2025-10-08 16:52 f6b9631 **step: add test for single char extension**
 - 2025-10-08 16:46 82933f0 **refactor: capitalise regex vars**
