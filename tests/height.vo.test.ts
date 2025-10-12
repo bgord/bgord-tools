@@ -1,22 +1,13 @@
 import { describe, expect, test } from "bun:test";
-import { Height, HeightUnit } from "../src/height.vo";
-import { RoundDown, RoundToDecimal, RoundToNearest, RoundUp } from "../src/rounding.adapter";
+import { Height } from "../src/height.vo";
+import { HeightMillimetersError } from "../src/height-milimiters.vo";
+import { RoundDown, RoundToDecimal, RoundUp } from "../src/rounding.adapter";
 
 describe("Height", () => {
   test("creates from centimeters and stores integer millimeters using strategy", () => {
     expect(Height.fromCentimeters(180).toMillimeters()).toBe(1800);
     expect(Height.fromCentimeters(180.04, new RoundDown()).toMillimeters()).toBe(1800);
     expect(Height.fromCentimeters(180.06, new RoundUp()).toMillimeters()).toBe(1801);
-  });
-
-  test("creates from feet+inches (inches can be fractional) and stores integer millimeters", () => {
-    expect(Height.fromFeetInches(5, 11).toMillimeters()).toBe(1803);
-    expect(Height.fromFeetInches(6, 0).toMillimeters()).toBe(1829);
-  });
-
-  test("creates from millimeters with configurable rounding", () => {
-    expect(Height.fromMillimeters(1799.6, new RoundToNearest()).toMillimeters()).toBe(1800);
-    expect(Height.fromMillimeters(1799.6, new RoundDown()).toMillimeters()).toBe(1799);
   });
 
   test("zero factory", () => {
@@ -30,30 +21,9 @@ describe("Height", () => {
     expect(Height.fromMillimeters(1804).toCentimeters(new RoundToDecimal(1))).toBe(180.4);
   });
 
-  test("converts to feet+inches with a SINGLE rounding step", () => {
-    expect(Height.fromCentimeters(180).toFeetInches(new RoundToNearest())).toEqual({ feet: 5, inches: 11 });
-    expect(Height.fromMillimeters(70.9 * 25.4).toFeetInches(new RoundDown())).toEqual({
-      feet: 5,
-      inches: 10,
-    });
-    expect(Height.fromMillimeters(70.1 * 25.4).toFeetInches(new RoundUp())).toEqual({ feet: 5, inches: 11 });
-  });
-
-  test("toFeetInches throws if rounding strategy does not produce an integer inches count", () => {
-    expect(() => Height.fromCentimeters(180).toFeetInches(new RoundToDecimal(1))).toThrow();
-  });
-
   test("formats centimeters using default RoundToDecimal(1)", () => {
-    expect(Height.fromMillimeters(1804).format(HeightUnit.cm)).toBe("180.4 cm");
-    expect(Height.fromCentimeters(180).format(HeightUnit.cm)).toBe("180 cm");
-  });
-
-  test("formats feet+inches using default RoundToNearest (whole inches)", () => {
-    expect(Height.fromCentimeters(180).format(HeightUnit.ft_in)).toBe("5′11″");
-  });
-
-  test("formats ft_in with custom rounding (floor)", () => {
-    expect(Height.fromMillimeters(70.9 * 25.4).format(HeightUnit.ft_in, new RoundDown())).toBe("5′10″");
+    expect(Height.fromMillimeters(1804).format()).toBe("180.4 cm");
+    expect(Height.fromCentimeters(180).format()).toBe("180 cm");
   });
 
   test("compares exactly via integer millimeters", () => {
@@ -69,17 +39,9 @@ describe("Height", () => {
     expect(Height.zero().isZero()).toBe(true);
   });
 
-  test("serializes/deserializes via millimeters", () => {
-    const original = Height.fromMillimeters(1829);
-    const restored = Height.fromJSON(original.toJSON());
-    expect(restored.equals(original)).toBe(true);
-  });
-
   test("guards invalid inputs", () => {
-    expect(() => Height.fromCentimeters(-1)).toThrow();
-    expect(() => Height.fromFeetInches(-1, 0)).toThrow();
-    expect(() => Height.fromFeetInches(5, -2)).toThrow();
-    expect(() => Height.fromMillimeters(Number.NaN)).toThrow();
-    expect(() => Height.fromMillimeters(Number.POSITIVE_INFINITY)).toThrow();
+    expect(() => Height.fromCentimeters(-1)).toThrow(HeightMillimetersError.Invalid);
+    expect(() => Height.fromMillimeters(Number.NaN)).toThrow(HeightMillimetersError.Type);
+    expect(() => Height.fromMillimeters(Number.POSITIVE_INFINITY)).toThrow(HeightMillimetersError.Type);
   });
 });
