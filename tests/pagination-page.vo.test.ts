@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { PaginationPageError, Page } from "../src/pagination-page.vo";
+import { Page, PaginationPageError } from "../src/pagination-page.vo";
 
 describe("PaginationTake", () => {
   test("happy path", () => {
