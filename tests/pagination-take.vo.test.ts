@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { PaginationTakeError, Take } from "../src/pagination-take.vo";
 
-describe("Timestamp", () => {
+describe("PaginationTake", () => {
   test("happy path", () => {
     expect(Take.safeParse(1).success).toEqual(true);
     expect(Take.safeParse(5).success).toEqual(true);

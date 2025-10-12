@@ -1,14 +1,10 @@
 import { z } from "zod/v4";
+import { Skip, type SkipType } from "./pagination-skip.vo";
 import { Take, type TakeType } from "./pagination-take.vo";
 import { RoundUp } from "./rounding.adapter";
 
 // TODO
-const PaginationSkipError = { error: "pagination.skip.invalid" } as const;
 const PaginationPageError = { error: "pagination.page.invalid" } as const;
-
-const Skip = z.number(PaginationSkipError).int(PaginationSkipError).gte(0, PaginationSkipError);
-
-type SkipType = z.infer<typeof Skip>;
 
 const Page = z.coerce
   .number(PaginationPageError)
