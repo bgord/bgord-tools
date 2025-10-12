@@ -1,12 +1,12 @@
 import { z } from "zod/v4";
 
 export const DirectoryPathAbsoluteError = {
-  Type: "directory.path.absolue.type",
-  LeadingSlash: "directory.path.absolue.leading.slash",
-  TrailingSlash: "directory.path.absolue.trailing.slash",
   BadSegments: "directory.path.absolue.bad.segments",
   Empty: "directory.path.absolue.empty",
+  LeadingSlash: "directory.path.absolue.leading.slash",
   TooLong: "directory.path.absolue.too.long",
+  TrailingSlash: "directory.path.absolue.trailing.slash",
+  Type: "directory.path.absolue.type",
 } as const;
 
 // Letters, digits, dots, underscores, and hyphens
@@ -26,10 +26,7 @@ export const DirectoryPathAbsoluteSchema = z
     const segments = value.slice(1).split("/");
 
     return segments.every(
-      (segment) =>
-        segment.length > 0 &&
-        DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST.test(segment) &&
-        !DOT_SEGMENTS.includes(segment),
+      (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST.test(segment) && !DOT_SEGMENTS.includes(segment),
     );
   }, DirectoryPathAbsoluteError.BadSegments)
   .brand("DirectoryPathAbsolute");

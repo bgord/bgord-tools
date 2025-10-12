@@ -1,57 +1,69 @@
 import { describe, expect, test } from "bun:test";
-import {
-  DirectoryPathRelativeSchema,
-  type DirectoryPathRelativeType,
-  RelDirBackslashForbiddenError,
-  RelDirBadSegmentsError,
-  RelDirControlCharsForbiddenError,
-  RelDirEmptyError,
-  RelDirMustNotStartWithSlashError,
-  RelDirTypeError,
-} from "../src/directory-path-relative.vo";
+import { DirectoryPathRelativeError, DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 
 describe("DirectoryPathRelativeSchema", () => {
-  test("accepts 'users/avatars' as-is", () => {
-    expect(DirectoryPathRelativeSchema.parse("users/avatars")).toEqual(
-      "users/avatars" as DirectoryPathRelativeType,
+  test("happy path", () => {
+    const valid = ["users/avatars", "users"];
+
+    for (const value of valid) {
+      // @ts-expect-error
+      expect(DirectoryPathRelativeSchema.parse(value)).toEqual(value);
+    }
+  });
+
+  test("rejects empty", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("")).toThrow(DirectoryPathRelativeError.Empty);
+  });
+
+  test("rejects too-long", () => {
+    expect(() => DirectoryPathRelativeSchema.parse(`/${"a".repeat(512)}`)).toThrow(
+      DirectoryPathRelativeError.TooLong,
     );
   });
 
-  test("normalizes 'users//avatars/' to 'users/avatars'", () => {
-    expect(DirectoryPathRelativeSchema.parse("users//avatars/")).toEqual(
-      "users/avatars" as DirectoryPathRelativeType,
+  test("rejects empty segment", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("tmp//app///users/")).toThrow(
+      DirectoryPathRelativeError.BadSegments,
     );
   });
 
-  test("rejects leading slash '/users/avatars'", () => {
+  test("rejects leading slash ", () => {
     expect(() => DirectoryPathRelativeSchema.parse("/users/avatars")).toThrow(
-      RelDirMustNotStartWithSlashError,
+      DirectoryPathRelativeError.LeadingSlash,
     );
   });
 
-  test("rejects backslash 'users\\avatars'", () => {
-    expect(() => DirectoryPathRelativeSchema.parse("users\\avatars")).toThrow(RelDirBackslashForbiddenError);
+  test("rejects trailing slash", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("tmp/app/")).toThrow(
+      DirectoryPathRelativeError.TrailingSlash,
+    );
   });
 
-  test("rejects control chars 'users\\navatars'", () => {
+  test("rejects backslash", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users\\avatars")).toThrow(
+      DirectoryPathRelativeError.BadSegments,
+    );
+  });
+
+  test("rejects control chars", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users\navatars")).toThrow(
-      RelDirControlCharsForbiddenError,
+      DirectoryPathRelativeError.BadSegments,
     );
   });
 
-  test("rejects empty (after trim) '   '", () => {
-    expect(() => DirectoryPathRelativeSchema.parse("   ")).toThrow(RelDirEmptyError);
+  test("rejects dot segment", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users/./avatars")).toThrow(
+      DirectoryPathRelativeError.BadSegments,
+    );
   });
 
-  test("rejects dot segment 'users/./avatars'", () => {
-    expect(() => DirectoryPathRelativeSchema.parse("users/./avatars")).toThrow(RelDirBadSegmentsError);
+  test("rejects dot segment", () => {
+    expect(() => DirectoryPathRelativeSchema.parse("users/../avatars")).toThrow(
+      DirectoryPathRelativeError.BadSegments,
+    );
   });
 
-  test("rejects dot segment 'users/../avatars'", () => {
-    expect(() => DirectoryPathRelativeSchema.parse("users/../avatars")).toThrow(RelDirBadSegmentsError);
-  });
-
-  test("rejects non-string (number)", () => {
-    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(RelDirTypeError);
+  test("rejects non-string", () => {
+    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(DirectoryPathRelativeError.Type);
   });
 });

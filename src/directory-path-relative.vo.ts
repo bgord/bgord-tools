@@ -1,30 +1,35 @@
 import { z } from "zod/v4";
 
-// TODO
-export const RelDirTypeError = "rel_dir.not.string" as const;
-export const RelDirMustNotStartWithSlashError = "rel_dir_must_not_start_with_slash" as const;
-export const RelDirBackslashForbiddenError = "rel_dir_backslash_forbidden" as const;
-export const RelDirControlCharsForbiddenError = "rel_dir_control_chars_forbidden" as const;
-export const RelDirEmptyError = "rel_dir_empty" as const;
-export const RelDirBadSegmentsError = "rel_dir_bad_segments" as const;
+export const DirectoryPathRelativeError = {
+  BadSegments: "directory.path.relative.bad.segments",
+  Empty: "directory.path.relative.empty",
+  LeadingSlash: "directory.path.relative.leading.slash",
+  TooLong: "directory.path.absolue.too.long",
+  TrailingSlash: "directory.path.absolue.trailing.slash",
+  Type: "directory.path.relative.not.type",
+} as const;
+
+// Letters, digits, dots, underscores, and hyphens
+export const DIRECTORY_PATH_RELATIVE_CHARS_WHITELIST = /^[A-Za-z0-9._-]+$/;
+
+const DOT_SEGMENTS = [".", ".."];
 
 export const DirectoryPathRelativeSchema = z
-  .string(RelDirTypeError)
-  .trim()
-  .refine((value) => !value.startsWith("/"), RelDirMustNotStartWithSlashError)
-  .refine((value) => !value.includes("\\"), RelDirBackslashForbiddenError)
-  // biome-ignore lint: lint/suspicious/noControlCharactersInRegex
-  .refine((value) => !/[\u0000-\u001F\u007F]/.test(value), RelDirControlCharsForbiddenError)
-  .transform((value) => value.replace(/\/{2,}/g, "/"))
-  .transform((value) => value.replace(/^\/+|\/+$/g, ""))
-  .refine((value) => value.length > 0, RelDirEmptyError)
+  .string(DirectoryPathRelativeError.Type)
+  .min(1, DirectoryPathRelativeError.Empty)
+  .max(512, DirectoryPathRelativeError.TooLong)
+  .refine((value) => !value.startsWith("/"), DirectoryPathRelativeError.LeadingSlash)
+  .refine((value) => !value.endsWith("/"), DirectoryPathRelativeError.TrailingSlash)
   .refine(
     (value) =>
       value
         .split("/")
-        .every((segment) => /^[A-Za-z0-9._-]+$/.test(segment) && segment !== "." && segment !== ".."),
-    RelDirBadSegmentsError,
+        .every(
+          (segment) =>
+            DIRECTORY_PATH_RELATIVE_CHARS_WHITELIST.test(segment) && !DOT_SEGMENTS.includes(segment),
+        ),
+    DirectoryPathRelativeError.BadSegments,
   )
-  .brand("directory_path_relative");
+  .brand("DirectoryPathRelative");
 
 export type DirectoryPathRelativeType = z.infer<typeof DirectoryPathRelativeSchema>;
