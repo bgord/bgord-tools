@@ -1,4 +1,6 @@
 # Changelog
+- 2025-10-12 22:36 ef6df7f **refactor: remove math.floor**
+- 2025-10-12 22:33 23db8db **refactor: remove trimming**
 - 2025-10-12 22:31 4225b9c **step: cleanup exports**
 - 2025-10-12 22:28 ee09f69 **step: update packages**
 - 2025-10-12 22:21 03e9665 **refactor: improve reordering**
@@ -8,6 +10,8 @@
 - 2025-10-12 21:26 997876e **refactor: improve height**
 - 2025-10-12 20:50 27c7ee9 **refactor: improve file path relative**
 - 2025-10-12 20:39 7a979e7 **refactor: improve file path absolute**
+- 2025-10-12 20:31 f3234c1 **docs: generate readme**
+- 2025-10-12 20:31 571648f **docs: generate CHANGELOG**
 - 2025-10-12 20:13 a04dc0c **refactor: improve dir path relative**
 - 2025-10-12 20:05 390488e **refactor: improve dir path absolute**
 - 2025-10-12 19:43 2c3de45 **refactor: extract dir path abs error**
