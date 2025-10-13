@@ -1,4 +1,6 @@
 # Changelog
+## 2025-10-13 15:00 v1.0.1
+- 2025-10-13 15:00 6cbecd1 **1.0.1**
 - 2025-10-13 14:59 f2bef81 **fix: allow hyphens in mime value**
 ## 2025-10-13 14:48 v1.0.0
 - 2025-10-13 14:48 cac0fc3 **step: update packages**
@@ -23,6 +25,7 @@
 - 2025-10-13 13:18 11ab22e **refactor: improve clock**
 - 2025-10-13 13:04 3c74872 **refactor: improve money**
 - 2025-10-13 13:02 0274490 **refactor: improve revision**
+- 2025-10-13 13:00 45cd171 **docs: generate CHANGELOG**
 - 2025-10-13 12:58 7690d71 **refactor: improve reordering**
 - 2025-10-13 12:56 e7a018e **refactor: improve mime**
 - 2025-10-13 12:53 2f4d87d **refactor: improve size**
