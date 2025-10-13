@@ -51,11 +51,6 @@ export class Height {
     return this.millimeters === another.millimeters;
   }
 
-  compare(another: Height): -1 | 0 | 1 {
-    if (this.equals(another)) return 0;
-    return this.millimeters < another.millimeters ? -1 : 1;
-  }
-
   greaterThan(another: Height): boolean {
     return this.millimeters > another.millimeters;
   }
@@ -68,7 +63,7 @@ export class Height {
     return this.millimeters === 0;
   }
 
-  toJSON(): { mm: number } {
-    return { mm: this.millimeters };
+  toJSON(): number {
+    return this.millimeters;
   }
 }
