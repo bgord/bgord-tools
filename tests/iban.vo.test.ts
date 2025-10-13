@@ -28,7 +28,7 @@ describe("IBAN", () => {
     }
   });
 
-  test("equality compares normalized values", () => {
+  test("equals", () => {
     const a = new IBAN("PL61 1090 1014 0000 0712 1981 2874");
     const b = new IBAN("PL61109010140000071219812874");
     const c = new IBAN("DE44 5001 0517 5407 3249 31");

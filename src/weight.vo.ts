@@ -26,7 +26,7 @@ export class Weight {
     return new Weight(0);
   }
 
-  toGrams(): number {
+  get(): number {
     return this.grams;
   }
 
@@ -37,7 +37,7 @@ export class Weight {
   }
 
   format(): string {
-    return `${this.toKilograms()} kg`;
+    return `${this.grams} g`;
   }
 
   add(other: Weight): Weight {
@@ -66,11 +66,6 @@ export class Weight {
     return this.grams === other.grams;
   }
 
-  compare(other: Weight): -1 | 0 | 1 {
-    if (this.grams === other.grams) return 0;
-    return this.grams < other.grams ? -1 : 1;
-  }
-
   greaterThan(other: Weight): boolean {
     return this.grams > other.grams;
   }
@@ -91,7 +86,11 @@ export class Weight {
     return this.grams === 0;
   }
 
-  toJSON(): { g: number } {
-    return { g: this.grams };
+  toString(): string {
+    return this.format();
+  }
+
+  toJSON(): number {
+    return this.grams;
   }
 }
