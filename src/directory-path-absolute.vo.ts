@@ -10,7 +10,7 @@ export const DirectoryPathAbsoluteError = {
 } as const;
 
 // Letters, digits, dots, underscores, and hyphens
-export const DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST = /^[a-zA-Z0-9._-]+$/;
+export const DIRECTORY_PATH_ABSOLUTE_CHARS = /^[a-zA-Z0-9._-]+$/;
 
 const DOT_SEGMENTS = [".", ".."];
 
@@ -26,7 +26,7 @@ export const DirectoryPathAbsoluteSchema = z
     const segments = value.slice(1).split("/");
 
     return segments.every(
-      (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS_WHITELIST.test(segment) && !DOT_SEGMENTS.includes(segment),
+      (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment),
     );
   }, DirectoryPathAbsoluteError.BadSegments)
   .brand("DirectoryPathAbsolute");

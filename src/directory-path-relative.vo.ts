@@ -10,7 +10,7 @@ export const DirectoryPathRelativeError = {
 } as const;
 
 // Letters, digits, dots, underscores, and hyphens
-export const DIRECTORY_PATH_RELATIVE_CHARS_WHITELIST = /^[A-Za-z0-9._-]+$/;
+export const DIRECTORY_PATH_RELATIVE_CHARS = /^[A-Za-z0-9._-]+$/;
 
 const DOT_SEGMENTS = [".", ".."];
 
@@ -24,10 +24,7 @@ export const DirectoryPathRelativeSchema = z
     (value) =>
       value
         .split("/")
-        .every(
-          (segment) =>
-            DIRECTORY_PATH_RELATIVE_CHARS_WHITELIST.test(segment) && !DOT_SEGMENTS.includes(segment),
-        ),
+        .every((segment) => DIRECTORY_PATH_RELATIVE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment)),
     DirectoryPathRelativeError.BadSegments,
   )
   .brand("DirectoryPathRelative");

@@ -8,11 +8,11 @@ export const DayIsoIdError = {
 } as const;
 
 // Four digits, hyphen, two digits, hyphen, two digits
-export const DAY_ISO_ID_CHARS_WHITEILST = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+export const DAY_ISO_ID_CHARS = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 
 export const DayIsoId = z
   .string(DayIsoIdError.Type)
-  .regex(DAY_ISO_ID_CHARS_WHITEILST, DayIsoIdError.BadChars)
+  .regex(DAY_ISO_ID_CHARS, DayIsoIdError.BadChars)
   .refine((value) => isValid(parseISO(value)), DayIsoIdError.InvalidDate)
   .brand("DayIsoId");
 

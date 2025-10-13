@@ -3,7 +3,7 @@ import { Age, AgeError } from "../src/age.vo";
 import { AgeYearsError } from "../src/age-years.vo";
 import { Timestamp, type TimestampType } from "../src/timestamp.vo";
 
-const toTimestamp = (ms: string) => Timestamp.parse(new Date(ms).getTime());
+const toTimestamp = (date: string) => Timestamp.parse(new Date(date).getTime());
 
 describe("Age", () => {
   describe("fromValue", () => {

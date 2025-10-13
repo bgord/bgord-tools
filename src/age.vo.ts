@@ -11,7 +11,7 @@ export class Age {
   private constructor(private readonly value: AgeYearsType) {}
 
   get(): number {
-    return this.value as number;
+    return this.value;
   }
 
   compare(other: Age): -1 | 0 | 1 {
@@ -55,6 +55,6 @@ export class Age {
   }
 
   toString(): string {
-    return String(this.value);
+    return this.value.toString();
   }
 }

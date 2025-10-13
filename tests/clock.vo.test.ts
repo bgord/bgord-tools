@@ -66,4 +66,8 @@ describe("Clock", () => {
 
     expect(clock.format()).toEqual("3 p.m. @ 07 min");
   });
+
+  test("toJSON", () => {
+    expect(new Clock(new Hour(15), new Minute(7)).toJSON()).toEqual({ hour: 15, minute: 7 });
+  });
 });

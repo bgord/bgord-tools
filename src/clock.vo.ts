@@ -1,6 +1,8 @@
 import { type ClockFormatter, ClockFormatters } from "./clock-format.service";
 import { Hour } from "./hour.vo";
+import type { HourSchemaType } from "./hour-schema.vo";
 import { Minute } from "./minute.vo";
+import type { MinuteSchemaType } from "./minute-schema.vo";
 import type { TimestampType } from "./timestamp.vo";
 
 export class Clock {
@@ -29,10 +31,6 @@ export class Clock {
     return this.formatter(this.hour, this.minute);
   }
 
-  toString(): string {
-    return this.format();
-  }
-
   equals(another: Clock): boolean {
     return this.hour.get() === another.hour.get() && this.minute.get() === another.minute.get();
   }
@@ -45,5 +43,13 @@ export class Clock {
   isBefore(another: Clock): boolean {
     if (this.hour.get() !== another.hour.get()) return this.hour.get() < another.hour.get();
     return this.minute.get() < another.minute.get();
+  }
+
+  toString(): string {
+    return this.format();
+  }
+
+  toJSON(): { hour: HourSchemaType; minute: MinuteSchemaType } {
+    return { hour: this.hour.get(), minute: this.minute.get() };
   }
 }
