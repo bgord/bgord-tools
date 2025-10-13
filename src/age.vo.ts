@@ -10,12 +10,24 @@ export class Age {
 
   private constructor(private readonly value: AgeYearsType) {}
 
-  get(): number {
-    return this.value;
+  static fromValue(candidate: number): Age {
+    return new Age(AgeYears.parse(candidate));
   }
 
-  compare(other: Age): -1 | 0 | 1 {
-    return this.value === other.value ? 0 : this.value < other.value ? -1 : 1;
+  static fromBirthdateEpochMs(params: { birthdate: TimestampType; now: TimestampType }): Age {
+    if (params.birthdate > params.now) throw new Error(AgeError.FutureBirthdate);
+    return Age.fromValue(differenceInYears(params.now, params.birthdate));
+  }
+
+  static fromBirthdate(candidate: { birthdate: string; now: TimestampType }): Age {
+    const birthdateMs = new Date(candidate.birthdate).getTime();
+
+    if (birthdateMs > candidate.now) throw new Error(AgeError.FutureBirthdate);
+    return Age.fromValue(differenceInYears(candidate.now, birthdateMs));
+  }
+
+  get(): number {
+    return this.value;
   }
 
   equals(other: Age): boolean {
@@ -34,27 +46,11 @@ export class Age {
     return this.value >= minimumAge.value;
   }
 
-  static fromValue(candidate: number): Age {
-    return new Age(AgeYears.parse(candidate));
-  }
-
-  static fromBirthdateEpochMs(params: { birthdate: TimestampType; now: TimestampType }): Age {
-    if (params.birthdate > params.now) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(params.now, params.birthdate));
-  }
-
-  static fromBirthdate(candidate: { birthdate: string; now: TimestampType }): Age {
-    const birthdateMs = new Date(candidate.birthdate).getTime();
-
-    if (birthdateMs > candidate.now) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(candidate.now, birthdateMs));
+  toString(): string {
+    return this.value.toString();
   }
 
   toJSON(): number {
     return this.get();
-  }
-
-  toString(): string {
-    return this.value.toString();
   }
 }
