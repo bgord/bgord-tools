@@ -20,10 +20,6 @@ export class Hour {
     return this.value;
   }
 
-  toString(): string {
-    return HourFormatters.TWENTY_FOUR_HOURS(this.value);
-  }
-
   format(formatter: HourFormatter): string {
     return formatter(this.value);
   }
@@ -42,5 +38,13 @@ export class Hour {
 
   static list(): readonly Hour[] {
     return Array.from({ length: 24 }, (_, index) => new Hour(index));
+  }
+
+  toString(): string {
+    return HourFormatters.TWENTY_FOUR_HOURS(this.value);
+  }
+
+  toJSON(): number {
+    return this.value;
   }
 }
