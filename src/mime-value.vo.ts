@@ -2,8 +2,8 @@ import { z } from "zod/v4";
 
 export const MimeValueError = { Type: "mime.value.type", Invalid: "mime.value.invalid" };
 
-// One to twenty four lowercase letters or an asterisk, forward slash, one to twenty four lowercase letters or an asterisk
-const MIME_VALUE_CHARS_WHITELIST = /^[a-z*]{1,24}\/[a-z*]{1,24}$/;
+// One to twenty four lowercase letters, asterisk or hyphen, forward slash, one to twenty four lowercase letters, asterisk or hyphen
+const MIME_VALUE_CHARS_WHITELIST = /^[a-z*-]{1,24}\/[a-z*-]{1,24}$/;
 
 export const MimeValue = z
   .string(MimeValueError.Type)

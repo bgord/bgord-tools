@@ -6,6 +6,7 @@ describe("MimeValue", () => {
     expect(MimeValue.safeParse("text/plain").success).toEqual(true);
     expect(MimeValue.safeParse("*/*").success).toEqual(true);
     expect(MimeValue.safeParse("image/*").success).toEqual(true);
+    expect(MimeValue.safeParse("application/octet-stream").success).toEqual(true);
   });
 
   test("rejects empty", () => {
