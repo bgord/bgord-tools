@@ -33,4 +33,12 @@ export class Revision {
     if (!weakEtag) throw new Error(RevisionError.Missing);
     return new Revision(weakEtag.revision);
   }
+
+  toString(): string {
+    return this.value.toString();
+  }
+
+  toJSON(): number {
+    return this.value;
+  }
 }
