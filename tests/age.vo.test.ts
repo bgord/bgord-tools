@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Age, AgeError } from "../src/age.vo";
 import { AgeYearsError } from "../src/age-years.vo";
-import { Timestamp, type TimestampType } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 
 const toTimestamp = (date: string) => Timestamp.parse(new Date(date).getTime());
 
@@ -92,9 +92,10 @@ describe("Age", () => {
 
     test("rejects above upper bound", () => {
       const nowTimestamp = toTimestamp("2025-09-30T00:00:00.000Z");
-      const veryOldBirthdateTimestamp = -5364662400000 as TimestampType;
+      const veryOldBirthdateTimestamp = -5364662400000;
 
       expect(() =>
+        // @ts-expect-error
         Age.fromBirthdateEpochMs({ birthdate: veryOldBirthdateTimestamp, now: nowTimestamp }),
       ).toThrow(AgeYearsError.Invalid);
     });

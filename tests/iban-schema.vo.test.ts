@@ -3,7 +3,7 @@ import { IbanSchema, IbanSchemaError } from "../src/iban-schema.vo";
 
 describe("IBAN", () => {
   test("normalizes and formats valid IBANs", () => {
-    const cases: string[] = [
+    const cases = [
       "PL61 1090 1014 0000 0712 1981 2874",
       "pl61 1090 1014 0000 0712 1981 2874",
       "DE44 5001 0517 5407 3249 31",

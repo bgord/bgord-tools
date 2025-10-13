@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { IBAN } from "../src/iban.vo";
-import { IbanSchemaError, type IbanSchemaType } from "../src/iban-schema.vo";
+import { IbanSchemaError } from "../src/iban-schema.vo";
 
 describe("IBAN", () => {
   test("normalizes and formats valid IBANs", () => {
-    const cases: [string, string, string][] = [
+    const cases = [
       [
         "PL61 1090 1014 0000 0712 1981 2874",
         "PL61109010140000071219812874",
@@ -21,7 +21,7 @@ describe("IBAN", () => {
 
     for (const [input, normalized, formatted] of cases) {
       const iban = new IBAN(input);
-      expect(iban.toString()).toEqual(normalized as IbanSchemaType);
+      expect(iban.toString()).toEqual(normalized);
       expect(iban.format()).toEqual(formatted);
       expect(iban.countryCode).toEqual(normalized.slice(0, 2));
     }

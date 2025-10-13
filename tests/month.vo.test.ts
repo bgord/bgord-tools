@@ -4,7 +4,7 @@ import { Month } from "../src/month.vo";
 import { MonthIsoId } from "../src/month-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
-const toMs = (s: string) => Timestamp.parse(Date.parse(s));
+const toMs = (date: string) => Timestamp.parse(Date.parse(date));
 
 const reference = toMs("2025-07-22T12:00:00Z");
 

@@ -115,7 +115,7 @@ describe("Money", () => {
   });
 
   test("format", () => {
-    const cases: [number, string][] = [
+    const cases = [
       [9999, "99.99"],
       [90, "0.90"],
       [99, "0.99"],
@@ -125,7 +125,7 @@ describe("Money", () => {
       [100, "1.00"],
       [1000, "10.00"],
       [123456789, "1234567.89"],
-    ];
+    ] as const;
 
     for (const [value, result] of cases) {
       expect(new Money(value).format()).toEqual(result);

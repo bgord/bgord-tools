@@ -11,7 +11,7 @@ describe("Quarter", () => {
 
     expect(quarter.getStart()).toEqual(Timestamp.parse(startOfQuarter(timestamp).getTime()));
     expect(quarter.getEnd()).toEqual(Timestamp.parse(endOfQuarter(timestamp).getTime()));
-    expect(quarter.toIsoId()).toEqual("2025-Q3");
+    expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2025-Q3"));
     expect(quarter.contains(timestamp)).toEqual(true);
   });
 
@@ -21,13 +21,13 @@ describe("Quarter", () => {
 
     expect(quarter.getStart()).toEqual(Timestamp.parse(startOfQuarter(timestamp).getTime()));
     expect(quarter.getEnd()).toEqual(Timestamp.parse(endOfQuarter(timestamp).getTime()));
-    expect(quarter.toIsoId()).toEqual("2025-Q4");
+    expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2025-Q4"));
   });
 
   test("round-trips via ISO id", () => {
     const ids = ["1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "2026-Q1"] as const;
     for (const id of ids) {
-      expect(Quarter.fromIsoId(QuarterIsoId.parse(id)).toIsoId()).toEqual(id);
+      expect(Quarter.fromIsoId(QuarterIsoId.parse(id)).toIsoId()).toEqual(QuarterIsoId.parse(id));
     }
   });
 

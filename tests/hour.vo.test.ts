@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Hour } from "../src/hour.vo";
-import { HourSchemaError } from "../src/hour-schema.vo";
+import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Hour", () => {
@@ -11,7 +11,7 @@ describe("Hour", () => {
   });
 
   test("creates a valid Hour instance", () => {
-    expect(new Hour(5).get()).toEqual(5);
+    expect(new Hour(5).get()).toEqual(HourSchema.parse(5));
   });
 
   test("default string formatting is 24h zero-padded", () => {
@@ -42,17 +42,17 @@ describe("Hour", () => {
     const hours = Hour.list();
 
     expect(hours.length).toEqual(24);
-    expect(hours[0].get()).toEqual(0);
-    expect(hours[23].get()).toEqual(23);
+    expect(hours[0].get()).toEqual(HourSchema.parse(0));
+    expect(hours[23].get()).toEqual(HourSchema.parse(23));
     expect(Hour.list()).toEqual(hours);
   });
 
   test("Hour.ZERO and Hour.MAX are correct", () => {
-    expect(Hour.ZERO.get()).toEqual(0);
-    expect(Hour.MAX.get()).toEqual(23);
+    expect(Hour.ZERO.get()).toEqual(HourSchema.parse(0));
+    expect(Hour.MAX.get()).toEqual(HourSchema.parse(23));
   });
 
   test("fromEpochMs extracts UTC hour", () => {
-    expect(Hour.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(22);
+    expect(Hour.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(HourSchema.parse(22));
   });
 });

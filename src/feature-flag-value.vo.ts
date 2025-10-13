@@ -7,8 +7,6 @@ export enum FeatureFlagEnum {
   no = "no",
 }
 
-export const FeatureFlagValue = z
-  .enum(FeatureFlagEnum, FeatureFlagValueError.Invalid)
-  .brand("FeatureFlagValue");
+export const FeatureFlagValue = z.enum(FeatureFlagEnum, FeatureFlagValueError.Invalid);
 
 export type FeatureFlagValueType = z.infer<typeof FeatureFlagValue>;

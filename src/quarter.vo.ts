@@ -8,7 +8,7 @@ export class Quarter extends DateRange {
     const year = getYear(this.getStart());
     const quarter = getQuarter(this.getStart());
 
-    return `${year}-Q${quarter}` as QuarterIsoIdType;
+    return QuarterIsoId.parse(`${year}-Q${quarter}`);
   }
 
   static fromTimestamp(timestamp: TimestampType): Quarter {

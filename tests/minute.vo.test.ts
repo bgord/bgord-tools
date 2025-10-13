@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Minute } from "../src/minute.vo";
-import { MinuteSchemaError } from "../src/minute-schema.vo";
+import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("Minute", () => {
@@ -11,7 +11,7 @@ describe("Minute", () => {
   });
 
   test("happy path", () => {
-    expect(new Minute(5).get()).toEqual(5);
+    expect(new Minute(5).get()).toEqual(MinuteSchema.parse(5));
   });
 
   test("formats minute to two digits via toString()", () => {
@@ -42,16 +42,16 @@ describe("Minute", () => {
     const list = Minute.list();
 
     expect(list.length).toEqual(60);
-    expect(list[0].get()).toEqual(0);
-    expect(list[59].get()).toEqual(59);
+    expect(list[0].get()).toEqual(MinuteSchema.parse(0));
+    expect(list[59].get()).toEqual(MinuteSchema.parse(59));
   });
 
   test("Minute.ZERO and Minute.MAX", () => {
-    expect(Minute.ZERO.get()).toEqual(0);
-    expect(Minute.MAX.get()).toEqual(59);
+    expect(Minute.ZERO.get()).toEqual(MinuteSchema.parse(0));
+    expect(Minute.MAX.get()).toEqual(MinuteSchema.parse(59));
   });
 
   test("fromEpochMs extracts UTC minutes", () => {
-    expect(Minute.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(13);
+    expect(Minute.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(MinuteSchema.parse(13));
   });
 });

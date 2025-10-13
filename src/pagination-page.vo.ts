@@ -6,7 +6,6 @@ export const Page = z.coerce
   .number(PaginationPageError.Type)
   .int(PaginationPageError.Type)
   .transform((value) => (value <= 0 ? 1 : value))
-  .default(1)
-  .brand("Page");
+  .default(1);
 
 export type PageType = z.infer<typeof Page>;

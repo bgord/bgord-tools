@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { Basename, type BasenameType } from "../src/basename.vo";
-import { Extension, type ExtensionType } from "../src/extension.vo";
+import { Basename } from "../src/basename.vo";
+import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
 import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
@@ -28,11 +28,11 @@ describe("Filename", () => {
   });
 
   test("getBasename returns branded basename", () => {
-    expect(Filename.fromString("user-photo.jpg").getBasename()).toEqual("user-photo" as BasenameType);
+    expect(Filename.fromString("user-photo.jpg").getBasename()).toEqual(Basename.parse("user-photo"));
   });
 
   test("getExtension returns branded extension", () => {
-    expect(Filename.fromString("user-photo.jpg").getExtension()).toEqual("jpg" as ExtensionType);
+    expect(Filename.fromString("user-photo.jpg").getExtension()).toEqual(Extension.parse("jpg"));
   });
 
   test("withExtension replaces only the extension", () => {

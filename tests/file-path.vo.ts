@@ -1,12 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import {
-  DirectoryPathAbsoluteSchema,
-  type DirectoryPathAbsoluteType,
-} from "../src/directory-path-absolute.vo";
-import {
-  DirectoryPathRelativeSchema,
-  type DirectoryPathRelativeType,
-} from "../src/directory-path-relative.vo";
+import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
+import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 import { FilePathAbsolute, FilePathRelative } from "../src/file-path.vo";
 import { Filename } from "../src/filename.vo";
 
@@ -38,7 +32,11 @@ describe("FilePathRelative", () => {
       path: FilePathRelative.fromString("tmp/file.txt").get(),
       directory: FilePathRelative.fromString("tmp/file.txt").getDirectory(),
       filename: FilePathRelative.fromString("tmp/file.txt").getFilename().get(),
-    }).toEqual({ path: "tmp/file.txt", directory: "tmp" as DirectoryPathRelativeType, filename: "file.txt" });
+    }).toEqual({
+      path: "tmp/file.txt",
+      directory: DirectoryPathRelativeSchema.parse("tmp"),
+      filename: "file.txt",
+    });
   });
 
   test("parses a nested path and normalizes duplicate slashes/whitespace", () => {
@@ -48,7 +46,7 @@ describe("FilePathRelative", () => {
       filename: FilePathRelative.fromString("  a//b///c/file.png  ").getFilename().get(),
     }).toEqual({
       path: "a/b/c/file.png",
-      directory: "a/b/c" as DirectoryPathRelativeType,
+      directory: DirectoryPathRelativeSchema.parse("a/b/c"),
       filename: "file.png",
     });
   });
@@ -88,7 +86,7 @@ describe("FilePathAbsolute", () => {
       filename: FilePathAbsolute.fromString("/avatar.webp").getFilename().get(),
     }).toEqual({
       path: "/avatar.webp",
-      directory: "/" as DirectoryPathAbsoluteType,
+      directory: DirectoryPathAbsoluteSchema.parse("/"),
       filename: "avatar.webp",
     });
   });
@@ -100,7 +98,7 @@ describe("FilePathAbsolute", () => {
       filename: FilePathAbsolute.fromString("   /var//uploads///avatar.webp   ").getFilename().get(),
     }).toEqual({
       path: "/var/uploads/avatar.webp",
-      directory: "/var/uploads" as DirectoryPathAbsoluteType,
+      directory: DirectoryPathAbsoluteSchema.parse("/var/uploads"),
       filename: "avatar.webp",
     });
   });
