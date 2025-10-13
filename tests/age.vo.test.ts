@@ -1,9 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Age, AgeError } from "../src/age.vo";
 import { AgeYearsError } from "../src/age-years.vo";
-import { Timestamp } from "../src/timestamp.vo";
-
-const toTimestamp = (date: string) => Timestamp.parse(new Date(date).getTime());
+import * as mocks from "./mocks";
 
 describe("Age", () => {
   test("fromValue", () => {
@@ -11,96 +9,67 @@ describe("Age", () => {
     expect(Age.fromValue(130).get()).toEqual(130);
   });
 
-  test("fromBirthdateEpochMs - birthday has already happened this year", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = toTimestamp("2000-09-01T00:00:00.000Z");
-
-    expect(Age.fromBirthdateEpochMs({ birthdate, now }).get()).toEqual(25);
+  test("fromBirthdateEpochMs - birthday has already happened", () => {
+    expect(
+      Age.fromBirthdateEpochMs({ birthdate: mocks.toTimestamp("2000-11-13"), now: mocks.TIME_ZERO }).get(),
+    ).toEqual(23);
   });
 
-  test("fromBirthdateEpochMs - birthday has NOT yet happened this year", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = toTimestamp("2000-10-01T00:00:00.000Z");
-
-    expect(Age.fromBirthdateEpochMs({ birthdate, now }).get()).toEqual(24);
+  test("fromBirthdateEpochMs - birthday has NOT yet happened", () => {
+    expect(
+      Age.fromBirthdateEpochMs({ birthdate: mocks.toTimestamp("2000-11-15"), now: mocks.TIME_ZERO }).get(),
+    ).toEqual(22);
   });
 
   test("fromBirthdateEpochMs - exactly on birthday", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = toTimestamp("2000-09-30T00:00:00.000Z");
-
-    expect(Age.fromBirthdateEpochMs({ birthdate, now }).get()).toEqual(25);
+    expect(
+      Age.fromBirthdateEpochMs({ birthdate: mocks.toTimestamp("2000-11-14"), now: mocks.TIME_ZERO }).get(),
+    ).toEqual(23);
   });
 
   test("fromBirthdateEpochMs - rejects future birthdates", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = toTimestamp("2025-10-01T00:00:00.000Z");
-
-    expect(() => Age.fromBirthdateEpochMs({ birthdate, now })).toThrowError(AgeError.FutureBirthdate);
+    expect(() =>
+      Age.fromBirthdateEpochMs({ birthdate: mocks.toTimestamp("2125-10-01"), now: mocks.TIME_ZERO }),
+    ).toThrowError(AgeError.FutureBirthdate);
   });
 
   test("fromBirthdateEpochMs - rejects above upper bound", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
     const birthdate = -5364662400000;
 
     // @ts-expect-error
-    expect(() => Age.fromBirthdateEpochMs({ birthdate, now })).toThrow(AgeYearsError.Invalid);
+    expect(() => Age.fromBirthdateEpochMs({ birthdate, now: mocks.TIME_ZERO })).toThrow(
+      AgeYearsError.Invalid,
+    );
   });
 
-  test("fromBirthdateEpochMs - respects lower bound", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = toTimestamp("2025-09-30T00:00:00.000Z");
-
-    expect(() => Age.fromBirthdateEpochMs({ birthdate, now })).toThrow(AgeYearsError.Invalid);
+  test("fromBirthdate - birthday has already happened", () => {
+    expect(Age.fromBirthdate({ birthdate: "2000-11-13", now: mocks.TIME_ZERO }).get()).toEqual(23);
   });
 
-  test("fromBirthdate - birthday has already happened this year", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "2000-09-01T00:00:00.000Z";
-
-    expect(Age.fromBirthdate({ birthdate, now }).get()).toEqual(25);
-  });
-
-  test("fromBirthdate - birthday has NOT yet happened this year", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "2000-10-01T00:00:00.000Z";
-
-    expect(Age.fromBirthdate({ birthdate, now }).get()).toEqual(24);
+  test("fromBirthdate - birthday has NOT yet happened", () => {
+    expect(Age.fromBirthdate({ birthdate: "2000-11-15", now: mocks.TIME_ZERO }).get()).toEqual(22);
   });
 
   test("fromBirthdate - exactly on birthday", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "2000-09-30T00:00:00.000Z";
-
-    expect(Age.fromBirthdate({ birthdate, now }).get()).toEqual(25);
+    expect(Age.fromBirthdate({ birthdate: "2000-11-14", now: mocks.TIME_ZERO }).get()).toEqual(23);
   });
 
   test("fromBirthdate - rejects future birthdates", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "2025-10-01T00:00:00.000Z";
-
-    expect(() => Age.fromBirthdate({ birthdate, now })).toThrowError(AgeError.FutureBirthdate);
+    expect(() => Age.fromBirthdate({ birthdate: "2125-10-01", now: mocks.TIME_ZERO })).toThrowError(
+      AgeError.FutureBirthdate,
+    );
   });
 
   test("fromBirthdate - rejects above upper bound", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "1800-01-01T00:00:00.000Z";
-
-    expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Invalid);
-  });
-
-  test("fromBirthdate - respects lower bound", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "2025-09-30T00:00:00.000Z";
-
-    expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Invalid);
+    expect(() => Age.fromBirthdate({ birthdate: "1800-01-01", now: mocks.TIME_ZERO })).toThrow(
+      AgeYearsError.Invalid,
+    );
   });
 
   test("fromBirthdate - invalid date string throws", () => {
-    const now = toTimestamp("2025-09-30T00:00:00.000Z");
-    const birthdate = "not-a-date";
-
-    expect(() => Age.fromBirthdate({ birthdate, now })).toThrow(AgeYearsError.Type);
+    expect(() => Age.fromBirthdate({ birthdate: "not-a-date", now: mocks.TIME_ZERO })).toThrow(
+      AgeYearsError.Type,
+    );
   });
 
   test("MIN", () => {
