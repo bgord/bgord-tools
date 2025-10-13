@@ -3,7 +3,7 @@ import { ETag, WeakETag, WeakETagError } from "../src/etags.vo";
 import { RevisionValue } from "../src/revision-value.vo";
 
 describe("ETag", () => {
-  test("ETag fromHeader should create a valid ETag instance", () => {
+  test("happy path", () => {
     const value = "123";
     const etag = ETag.fromHeader(value);
 
@@ -13,7 +13,7 @@ describe("ETag", () => {
     expect(etag.revision).toBe(123);
   });
 
-  test("ETag fromHeader should return null for WeakETag value", () => {
+  test("returns null", () => {
     const weakETagValue = "W/123";
     const etag = ETag.fromHeader(weakETagValue);
 
@@ -22,7 +22,7 @@ describe("ETag", () => {
 });
 
 describe("WeakETag class", () => {
-  test("WeakETag fromHeader should create a valid WeakETag instance", () => {
+  test("happy path", () => {
     const value = "W/123";
     const weakEtag = WeakETag.fromHeader(value);
 
@@ -30,7 +30,7 @@ describe("WeakETag class", () => {
     expect(weakEtag?.revision).toBe(RevisionValue.parse(123));
   });
 
-  test("WeakETag fromHeader should throw an error for invalid WeakETag value", () => {
+  test("throws for invalid", () => {
     const invalidValue = "invalid";
 
     expect(() => WeakETag.fromHeader(invalidValue)).toThrow(WeakETagError.Invalid);
