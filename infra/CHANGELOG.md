@@ -1,4 +1,5 @@
 # Changelog
+- 2025-10-13 14:59 f2bef81 **fix: allow hyphens in mime value**
 ## 2025-10-13 14:48 v1.0.0
 - 2025-10-13 14:48 cac0fc3 **step: update packages**
 - 2025-10-13 14:48 a372510 **1.0.0**
@@ -25,6 +26,7 @@
 - 2025-10-13 12:58 7690d71 **refactor: improve reordering**
 - 2025-10-13 12:56 e7a018e **refactor: improve mime**
 - 2025-10-13 12:53 2f4d87d **refactor: improve size**
+- 2025-10-13 12:49 1ca1920 **docs: generate CHANGELOG**
 - 2025-10-13 12:48 b576949 **refactor: improve hour**
 - 2025-10-13 12:48 a90a6d4 **docs: generate CHANGELOG**
 - 2025-10-13 12:43 0a7069f **refactor: improve minute**
