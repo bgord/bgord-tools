@@ -138,7 +138,7 @@ export class ReorderingCalculator {
     let index = 0;
     for (const node of this.dll) {
       const id = node.data.id;
-      const position = new ReorderingPosition(index);
+      const position = new ReorderingPosition(ReorderingItemPositionValue.parse(index));
       node.data = new ReorderingItem(id, position);
       index += 1;
     }

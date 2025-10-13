@@ -10,6 +10,6 @@ export const IbanSchema = z
   .toUpperCase()
   .transform((value) => value.replaceAll(" ", ""))
   .refine((value) => IBAN_CHARS_WHITELIST.test(value), IbanSchemaError.Invalid)
-  .brand("Iban");
+  .brand("IbanSchema");
 
 export type IbanSchemaType = z.infer<typeof IbanSchema>;

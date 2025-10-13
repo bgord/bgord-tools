@@ -26,6 +26,7 @@ export const FilePathAbsoluteSchema = z
     const filename = Filename.fromString(filenameCandidate);
 
     return { directory, filename };
-  });
+  })
+  .brand("FilePathAbsoluteSchema");
 
 export type FilePathAbsoluteType = z.infer<typeof FilePathAbsoluteSchema>;

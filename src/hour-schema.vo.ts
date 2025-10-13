@@ -6,6 +6,7 @@ export const HourSchema = z
   .number(HourSchemaError.Type)
   .int(HourSchemaError.Type)
   .gte(0, HourSchemaError.Invalid)
-  .lte(23, HourSchemaError.Invalid);
+  .lte(23, HourSchemaError.Invalid)
+  .brand("HourSchema");
 
 export type HourSchemaType = z.infer<typeof HourSchema>;

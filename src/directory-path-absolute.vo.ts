@@ -29,6 +29,6 @@ export const DirectoryPathAbsoluteSchema = z
       (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment),
     );
   }, DirectoryPathAbsoluteError.BadSegments)
-  .brand("DirectoryPathAbsolute");
+  .brand("DirectoryPathAbsoluteSchema");
 
 export type DirectoryPathAbsoluteType = z.infer<typeof DirectoryPathAbsoluteSchema>;

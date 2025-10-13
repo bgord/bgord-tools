@@ -8,6 +8,7 @@ export const PaginationTakeError = {
 export const Take = z
   .number(PaginationTakeError.Type)
   .int(PaginationTakeError.Type)
-  .gte(1, PaginationTakeError.Invalid);
+  .gte(1, PaginationTakeError.Invalid)
+  .brand("Take");
 
 export type TakeType = z.infer<typeof Take>;

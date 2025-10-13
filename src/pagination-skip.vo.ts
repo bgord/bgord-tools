@@ -8,6 +8,7 @@ export const PaginationSkipError = {
 export const Skip = z
   .number(PaginationSkipError.Type)
   .int(PaginationSkipError.Type)
-  .gte(0, PaginationSkipError.Invalid);
+  .gte(0, PaginationSkipError.Invalid)
+  .brand("Skip");
 
 export type SkipType = z.infer<typeof Skip>;

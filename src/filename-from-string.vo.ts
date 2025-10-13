@@ -22,6 +22,7 @@ export const FilenameFromString = z
     const extension = Extension.parse(value.slice(index + 1));
 
     return { basename, extension };
-  });
+  })
+  .brand("FilenameFromString");
 
 export type FilenameFromStringType = z.infer<typeof FilenameFromString>;

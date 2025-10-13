@@ -6,6 +6,7 @@ export const MinuteSchema = z
   .number(MinuteSchemaError.Type)
   .int(MinuteSchemaError.Type)
   .gte(0, MinuteSchemaError.Invalid)
-  .lte(59, MinuteSchemaError.Invalid);
+  .lte(59, MinuteSchemaError.Invalid)
+  .brand("MinuteSchema");
 
 export type MinuteSchemaType = z.infer<typeof MinuteSchema>;

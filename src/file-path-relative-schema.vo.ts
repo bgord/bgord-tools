@@ -26,6 +26,7 @@ export const FilePathRelativeSchema = z
     const filename = Filename.fromString(filenameCandidate);
 
     return { directory, filename };
-  });
+  })
+  .brand("FilePathRelativeSchema");
 
 export type FilePathRelativeType = z.infer<typeof FilePathRelativeSchema>;

@@ -5,6 +5,7 @@ export const ReorderingItemPositionValueError = { Invalid: "reordering.position.
 export const ReorderingItemPositionValue = z
   .number(ReorderingItemPositionValueError.Invalid)
   .int(ReorderingItemPositionValueError.Invalid)
-  .min(0, ReorderingItemPositionValueError.Invalid);
+  .min(0, ReorderingItemPositionValueError.Invalid)
+  .brand("ReorderingItemPositionValue");
 
 export type ReorderingItemPositionValueType = z.infer<typeof ReorderingItemPositionValue>;
