@@ -1,22 +1,30 @@
 import { describe, expect, test } from "bun:test";
-import type { TimestampType } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 import { Weekday, WeekdayFormatterEnum, WeekdayFormatters, WeekdayValueError } from "../src/weekday.vo";
 
 describe("Weekday", () => {
-  test("constructs valid weekdays 0..6 and exposes raw value", () => {
+  test("happy path", () => {
     for (let candidate = 0; candidate <= 6; candidate += 1) {
       expect(new Weekday(candidate).get()).toEqual(candidate);
     }
   });
 
-  test("throws on invalid constructor inputs", () => {
+  test("fromUtcTimestamp", () => {
+    const timestamp = Timestamp.parse(1700000000000);
+
+    const monday = Weekday.fromUtcTimestamp(timestamp);
+    expect(monday.isTuesday()).toEqual(true);
+    expect(monday.get()).toEqual(2);
+  });
+
+  test("throws on invalid input", () => {
     expect(() => new Weekday(-1)).toThrow(WeekdayValueError);
     expect(() => new Weekday(7)).toThrow(WeekdayValueError);
     expect(() => new Weekday(Number.NaN)).toThrow(WeekdayValueError);
     expect(() => new Weekday(1.5)).toThrow(WeekdayValueError);
   });
 
-  test("named statics map to correct values", () => {
+  test("maps named weekdays", () => {
     expect(Weekday.SUNDAY.get()).toEqual(0);
     expect(Weekday.MONDAY.get()).toEqual(1);
     expect(Weekday.TUESDAY.get()).toEqual(2);
@@ -26,30 +34,23 @@ describe("Weekday", () => {
     expect(Weekday.SATURDAY.get()).toEqual(6);
   });
 
-  test("default formatter is FULL", () => {
+  test("format - default", () => {
     expect(new Weekday(0).toString()).toEqual("Sunday");
     expect(new Weekday(3).toString()).toEqual("Wednesday");
     expect(new Weekday(0).format()).toEqual("Sunday");
   });
 
-  test("custom default formatter via constructor is used by format()", () => {
+  test("format - short", () => {
     const weekday = new Weekday(1, WeekdayFormatters[WeekdayFormatterEnum.SHORT]);
     expect(weekday.format()).toEqual("Mon");
   });
 
-  test("formatters produce expected values", () => {
+  test("formatters", () => {
     expect(WeekdayFormatters.FULL(0)).toEqual("Sunday");
     expect(WeekdayFormatters.SHORT(3)).toEqual("Wed");
-    expect(WeekdayFormatters.ISO_NUMBER(0)).toEqual("7"); // Sunday -> 7
-    expect(WeekdayFormatters.ISO_NUMBER(1)).toEqual("1"); // Monday -> 1
+    expect(WeekdayFormatters.ISO_NUMBER(0)).toEqual("7");
+    expect(WeekdayFormatters.ISO_NUMBER(1)).toEqual("1");
     expect(WeekdayFormatters.ZERO_BASED_NUMBER(6)).toEqual("6");
-  });
-
-  test("fromUtcTimestamp builds correct weekday (UTC)", () => {
-    const reference = Date.UTC(2024, 7, 5, 0, 0, 0, 0);
-    const monday = Weekday.fromUtcTimestamp(reference as TimestampType);
-    expect(monday.isMonday()).toEqual(true);
-    expect(monday.get()).toEqual(1);
   });
 
   test("equals", () => {
@@ -61,9 +62,9 @@ describe("Weekday", () => {
   });
 
   test("toIsoNumber", () => {
-    expect(new Weekday(0).toIsoNumber()).toEqual(7); // Sunday
-    expect(new Weekday(1).toIsoNumber()).toEqual(1); // Monday
-    expect(new Weekday(6).toIsoNumber()).toEqual(6); // Saturday
+    expect(new Weekday(0).toIsoNumber()).toEqual(7);
+    expect(new Weekday(1).toIsoNumber()).toEqual(1);
+    expect(new Weekday(6).toIsoNumber()).toEqual(6);
   });
 
   test("day-name predicates", () => {
@@ -76,7 +77,7 @@ describe("Weekday", () => {
     expect(new Weekday(0).isSunday()).toEqual(true);
   });
 
-  test("list returns Sunday-first 0..6", () => {
+  test("list", () => {
     const days = Weekday.list();
     const rawValues = days.map((d) => d.get());
     expect(rawValues).toEqual([0, 1, 2, 3, 4, 5, 6]);
@@ -86,7 +87,7 @@ describe("Weekday", () => {
     expect(shortDays[1].format()).toEqual("Mon");
   });
 
-  test("listMondayFirst returns 1..6,0", () => {
+  test("listMondayFirst", () => {
     const days = Weekday.listMondayFirst();
     const rawValues = days.map((d) => d.get());
     expect(rawValues).toEqual([1, 2, 3, 4, 5, 6, 0]);
