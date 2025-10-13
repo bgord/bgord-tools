@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
 
 describe("YearIsoId", () => {
-  test("accepts 4-digit years", () => {
+  test("happy path", () => {
     const valid = ["0000", "1970", "1999", "2024", "2025", "9999"];
 
     for (const year of valid) {
@@ -10,11 +10,11 @@ describe("YearIsoId", () => {
     }
   });
 
-  test("rejects non-string null", () => {
+  test("rejects non-string - null", () => {
     expect(() => YearIsoId.parse(null)).toThrow(YearIsoIdError.Type);
   });
 
-  test("rejects non-string number", () => {
+  test("rejects non-string - number", () => {
     expect(() => YearIsoId.parse(123)).toThrow(YearIsoIdError.Type);
   });
 

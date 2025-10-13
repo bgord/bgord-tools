@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Timezone, TimezoneError } from "../src/timezone.vo";
 
 describe("Timezone", () => {
-  test("valid timezones parse", () => {
+  test("happy path", () => {
     const valid = ["UTC", "America/New_York", "Europe/London", "Asia/Tokyo"];
 
     for (const value of valid) {

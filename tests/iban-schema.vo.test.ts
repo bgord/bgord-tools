@@ -27,7 +27,7 @@ describe("IBAN", () => {
     expect(() => IbanSchema.parse("")).toThrow(IbanSchemaError.Invalid);
   });
 
-  test("rejects invalid format strings with VO error", () => {
+  test("rejects invalid format", () => {
     const invalid = [
       "INVALID_VALUE",
       "61 1090 1014 0000 0712 1981 2874",
@@ -35,6 +35,7 @@ describe("IBAN", () => {
       "PL61 1090 1014 0000 0712 1981 2874 00000 00",
       "PL61 1090 1014 $000 0712 1981 2874",
     ];
+
     for (const value of invalid) {
       expect(() => IbanSchema.parse(value)).toThrow(IbanSchemaError.Invalid);
     }

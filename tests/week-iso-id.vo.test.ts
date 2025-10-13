@@ -2,15 +2,9 @@ import { describe, expect, test } from "bun:test";
 import { WeekIsoId, WeekIsoIdError } from "../src/week-iso-id.vo";
 
 describe("WeekIsoId", () => {
-  test("accepts a normal mid-year week", () => {
+  test("happy path", () => {
     expect(WeekIsoId.safeParse("2025-W30").success).toEqual(true);
-  });
-
-  test("accepts week 01 (may start in Dec of prev calendar year)", () => {
     expect(WeekIsoId.safeParse("2026-W01").success).toEqual(true);
-  });
-
-  test("accepts week 53 when the ISO week-year really has 53 weeks", () => {
     expect(WeekIsoId.safeParse("2020-W53").success).toEqual(true);
   });
 
@@ -18,11 +12,11 @@ describe("WeekIsoId", () => {
     expect(() => WeekIsoId.parse("")).toThrow(WeekIsoIdError.BadChars);
   });
 
-  test("rejects non-string null", () => {
+  test("rejects non-string - null", () => {
     expect(() => WeekIsoId.parse(null)).toThrow(WeekIsoIdError.Type);
   });
 
-  test("rejects non-string number", () => {
+  test("rejects non-string - number", () => {
     expect(() => WeekIsoId.parse(123)).toThrow(WeekIsoIdError.Type);
   });
 

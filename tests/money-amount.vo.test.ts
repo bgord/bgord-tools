@@ -2,11 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
 
 describe("MoneyAmount", () => {
-  test("accepts 0", () => {
+  test("happy path", () => {
     expect(MoneyAmount.safeParse(0).success).toEqual(true);
-  });
-
-  test("accepts 1_000", () => {
     expect(MoneyAmount.safeParse(1_000).success).toEqual(true);
   });
 

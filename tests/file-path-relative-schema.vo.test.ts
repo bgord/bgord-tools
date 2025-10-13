@@ -20,6 +20,14 @@ describe("FilePathRelativeSchema", () => {
     }).toEqual({ directory: DirectoryPathRelativeSchema.parse("dir/sub"), filename: "archive.tar.gz" });
   });
 
+  test("rejects non-string - null", () => {
+    expect(() => FilePathRelativeSchema.parse(null)).toThrow(FilePathRelativeSchemaError.Type);
+  });
+
+  test("rejects non-string - number", () => {
+    expect(() => FilePathRelativeSchema.parse(123)).toThrow(FilePathRelativeSchemaError.Type);
+  });
+
   test("rejects empty", () => {
     expect(() => FilePathRelativeSchema.parse("")).toThrow(FilePathRelativeSchemaError.Empty);
   });
@@ -42,12 +50,8 @@ describe("FilePathRelativeSchema", () => {
     );
   });
 
-  test("rejects non-string", () => {
-    expect(() => FilePathRelativeSchema.parse(123)).toThrow(FilePathRelativeSchemaError.Type);
-  });
-
-  describe("delegated failures", () => {
-    const cases = [
+  test("delegated failures", () => {
+    const invalid = [
       "tmp/./file.txt",
       "tmp/../file.txt",
       "tmp/\u0000/sub/file.txt",
@@ -57,8 +61,8 @@ describe("FilePathRelativeSchema", () => {
       "tmp/",
     ];
 
-    for (const input of cases) {
-      test(`fails "${input}"`, () => expect(() => FilePathRelativeSchema.parse(input)).toThrow());
+    for (const value of invalid) {
+      expect(() => FilePathRelativeSchema.parse(value)).toThrow();
     }
   });
 });

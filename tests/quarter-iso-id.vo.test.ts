@@ -2,11 +2,11 @@ import { describe, expect, test } from "bun:test";
 import { QuarterIsoId, QuarterIsoIdError } from "../src/quarter-iso-id.vo";
 
 describe("QuarterIsoId", () => {
-  test("accepts valid YYYY-Qn values", () => {
-    const quarters = ["0000-Q1", "1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "9999-Q4"];
+  test("happy path", () => {
+    const valid = ["0000-Q1", "1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "9999-Q4"];
 
-    for (const quarter of quarters) {
-      expect(QuarterIsoId.safeParse(quarter).success).toEqual(true);
+    for (const value of valid) {
+      expect(QuarterIsoId.safeParse(value).success).toEqual(true);
     }
   });
 
@@ -23,11 +23,8 @@ describe("QuarterIsoId", () => {
   });
 
   test("rejects quarters < 1 and > 4", () => {
-    const invalid = ["2025-Q0", "2025-Q5"];
-
-    for (const value of invalid) {
-      expect(() => QuarterIsoId.parse(value)).toThrow(QuarterIsoIdError.BadChars);
-    }
+    expect(() => QuarterIsoId.parse("2025-Q0")).toThrow(QuarterIsoIdError.BadChars);
+    expect(() => QuarterIsoId.parse("2025-Q5")).toThrow(QuarterIsoIdError.BadChars);
   });
 
   test("rejects structurally invalid strings", () => {

@@ -11,11 +11,19 @@ describe("DirectoryPathRelativeSchema", () => {
     }
   });
 
+  test("rejects non-string - null", () => {
+    expect(() => DirectoryPathRelativeSchema.parse(null)).toThrow(DirectoryPathRelativeError.Type);
+  });
+
+  test("rejects non-string - number", () => {
+    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(DirectoryPathRelativeError.Type);
+  });
+
   test("rejects empty", () => {
     expect(() => DirectoryPathRelativeSchema.parse("")).toThrow(DirectoryPathRelativeError.Empty);
   });
 
-  test("rejects too-long", () => {
+  test("rejects too long", () => {
     expect(() => DirectoryPathRelativeSchema.parse(`/${"a".repeat(512)}`)).toThrow(
       DirectoryPathRelativeError.TooLong,
     );
@@ -27,7 +35,7 @@ describe("DirectoryPathRelativeSchema", () => {
     );
   });
 
-  test("rejects leading slash ", () => {
+  test("rejects leading slash", () => {
     expect(() => DirectoryPathRelativeSchema.parse("/users/avatars")).toThrow(
       DirectoryPathRelativeError.LeadingSlash,
     );
@@ -61,9 +69,5 @@ describe("DirectoryPathRelativeSchema", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users/../avatars")).toThrow(
       DirectoryPathRelativeError.BadSegments,
     );
-  });
-
-  test("rejects non-string", () => {
-    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(DirectoryPathRelativeError.Type);
   });
 });

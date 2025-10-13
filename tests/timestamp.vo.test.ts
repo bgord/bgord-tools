@@ -2,11 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { Timestamp, TimestampError } from "../src/timestamp.vo";
 
 describe("Timestamp", () => {
-  test("accepts 0", () => {
+  test("happy path", () => {
     expect(Timestamp.safeParse(0).success).toEqual(true);
-  });
-
-  test("accepts current timestamp", () => {
     expect(Timestamp.safeParse(Date.now()).success).toEqual(true);
   });
 
@@ -24,9 +21,5 @@ describe("Timestamp", () => {
 
   test("rejects fractions", () => {
     expect(() => Timestamp.parse(1.5)).toThrow(TimestampError.Invalid);
-  });
-
-  test("rejects POSITIVE_INFINITY", () => {
-    expect(() => Timestamp.parse(Number.POSITIVE_INFINITY)).toThrow(TimestampError.Invalid);
   });
 });

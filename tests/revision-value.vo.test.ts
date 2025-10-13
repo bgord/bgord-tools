@@ -2,8 +2,9 @@ import { describe, expect, test } from "bun:test";
 import { RevisionValue, RevisionValueError } from "../src/revision-value.vo";
 
 describe("RevisionValue", () => {
-  test("accepts 0", () => {
+  test("happy path", () => {
     expect(RevisionValue.safeParse(0).success).toEqual(true);
+    expect(RevisionValue.safeParse(1).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {

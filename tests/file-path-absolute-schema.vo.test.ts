@@ -15,8 +15,12 @@ describe("FilePathAbsoluteSchema", () => {
     }).toEqual({ directory: DirectoryPathAbsoluteSchema.parse("/var/uploads"), filename: "avatar.webp" });
   });
 
-  test("rejects non-string", () => {
+  test("rejects non-string - number", () => {
     expect(() => FilePathAbsoluteSchema.parse(123)).toThrow(FilePathAbsoluteSchemaError.Type);
+  });
+
+  test("rejects non-string - null", () => {
+    expect(() => FilePathAbsoluteSchema.parse(null)).toThrow(FilePathAbsoluteSchemaError.Type);
   });
 
   test("rejects empty", () => {
@@ -48,18 +52,18 @@ describe("FilePathAbsoluteSchema", () => {
     }).toEqual({ directory: DirectoryPathAbsoluteSchema.parse("/"), filename: "avatar.webp" });
   });
 
-  describe("delegated failures", () => {
-    for (const input of [
+  test("delegated failures", () => {
+    const invalid = [
       "/var/./avatar.webp",
       "/var/../avatar.webp",
       "/var/\u0000/uploads/avatar.webp",
       "/var/uploads/",
       "/var/uploads/avatar",
       "/var/upload s/avatar.webp",
-    ] as const) {
-      test(`fails "${input}"`, () => {
-        expect(() => FilePathAbsoluteSchema.parse(input)).toThrow();
-      });
+    ];
+
+    for (const value of invalid) {
+      expect(() => FilePathAbsoluteSchema.parse(value)).toThrow();
     }
   });
 });

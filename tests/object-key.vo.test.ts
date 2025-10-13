@@ -24,7 +24,7 @@ describe("ObjectKey", () => {
     expect(() => ObjectKey.parse(null)).toThrow(ObjectKeyError.Type);
   });
 
-  test("rejects non-string - 123", () => {
+  test("rejects non-string - number", () => {
     expect(() => ObjectKey.parse(123)).toThrow(ObjectKeyError.Type);
   });
 
@@ -48,11 +48,11 @@ describe("ObjectKey", () => {
     expect(() => ObjectKey.parse("users/u/")).toThrow(ObjectKeyError.BadChars);
   });
 
-  test("rejects dot segments", () => {
+  test("rejects single dot segments", () => {
     expect(() => ObjectKey.parse("users/./avatar.webp")).toThrow(ObjectKeyError.DotSegments);
   });
 
-  test("rejects dotdot segments", () => {
+  test("rejects double dot segments", () => {
     expect(() => ObjectKey.parse("users/../avatar.webp")).toThrow(ObjectKeyError.DotSegments);
   });
 

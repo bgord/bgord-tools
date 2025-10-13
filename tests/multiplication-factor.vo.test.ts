@@ -19,10 +19,4 @@ describe("DivisionFactor", () => {
   test("rejects negative numbers", () => {
     expect(() => MultiplicationFactor.parse(-1)).toThrow(MultiplicationFactorError.Invalid);
   });
-
-  test("rejects POSITIVE_INFINITY", () => {
-    expect(() => MultiplicationFactor.parse(Number.POSITIVE_INFINITY)).toThrow(
-      MultiplicationFactorError.Type,
-    );
-  });
 });

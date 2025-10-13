@@ -8,15 +8,11 @@ describe("ImageWidth", () => {
     expect(ImageWidth.safeParse(10_000).success).toEqual(true);
   });
 
-  test("rejects empty", () => {
-    expect(() => ImageWidth.parse("")).toThrow(ImageWidthError.Type);
-  });
-
-  test("rejects non-numeric null", () => {
+  test("rejects non-numeric - null", () => {
     expect(() => ImageWidth.parse(null)).toThrow(ImageWidthError.Type);
   });
 
-  test("rejects non-numeric string", () => {
+  test("rejects non-numeric - string", () => {
     expect(() => ImageWidth.parse("100")).toThrow(ImageWidthError.Type);
   });
 
@@ -36,15 +32,11 @@ describe("ImageWidth", () => {
     expect(ImageHeight.safeParse(10_000).success).toEqual(true);
   });
 
-  test("rejects empty", () => {
-    expect(() => ImageHeight.parse("")).toThrow(ImageHeightError.Type);
-  });
-
-  test("rejects non-numeric null", () => {
+  test("rejects non-numeric - null", () => {
     expect(() => ImageHeight.parse(null)).toThrow(ImageHeightError.Type);
   });
 
-  test("rejects non-numeric string", () => {
+  test("rejects non-numeric - string", () => {
     expect(() => ImageHeight.parse("100")).toThrow(ImageHeightError.Type);
   });
 

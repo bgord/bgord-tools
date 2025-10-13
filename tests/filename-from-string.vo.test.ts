@@ -19,6 +19,10 @@ describe("FilenameFromString", () => {
     expect(() => FilenameFromString.parse(123)).toThrow(FilenameFromStringError.Type);
   });
 
+  test("rejects empty", () => {
+    expect(() => FilenameFromString.parse("")).toThrow(FilenameFromStringError.Invalid);
+  });
+
   test("rejects missing extension", () => {
     expect(() => FilenameFromString.parse("avatar")).toThrow(FilenameFromStringError.Invalid);
   });

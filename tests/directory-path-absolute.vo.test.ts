@@ -11,14 +11,22 @@ describe("DirectoryPathAbsoluteSchema", () => {
     }
   });
 
-  test("rejects empty", () => {
-    expect(() => DirectoryPathAbsoluteSchema.parse("")).toThrow(DirectoryPathAbsoluteError.Empty);
+  test("rejects non-string - null", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse(null)).toThrow(DirectoryPathAbsoluteError.Type);
+  });
+
+  test("rejects non-string - number", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse(42)).toThrow(DirectoryPathAbsoluteError.Type);
   });
 
   test("rejects too-long", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse(`/${"a".repeat(512)}`)).toThrow(
       DirectoryPathAbsoluteError.TooLong,
     );
+  });
+
+  test("rejects empty", () => {
+    expect(() => DirectoryPathAbsoluteSchema.parse("")).toThrow(DirectoryPathAbsoluteError.Empty);
   });
 
   test("rejects empty segment", () => {
@@ -33,7 +41,7 @@ describe("DirectoryPathAbsoluteSchema", () => {
     );
   });
 
-  test("rejects relative path 'tmp/app'", () => {
+  test("rejects relative path", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("tmp/app")).toThrow(
       DirectoryPathAbsoluteError.LeadingSlash,
     );
@@ -67,9 +75,5 @@ describe("DirectoryPathAbsoluteSchema", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/app/invalid segment")).toThrow(
       DirectoryPathAbsoluteError.BadSegments,
     );
-  });
-
-  test("rejects non-string", () => {
-    expect(() => DirectoryPathAbsoluteSchema.parse(42)).toThrow(DirectoryPathAbsoluteError.Type);
   });
 });

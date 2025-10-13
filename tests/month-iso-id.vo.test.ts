@@ -14,12 +14,17 @@ describe("MonthIsoId", () => {
     expect(() => MonthIsoId.parse("")).toThrow(MonthIsoIdError.BadChars);
   });
 
-  test("rejects non-string null", () => {
+  test("rejects non-string - null", () => {
     expect(() => MonthIsoId.parse(null)).toThrow(MonthIsoIdError.Type);
   });
 
-  test("rejects non-string number", () => {
+  test("rejects non-string - number", () => {
     expect(() => MonthIsoId.parse(123)).toThrow(MonthIsoIdError.Type);
+  });
+
+  test("rejects months < 1 and > 12", () => {
+    expect(() => MonthIsoId.parse("2023-00")).toThrow(MonthIsoIdError.Invalid);
+    expect(() => MonthIsoId.parse("2023-13")).toThrow(MonthIsoIdError.Invalid);
   });
 
   test("rejects structurally invalid strings", () => {
@@ -28,10 +33,5 @@ describe("MonthIsoId", () => {
     for (const value of invalid) {
       expect(() => MonthIsoId.parse(value)).toThrow(MonthIsoIdError.BadChars);
     }
-  });
-
-  test("rejects months < 1 and > 12", () => {
-    expect(() => MonthIsoId.parse("2023-00")).toThrow(MonthIsoIdError.Invalid);
-    expect(() => MonthIsoId.parse("2023-13")).toThrow(MonthIsoIdError.Invalid);
   });
 });

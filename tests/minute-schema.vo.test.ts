@@ -2,11 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
 
 describe("MinuteSchema", () => {
-  test("accepts 0", () => {
+  test("happy path", () => {
     expect(MinuteSchema.safeParse(0).success).toEqual(true);
-  });
-
-  test("accepts 59", () => {
     expect(MinuteSchema.safeParse(59).success).toEqual(true);
   });
 

@@ -2,11 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
 
 describe("HourSchema", () => {
-  test("accepts 0", () => {
+  test("happy path", () => {
     expect(HourSchema.safeParse(0).success).toEqual(true);
-  });
-
-  test("accepts 23", () => {
     expect(HourSchema.safeParse(23).success).toEqual(true);
   });
 
@@ -26,7 +23,7 @@ describe("HourSchema", () => {
     expect(() => HourSchema.parse(-1)).toThrow(HourSchemaError.Invalid);
   });
 
-  test("rejects 24", () => {
+  test("rejects too big", () => {
     expect(() => HourSchema.parse(24)).toThrow(HourSchemaError.Invalid);
   });
 });
