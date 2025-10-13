@@ -1,4 +1,37 @@
 # Changelog
+- 2025-10-13 14:48 cac0fc3 **step: update packages**
+- 2025-10-13 14:35 e13562d **refactor: unify timestamp based tests**
+- 2025-10-13 14:25 40d9c75 **refactor: unify timestamp based tests**
+- 2025-10-13 14:14 57d8f79 **refactor: improve weekday**
+- 2025-10-13 14:11 3aa2953 **refactor: improve weight**
+- 2025-10-13 14:07 13713fd **refactor: tobe to toequal**
+- 2025-10-13 14:05 0fdd6f0 **refactor: improve height**
+- 2025-10-13 14:02 7449465 **refactor: improve file path**
+- 2025-10-13 13:59 5076a93 **refactor: improve filename**
+- 2025-10-13 13:57 a8a6779 **refactor: remove toJSON from date-range**
+- 2025-10-13 13:55 61cbaeb **refactor: improve week**
+- 2025-10-13 13:51 c448953 **refactor: improve quarter**
+- 2025-10-13 13:47 3dd7da9 **refactor: improve month**
+- 2025-10-13 13:44 d3b2cfd **refactor: improve year**
+- 2025-10-13 13:36 a79fe2d **refactor: improve day**
+- 2025-10-13 13:31 874941f **refactor: improve age**
+- 2025-10-13 13:23 8aae43e **refactor: improve etags**
+- 2025-10-13 13:22 3f46211 **refactor: improve date range**
+- 2025-10-13 13:18 11ab22e **refactor: improve clock**
+- 2025-10-13 13:04 3c74872 **refactor: improve money**
+- 2025-10-13 13:02 0274490 **refactor: improve revision**
+- 2025-10-13 12:58 7690d71 **refactor: improve reordering**
+- 2025-10-13 12:56 e7a018e **refactor: improve mime**
+- 2025-10-13 12:53 2f4d87d **refactor: improve size**
+- 2025-10-13 12:48 b576949 **refactor: improve hour**
+- 2025-10-13 12:43 0a7069f **refactor: improve minute**
+- 2025-10-13 12:38 07b468a **refactor: improve package version**
+- 2025-10-13 12:29 a89f560 **refactor: cleanup other tests**
+- 2025-10-13 12:17 0eeca53 **refactor: cleanup vo tests**
+- 2025-10-13 12:02 64c147f **refactor: cleanup zod vo tests**
+- 2025-10-13 11:45 edc6c78 **refactor: remove type casting**
+- 2025-10-13 11:39 0e44bd2 **step: add missing brand types**
+- 2025-10-13 11:35 e2b1154 **refactor: improve**
 - 2025-10-12 22:36 ef6df7f **refactor: remove math.floor**
 - 2025-10-12 22:33 23db8db **refactor: remove trimming**
 - 2025-10-12 22:31 4225b9c **step: cleanup exports**
@@ -10,6 +43,7 @@
 - 2025-10-12 21:26 997876e **refactor: improve height**
 - 2025-10-12 20:50 27c7ee9 **refactor: improve file path relative**
 - 2025-10-12 20:39 7a979e7 **refactor: improve file path absolute**
+- 2025-10-12 20:38 f8f41ca **docs: generate CHANGELOG**
 - 2025-10-12 20:31 f3234c1 **docs: generate readme**
 - 2025-10-12 20:31 571648f **docs: generate CHANGELOG**
 - 2025-10-12 20:13 a04dc0c **refactor: improve dir path relative**
