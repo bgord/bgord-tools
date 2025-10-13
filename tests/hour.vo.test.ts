@@ -3,9 +3,12 @@ import { Hour } from "../src/hour.vo";
 import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
+const FIVE = new Hour(5);
+const THIRTEEN = new Hour(13);
+
 describe("Hour", () => {
   test("happy path", () => {
-    expect(new Hour(5).get()).toEqual(HourSchema.parse(5));
+    expect(FIVE.get()).toEqual(HourSchema.parse(5));
   });
 
   test("throws for invalid hour values", () => {
@@ -27,27 +30,27 @@ describe("Hour", () => {
   });
 
   test("get", () => {
-    expect(new Hour(5).get()).toEqual(HourSchema.parse(5));
+    expect(FIVE.get()).toEqual(HourSchema.parse(5));
   });
 
   test("format", () => {
-    expect(new Hour(5).toString()).toEqual("05");
-    expect(new Hour(13).toString()).toEqual("13");
+    expect(FIVE.toString()).toEqual("05");
+    expect(THIRTEEN.toString()).toEqual("13");
   });
 
   test("equals", () => {
-    expect(new Hour(8).equals(new Hour(8))).toEqual(true);
-    expect(new Hour(8).equals(new Hour(9))).toEqual(false);
+    expect(FIVE.equals(FIVE)).toEqual(true);
+    expect(FIVE.equals(THIRTEEN)).toEqual(false);
   });
 
   test("isAfter", () => {
-    expect(new Hour(10).isAfter(new Hour(9))).toEqual(true);
-    expect(new Hour(9).isAfter(new Hour(10))).toEqual(false);
+    expect(THIRTEEN.isAfter(FIVE)).toEqual(true);
+    expect(FIVE.isAfter(THIRTEEN)).toEqual(false);
   });
 
   test("isBefore", () => {
-    expect(new Hour(9).isBefore(new Hour(10))).toEqual(true);
-    expect(new Hour(10).isBefore(new Hour(9))).toEqual(false);
+    expect(FIVE.isBefore(THIRTEEN)).toEqual(true);
+    expect(THIRTEEN.isBefore(FIVE)).toEqual(false);
   });
 
   test("Hour.list() returns cached 24 items", () => {
@@ -60,12 +63,12 @@ describe("Hour", () => {
   });
 
   test("toString", () => {
-    expect(new Hour(3).toString()).toEqual("03");
-    expect(new Hour(12).toString()).toEqual("12");
+    expect(FIVE.toString()).toEqual("05");
+    expect(THIRTEEN.toString()).toEqual("13");
   });
 
   test("toJSON", () => {
-    expect(new Hour(3).toJSON()).toEqual(3);
-    expect(new Hour(12).toJSON()).toEqual(12);
+    expect(FIVE.toJSON()).toEqual(HourSchema.parse(5));
+    expect(THIRTEEN.toJSON()).toEqual(13);
   });
 });

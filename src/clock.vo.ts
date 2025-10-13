@@ -23,7 +23,7 @@ export class Clock {
     return new Clock(hour, minute, formatter);
   }
 
-  get(): { hour: number; minute: number } {
+  get(): { hour: HourSchemaType; minute: MinuteSchemaType } {
     return { hour: this.hour.get(), minute: this.minute.get() };
   }
 
@@ -50,6 +50,6 @@ export class Clock {
   }
 
   toJSON(): { hour: HourSchemaType; minute: MinuteSchemaType } {
-    return { hour: this.hour.get(), minute: this.minute.get() };
+    return this.get();
   }
 }

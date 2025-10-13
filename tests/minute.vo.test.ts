@@ -3,9 +3,12 @@ import { Minute } from "../src/minute.vo";
 import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
+const FIVE = new Minute(5);
+const TEN = new Minute(10);
+
 describe("Minute", () => {
   test("happy path", () => {
-    expect(new Minute(5).get()).toEqual(MinuteSchema.parse(5));
+    expect(FIVE.get()).toEqual(MinuteSchema.parse(5));
   });
 
   test("throws for invalid minute values", () => {
@@ -27,20 +30,22 @@ describe("Minute", () => {
   });
 
   test("get", () => {
-    expect(new Minute(5).get()).toEqual(MinuteSchema.parse(5));
+    expect(FIVE.get()).toEqual(MinuteSchema.parse(5));
   });
 
   test("equals", () => {
-    expect(new Minute(10).equals(new Minute(10))).toEqual(true);
-    expect(new Minute(10).equals(new Minute(15))).toEqual(false);
+    expect(FIVE.equals(FIVE)).toEqual(true);
+    expect(FIVE.equals(TEN)).toEqual(false);
   });
 
   test("isAfter", () => {
-    expect(new Minute(15).isAfter(new Minute(10))).toEqual(true);
+    expect(TEN.isAfter(FIVE)).toEqual(true);
+    expect(FIVE.isAfter(TEN)).toEqual(false);
   });
 
   test("isBefore", () => {
-    expect(new Minute(15).isBefore(new Minute(10))).toEqual(false);
+    expect(FIVE.isBefore(TEN)).toEqual(true);
+    expect(TEN.isBefore(FIVE)).toEqual(false);
   });
 
   test("Minute.list()", () => {
@@ -52,12 +57,12 @@ describe("Minute", () => {
   });
 
   test("toString", () => {
-    expect(new Minute(3).toString()).toEqual("03");
-    expect(new Minute(12).toString()).toEqual("12");
+    expect(FIVE.toString()).toEqual("05");
+    expect(TEN.toString()).toEqual("10");
   });
 
   test("toJSON", () => {
-    expect(new Minute(3).toJSON()).toEqual(3);
-    expect(new Minute(12).toJSON()).toEqual(12);
+    expect(FIVE.toJSON()).toEqual(MinuteSchema.parse(5));
+    expect(TEN.toJSON()).toEqual(MinuteSchema.parse(10));
   });
 });
