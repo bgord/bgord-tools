@@ -4,13 +4,6 @@ import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 export class Quarter extends DateRange {
-  toIsoId(): QuarterIsoIdType {
-    const year = getYear(this.getStart());
-    const quarter = getQuarter(this.getStart());
-
-    return QuarterIsoId.parse(`${year}-Q${quarter}`);
-  }
-
   static fromTimestamp(timestamp: TimestampType): Quarter {
     const start = Timestamp.parse(startOfQuarter(timestamp).getTime());
     const end = Timestamp.parse(endOfQuarter(timestamp).getTime());
@@ -28,5 +21,20 @@ export class Quarter extends DateRange {
     const reference = setQuarter(Date.UTC(year), quarter).getTime();
 
     return Quarter.fromTimestamp(Timestamp.parse(reference));
+  }
+
+  toIsoId(): QuarterIsoIdType {
+    const year = getYear(this.getStart());
+    const quarter = getQuarter(this.getStart());
+
+    return QuarterIsoId.parse(`${year}-Q${quarter}`);
+  }
+
+  toString(): string {
+    return this.toIsoId();
+  }
+
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
   }
 }
