@@ -4,6 +4,25 @@ import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp, type TimestampType } from "./timestamp.vo";
 
 export class Month extends DateRange {
+  static fromTimestamp(timestamp: TimestampType): Month {
+    const start = Timestamp.parse(startOfMonth(timestamp).getTime());
+    const end = Timestamp.parse(endOfMonth(timestamp).getTime());
+
+    return new Month(start, end);
+  }
+
+  static fromNow(now: TimestampType): Month {
+    return Month.fromTimestamp(now);
+  }
+
+  static fromIsoId(iso: MonthIsoIdType): Month {
+    const [year, month] = MonthIsoId.parse(iso).split("-").map(Number);
+
+    const reference = setMonth(Date.UTC(year), month - 1).getTime();
+
+    return Month.fromTimestamp(Timestamp.parse(reference));
+  }
+
   toIsoId(): MonthIsoIdType {
     return MonthIsoId.parse(format(this.getStart(), "yyyy-MM"));
   }
@@ -22,22 +41,11 @@ export class Month extends DateRange {
     return Month.fromTimestamp(Timestamp.parse(shifted));
   }
 
-  static fromTimestamp(timestamp: TimestampType): Month {
-    const start = Timestamp.parse(startOfMonth(timestamp).getTime());
-    const end = Timestamp.parse(endOfMonth(timestamp).getTime());
-
-    return new Month(start, end);
+  toString(): string {
+    return this.toIsoId();
   }
 
-  static fromNow(now: TimestampType): Month {
-    return Month.fromTimestamp(now);
-  }
-
-  static fromIsoId(iso: MonthIsoIdType): Month {
-    const [year, month] = MonthIsoId.parse(iso).split("-").map(Number);
-
-    const reference = setMonth(Date.UTC(year), month - 1).getTime();
-
-    return Month.fromTimestamp(Timestamp.parse(reference));
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
   }
 }
