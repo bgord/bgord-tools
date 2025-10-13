@@ -7,6 +7,18 @@ export class PackageVersion {
     private readonly patch: number,
   ) {}
 
+  static fromStringWithV(candidate: string): PackageVersion {
+    const version = PackageVersionSchema.parse(candidate);
+
+    return new PackageVersion(version.major, version.minor, version.patch);
+  }
+
+  static fromString(candidate: string): PackageVersion {
+    const version = PackageVersionSchema.parse(`v${candidate}`);
+
+    return new PackageVersion(version.major, version.minor, version.patch);
+  }
+
   isGreaterThanOrEqual(another: PackageVersion): boolean {
     if (this.major > another.major) return true;
     if (this.major < another.major) return false;
@@ -24,15 +36,7 @@ export class PackageVersion {
     return `${this.major}.${this.minor}.${this.patch}`;
   }
 
-  static fromStringWithV(candidate: string): PackageVersion {
-    const version = PackageVersionSchema.parse(candidate);
-
-    return new PackageVersion(version.major, version.minor, version.patch);
-  }
-
-  static fromString(candidate: string): PackageVersion {
-    const version = PackageVersionSchema.parse(`v${candidate}`);
-
-    return new PackageVersion(version.major, version.minor, version.patch);
+  toJSON(): { major: number; minor: number; patch: number } {
+    return { major: this.major, minor: this.minor, patch: this.patch };
   }
 }
