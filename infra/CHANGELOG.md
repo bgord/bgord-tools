@@ -1,5 +1,7 @@
 # Changelog
+## 2025-10-13 14:48 v1.0.0
 - 2025-10-13 14:48 cac0fc3 **step: update packages**
+- 2025-10-13 14:48 a372510 **1.0.0**
 - 2025-10-13 14:35 e13562d **refactor: unify timestamp based tests**
 - 2025-10-13 14:25 40d9c75 **refactor: unify timestamp based tests**
 - 2025-10-13 14:14 57d8f79 **refactor: improve weekday**
@@ -24,6 +26,7 @@
 - 2025-10-13 12:56 e7a018e **refactor: improve mime**
 - 2025-10-13 12:53 2f4d87d **refactor: improve size**
 - 2025-10-13 12:48 b576949 **refactor: improve hour**
+- 2025-10-13 12:48 a90a6d4 **docs: generate CHANGELOG**
 - 2025-10-13 12:43 0a7069f **refactor: improve minute**
 - 2025-10-13 12:38 07b468a **refactor: improve package version**
 - 2025-10-13 12:29 a89f560 **refactor: cleanup other tests**
