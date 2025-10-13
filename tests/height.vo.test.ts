@@ -5,17 +5,17 @@ import { RoundDown, RoundToDecimal, RoundUp } from "../src/rounding.adapter";
 
 describe("Height", () => {
   test("fromCentimeters", () => {
-    expect(Height.fromCentimeters(180).toMillimeters()).toBe(1800);
-    expect(Height.fromCentimeters(180.04, new RoundDown()).toMillimeters()).toBe(1800);
-    expect(Height.fromCentimeters(180.06, new RoundUp()).toMillimeters()).toBe(1801);
+    expect(Height.fromCentimeters(180).toMillimeters()).toEqual(1800);
+    expect(Height.fromCentimeters(180.04, new RoundDown()).toMillimeters()).toEqual(1800);
+    expect(Height.fromCentimeters(180.06, new RoundUp()).toMillimeters()).toEqual(1801);
   });
 
   test("fromMillimeters", () => {
-    expect(Height.fromMillimeters(180).toMillimeters()).toBe(180);
+    expect(Height.fromMillimeters(180).toMillimeters()).toEqual(180);
   });
 
   test("zero factory", () => {
-    expect(Height.zero().toMillimeters()).toBe(0);
+    expect(Height.zero().toMillimeters()).toEqual(0);
   });
 
   test("guards invalid inputs", () => {
@@ -26,14 +26,14 @@ describe("Height", () => {
 
   test("toCentimeters", () => {
     const height = Height.fromCentimeters(180);
-    expect(height.toCentimeters()).toBe(180);
-    expect(height.toCentimeters(new RoundToDecimal(1))).toBe(180);
-    expect(Height.fromMillimeters(1804).toCentimeters(new RoundToDecimal(1))).toBe(180.4);
+    expect(height.toCentimeters()).toEqual(180);
+    expect(height.toCentimeters(new RoundToDecimal(1))).toEqual(180);
+    expect(Height.fromMillimeters(1804).toCentimeters(new RoundToDecimal(1))).toEqual(180.4);
   });
 
   test("format", () => {
-    expect(Height.fromMillimeters(1804).format()).toBe("180.4 cm");
-    expect(Height.fromCentimeters(180).format()).toBe("180 cm");
+    expect(Height.fromMillimeters(1804).format()).toEqual("180.4 cm");
+    expect(Height.fromCentimeters(180).format()).toEqual("180 cm");
   });
 
   test("comparisons", () => {
@@ -41,14 +41,14 @@ describe("Height", () => {
     const b = Height.fromCentimeters(180);
     const c = Height.fromMillimeters(1801);
 
-    expect(a.equals(b)).toBe(true);
-    expect(a.lessThan(c)).toBe(true);
-    expect(c.greaterThan(b)).toBe(true);
-    expect(Height.zero().isZero()).toBe(true);
+    expect(a.equals(b)).toEqual(true);
+    expect(a.lessThan(c)).toEqual(true);
+    expect(c.greaterThan(b)).toEqual(true);
+    expect(Height.zero().isZero()).toEqual(true);
   });
 
   test("toString", () => {
-    expect(Height.fromMillimeters(1804).toString()).toBe("180.4 cm");
+    expect(Height.fromMillimeters(1804).toString()).toEqual("180.4 cm");
   });
 
   test("toJSON", () => {

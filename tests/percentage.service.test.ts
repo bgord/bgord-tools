@@ -8,18 +8,18 @@ describe("Percentage", () => {
   });
 
   test("works correctly for the 0 numerator", () => {
-    expect(Percentage.of(0, 2)).toBe(0);
+    expect(Percentage.of(0, 2)).toEqual(0);
   });
 
   test("works correctly for an integer result", () => {
-    expect(Percentage.of(1, 2)).toBe(50);
+    expect(Percentage.of(1, 2)).toEqual(50);
   });
 
   test("works correctly with default to nearest rounding", () => {
-    expect(Percentage.of(1, 3)).toBe(33);
+    expect(Percentage.of(1, 3)).toEqual(33);
   });
 
   test("works correctly with round up rounding", () => {
-    expect(Percentage.of(1, 3, new RoundUp())).toBe(34);
+    expect(Percentage.of(1, 3, new RoundUp())).toEqual(34);
   });
 });

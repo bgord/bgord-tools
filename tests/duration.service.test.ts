@@ -62,12 +62,12 @@ describe("Duration", () => {
     const b = Duration.Ms(1_000);
     const c = Duration.Ms(2_000);
 
-    expect(a.equals(b)).toBe(true);
-    expect(a.equals(c)).toBe(false);
+    expect(a.equals(b)).toEqual(true);
+    expect(a.equals(c)).toEqual(false);
 
-    expect(c.isLongerThan(a)).toBe(true);
-    expect(a.isShorterThan(c)).toBe(true);
-    expect(a.isLongerThan(c)).toBe(false);
-    expect(c.isShorterThan(a)).toBe(false);
+    expect(c.isLongerThan(a)).toEqual(true);
+    expect(a.isShorterThan(c)).toEqual(true);
+    expect(a.isLongerThan(c)).toEqual(false);
+    expect(c.isShorterThan(a)).toEqual(false);
   });
 });

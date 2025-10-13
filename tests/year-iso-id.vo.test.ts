@@ -6,7 +6,7 @@ describe("YearIsoId", () => {
     const valid = ["0000", "1970", "1999", "2024", "2025", "9999"];
 
     for (const year of valid) {
-      expect(YearIsoId.safeParse(year).success).toBe(true);
+      expect(YearIsoId.safeParse(year).success).toEqual(true);
     }
   });
 

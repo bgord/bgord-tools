@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Age, AgeError } from "../src/age.vo";
-import { AgeYears, AgeYearsError } from "../src/age-years.vo";
+import { AgeYearsError } from "../src/age-years.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 const toTimestamp = (date: string) => Timestamp.parse(new Date(date).getTime());

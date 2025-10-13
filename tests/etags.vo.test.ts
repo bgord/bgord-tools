@@ -8,16 +8,16 @@ describe("ETag", () => {
     const etag = ETag.fromHeader(value);
 
     //@ts-expect-error
-    expect(etag.value).toBe(value);
+    expect(etag.value).toEqual(value);
     //@ts-expect-error
-    expect(etag.revision).toBe(123);
+    expect(etag.revision).toEqual(123);
   });
 
   test("returns null", () => {
     const weakETagValue = "W/123";
     const etag = ETag.fromHeader(weakETagValue);
 
-    expect(etag).toBe(null);
+    expect(etag).toEqual(null);
   });
 });
 
@@ -26,8 +26,8 @@ describe("WeakETag class", () => {
     const value = "W/123";
     const weakEtag = WeakETag.fromHeader(value);
 
-    expect(weakEtag?.value).toBe(value);
-    expect(weakEtag?.revision).toBe(RevisionValue.parse(123));
+    expect(weakEtag?.value).toEqual(value);
+    expect(weakEtag?.revision).toEqual(RevisionValue.parse(123));
   });
 
   test("throws for invalid", () => {
