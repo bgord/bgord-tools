@@ -4,6 +4,26 @@ import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
+  static fromTimestamp(timestamp: TimestampType): Week {
+    const start = Timestamp.parse(startOfISOWeek(timestamp).getTime());
+    const end = Timestamp.parse(endOfISOWeek(timestamp).getTime());
+
+    return new Week(start, end);
+  }
+
+  static fromNow(now: TimestampType): Week {
+    return Week.fromTimestamp(now);
+  }
+
+  static fromIsoId(isoId: WeekIsoIdType): Week {
+    const [year, week] = WeekIsoId.parse(isoId).split("-W").map(Number);
+
+    // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
+    const reference = setISOWeek(Date.UTC(year, 0, 4), week).getTime();
+
+    return Week.fromTimestamp(Timestamp.parse(reference));
+  }
+
   toIsoId(): WeekIsoIdType {
     const year = getISOWeekYear(this.getStart());
     const week = getISOWeek(this.getStart());
@@ -25,23 +45,11 @@ export class Week extends DateRange {
     return Week.fromTimestamp(Timestamp.parse(shifted));
   }
 
-  static fromTimestamp(timestamp: TimestampType): Week {
-    const start = Timestamp.parse(startOfISOWeek(timestamp).getTime());
-    const end = Timestamp.parse(endOfISOWeek(timestamp).getTime());
-
-    return new Week(start, end);
+  toString(): string {
+    return this.toIsoId();
   }
 
-  static fromNow(now: TimestampType): Week {
-    return Week.fromTimestamp(now);
-  }
-
-  static fromIsoId(isoId: WeekIsoIdType): Week {
-    const [year, week] = WeekIsoId.parse(isoId).split("-W").map(Number);
-
-    // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
-    const reference = setISOWeek(Date.UTC(year, 0, 4), week).getTime();
-
-    return Week.fromTimestamp(Timestamp.parse(reference));
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
   }
 }
