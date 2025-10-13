@@ -31,6 +31,10 @@ export class Mime {
   toString(): string {
     return `${this.type}/${this.subtype}`;
   }
+
+  toJSON(): { type: string; subtype: string } {
+    return { type: this.type, subtype: this.subtype };
+  }
 }
 
 export const MIMES = {

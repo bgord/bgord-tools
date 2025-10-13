@@ -4,10 +4,9 @@ import { Mime } from "../src/mime.vo";
 import { MimeValueError } from "../src/mime-value.vo";
 
 describe("Mime", () => {
-  test("creates a Mime instance with valid input", () => {
+  test("happy path", () => {
     const mime = new Mime("text/plain");
 
-    expect(mime).toBeDefined();
     expect(mime.type).toEqual("text");
     expect(mime.subtype).toEqual("plain");
   });
@@ -19,7 +18,11 @@ describe("Mime", () => {
     expect(() => new Mime("no-slash")).toThrow(MimeValueError.Invalid);
   });
 
-  test("correctly checks wildcard satisfaction rules", () => {
+  test("fromExtension", () => {
+    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
+  });
+
+  test("isSatisfiedBy - happy path", () => {
     const textPlain = new Mime("text/plain");
     const textHtml = new Mime("text/html");
     const applicationJson = new Mime("application/json");
@@ -33,7 +36,7 @@ describe("Mime", () => {
     expect(anyWildcard.isSatisfiedBy(textPlain)).toEqual(true);
   });
 
-  test("wildcard combinations that should not satisfy", () => {
+  test("isSatisfiedBy - failures", () => {
     const textPlain = new Mime("text/plain");
     const imageWildcard = new Mime("image/*");
     const wildcardPlain = new Mime("*/plain");
@@ -47,15 +50,15 @@ describe("Mime", () => {
     expect(wildcardPlain.isSatisfiedBy(anyWildcard)).toEqual(false);
   });
 
-  test("toExtension returns expected extension", () => {
+  test("toExtension", () => {
     expect(new Mime("application/pdf").toExtension()).toEqual(Extension.parse("pdf"));
-  });
-
-  test("fromExtension creates a mime from an extension", () => {
-    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
   });
 
   test("toString", () => {
     expect(new Mime("text/plain").toString()).toEqual("text/plain");
+  });
+
+  test("toJSON", () => {
+    expect(new Mime("text/plain").toJSON()).toEqual({ type: "text", subtype: "plain" });
   });
 });
