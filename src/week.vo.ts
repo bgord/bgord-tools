@@ -48,8 +48,4 @@ export class Week extends DateRange {
   toString(): string {
     return this.toIsoId();
   }
-
-  toJSON(): { start: number; end: number } {
-    return { start: this.getStart(), end: this.getEnd() };
-  }
 }

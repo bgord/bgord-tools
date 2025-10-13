@@ -29,4 +29,8 @@ export class DateRange {
   equals(other: DateRange): boolean {
     return this.start === other.start && this.end === other.end;
   }
+
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
+  }
 }
