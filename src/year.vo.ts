@@ -4,6 +4,27 @@ import { Timestamp, type TimestampType } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
+  static fromTimestamp(timestamp: TimestampType): Year {
+    const start = Timestamp.parse(startOfYear(timestamp).getTime());
+    const end = Timestamp.parse(endOfYear(timestamp).getTime());
+
+    return new Year(start, end);
+  }
+
+  static fromNow(now: TimestampType): Year {
+    return Year.fromTimestamp(now);
+  }
+
+  static fromNumber(candidate: number): Year {
+    return Year.fromIsoId(YearIsoId.parse(String(candidate)));
+  }
+
+  static fromIsoId(isoId: YearIsoIdType): Year {
+    const reference = Date.UTC(Number(isoId));
+
+    return Year.fromTimestamp(Timestamp.parse(reference));
+  }
+
   toIsoId(): YearIsoIdType {
     return YearIsoId.parse(String(getYear(this.getStart())));
   }
@@ -28,24 +49,11 @@ export class Year extends DateRange {
     return Year.fromTimestamp(Timestamp.parse(shifted));
   }
 
-  static fromTimestamp(timestamp: TimestampType): Year {
-    const start = Timestamp.parse(startOfYear(timestamp).getTime());
-    const end = Timestamp.parse(endOfYear(timestamp).getTime());
-
-    return new Year(start, end);
+  toString(): string {
+    return this.toIsoId();
   }
 
-  static fromNow(now: TimestampType): Year {
-    return Year.fromTimestamp(now);
-  }
-
-  static fromNumber(candidate: number): Year {
-    return Year.fromIsoId(YearIsoId.parse(String(candidate)));
-  }
-
-  static fromIsoId(isoId: YearIsoIdType): Year {
-    const reference = Date.UTC(Number(isoId));
-
-    return Year.fromTimestamp(Timestamp.parse(reference));
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
   }
 }
