@@ -19,10 +19,6 @@ export class Minute {
     return this.value;
   }
 
-  toString(): string {
-    return this.value.toString().padStart(2, "0");
-  }
-
   equals(another: Minute): boolean {
     return this.value === another.value;
   }
@@ -37,5 +33,13 @@ export class Minute {
 
   static list(): readonly Minute[] {
     return Array.from({ length: 60 }, (_, index) => new Minute(index));
+  }
+
+  toString(): string {
+    return this.value.toString().padStart(2, "0");
+  }
+
+  toJSON(): number {
+    return this.value;
   }
 }
