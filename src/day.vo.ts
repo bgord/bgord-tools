@@ -9,26 +9,6 @@ export class Day extends DateRange {
     super(start, end);
   }
 
-  toIsoId(): DayIsoIdType {
-    const midday = this.getStart() + Duration.Hours(12).ms;
-
-    return DayIsoId.parse(formatISO(midday, { representation: "date" }));
-  }
-
-  previous(): Day {
-    return this.shift(-1);
-  }
-
-  next(): Day {
-    return this.shift(1);
-  }
-
-  shift(count: number): Day {
-    const timestamp = this.getStart() + count * Duration.Days(1).ms;
-
-    return Day.fromTimestamp(Timestamp.parse(timestamp));
-  }
-
   static fromTimestamp(timestamp: TimestampType): Day {
     const date = new Date(timestamp);
 
@@ -49,5 +29,33 @@ export class Day extends DateRange {
     const endUtc = startUtc + Duration.Days(1).ms - 1;
 
     return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
+  }
+
+  toIsoId(): DayIsoIdType {
+    const midday = this.getStart() + Duration.Hours(12).ms;
+
+    return DayIsoId.parse(formatISO(midday, { representation: "date" }));
+  }
+
+  previous(): Day {
+    return this.shift(-1);
+  }
+
+  next(): Day {
+    return this.shift(1);
+  }
+
+  shift(count: number): Day {
+    const timestamp = this.getStart() + count * Duration.Days(1).ms;
+
+    return Day.fromTimestamp(Timestamp.parse(timestamp));
+  }
+
+  toString(): string {
+    return this.toIsoId();
+  }
+
+  toJSON(): { start: number; end: number } {
+    return { start: this.getStart(), end: this.getEnd() };
   }
 }

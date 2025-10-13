@@ -7,7 +7,7 @@ const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
 const timestamp = toMs("2025-07-22T12:00:00Z");
 
 describe("Day", () => {
-  test("creates the correct range & ISO id from a mid-day timestamp (UTC)", () => {
+  test("happy path", () => {
     const day = Day.fromTimestamp(timestamp);
 
     const date = new Date(timestamp);
@@ -22,12 +22,34 @@ describe("Day", () => {
     expect(day.contains(timestamp)).toEqual(true);
   });
 
-  test("handles leap-day correctly", () => {
-    const ts = toMs("2024-02-29T15:30:00Z");
-    const day = Day.fromTimestamp(ts);
+  test("leap-day", () => {
+    const timestamp = toMs("2024-02-29T15:30:00Z");
+    const day = Day.fromTimestamp(timestamp);
 
     expect(day.toIsoId()).toEqual(DayIsoId.parse("2024-02-29"));
-    expect(day.contains(ts)).toEqual(true);
+    expect(day.contains(timestamp)).toEqual(true);
+  });
+
+  test("fromNow", () => {
+    const timestamp = Timestamp.parse(1700000000000);
+    expect(Day.fromNow(timestamp).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+  });
+
+  test("fromNow", () => {
+    const timestamp = Timestamp.parse(1700000000000);
+    expect(Day.fromTimestamp(timestamp).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+  });
+
+  test("fromIsoId", () => {
+    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+  });
+
+  test("equals", () => {
+    const now = Timestamp.parse(Date.now());
+    const dayA = Day.fromTimestamp(now);
+    const dayB = Day.fromNow(now);
+
+    expect(dayB.equals(dayA)).toEqual(true);
   });
 
   test("next", () => {
@@ -43,23 +65,26 @@ describe("Day", () => {
     expect(Day.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual(DayIsoId.parse("2025-07-20"));
   });
 
-  test("round-trips ISO id → Day → ISO id", () => {
+  test("round-trips", () => {
     expect(Day.fromIsoId(DayIsoId.parse("2025-12-31")).toIsoId()).toEqual(DayIsoId.parse("2025-12-31"));
   });
 
-  test("fromNow", () => {
-    const now = Timestamp.parse(Date.now());
-    const dayA = Day.fromTimestamp(now);
-    const dayB = Day.fromNow(now);
-
-    expect(dayB.equals(dayA)).toEqual(true);
-  });
-
-  test("contains() returns false for timestamps outside the day", () => {
-    const ts = toMs("2025-07-22T12:00:00Z");
-    const day = Day.fromTimestamp(ts);
+  test("contains", () => {
+    const timestamp = toMs("2025-07-22T12:00:00Z");
+    const day = Day.fromTimestamp(timestamp);
 
     expect(day.contains(Timestamp.parse(day.getStart() - 1))).toEqual(false);
     expect(day.contains(Timestamp.parse(day.getEnd() + 1))).toEqual(false);
+  });
+
+  test("toString", () => {
+    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toString()).toEqual("2023-11-14");
+  });
+
+  test("toJSON", () => {
+    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toJSON()).toEqual({
+      start: 1699920000000,
+      end: 1700006399999,
+    });
   });
 });
