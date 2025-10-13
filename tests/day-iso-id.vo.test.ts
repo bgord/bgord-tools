@@ -2,12 +2,17 @@ import { describe, expect, test } from "bun:test";
 import { DayIsoId, DayIsoIdError } from "../src/day-iso-id.vo";
 
 describe("DayIsoId", () => {
-  test("accepts a normal mid-year day", () => {
+  test("happy path", () => {
     expect(DayIsoId.safeParse("2025-07-15").success).toEqual(true);
+    expect(DayIsoId.safeParse("2024-02-29").success).toEqual(true);
   });
 
-  test("accepts leap day in a leap year", () => {
-    expect(DayIsoId.safeParse("2024-02-29").success).toEqual(true);
+  test("rejects non-string - null", () => {
+    expect(() => DayIsoId.parse(null)).toThrow(DayIsoIdError.Type);
+  });
+
+  test("rejects non-string - number", () => {
+    expect(() => DayIsoId.parse(2024)).toThrow(DayIsoIdError.Type);
   });
 
   test("rejects empty", () => {

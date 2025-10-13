@@ -4,7 +4,7 @@ import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
 import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
 
-const toMs = (value: string) => Timestamp.parse(Date.parse(value));
+const toMs = (date: string) => Timestamp.parse(Date.parse(date));
 const timestamp = toMs("2025-07-22T12:00:00Z");
 
 describe("Year", () => {

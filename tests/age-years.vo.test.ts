@@ -2,11 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { AgeYears, AgeYearsError } from "../src/age-years.vo";
 
 describe("AgeYears", () => {
-  test("accepts 1", () => {
+  test("happy path", () => {
     expect(AgeYears.safeParse(1).success).toEqual(true);
-  });
-
-  test("accepts 130", () => {
     expect(AgeYears.safeParse(130).success).toEqual(true);
   });
 

@@ -2,17 +2,17 @@ import { describe, expect, test } from "bun:test";
 import { ApiKey, ApiKeyError } from "../src/api-key.vo";
 
 describe("ApiKey", () => {
-  test("accepts a 64-char string", () => {
+  test("happy path", () => {
     expect(ApiKey.safeParse("a".repeat(64)).success).toEqual(true);
     expect(ApiKey.safeParse("A".repeat(64)).success).toEqual(true);
   });
 
-  test("rejects non-string input - number", () => {
-    expect(() => ApiKey.parse(123)).toThrow(ApiKeyError.Type);
+  test("rejects non-string - null", () => {
+    expect(() => ApiKey.parse(null)).toThrow(ApiKeyError.Type);
   });
 
-  test("rejects non-string input - null", () => {
-    expect(() => ApiKey.parse(null)).toThrow(ApiKeyError.Type);
+  test("rejects non-string - number", () => {
+    expect(() => ApiKey.parse(123)).toThrow(ApiKeyError.Type);
   });
 
   test("rejects empty", () => {
