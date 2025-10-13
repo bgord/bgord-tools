@@ -69,4 +69,12 @@ export class Money {
 
     return `${whole}.${fraction.toString().padStart(2, "0")}`;
   }
+
+  toString(): string {
+    return this.format();
+  }
+
+  toJSON(): number {
+    return this.amount;
+  }
 }

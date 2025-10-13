@@ -9,15 +9,12 @@ const roundUp = new RoundUp();
 const roundDown = new RoundDown();
 
 describe("Money", () => {
-  test("creates an empty instance", () => {
+  test("happy path", () => {
     expect(new Money().getAmount()).toEqual(MoneyAmount.parse(0));
-  });
-
-  test("creates an instance with a value", () => {
     expect(new Money(100).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
-  test("throws an error when passing a float value", () => {
+  test("throws on invalid input", () => {
     expect(() => new Money(100.5)).toThrow(MoneyAmountError.Type);
   });
 
@@ -130,5 +127,13 @@ describe("Money", () => {
     for (const [value, result] of cases) {
       expect(new Money(value).format()).toEqual(result);
     }
+  });
+
+  test("toString", () => {
+    expect(new Money(5).toString()).toEqual("0.05");
+  });
+
+  test("toJSON", () => {
+    expect(new Money(5).toJSON()).toEqual(5);
   });
 });
