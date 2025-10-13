@@ -41,10 +41,6 @@ export class Size {
     return new Size({ value, unit: SizeUnitEnum.GB });
   }
 
-  toString(): string {
-    return this.format(this.unit);
-  }
-
   toBytes(): SizeBytesType {
     return this.bytes;
   }
@@ -83,5 +79,13 @@ export class Size {
       default:
         return SizeBytes.parse(value);
     }
+  }
+
+  toString(): string {
+    return this.format(this.unit);
+  }
+
+  toJSON(): { bytes: number } {
+    return { bytes: this.bytes };
   }
 }
