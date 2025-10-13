@@ -16,7 +16,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(null);
   });
 
-  test("isEmpty()", () => {
+  test("isEmpty", () => {
     const dll = new DoublyLinkedList();
 
     expect(dll.isEmpty()).toEqual(true);
@@ -219,7 +219,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node1);
   });
 
-  test("clear()", () => {
+  test("clear", () => {
     const dll = new DoublyLinkedList<Token>();
     const node = new Node<Token>(token);
 
@@ -236,7 +236,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(null);
   });
 
-  test("remove() head", () => {
+  test("remove - head", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -256,7 +256,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node3);
   });
 
-  test("remove() tail", () => {
+  test("remove - tail", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -276,7 +276,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node2);
   });
 
-  test("remove() in between", () => {
+  test("remove - in between", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -296,7 +296,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node3);
   });
 
-  test("insertAfter() head", () => {
+  test("insertAfter - head", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -312,7 +312,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node2);
   });
 
-  test("insertAfter() tail", () => {
+  test("insertAfter - tail", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -332,7 +332,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node3);
   });
 
-  test("insertAfter() node in between", () => {
+  test("insertAfter - node in between", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -352,7 +352,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node2);
   });
 
-  test("insertBefore() head", () => {
+  test("insertBefore - head", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -368,7 +368,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node1);
   });
 
-  test("insertBefore() tail", () => {
+  test("insertBefore - tail", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -388,7 +388,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node2);
   });
 
-  test("insertBefore() node in between", () => {
+  test("insertBefore - node in between", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -408,7 +408,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node2);
   });
 
-  test("find()", () => {
+  test("find", () => {
     const dll = new DoublyLinkedList<Token>();
     const node1 = new Node<Token>(token);
     const node2 = new Node<Token>(token);
@@ -425,7 +425,7 @@ describe("DLL", () => {
     expect(dll.find((node) => node.data.value === "ok")).toEqual(null);
   });
 
-  test("fromArray()", () => {
+  test("fromArray", () => {
     const data = [token, token, token];
 
     const dll = DoublyLinkedList.fromArray<Token>(data);
@@ -441,7 +441,7 @@ describe("DLL", () => {
     expect(dll.getTail()?.backward(3)).toEqual(null);
   });
 
-  test("toArray()", () => {
+  test("toArray", () => {
     const data = [token, token, token];
 
     const dll = DoublyLinkedList.fromArray<Token>(data);
@@ -453,7 +453,7 @@ describe("DLL", () => {
     expect(dll?.toArray?.()?.[2]?.data).toEqual(data[2]);
   });
 
-  test("reverse()", () => {
+  test("reverse", () => {
     const token1 = new Token("test1");
     const token2 = new Token("test2");
     const token3 = new Token("test3");
@@ -482,7 +482,7 @@ describe("DLL", () => {
     expect(dll.getTail()).toEqual(node1);
   });
 
-  test("Symbol.iterator()", () => {
+  test("Symbol.iterator", () => {
     const dll = new DoublyLinkedList<Token>();
 
     const firstToken = new Token("first");

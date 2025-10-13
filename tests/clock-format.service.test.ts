@@ -4,13 +4,13 @@ import { Hour } from "../src/hour.vo";
 import { Minute } from "../src/minute.vo";
 
 describe("ClockFormatters", () => {
-  test("TWENTY_FOUR_HOURS -> HH:MM (zero-padded)", () => {
+  test("TWENTY_FOUR_HOURS", () => {
     const clock = { hour: new Hour(5), minute: new Minute(3) };
 
     expect(ClockFormatters.TWENTY_FOUR_HOURS(clock.hour, clock.minute)).toEqual("05:03");
   });
 
-  test("TWELVE_HOURS formats the hour in 12h and preserves minute padding", () => {
+  test("TWELVE_HOURS ", () => {
     const midday = { hour: new Hour(12), minute: new Minute(0) };
     const afternoon = { hour: new Hour(15), minute: new Minute(9) };
 

@@ -2,16 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Pagination } from "../src/pagination.service";
 
 describe("Pagination", () => {
-  test("should parse pagination values correctly", () => {
-    const take = 10;
-    const parsed = Pagination.parse({ page: 2 }, take);
-
-    expect(parsed.page).toEqual(2);
-    expect(parsed.values.take).toEqual(10);
-    expect(parsed.values.skip).toEqual(10);
-  });
-
-  test("should parse pagination with 0 page correctly", () => {
+  test("page 0, take 10", () => {
     const take = 10;
     const parsed = Pagination.parse({ page: 0 }, take);
 
@@ -20,16 +11,7 @@ describe("Pagination", () => {
     expect(parsed.values.skip).toEqual(0);
   });
 
-  test("should parse pagination with negative page correctly", () => {
-    const take = 10;
-    const parsed = Pagination.parse({ page: -1 }, take);
-
-    expect(parsed.page).toEqual(1);
-    expect(parsed.values.take).toEqual(take);
-    expect(parsed.values.skip).toEqual(0);
-  });
-
-  test("should parse pagination with 1 page correctly", () => {
+  test("page 1, take 10", () => {
     const take = 10;
     const page = 1;
     const parsed = Pagination.parse({ page }, take);
@@ -39,7 +21,25 @@ describe("Pagination", () => {
     expect(parsed.values.skip).toEqual(0);
   });
 
-  test("should prepare paged data with correct metadata", () => {
+  test("page 2, take 10", () => {
+    const take = 10;
+    const parsed = Pagination.parse({ page: 2 }, take);
+
+    expect(parsed.page).toEqual(2);
+    expect(parsed.values.take).toEqual(10);
+    expect(parsed.values.skip).toEqual(10);
+  });
+
+  test("page -1, take 10", () => {
+    const take = 10;
+    const parsed = Pagination.parse({ page: -1 }, take);
+
+    expect(parsed.page).toEqual(1);
+    expect(parsed.values.take).toEqual(take);
+    expect(parsed.values.skip).toEqual(0);
+  });
+
+  test("prepares paged metadata", () => {
     const config = {
       total: 50,
       pagination: { values: { take: 10, skip: 10 }, page: 2 },
@@ -57,18 +57,7 @@ describe("Pagination", () => {
     expect(paged.meta.total).toEqual(50);
   });
 
-  test("should determine if pagination is exhausted", () => {
-    const config = {
-      total: 25,
-      pagination: { values: { take: 10, skip: 10 }, page: 3 },
-    };
-
-    const exhausted = Pagination.isExhausted(config);
-
-    expect(exhausted).toEqual(true);
-  });
-
-  test("should return empty paged data", () => {
+  test("empty paged data", () => {
     const emptyPaged = Pagination.empty;
 
     expect(emptyPaged.result).toEqual([]);
@@ -80,7 +69,18 @@ describe("Pagination", () => {
     expect(emptyPaged.meta.total).toEqual(0);
   });
 
-  test("should get first page correctly", () => {
+  test("isExhausted", () => {
+    const config = {
+      total: 25,
+      pagination: { values: { take: 10, skip: 10 }, page: 3 },
+    };
+
+    const exhausted = Pagination.isExhausted(config);
+
+    expect(exhausted).toEqual(true);
+  });
+
+  test("getFirstPage", () => {
     const firstPage = Pagination.getFirstPage({ take: 15 });
 
     expect(firstPage.page).toEqual(1);
