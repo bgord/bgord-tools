@@ -55,4 +55,12 @@ export class Filename {
 
     return new Filename(basename, this.extension);
   }
+
+  toString(): string {
+    return this.get();
+  }
+
+  toJSON(): string {
+    return this.get();
+  }
 }
