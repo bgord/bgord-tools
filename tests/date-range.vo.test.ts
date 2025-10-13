@@ -13,35 +13,34 @@ describe("DateRange", () => {
     expect(() => new DateRange(END, START)).toThrow(DateRangeError.Invalid);
   });
 
-  test("returns the exact start timestamp", () => {
+  test("getStart", () => {
     expect(range.getStart()).toEqual(START);
   });
 
-  test("returns the exact end timestamp", () => {
+  test("getEnd", () => {
     expect(range.getEnd()).toEqual(END);
   });
 
-  test("returns a tuple [start, end] via toRange()", () => {
+  test("toRange", () => {
     expect(range.toRange()).toEqual([START, END]);
   });
 
-  test("contains the start, an inner point and the end", () => {
+  test("contains - true", () => {
     expect(range.contains(START)).toEqual(true);
     expect(range.contains(Timestamp.parse(START + 500))).toEqual(true);
     expect(range.contains(END)).toEqual(true);
   });
 
-  test("does NOT contain values outside the range", () => {
+  test("contains - false", () => {
     expect(range.contains(Timestamp.parse(START - 1))).toEqual(false);
     expect(range.contains(Timestamp.parse(END + 1))).toEqual(false);
   });
 
-  test("equals another DateRange with identical boundaries", () => {
-    const same = new DateRange(START, END);
-    expect(range.equals(same)).toEqual(true);
+  test("equals - true", () => {
+    expect(new DateRange(START, END).equals(new DateRange(START, END))).toEqual(true);
   });
 
-  test("does NOT equal a DateRange with different boundaries", () => {
+  test("equals - false", () => {
     const different = new DateRange(START, Timestamp.parse(END + 1_000));
     expect(range.equals(different)).toEqual(false);
   });
