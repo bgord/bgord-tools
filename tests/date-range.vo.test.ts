@@ -2,8 +2,9 @@ import { describe, expect, test } from "bun:test";
 import { DateRange, DateRangeError } from "../src/date-range.vo";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
+import * as mocks from "./mocks";
 
-const START = Timestamp.parse(1_700_000_000_000); // ≈ 2023-11-14T06:40:00Z
+const START = mocks.TIME_ZERO;
 const END = Timestamp.parse(START + Duration.Seconds(1).ms);
 
 const range = new DateRange(START, END);

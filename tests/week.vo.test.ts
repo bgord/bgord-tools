@@ -3,40 +3,36 @@ import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import { Timestamp } from "../src/timestamp.vo";
 import { Week } from "../src/week.vo";
 import { WeekIsoId } from "../src/week-iso-id.vo";
-
-const toMs = (date: string) => Timestamp.parse(Date.parse(date));
-const timestamp = toMs("2025-07-22T12:00:00Z"); // Tuesday
+import * as mocks from "./mocks";
 
 describe("Week", () => {
   test("happy path", () => {
-    const week = Week.fromTimestamp(timestamp);
+    const week = Week.fromTimestamp(mocks.TIME_ZERO);
 
-    const expectedStart = Timestamp.parse(startOfISOWeek(timestamp).getTime());
-    const expectedEnd = Timestamp.parse(endOfISOWeek(timestamp).getTime());
+    const expectedStart = Timestamp.parse(startOfISOWeek(mocks.TIME_ZERO).getTime());
+    const expectedEnd = Timestamp.parse(endOfISOWeek(mocks.TIME_ZERO).getTime());
 
     expect(week.getStart()).toEqual(expectedStart);
     expect(week.getEnd()).toEqual(expectedEnd);
-    expect(week.toIsoId()).toEqual(WeekIsoId.parse("2025-W30"));
-    expect(week.contains(timestamp)).toEqual(true);
+    expect(week.toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
+    expect(week.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - ISO week spills into the next year", () => {
-    const ts = toMs("2025-12-31T23:59:59Z"); // Wednesday
-    const week = Week.fromTimestamp(ts);
+    const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
+    const week = Week.fromTimestamp(timestamp);
 
     expect(week.toIsoId()).toEqual(WeekIsoId.parse("2026-W01"));
-    expect(week.getStart()).toEqual(Timestamp.parse(startOfISOWeek(ts).getTime()));
-    expect(week.getEnd()).toEqual(Timestamp.parse(endOfISOWeek(ts).getTime()));
+    expect(week.getStart()).toEqual(Timestamp.parse(startOfISOWeek(timestamp).getTime()));
+    expect(week.getEnd()).toEqual(Timestamp.parse(endOfISOWeek(timestamp).getTime()));
   });
 
   test("fromNow", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-    expect(Week.fromNow(timestamp).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
+    expect(Week.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
   });
 
   test("fromTimestamp", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-    expect(Week.fromTimestamp(timestamp).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
   });
 
   test("fromIsoId", () => {
@@ -44,27 +40,25 @@ describe("Week", () => {
   });
 
   test("next", () => {
-    expect(Week.fromTimestamp(timestamp).next().toIsoId()).toEqual(WeekIsoId.parse("2025-W31"));
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(WeekIsoId.parse("2023-W47"));
   });
 
   test("previous", () => {
-    expect(Week.fromTimestamp(timestamp).previous().toIsoId()).toEqual(WeekIsoId.parse("2025-W29"));
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(WeekIsoId.parse("2023-W45"));
   });
 
   test("shift", () => {
-    expect(Week.fromTimestamp(timestamp).shift(2).toIsoId()).toEqual(WeekIsoId.parse("2025-W32"));
-    expect(Week.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual(WeekIsoId.parse("2025-W28"));
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(WeekIsoId.parse("2023-W48"));
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(WeekIsoId.parse("2023-W44"));
   });
 
   test("round-trips", () => {
-    const id = WeekIsoId.parse("2026-W01");
-    const week = Week.fromIsoId(id);
-    expect(week.toIsoId()).toEqual(id);
+    expect(Week.fromIsoId(WeekIsoId.parse("2026-W01")).toIsoId()).toEqual(WeekIsoId.parse("2026-W01"));
   });
 
   test("contains", () => {
-    const ts = toMs("2025-07-22T12:00:00Z");
-    const week = Week.fromTimestamp(ts);
+    const week = Week.fromTimestamp(mocks.TIME_ZERO);
+
     expect(week.contains(Timestamp.parse(week.getStart() - 1))).toEqual(false);
     expect(week.contains(Timestamp.parse(week.getEnd() + 1))).toEqual(false);
   });

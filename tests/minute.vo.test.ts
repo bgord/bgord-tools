@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Minute } from "../src/minute.vo";
 import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
-import { Timestamp } from "../src/timestamp.vo";
+import * as mocks from "./mocks";
 
 const FIVE = new Minute(5);
 const TEN = new Minute(10);
@@ -18,7 +18,7 @@ describe("Minute", () => {
   });
 
   test("fromEpochMs extracts UTC minutes", () => {
-    expect(Minute.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(MinuteSchema.parse(13));
+    expect(Minute.fromEpochMs(mocks.TIME_ZERO).get()).toEqual(MinuteSchema.parse(13));
   });
 
   test("Minute.ZERO", () => {

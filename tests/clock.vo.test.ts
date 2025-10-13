@@ -6,14 +6,14 @@ import { HourFormatters } from "../src/hour-format.service";
 import { HourSchema } from "../src/hour-schema.vo";
 import { Minute } from "../src/minute.vo";
 import { MinuteSchema } from "../src/minute-schema.vo";
-import { Timestamp } from "../src/timestamp.vo";
+import * as mocks from "./mocks";
 
 const EIGHT_FIFTY_NINE = new Clock(new Hour(8), new Minute(59));
 const NINE = new Clock(new Hour(9), new Minute(0));
 
 describe("Clock", () => {
-  test("fromEpochMs uses UTC hour and minute", () => {
-    expect(() => Clock.fromEpochMs(Timestamp.parse(1700000000000)).get()).not.toThrow();
+  test("fromEpochMs", () => {
+    expect(() => Clock.fromEpochMs(mocks.TIME_ZERO).get()).not.toThrow();
   });
 
   test("get", () => {

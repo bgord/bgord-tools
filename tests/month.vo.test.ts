@@ -3,23 +3,20 @@ import { endOfMonth, startOfMonth } from "date-fns";
 import { Month } from "../src/month.vo";
 import { MonthIsoId } from "../src/month-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
-
-const toMs = (date: string) => Timestamp.parse(Date.parse(date));
-
-const reference = toMs("2025-07-22T12:00:00Z");
+import * as mocks from "./mocks";
 
 describe("Month", () => {
   test("happy path", () => {
-    const month = Month.fromTimestamp(reference);
+    const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.getStart()).toEqual(Timestamp.parse(startOfMonth(reference).getTime()));
-    expect(month.getEnd()).toEqual(Timestamp.parse(endOfMonth(reference).getTime()));
-    expect(month.toIsoId()).toEqual(MonthIsoId.parse("2025-07"));
-    expect(month.contains(reference)).toEqual(true);
+    expect(month.getStart()).toEqual(Timestamp.parse(startOfMonth(mocks.TIME_ZERO).getTime()));
+    expect(month.getEnd()).toEqual(Timestamp.parse(endOfMonth(mocks.TIME_ZERO).getTime()));
+    expect(month.toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(month.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - near year boundary", () => {
-    const timestamp = toMs("2025-12-31T23:59:59Z");
+    const timestamp = mocks.toTimestamp("2025-12-31");
     const month = Month.fromTimestamp(timestamp);
 
     expect(month.getStart()).toEqual(Timestamp.parse(startOfMonth(timestamp).getTime()));
@@ -28,15 +25,11 @@ describe("Month", () => {
   });
 
   test("fromNow", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-
-    expect(Month.fromNow(timestamp).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
   });
 
   test("fromTimestamp", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-
-    expect(Month.fromTimestamp(timestamp).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
   });
 
   test("fromIsoId", () => {
@@ -44,16 +37,16 @@ describe("Month", () => {
   });
 
   test("next", () => {
-    expect(Month.fromTimestamp(reference).next().toIsoId()).toEqual(MonthIsoId.parse("2025-08"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(MonthIsoId.parse("2023-12"));
   });
 
   test("previous", () => {
-    expect(Month.fromTimestamp(reference).previous().toIsoId()).toEqual(MonthIsoId.parse("2025-06"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(MonthIsoId.parse("2023-10"));
   });
 
   test("shift", () => {
-    expect(Month.fromTimestamp(reference).shift(2).toIsoId()).toEqual(MonthIsoId.parse("2025-09"));
-    expect(Month.fromTimestamp(reference).shift(-2).toIsoId()).toEqual(MonthIsoId.parse("2025-05"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(MonthIsoId.parse("2024-01"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(MonthIsoId.parse("2023-09"));
   });
 
   test("round-trips", () => {
@@ -67,8 +60,7 @@ describe("Month", () => {
   });
 
   test("contains", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z");
-    const month = Month.fromTimestamp(timestamp);
+    const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
     expect(month.contains(Timestamp.parse(month.getStart() - 1))).toEqual(false);
     expect(month.contains(Timestamp.parse(month.getEnd() + 1))).toEqual(false);

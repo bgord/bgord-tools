@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Hour } from "../src/hour.vo";
 import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
-import { Timestamp } from "../src/timestamp.vo";
+import * as mocks from "./mocks";
 
 const FIVE = new Hour(5);
 const THIRTEEN = new Hour(13);
@@ -18,7 +18,7 @@ describe("Hour", () => {
   });
 
   test("fromEpochMs extracts UTC hour", () => {
-    expect(Hour.fromEpochMs(Timestamp.parse(1700000000000)).get()).toEqual(HourSchema.parse(22));
+    expect(Hour.fromEpochMs(mocks.TIME_ZERO).get()).toEqual(HourSchema.parse(22));
   });
 
   test("Hour.ZERO", () => {

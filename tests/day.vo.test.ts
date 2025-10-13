@@ -2,15 +2,13 @@ import { describe, expect, test } from "bun:test";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
-
-const toMs = (s: string) => Timestamp.parse(Date.parse(s)); // ISO → millis
-const timestamp = toMs("2025-07-22T12:00:00Z");
+import * as mocks from "./mocks";
 
 describe("Day", () => {
   test("happy path", () => {
-    const day = Day.fromTimestamp(timestamp);
+    const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    const date = new Date(timestamp);
+    const date = new Date(mocks.TIME_ZERO);
     const expectedStart = Timestamp.parse(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );
@@ -18,12 +16,12 @@ describe("Day", () => {
 
     expect(day.getStart()).toEqual(expectedStart);
     expect(day.getEnd()).toEqual(expectedEnd);
-    expect(day.toIsoId()).toEqual(DayIsoId.parse("2025-07-22"));
-    expect(day.contains(timestamp)).toEqual(true);
+    expect(day.toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
+    expect(day.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("leap-day", () => {
-    const timestamp = toMs("2024-02-29T15:30:00Z");
+    const timestamp = mocks.toTimestamp("2024-02-29");
     const day = Day.fromTimestamp(timestamp);
 
     expect(day.toIsoId()).toEqual(DayIsoId.parse("2024-02-29"));
@@ -31,17 +29,17 @@ describe("Day", () => {
   });
 
   test("fromNow", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-    expect(Day.fromNow(timestamp).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
   });
 
   test("fromNow", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-    expect(Day.fromTimestamp(timestamp).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
   });
 
   test("fromIsoId", () => {
-    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toIsoId()).toEqual(DayIsoId.parse("2023-11-14"));
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toIsoId()).toEqual(
+      DayIsoId.parse(mocks.TIME_ZERO_DATE),
+    );
   });
 
   test("equals", () => {
@@ -53,16 +51,16 @@ describe("Day", () => {
   });
 
   test("next", () => {
-    expect(Day.fromTimestamp(timestamp).next().toIsoId()).toEqual(DayIsoId.parse("2025-07-23"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(DayIsoId.parse("2023-11-15"));
   });
 
   test("previous", () => {
-    expect(Day.fromTimestamp(timestamp).previous().toIsoId()).toEqual(DayIsoId.parse("2025-07-21"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(DayIsoId.parse("2023-11-13"));
   });
 
   test("shift", () => {
-    expect(Day.fromTimestamp(timestamp).shift(2).toIsoId()).toEqual(DayIsoId.parse("2025-07-24"));
-    expect(Day.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual(DayIsoId.parse("2025-07-20"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(DayIsoId.parse("2023-11-16"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(DayIsoId.parse("2023-11-12"));
   });
 
   test("round-trips", () => {
@@ -70,19 +68,18 @@ describe("Day", () => {
   });
 
   test("contains", () => {
-    const timestamp = toMs("2025-07-22T12:00:00Z");
-    const day = Day.fromTimestamp(timestamp);
+    const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
     expect(day.contains(Timestamp.parse(day.getStart() - 1))).toEqual(false);
     expect(day.contains(Timestamp.parse(day.getEnd() + 1))).toEqual(false);
   });
 
   test("toString", () => {
-    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toString()).toEqual("2023-11-14");
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toString()).toEqual(mocks.TIME_ZERO_DATE);
   });
 
   test("toJSON", () => {
-    expect(Day.fromIsoId(DayIsoId.parse("2023-11-14")).toJSON()).toEqual({
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toJSON()).toEqual({
       start: 1699920000000,
       end: 1700006399999,
     });

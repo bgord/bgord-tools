@@ -3,22 +3,20 @@ import { endOfYear, startOfYear } from "date-fns";
 import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
 import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
-
-const toMs = (date: string) => Timestamp.parse(Date.parse(date));
-const timestamp = toMs("2025-07-22T12:00:00Z");
+import * as mocks from "./mocks";
 
 describe("Year", () => {
   test("happy path", () => {
-    const year = Year.fromTimestamp(timestamp);
+    const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(timestamp).getTime()));
-    expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(timestamp).getTime()));
-    expect(year.toIsoId()).toEqual(YearIsoId.parse("2025"));
-    expect(year.contains(timestamp)).toEqual(true);
+    expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(mocks.TIME_ZERO).getTime()));
+    expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(mocks.TIME_ZERO).getTime()));
+    expect(year.toIsoId()).toEqual(YearIsoId.parse("2023"));
+    expect(year.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - near year boundary", () => {
-    const timestamp = toMs("2025-12-31T23:59:59Z"); // still 2025 in UTC
+    const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
     const year = Year.fromTimestamp(timestamp);
 
     expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(timestamp).getTime()));
@@ -42,9 +40,7 @@ describe("Year", () => {
   });
 
   test("fromNow", () => {
-    const timestamp = Timestamp.parse(1700000000000);
-
-    expect(Year.fromNow(timestamp).toIsoId()).toEqual(YearIsoId.parse("2023"));
+    expect(Year.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(YearIsoId.parse("2023"));
   });
 
   test("fromIsoId", () => {
@@ -52,16 +48,16 @@ describe("Year", () => {
   });
 
   test("next", () => {
-    expect(Year.fromTimestamp(timestamp).next().toIsoId()).toEqual(YearIsoId.parse("2026"));
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(YearIsoId.parse("2024"));
   });
 
   test("previous", () => {
-    expect(Year.fromTimestamp(timestamp).previous().toIsoId()).toEqual(YearIsoId.parse("2024"));
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(YearIsoId.parse("2022"));
   });
 
   test("shift", () => {
-    expect(Year.fromTimestamp(timestamp).shift(2).toIsoId()).toEqual(YearIsoId.parse("2027"));
-    expect(Year.fromTimestamp(timestamp).shift(-2).toIsoId()).toEqual(YearIsoId.parse("2023"));
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(YearIsoId.parse("2025"));
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(YearIsoId.parse("2021"));
   });
 
   test("round-trips", () => {
@@ -73,7 +69,7 @@ describe("Year", () => {
   });
 
   test("contains", () => {
-    const year = Year.fromTimestamp(toMs("2025-07-22T12:00:00Z"));
+    const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
     expect(year.contains(Timestamp.parse(year.getStart() - 1))).toEqual(false);
     expect(year.contains(Timestamp.parse(year.getEnd() + 1))).toEqual(false);

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { Timestamp } from "../src/timestamp.vo";
 import { Weekday, WeekdayFormatterEnum, WeekdayFormatters, WeekdayValueError } from "../src/weekday.vo";
+import * as mocks from "./mocks";
 
 describe("Weekday", () => {
   test("happy path", () => {
@@ -10,9 +10,8 @@ describe("Weekday", () => {
   });
 
   test("fromUtcTimestamp", () => {
-    const timestamp = Timestamp.parse(1700000000000);
+    const monday = Weekday.fromUtcTimestamp(mocks.TIME_ZERO);
 
-    const monday = Weekday.fromUtcTimestamp(timestamp);
     expect(monday.isTuesday()).toEqual(true);
     expect(monday.get()).toEqual(2);
   });
