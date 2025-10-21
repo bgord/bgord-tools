@@ -1,5 +1,7 @@
 # Changelog
+- 2025-10-21 09:31 1b5260b **step: bump bgord/scripts**
 - 2025-10-21 09:30 a9aa75f **step: update packages**
+- 2025-10-21 07:31 591de53 **docs: generate CHANGELOG**
 ## 2025-10-13 15:00 v1.0.1
 - 2025-10-13 15:00 6cbecd1 **1.0.1**
 - 2025-10-13 14:59 f2bef81 **fix: allow hyphens in mime value**
