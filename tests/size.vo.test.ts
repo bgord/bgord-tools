@@ -30,6 +30,24 @@ describe("Size", () => {
     expect(Size.fromGB(1.5).toBytes()).toEqual(SizeBytes.parse(1610612736));
   });
 
+  test("tokB", () => {
+    expect(Size.fromBytes(1023).tokB()).toEqual(1);
+    expect(Size.fromBytes(1024).tokB()).toEqual(1);
+    expect(Size.fromBytes(1025).tokB()).toEqual(2);
+  });
+
+  test("toMB", () => {
+    expect(Size.fromKb(1023).toMB()).toEqual(1);
+    expect(Size.fromKb(1024).toMB()).toEqual(1);
+    expect(Size.fromKb(1025).toMB()).toEqual(2);
+  });
+
+  test("toGB", () => {
+    expect(Size.fromMB(1023).toGB()).toEqual(1);
+    expect(Size.fromMB(1024).toGB()).toEqual(1);
+    expect(Size.fromMB(1025).toGB()).toEqual(2);
+  });
+
   test("isGreaterThan", () => {
     expect(Size.fromGB(1).isGreaterThan(Size.fromMB(1))).toEqual(true);
     expect(Size.fromMB(1).isGreaterThan(Size.fromMB(1))).toEqual(false);

@@ -1,4 +1,4 @@
-import { RoundToDecimal } from "./rounding.adapter";
+import { RoundToDecimal, RoundUp } from "./rounding.adapter";
 import { SizeBytes, type SizeBytesType } from "./size-bytes.vo";
 
 enum SizeUnitEnum {
@@ -18,6 +18,7 @@ export class Size {
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
 
+  private static readonly CONVERT_ROUND = new RoundUp();
   private static readonly FORMAT_ROUND = new RoundToDecimal(2);
 
   constructor(config: SizeConfigType) {
@@ -43,6 +44,18 @@ export class Size {
 
   toBytes(): SizeBytesType {
     return this.bytes;
+  }
+
+  tokB(): number {
+    return Size.CONVERT_ROUND.round(this.bytes / Size.KB_MULTIPLIER);
+  }
+
+  toMB(): number {
+    return Size.CONVERT_ROUND.round(this.bytes / Size.MB_MULTIPLIER);
+  }
+
+  toGB(): number {
+    return Size.CONVERT_ROUND.round(this.bytes / Size.GB_MULTIPLIER);
   }
 
   isGreaterThan(another: Size): boolean {
