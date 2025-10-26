@@ -18,7 +18,7 @@ export class Size {
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
 
-  private static readonly ROUNDER = new RoundToDecimal(2);
+  private static readonly FORMAT_ROUND = new RoundToDecimal(2);
 
   constructor(config: SizeConfigType) {
     this.unit = config.unit;
@@ -52,11 +52,11 @@ export class Size {
   format(unit: SizeUnitEnum): string {
     switch (unit) {
       case SizeUnitEnum.kB:
-        return `${Size.ROUNDER.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnitEnum.kB}`;
+        return `${Size.FORMAT_ROUND.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnitEnum.kB}`;
       case SizeUnitEnum.MB:
-        return `${Size.ROUNDER.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnitEnum.MB}`;
+        return `${Size.FORMAT_ROUND.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnitEnum.MB}`;
       case SizeUnitEnum.GB:
-        return `${Size.ROUNDER.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnitEnum.GB}`;
+        return `${Size.FORMAT_ROUND.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnitEnum.GB}`;
       default:
         return `${this.bytes} ${SizeUnitEnum.b}`;
     }
