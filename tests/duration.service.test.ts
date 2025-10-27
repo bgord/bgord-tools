@@ -3,8 +3,18 @@ import { Duration } from "../src/duration.service";
 import { DurationMs } from "../src/duration-ms.vo";
 
 describe("Duration", () => {
+  test("converts weeks", () => {
+    const days = Duration.Weeks(2);
+    expect(days.days).toEqual(14);
+    expect(days.hours).toEqual(336);
+    expect(days.minutes).toEqual(20160);
+    expect(days.seconds).toEqual(1209600);
+    expect(days.ms).toEqual(DurationMs.parse(1_209_600_000));
+  });
+
   test("converts days", () => {
     const days = Duration.Days(2);
+    expect(days.weeks).toEqual(0.29);
     expect(days.days).toEqual(2);
     expect(days.hours).toEqual(48);
     expect(days.minutes).toEqual(2880);
@@ -14,6 +24,7 @@ describe("Duration", () => {
 
   test("converts hours", () => {
     const hours = Duration.Hours(3);
+    expect(hours.weeks).toEqual(0.02);
     expect(hours.days).toEqual(0.13);
     expect(hours.hours).toEqual(3);
     expect(hours.minutes).toEqual(180);
@@ -23,6 +34,7 @@ describe("Duration", () => {
 
   test("converts minutes", () => {
     const minutes = Duration.Minutes(30);
+    expect(minutes.weeks).toEqual(0);
     expect(minutes.days).toEqual(0.02);
     expect(minutes.hours).toEqual(0.5);
     expect(minutes.minutes).toEqual(30);
@@ -32,6 +44,7 @@ describe("Duration", () => {
 
   test("converts seconds", () => {
     const seconds = Duration.Seconds(120);
+    expect(seconds.weeks).toEqual(0);
     expect(seconds.days).toEqual(0);
     expect(seconds.hours).toEqual(0.03);
     expect(seconds.minutes).toEqual(2);
@@ -41,6 +54,7 @@ describe("Duration", () => {
 
   test("converts ms", () => {
     const ms = Duration.Ms(500);
+    expect(ms.weeks).toEqual(0);
     expect(ms.days).toEqual(0);
     expect(ms.hours).toEqual(0);
     expect(ms.minutes).toEqual(0.01);

@@ -10,9 +10,14 @@ export class Duration {
   private static readonly MS_IN_MINUTE = 60 * Duration.MS_IN_SECOND;
   private static readonly MS_IN_HOUR = 60 * Duration.MS_IN_MINUTE;
   private static readonly MS_IN_DAY = 24 * Duration.MS_IN_HOUR;
+  private static readonly MS_IN_WEEK = 7 * Duration.MS_IN_DAY;
 
   private constructor(candidateMs: number) {
     this.internal = DurationMs.parse(candidateMs);
+  }
+
+  static Weeks(value: number): Duration {
+    return new Duration(value * Duration.MS_IN_WEEK);
   }
 
   static Days(value: number): Duration {
@@ -29,6 +34,10 @@ export class Duration {
   }
   static Ms(value: number): Duration {
     return new Duration(value);
+  }
+
+  get weeks(): number {
+    return Duration.rounding.round(this.internal / Duration.MS_IN_WEEK);
   }
 
   get days(): number {
