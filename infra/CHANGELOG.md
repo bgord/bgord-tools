@@ -1,6 +1,9 @@
 # Changelog
+## 2025-10-27 11:31 v1.0.4
+- 2025-10-27 11:31 ddd5851 **1.0.4**
 - 2025-10-27 11:30 b7cbfbc **step: update packages**
 - 2025-10-27 11:30 4172a4f **step: add week duration**
+- 2025-10-27 10:30 0b17987 **docs: generate CHANGELOG**
 ## 2025-10-26 15:28 v1.0.3
 - 2025-10-26 15:28 1a29509 **1.0.3**
 - 2025-10-26 15:25 cf0bcc0 **step: add to kb/mb/gb to size**
