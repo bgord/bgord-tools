@@ -10,8 +10,8 @@ describe("Week", () => {
   test("happy path", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
 
-    const expectedStart = TimestampVO.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms()).getTime());
-    const expectedEnd = TimestampVO.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms()).getTime());
+    const expectedStart = TimestampVO.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms).getTime());
+    const expectedEnd = TimestampVO.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms).getTime());
 
     expect(week.getStart()).toEqual(expectedStart);
     expect(week.getEnd()).toEqual(expectedEnd);
@@ -24,8 +24,8 @@ describe("Week", () => {
     const week = Week.fromTimestamp(timestamp);
 
     expect(week.toIsoId()).toEqual(WeekIsoId.parse("2026-W01"));
-    expect(week.getStart()).toEqual(TimestampVO.fromNumber(startOfISOWeek(timestamp.ms()).getTime()));
-    expect(week.getEnd()).toEqual(TimestampVO.fromNumber(endOfISOWeek(timestamp.ms()).getTime()));
+    expect(week.getStart()).toEqual(TimestampVO.fromNumber(startOfISOWeek(timestamp.ms).getTime()));
+    expect(week.getEnd()).toEqual(TimestampVO.fromNumber(endOfISOWeek(timestamp.ms).getTime()));
   });
 
   test("fromNow", () => {

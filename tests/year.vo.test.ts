@@ -10,8 +10,8 @@ describe("Year", () => {
   test("happy path", () => {
     const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.getStart()).toEqual(TimestampVO.fromNumber(startOfYear(mocks.TIME_ZERO.ms()).getTime()));
-    expect(year.getEnd()).toEqual(TimestampVO.fromNumber(endOfYear(mocks.TIME_ZERO.ms()).getTime()));
+    expect(year.getStart()).toEqual(TimestampVO.fromNumber(startOfYear(mocks.TIME_ZERO.ms).getTime()));
+    expect(year.getEnd()).toEqual(TimestampVO.fromNumber(endOfYear(mocks.TIME_ZERO.ms).getTime()));
     expect(year.toIsoId()).toEqual(YearIsoId.parse("2023"));
     expect(year.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -20,8 +20,8 @@ describe("Year", () => {
     const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
     const year = Year.fromTimestamp(timestamp);
 
-    expect(year.getStart()).toEqual(TimestampVO.fromNumber(startOfYear(timestamp.ms()).getTime()));
-    expect(year.getEnd()).toEqual(TimestampVO.fromNumber(endOfYear(timestamp.ms()).getTime()));
+    expect(year.getStart()).toEqual(TimestampVO.fromNumber(startOfYear(timestamp.ms).getTime()));
+    expect(year.getEnd()).toEqual(TimestampVO.fromNumber(endOfYear(timestamp.ms).getTime()));
     expect(year.toIsoId()).toEqual(YearIsoId.parse("2025"));
   });
 

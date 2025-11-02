@@ -25,7 +25,7 @@ export class RateLimiter {
       return { allowed: true };
     }
 
-    const remainingDelta = nextAllowedTimestamp.ms() - now.ms();
+    const remainingDelta = nextAllowedTimestamp.ms - now.ms;
 
     return { allowed: false, remaining: Duration.Ms(remainingDelta) };
   }

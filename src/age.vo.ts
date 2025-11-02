@@ -16,14 +16,14 @@ export class Age {
 
   static fromBirthdateEpochMs(params: { birthdate: TimestampVO; now: TimestampVO }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(params.now.ms(), params.birthdate.ms()));
+    return Age.fromValue(differenceInYears(params.now.ms, params.birthdate.ms));
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: TimestampVO }): Age {
     const birthdate = TimestampVO.fromNumber(new Date(candidate.birthdate).getTime());
 
     if (birthdate.isAfter(candidate.now)) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(candidate.now.ms(), birthdate.ms()));
+    return Age.fromValue(differenceInYears(candidate.now.ms, birthdate.ms));
   }
 
   get(): number {

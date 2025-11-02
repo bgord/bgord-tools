@@ -53,7 +53,7 @@ export class Weekday {
   }
 
   static fromUtcTimestamp(timestamp: TimestampVO, formatter?: WeekdayFormatter): Weekday {
-    const dayZeroBased = new Date(timestamp.ms()).getUTCDay(); // 0..6
+    const dayZeroBased = new Date(timestamp.ms).getUTCDay(); // 0..6
     return new Weekday(dayZeroBased, formatter);
   }
 

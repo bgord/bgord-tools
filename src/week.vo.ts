@@ -5,8 +5,8 @@ import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Week {
-    const start = TimestampVO.fromNumber(startOfISOWeek(timestamp.ms()).getTime());
-    const end = TimestampVO.fromNumber(endOfISOWeek(timestamp.ms()).getTime());
+    const start = TimestampVO.fromNumber(startOfISOWeek(timestamp.ms).getTime());
+    const end = TimestampVO.fromNumber(endOfISOWeek(timestamp.ms).getTime());
 
     return new Week(start, end);
   }
@@ -25,8 +25,8 @@ export class Week extends DateRange {
   }
 
   toIsoId(): WeekIsoIdType {
-    const year = getISOWeekYear(this.getStart().ms());
-    const week = getISOWeek(this.getStart().ms());
+    const year = getISOWeekYear(this.getStart().ms);
+    const week = getISOWeek(this.getStart().ms);
 
     return WeekIsoId.parse(`${year}-W${String(week).padStart(2, "0")}`);
   }
@@ -40,7 +40,7 @@ export class Week extends DateRange {
   }
 
   shift(count: number): Week {
-    const shifted = addWeeks(this.getStart().ms(), count).getTime();
+    const shifted = addWeeks(this.getStart().ms, count).getTime();
 
     return Week.fromTimestamp(TimestampVO.fromNumber(shifted));
   }

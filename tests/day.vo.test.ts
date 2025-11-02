@@ -9,7 +9,7 @@ describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    const date = new Date(mocks.TIME_ZERO.ms());
+    const date = new Date(mocks.TIME_ZERO.ms);
     const expectedStart = TimestampVO.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );

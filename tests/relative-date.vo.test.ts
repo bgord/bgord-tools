@@ -10,7 +10,7 @@ describe("RelativeDate", () => {
 
   describe("truthy", () => {
     test("formats a timestamp into relative format", () => {
-      expect(RelativeDate.truthy(timestamp)).toEqual({ raw: timestamp.ms(), relative: "5 minutes ago" });
+      expect(RelativeDate.truthy(timestamp)).toEqual({ raw: timestamp.ms, relative: "5 minutes ago" });
     });
   });
 
@@ -21,7 +21,7 @@ describe("RelativeDate", () => {
     });
 
     test("formats a valid timestamp", () => {
-      expect(RelativeDate.falsy(timestamp)).toEqual({ raw: timestamp.ms(), relative: "5 minutes ago" });
+      expect(RelativeDate.falsy(timestamp)).toEqual({ raw: timestamp.ms, relative: "5 minutes ago" });
     });
   });
 });

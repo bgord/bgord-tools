@@ -12,7 +12,7 @@ export class Minute {
   }
 
   static fromEpochMs(timestamp: TimestampVO): Minute {
-    return new Minute(new Date(timestamp.ms()).getUTCMinutes());
+    return new Minute(new Date(timestamp.ms).getUTCMinutes());
   }
 
   get(): MinuteSchemaType {

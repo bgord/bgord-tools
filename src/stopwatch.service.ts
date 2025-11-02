@@ -20,6 +20,6 @@ export class Stopwatch {
 
     this.state = StopwatchState.stopped;
 
-    return Duration.Ms(TimestampVO.fromNumber(Date.now() - this.start.ms()).ms());
+    return Duration.Ms(TimestampVO.fromNumber(Date.now() - this.start.ms).ms);
   }
 }

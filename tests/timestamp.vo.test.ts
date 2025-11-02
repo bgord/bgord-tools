@@ -6,7 +6,7 @@ import * as mocks from "./mocks";
 
 describe("Timestamp", () => {
   test("fromValue - success", () => {
-    expect(TimestampVO.fromValue(mocks.TIME_ZERO.ms()));
+    expect(TimestampVO.fromValue(mocks.TIME_ZERO.ms));
   });
 
   test("fromValue - error", () => {
@@ -14,7 +14,7 @@ describe("Timestamp", () => {
   });
 
   test("fromNumber - success", () => {
-    expect(TimestampVO.fromNumber(mocks.TIME_ZERO.ms()));
+    expect(TimestampVO.fromNumber(mocks.TIME_ZERO.ms));
   });
 
   test("fromNumber - error", () => {
@@ -22,14 +22,12 @@ describe("Timestamp", () => {
   });
 
   test("add", () => {
-    expect(mocks.TIME_ZERO.add(Duration.Ms(500)).ms()).toEqual(
-      TimestampValue.parse(mocks.TIME_ZERO.ms() + 500),
-    );
+    expect(mocks.TIME_ZERO.add(Duration.Ms(500)).ms).toEqual(TimestampValue.parse(mocks.TIME_ZERO.ms + 500));
   });
 
   test("subtract", () => {
-    expect(mocks.TIME_ZERO.subtract(Duration.Ms(500)).ms()).toEqual(
-      TimestampValue.parse(mocks.TIME_ZERO.ms() - 500),
+    expect(mocks.TIME_ZERO.subtract(Duration.Ms(500)).ms).toEqual(
+      TimestampValue.parse(mocks.TIME_ZERO.ms - 500),
     );
   });
 
@@ -60,14 +58,14 @@ describe("Timestamp", () => {
   });
 
   test("get", () => {
-    expect(mocks.TIME_ZERO.ms()).toEqual(mocks.TIME_ZERO.ms());
+    expect(mocks.TIME_ZERO.ms).toEqual(mocks.TIME_ZERO.ms);
   });
 
   test("toJSON", () => {
-    expect(mocks.TIME_ZERO.toJSON()).toEqual(mocks.TIME_ZERO.ms());
+    expect(mocks.TIME_ZERO.toJSON()).toEqual(mocks.TIME_ZERO.ms);
   });
 
   test("toString", () => {
-    expect(mocks.TIME_ZERO.toString()).toEqual(mocks.TIME_ZERO.ms().toString());
+    expect(mocks.TIME_ZERO.toString()).toEqual(mocks.TIME_ZERO.ms.toString());
   });
 });

@@ -40,7 +40,7 @@ export class TimestampVO {
     return this.value === another.value;
   }
 
-  ms(): TimestampValueType {
+  get ms(): TimestampValueType {
     return this.value;
   }
 

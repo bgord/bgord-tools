@@ -10,10 +10,8 @@ describe("Quarter", () => {
   test("happy path", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(quarter.getStart()).toEqual(
-      TimestampVO.fromNumber(startOfQuarter(mocks.TIME_ZERO.ms()).getTime()),
-    );
-    expect(quarter.getEnd()).toEqual(TimestampVO.fromNumber(endOfQuarter(mocks.TIME_ZERO.ms()).getTime()));
+    expect(quarter.getStart()).toEqual(TimestampVO.fromNumber(startOfQuarter(mocks.TIME_ZERO.ms).getTime()));
+    expect(quarter.getEnd()).toEqual(TimestampVO.fromNumber(endOfQuarter(mocks.TIME_ZERO.ms).getTime()));
     expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
     expect(quarter.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -22,8 +20,8 @@ describe("Quarter", () => {
     const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
     const quarter = Quarter.fromTimestamp(timestamp);
 
-    expect(quarter.getStart()).toEqual(TimestampVO.fromNumber(startOfQuarter(timestamp.ms()).getTime()));
-    expect(quarter.getEnd()).toEqual(TimestampVO.fromNumber(endOfQuarter(timestamp.ms()).getTime()));
+    expect(quarter.getStart()).toEqual(TimestampVO.fromNumber(startOfQuarter(timestamp.ms).getTime()));
+    expect(quarter.getEnd()).toEqual(TimestampVO.fromNumber(endOfQuarter(timestamp.ms).getTime()));
     expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2025-Q4"));
   });
 

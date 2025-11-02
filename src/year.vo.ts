@@ -5,8 +5,8 @@ import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Year {
-    const start = TimestampVO.fromNumber(startOfYear(timestamp.ms()).getTime());
-    const end = TimestampVO.fromNumber(endOfYear(timestamp.ms()).getTime());
+    const start = TimestampVO.fromNumber(startOfYear(timestamp.ms).getTime());
+    const end = TimestampVO.fromNumber(endOfYear(timestamp.ms).getTime());
 
     return new Year(start, end);
   }
@@ -26,11 +26,11 @@ export class Year extends DateRange {
   }
 
   toIsoId(): YearIsoIdType {
-    return YearIsoId.parse(String(getYear(this.getStart().ms())));
+    return YearIsoId.parse(String(getYear(this.getStart().ms)));
   }
 
   isLeapYear(): boolean {
-    const year = getYear(this.getStart().ms());
+    const year = getYear(this.getStart().ms);
 
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
@@ -44,7 +44,7 @@ export class Year extends DateRange {
   }
 
   shift(count: number): Year {
-    const shifted = addYears(this.getStart().ms(), count).getTime();
+    const shifted = addYears(this.getStart().ms, count).getTime();
 
     return Year.fromTimestamp(TimestampVO.fromNumber(shifted));
   }

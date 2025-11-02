@@ -9,13 +9,13 @@ export class DateCalculator {
     const dayMs = Duration.Days(1).ms;
 
     // UTC midnight for the UTC date of `now`
-    const utcMidnight = Math.floor(config.now.ms() / dayMs) * dayMs;
+    const utcMidnight = Math.floor(config.now.ms / dayMs) * dayMs;
 
     // Candidate start of the local day (in UTC), anchored to the same UTC date
     let start = utcMidnight + config.timeZoneOffsetMs;
 
     // If the candidate is in the future relative to `now`, it means local midnight was "yesterday" in UTC.
-    if (start > config.now.ms()) start -= dayMs;
+    if (start > config.now.ms) start -= dayMs;
 
     return TimestampVO.fromNumber(start);
   }

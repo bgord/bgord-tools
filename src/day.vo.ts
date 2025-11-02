@@ -6,7 +6,7 @@ import { TimestampVO } from "./timestamp.vo";
 
 export class Day extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Day {
-    const date = new Date(timestamp.ms());
+    const date = new Date(timestamp.ms);
 
     const startUtc = TimestampVO.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
@@ -32,7 +32,7 @@ export class Day extends DateRange {
   toIsoId(): DayIsoIdType {
     const midday = this.getStart().add(Duration.Hours(12));
 
-    return DayIsoId.parse(formatISO(midday.ms(), { representation: "date" }));
+    return DayIsoId.parse(formatISO(midday.ms, { representation: "date" }));
   }
 
   previous(): Day {

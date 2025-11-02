@@ -13,7 +13,7 @@ export class Hour {
   }
 
   static fromEpochMs(timestamp: TimestampVO): Hour {
-    return new Hour(new Date(timestamp.ms()).getUTCHours());
+    return new Hour(new Date(timestamp.ms).getUTCHours());
   }
 
   get(): HourSchemaType {

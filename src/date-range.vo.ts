@@ -31,6 +31,6 @@ export class DateRange {
   }
 
   toJSON(): { start: number; end: number } {
-    return { start: this.getStart().ms(), end: this.getEnd().ms() };
+    return { start: this.getStart().ms, end: this.getEnd().ms };
   }
 }

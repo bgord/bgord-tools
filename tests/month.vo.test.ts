@@ -10,8 +10,8 @@ describe("Month", () => {
   test("happy path", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(mocks.TIME_ZERO.ms()).getTime()));
-    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(mocks.TIME_ZERO.ms()).getTime()));
+    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(mocks.TIME_ZERO.ms).getTime()));
+    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(mocks.TIME_ZERO.ms).getTime()));
     expect(month.toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
     expect(month.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -20,8 +20,8 @@ describe("Month", () => {
     const timestamp = mocks.toTimestamp("2025-12-31");
     const month = Month.fromTimestamp(timestamp);
 
-    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(timestamp.ms()).getTime()));
-    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(timestamp.ms()).getTime()));
+    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(timestamp.ms).getTime()));
+    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(timestamp.ms).getTime()));
     expect(month.toIsoId()).toEqual(MonthIsoId.parse("2025-12"));
   });
 
