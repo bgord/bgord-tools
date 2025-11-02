@@ -1,9 +1,12 @@
 # Changelog
+## 2025-11-02 18:35 v1.1.1
+- 2025-11-02 18:35 31560f1 **1.1.1**
 - 2025-11-02 18:30 5da91cd **refactor: improve date calculator**
 - 2025-11-02 18:14 b571afa **step: use timestamp difference**
 - 2025-11-02 18:12 2d97784 **step: add timestamp vo difference method**
 - 2025-11-02 17:58 8e1291f **refactor: make TimestampVO.ms a getter**
 - 2025-11-02 17:46 b5afbf3 **refactor: adjust tests to accomodate for timestamp vo**
+- 2025-11-02 17:35 cd35190 **docs: generate CHANGELOG**
 ## 2025-11-02 15:45 v1.1.0
 - 2025-11-02 15:45 4fc68f4 **1.1.0**
 - 2025-11-02 15:44 53b871d **Merge pull request #44 from bgord/timestamp**
