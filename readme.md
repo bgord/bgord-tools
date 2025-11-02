@@ -104,7 +104,7 @@ src/
 ├── sum.service.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
-├── time.service.ts
+├── timestamp-value.vo.ts
 ├── timestamp.vo.ts
 ├── timezone.vo.ts
 ├── ts-utils.ts
