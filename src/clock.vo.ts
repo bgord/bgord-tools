@@ -32,17 +32,17 @@ export class Clock {
   }
 
   equals(another: Clock): boolean {
-    return this.hour.get() === another.hour.get() && this.minute.get() === another.minute.get();
+    return this.hour.equals(another.hour) && this.minute.equals(another.minute);
   }
 
   isAfter(another: Clock): boolean {
-    if (this.hour.get() !== another.hour.get()) return this.hour.get() > another.hour.get();
-    return this.minute.get() > another.minute.get();
+    if (!this.hour.equals(another.hour)) return this.hour.isAfter(another.hour);
+    return this.minute.isAfter(another.minute);
   }
 
   isBefore(another: Clock): boolean {
-    if (this.hour.get() !== another.hour.get()) return this.hour.get() < another.hour.get();
-    return this.minute.get() < another.minute.get();
+    if (!this.hour.equals(another.hour)) return this.hour.isBefore(another.hour);
+    return this.minute.isBefore(another.minute);
   }
 
   toString(): string {
