@@ -1,7 +1,21 @@
 # Changelog
+- 2025-11-02 15:44 53b871d **Merge pull request #44 from bgord/timestamp**
+- 2025-11-02 15:42 ff5cb75 **refactor: rename TimestampValueError**
+- 2025-11-02 15:36 9daee03 **refactor: improve clock**
+- 2025-11-02 15:30 e31ffe1 **step: add timestamp vo tests**
+- 2025-11-02 14:01 27343d0 **fix: tests**
+- 2025-11-02 13:57 91573cc **fix: mocks**
+- 2025-11-02 13:42 acd365b **refactor: remove redundant time service**
+- 2025-11-02 13:39 9223fda **step: add and subtract to timestamp**
+- 2025-11-02 13:39 7d16c96 **step: use new timestamp vo**
+- 2025-11-02 13:38 d4356ca **step: add comparison methods**
+- 2025-11-02 13:35 20e660b **step: use new timestamp vo**
+- 2025-11-02 09:59 6618e2b **step: create timestamp vo**
+- 2025-11-02 09:50 dd62222 **step: add timestamp value**
 ## 2025-10-30 09:01 v1.0.5
 - 2025-10-30 09:01 e67867f **1.0.5**
 - 2025-10-30 09:00 6f20e44 **step: update packages**
+- 2025-10-30 08:01 4e0cc85 **docs: generate CHANGELOG**
 - 2025-10-30 08:01 3687756 **docs: generate CHANGELOG**
 ## 2025-10-27 11:31 v1.0.4
 - 2025-10-27 11:31 ddd5851 **1.0.4**
