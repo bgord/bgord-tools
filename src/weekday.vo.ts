@@ -1,4 +1,4 @@
-import type { TimestampValueType } from "./timestamp-value.vo";
+import type { Timestamp } from "./timestamp.vo";
 
 export type WeekdayFormatter = (value: Weekday["value"]) => string;
 
@@ -52,8 +52,8 @@ export class Weekday {
     this.formatter = formatter ?? WeekdayFormatters.FULL;
   }
 
-  static fromUtcTimestamp(timestamp: TimestampValueType, formatter?: WeekdayFormatter): Weekday {
-    const dayZeroBased = new Date(timestamp).getUTCDay(); // 0..6
+  static fromUtcTimestamp(timestamp: Timestamp, formatter?: WeekdayFormatter): Weekday {
+    const dayZeroBased = new Date(timestamp.get()).getUTCDay(); // 0..6
     return new Weekday(dayZeroBased, formatter);
   }
 

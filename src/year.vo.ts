@@ -1,17 +1,17 @@
 import { addYears, endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
-import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
+import { Timestamp } from "./timestamp.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
-  static fromTimestamp(timestamp: TimestampValueType): Year {
-    const start = TimestampValue.parse(startOfYear(timestamp).getTime());
-    const end = TimestampValue.parse(endOfYear(timestamp).getTime());
+  static fromTimestamp(timestamp: Timestamp): Year {
+    const start = Timestamp.fromNumber(startOfYear(timestamp.get()).getTime());
+    const end = Timestamp.fromNumber(endOfYear(timestamp.get()).getTime());
 
     return new Year(start, end);
   }
 
-  static fromNow(now: TimestampValueType): Year {
+  static fromNow(now: Timestamp): Year {
     return Year.fromTimestamp(now);
   }
 
@@ -22,15 +22,15 @@ export class Year extends DateRange {
   static fromIsoId(isoId: YearIsoIdType): Year {
     const reference = Date.UTC(Number(isoId));
 
-    return Year.fromTimestamp(TimestampValue.parse(reference));
+    return Year.fromTimestamp(Timestamp.fromNumber(reference));
   }
 
   toIsoId(): YearIsoIdType {
-    return YearIsoId.parse(String(getYear(this.getStart())));
+    return YearIsoId.parse(String(getYear(this.getStart().get())));
   }
 
   isLeapYear(): boolean {
-    const year = getYear(this.getStart());
+    const year = getYear(this.getStart().get());
 
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
@@ -44,9 +44,9 @@ export class Year extends DateRange {
   }
 
   shift(count: number): Year {
-    const shifted = addYears(this.getStart(), count).getTime();
+    const shifted = addYears(this.getStart().get(), count).getTime();
 
-    return Year.fromTimestamp(TimestampValue.parse(shifted));
+    return Year.fromTimestamp(Timestamp.fromNumber(shifted));
   }
 
   toString(): string {

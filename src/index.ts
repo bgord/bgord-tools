@@ -78,7 +78,6 @@ export * from "./size-bytes.vo";
 export * from "./stopwatch.service";
 export * from "./sum.service";
 export * from "./thousands-separator.service";
-export * from "./time.service";
 export * from "./time-zone-offset-value.vo";
 export * from "./timestamp.vo";
 export * from "./timestamp-value.vo";
