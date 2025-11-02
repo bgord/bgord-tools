@@ -1,8 +1,12 @@
 # Changelog
+## 2025-11-02 15:45 v1.1.0
+- 2025-11-02 15:45 4fc68f4 **1.1.0**
 - 2025-11-02 15:44 53b871d **Merge pull request #44 from bgord/timestamp**
 - 2025-11-02 15:42 ff5cb75 **refactor: rename TimestampValueError**
 - 2025-11-02 15:36 9daee03 **refactor: improve clock**
 - 2025-11-02 15:30 e31ffe1 **step: add timestamp vo tests**
+- 2025-11-02 14:44 a41838d **docs: generate CHANGELOG**
+- 2025-11-02 14:44 70dcd70 **docs: generate readme**
 - 2025-11-02 14:01 27343d0 **fix: tests**
 - 2025-11-02 13:57 91573cc **fix: mocks**
 - 2025-11-02 13:42 acd365b **refactor: remove redundant time service**
