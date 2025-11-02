@@ -1,14 +1,14 @@
 import type { Duration } from "./duration.service";
-import { Timestamp, type TimestampType } from "./timestamp.vo";
+import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
 export const Time = {
-  Now(now: TimestampType) {
+  Now(now: TimestampValueType) {
     return {
-      Add(duration: Duration): TimestampType {
-        return Timestamp.parse(now + duration.ms);
+      Add(duration: Duration): TimestampValueType {
+        return TimestampValue.parse(now + duration.ms);
       },
-      Minus(duration: Duration): TimestampType {
-        return Timestamp.parse(now - duration.ms);
+      Minus(duration: Duration): TimestampValueType {
+        return TimestampValue.parse(now - duration.ms);
       },
     };
   },

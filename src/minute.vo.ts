@@ -1,5 +1,5 @@
 import { MinuteSchema, type MinuteSchemaType } from "./minute-schema.vo";
-import type { TimestampType } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
   private readonly value: MinuteSchemaType;
@@ -11,7 +11,7 @@ export class Minute {
     this.value = MinuteSchema.parse(candidate);
   }
 
-  static fromEpochMs(timestamp: TimestampType): Minute {
+  static fromEpochMs(timestamp: TimestampValueType): Minute {
     return new Minute(new Date(timestamp).getUTCMinutes());
   }
 

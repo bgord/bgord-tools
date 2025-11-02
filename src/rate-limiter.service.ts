@@ -1,16 +1,16 @@
 import { Duration } from "./duration.service";
-import type { TimestampType } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 type RateLimiterResultSuccessType = { allowed: true };
 type RateLimiterResultErrorType = { allowed: false; remaining: Duration };
 type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
 export class RateLimiter {
-  private lastInvocation: TimestampType | null = null;
+  private lastInvocation: TimestampValueType | null = null;
 
   constructor(private readonly duration: Duration) {}
 
-  verify(now: TimestampType): RateLimiterResultType {
+  verify(now: TimestampValueType): RateLimiterResultType {
     if (this.lastInvocation == null) {
       this.lastInvocation = now;
 

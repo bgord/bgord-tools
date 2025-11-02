@@ -1,17 +1,17 @@
 import { endOfMonth, format, getMonth, setMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
-import { Timestamp, type TimestampType } from "./timestamp.vo";
+import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
 export class Month extends DateRange {
-  static fromTimestamp(timestamp: TimestampType): Month {
-    const start = Timestamp.parse(startOfMonth(timestamp).getTime());
-    const end = Timestamp.parse(endOfMonth(timestamp).getTime());
+  static fromTimestamp(timestamp: TimestampValueType): Month {
+    const start = TimestampValue.parse(startOfMonth(timestamp).getTime());
+    const end = TimestampValue.parse(endOfMonth(timestamp).getTime());
 
     return new Month(start, end);
   }
 
-  static fromNow(now: TimestampType): Month {
+  static fromNow(now: TimestampValueType): Month {
     return Month.fromTimestamp(now);
   }
 
@@ -20,7 +20,7 @@ export class Month extends DateRange {
 
     const reference = setMonth(Date.UTC(year), month - 1).getTime();
 
-    return Month.fromTimestamp(Timestamp.parse(reference));
+    return Month.fromTimestamp(TimestampValue.parse(reference));
   }
 
   toIsoId(): MonthIsoIdType {
@@ -38,7 +38,7 @@ export class Month extends DateRange {
   shift(count: number): Month {
     const shifted = setMonth(this.getStart(), getMonth(this.getStart()) + count).getTime();
 
-    return Month.fromTimestamp(Timestamp.parse(shifted));
+    return Month.fromTimestamp(TimestampValue.parse(shifted));
   }
 
   toString(): string {

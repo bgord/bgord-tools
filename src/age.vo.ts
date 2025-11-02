@@ -1,6 +1,6 @@
 import { differenceInYears } from "date-fns";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
-import type { TimestampType } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 export const AgeError = { FutureBirthdate: "age.future.birthdate" } as const;
 
@@ -14,12 +14,12 @@ export class Age {
     return new Age(AgeYears.parse(candidate));
   }
 
-  static fromBirthdateEpochMs(params: { birthdate: TimestampType; now: TimestampType }): Age {
+  static fromBirthdateEpochMs(params: { birthdate: TimestampValueType; now: TimestampValueType }): Age {
     if (params.birthdate > params.now) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(params.now, params.birthdate));
   }
 
-  static fromBirthdate(candidate: { birthdate: string; now: TimestampType }): Age {
+  static fromBirthdate(candidate: { birthdate: string; now: TimestampValueType }): Age {
     const birthdateMs = new Date(candidate.birthdate).getTime();
 
     if (birthdateMs > candidate.now) throw new Error(AgeError.FutureBirthdate);

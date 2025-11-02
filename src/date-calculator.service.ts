@@ -1,11 +1,11 @@
 import { Duration } from "./duration.service";
 import type { TimeZoneOffsetValueType } from "./time-zone-offset-value.vo";
-import { Timestamp, type TimestampType } from "./timestamp.vo";
+import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
-type GetStartOfDayTsInTzConfigType = { now: TimestampType; timeZoneOffsetMs: TimeZoneOffsetValueType };
+type GetStartOfDayTsInTzConfigType = { now: TimestampValueType; timeZoneOffsetMs: TimeZoneOffsetValueType };
 
 export class DateCalculator {
-  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): TimestampType {
+  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): TimestampValueType {
     const dayMs = Duration.Days(1).ms;
 
     // UTC midnight for the UTC date of `now`
@@ -17,6 +17,6 @@ export class DateCalculator {
     // If the candidate is in the future relative to `now`, it means local midnight was "yesterday" in UTC.
     if (start > config.now) start -= dayMs;
 
-    return Timestamp.parse(start);
+    return TimestampValue.parse(start);
   }
 }
