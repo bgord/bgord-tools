@@ -5,4 +5,4 @@ export const TIME_ZERO = Timestamp.fromNumber(1700000000000);
 
 export const TIME_ZERO_DATE = "2023-11-14";
 
-export const toTimestamp = (date: string) => Timestamp.fromNumber(new Date(date).getTime()).get();
+export const toTimestamp = (date: string) => Timestamp.fromNumber(new Date(date).getTime());

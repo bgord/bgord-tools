@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
+import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
@@ -8,11 +9,11 @@ describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    const date = new Date(mocks.TIME_ZERO);
-    const expectedStart = Timestamp.parse(
+    const date = new Date(mocks.TIME_ZERO.get());
+    const expectedStart = Timestamp.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );
-    const expectedEnd = Timestamp.parse(expectedStart + 86_400_000 - 1);
+    const expectedEnd = expectedStart.add(Duration.Days(1)).subtract(Duration.Ms(1));
 
     expect(day.getStart()).toEqual(expectedStart);
     expect(day.getEnd()).toEqual(expectedEnd);
@@ -43,7 +44,7 @@ describe("Day", () => {
   });
 
   test("equals", () => {
-    const now = Timestamp.parse(Date.now());
+    const now = Timestamp.fromNumber(Date.now());
     const dayA = Day.fromTimestamp(now);
     const dayB = Day.fromNow(now);
 
@@ -70,8 +71,8 @@ describe("Day", () => {
   test("contains", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(day.contains(Timestamp.parse(day.getStart() - 1))).toEqual(false);
-    expect(day.contains(Timestamp.parse(day.getEnd() + 1))).toEqual(false);
+    expect(day.contains(day.getStart().subtract(Duration.Ms(1)))).toEqual(false);
+    expect(day.contains(day.getEnd().add(Duration.Ms(1)))).toEqual(false);
   });
 
   test("toString", () => {

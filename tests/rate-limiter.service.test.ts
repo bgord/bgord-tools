@@ -4,11 +4,11 @@ import { RateLimiter } from "../src/rate-limiter.service";
 import { Timestamp } from "../src/timestamp.vo";
 
 const duration = Duration.Ms(1000);
-const currentTimestampMs = Timestamp.parse(0);
+const currentTimestampMs = Timestamp.fromNumber(0);
 
 describe("RateLimiter", () => {
   test("allows the first invocation", () => {
-    expect(new RateLimiter(duration).verify(Timestamp.parse(0)).allowed).toEqual(true);
+    expect(new RateLimiter(duration).verify(currentTimestampMs).allowed).toEqual(true);
   });
 
   test("does not allow invocations within the rate limit", () => {
@@ -17,7 +17,7 @@ describe("RateLimiter", () => {
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toEqual(true);
 
-    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + duration.ms - 1));
+    const second = rateLimiter.verify(currentTimestampMs.add(duration).subtract(Duration.Ms(1)));
     expect(second.allowed).toEqual(false);
     // @ts-expect-error
     expect(second.remaining.ms).toEqual(1);
@@ -29,7 +29,7 @@ describe("RateLimiter", () => {
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toEqual(true);
 
-    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + duration.ms));
+    const second = rateLimiter.verify(currentTimestampMs.add(duration));
     expect(second.allowed).toEqual(true);
   });
 
@@ -39,13 +39,13 @@ describe("RateLimiter", () => {
     const first = rateLimiter.verify(currentTimestampMs);
     expect(first.allowed).toEqual(true);
 
-    const second = rateLimiter.verify(Timestamp.parse(currentTimestampMs + duration.ms));
+    const second = rateLimiter.verify(currentTimestampMs.add(duration));
     expect(second.allowed).toEqual(true);
 
-    const third = rateLimiter.verify(Timestamp.parse(currentTimestampMs + duration.ms + 1));
+    const third = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.Ms(1)));
     expect(third.allowed).toEqual(false);
 
-    const fourth = rateLimiter.verify(Timestamp.parse(currentTimestampMs + duration.ms + 2));
+    const fourth = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.Ms(2)));
     expect(fourth.allowed).toEqual(false);
   });
 });

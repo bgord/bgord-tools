@@ -1,11 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { DateRange, DateRangeError } from "../src/date-range.vo";
 import { Duration } from "../src/duration.service";
-import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 const START = mocks.TIME_ZERO;
-const END = Timestamp.parse(START + Duration.Seconds(1).ms);
+const END = START.add(Duration.Seconds(1));
 
 const range = new DateRange(START, END);
 
@@ -28,13 +27,13 @@ describe("DateRange", () => {
 
   test("contains - true", () => {
     expect(range.contains(START)).toEqual(true);
-    expect(range.contains(Timestamp.parse(START + 500))).toEqual(true);
+    expect(range.contains(START.add(Duration.Ms(500)))).toEqual(true);
     expect(range.contains(END)).toEqual(true);
   });
 
   test("contains - false", () => {
-    expect(range.contains(Timestamp.parse(START - 1))).toEqual(false);
-    expect(range.contains(Timestamp.parse(END + 1))).toEqual(false);
+    expect(range.contains(START.subtract(Duration.Ms(1)))).toEqual(false);
+    expect(range.contains(END.add(Duration.Ms(1)))).toEqual(false);
   });
 
   test("equals - true", () => {
@@ -42,7 +41,7 @@ describe("DateRange", () => {
   });
 
   test("equals - false", () => {
-    const different = new DateRange(START, Timestamp.parse(END + 1_000));
+    const different = new DateRange(START, END.add(Duration.Seconds(1)));
     expect(range.equals(different)).toEqual(false);
   });
 });
