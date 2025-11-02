@@ -1,3 +1,4 @@
+import type { Duration } from "./duration.service";
 import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
 export class Timestamp {
@@ -9,6 +10,14 @@ export class Timestamp {
 
   static fromNumber(value: number): Timestamp {
     return new Timestamp(TimestampValue.parse(value));
+  }
+
+  add(duration: Duration): Timestamp {
+    return Timestamp.fromNumber(this.value + duration.ms);
+  }
+
+  subtract(duration: Duration): Timestamp {
+    return Timestamp.fromNumber(this.value - duration.ms);
   }
 
   isBefore(another: Timestamp): boolean {
