@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import { Duration } from "../src/duration.service";
-import { TimestampVO } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 import { Week } from "../src/week.vo";
 import { WeekIsoId } from "../src/week-iso-id.vo";
 import * as mocks from "./mocks";
@@ -10,8 +10,8 @@ describe("Week", () => {
   test("happy path", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
 
-    const expectedStart = TimestampVO.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms).getTime());
-    const expectedEnd = TimestampVO.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms).getTime());
+    const expectedStart = Timestamp.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms).getTime());
+    const expectedEnd = Timestamp.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms).getTime());
 
     expect(week.getStart()).toEqual(expectedStart);
     expect(week.getEnd()).toEqual(expectedEnd);
@@ -24,8 +24,8 @@ describe("Week", () => {
     const week = Week.fromTimestamp(timestamp);
 
     expect(week.toIsoId()).toEqual(WeekIsoId.parse("2026-W01"));
-    expect(week.getStart()).toEqual(TimestampVO.fromNumber(startOfISOWeek(timestamp.ms).getTime()));
-    expect(week.getEnd()).toEqual(TimestampVO.fromNumber(endOfISOWeek(timestamp.ms).getTime()));
+    expect(week.getStart()).toEqual(Timestamp.fromNumber(startOfISOWeek(timestamp.ms).getTime()));
+    expect(week.getEnd()).toEqual(Timestamp.fromNumber(endOfISOWeek(timestamp.ms).getTime()));
   });
 
   test("fromNow", () => {

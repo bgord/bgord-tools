@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
 import { RelativeDate } from "../src/relative-date.vo";
-import { TimestampVO } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 
 describe("RelativeDate", () => {
-  const timestamp = TimestampVO.fromNumber(new Date("2024-06-01T12:00:00Z").getTime());
+  const timestamp = Timestamp.fromNumber(new Date("2024-06-01T12:00:00Z").getTime());
 
   beforeEach(() => setSystemTime(new Date("2024-06-01T12:05:00Z")));
   afterEach(() => setSystemTime());

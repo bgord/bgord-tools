@@ -2,9 +2,9 @@ import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bu
 import { Duration } from "../src/duration.service";
 import { DurationMs } from "../src/duration-ms.vo";
 import { Stopwatch, StopwatchError } from "../src/stopwatch.service";
-import { TimestampVO } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 
-const T0 = TimestampVO.fromNumber(1_000_000);
+const T0 = Timestamp.fromNumber(1_000_000);
 
 describe("Stopwatch", () => {
   beforeEach(() => setSystemTime(T0.ms));

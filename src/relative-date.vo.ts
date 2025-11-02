@@ -1,21 +1,21 @@
 import { DateFormatters } from "./date-formatter.service";
-import type { TimestampVO } from "./timestamp.vo";
+import type { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import type { Falsy } from "./ts-utils";
 
 type RelativeDateType = { raw: TimestampValueType; relative: string };
 
 export class RelativeDate {
-  static truthy(timestamp: TimestampVO): RelativeDateType {
+  static truthy(timestamp: Timestamp): RelativeDateType {
     return RelativeDate._format(timestamp);
   }
 
-  static falsy(timestamp: Falsy<TimestampVO>): RelativeDateType | null {
+  static falsy(timestamp: Falsy<Timestamp>): RelativeDateType | null {
     if (!timestamp) return null;
     return RelativeDate._format(timestamp);
   }
 
-  private static _format(timestamp: TimestampVO): RelativeDateType {
+  private static _format(timestamp: Timestamp): RelativeDateType {
     return { raw: timestamp.ms, relative: DateFormatters.relative(timestamp.ms) };
   }
 }

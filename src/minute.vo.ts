@@ -1,5 +1,5 @@
 import { MinuteSchema, type MinuteSchemaType } from "./minute-schema.vo";
-import { TimestampVO } from "./timestamp.vo";
+import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
@@ -12,12 +12,12 @@ export class Minute {
     this.value = MinuteSchema.parse(candidate);
   }
 
-  static fromTimestamp(timestamp: TimestampVO): Minute {
+  static fromTimestamp(timestamp: Timestamp): Minute {
     return new Minute(new Date(timestamp.ms).getUTCMinutes());
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
-    return Minute.fromTimestamp(TimestampVO.fromValue(timestamp));
+    return Minute.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
   get(): MinuteSchemaType {

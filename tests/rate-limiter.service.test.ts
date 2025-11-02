@@ -1,11 +1,11 @@
 import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { RateLimiter } from "../src/rate-limiter.service";
-import { TimestampVO } from "../src/timestamp.vo";
+import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 const duration = Duration.Ms(1000);
-const currentTimestampMs = TimestampVO.fromNumber(0);
+const currentTimestampMs = Timestamp.fromNumber(0);
 
 describe("RateLimiter", () => {
   test("first invocation", () => {

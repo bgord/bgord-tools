@@ -1,13 +1,13 @@
 import { Duration } from "./duration.service";
-import { TimestampVO } from "./timestamp.vo";
+import { Timestamp } from "./timestamp.vo";
 
-type GetStartOfDayTsInTzConfigType = { now: TimestampVO; timeZoneOffset: Duration };
+type GetStartOfDayTsInTzConfigType = { now: Timestamp; timeZoneOffset: Duration };
 
 export class DateCalculator {
-  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): TimestampVO {
+  static getStartOfDayTsInTz(config: GetStartOfDayTsInTzConfigType): Timestamp {
     const dayMs = Duration.Days(1).ms;
 
-    const utcMidnightOfNow = TimestampVO.fromNumber(Math.floor(config.now.ms / dayMs) * dayMs);
+    const utcMidnightOfNow = Timestamp.fromNumber(Math.floor(config.now.ms / dayMs) * dayMs);
 
     let startOfDayInTz = utcMidnightOfNow.add(config.timeZoneOffset);
 
