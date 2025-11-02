@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
-import { TimestampError, TimestampValue } from "../src/timestamp-value.vo";
+import { TimestampValue, TimestampValueError } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
 describe("Timestamp", () => {
@@ -10,7 +10,7 @@ describe("Timestamp", () => {
   });
 
   test("fromValue - error", () => {
-    expect(() => Timestamp.fromValue(TimestampValue.parse(-1))).toThrow(TimestampError.Invalid);
+    expect(() => Timestamp.fromValue(TimestampValue.parse(-1))).toThrow(TimestampValueError.Invalid);
   });
 
   test("fromNumber - success", () => {
@@ -18,7 +18,7 @@ describe("Timestamp", () => {
   });
 
   test("fromNumber - error", () => {
-    expect(() => Timestamp.fromNumber(-1)).toThrow(TimestampError.Invalid);
+    expect(() => Timestamp.fromNumber(-1)).toThrow(TimestampValueError.Invalid);
   });
 
   test("add", () => {

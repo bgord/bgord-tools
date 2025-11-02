@@ -1,11 +1,11 @@
 import { z } from "zod/v4";
 
-export const TimestampError = { Invalid: "timestamp.invalid" } as const;
+export const TimestampValueError = { Invalid: "timestamp.invalid" } as const;
 
 export const TimestampValue = z
-  .number(TimestampError.Invalid)
-  .int(TimestampError.Invalid)
-  .gte(0, TimestampError.Invalid)
+  .number(TimestampValueError.Invalid)
+  .int(TimestampValueError.Invalid)
+  .gte(0, TimestampValueError.Invalid)
   .brand("TimestampValue");
 
 export type TimestampValueType = z.infer<typeof TimestampValue>;

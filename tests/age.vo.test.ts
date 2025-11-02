@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Age, AgeError } from "../src/age.vo";
-import { AgeYearsError } from "../src/age-years.vo";
-import { TimestampError } from "../src/timestamp-value.vo";
+import { TimestampValueError } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
 describe("Age", () => {
@@ -54,13 +53,13 @@ describe("Age", () => {
 
   test("fromBirthdate - rejects above upper bound", () => {
     expect(() => Age.fromBirthdate({ birthdate: "1800-01-01", now: mocks.TIME_ZERO })).toThrow(
-      TimestampError.Invalid,
+      TimestampValueError.Invalid,
     );
   });
 
   test("fromBirthdate - invalid date string throws", () => {
     expect(() => Age.fromBirthdate({ birthdate: "not-a-date", now: mocks.TIME_ZERO })).toThrow(
-      TimestampError.Invalid,
+      TimestampValueError.Invalid,
     );
   });
 
