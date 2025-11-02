@@ -1,36 +1,36 @@
-import type { TimestampValueType } from "./timestamp-value.vo";
+import type { Timestamp } from "./timestamp.vo";
 
 export const DateRangeError = { Invalid: "date.range.invalid" } as const;
 
 export class DateRange {
   constructor(
-    private readonly start: TimestampValueType,
-    private readonly end: TimestampValueType,
+    private readonly start: Timestamp,
+    private readonly end: Timestamp,
   ) {
-    if (start > end) throw new Error(DateRangeError.Invalid);
+    if (start.isAfter(end)) throw new Error(DateRangeError.Invalid);
   }
 
-  getStart(): TimestampValueType {
+  getStart(): Timestamp {
     return this.start;
   }
 
-  getEnd(): TimestampValueType {
+  getEnd(): Timestamp {
     return this.end;
   }
 
-  toRange(): [TimestampValueType, TimestampValueType] {
+  toRange(): [Timestamp, Timestamp] {
     return [this.start, this.end];
   }
 
-  contains(timestamp: TimestampValueType): boolean {
-    return timestamp >= this.start && timestamp <= this.end;
+  contains(timestamp: Timestamp): boolean {
+    return timestamp.isAfterOrEqual(this.start) && timestamp.isBeforeOrEqual(this.end);
   }
 
   equals(other: DateRange): boolean {
-    return this.start === other.start && this.end === other.end;
+    return this.start.equals(other.start) && this.end.equals(other.end);
   }
 
   toJSON(): { start: number; end: number } {
-    return { start: this.getStart(), end: this.getEnd() };
+    return { start: this.getStart().get(), end: this.getEnd().get() };
   }
 }
