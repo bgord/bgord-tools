@@ -31,6 +31,12 @@ describe("Timestamp", () => {
     );
   });
 
+  test("difference", () => {
+    expect(mocks.TIME_ZERO.difference(mocks.TIME_ZERO.subtract(Duration.Minutes(30)))).toEqual(
+      Duration.Minutes(30),
+    );
+  });
+
   test("isBefore", () => {
     expect(mocks.TIME_ZERO.isBefore(TimestampVO.fromNumber(Date.now()))).toEqual(true);
     expect(mocks.TIME_ZERO.isBefore(TimestampVO.fromNumber(0))).toEqual(false);
