@@ -33,6 +33,10 @@ describe("Quarter", () => {
     expect(Quarter.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
   });
 
+  test("fromTimestampValue", () => {
+    expect(Quarter.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+  });
+
   test("fromIsoId", () => {
     expect(Quarter.fromIsoId(QuarterIsoId.parse("2023-Q4")).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
   });

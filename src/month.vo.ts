@@ -2,6 +2,7 @@ import { endOfMonth, format, getMonth, setMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { TimestampVO } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Month extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Month {
@@ -9,6 +10,10 @@ export class Month extends DateRange {
     const end = TimestampVO.fromNumber(endOfMonth(timestamp.ms).getTime());
 
     return new Month(start, end);
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Month {
+    return Month.fromTimestamp(TimestampVO.fromValue(timestamp));
   }
 
   static fromNow(now: TimestampVO): Month {

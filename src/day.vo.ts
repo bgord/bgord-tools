@@ -3,6 +3,7 @@ import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
 import { TimestampVO } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Day extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Day {
@@ -14,6 +15,10 @@ export class Day extends DateRange {
     const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
 
     return new Day(startUtc, endUtc);
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Day {
+    return Day.fromTimestamp(TimestampVO.fromValue(timestamp));
   }
 
   static fromNow(now: TimestampVO): Day {

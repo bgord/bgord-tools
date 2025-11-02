@@ -21,6 +21,12 @@ describe("Day", () => {
     expect(day.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
+  test("fromTimestampValue", () => {
+    expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(
+      DayIsoId.parse(mocks.TIME_ZERO_DATE),
+    );
+  });
+
   test("leap-day", () => {
     const timestamp = mocks.toTimestamp("2024-02-29");
     const day = Day.fromTimestamp(timestamp);

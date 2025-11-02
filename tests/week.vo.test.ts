@@ -36,6 +36,10 @@ describe("Week", () => {
     expect(Week.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
   });
 
+  test("fromTimestampValue", () => {
+    expect(Week.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
+  });
+
   test("fromIsoId", () => {
     expect(Week.fromIsoId(WeekIsoId.parse("2023-W46")).toIsoId()).toEqual(WeekIsoId.parse("2023-W46"));
   });

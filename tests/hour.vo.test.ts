@@ -17,8 +17,12 @@ describe("Hour", () => {
     expect(() => new Hour(24)).toThrow(HourSchemaError.Invalid);
   });
 
-  test("fromEpochMs extracts UTC hour", () => {
-    expect(Hour.fromEpochMs(mocks.TIME_ZERO).get()).toEqual(HourSchema.parse(22));
+  test("fromTimestampValue", () => {
+    expect(Hour.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(HourSchema.parse(22));
+  });
+
+  test("fromTimestamp", () => {
+    expect(Hour.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(HourSchema.parse(22));
   });
 
   test("Hour.ZERO", () => {

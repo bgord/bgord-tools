@@ -10,7 +10,14 @@ describe("Weekday", () => {
   });
 
   test("fromUtcTimestamp", () => {
-    const monday = Weekday.fromUtcTimestamp(mocks.TIME_ZERO);
+    const monday = Weekday.fromTimestamp(mocks.TIME_ZERO);
+
+    expect(monday.isTuesday()).toEqual(true);
+    expect(monday.get()).toEqual(2);
+  });
+
+  test("fromTimestampValue", () => {
+    const monday = Weekday.fromTimestampValue(mocks.TIME_ZERO.ms);
 
     expect(monday.isTuesday()).toEqual(true);
     expect(monday.get()).toEqual(2);

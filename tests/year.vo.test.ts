@@ -44,6 +44,10 @@ describe("Year", () => {
     expect(Year.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(YearIsoId.parse("2023"));
   });
 
+  test("fromTimestampValue", () => {
+    expect(Year.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(YearIsoId.parse("2023"));
+  });
+
   test("fromIsoId", () => {
     expect(Year.fromIsoId(YearIsoId.parse("2023")).toIsoId()).toEqual(YearIsoId.parse("2023"));
   });

@@ -1,6 +1,7 @@
 import { addWeeks, endOfISOWeek, getISOWeek, getISOWeekYear, setISOWeek, startOfISOWeek } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { TimestampVO } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
@@ -9,6 +10,10 @@ export class Week extends DateRange {
     const end = TimestampVO.fromNumber(endOfISOWeek(timestamp.ms).getTime());
 
     return new Week(start, end);
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Week {
+    return Week.fromTimestamp(TimestampVO.fromValue(timestamp));
   }
 
   static fromNow(now: TimestampVO): Week {

@@ -2,6 +2,7 @@ import { endOfQuarter, getQuarter, getYear, setQuarter, startOfQuarter } from "d
 import { DateRange } from "./date-range.vo";
 import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
 import { TimestampVO } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Quarter extends DateRange {
   static fromTimestamp(timestamp: TimestampVO): Quarter {
@@ -9,6 +10,10 @@ export class Quarter extends DateRange {
     const end = TimestampVO.fromNumber(endOfQuarter(timestamp.ms).getTime());
 
     return new Quarter(start, end);
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Quarter {
+    return Quarter.fromTimestamp(TimestampVO.fromValue(timestamp));
   }
 
   static fromNow(now: TimestampVO): Quarter {

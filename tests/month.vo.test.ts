@@ -33,6 +33,10 @@ describe("Month", () => {
     expect(Month.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
   });
 
+  test("fromTimestampValue", () => {
+    expect(Month.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+  });
+
   test("fromIsoId", () => {
     expect(Month.fromIsoId(MonthIsoId.parse("2023-11")).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
   });

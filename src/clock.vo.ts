@@ -16,9 +16,9 @@ export class Clock {
     this.formatter = formatter ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
-  static fromEpochMs(timestamp: TimestampVO, formatter?: ClockFormatter): Clock {
-    const hour = Hour.fromEpochMs(timestamp);
-    const minute = Minute.fromEpochMs(timestamp);
+  static fromTimestamp(timestamp: TimestampVO, formatter?: ClockFormatter): Clock {
+    const hour = Hour.fromTimestamp(timestamp);
+    const minute = Minute.fromTimestamp(timestamp);
 
     return new Clock(hour, minute, formatter);
   }

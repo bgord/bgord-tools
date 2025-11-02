@@ -17,8 +17,12 @@ describe("Minute", () => {
     expect(() => new Minute(60)).toThrow(MinuteSchemaError.Invalid);
   });
 
-  test("fromEpochMs extracts UTC minutes", () => {
-    expect(Minute.fromEpochMs(mocks.TIME_ZERO).get()).toEqual(MinuteSchema.parse(13));
+  test("fromTimestamp extracts UTC minutes", () => {
+    expect(Minute.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(MinuteSchema.parse(13));
+  });
+
+  test("fromTimestampValue", () => {
+    expect(Minute.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(MinuteSchema.parse(13));
   });
 
   test("Minute.ZERO", () => {

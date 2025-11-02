@@ -12,8 +12,8 @@ const EIGHT_FIFTY_NINE = new Clock(new Hour(8), new Minute(59));
 const NINE = new Clock(new Hour(9), new Minute(0));
 
 describe("Clock", () => {
-  test("fromEpochMs", () => {
-    expect(() => Clock.fromEpochMs(mocks.TIME_ZERO).get()).not.toThrow();
+  test("fromTimestamp", () => {
+    expect(() => Clock.fromTimestamp(mocks.TIME_ZERO).get()).not.toThrow();
   });
 
   test("get", () => {

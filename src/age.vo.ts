@@ -14,7 +14,7 @@ export class Age {
     return new Age(AgeYears.parse(candidate));
   }
 
-  static fromBirthdateEpochMs(params: { birthdate: TimestampVO; now: TimestampVO }): Age {
+  static fromBirthdateTimestamp(params: { birthdate: TimestampVO; now: TimestampVO }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(params.now.ms, params.birthdate.ms));
   }

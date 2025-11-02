@@ -1,6 +1,7 @@
 import { addYears, endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { TimestampVO } from "./timestamp.vo";
+import type { TimestampValueType } from "./timestamp-value.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
@@ -9,6 +10,10 @@ export class Year extends DateRange {
     const end = TimestampVO.fromNumber(endOfYear(timestamp.ms).getTime());
 
     return new Year(start, end);
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Year {
+    return Year.fromTimestamp(TimestampVO.fromValue(timestamp));
   }
 
   static fromNow(now: TimestampVO): Year {
