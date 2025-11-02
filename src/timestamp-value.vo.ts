@@ -6,6 +6,6 @@ export const TimestampValue = z
   .number(TimestampError.Invalid)
   .int(TimestampError.Invalid)
   .gte(0, TimestampError.Invalid)
-  .brand("Timestamp");
+  .brand("TimestampValue");
 
 export type TimestampValueType = z.infer<typeof TimestampValue>;
