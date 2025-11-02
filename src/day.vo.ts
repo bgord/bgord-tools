@@ -2,39 +2,37 @@ import { formatISO } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
-import { Timestamp, type TimestampType } from "./timestamp.vo";
+import { Timestamp } from "./timestamp.vo";
 
 export class Day extends DateRange {
-  private constructor(start: TimestampType, end: TimestampType) {
-    super(start, end);
+  static fromTimestamp(timestamp: Timestamp): Day {
+    const date = new Date(timestamp.get());
+
+    const startUtc = Timestamp.fromNumber(
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
+    );
+    const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
+
+    return new Day(startUtc, endUtc);
   }
 
-  static fromTimestamp(timestamp: TimestampType): Day {
-    const date = new Date(timestamp);
-
-    const startUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-    const endUtc = startUtc + Duration.Days(1).ms - 1;
-
-    return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
-  }
-
-  static fromNow(now: TimestampType): Day {
+  static fromNow(now: Timestamp): Day {
     return Day.fromTimestamp(now);
   }
 
   static fromIsoId(isoId: DayIsoIdType): Day {
     const [year, month, day] = DayIsoId.parse(isoId).split("-").map(Number);
 
-    const startUtc = Date.UTC(year, month - 1, day);
-    const endUtc = startUtc + Duration.Days(1).ms - 1;
+    const startUtc = Timestamp.fromNumber(Date.UTC(year, month - 1, day));
+    const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
 
-    return new Day(Timestamp.parse(startUtc), Timestamp.parse(endUtc));
+    return new Day(startUtc, endUtc);
   }
 
   toIsoId(): DayIsoIdType {
-    const midday = this.getStart() + Duration.Hours(12).ms;
+    const midday = this.getStart().add(Duration.Hours(12));
 
-    return DayIsoId.parse(formatISO(midday, { representation: "date" }));
+    return DayIsoId.parse(formatISO(midday.get(), { representation: "date" }));
   }
 
   previous(): Day {
@@ -46,9 +44,7 @@ export class Day extends DateRange {
   }
 
   shift(count: number): Day {
-    const timestamp = this.getStart() + count * Duration.Days(1).ms;
-
-    return Day.fromTimestamp(Timestamp.parse(timestamp));
+    return Day.fromTimestamp(this.getStart().add(Duration.Days(count)));
   }
 
   toString(): string {

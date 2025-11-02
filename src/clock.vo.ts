@@ -3,7 +3,7 @@ import { Hour } from "./hour.vo";
 import type { HourSchemaType } from "./hour-schema.vo";
 import { Minute } from "./minute.vo";
 import type { MinuteSchemaType } from "./minute-schema.vo";
-import type { TimestampType } from "./timestamp.vo";
+import type { Timestamp } from "./timestamp.vo";
 
 export class Clock {
   private readonly formatter: ClockFormatter;
@@ -16,7 +16,7 @@ export class Clock {
     this.formatter = formatter ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
-  static fromEpochMs(timestamp: TimestampType, formatter?: ClockFormatter): Clock {
+  static fromEpochMs(timestamp: Timestamp, formatter?: ClockFormatter): Clock {
     const hour = Hour.fromEpochMs(timestamp);
     const minute = Minute.fromEpochMs(timestamp);
 
@@ -32,17 +32,17 @@ export class Clock {
   }
 
   equals(another: Clock): boolean {
-    return this.hour.get() === another.hour.get() && this.minute.get() === another.minute.get();
+    return this.hour.equals(another.hour) && this.minute.equals(another.minute);
   }
 
   isAfter(another: Clock): boolean {
-    if (this.hour.get() !== another.hour.get()) return this.hour.get() > another.hour.get();
-    return this.minute.get() > another.minute.get();
+    if (!this.hour.equals(another.hour)) return this.hour.isAfter(another.hour);
+    return this.minute.isAfter(another.minute);
   }
 
   isBefore(another: Clock): boolean {
-    if (this.hour.get() !== another.hour.get()) return this.hour.get() < another.hour.get();
-    return this.minute.get() < another.minute.get();
+    if (!this.hour.equals(another.hour)) return this.hour.isBefore(another.hour);
+    return this.minute.isBefore(another.minute);
   }
 
   toString(): string {

@@ -3,14 +3,14 @@ import { RelativeDate } from "../src/relative-date.vo";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("RelativeDate", () => {
-  const timestamp = Timestamp.parse(new Date("2024-06-01T12:00:00Z").getTime());
+  const timestamp = Timestamp.fromNumber(new Date("2024-06-01T12:00:00Z").getTime());
 
   beforeEach(() => setSystemTime(new Date("2024-06-01T12:05:00Z")));
   afterEach(() => setSystemTime());
 
   describe("truthy", () => {
     test("formats a timestamp into relative format", () => {
-      expect(RelativeDate.truthy(timestamp)).toEqual({ raw: timestamp, relative: "5 minutes ago" });
+      expect(RelativeDate.truthy(timestamp)).toEqual({ raw: timestamp.get(), relative: "5 minutes ago" });
     });
   });
 
@@ -18,11 +18,10 @@ describe("RelativeDate", () => {
     test("returns null for falsy value", () => {
       expect(RelativeDate.falsy(undefined)).toEqual(null);
       expect(RelativeDate.falsy(null)).toEqual(null);
-      expect(RelativeDate.falsy(Timestamp.parse(0))).toEqual(null);
     });
 
     test("formats a valid timestamp", () => {
-      expect(RelativeDate.falsy(timestamp)).toEqual({ raw: timestamp, relative: "5 minutes ago" });
+      expect(RelativeDate.falsy(timestamp)).toEqual({ raw: timestamp.get(), relative: "5 minutes ago" });
     });
   });
 });

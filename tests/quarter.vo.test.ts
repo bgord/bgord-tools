@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { endOfQuarter, startOfQuarter } from "date-fns";
+import { Duration } from "../src/duration.service";
 import { Quarter } from "../src/quarter.vo";
 import { QuarterIsoId } from "../src/quarter-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
@@ -9,8 +10,8 @@ describe("Quarter", () => {
   test("happy path", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(quarter.getStart()).toEqual(Timestamp.parse(startOfQuarter(mocks.TIME_ZERO).getTime()));
-    expect(quarter.getEnd()).toEqual(Timestamp.parse(endOfQuarter(mocks.TIME_ZERO).getTime()));
+    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(mocks.TIME_ZERO.get()).getTime()));
+    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(mocks.TIME_ZERO.get()).getTime()));
     expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
     expect(quarter.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -19,8 +20,8 @@ describe("Quarter", () => {
     const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
     const quarter = Quarter.fromTimestamp(timestamp);
 
-    expect(quarter.getStart()).toEqual(Timestamp.parse(startOfQuarter(timestamp).getTime()));
-    expect(quarter.getEnd()).toEqual(Timestamp.parse(endOfQuarter(timestamp).getTime()));
+    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(timestamp.get()).getTime()));
+    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(timestamp.get()).getTime()));
     expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2025-Q4"));
   });
 
@@ -46,8 +47,9 @@ describe("Quarter", () => {
 
   test("contains", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
-    expect(quarter.contains(Timestamp.parse(quarter.getStart() - 1))).toEqual(false);
-    expect(quarter.contains(Timestamp.parse(quarter.getEnd() + 1))).toEqual(false);
+
+    expect(quarter.contains(quarter.getStart().subtract(Duration.Ms(1)))).toEqual(false);
+    expect(quarter.contains(quarter.getEnd().add(Duration.Ms(1)))).toEqual(false);
   });
 
   test("toString", () => {

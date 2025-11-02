@@ -1,6 +1,6 @@
 import { type HourFormatter, HourFormatters } from "./hour-format.service";
 import { HourSchema, type HourSchemaType } from "./hour-schema.vo";
-import type { TimestampType } from "./timestamp.vo";
+import type { Timestamp } from "./timestamp.vo";
 
 export class Hour {
   private readonly value: HourSchemaType;
@@ -12,8 +12,8 @@ export class Hour {
     this.value = HourSchema.parse(candidate);
   }
 
-  static fromEpochMs(timestamp: TimestampType): Hour {
-    return new Hour(new Date(timestamp).getUTCHours());
+  static fromEpochMs(timestamp: Timestamp): Hour {
+    return new Hour(new Date(timestamp.get()).getUTCHours());
   }
 
   get(): HourSchemaType {

@@ -1,31 +1,31 @@
 import { Duration } from "./duration.service";
-import type { TimestampType } from "./timestamp.vo";
+import type { Timestamp } from "./timestamp.vo";
 
 type RateLimiterResultSuccessType = { allowed: true };
 type RateLimiterResultErrorType = { allowed: false; remaining: Duration };
 type RateLimiterResultType = RateLimiterResultSuccessType | RateLimiterResultErrorType;
 
 export class RateLimiter {
-  private lastInvocation: TimestampType | null = null;
+  private lastInvocation: Timestamp | null = null;
 
   constructor(private readonly duration: Duration) {}
 
-  verify(now: TimestampType): RateLimiterResultType {
+  verify(now: Timestamp): RateLimiterResultType {
     if (this.lastInvocation == null) {
       this.lastInvocation = now;
 
       return { allowed: true };
     }
 
-    const nextAllowedTimestamp = this.lastInvocation + this.duration.ms;
+    const nextAllowedTimestamp = this.lastInvocation.add(this.duration);
 
-    if (nextAllowedTimestamp <= now) {
+    if (nextAllowedTimestamp.isBeforeOrEqual(now)) {
       this.lastInvocation = now;
 
       return { allowed: true };
     }
 
-    const remainingDelta = nextAllowedTimestamp - now;
+    const remainingDelta = nextAllowedTimestamp.get() - now.get();
 
     return { allowed: false, remaining: Duration.Ms(remainingDelta) };
   }

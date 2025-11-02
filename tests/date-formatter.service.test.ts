@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bu
 import { DateFormatters } from "../src/date-formatter.service";
 import * as mocks from "./mocks";
 
-const date = new Date(mocks.TIME_ZERO);
+const date = new Date(mocks.TIME_ZERO.get());
 
 describe("DateFormatters", () => {
   test("datetime formats date with date and time", () => {

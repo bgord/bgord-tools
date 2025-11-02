@@ -9,17 +9,17 @@ describe("DateCalculator", () => {
   afterEach(() => setSystemTime());
 
   test("returns start of day timestamp for UTC timezone", () => {
-    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
+    const now = Timestamp.fromNumber(Date.now()); // 2024-06-01T12:00:00Z
     const result = DateCalculator.getStartOfDayTsInTz({
       now,
       timeZoneOffsetMs: TimeZoneOffsetValue.parse(0),
     });
 
-    expect(result).toEqual(Timestamp.parse(new Date("2024-06-01T00:00:00Z").getTime()));
+    expect(result).toEqual(Timestamp.fromNumber(new Date("2024-06-01T00:00:00Z").getTime()));
   });
 
   test("returns start of day for UTC+2 timezone", () => {
-    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
+    const now = Timestamp.fromNumber(Date.now()); // 2024-06-01T12:00:00Z
     const offset = Duration.Hours(2).ms; // +2 hours
     const result = DateCalculator.getStartOfDayTsInTz({
       now,
@@ -28,11 +28,11 @@ describe("DateCalculator", () => {
 
     // Local day = 2024-06-01 (because 12:00Z is 14:00 local).
     // Local midnight (00:00 +02:00) corresponds to 2024-06-01T02:00:00Z.
-    expect(result).toEqual(Timestamp.parse(new Date("2024-06-01T02:00:00Z").getTime()));
+    expect(result).toEqual(Timestamp.fromNumber(new Date("2024-06-01T02:00:00Z").getTime()));
   });
 
   test("returns start of day for UTC-5 timezone", () => {
-    const now = Timestamp.parse(Date.now()); // 2024-06-01T12:00:00Z
+    const now = Timestamp.fromNumber(Date.now()); // 2024-06-01T12:00:00Z
     const offset = -Duration.Hours(5).ms; // -5 hours
     const result = DateCalculator.getStartOfDayTsInTz({
       now,
@@ -41,6 +41,6 @@ describe("DateCalculator", () => {
 
     // Local day = 2024-06-01 (because 12:00Z is 07:00 local).
     // Local midnight (00:00 -05:00) corresponds to 2024-05-31T19:00:00Z.
-    expect(result).toEqual(Timestamp.parse(new Date("2024-05-31T19:00:00Z").getTime()));
+    expect(result).toEqual(Timestamp.fromNumber(new Date("2024-05-31T19:00:00Z").getTime()));
   });
 });

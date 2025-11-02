@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { endOfYear, startOfYear } from "date-fns";
+import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
 import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
@@ -9,8 +10,8 @@ describe("Year", () => {
   test("happy path", () => {
     const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(mocks.TIME_ZERO).getTime()));
-    expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(mocks.TIME_ZERO).getTime()));
+    expect(year.getStart()).toEqual(Timestamp.fromNumber(startOfYear(mocks.TIME_ZERO.get()).getTime()));
+    expect(year.getEnd()).toEqual(Timestamp.fromNumber(endOfYear(mocks.TIME_ZERO.get()).getTime()));
     expect(year.toIsoId()).toEqual(YearIsoId.parse("2023"));
     expect(year.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -19,8 +20,8 @@ describe("Year", () => {
     const timestamp = mocks.toTimestamp("2025-12-31T23:59:59Z");
     const year = Year.fromTimestamp(timestamp);
 
-    expect(year.getStart()).toEqual(Timestamp.parse(startOfYear(timestamp).getTime()));
-    expect(year.getEnd()).toEqual(Timestamp.parse(endOfYear(timestamp).getTime()));
+    expect(year.getStart()).toEqual(Timestamp.fromNumber(startOfYear(timestamp.get()).getTime()));
+    expect(year.getEnd()).toEqual(Timestamp.fromNumber(endOfYear(timestamp.get()).getTime()));
     expect(year.toIsoId()).toEqual(YearIsoId.parse("2025"));
   });
 
@@ -71,8 +72,8 @@ describe("Year", () => {
   test("contains", () => {
     const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.contains(Timestamp.parse(year.getStart() - 1))).toEqual(false);
-    expect(year.contains(Timestamp.parse(year.getEnd() + 1))).toEqual(false);
+    expect(year.contains(year.getStart().subtract(Duration.Ms(1)))).toEqual(false);
+    expect(year.contains(year.getEnd().add(Duration.Ms(1)))).toEqual(false);
   });
 
   test("leap year check for 2000", () => expect(Year.fromNumber(2000).isLeapYear()).toEqual(true));
