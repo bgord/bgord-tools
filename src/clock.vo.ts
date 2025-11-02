@@ -3,7 +3,7 @@ import { Hour } from "./hour.vo";
 import type { HourSchemaType } from "./hour-schema.vo";
 import { Minute } from "./minute.vo";
 import type { MinuteSchemaType } from "./minute-schema.vo";
-import type { Timestamp } from "./timestamp.vo";
+import type { TimestampVO } from "./timestamp.vo";
 
 export class Clock {
   private readonly formatter: ClockFormatter;
@@ -16,7 +16,7 @@ export class Clock {
     this.formatter = formatter ?? ClockFormatters.TWENTY_FOUR_HOURS;
   }
 
-  static fromEpochMs(timestamp: Timestamp, formatter?: ClockFormatter): Clock {
+  static fromEpochMs(timestamp: TimestampVO, formatter?: ClockFormatter): Clock {
     const hour = Hour.fromEpochMs(timestamp);
     const minute = Minute.fromEpochMs(timestamp);
 

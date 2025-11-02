@@ -1,46 +1,46 @@
 import type { Duration } from "./duration.service";
 import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
-export class Timestamp {
+export class TimestampVO {
   constructor(private readonly value: TimestampValueType) {}
 
-  static fromValue(value: TimestampValueType): Timestamp {
-    return new Timestamp(value);
+  static fromValue(value: TimestampValueType): TimestampVO {
+    return new TimestampVO(value);
   }
 
-  static fromNumber(value: number): Timestamp {
-    return new Timestamp(TimestampValue.parse(value));
+  static fromNumber(value: number): TimestampVO {
+    return new TimestampVO(TimestampValue.parse(value));
   }
 
-  add(duration: Duration): Timestamp {
-    return Timestamp.fromNumber(this.value + duration.ms);
+  add(duration: Duration): TimestampVO {
+    return TimestampVO.fromNumber(this.value + duration.ms);
   }
 
-  subtract(duration: Duration): Timestamp {
-    return Timestamp.fromNumber(this.value - duration.ms);
+  subtract(duration: Duration): TimestampVO {
+    return TimestampVO.fromNumber(this.value - duration.ms);
   }
 
-  isBefore(another: Timestamp): boolean {
+  isBefore(another: TimestampVO): boolean {
     return this.value < another.value;
   }
 
-  isBeforeOrEqual(another: Timestamp): boolean {
+  isBeforeOrEqual(another: TimestampVO): boolean {
     return this.value <= another.value;
   }
 
-  isAfter(another: Timestamp): boolean {
+  isAfter(another: TimestampVO): boolean {
     return this.value > another.value;
   }
 
-  isAfterOrEqual(another: Timestamp): boolean {
+  isAfterOrEqual(another: TimestampVO): boolean {
     return this.value >= another.value;
   }
 
-  equals(another: Timestamp): boolean {
+  equals(another: TimestampVO): boolean {
     return this.value === another.value;
   }
 
-  get(): TimestampValueType {
+  ms(): TimestampValueType {
     return this.value;
   }
 

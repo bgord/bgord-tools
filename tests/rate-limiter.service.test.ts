@@ -1,17 +1,17 @@
 import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { RateLimiter } from "../src/rate-limiter.service";
-import { Timestamp } from "../src/timestamp.vo";
+import { TimestampVO } from "../src/timestamp.vo";
 
 const duration = Duration.Ms(1000);
-const currentTimestampMs = Timestamp.fromNumber(0);
+const currentTimestampMs = TimestampVO.fromNumber(0);
 
 describe("RateLimiter", () => {
-  test("allows the first invocation", () => {
+  test("first invocation", () => {
     expect(new RateLimiter(duration).verify(currentTimestampMs).allowed).toEqual(true);
   });
 
-  test("does not allow invocations within the rate limit", () => {
+  test("rejects invocations within the rate limit", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);
@@ -23,7 +23,7 @@ describe("RateLimiter", () => {
     expect(second.remaining.ms).toEqual(1);
   });
 
-  test("allows invocations exactly at the limit boundary", () => {
+  test("allows invocations at the limit boundary", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);
@@ -33,7 +33,7 @@ describe("RateLimiter", () => {
     expect(second.allowed).toEqual(true);
   });
 
-  test("resets the window after an allowed invocation at the boundary", () => {
+  test("resets invocations around the boundaries", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);

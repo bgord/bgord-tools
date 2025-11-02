@@ -2,18 +2,18 @@ import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bu
 import { DateFormatters } from "../src/date-formatter.service";
 import * as mocks from "./mocks";
 
-const date = new Date(mocks.TIME_ZERO.get());
+const date = new Date(mocks.TIME_ZERO.ms());
 
 describe("DateFormatters", () => {
-  test("datetime formats date with date and time", () => {
+  test("datetime", () => {
     expect(DateFormatters.datetime(date)).toEqual("2023/11/14 22:13");
   });
 
-  test("date formats date with just year/month/day", () => {
+  test("date", () => {
     expect(DateFormatters.date(date)).toEqual("2023/11/14");
   });
 
-  test("monthDay formats date with just month/day", () => {
+  test("monthDay", () => {
     expect(DateFormatters.monthDay(date)).toEqual("11/14");
   });
 
@@ -21,7 +21,7 @@ describe("DateFormatters", () => {
     beforeEach(() => setSystemTime(new Date("2024-06-01T15:35:00Z")));
     afterEach(() => setSystemTime());
 
-    test("returns relative time with suffix", () => {
+    test("happy path", () => {
       expect(DateFormatters.relative(date)).toEqual("7 months ago");
     });
   });

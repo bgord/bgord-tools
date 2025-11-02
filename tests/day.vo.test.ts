@@ -2,15 +2,15 @@ import { describe, expect, test } from "bun:test";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
-import { Timestamp } from "../src/timestamp.vo";
+import { TimestampVO } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    const date = new Date(mocks.TIME_ZERO.get());
-    const expectedStart = Timestamp.fromNumber(
+    const date = new Date(mocks.TIME_ZERO.ms());
+    const expectedStart = TimestampVO.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );
     const expectedEnd = expectedStart.add(Duration.Days(1)).subtract(Duration.Ms(1));
@@ -44,7 +44,7 @@ describe("Day", () => {
   });
 
   test("equals", () => {
-    const now = Timestamp.fromNumber(Date.now());
+    const now = TimestampVO.fromNumber(Date.now());
     const dayA = Day.fromTimestamp(now);
     const dayB = Day.fromNow(now);
 

@@ -3,15 +3,15 @@ import { endOfMonth, startOfMonth } from "date-fns";
 import { Duration } from "../src/duration.service";
 import { Month } from "../src/month.vo";
 import { MonthIsoId } from "../src/month-iso-id.vo";
-import { Timestamp } from "../src/timestamp.vo";
+import { TimestampVO } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 describe("Month", () => {
   test("happy path", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(mocks.TIME_ZERO.get()).getTime()));
-    expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(mocks.TIME_ZERO.get()).getTime()));
+    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(mocks.TIME_ZERO.ms()).getTime()));
+    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(mocks.TIME_ZERO.ms()).getTime()));
     expect(month.toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
     expect(month.contains(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -20,8 +20,8 @@ describe("Month", () => {
     const timestamp = mocks.toTimestamp("2025-12-31");
     const month = Month.fromTimestamp(timestamp);
 
-    expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(timestamp.get()).getTime()));
-    expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(timestamp.get()).getTime()));
+    expect(month.getStart()).toEqual(TimestampVO.fromNumber(startOfMonth(timestamp.ms()).getTime()));
+    expect(month.getEnd()).toEqual(TimestampVO.fromNumber(endOfMonth(timestamp.ms()).getTime()));
     expect(month.toIsoId()).toEqual(MonthIsoId.parse("2025-12"));
   });
 

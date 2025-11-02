@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { MinMaxScaler, MinMaxScalerError } from "../src/min-max-scaler.service";
 
 describe("MinMaxScaler", () => {
-  test("scale - scales a value within the default bound", () => {
+  test("scale - default bound", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100 });
 
     const original = 50;
@@ -19,7 +19,7 @@ describe("MinMaxScaler", () => {
     });
   });
 
-  test("scale - scales a value within a custom bound", () => {
+  test("scale - custom bound", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
     const original = 50;
@@ -36,7 +36,7 @@ describe("MinMaxScaler", () => {
     });
   });
 
-  test("scale - scales a value within a custom bound - 2 decimals rounding", () => {
+  test("scale - custom bound - 2 decimals rounding", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 27, bound: { lower: 0, upper: 9 } });
 
     const original = 5;
@@ -53,7 +53,7 @@ describe("MinMaxScaler", () => {
     });
   });
 
-  test("scale - handles the minimum value", () => {
+  test("scale - minimum value", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
     const original = 0;
@@ -70,7 +70,7 @@ describe("MinMaxScaler", () => {
     });
   });
 
-  test("scale - handles the maximum value", () => {
+  test("scale - maximum value", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
     const original = 100;
@@ -87,7 +87,7 @@ describe("MinMaxScaler", () => {
     });
   });
 
-  test("scale - handles min equal to max", () => {
+  test("scale - min equals to max", () => {
     const scaler = new MinMaxScaler({ min: 100, max: 100, bound: { lower: 10, upper: 20 } });
 
     const original = 100;
@@ -130,15 +130,15 @@ describe("MinMaxScaler", () => {
     expect(() => scaler.descale(25)).toThrow(MinMaxScalerError.ScaledOutOfBounds);
   });
 
-  test("getMinMax - throws for an empty array", () => {
+  test("getMinMax - happy path", () => {
+    expect(MinMaxScaler.getMinMax([10, 5, 20, 15, 30])).toEqual({ min: 5, max: 30 });
+  });
+
+  test("getMinMax - empty array", () => {
     expect(() => MinMaxScaler.getMinMax([])).toThrow(MinMaxScalerError.EmptyArray);
   });
 
-  test("getMinMax - returns min and max for single-value arrays", () => {
+  test("getMinMax - single-value arrays", () => {
     expect(MinMaxScaler.getMinMax([10])).toEqual({ min: 10, max: 10 });
-  });
-
-  test("getMinMax - returns the minimum and maximum values from an array", () => {
-    expect(MinMaxScaler.getMinMax([10, 5, 20, 15, 30])).toEqual({ min: 5, max: 30 });
   });
 });
