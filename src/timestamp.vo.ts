@@ -15,8 +15,20 @@ export class Timestamp {
     return this.value < another.value;
   }
 
+  isBeforeOrEqual(another: Timestamp): boolean {
+    return this.value <= another.value;
+  }
+
   isAfter(another: Timestamp): boolean {
     return this.value > another.value;
+  }
+
+  isAfterOrEqual(another: Timestamp): boolean {
+    return this.value >= another.value;
+  }
+
+  equals(another: Timestamp): boolean {
+    return this.value === another.value;
   }
 
   get(): TimestampValueType {
