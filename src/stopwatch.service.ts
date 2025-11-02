@@ -1,4 +1,4 @@
-import { Duration } from "./duration.service";
+import type { Duration } from "./duration.service";
 import { TimestampVO } from "./timestamp.vo";
 
 export const StopwatchError = { AlreadyStopped: "stopwatch.already.stopped" } as const;
@@ -20,6 +20,6 @@ export class Stopwatch {
 
     this.state = StopwatchState.stopped;
 
-    return Duration.Ms(TimestampVO.fromNumber(Date.now() - this.start.ms).ms);
+    return TimestampVO.fromNumber(Date.now()).difference(this.start);
   }
 }

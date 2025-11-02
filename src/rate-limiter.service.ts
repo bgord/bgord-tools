@@ -1,4 +1,4 @@
-import { Duration } from "./duration.service";
+import type { Duration } from "./duration.service";
 import type { TimestampVO } from "./timestamp.vo";
 
 type RateLimiterResultSuccessType = { allowed: true };
@@ -25,8 +25,6 @@ export class RateLimiter {
       return { allowed: true };
     }
 
-    const remainingDelta = nextAllowedTimestamp.ms - now.ms;
-
-    return { allowed: false, remaining: Duration.Ms(remainingDelta) };
+    return { allowed: false, remaining: nextAllowedTimestamp.difference(now) };
   }
 }

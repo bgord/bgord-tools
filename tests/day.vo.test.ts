@@ -13,7 +13,7 @@ describe("Day", () => {
     const expectedStart = TimestampVO.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );
-    const expectedEnd = expectedStart.add(Duration.Days(1)).subtract(Duration.Ms(1));
+    const expectedEnd = expectedStart.add(Duration.Days(1)).subtract(mocks.epsilon);
 
     expect(day.getStart()).toEqual(expectedStart);
     expect(day.getEnd()).toEqual(expectedEnd);
@@ -71,8 +71,8 @@ describe("Day", () => {
   test("contains", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(day.contains(day.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(day.contains(day.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(day.contains(day.getStart().subtract(mocks.epsilon))).toEqual(false);
+    expect(day.contains(day.getEnd().add(mocks.epsilon))).toEqual(false);
   });
 
   test("toString", () => {
