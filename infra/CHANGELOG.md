@@ -1,9 +1,12 @@
 # Changelog
+- 2025-11-04 19:55 eb2992d **step: add helper withSuffix/Prefix(Safe) methods**
 - 2025-11-04 19:51 13c4c58 **step: implement both strategies**
 - 2025-11-04 19:45 bb86f42 **step: define with affix strategy**
 - 2025-11-04 19:43 bc07a15 **refactor: rename filename affix methods**
 - 2025-11-04 19:41 eb409b7 **step: rename filename affix**
 - 2025-11-04 19:37 603b45e **refactor: rename filename affix file**
+- 2025-11-04 18:51 d29c1f9 **docs: generate readme**
+- 2025-11-04 18:51 cab5b59 **docs: generate CHANGELOG**
 ## 2025-11-04 14:31 v1.1.4
 - 2025-11-04 14:31 368d836 **1.1.4**
 - 2025-11-04 14:30 f60e18d **step: update packages**
