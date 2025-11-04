@@ -53,19 +53,19 @@ describe("Filename", () => {
     expect(updated.get()).toEqual("profile_v2.webp");
   });
 
-  test("withSuffix", () => {
-    expect(Filename.fromString("avatar.webp").withSuffix("-sm").get()).toEqual("avatar-sm.webp");
+  test("withAffix", () => {
+    expect(Filename.fromString("avatar.webp").withAffix("-sm").get()).toEqual("avatar-sm.webp");
   });
 
-  test("withSuffix rejects invalid input", () => {
-    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameAffixError.Empty);
+  test("withAffix rejects invalid input", () => {
+    expect(() => Filename.fromString("avatar.webp").withAffix("")).toThrow(FilenameAffixError.Empty);
   });
 
-  test("withSuffixSafe", () => {
+  test("withAffixSafe", () => {
     const filename = Filename.fromString("avatar.webp");
-    const suffix = FilenameAffix.parse("-sm");
+    const affix = FilenameAffix.parse("-sm");
 
-    expect(filename.withSuffixSafe(suffix).get()).toEqual("avatar-sm.webp");
+    expect(filename.withAffixSafe(affix).get()).toEqual("avatar-sm.webp");
   });
 
   test("toString", () => {

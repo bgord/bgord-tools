@@ -43,15 +43,15 @@ export class Filename {
     return new Filename(basename, this.extension);
   }
 
-  withSuffix(candidate: string): Filename {
-    const suffix = FilenameAffix.parse(candidate);
-    const basename = Basename.parse(`${this.basename}${suffix}`);
+  withAffix(candidate: string): Filename {
+    const affix = FilenameAffix.parse(candidate);
+    const basename = Basename.parse(`${this.basename}${affix}`);
 
     return new Filename(basename, this.extension);
   }
 
-  withSuffixSafe(suffix: FilenameAffixType): Filename {
-    const basename = Basename.parse(`${this.basename}${suffix}`);
+  withAffixSafe(affix: FilenameAffixType): Filename {
+    const basename = Basename.parse(`${this.basename}${affix}`);
 
     return new Filename(basename, this.extension);
   }
