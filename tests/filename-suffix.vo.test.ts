@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
+import { FilenameSuffix, FilenameSuffixError } from "../src/filename-affix.vo";
 
 describe("FilenameSuffixSchema", () => {
   test("happy path", () => {

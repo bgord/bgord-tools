@@ -2,8 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
+import { FilenameSuffix, FilenameSuffixError } from "../src/filename-affix.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
-import { FilenameSuffix, FilenameSuffixError } from "../src/filename-suffix.vo";
 
 describe("Filename", () => {
   test("fromParts", () => {

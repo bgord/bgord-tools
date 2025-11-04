@@ -1,7 +1,7 @@
 import { Basename, type BasenameType } from "./basename.vo";
 import { Extension, type ExtensionType } from "./extension.vo";
+import { FilenameSuffix, type FilenameSuffixType } from "./filename-affix.vo";
 import { FilenameFromString } from "./filename-from-string.vo";
-import { FilenameSuffix, type FilenameSuffixType } from "./filename-suffix.vo";
 
 export class Filename {
   private constructor(
