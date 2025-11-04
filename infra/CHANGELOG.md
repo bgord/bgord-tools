@@ -1,6 +1,9 @@
 # Changelog
+## 2025-11-04 14:31 v1.1.4
+- 2025-11-04 14:31 368d836 **1.1.4**
 - 2025-11-04 14:30 f60e18d **step: update packages**
 - 2025-11-04 14:30 3bc3164 **feature: add Duration.toAbsolute**
+- 2025-11-04 13:30 4eee191 **docs: generate CHANGELOG**
 ## 2025-11-02 22:58 v1.1.3
 - 2025-11-02 22:58 64e3481 **1.1.3**
 - 2025-11-02 22:56 d9ca419 **step: rename timestamp**
