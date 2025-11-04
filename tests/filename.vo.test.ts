@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
-import { FilenameSuffix, FilenameSuffixError } from "../src/filename-affix.vo";
+import { FilenameAffix, FilenameAffixError } from "../src/filename-affix.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
 
 describe("Filename", () => {
@@ -58,12 +58,12 @@ describe("Filename", () => {
   });
 
   test("withSuffix rejects invalid input", () => {
-    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameSuffixError.Empty);
+    expect(() => Filename.fromString("avatar.webp").withSuffix("")).toThrow(FilenameAffixError.Empty);
   });
 
   test("withSuffixSafe", () => {
     const filename = Filename.fromString("avatar.webp");
-    const suffix = FilenameSuffix.parse("-sm");
+    const suffix = FilenameAffix.parse("-sm");
 
     expect(filename.withSuffixSafe(suffix).get()).toEqual("avatar-sm.webp");
   });
