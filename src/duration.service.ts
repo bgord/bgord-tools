@@ -72,4 +72,8 @@ export class Duration {
   subtract(another: Duration): Duration {
     return Duration.Ms(this.internal - another.internal);
   }
+
+  toAbolute(): Duration {
+    return Duration.Ms(Math.abs(this.internal));
+  }
 }

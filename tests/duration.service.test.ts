@@ -84,4 +84,9 @@ describe("Duration", () => {
     expect(a.isLongerThan(c)).toEqual(false);
     expect(c.isShorterThan(a)).toEqual(false);
   });
+
+  test("toAbolute", () => {
+    expect(Duration.Ms(1000).toAbolute()).toEqual(Duration.Ms(1000));
+    expect(Duration.Ms(-1000).toAbolute()).toEqual(Duration.Ms(1000));
+  });
 });
