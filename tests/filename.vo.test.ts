@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
-import { FilenameAffix, FilenameAffixError } from "../src/filename-affix.vo";
+import { FilenameAffix, FilenameAffixError, FilenameAffixStrategy } from "../src/filename-affix.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
 
 describe("Filename", () => {
@@ -54,18 +54,22 @@ describe("Filename", () => {
   });
 
   test("withAffix", () => {
-    expect(Filename.fromString("avatar.webp").withAffix("-sm").get()).toEqual("avatar-sm.webp");
+    expect(Filename.fromString("avatar.webp").withAffix("-sm", FilenameAffixStrategy.suffix).get()).toEqual(
+      "avatar-sm.webp",
+    );
   });
 
   test("withAffix rejects invalid input", () => {
-    expect(() => Filename.fromString("avatar.webp").withAffix("")).toThrow(FilenameAffixError.Empty);
+    expect(() => Filename.fromString("avatar.webp").withAffix("", FilenameAffixStrategy.suffix)).toThrow(
+      FilenameAffixError.Empty,
+    );
   });
 
   test("withAffixSafe", () => {
     const filename = Filename.fromString("avatar.webp");
     const affix = FilenameAffix.parse("-sm");
 
-    expect(filename.withAffixSafe(affix).get()).toEqual("avatar-sm.webp");
+    expect(filename.withAffixSafe(affix, FilenameAffixStrategy.suffix).get()).toEqual("avatar-sm.webp");
   });
 
   test("toString", () => {

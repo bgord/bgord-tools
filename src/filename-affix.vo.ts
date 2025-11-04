@@ -1,5 +1,10 @@
 import { z } from "zod/v4";
 
+export enum FilenameAffixStrategy {
+  prefix = "prefix",
+  suffix = "suffix",
+}
+
 export const FilenameAffixError = {
   Type: "affix.type",
   Empty: "affix.empty",

@@ -1,6 +1,6 @@
 import { Basename, type BasenameType } from "./basename.vo";
 import { Extension, type ExtensionType } from "./extension.vo";
-import { FilenameAffix, type FilenameAffixType } from "./filename-affix.vo";
+import { FilenameAffix, type FilenameAffixStrategy, type FilenameAffixType } from "./filename-affix.vo";
 import { FilenameFromString } from "./filename-from-string.vo";
 
 export class Filename {
@@ -43,14 +43,14 @@ export class Filename {
     return new Filename(basename, this.extension);
   }
 
-  withAffix(candidate: string): Filename {
+  withAffix(candidate: string, _strategy: FilenameAffixStrategy): Filename {
     const affix = FilenameAffix.parse(candidate);
     const basename = Basename.parse(`${this.basename}${affix}`);
 
     return new Filename(basename, this.extension);
   }
 
-  withAffixSafe(affix: FilenameAffixType): Filename {
+  withAffixSafe(affix: FilenameAffixType, _strategy: FilenameAffixStrategy): Filename {
     const basename = Basename.parse(`${this.basename}${affix}`);
 
     return new Filename(basename, this.extension);
