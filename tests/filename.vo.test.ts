@@ -59,6 +59,10 @@ describe("Filename", () => {
     );
   });
 
+  test("withSuffix", () => {
+    expect(Filename.fromString("avatar.webp").withSuffix("-sm").get()).toEqual("avatar-sm.webp");
+  });
+
   test("withAffix rejects invalid input - suffix", () => {
     expect(() => Filename.fromString("avatar.webp").withAffix("", FilenameAffixStrategy.suffix)).toThrow(
       FilenameAffixError.Empty,
@@ -72,10 +76,21 @@ describe("Filename", () => {
     expect(filename.withAffixSafe(affix, FilenameAffixStrategy.suffix).get()).toEqual("avatar-sm.webp");
   });
 
+  test("withSuffixSafe", () => {
+    const filename = Filename.fromString("avatar.webp");
+    const affix = FilenameAffix.parse("-sm");
+
+    expect(filename.withSuffixSafe(affix).get()).toEqual("avatar-sm.webp");
+  });
+
   test("withAffix - prefix", () => {
     expect(Filename.fromString("avatar.webp").withAffix("sm-", FilenameAffixStrategy.prefix).get()).toEqual(
       "sm-avatar.webp",
     );
+  });
+
+  test("withPrefix", () => {
+    expect(Filename.fromString("avatar.webp").withPrefix("sm-").get()).toEqual("sm-avatar.webp");
   });
 
   test("withAffix rejects invalid input - prefix", () => {
@@ -89,6 +104,13 @@ describe("Filename", () => {
     const affix = FilenameAffix.parse("sm-");
 
     expect(filename.withAffixSafe(affix, FilenameAffixStrategy.prefix).get()).toEqual("sm-avatar.webp");
+  });
+
+  test("withPrefixSafe", () => {
+    const filename = Filename.fromString("avatar.webp");
+    const affix = FilenameAffix.parse("sm-");
+
+    expect(filename.withPrefixSafe(affix).get()).toEqual("sm-avatar.webp");
   });
 
   test("toString", () => {
