@@ -86,7 +86,7 @@ describe("Duration", () => {
   });
 
   test("toAbolute", () => {
-    expect(Duration.Ms(1000).toAbolute()).toEqual(Duration.Ms(1000));
-    expect(Duration.Ms(-1000).toAbolute()).toEqual(Duration.Ms(1000));
+    expect(Duration.Ms(1000).toAbsolute()).toEqual(Duration.Ms(1000));
+    expect(Duration.Ms(-1000).toAbsolute()).toEqual(Duration.Ms(1000));
   });
 });
