@@ -1,4 +1,5 @@
 # Changelog
+- 2025-11-05 12:37 fc2efee **fix: toAbsolute**
 ## 2025-11-04 19:57 v1.1.5
 - 2025-11-04 19:57 8fceb17 **1.1.5**
 - 2025-11-04 19:55 eb2992d **step: add helper withSuffix/Prefix(Safe) methods**
@@ -7,6 +8,7 @@
 - 2025-11-04 19:43 bc07a15 **refactor: rename filename affix methods**
 - 2025-11-04 19:41 eb409b7 **step: rename filename affix**
 - 2025-11-04 19:37 603b45e **refactor: rename filename affix file**
+- 2025-11-04 18:57 2481d62 **docs: generate CHANGELOG**
 - 2025-11-04 18:56 2dcdfb6 **docs: generate CHANGELOG**
 - 2025-11-04 18:51 d29c1f9 **docs: generate readme**
 - 2025-11-04 18:51 cab5b59 **docs: generate CHANGELOG**
