@@ -1,8 +1,10 @@
 # Changelog
+- 2025-11-06 10:40 37ea289 **step: update packages**
 ## 2025-11-05 13:04 v1.1.6
 - 2025-11-05 13:04 6e6345f **1.1.6**
 - 2025-11-05 12:37 fc2efee **fix: toAbsolute**
 - 2025-11-05 12:04 51878c6 **docs: generate CHANGELOG**
+- 2025-11-05 12:04 3960331 **docs: generate CHANGELOG**
 ## 2025-11-04 19:57 v1.1.5
 - 2025-11-04 19:57 8fceb17 **1.1.5**
 - 2025-11-04 19:55 eb2992d **step: add helper withSuffix/Prefix(Safe) methods**
