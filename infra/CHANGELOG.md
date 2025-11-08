@@ -1,5 +1,9 @@
 # Changelog
+- 2025-11-08 19:28 d245a52 **step: bump bgord/scripts**
+- 2025-11-08 19:28 68defc9 **step: update packages**
+- 2025-11-08 19:26 1e3ebd3 **step: update bun**
 - 2025-11-06 10:40 37ea289 **step: update packages**
+- 2025-11-06 09:41 0fab92b **docs: generate CHANGELOG**
 ## 2025-11-05 13:04 v1.1.6
 - 2025-11-05 13:04 6e6345f **1.1.6**
 - 2025-11-05 12:37 fc2efee **fix: toAbsolute**
