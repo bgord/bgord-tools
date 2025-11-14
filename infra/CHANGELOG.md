@@ -1,5 +1,8 @@
 # Changelog
+## 2025-11-14 16:57 v1.1.7
+- 2025-11-14 16:57 e1d931d **1.1.7**
 - 2025-11-14 16:56 afeb57a **step: update packages**
+- 2025-11-14 15:56 0001490 **docs: generate CHANGELOG**
 - 2025-11-13 09:52 31ef28e **step: update packages**
 - 2025-11-13 08:52 03079d2 **docs: generate CHANGELOG**
 - 2025-11-11 09:36 2cd6777 **step: update packages**
