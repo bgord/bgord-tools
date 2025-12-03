@@ -1,5 +1,8 @@
 # Changelog
+- 2025-12-03 18:05 33a8b82 **step: update packages**
+- 2025-12-03 16:38 66d1c37 **step: add slug service**
 - 2025-12-03 11:42 525769f **step: bump bgord/scripts**
+- 2025-12-03 10:42 03f4473 **docs: generate CHANGELOG**
 ## 2025-12-03 10:22 v1.1.9
 - 2025-12-03 10:22 1678d71 **1.1.9**
 - 2025-12-03 09:31 c439e31 **step: update packages**
