@@ -100,6 +100,7 @@ src/
 ├── rounding.port.ts
 ├── size-bytes.vo.ts
 ├── size.vo.ts
+├── slug.service.ts
 ├── stopwatch.service.ts
 ├── sum.service.ts
 ├── thousands-separator.service.ts
