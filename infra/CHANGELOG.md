@@ -1,7 +1,11 @@
 # Changelog
+## 2025-12-03 18:07 v1.1.11
 - 2025-12-03 18:07 4802436 **Merge branch 'master' of github.com:bgord/bgord-tools**
+- 2025-12-03 18:07 2aebb28 **1.1.11**
+## 2025-12-03 18:06 v1.1.10
 - 2025-12-03 18:06 9df3447 **1.1.10**
 - 2025-12-03 18:05 33a8b82 **step: update packages**
+- 2025-12-03 17:07 98cd91a **docs: generate CHANGELOG**
 - 2025-12-03 17:05 f93fa8d **docs: generate CHANGELOG**
 - 2025-12-03 17:05 54693d3 **docs: generate readme**
 - 2025-12-03 16:38 66d1c37 **step: add slug service**
