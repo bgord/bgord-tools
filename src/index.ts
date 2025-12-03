@@ -75,6 +75,7 @@ export * from "./rounding.adapter";
 export * from "./rounding.port";
 export * from "./size.vo";
 export * from "./size-bytes.vo";
+export * from "./slug.service";
 export * from "./stopwatch.service";
 export * from "./sum.service";
 export * from "./thousands-separator.service";
