@@ -45,4 +45,7 @@ export const MIMES = {
   text: Mime.fromString("text/plain"),
   markdown: Mime.fromString("text/markdown"),
   pdf: Mime.fromString("application/pdf"),
+  png: Mime.fromString("image/png"),
+  jpeg: Mime.fromString("image/jpeg"),
+  webp: Mime.fromString("image/webp"),
 };
