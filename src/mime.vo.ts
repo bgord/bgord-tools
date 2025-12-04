@@ -5,18 +5,21 @@ import { MimeValue } from "./mime-value.vo";
 export const MimeError = { NotAccepted: "mime.not.accepted" } as const;
 
 export class Mime {
-  readonly type: string;
-  readonly subtype: string;
+  private constructor(
+    readonly type: string,
+    readonly subtype: string,
+  ) {}
 
-  constructor(candidate: string) {
+  static fromString(candidate: string): Mime {
     const { type, subtype } = MimeValue.parse(candidate);
 
-    this.type = type;
-    this.subtype = subtype;
+    return new Mime(type, subtype);
   }
 
   static fromExtension(extension: ExtensionType): Mime {
-    return new Mime(String(mime.contentType(extension)));
+    const { type, subtype } = MimeValue.parse(String(mime.contentType(extension)));
+
+    return new Mime(type, subtype);
   }
 
   isSatisfiedBy(another: Mime): boolean {
@@ -38,8 +41,8 @@ export class Mime {
 }
 
 export const MIMES = {
-  csv: new Mime("text/csv"),
-  text: new Mime("text/plain"),
-  markdown: new Mime("text/markdown"),
-  pdf: new Mime("application/pdf"),
+  csv: Mime.fromString("text/csv"),
+  text: Mime.fromString("text/plain"),
+  markdown: Mime.fromString("text/markdown"),
+  pdf: Mime.fromString("application/pdf"),
 };
