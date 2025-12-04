@@ -1,8 +1,11 @@
 # Changelog
+## 2025-12-04 10:23 v1.1.13
+- 2025-12-04 10:23 b15b339 **1.1.13**
 - 2025-12-04 10:23 6dc4ed6 **step: add more predefined image MIMES**
 ## 2025-12-04 10:16 v1.1.12
 - 2025-12-04 10:16 461fa86 **1.1.12**
 - 2025-12-04 10:15 671869a **refactor: improve mime vo**
+- 2025-12-04 09:23 5553067 **docs: generate CHANGELOG**
 - 2025-12-04 09:16 74651d9 **docs: generate CHANGELOG**
 - 2025-12-04 09:15 a679c72 **docs: generate CHANGELOG**
 ## 2025-12-03 18:07 v1.1.11
