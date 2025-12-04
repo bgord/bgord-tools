@@ -1,5 +1,8 @@
 # Changelog
+## 2025-12-04 10:16 v1.1.12
+- 2025-12-04 10:16 461fa86 **1.1.12**
 - 2025-12-04 10:15 671869a **refactor: improve mime vo**
+- 2025-12-04 09:15 a679c72 **docs: generate CHANGELOG**
 ## 2025-12-03 18:07 v1.1.11
 - 2025-12-03 18:07 4802436 **Merge branch 'master' of github.com:bgord/bgord-tools**
 - 2025-12-03 18:07 2aebb28 **1.1.11**
