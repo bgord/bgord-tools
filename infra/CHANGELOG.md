@@ -1,4 +1,6 @@
 # Changelog
+## 2025-12-04 11:47 v1.1.16
+- 2025-12-04 11:47 7f23fe6 **1.1.16**
 - 2025-12-04 11:46 c08966e **step: strip metadata in Mime.fromString**
 - 2025-12-04 11:43 d59ed23 **refactor: simplify fromExtension**
 ## 2025-12-04 11:10 v1.1.15
@@ -7,6 +9,7 @@
 ## 2025-12-04 11:03 v1.1.14
 - 2025-12-04 11:03 a1e1f6e **1.1.14**
 - 2025-12-04 11:02 ce246b8 **step: add zip to MIMES**
+- 2025-12-04 10:46 dbd6572 **docs: generate CHANGELOG**
 ## 2025-12-04 10:23 v1.1.13
 - 2025-12-04 10:23 b15b339 **1.1.13**
 - 2025-12-04 10:23 6dc4ed6 **step: add more predefined image MIMES**
