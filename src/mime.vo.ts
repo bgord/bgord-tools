@@ -17,9 +17,7 @@ export class Mime {
   }
 
   static fromExtension(extension: ExtensionType): Mime {
-    const { type, subtype } = MimeValue.parse(String(mime.contentType(extension)));
-
-    return new Mime(type, subtype);
+    return Mime.fromString(String(mime.contentType(extension)));
   }
 
   isSatisfiedBy(another: Mime): boolean {
