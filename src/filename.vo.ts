@@ -2,6 +2,7 @@ import { Basename, type BasenameType } from "./basename.vo";
 import { Extension, type ExtensionType } from "./extension.vo";
 import { FilenameAffix, FilenameAffixStrategy, type FilenameAffixType } from "./filename-affix.vo";
 import { FilenameFromString } from "./filename-from-string.vo";
+import { Mime } from "./mime.vo";
 
 export class Filename {
   private constructor(
@@ -33,6 +34,10 @@ export class Filename {
 
   getExtension(): ExtensionType {
     return this.extension;
+  }
+
+  getMime(): Mime {
+    return Mime.fromExtension(this.extension);
   }
 
   withExtension(extension: ExtensionType): Filename {
