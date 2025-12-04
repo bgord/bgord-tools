@@ -48,4 +48,5 @@ export const MIMES = {
   png: Mime.fromString("image/png"),
   jpeg: Mime.fromString("image/jpeg"),
   webp: Mime.fromString("image/webp"),
+  zip: Mime.fromString("application/zip"),
 };
