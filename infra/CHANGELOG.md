@@ -1,5 +1,7 @@
 # Changelog
+## 2025-12-04 11:10 v1.1.15
 - 2025-12-04 11:10 95ba5e9 **step: add Filename.getMime**
+- 2025-12-04 11:10 8152b2b **1.1.15**
 ## 2025-12-04 11:03 v1.1.14
 - 2025-12-04 11:03 a1e1f6e **1.1.14**
 - 2025-12-04 11:02 ce246b8 **step: add zip to MIMES**
@@ -9,6 +11,7 @@
 ## 2025-12-04 10:16 v1.1.12
 - 2025-12-04 10:16 461fa86 **1.1.12**
 - 2025-12-04 10:15 671869a **refactor: improve mime vo**
+- 2025-12-04 10:10 4a00e85 **docs: generate CHANGELOG**
 - 2025-12-04 10:03 9183558 **docs: generate CHANGELOG**
 - 2025-12-04 10:03 80aa21c **docs: generate CHANGELOG**
 - 2025-12-04 09:23 8371998 **docs: generate CHANGELOG**
