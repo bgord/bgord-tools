@@ -11,15 +11,19 @@ describe("Mime", () => {
     expect(mime.subtype).toEqual("plain");
   });
 
+  test("fromExtension", () => {
+    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
+  });
+
+  test("strips semicolon separated mime metadata", () => {
+    expect(Mime.fromString("text/plain; charset=UTF-8").toString()).toEqual("text/plain");
+  });
+
   test("throws InvalidMimeError for invalid input", () => {
     expect(() => Mime.fromString("")).toThrow(MimeValueError.Invalid);
     expect(() => Mime.fromString("/subtype")).toThrow(MimeValueError.Invalid);
     expect(() => Mime.fromString("type/")).toThrow(MimeValueError.Invalid);
     expect(() => Mime.fromString("no-slash")).toThrow(MimeValueError.Invalid);
-  });
-
-  test("fromExtension", () => {
-    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
   });
 
   test("isSatisfiedBy - happy path", () => {

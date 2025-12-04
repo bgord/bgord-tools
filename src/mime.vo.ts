@@ -11,7 +11,7 @@ export class Mime {
   ) {}
 
   static fromString(candidate: string): Mime {
-    const { type, subtype } = MimeValue.parse(candidate);
+    const { type, subtype } = MimeValue.parse(candidate.split(";")[0].trim());
 
     return new Mime(type, subtype);
   }
