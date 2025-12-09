@@ -1,6 +1,10 @@
 # Changelog
+## 2025-12-09 20:51 v1.1.17
+- 2025-12-09 20:51 4b8049b **1.1.17**
 - 2025-12-09 20:50 9595397 **step: bump bgord/scripts**
 - 2025-12-09 20:50 04463dc **step: update packages**
+- 2025-12-09 19:51 8dd28a3 **docs: generate CHANGELOG**
+- 2025-12-09 19:51 1a5ed96 **docs: generate readme**
 ## 2025-12-04 11:47 v1.1.16
 - 2025-12-04 11:47 7f23fe6 **1.1.16**
 - 2025-12-04 11:46 c08966e **step: strip metadata in Mime.fromString**
