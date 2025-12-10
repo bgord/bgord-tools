@@ -4,10 +4,6 @@ import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Hour {
-  static readonly ZERO = Hour.fromValue(0);
-
-  static readonly MAX = Hour.fromValue(23);
-
   private constructor(private readonly value: HourSchemaType) {}
 
   static fromValue(candidate: number): Hour {
@@ -24,6 +20,14 @@ export class Hour {
 
   static fromTimestampValue(timestamp: TimestampValueType): Hour {
     return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
+  }
+
+  static zero(): Hour {
+    return Hour.fromValue(0);
+  }
+
+  static max(): Hour {
+    return Hour.fromValue(23);
   }
 
   get(): HourSchemaType {

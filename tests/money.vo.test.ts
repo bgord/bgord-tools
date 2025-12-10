@@ -14,6 +14,11 @@ describe("Money", () => {
     expect(Money.fromAmount(100).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
+  test("fromAmountSafe", () => {
+    expect(Money.fromAmountSafe(MoneyAmount.parse(0)).getAmount()).toEqual(MoneyAmount.parse(0));
+    expect(Money.fromAmountSafe(MoneyAmount.parse(100)).getAmount()).toEqual(MoneyAmount.parse(100));
+  });
+
   test("throws on invalid input", () => {
     expect(() => Money.fromAmount(100.5)).toThrow(MoneyAmountError.Type);
   });

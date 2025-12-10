@@ -3,10 +3,6 @@ import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
-  static readonly ZERO = Minute.fromValue(0);
-
-  static readonly MAX = Minute.fromValue(59);
-
   private constructor(private readonly value: MinuteSchemaType) {}
 
   static fromValue(candidate: number): Minute {
@@ -23,6 +19,14 @@ export class Minute {
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
     return Minute.fromTimestamp(Timestamp.fromValue(timestamp));
+  }
+
+  static zero(): Minute {
+    return Minute.fromValue(0);
+  }
+
+  static max(): Minute {
+    return Minute.fromValue(59);
   }
 
   get(): MinuteSchemaType {

@@ -25,12 +25,12 @@ describe("Hour", () => {
     expect(Hour.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(HourSchema.parse(22));
   });
 
-  test("Hour.ZERO", () => {
-    expect(Hour.ZERO.get()).toEqual(HourSchema.parse(0));
+  test("zero", () => {
+    expect(Hour.zero().get()).toEqual(HourSchema.parse(0));
   });
 
-  test("Hour.MAX", () => {
-    expect(Hour.MAX.get()).toEqual(HourSchema.parse(23));
+  test("max", () => {
+    expect(Hour.max().get()).toEqual(HourSchema.parse(23));
   });
 
   test("get", () => {

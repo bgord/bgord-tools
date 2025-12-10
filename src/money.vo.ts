@@ -8,11 +8,10 @@ export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.l
 
 export class Money {
   private static readonly ZERO = MoneyAmount.parse(0);
-  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();
 
   private constructor(
     private readonly amount: MoneyAmountType,
-    private readonly rounding: RoundingPort = Money.DEFAULT_ROUNDING,
+    private readonly rounding: RoundingPort = new RoundToNearest(),
   ) {}
 
   static fromAmount(candidate: number, rounding?: RoundingPort): Money {
@@ -21,6 +20,10 @@ export class Money {
 
   static fromAmountSafe(candidate: MoneyAmountType, rounding?: RoundingPort): Money {
     return new Money(candidate, rounding);
+  }
+
+  static zero(): Money {
+    return Money.fromAmount(0);
   }
 
   getAmount(): MoneyAmountType {
@@ -39,7 +42,7 @@ export class Money {
     const result = this.amount - money.getAmount();
 
     if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
-    return new Money(MoneyAmount.parse(result), this.rounding);
+    return new Money(MoneyAmount.parse(this.rounding.round(result)), this.rounding);
   }
 
   divide(factor: DivisionFactorType): Money {
