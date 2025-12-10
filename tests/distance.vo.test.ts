@@ -13,6 +13,10 @@ describe("Distance", () => {
     expect(() => Distance.fromMeters(100.5)).toThrow(DistanceValueError.Type);
   });
 
+  test("fromMetersSafe", () => {
+    expect(Distance.fromMetersSafe(DistanceValue.parse(1)).get()).toEqual(DistanceValue.parse(1));
+  });
+
   test("fromKilometers", () => {
     expect(Distance.fromKilometers(1).get()).toEqual(DistanceValue.parse(1000));
     expect(Distance.fromKilometers(1.5).get()).toEqual(DistanceValue.parse(1500));

@@ -7,12 +7,16 @@ export const DistanceError = {
 } as const;
 
 export class Distance {
-  private static readonly ZERO = 0;
+  private static readonly ZERO = DistanceValue.parse(0);
 
   private constructor(private readonly value: DistanceValueType) {}
 
   static fromMeters(candidate: number = Distance.ZERO): Distance {
     return new Distance(DistanceValue.parse(candidate));
+  }
+
+  static fromMetersSafe(candidate: DistanceValueType = Distance.ZERO): Distance {
+    return new Distance(candidate);
   }
 
   static fromKilometers(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
