@@ -14,6 +14,10 @@ export class Age {
     return new Age(AgeYears.parse(candidate));
   }
 
+  static fromValueSafe(candidate: AgeYearsType): Age {
+    return new Age(candidate);
+  }
+
   static fromBirthdateTimestamp(params: { birthdate: Timestamp; now: Timestamp }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(params.now.ms, params.birthdate.ms));

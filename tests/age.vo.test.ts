@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Age, AgeError } from "../src/age.vo";
+import { AgeYears } from "../src/age-years.vo";
 import { TimestampValueError } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
@@ -7,6 +8,11 @@ describe("Age", () => {
   test("fromValue", () => {
     expect(Age.fromValue(1).get()).toEqual(1);
     expect(Age.fromValue(130).get()).toEqual(130);
+  });
+
+  test("fromValueSafe", () => {
+    expect(Age.fromValueSafe(AgeYears.parse(1)).get()).toEqual(1);
+    expect(Age.fromValueSafe(AgeYears.parse(130)).get()).toEqual(130);
   });
 
   test("fromBirthdateTimestamp - birthday has already happened", () => {
