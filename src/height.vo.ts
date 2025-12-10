@@ -1,11 +1,21 @@
-import { HeightMillimeters } from "./height-milimiters.vo";
+import { HeightMillimeters, type HeightMillimetersType } from "./height-milimiters.vo";
 import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
 export class Height {
+  private static readonly ZERO = HeightMillimeters.parse(0);
+
   private static readonly MILLIMETERS_PER_CENTIMETER = 10;
 
-  private constructor(private readonly millimeters: number) {}
+  private constructor(private readonly millimeters: HeightMillimetersType) {}
+
+  static fromMillimeters(millimeters: number): Height {
+    return new Height(HeightMillimeters.parse(millimeters));
+  }
+
+  static fromMillimetersSafe(millimeters: HeightMillimetersType): Height {
+    return new Height(millimeters);
+  }
 
   static fromCentimeters(centimeters: number, rounding: RoundingPort = new RoundToNearest()): Height {
     const millimeters = rounding.round(centimeters * Height.MILLIMETERS_PER_CENTIMETER);
@@ -13,12 +23,8 @@ export class Height {
     return new Height(HeightMillimeters.parse(millimeters));
   }
 
-  static fromMillimeters(millimeters: number): Height {
-    return new Height(HeightMillimeters.parse(millimeters));
-  }
-
   static zero(): Height {
-    return new Height(0);
+    return Height.fromMillimetersSafe(Height.ZERO);
   }
 
   get(): number {

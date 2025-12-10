@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Height } from "../src/height.vo";
-import { HeightMillimetersError } from "../src/height-milimiters.vo";
+import { HeightMillimeters, HeightMillimetersError } from "../src/height-milimiters.vo";
 import { RoundDown, RoundToDecimal, RoundUp } from "../src/rounding.adapter";
 
 describe("Height", () => {
@@ -12,6 +12,10 @@ describe("Height", () => {
 
   test("fromMillimeters", () => {
     expect(Height.fromMillimeters(180).toMillimeters()).toEqual(180);
+  });
+
+  test("fromMillimetersSafe", () => {
+    expect(Height.fromMillimetersSafe(HeightMillimeters.parse(100)).toMillimeters()).toEqual(100);
   });
 
   test("zero factory", () => {

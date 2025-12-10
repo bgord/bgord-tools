@@ -10,3 +10,5 @@ export const HeightMillimeters = z
   .int(HeightMillimetersError.Type)
   .min(0, HeightMillimetersError.Invalid)
   .brand("HeightMillimeters");
+
+export type HeightMillimetersType = z.infer<typeof HeightMillimeters>;
