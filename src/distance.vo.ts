@@ -11,11 +11,11 @@ export class Distance {
 
   private constructor(private readonly value: DistanceValueType) {}
 
-  static fromMeters(candidate: number = Distance.ZERO): Distance {
+  static fromMeters(candidate: number): Distance {
     return new Distance(DistanceValue.parse(candidate));
   }
 
-  static fromMetersSafe(candidate: DistanceValueType = Distance.ZERO): Distance {
+  static fromMetersSafe(candidate: DistanceValueType): Distance {
     return new Distance(candidate);
   }
 

@@ -5,7 +5,7 @@ import { RoundToDecimal } from "../src/rounding.adapter";
 
 describe("Distance", () => {
   test("happy path", () => {
-    expect(Distance.fromMeters().get()).toEqual(DistanceValue.parse(0));
+    expect(Distance.fromMeters(0).get()).toEqual(DistanceValue.parse(0));
     expect(Distance.fromMeters(100).get()).toEqual(DistanceValue.parse(100));
   });
 
@@ -40,7 +40,7 @@ describe("Distance", () => {
   });
 
   test("add", () => {
-    expect(Distance.fromMeters(100).add(Distance.fromMeters()).get()).toEqual(DistanceValue.parse(100));
+    expect(Distance.fromMeters(100).add(Distance.fromMeters(0)).get()).toEqual(DistanceValue.parse(100));
     expect(Distance.fromMeters(15).add(Distance.fromMeters(10)).get()).toEqual(DistanceValue.parse(25));
   });
 
@@ -83,7 +83,7 @@ describe("Distance", () => {
   });
 
   test("isZero", () => {
-    expect(Distance.fromMeters().isZero()).toEqual(true);
+    expect(Distance.fromMeters(0).isZero()).toEqual(true);
   });
 
   test("format", () => {
