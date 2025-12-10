@@ -25,6 +25,16 @@ describe("Distance", () => {
     );
   });
 
+  test("fromMiles", () => {
+    expect(Distance.fromMiles(1).get()).toEqual(DistanceValue.parse(1609));
+    expect(Distance.fromMiles(1.5).get()).toEqual(DistanceValue.parse(2414));
+    expect(Distance.fromMiles(0.123456789).get()).toEqual(DistanceValue.parse(199));
+  });
+
+  test("fromMiles - throws on invalid input", () => {
+    expect(() => Distance.fromMiles(1, new RoundToDecimal(1))).toThrow(DistanceValueError.Type);
+  });
+
   test("add", () => {
     expect(new Distance(100).add(new Distance()).get()).toEqual(DistanceValue.parse(100));
     expect(new Distance(15).add(new Distance(10)).get()).toEqual(DistanceValue.parse(25));

@@ -19,21 +19,23 @@ export class Distance {
     return new Distance(rounding.round(candidate * 1000));
   }
 
+  static fromMiles(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
+    return new Distance(rounding.round(candidate * 1_609.344));
+  }
+
   get(): DistanceValueType {
     return this.value;
   }
 
   add(distance: Distance): Distance {
-    const result = this.value + distance.get();
-
-    return new Distance(DistanceValue.parse(result));
+    return new Distance(this.value + distance.get());
   }
 
   subtract(money: Distance): Distance {
     const result = this.value - money.get();
 
     if (result < Distance.ZERO) throw new Error(DistanceError.SubtractResultLessThanZero);
-    return new Distance(DistanceValue.parse(result));
+    return new Distance(result);
   }
 
   equals(another: Distance): boolean {
