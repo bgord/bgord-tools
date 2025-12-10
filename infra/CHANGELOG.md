@@ -1,5 +1,23 @@
 # Changelog
+- 2025-12-10 11:46 e9da9a6 **step: unify zero static property**
+- 2025-12-10 11:39 7efab43 **step: add safe static factory method for money**
+- 2025-12-10 11:39 01fd630 **step: unify zero static property**
+- 2025-12-10 11:30 fbc7e86 **step: add safe static factory method for size**
+- 2025-12-10 11:29 2267898 **step: add safe static factory method for package version**
+- 2025-12-10 11:25 8f72703 **step: add safe static factory method for minute**
+- 2025-12-10 11:23 95c2cc1 **step: add safe static factory method for hour**
+- 2025-12-10 11:20 9296e5b **step: add safe static factory method for height**
+- 2025-12-10 11:16 188f189 **step: add safe static factory method for distance**
+- 2025-12-10 11:14 244e8a3 **step: add safe static factory method for age**
+- 2025-12-10 11:09 9a740c1 **refactor: make distance constructor private**
+- 2025-12-10 11:01 7e1b8dd **step: add distance from miles**
+- 2025-12-10 10:57 99c51aa **refactor: improve money vo tests**
+- 2025-12-10 10:55 e31f4a5 **step: add distance from km**
+- 2025-12-10 10:42 9266470 **feature: add distance vo**
+- 2025-12-10 10:10 bbd11bd **step: add distance value vo**
+- 2025-12-10 09:56 1ac8498 **refactor: use jest instead of setSystemTime**
 - 2025-12-09 23:30 a9e080c **refactor: use jest fake timers**
+- 2025-12-09 22:34 12a7840 **docs: generate CHANGELOG**
 ## 2025-12-09 20:51 v1.1.17
 - 2025-12-09 20:51 4b8049b **1.1.17**
 - 2025-12-09 20:50 9595397 **step: bump bgord/scripts**
