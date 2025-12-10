@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, jest, test } from "bun:test";
 import { DateFormatters } from "../src/date-formatter.service";
 import * as mocks from "./mocks";
 
@@ -18,8 +18,8 @@ describe("DateFormatters", () => {
   });
 
   describe("relative", () => {
-    beforeEach(() => setSystemTime(new Date("2024-06-01T15:35:00Z")));
-    afterEach(() => setSystemTime());
+    beforeEach(() => jest.setSystemTime(new Date("2024-06-01T15:35:00Z")));
+    afterEach(() => jest.setSystemTime());
 
     test("happy path", () => {
       expect(DateFormatters.relative(date)).toEqual("7 months ago");

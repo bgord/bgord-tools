@@ -1,11 +1,11 @@
-import { afterEach, beforeEach, describe, expect, setSystemTime, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, jest, test } from "bun:test";
 import { DateCalculator } from "../src/date-calculator.service";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 
 describe("DateCalculator", () => {
-  beforeEach(() => setSystemTime(new Date("2024-06-01T12:00:00Z")));
-  afterEach(() => setSystemTime());
+  beforeEach(() => jest.setSystemTime(new Date("2024-06-01T12:00:00Z")));
+  afterEach(() => jest.setSystemTime());
 
   test("UTC timezone", () => {
     const now = Timestamp.fromNumber(Date.now()); // 2024-06-01T12:00:00Z
