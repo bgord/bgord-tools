@@ -3,8 +3,8 @@ import { Hour } from "../src/hour.vo";
 import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
 import * as mocks from "./mocks";
 
-const FIVE = new Hour(5);
-const THIRTEEN = new Hour(13);
+const FIVE = Hour.fromValue(5);
+const THIRTEEN = Hour.fromValue(13);
 
 describe("Hour", () => {
   test("happy path", () => {
@@ -12,9 +12,9 @@ describe("Hour", () => {
   });
 
   test("throws for invalid hour values", () => {
-    expect(() => new Hour(12.5)).toThrow(HourSchemaError.Type);
-    expect(() => new Hour(-1)).toThrow(HourSchemaError.Invalid);
-    expect(() => new Hour(24)).toThrow(HourSchemaError.Invalid);
+    expect(() => Hour.fromValue(12.5)).toThrow(HourSchemaError.Type);
+    expect(() => Hour.fromValue(-1)).toThrow(HourSchemaError.Invalid);
+    expect(() => Hour.fromValue(24)).toThrow(HourSchemaError.Invalid);
   });
 
   test("fromTimestampValue", () => {

@@ -4,17 +4,21 @@ import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Hour {
-  private readonly value: HourSchemaType;
+  static readonly ZERO = Hour.fromValue(0);
+  static readonly MAX = Hour.fromValue(23);
 
-  static readonly ZERO = new Hour(0);
-  static readonly MAX = new Hour(23);
+  private constructor(private readonly value: HourSchemaType) {}
 
-  constructor(candidate: number) {
-    this.value = HourSchema.parse(candidate);
+  static fromValue(candidate: number): Hour {
+    return new Hour(HourSchema.parse(candidate));
+  }
+
+  static fromValueSafe(candidate: HourSchemaType) {
+    return new Hour(candidate);
   }
 
   static fromTimestamp(timestamp: Timestamp): Hour {
-    return new Hour(new Date(timestamp.ms).getUTCHours());
+    return new Hour(HourSchema.parse(new Date(timestamp.ms).getUTCHours()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Hour {
@@ -42,7 +46,7 @@ export class Hour {
   }
 
   static list(): readonly Hour[] {
-    return Array.from({ length: 24 }, (_, index) => new Hour(index));
+    return Array.from({ length: 24 }, (_, index) => Hour.fromValue(index));
   }
 
   toString(): string {
