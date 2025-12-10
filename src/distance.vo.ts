@@ -9,18 +9,18 @@ export const DistanceError = {
 export class Distance {
   private static readonly ZERO = 0;
 
-  private readonly value: DistanceValueType;
+  private constructor(private readonly value: DistanceValueType) {}
 
-  constructor(value: number = Distance.ZERO) {
-    this.value = DistanceValue.parse(value);
+  static fromMeters(candidate: number = Distance.ZERO): Distance {
+    return new Distance(DistanceValue.parse(candidate));
   }
 
   static fromKilometers(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
-    return new Distance(rounding.round(candidate * 1000));
+    return new Distance(DistanceValue.parse(rounding.round(candidate * 1000)));
   }
 
   static fromMiles(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
-    return new Distance(rounding.round(candidate * 1_609.344));
+    return new Distance(DistanceValue.parse(rounding.round(candidate * 1_609.344)));
   }
 
   get(): DistanceValueType {
@@ -28,14 +28,14 @@ export class Distance {
   }
 
   add(distance: Distance): Distance {
-    return new Distance(this.value + distance.get());
+    return new Distance(DistanceValue.parse(this.value + distance.get()));
   }
 
   subtract(money: Distance): Distance {
     const result = this.value - money.get();
 
     if (result < Distance.ZERO) throw new Error(DistanceError.SubtractResultLessThanZero);
-    return new Distance(result);
+    return new Distance(DistanceValue.parse(result));
   }
 
   equals(another: Distance): boolean {
