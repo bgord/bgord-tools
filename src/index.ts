@@ -11,6 +11,7 @@ export * from "./day.vo";
 export * from "./day-iso-id.vo";
 export * from "./directory-path-absolute.vo";
 export * from "./directory-path-relative.vo";
+export * from "./distance.vo";
 export * from "./distance-value.vo";
 export * from "./division-factor.vo";
 export * from "./dll.service";
