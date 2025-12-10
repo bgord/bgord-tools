@@ -37,6 +37,8 @@ src/
 ├── day.vo.ts
 ├── directory-path-absolute.vo.ts
 ├── directory-path-relative.vo.ts
+├── distance-value.vo.ts
+├── distance.vo.ts
 ├── division-factor.vo.ts
 ├── dll.service.ts
 ├── duration-ms.vo.ts
