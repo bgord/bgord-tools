@@ -4,10 +4,10 @@ import { SizeBytes, SizeBytesError } from "../src/size-bytes.vo";
 
 describe("Size", () => {
   test("happy path", () => {
-    expect(new Size({ unit: Size.unit.b, value: 500 }).toString()).toEqual("500 b");
-    expect(new Size({ unit: Size.unit.kB, value: 500 }).toString()).toEqual("500 kB");
-    expect(new Size({ unit: Size.unit.MB, value: 2 }).toString()).toEqual("2 MB");
-    expect(new Size({ unit: Size.unit.GB, value: 2 }).toString()).toEqual("2 GB");
+    expect(Size.fromBytes(500).toString()).toEqual("500 b");
+    expect(Size.fromKb(500).toString()).toEqual("500 kB");
+    expect(Size.fromMB(2).toString()).toEqual("2 MB");
+    expect(Size.fromGB(2).toString()).toEqual("2 GB");
   });
 
   test("rejects invalid values", () => {

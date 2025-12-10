@@ -21,7 +21,7 @@ export class Size {
   private static readonly CONVERT_ROUND = new RoundUp();
   private static readonly FORMAT_ROUND = new RoundToDecimal(2);
 
-  constructor(config: SizeConfigType) {
+  private constructor(config: SizeConfigType) {
     this.unit = config.unit;
     this.bytes = this.calculateBytes(config.value, config.unit);
   }
