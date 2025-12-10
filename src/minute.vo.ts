@@ -3,17 +3,21 @@ import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
-  private readonly value: MinuteSchemaType;
+  static readonly ZERO = Minute.fromValue(0);
+  static readonly MAX = Minute.fromValue(59);
 
-  static readonly ZERO = new Minute(0);
-  static readonly MAX = new Minute(59);
+  private constructor(private readonly value: MinuteSchemaType) {}
 
-  constructor(candidate: number) {
-    this.value = MinuteSchema.parse(candidate);
+  static fromValue(candidate: number): Minute {
+    return new Minute(MinuteSchema.parse(candidate));
+  }
+
+  static fromValueSafe(candidate: MinuteSchemaType) {
+    return new Minute(candidate);
   }
 
   static fromTimestamp(timestamp: Timestamp): Minute {
-    return new Minute(new Date(timestamp.ms).getUTCMinutes());
+    return new Minute(MinuteSchema.parse(new Date(timestamp.ms).getUTCMinutes()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
@@ -37,7 +41,7 @@ export class Minute {
   }
 
   static list(): readonly Minute[] {
-    return Array.from({ length: 60 }, (_, index) => new Minute(index));
+    return Array.from({ length: 60 }, (_, index) => Minute.fromValue(index));
   }
 
   toString(): string {

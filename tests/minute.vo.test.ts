@@ -3,8 +3,8 @@ import { Minute } from "../src/minute.vo";
 import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
 import * as mocks from "./mocks";
 
-const FIVE = new Minute(5);
-const TEN = new Minute(10);
+const FIVE = Minute.fromValue(5);
+const TEN = Minute.fromValue(10);
 
 describe("Minute", () => {
   test("happy path", () => {
@@ -12,9 +12,9 @@ describe("Minute", () => {
   });
 
   test("throws for invalid minute values", () => {
-    expect(() => new Minute(12.5)).toThrow(MinuteSchemaError.Type);
-    expect(() => new Minute(-1)).toThrow(MinuteSchemaError.Invalid);
-    expect(() => new Minute(60)).toThrow(MinuteSchemaError.Invalid);
+    expect(() => Minute.fromValue(12.5)).toThrow(MinuteSchemaError.Type);
+    expect(() => Minute.fromValue(-1)).toThrow(MinuteSchemaError.Invalid);
+    expect(() => Minute.fromValue(60)).toThrow(MinuteSchemaError.Invalid);
   });
 
   test("fromTimestamp extracts UTC minutes", () => {
