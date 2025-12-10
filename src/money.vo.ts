@@ -23,28 +23,22 @@ export class Money {
   }
 
   add(money: Money): Money {
-    const result = this.amount + money.getAmount();
-
-    return new Money(MoneyAmount.parse(result), this.rounding);
+    return new Money(this.amount + money.getAmount(), this.rounding);
   }
 
   multiply(factor: MultiplicationFactorType): Money {
-    const result = this.rounding.round(this.amount * factor);
-
-    return new Money(MoneyAmount.parse(result), this.rounding);
+    return new Money(this.rounding.round(this.amount * factor), this.rounding);
   }
 
   subtract(money: Money): Money {
     const result = this.amount - money.getAmount();
 
     if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
-    return new Money(MoneyAmount.parse(result), this.rounding);
+    return new Money(result, this.rounding);
   }
 
   divide(factor: DivisionFactorType): Money {
-    const result = this.rounding.round(this.amount / factor);
-
-    return new Money(MoneyAmount.parse(result), this.rounding);
+    return new Money(this.rounding.round(this.amount / factor), this.rounding);
   }
 
   equals(another: Money): boolean {
