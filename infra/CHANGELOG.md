@@ -1,4 +1,6 @@
 # Changelog
+## 2025-12-10 11:50 v1.1.18
+- 2025-12-10 11:50 20b47a2 **1.1.18**
 - 2025-12-10 11:46 e9da9a6 **step: unify zero static property**
 - 2025-12-10 11:39 7efab43 **step: add safe static factory method for money**
 - 2025-12-10 11:39 01fd630 **step: unify zero static property**
@@ -13,6 +15,8 @@
 - 2025-12-10 11:01 7e1b8dd **step: add distance from miles**
 - 2025-12-10 10:57 99c51aa **refactor: improve money vo tests**
 - 2025-12-10 10:55 e31f4a5 **step: add distance from km**
+- 2025-12-10 10:49 a35c347 **docs: generate CHANGELOG**
+- 2025-12-10 10:49 4773f00 **docs: generate readme**
 - 2025-12-10 10:42 9266470 **feature: add distance vo**
 - 2025-12-10 10:10 bbd11bd **step: add distance value vo**
 - 2025-12-10 09:56 1ac8498 **refactor: use jest instead of setSystemTime**
