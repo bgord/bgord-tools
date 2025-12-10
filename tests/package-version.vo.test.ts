@@ -1,10 +1,20 @@
 import { describe, expect, test } from "bun:test";
 import { PackageVersion } from "../src/package-version.vo";
+import { PackageVersionSchema } from "../src/package-version-schema.vo";
 
 describe("PackageVersion", () => {
-  describe("fromStringWithV method", () => {
+  describe("fromVersionString method", () => {
     // @ts-expect-error Inspect private attributes
-    expect(PackageVersion.fromStringWithV("v1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
+    expect(PackageVersion.fromVersionString("v1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
+  });
+
+  describe("fromVersionStringSafe method", () => {
+    // @ts-expect-error Inspect private attributes
+    expect(PackageVersion.fromVersionStringSafe(PackageVersionSchema.parse("v1.0.0"))).toEqual({
+      major: 1,
+      minor: 0,
+      patch: 0,
+    });
   });
 
   describe("fromStringWith method", () => {

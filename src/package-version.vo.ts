@@ -1,4 +1,4 @@
-import { PackageVersionSchema } from "./package-version-schema.vo";
+import { PackageVersionSchema, type PackageVersionSchemaType } from "./package-version-schema.vo";
 
 export class PackageVersion {
   constructor(
@@ -7,10 +7,14 @@ export class PackageVersion {
     private readonly patch: number,
   ) {}
 
-  static fromStringWithV(candidate: string): PackageVersion {
+  static fromVersionString(candidate: string): PackageVersion {
     const version = PackageVersionSchema.parse(candidate);
 
     return new PackageVersion(version.major, version.minor, version.patch);
+  }
+
+  static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
+    return new PackageVersion(candidate.major, candidate.minor, candidate.patch);
   }
 
   static fromString(candidate: string): PackageVersion {
