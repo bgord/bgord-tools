@@ -7,15 +7,20 @@ import type { RoundingPort } from "./rounding.port";
 export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" } as const;
 
 export class Money {
-  private static readonly ZERO = 0;
+  private static readonly ZERO = MoneyAmount.parse(0);
   private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();
 
-  private readonly amount: MoneyAmountType;
-  private readonly rounding: RoundingPort;
+  private constructor(
+    private readonly amount: MoneyAmountType,
+    private readonly rounding: RoundingPort = Money.DEFAULT_ROUNDING,
+  ) {}
 
-  constructor(value: number = Money.ZERO, rounding?: RoundingPort) {
-    this.amount = MoneyAmount.parse(value);
-    this.rounding = rounding ?? Money.DEFAULT_ROUNDING;
+  static fromAmount(candidate: number, rounding?: RoundingPort): Money {
+    return new Money(MoneyAmount.parse(candidate), rounding);
+  }
+
+  static fromAmountSafe(candidate: MoneyAmountType, rounding?: RoundingPort): Money {
+    return new Money(candidate, rounding);
   }
 
   getAmount(): MoneyAmountType {
@@ -23,22 +28,22 @@ export class Money {
   }
 
   add(money: Money): Money {
-    return new Money(this.amount + money.getAmount(), this.rounding);
+    return new Money(MoneyAmount.parse(this.amount + money.getAmount()), this.rounding);
   }
 
   multiply(factor: MultiplicationFactorType): Money {
-    return new Money(this.rounding.round(this.amount * factor), this.rounding);
+    return new Money(MoneyAmount.parse(this.rounding.round(this.amount * factor)), this.rounding);
   }
 
   subtract(money: Money): Money {
     const result = this.amount - money.getAmount();
 
     if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
-    return new Money(result, this.rounding);
+    return new Money(MoneyAmount.parse(result), this.rounding);
   }
 
   divide(factor: DivisionFactorType): Money {
-    return new Money(this.rounding.round(this.amount / factor), this.rounding);
+    return new Money(MoneyAmount.parse(this.rounding.round(this.amount / factor)), this.rounding);
   }
 
   equals(another: Money): boolean {

@@ -10,105 +10,106 @@ const roundDown = new RoundDown();
 
 describe("Money", () => {
   test("happy path", () => {
-    expect(new Money().getAmount()).toEqual(MoneyAmount.parse(0));
-    expect(new Money(100).getAmount()).toEqual(MoneyAmount.parse(100));
+    expect(Money.fromAmount(0).getAmount()).toEqual(MoneyAmount.parse(0));
+    expect(Money.fromAmount(100).getAmount()).toEqual(MoneyAmount.parse(100));
   });
 
   test("throws on invalid input", () => {
-    expect(() => new Money(100.5)).toThrow(MoneyAmountError.Type);
+    expect(() => Money.fromAmount(100.5)).toThrow(MoneyAmountError.Type);
   });
 
   test("add", () => {
-    expect(new Money(100).add(new Money()).getAmount()).toEqual(MoneyAmount.parse(100));
-    expect(new Money(15).add(new Money(10)).getAmount()).toEqual(MoneyAmount.parse(25));
+    expect(Money.fromAmount(100).add(Money.fromAmount(0)).getAmount()).toEqual(MoneyAmount.parse(100));
+    expect(Money.fromAmount(15).add(Money.fromAmount(10)).getAmount()).toEqual(MoneyAmount.parse(25));
   });
 
   test("multiply - integer factor", () => {
-    expect(new Money(100).multiply(MultiplicationFactor.parse(5)).getAmount()).toEqual(
+    expect(Money.fromAmount(100).multiply(MultiplicationFactor.parse(5)).getAmount()).toEqual(
       MoneyAmount.parse(500),
     );
   });
 
   test("multiply - float factor", () => {
-    expect(new Money(100).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(100).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(150),
     );
   });
 
   test("subtract - result more than zero", () => {
-    expect(new Money(100).subtract(new Money(20)).getAmount()).toEqual(MoneyAmount.parse(80));
+    expect(Money.fromAmount(100).subtract(Money.fromAmount(20)).getAmount()).toEqual(MoneyAmount.parse(80));
   });
 
   test("subtract - result zero", () => {
-    expect(new Money(100).subtract(new Money(100)).isZero()).toEqual(true);
+    expect(Money.fromAmount(100).subtract(Money.fromAmount(100)).isZero()).toEqual(true);
   });
 
   test("subtract - result less than zero", () => {
-    expect(() => new Money(100).subtract(new Money(120)).getAmount()).toThrow(
+    expect(() => Money.fromAmount(100).subtract(Money.fromAmount(120)).getAmount()).toThrow(
       MoneyError.SubtractResultLessThanZero,
     );
   });
 
   test("multiply - float factor - default round-to-nearest", () => {
-    expect(new Money(99).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(99).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
   test("multiply - float factor - round-up", () => {
-    expect(new Money(99, roundUp).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(99, roundUp).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(149),
     );
   });
 
   test("multiply - float factor - round-down", () => {
-    expect(new Money(99, roundDown).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(99, roundDown).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
       MoneyAmount.parse(148),
     );
   });
 
   test("divide - float factor - default round-to-nearest", () => {
-    expect(new Money(98).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("divide - float factor - round-up", () => {
-    expect(new Money(98, roundUp).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(98, roundUp).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
       MoneyAmount.parse(40),
     );
   });
 
   test("divide - float factor - round-down", () => {
-    expect(new Money(98, roundDown).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
+    expect(Money.fromAmount(98, roundDown).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(
       MoneyAmount.parse(39),
     );
   });
 
   test("equals", () => {
-    const oneHundred = new Money(100);
-    const twoHundred = new Money(200);
+    const oneHundred = Money.fromAmount(100);
+    const twoHundred = Money.fromAmount(200);
 
     expect(oneHundred.equals(oneHundred)).toEqual(true);
     expect(oneHundred.equals(twoHundred)).toEqual(false);
   });
 
   test("isGreaterThan", () => {
-    const oneHundred = new Money(100);
-    const twoHundred = new Money(200);
+    const oneHundred = Money.fromAmount(100);
+    const twoHundred = Money.fromAmount(200);
 
     expect(oneHundred.isGreaterThan(oneHundred)).toEqual(false);
     expect(twoHundred.isGreaterThan(oneHundred)).toEqual(true);
   });
 
   test("isLessThan", () => {
-    const oneHundred = new Money(100);
-    const twoHundred = new Money(200);
+    const oneHundred = Money.fromAmount(100);
+    const twoHundred = Money.fromAmount(200);
 
     expect(oneHundred.isLessThan(oneHundred)).toEqual(false);
     expect(oneHundred.isLessThan(twoHundred)).toEqual(true);
   });
 
   test("isZero", () => {
-    expect(new Money().isZero()).toEqual(true);
+    expect(Money.fromAmount(0).isZero()).toEqual(true);
+    expect(Money.fromAmount(1).isZero()).toEqual(false);
   });
 
   test("format", () => {
@@ -125,15 +126,15 @@ describe("Money", () => {
     ] as const;
 
     for (const [value, result] of cases) {
-      expect(new Money(value).format()).toEqual(result);
+      expect(Money.fromAmount(value).format()).toEqual(result);
     }
   });
 
   test("toString", () => {
-    expect(new Money(5).toString()).toEqual("0.05");
+    expect(Money.fromAmount(5).toString()).toEqual("0.05");
   });
 
   test("toJSON", () => {
-    expect(new Money(5).toJSON()).toEqual(5);
+    expect(Money.fromAmount(5).toJSON()).toEqual(5);
   });
 });

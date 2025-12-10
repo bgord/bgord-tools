@@ -4,6 +4,7 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
   static readonly ZERO = Minute.fromValue(0);
+
   static readonly MAX = Minute.fromValue(59);
 
   private constructor(private readonly value: MinuteSchemaType) {}

@@ -5,6 +5,7 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Hour {
   static readonly ZERO = Hour.fromValue(0);
+
   static readonly MAX = Hour.fromValue(23);
 
   private constructor(private readonly value: HourSchemaType) {}
