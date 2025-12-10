@@ -1,4 +1,6 @@
 import { DistanceValue, type DistanceValueType } from "./distance-value.vo";
+import { RoundToNearest } from "./rounding.adapter";
+import type { RoundingPort } from "./rounding.port";
 
 export const DistanceError = {
   SubtractResultLessThanZero: "distance.subtract.result.less.than.zero",
@@ -11,6 +13,10 @@ export class Distance {
 
   constructor(value: number = Distance.ZERO) {
     this.value = DistanceValue.parse(value);
+  }
+
+  static fromKilometers(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
+    return new Distance(rounding.round(candidate * 1000));
   }
 
   get(): DistanceValueType {
