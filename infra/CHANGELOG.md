@@ -1,4 +1,7 @@
 # Changelog
+- 2025-12-12 18:35 b1e203f **step: update packages**
+- 2025-12-12 18:34 dad84d9 **step: bump bgord/scripts**
+- 2025-12-12 13:44 c84d1b4 **step: update packages**
 ## 2025-12-10 11:50 v1.1.18
 - 2025-12-10 11:50 20b47a2 **1.1.18**
 - 2025-12-10 11:46 e9da9a6 **step: unify zero static property**
@@ -15,6 +18,7 @@
 - 2025-12-10 11:01 7e1b8dd **step: add distance from miles**
 - 2025-12-10 10:57 99c51aa **refactor: improve money vo tests**
 - 2025-12-10 10:55 e31f4a5 **step: add distance from km**
+- 2025-12-10 10:50 b936279 **docs: generate CHANGELOG**
 - 2025-12-10 10:49 a35c347 **docs: generate CHANGELOG**
 - 2025-12-10 10:49 4773f00 **docs: generate readme**
 - 2025-12-10 10:42 9266470 **feature: add distance vo**
