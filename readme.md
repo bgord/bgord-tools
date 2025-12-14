@@ -44,6 +44,7 @@ src/
 ├── duration-ms.vo.ts
 ├── duration.service.ts
 ├── email-mask.service.ts
+├── email.vo.ts
 ├── etags.vo.ts
 ├── extension.vo.ts
 ├── feature-flag-value.vo.ts
