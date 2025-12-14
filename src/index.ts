@@ -17,6 +17,7 @@ export * from "./division-factor.vo";
 export * from "./dll.service";
 export * from "./duration.service";
 export * from "./duration-ms.vo";
+export * from "./email.vo";
 export * from "./email-mask.service";
 export * from "./etags.vo";
 export * from "./extension.vo";
