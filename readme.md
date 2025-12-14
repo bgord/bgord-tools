@@ -112,6 +112,8 @@ src/
 ├── timestamp.vo.ts
 ├── timezone.vo.ts
 ├── ts-utils.ts
+├── url-with-slash.vo.ts
+├── url-without-slash.vo.ts
 ├── visually-unambiguous-characters-generator.service.ts
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
