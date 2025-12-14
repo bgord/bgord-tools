@@ -87,6 +87,8 @@ export * from "./timestamp.vo";
 export * from "./timestamp-value.vo";
 export * from "./timezone.vo";
 export * from "./ts-utils";
+export * from "./url-with-slash.vo";
+export * from "./url-without-slash.vo";
 export * from "./visually-unambiguous-characters-generator.service";
 export * from "./week.vo";
 export * from "./week-iso-id.vo";
