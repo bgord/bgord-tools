@@ -1,6 +1,10 @@
 # Changelog
+## 2025-12-14 22:56 v1.2.0
+- 2025-12-14 22:56 83a9c15 **1.2.0**
 - 2025-12-14 22:54 6380e78 **feature: url vos**
 - 2025-12-14 22:29 8fc2d8d **feature: email vo**
+- 2025-12-14 21:55 9b67900 **docs: generate readme**
+- 2025-12-14 21:55 40df534 **docs: generate CHANGELOG**
 - 2025-12-14 21:31 bbc00a4 **docs: generate CHANGELOG**
 - 2025-12-14 21:31 20c296f **docs: generate readme**
 ## 2025-12-14 12:57 v1.1.20
