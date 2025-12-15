@@ -1,7 +1,10 @@
 # Changelog
+- 2025-12-15 18:16 0657af9 **step: update packages**
+- 2025-12-15 18:13 793048e **refactor: simplify type casting**
 ## 2025-12-15 10:01 v1.2.1
 - 2025-12-15 10:01 ae1e8b0 **1.2.1**
 - 2025-12-15 10:00 81abd28 **step: update packages**
+- 2025-12-15 09:01 fdb77e5 **docs: generate CHANGELOG**
 - 2025-12-15 09:00 ce9538c **docs: generate CHANGELOG**
 ## 2025-12-14 22:56 v1.2.0
 - 2025-12-14 22:56 83a9c15 **1.2.0**
