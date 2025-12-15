@@ -4,7 +4,7 @@ export const MonthIsoIdError = {
   Type: "month.iso.id.type",
   BadChars: "month.iso.id.bad.chars",
   Invalid: "month.iso.id.invalid",
-} as const;
+};
 
 // Four digits, hyphen, two digits
 const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;

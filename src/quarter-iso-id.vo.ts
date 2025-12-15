@@ -3,7 +3,7 @@ import { z } from "zod/v4";
 export const QuarterIsoIdError = {
   Type: "quarter.iso.id.type",
   BadChars: "quarter.iso.id.bad.chars",
-} as const;
+};
 
 export const QuarterIsoId = z
   .string(QuarterIsoIdError.Type)

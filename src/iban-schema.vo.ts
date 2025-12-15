@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const IbanSchemaError = { Type: "iban.schema.type", Invalid: "iban.schema.invalid" } as const;
+export const IbanSchemaError = { Type: "iban.schema.type", Invalid: "iban.schema.invalid" };
 
 // Two letters for country code, two digits, 11–30 uppercase letters or digits
 const IBAN_CHARS_WHITELIST = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/;

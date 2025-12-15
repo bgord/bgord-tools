@@ -3,7 +3,7 @@ import { PopulationStandardDeviation } from "./population-standard-deviation.ser
 import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-export const ZScoreError = { NotEnoughValues: "z.score.not.enough.values" } as const;
+export const ZScoreError = { NotEnoughValues: "z.score.not.enough.values" };
 
 export class ZScore {
   private readonly mean: number;

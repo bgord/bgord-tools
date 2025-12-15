@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const RevisionValueError = { Type: "revision.value.type", Invalid: "revision.value.invalid" } as const;
+export const RevisionValueError = { Type: "revision.value.type", Invalid: "revision.value.invalid" };
 
 export const RevisionValue = z
   .number(RevisionValueError.Type)

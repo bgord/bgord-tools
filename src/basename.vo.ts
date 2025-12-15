@@ -8,7 +8,7 @@ export const BasenameError = {
   Dotfiles: "basename.dotfiles",
   TrailingDot: "basename.trailing.dot",
   BadChars: "basename.bad.chars",
-} as const;
+};
 
 // Letters, digits, dots, underscores, and hyphens allowed
 const BASENAME_CHARS = /^[a-zA-Z0-9._-]+$/;

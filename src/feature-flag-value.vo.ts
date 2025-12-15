@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const FeatureFlagValueError = { Invalid: "feature.flag.value.invalid" } as const;
+export const FeatureFlagValueError = { Invalid: "feature.flag.value.invalid" };
 
 export enum FeatureFlagEnum {
   yes = "yes",

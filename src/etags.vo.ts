@@ -25,7 +25,7 @@ export class ETag {
 
 export type WeakETagValueType = string;
 
-export const WeakETagError = { Invalid: "weak.etag.invalid" } as const;
+export const WeakETagError = { Invalid: "weak.etag.invalid" };
 
 export class WeakETag {
   static HEADER_NAME = "ETag";

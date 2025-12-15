@@ -12,7 +12,7 @@ export const LinearRegressionError = {
   SumXSquaredTooBig: "linear.regression.sum.x.squared.too.big",
   SumXTimesYTooBig: "linear.regression.sum.x.times.y.too.big",
   ModelCreation: "linear.regression.model.creation",
-} as const;
+};
 
 export class LinearRegression {
   private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();

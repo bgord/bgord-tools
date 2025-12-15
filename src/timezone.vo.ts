@@ -5,7 +5,7 @@ export const TimezoneError = {
   Empty: "timezone.empty",
   TooLong: "timezone.too.long",
   Invalid: "timezone.invalid",
-} as const;
+};
 
 export const Timezone = z
   .string(TimezoneError.Type)

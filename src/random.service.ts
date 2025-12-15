@@ -2,7 +2,7 @@ import { RoundDown } from "./rounding.adapter";
 
 type RandomGenerateConfigType = { min: number; max: number };
 
-export const RandomError = { MinMax: "random.min.max" } as const;
+export const RandomError = { MinMax: "random.min.max" };
 
 export class Random {
   private static readonly DEFAULT_MIN = 0;

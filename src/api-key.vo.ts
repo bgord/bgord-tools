@@ -1,10 +1,6 @@
 import { z } from "zod/v4";
 
-export const ApiKeyError = {
-  Type: "api.key.type",
-  Length: "api.key.length",
-  BadChars: "api.key.bad.chars",
-} as const;
+export const ApiKeyError = { Type: "api.key.type", Length: "api.key.length", BadChars: "api.key.bad.chars" };
 
 // 64 letters and digits allowed
 const API_KEY_CHARS = /^[a-zA-Z0-9]{64}$/;

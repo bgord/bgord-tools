@@ -7,7 +7,7 @@ export const ObjectKeyError = {
   TooLong: "object.key.too.long",
   BadChars: "object.key.bad.chars",
   DotSegments: "object.key.dot.segments",
-} as const;
+};
 
 // Lowercase letters, digits, dots, underscores, and hyphens
 const OBJECT_KEY_SEGMENT_CHARS_WHITELIST = /^[a-z0-9._-]+$/;

@@ -30,7 +30,7 @@ export const MinMaxScalerError = {
   ValueOutOfRange: "min.max.scaler.value.out.of.range",
   ScaledOutOfBounds: "min.max.scaler.scaled.out.of.bounds",
   EmptyArray: "min.max.scaler.empty.array",
-} as const;
+};
 
 export class MinMaxScaler {
   private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToDecimal(2);

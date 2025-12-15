@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const ReorderingItemPositionValueError = { Invalid: "reordering.position.type" } as const;
+export const ReorderingItemPositionValueError = { Invalid: "reordering.position.type" };
 
 export const ReorderingItemPositionValue = z
   .number(ReorderingItemPositionValueError.Invalid)

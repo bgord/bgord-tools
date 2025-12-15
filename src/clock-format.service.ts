@@ -12,4 +12,4 @@ enum ClockFormatterEnum {
 export const ClockFormatters: Record<ClockFormatterEnum, ClockFormatter> = {
   TWENTY_FOUR_HOURS: (hour, minute) => `${hour.toString()}:${minute.toString()}`,
   TWELVE_HOURS: (hour, minute) => `${hour.format(HourFormatters.TWELVE_HOURS)}:${minute.toString()}`,
-} as const;
+};

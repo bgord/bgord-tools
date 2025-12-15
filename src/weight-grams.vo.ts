@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const WeightGramsError = { Type: "weight.grams.type", Invalid: "weight.grams.invalid" } as const;
+export const WeightGramsError = { Type: "weight.grams.type", Invalid: "weight.grams.invalid" };
 
 export const WeightGrams = z
   .number(WeightGramsError.Type)

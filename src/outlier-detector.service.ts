@@ -1,6 +1,6 @@
 import { ZScore } from "./z-score.service";
 
-export const OutlierDetectorError = { NotEnoughValues: "outlier.detector.not.enough.values" } as const;
+export const OutlierDetectorError = { NotEnoughValues: "outlier.detector.not.enough.values" };
 
 export class OutlierDetector {
   private readonly zScore: ZScore;

@@ -1,6 +1,6 @@
 import type { Timestamp } from "./timestamp.vo";
 
-export const DateRangeError = { Invalid: "date.range.invalid" } as const;
+export const DateRangeError = { Invalid: "date.range.invalid" };
 
 export class DateRange {
   constructor(

@@ -3,7 +3,7 @@ import { z } from "zod/v4";
 export const PackageVersionSchemaError = {
   Type: "package.version.schema.error",
   BadChars: "package.version.schema.bad.chars",
-} as const;
+};
 
 // v, 1-4 digits, dot, 1-4 digits, dot, 1-4 digits - () for capturing groups
 const PACKAGE_VERSIONS_CHARS_WHITELIST = /^v([0-9]{1,4})\.([0-9]{1,4})\.([0-9]{1,4})$/;

@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const AgeYearsError = { Type: "age.years.type", Invalid: "age.years.invalid" } as const;
+export const AgeYearsError = { Type: "age.years.type", Invalid: "age.years.invalid" };
 
 export const AgeYearsConstraints = { min: 1, max: 130 };
 

@@ -8,7 +8,7 @@ export const FilePathRelativeSchemaError = {
   BackslashForbidden: "file.path.relative.backslash.forbidden",
   RequiresDirectory: "file.path.relative.requires.directory",
   Empty: "file.path.relative.empty",
-} as const;
+};
 
 export const FilePathRelativeSchema = z
   .string(FilePathRelativeSchemaError.Type)

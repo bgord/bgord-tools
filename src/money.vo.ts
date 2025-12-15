@@ -4,7 +4,7 @@ import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import { RoundDown, RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" } as const;
+export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" };
 
 export class Money {
   private static readonly ZERO = MoneyAmount.parse(0);

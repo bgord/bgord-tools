@@ -3,7 +3,7 @@ import { z } from "zod/v4";
 export const HeightMillimetersError = {
   Type: "height.millimeters.type",
   Invalid: "height.millimeters.invalid",
-} as const;
+};
 
 export const HeightMillimeters = z
   .number(HeightMillimetersError.Type)

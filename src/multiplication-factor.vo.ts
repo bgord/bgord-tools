@@ -3,7 +3,7 @@ import { z } from "zod/v4";
 export const MultiplicationFactorError = {
   Type: "multiplication.factor.type",
   Invalid: "multiplication.factor.invalid",
-} as const;
+};
 
 export const MultiplicationFactor = z
   .number(MultiplicationFactorError.Type)

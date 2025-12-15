@@ -5,7 +5,7 @@ export const ExtensionError = {
   Empty: "extension.empty",
   TooLong: "extension.too.long",
   BadChars: "extension.bad.chars",
-} as const;
+};
 
 // Lowercase letters and digits allowed
 const EXTENSION_WHITELIST = /^[a-z0-9]+$/;

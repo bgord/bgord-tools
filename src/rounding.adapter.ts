@@ -19,10 +19,7 @@ export class RoundDown implements RoundingPort {
   }
 }
 
-export const RoundingDecimalError = {
-  Type: "rounding.decimal.type",
-  Invalid: "rounding.decimal.invalid",
-} as const;
+export const RoundingDecimalError = { Type: "rounding.decimal.type", Invalid: "rounding.decimal.invalid" };
 
 export const RoundingDecimal = z
   .number(RoundingDecimalError.Type)

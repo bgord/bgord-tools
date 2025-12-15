@@ -1,9 +1,6 @@
 import { z } from "zod/v4";
 
-export const PaginationSkipError = {
-  Type: "pagination.skip.type",
-  Invalid: "pagination.skip.invalid",
-} as const;
+export const PaginationSkipError = { Type: "pagination.skip.type", Invalid: "pagination.skip.invalid" };
 
 export const Skip = z
   .number(PaginationSkipError.Type)

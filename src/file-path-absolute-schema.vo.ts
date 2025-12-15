@@ -8,7 +8,7 @@ export const FilePathAbsoluteSchemaError = {
   TrailingSlash: "file.path.absolute.trailing.slash",
   BackslashForbidden: "file.path.absolute.backslash.forbidden",
   Empty: "file.path.absolute.empty",
-} as const;
+};
 
 export const FilePathAbsoluteSchema = z
   .string(FilePathAbsoluteSchemaError.Type)

@@ -2,7 +2,7 @@ import { differenceInYears } from "date-fns";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
 import { Timestamp } from "./timestamp.vo";
 
-export const AgeError = { FutureBirthdate: "age.future.birthdate" } as const;
+export const AgeError = { FutureBirthdate: "age.future.birthdate" };
 
 export class Age {
   static readonly MIN = AgeYearsConstraints.min;

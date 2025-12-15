@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const UrlWithoutSlashError = { Invalid: "url.without.slash.invalid" } as const;
+export const UrlWithoutSlashError = { Invalid: "url.without.slash.invalid" };
 
 export const UrlWithoutSlash = z
   .url({ error: UrlWithoutSlashError.Invalid })

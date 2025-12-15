@@ -5,7 +5,7 @@ export const DayIsoIdError = {
   Type: "day.iso.id.type",
   BadChars: "day.iso.id.bad.chars",
   InvalidDate: "day.iso.id.invalid.date",
-} as const;
+};
 
 // Four digits, hyphen, two digits, hyphen, two digits
 export const DAY_ISO_ID_CHARS = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;

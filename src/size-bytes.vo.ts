@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const SizeBytesError = { Invalid: "size.bytes.invalid" } as const;
+export const SizeBytesError = { Invalid: "size.bytes.invalid" };
 
 export const SizeBytes = z
   .number(SizeBytesError.Invalid)

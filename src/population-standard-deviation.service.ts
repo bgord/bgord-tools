@@ -5,7 +5,7 @@ import { Sum } from "./sum.service";
 
 export const PopulationStandardDeviationError = {
   NotEnoughValues: "population.standard.deviation.not.enough.values",
-} as const;
+};
 
 export class PopulationStandardDeviation {
   static calculate(values: number[], rounding: RoundingPort = new RoundToDecimal(2)): number {

@@ -1,9 +1,6 @@
 import { z } from "zod/v4";
 
-export const PaginationTakeError = {
-  Type: "pagination.take.type",
-  Invalid: "pagination.take.invalid",
-} as const;
+export const PaginationTakeError = { Type: "pagination.take.type", Invalid: "pagination.take.invalid" };
 
 export const Take = z
   .number(PaginationTakeError.Type)

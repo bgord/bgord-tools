@@ -11,7 +11,7 @@ export const ReorderingError = {
   CannotFindTarget: "reordering.cannot.find.target",
 };
 
-const ReorderingIdError = { Type: "reordering.id.type" } as const;
+const ReorderingIdError = { Type: "reordering.id.type" };
 
 export const ReorderingId = z.string(ReorderingIdError.Type).min(1, ReorderingIdError.Type);
 export type ReorderingItemIdType = z.infer<typeof ReorderingId>;

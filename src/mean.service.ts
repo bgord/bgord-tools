@@ -2,7 +2,7 @@ import { RoundToDecimal } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 import { Sum } from "./sum.service";
 
-export const MeanError = { NotEnoughValues: "mean.not.enough.values" } as const;
+export const MeanError = { NotEnoughValues: "mean.not.enough.values" };
 
 export class Mean {
   private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToDecimal(2);

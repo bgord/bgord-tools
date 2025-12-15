@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const LanguageError = { Type: "language.type", BadChars: "language.bad.chars" } as const;
+export const LanguageError = { Type: "language.type", BadChars: "language.bad.chars" };
 
 // Two lowercase letters
 const LANGUAGE_CHARS_WHITELIST = /^[a-z]{2}$/;

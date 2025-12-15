@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const TimestampValueError = { Invalid: "timestamp.invalid" } as const;
+export const TimestampValueError = { Invalid: "timestamp.invalid" };
 
 export const TimestampValue = z
   .number(TimestampValueError.Invalid)

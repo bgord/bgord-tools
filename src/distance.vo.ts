@@ -2,9 +2,7 @@ import { DistanceValue, type DistanceValueType } from "./distance-value.vo";
 import { RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
-export const DistanceError = {
-  SubtractResultLessThanZero: "distance.subtract.result.less.than.zero",
-} as const;
+export const DistanceError = { SubtractResultLessThanZero: "distance.subtract.result.less.than.zero" };
 
 export class Distance {
   private static readonly ZERO = DistanceValue.parse(0);

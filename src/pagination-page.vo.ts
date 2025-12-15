@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const PaginationPageError = { Type: "pagination.page.Type" } as const;
+export const PaginationPageError = { Type: "pagination.page.Type" };
 
 export const Page = z.coerce
   .number(PaginationPageError.Type)

@@ -2,7 +2,7 @@ import * as mime from "mime-types";
 import { Extension, type ExtensionType } from "./extension.vo";
 import { MimeValue } from "./mime-value.vo";
 
-export const MimeError = { NotAccepted: "mime.not.accepted" } as const;
+export const MimeError = { NotAccepted: "mime.not.accepted" };
 
 export class Mime {
   private constructor(

@@ -5,7 +5,7 @@ export const WeekIsoIdError = {
   Type: "week.iso.id.type",
   BadChars: "week.iso.id.bad.chars",
   Invalid: "week.iso.id.invalid",
-} as const;
+};
 
 // Four digits, hypen, W, followed by two digits
 const WEEK_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-W[0-9]{2}$/;

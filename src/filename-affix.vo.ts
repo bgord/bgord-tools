@@ -10,7 +10,7 @@ export const FilenameAffixError = {
   Empty: "affix.empty",
   TooLong: "affix.too.long",
   BadChars: "affix.bad.chars",
-} as const;
+};
 
 // Letters, digits, underscores, and hyphens allowed
 const FILENAME_AFFIX_WHITELIST = /^[a-zA-Z0-9_-]+$/;

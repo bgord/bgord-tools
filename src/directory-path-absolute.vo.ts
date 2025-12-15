@@ -7,7 +7,7 @@ export const DirectoryPathAbsoluteError = {
   TooLong: "directory.path.absolue.too.long",
   TrailingSlash: "directory.path.absolue.trailing.slash",
   Type: "directory.path.absolue.type",
-} as const;
+};
 
 // Letters, digits, dots, underscores, and hyphens
 export const DIRECTORY_PATH_ABSOLUTE_CHARS = /^[a-zA-Z0-9._-]+$/;
