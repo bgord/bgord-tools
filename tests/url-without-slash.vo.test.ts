@@ -5,6 +5,7 @@ describe("UrlWithoutSlash", () => {
   test("happy path", () => {
     expect(UrlWithoutSlash.safeParse("https://example.com").success).toEqual(true);
     expect(UrlWithoutSlash.safeParse("http://localhost/foo/bar").success).toEqual(true);
+    expect(UrlWithoutSlash.safeParse("http://localhost:3000").success).toEqual(true);
   });
 
   test("rejects empty", () => {

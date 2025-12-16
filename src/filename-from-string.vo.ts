@@ -4,7 +4,7 @@ import { Extension } from "./extension.vo";
 
 export const FilenameFromStringError = {
   Type: "filename.from.string.type",
-  Invalid: "filename.from.string.Invalid",
+  Invalid: "filename.from.string.invalid",
 };
 
 // .+ at least one character, advances to the last dot
