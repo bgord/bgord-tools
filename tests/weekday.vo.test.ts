@@ -48,6 +48,7 @@ describe("Weekday", () => {
 
   test("format - short", () => {
     const weekday = new Weekday(1, WeekdayFormatters[WeekdayFormatterEnum.SHORT]);
+
     expect(weekday.format()).toEqual("Mon");
   });
 
@@ -86,9 +87,11 @@ describe("Weekday", () => {
   test("list", () => {
     const days = Weekday.list();
     const rawValues = days.map((d) => d.get());
+
     expect(rawValues).toEqual([0, 1, 2, 3, 4, 5, 6]);
 
     const shortDays = Weekday.list(WeekdayFormatters[WeekdayFormatterEnum.SHORT]);
+
     expect(shortDays[0].format()).toEqual("Sun");
     expect(shortDays[1].format()).toEqual("Mon");
   });
@@ -96,6 +99,7 @@ describe("Weekday", () => {
   test("listMondayFirst", () => {
     const days = Weekday.listMondayFirst();
     const rawValues = days.map((d) => d.get());
+
     expect(rawValues).toEqual([1, 2, 3, 4, 5, 6, 0]);
   });
 });

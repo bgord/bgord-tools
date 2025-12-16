@@ -42,6 +42,7 @@ describe("DateRange", () => {
 
   test("equals - false", () => {
     const different = new DateRange(START, END.add(Duration.Seconds(1)));
+
     expect(range.equals(different)).toEqual(false);
   });
 });

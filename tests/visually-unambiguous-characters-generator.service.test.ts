@@ -10,8 +10,8 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
 
   test("length of 5", () => {
     const result = VisuallyUnambiguousCharactersGenerator.generate(5);
-    expect(result.length).toEqual(5);
 
+    expect(result.length).toEqual(5);
     result.split("").forEach((character) => {
       expect(VisuallyUnambiguousCharactersGenerator.chars).toContain(character);
     });

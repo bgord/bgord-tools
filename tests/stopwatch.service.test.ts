@@ -7,7 +7,6 @@ import { Timestamp } from "../src/timestamp.vo";
 describe("Stopwatch", () => {
   test("happy path", () => {
     jest.useFakeTimers();
-
     const stopwatch = new Stopwatch(Timestamp.fromNumber(Date.now()));
     jest.advanceTimersByTime(Duration.Ms(500).ms);
 
@@ -18,8 +17,8 @@ describe("Stopwatch", () => {
 
   test("throws if stop is called twice", () => {
     jest.useFakeTimers();
-
     const stopwatch = new Stopwatch(Timestamp.fromNumber(Date.now()));
+
     stopwatch.stop();
 
     expect(() => stopwatch.stop()).toThrow(StopwatchError.AlreadyStopped);

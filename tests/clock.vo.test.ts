@@ -8,8 +8,8 @@ import { Minute } from "../src/minute.vo";
 import { MinuteSchema } from "../src/minute-schema.vo";
 import * as mocks from "./mocks";
 
-const EIGHT_FIFTY_NINE = new Clock(new Hour(8), new Minute(59));
-const NINE = new Clock(new Hour(9), new Minute(0));
+const EIGHT_FIFTY_NINE = new Clock(Hour.fromValue(8), Minute.fromValue(59));
+const NINE = new Clock(Hour.fromValue(9), Minute.fromValue(0));
 
 describe("Clock", () => {
   test("fromTimestamp", () => {
@@ -21,7 +21,7 @@ describe("Clock", () => {
   });
 
   test("equals", () => {
-    expect(NINE.equals(new Clock(new Hour(9), new Minute(0)))).toEqual(true);
+    expect(NINE.equals(new Clock(Hour.fromValue(9), Minute.fromValue(0)))).toEqual(true);
     expect(EIGHT_FIFTY_NINE.equals(NINE)).toEqual(false);
   });
 
@@ -40,14 +40,16 @@ describe("Clock", () => {
   });
 
   test("format - TWELVE_HOURS", () => {
-    expect(new Clock(new Hour(13), new Minute(3), ClockFormatters.TWELVE_HOURS).format()).toEqual("01:03");
+    expect(new Clock(Hour.fromValue(13), Minute.fromValue(3), ClockFormatters.TWELVE_HOURS).format()).toEqual(
+      "01:03",
+    );
   });
 
   test("format - custom", () => {
     const composed = (hour: Hour, minute: Minute) =>
       `${hour.format(HourFormatters.AM_PM)} @ ${minute.toString()} min`;
 
-    expect(new Clock(new Hour(15), new Minute(7), composed).format()).toEqual("3 p.m. @ 07 min");
+    expect(new Clock(Hour.fromValue(15), Minute.fromValue(7), composed).format()).toEqual("3 p.m. @ 07 min");
   });
 
   test("toString", () => {

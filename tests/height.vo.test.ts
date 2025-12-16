@@ -30,6 +30,7 @@ describe("Height", () => {
 
   test("toCentimeters", () => {
     const height = Height.fromCentimeters(180);
+
     expect(height.toCentimeters()).toEqual(180);
     expect(height.toCentimeters(new RoundToDecimal(1))).toEqual(180);
     expect(Height.fromMillimeters(1804).toCentimeters(new RoundToDecimal(1))).toEqual(180.4);

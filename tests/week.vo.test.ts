@@ -9,7 +9,6 @@ import * as mocks from "./mocks";
 describe("Week", () => {
   test("happy path", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
-
     const expectedStart = Timestamp.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms).getTime());
     const expectedEnd = Timestamp.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms).getTime());
 

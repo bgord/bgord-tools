@@ -55,6 +55,7 @@ describe("Size", () => {
 
   test("format - bytes source", () => {
     const value = Size.fromBytes(1024);
+
     expect(value.format(Size.unit.b)).toEqual("1024 b");
     expect(value.format(Size.unit.kB)).toEqual("1 kB");
     expect(value.format(Size.unit.MB)).toEqual("0 MB");
@@ -63,6 +64,7 @@ describe("Size", () => {
 
   test("format - kB source", () => {
     const value = Size.fromKb(512);
+
     expect(value.format(Size.unit.b)).toEqual("524288 b");
     expect(value.format(Size.unit.kB)).toEqual("512 kB");
     expect(value.format(Size.unit.MB)).toEqual("0.5 MB");
@@ -71,6 +73,7 @@ describe("Size", () => {
 
   test("format - MB source", () => {
     const value = Size.fromMB(128);
+
     expect(value.format(Size.unit.b)).toEqual("134217728 b");
     expect(value.format(Size.unit.kB)).toEqual("131072 kB");
     expect(value.format(Size.unit.MB)).toEqual("128 MB");
@@ -79,6 +82,7 @@ describe("Size", () => {
 
   test("format - GB source", () => {
     const value = Size.fromGB(2);
+
     expect(value.format(Size.unit.b)).toEqual("2147483648 b");
     expect(value.format(Size.unit.kB)).toEqual("2097152 kB");
     expect(value.format(Size.unit.MB)).toEqual("2048 MB");

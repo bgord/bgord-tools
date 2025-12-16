@@ -16,9 +16,11 @@ describe("RateLimiter", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);
+
     expect(first.allowed).toEqual(true);
 
     const second = rateLimiter.verify(currentTimestampMs.add(duration).subtract(mocks.epsilon));
+
     expect(second.allowed).toEqual(false);
     // @ts-expect-error
     expect(second.remaining).toEqual(mocks.epsilon);
@@ -28,9 +30,11 @@ describe("RateLimiter", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);
+
     expect(first.allowed).toEqual(true);
 
     const second = rateLimiter.verify(currentTimestampMs.add(duration));
+
     expect(second.allowed).toEqual(true);
   });
 
@@ -38,15 +42,19 @@ describe("RateLimiter", () => {
     const rateLimiter = new RateLimiter(duration);
 
     const first = rateLimiter.verify(currentTimestampMs);
+
     expect(first.allowed).toEqual(true);
 
     const second = rateLimiter.verify(currentTimestampMs.add(duration));
+
     expect(second.allowed).toEqual(true);
 
     const third = rateLimiter.verify(currentTimestampMs.add(duration).add(mocks.epsilon));
+
     expect(third.allowed).toEqual(false);
 
     const fourth = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.Ms(2)));
+
     expect(fourth.allowed).toEqual(false);
   });
 });

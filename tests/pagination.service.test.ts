@@ -45,7 +45,6 @@ describe("Pagination", () => {
       pagination: { values: { take: 10, skip: 10 }, page: 2 },
       result: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
     };
-
     const paged = Pagination.prepare(config);
 
     expect(paged.result).toEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
@@ -70,11 +69,7 @@ describe("Pagination", () => {
   });
 
   test("isExhausted", () => {
-    const config = {
-      total: 25,
-      pagination: { values: { take: 10, skip: 10 }, page: 3 },
-    };
-
+    const config = { total: 25, pagination: { values: { take: 10, skip: 10 }, page: 3 } };
     const exhausted = Pagination.isExhausted(config);
 
     expect(exhausted).toEqual(true);

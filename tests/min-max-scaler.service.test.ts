@@ -4,13 +4,11 @@ import { MinMaxScaler, MinMaxScalerError } from "../src/min-max-scaler.service";
 describe("MinMaxScaler", () => {
   test("scale - default bound", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100 });
-
     const original = 50;
     const scaled = 0.5;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
 
+    expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: false,
       isUpperBound: false,
@@ -21,13 +19,11 @@ describe("MinMaxScaler", () => {
 
   test("scale - custom bound", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
-
     const original = 50;
     const scaled = 15;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ original, scaled, isMin: false, isMax: false });
 
+    expect(result).toEqual({ original, scaled, isMin: false, isMax: false });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: false,
       isUpperBound: false,
@@ -38,13 +34,11 @@ describe("MinMaxScaler", () => {
 
   test("scale - custom bound - 2 decimals rounding", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 27, bound: { lower: 0, upper: 9 } });
-
     const original = 5;
     const scaled = 1.67;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
 
+    expect(result).toEqual({ scaled, original, isMin: false, isMax: false });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: false,
       isUpperBound: false,
@@ -55,13 +49,11 @@ describe("MinMaxScaler", () => {
 
   test("scale - minimum value", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
-
     const original = 0;
     const scaled = 10;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ scaled, original, isMin: true, isMax: false });
 
+    expect(result).toEqual({ scaled, original, isMin: true, isMax: false });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: true,
       isUpperBound: false,
@@ -72,13 +64,11 @@ describe("MinMaxScaler", () => {
 
   test("scale - maximum value", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
-
     const original = 100;
     const scaled = 20;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ scaled, original, isMin: false, isMax: true });
 
+    expect(result).toEqual({ scaled, original, isMin: false, isMax: true });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: false,
       isUpperBound: true,
@@ -89,13 +79,11 @@ describe("MinMaxScaler", () => {
 
   test("scale - min equals to max", () => {
     const scaler = new MinMaxScaler({ min: 100, max: 100, bound: { lower: 10, upper: 20 } });
-
     const original = 100;
     const scaled = 15;
-
     const result = scaler.scale(original);
-    expect(result).toEqual({ scaled, original, isMin: true, isMax: true });
 
+    expect(result).toEqual({ scaled, original, isMin: true, isMax: true });
     expect(scaler.descale(result.scaled)).toEqual({
       isLowerBound: false,
       isUpperBound: false,

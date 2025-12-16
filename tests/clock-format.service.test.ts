@@ -5,14 +5,14 @@ import { Minute } from "../src/minute.vo";
 
 describe("ClockFormatters", () => {
   test("TWENTY_FOUR_HOURS", () => {
-    const clock = { hour: new Hour(5), minute: new Minute(3) };
+    const clock = { hour: Hour.fromValue(5), minute: Minute.fromValue(3) };
 
     expect(ClockFormatters.TWENTY_FOUR_HOURS(clock.hour, clock.minute)).toEqual("05:03");
   });
 
   test("TWELVE_HOURS ", () => {
-    const midday = { hour: new Hour(12), minute: new Minute(0) };
-    const afternoon = { hour: new Hour(15), minute: new Minute(9) };
+    const midday = { hour: Hour.fromValue(12), minute: Minute.fromValue(0) };
+    const afternoon = { hour: Hour.fromValue(15), minute: Minute.fromValue(9) };
 
     expect(ClockFormatters.TWELVE_HOURS(midday.hour, midday.minute)).toEqual("12:00");
     expect(ClockFormatters.TWELVE_HOURS(afternoon.hour, afternoon.minute)).toEqual("03:09");

@@ -8,7 +8,6 @@ import * as mocks from "./mocks";
 describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
-
     const date = new Date(mocks.TIME_ZERO.ms);
     const expectedStart = Timestamp.fromNumber(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),

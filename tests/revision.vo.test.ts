@@ -7,6 +7,7 @@ describe("Revision", () => {
   test("happy path", () => {
     const value = RevisionValue.parse(0);
     const revision = new Revision(value);
+
     expect(revision.value).toEqual(value);
   });
 

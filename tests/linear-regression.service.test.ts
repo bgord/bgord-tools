@@ -56,6 +56,7 @@ describe("LinearRegression", () => {
       { x: 1, y: 2 },
       { x: 2, y: 4 },
     ]);
+
     expect(model.predict(4)).toEqual(8);
   });
 
@@ -65,6 +66,7 @@ describe("LinearRegression", () => {
       { x: 2, y: 4 },
       { x: 3, y: 6 },
     ]);
+
     expect(model.predict(10)).toEqual(20);
   });
 
@@ -76,6 +78,7 @@ describe("LinearRegression", () => {
     ]);
     const params = model.inspect();
     const reconstructed = new LinearRegression(params);
+
     expect(reconstructed.predict(10)).toEqual(20);
   });
 
@@ -87,6 +90,7 @@ describe("LinearRegression", () => {
     ]);
     const params = model.inspect();
     const reconstructed = new LinearRegression(params);
+
     expect(reconstructed.predict(10)).toEqual(0);
   });
 

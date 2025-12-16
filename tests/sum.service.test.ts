@@ -15,9 +15,9 @@ describe("Sum", () => {
   test("precise", () => {
     const values = [1e12, ...Array.from({ length: 1000 }, () => 1e-3)];
     const naive = Sum.of(values);
-    const precise = Sum.precise(values);
-
     const expected = 1e12 + 1;
+
+    const precise = Sum.precise(values);
 
     expect(precise).toBeCloseTo(expected, 9);
     expect(naive).toBeCloseTo(expected, 1);
