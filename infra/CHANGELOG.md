@@ -1,5 +1,8 @@
 # Changelog
+## 2025-12-17 12:26 v1.2.3
+- 2025-12-17 12:26 3dd874d **1.2.3**
 - 2025-12-17 12:25 61509dc **step: update packages**
+- 2025-12-17 11:25 1824168 **docs: generate CHANGELOG**
 - 2025-12-16 21:03 ebbade1 **fix: filename from string error**
 - 2025-12-16 09:36 9710c23 **refactor: arrange act assert**
 ## 2025-12-16 09:09 v1.2.2
