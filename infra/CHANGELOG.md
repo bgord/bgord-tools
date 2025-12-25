@@ -1,5 +1,8 @@
 # Changelog
+- 2025-12-25 12:18 933d107 **step: update packages**
+- 2025-12-19 12:20 8a2da21 **fix: make mime types const**
 - 2025-12-17 23:06 51182aa **step: update packages**
+- 2025-12-17 22:07 8f0f2fc **docs: generate CHANGELOG**
 ## 2025-12-17 12:26 v1.2.3
 - 2025-12-17 12:26 3dd874d **1.2.3**
 - 2025-12-17 12:25 61509dc **step: update packages**
