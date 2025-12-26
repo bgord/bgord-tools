@@ -1,5 +1,6 @@
 import { DurationMs, type DurationMsType } from "./duration-ms.vo";
-import { RoundToDecimal } from "./rounding.adapter";
+import type { MultiplicationFactorType } from "./multiplication-factor.vo";
+import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
 import type { RoundingPort } from "./rounding.port";
 
 export class Duration {
@@ -71,6 +72,12 @@ export class Duration {
   }
   subtract(another: Duration): Duration {
     return Duration.Ms(this.internal - another.internal);
+  }
+
+  times(factor: MultiplicationFactorType): Duration {
+    const rounding = new RoundToNearest();
+
+    return Duration.Ms(rounding.round(this.internal * factor));
   }
 
   toAbsolute(): Duration {

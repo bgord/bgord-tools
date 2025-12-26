@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { DurationMs } from "../src/duration-ms.vo";
+import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 
 describe("Duration", () => {
   test("weeks", () => {
@@ -70,11 +71,30 @@ describe("Duration", () => {
 
   test("add/subtract", () => {
     const base = Duration.Seconds(10);
+
     const added = base.add(Duration.Seconds(5));
     const subtracted = base.subtract(Duration.Seconds(3));
 
     expect(added.seconds).toEqual(15);
     expect(subtracted.seconds).toEqual(7);
+  });
+
+  test("times", () => {
+    const base = Duration.Ms(10);
+    const factor = MultiplicationFactor.parse(1.5);
+
+    const result = base.times(factor);
+
+    expect(result.ms).toEqual(DurationMs.parse(15));
+  });
+
+  test("times - rounding", () => {
+    const base = Duration.Ms(7);
+    const factor = MultiplicationFactor.parse(1.29);
+
+    const result = base.times(factor);
+
+    expect(result.ms).toEqual(DurationMs.parse(9));
   });
 
   test("equals / comparisons", () => {
