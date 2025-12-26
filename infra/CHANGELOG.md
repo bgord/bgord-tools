@@ -1,8 +1,10 @@
 # Changelog
+- 2025-12-26 16:02 2e65e23 **step: add duration.times**
 ## 2025-12-26 13:57 v1.2.5
 - 2025-12-26 13:57 e1836cf **1.2.5**
 - 2025-12-26 13:56 1f97ce7 **step: update packages**
 - 2025-12-26 13:55 46d3490 **refactor: move stopwatch to bun**
+- 2025-12-26 12:57 63eabac **docs: generate CHANGELOG**
 - 2025-12-26 12:56 f999722 **docs: generate readme**
 - 2025-12-26 12:56 d623282 **docs: generate CHANGELOG**
 ## 2025-12-25 12:20 v1.2.4
