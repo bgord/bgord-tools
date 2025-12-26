@@ -104,7 +104,6 @@ src/
 ├── size-bytes.vo.ts
 ├── size.vo.ts
 ├── slug.service.ts
-├── stopwatch.service.ts
 ├── sum.service.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
