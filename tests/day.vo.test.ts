@@ -16,13 +16,13 @@ describe("Day", () => {
 
     expect(day.getStart()).toEqual(expectedStart);
     expect(day.getEnd()).toEqual(expectedEnd);
-    expect(day.toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
+    expect(day.toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
     expect(day.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("fromTimestampValue", () => {
     expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(
-      DayIsoId.parse(mocks.TIME_ZERO_DATE),
+      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
     );
   });
 
@@ -35,16 +35,16 @@ describe("Day", () => {
   });
 
   test("fromNow", () => {
-    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
+    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
   });
 
   test("fromNow", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
   });
 
   test("fromIsoId", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toIsoId()).toEqual(
-      DayIsoId.parse(mocks.TIME_ZERO_DATE),
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toIsoId()).toEqual(
+      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
     );
   });
 
@@ -81,11 +81,13 @@ describe("Day", () => {
   });
 
   test("toString", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toString()).toEqual(mocks.TIME_ZERO_DATE);
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toString()).toEqual(
+      mocks.TIME_ZERO_DATE_LIKE,
+    );
   });
 
   test("toJSON", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE)).toJSON()).toEqual({
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toJSON()).toEqual({
       start: 1699920000000,
       end: 1700006399999,
     });

@@ -21,6 +21,22 @@ describe("Timestamp", () => {
     expect(() => Timestamp.fromNumber(-1)).toThrow(TimestampValueError.Invalid);
   });
 
+  test("fromDate - success", () => {
+    expect(Timestamp.fromDate(mocks.TIME_ZERO_DATE));
+  });
+
+  test("fromDate - error", () => {
+    expect(() => Timestamp.fromDate(new Date("invalid"))).toThrow(TimestampValueError.Invalid);
+  });
+
+  test("fromDateLike - success", () => {
+    expect(Timestamp.fromDateLike(mocks.TIME_ZERO_DATE_LIKE));
+  });
+
+  test("fromDateLike - error", () => {
+    expect(() => Timestamp.fromDateLike("invalid")).toThrow(TimestampValueError.Invalid);
+  });
+
   test("add", () => {
     expect(mocks.TIME_ZERO.add(Duration.Ms(500)).ms).toEqual(TimestampValue.parse(mocks.TIME_ZERO.ms + 500));
   });
