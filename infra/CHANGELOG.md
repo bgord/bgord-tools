@@ -1,8 +1,11 @@
 # Changelog
+- 2025-12-28 12:51 cf86f11 **step: update packages**
+- 2025-12-28 12:51 c6be096 **step: timestamp vo from date/date like**
 ## 2025-12-26 16:03 v1.2.6
 - 2025-12-26 16:03 6a49905 **1.2.6**
 - 2025-12-26 16:02 2e65e23 **step: add duration.times**
 - 2025-12-26 15:03 f1aad23 **docs: generate CHANGELOG**
+- 2025-12-26 15:03 2c1f3bd **docs: generate CHANGELOG**
 ## 2025-12-26 13:57 v1.2.5
 - 2025-12-26 13:57 e1836cf **1.2.5**
 - 2025-12-26 13:56 1f97ce7 **step: update packages**
