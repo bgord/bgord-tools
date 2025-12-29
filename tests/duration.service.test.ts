@@ -114,4 +114,8 @@ describe("Duration", () => {
     expect(Duration.Ms(1000).toAbsolute()).toEqual(Duration.Ms(1000));
     expect(Duration.Ms(-1000).toAbsolute()).toEqual(Duration.Ms(1000));
   });
+
+  test("MIN", () => {
+    expect(Duration.MIN.ms).toEqual(DurationMs.parse(1));
+  });
 });

@@ -8,6 +8,8 @@ export class Duration {
   private static readonly rounding: RoundingStrategy = new RoundingDecimalStrategy(2);
   private readonly internal: DurationMsType;
 
+  static readonly MIN = Duration.Ms(1);
+
   private static readonly MS_IN_SECOND = 1_000;
   private static readonly MS_IN_MINUTE = 60 * Duration.MS_IN_SECOND;
   private static readonly MS_IN_HOUR = 60 * Duration.MS_IN_MINUTE;
