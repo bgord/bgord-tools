@@ -1,8 +1,11 @@
 # Changelog
+- 2025-12-29 11:51 6c3726d **step: add duration.min**
+- 2025-12-29 11:45 e57d77c **refactor: make rounding a strategy**
 ## 2025-12-28 12:52 v1.2.7
 - 2025-12-28 12:52 ce12f1c **1.2.7**
 - 2025-12-28 12:51 cf86f11 **step: update packages**
 - 2025-12-28 12:51 c6be096 **step: timestamp vo from date/date like**
+- 2025-12-28 11:52 18ed2dc **docs: generate CHANGELOG**
 - 2025-12-28 11:51 e4c3d60 **docs: generate CHANGELOG**
 ## 2025-12-26 16:03 v1.2.6
 - 2025-12-26 16:03 6a49905 **1.2.6**
