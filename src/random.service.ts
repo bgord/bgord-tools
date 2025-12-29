@@ -1,4 +1,4 @@
-import { RoundDown } from "./rounding.adapter";
+import { RoundingDownStrategy } from "./rounding-down.strategy";
 
 type RandomGenerateConfigType = { min: number; max: number };
 
@@ -15,6 +15,6 @@ export class Random {
     if (min === max) throw new Error(RandomError.MinMax);
     if (min > max) throw new Error(RandomError.MinMax);
 
-    return new RoundDown().round(Math.random() * (max - min + 1)) + min;
+    return new RoundingDownStrategy().round(Math.random() * (max - min + 1)) + min;
   }
 }

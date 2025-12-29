@@ -1,6 +1,6 @@
 import { Mean } from "./mean.service";
-import { RoundToDecimal } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
 import { Sum } from "./sum.service";
 
 export const PopulationStandardDeviationError = {
@@ -8,7 +8,7 @@ export const PopulationStandardDeviationError = {
 };
 
 export class PopulationStandardDeviation {
-  static calculate(values: number[], rounding: RoundingPort = new RoundToDecimal(2)): number {
+  static calculate(values: number[], rounding: RoundingStrategy = new RoundingDecimalStrategy(2)): number {
     if (values.length < 2) throw new Error(PopulationStandardDeviationError.NotEnoughValues);
 
     const mean = Mean.calculate(values);

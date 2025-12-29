@@ -1,6 +1,7 @@
 import { HeightMillimeters, type HeightMillimetersType } from "./height-milimiters.vo";
-import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
+import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export class Height {
   private static readonly ZERO = HeightMillimeters.parse(0);
@@ -17,7 +18,10 @@ export class Height {
     return new Height(millimeters);
   }
 
-  static fromCentimeters(centimeters: number, rounding: RoundingPort = new RoundToNearest()): Height {
+  static fromCentimeters(
+    centimeters: number,
+    rounding: RoundingStrategy = new RoundingToNearestStrategy(),
+  ): Height {
     const millimeters = rounding.round(centimeters * Height.MILLIMETERS_PER_CENTIMETER);
 
     return new Height(HeightMillimeters.parse(millimeters));
@@ -35,22 +39,22 @@ export class Height {
     return this.millimeters;
   }
 
-  toCentimeters(rounding?: RoundingPort): number {
+  toCentimeters(rounding?: RoundingStrategy): number {
     const centimeters = this.millimeters / Height.MILLIMETERS_PER_CENTIMETER;
 
     if (rounding) return rounding.round(centimeters);
     return centimeters;
   }
 
-  format(rounding?: RoundingPort): string {
-    const chosen = rounding ?? new RoundToDecimal(1);
+  format(rounding?: RoundingStrategy): string {
+    const chosen = rounding ?? new RoundingDecimalStrategy(1);
     const value = this.toCentimeters(chosen);
 
     return `${value} cm`;
   }
 
   toString(): string {
-    return this.format(new RoundToDecimal(1));
+    return this.format(new RoundingDecimalStrategy(1));
   }
 
   equals(another: Height): boolean {

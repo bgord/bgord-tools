@@ -1,6 +1,6 @@
 import { DistanceValue, type DistanceValueType } from "./distance-value.vo";
-import { RoundToNearest } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export const DistanceError = { SubtractResultLessThanZero: "distance.subtract.result.less.than.zero" };
 
@@ -17,11 +17,17 @@ export class Distance {
     return new Distance(candidate);
   }
 
-  static fromKilometers(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
+  static fromKilometers(
+    candidate: number,
+    rounding: RoundingStrategy = new RoundingToNearestStrategy(),
+  ): Distance {
     return new Distance(DistanceValue.parse(rounding.round(candidate * 1000)));
   }
 
-  static fromMiles(candidate: number, rounding: RoundingPort = new RoundToNearest()): Distance {
+  static fromMiles(
+    candidate: number,
+    rounding: RoundingStrategy = new RoundingToNearestStrategy(),
+  ): Distance {
     return new Distance(DistanceValue.parse(rounding.round(candidate * 1_609.344)));
   }
 

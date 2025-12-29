@@ -1,7 +1,7 @@
 import type { DivisionFactorType } from "./division-factor.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
-import { RoundToNearest } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 import { WeightGrams } from "./weight-grams.vo";
 
 export class Weight {
@@ -9,16 +9,19 @@ export class Weight {
 
   private constructor(
     private readonly grams: number,
-    private readonly rounding: RoundingPort = new RoundToNearest(),
+    private readonly rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ) {}
 
-  static fromKilograms(kilograms: number, rounding: RoundingPort = new RoundToNearest()): Weight {
+  static fromKilograms(
+    kilograms: number,
+    rounding: RoundingStrategy = new RoundingToNearestStrategy(),
+  ): Weight {
     const grams = rounding.round(kilograms * Weight.GRAMS_PER_KILOGRAM);
 
     return new Weight(WeightGrams.parse(grams), rounding);
   }
 
-  static fromGrams(grams: number, rounding: RoundingPort = new RoundToNearest()): Weight {
+  static fromGrams(grams: number, rounding: RoundingStrategy = new RoundingToNearestStrategy()): Weight {
     return new Weight(WeightGrams.parse(grams), rounding);
   }
 

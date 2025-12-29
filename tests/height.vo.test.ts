@@ -1,13 +1,15 @@
 import { describe, expect, test } from "bun:test";
 import { Height } from "../src/height.vo";
 import { HeightMillimeters, HeightMillimetersError } from "../src/height-milimiters.vo";
-import { RoundDown, RoundToDecimal, RoundUp } from "../src/rounding.adapter";
+import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
+import { RoundingDownStrategy } from "../src/rounding-down.strategy";
+import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 
 describe("Height", () => {
   test("fromCentimeters", () => {
     expect(Height.fromCentimeters(180).toMillimeters()).toEqual(1800);
-    expect(Height.fromCentimeters(180.04, new RoundDown()).toMillimeters()).toEqual(1800);
-    expect(Height.fromCentimeters(180.06, new RoundUp()).toMillimeters()).toEqual(1801);
+    expect(Height.fromCentimeters(180.04, new RoundingDownStrategy()).toMillimeters()).toEqual(1800);
+    expect(Height.fromCentimeters(180.06, new RoundingUpStrategy()).toMillimeters()).toEqual(1801);
   });
 
   test("fromMillimeters", () => {
@@ -32,8 +34,8 @@ describe("Height", () => {
     const height = Height.fromCentimeters(180);
 
     expect(height.toCentimeters()).toEqual(180);
-    expect(height.toCentimeters(new RoundToDecimal(1))).toEqual(180);
-    expect(Height.fromMillimeters(1804).toCentimeters(new RoundToDecimal(1))).toEqual(180.4);
+    expect(height.toCentimeters(new RoundingDecimalStrategy(1))).toEqual(180);
+    expect(Height.fromMillimeters(1804).toCentimeters(new RoundingDecimalStrategy(1))).toEqual(180.4);
   });
 
   test("format", () => {

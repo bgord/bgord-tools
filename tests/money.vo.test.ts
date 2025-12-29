@@ -3,10 +3,11 @@ import { DivisionFactor } from "../src/division-factor.vo";
 import { Money, MoneyError } from "../src/money.vo";
 import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
-import { RoundDown, RoundUp } from "../src/rounding.adapter";
+import { RoundingDownStrategy } from "../src/rounding-down.strategy";
+import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 
-const roundUp = new RoundUp();
-const roundDown = new RoundDown();
+const roundUp = new RoundingUpStrategy();
+const roundDown = new RoundingDownStrategy();
 
 describe("Money", () => {
   test("happy path", () => {

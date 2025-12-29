@@ -1,7 +1,7 @@
 import { Page, type PageType } from "./pagination-page.vo";
 import { Skip, type SkipType } from "./pagination-skip.vo";
 import { Take, type TakeType } from "./pagination-take.vo";
-import { RoundUp } from "./rounding.adapter";
+import { RoundingUpStrategy } from "./rounding-up.strategy";
 
 export type PaginationType = { values: { take: TakeType; skip: SkipType }; page: PageType };
 export type PaginationValuesType = Record<string, unknown>;
@@ -40,7 +40,7 @@ export class Pagination {
   }
 
   private static getLastPage(config: PaginationExhaustedConfig): PageType {
-    return Page.parse(new RoundUp().round(config.total / config.pagination.values.take));
+    return Page.parse(new RoundingUpStrategy().round(config.total / config.pagination.values.take));
   }
 
   static empty = {

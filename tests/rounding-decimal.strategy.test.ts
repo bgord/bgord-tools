@@ -1,0 +1,18 @@
+import { describe, expect, test } from "bun:test";
+import { RoundingDecimalError, RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
+
+describe("RoundingDecimalStrategy", () => {
+  test("happy path", () => {
+    const rounding = new RoundingDecimalStrategy(2);
+
+    expect(rounding.round(5.678)).toEqual(5.68);
+    expect(rounding.round(3.245)).toEqual(3.25);
+  });
+
+  test("invalid", () => {
+    expect(() => new RoundingDecimalStrategy(-1)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundingDecimalStrategy(0)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundingDecimalStrategy(1.5)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundingDecimalStrategy(101)).toThrow(RoundingDecimalError.Invalid);
+  });
+});

@@ -1,10 +1,11 @@
 import { DurationMs, type DurationMsType } from "./duration-ms.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
-import { RoundToDecimal, RoundToNearest } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
+import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export class Duration {
-  private static readonly rounding: RoundingPort = new RoundToDecimal(2);
+  private static readonly rounding: RoundingStrategy = new RoundingDecimalStrategy(2);
   private readonly internal: DurationMsType;
 
   private static readonly MS_IN_SECOND = 1_000;
@@ -75,7 +76,7 @@ export class Duration {
   }
 
   times(factor: MultiplicationFactorType): Duration {
-    const rounding = new RoundToNearest();
+    const rounding = new RoundingToNearestStrategy();
 
     return Duration.Ms(rounding.round(this.internal * factor));
   }

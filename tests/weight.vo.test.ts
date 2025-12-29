@@ -1,12 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import { DivisionFactor } from "../src/division-factor.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
-import { RoundToDecimal } from "../src/rounding.adapter";
+import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { Weight } from "../src/weight.vo";
 import { WeightGramsError } from "../src/weight-grams.vo";
 
-const twoDecimals = new RoundToDecimal(2);
-const threeDecimals = new RoundToDecimal(3);
+const twoDecimals = new RoundingDecimalStrategy(2);
+const threeDecimals = new RoundingDecimalStrategy(3);
 
 describe("Weight", () => {
   test("fromKilograms", () => {

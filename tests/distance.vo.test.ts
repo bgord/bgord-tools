@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Distance, DistanceError } from "../src/distance.vo";
 import { DistanceValue, DistanceValueError } from "../src/distance-value.vo";
-import { RoundToDecimal } from "../src/rounding.adapter";
+import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 
 describe("Distance", () => {
   test("happy path", () => {
@@ -24,7 +24,7 @@ describe("Distance", () => {
   });
 
   test("fromKilometers - throws on invalid input", () => {
-    expect(() => Distance.fromKilometers(0.123456789, new RoundToDecimal(5))).toThrow(
+    expect(() => Distance.fromKilometers(0.123456789, new RoundingDecimalStrategy(5))).toThrow(
       DistanceValueError.Type,
     );
   });
@@ -36,7 +36,7 @@ describe("Distance", () => {
   });
 
   test("fromMiles - throws on invalid input", () => {
-    expect(() => Distance.fromMiles(1, new RoundToDecimal(1))).toThrow(DistanceValueError.Type);
+    expect(() => Distance.fromMiles(1, new RoundingDecimalStrategy(1))).toThrow(DistanceValueError.Type);
   });
 
   test("add", () => {

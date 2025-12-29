@@ -1,4 +1,5 @@
-import { RoundToDecimal, RoundUp } from "./rounding.adapter";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
+import { RoundingUpStrategy } from "./rounding-up.strategy";
 import { SizeBytes, type SizeBytesType } from "./size-bytes.vo";
 
 enum SizeUnitEnum {
@@ -18,8 +19,8 @@ export class Size {
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
 
-  private static readonly CONVERT_ROUND = new RoundUp();
-  private static readonly FORMAT_ROUND = new RoundToDecimal(2);
+  private static readonly CONVERT_ROUND = new RoundingUpStrategy();
+  private static readonly FORMAT_ROUND = new RoundingDecimalStrategy(2);
 
   private constructor(config: SizeConfigType) {
     this.unit = config.unit;

@@ -1,7 +1,7 @@
 import { Mean } from "./mean.service";
 import { PopulationStandardDeviation } from "./population-standard-deviation.service";
-import { RoundToDecimal } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
 
 export const ZScoreError = { NotEnoughValues: "z.score.not.enough.values" };
 
@@ -11,7 +11,7 @@ export class ZScore {
 
   constructor(
     values: number[],
-    private readonly rounding: RoundingPort = new RoundToDecimal(2),
+    private readonly rounding: RoundingStrategy = new RoundingDecimalStrategy(2),
   ) {
     if (values.length < 2) throw new Error(ZScoreError.NotEnoughValues);
 

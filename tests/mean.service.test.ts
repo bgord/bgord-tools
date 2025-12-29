@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Mean, MeanError } from "../src/mean.service";
-import { RoundToNearest } from "../src/rounding.adapter";
+import { RoundingToNearestStrategy } from "../src/rounding-to-nearest.strategy";
 
 describe("Mean", () => {
   test("throws for empty values array", () => {
@@ -23,7 +23,7 @@ describe("Mean", () => {
     expect(Mean.calculate([0, 0, 0])).toEqual(0);
   });
 
-  test("works with non-default rounding", () => {
-    expect(Mean.calculate([1, 3, 6], new RoundToNearest())).toEqual(3);
+  test("non-default rounding", () => {
+    expect(Mean.calculate([1, 3, 6], new RoundingToNearestStrategy())).toEqual(3);
   });
 });

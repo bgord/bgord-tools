@@ -1,5 +1,5 @@
-import { RoundToNearest } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export type LinearRegressionPairType = { x: number; y: number };
 export type LinearRegressionParamsType = { a: number; b: number };
@@ -15,17 +15,17 @@ export const LinearRegressionError = {
 };
 
 export class LinearRegression {
-  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToNearest();
+  private static readonly DEFAULT_ROUNDING: RoundingStrategy = new RoundingToNearestStrategy();
 
   private readonly params: LinearRegressionParamsType;
-  private readonly rounding: RoundingPort;
+  private readonly rounding: RoundingStrategy;
 
-  constructor(params: LinearRegressionParamsType, rounding?: RoundingPort) {
+  constructor(params: LinearRegressionParamsType, rounding?: RoundingStrategy) {
     this.params = params;
     this.rounding = rounding ?? LinearRegression.DEFAULT_ROUNDING;
   }
 
-  static fromPairs(pairs: LinearRegressionPairType[], rounding?: RoundingPort): LinearRegression {
+  static fromPairs(pairs: LinearRegressionPairType[], rounding?: RoundingStrategy): LinearRegression {
     const count = pairs.length;
 
     if (count < 2) throw new Error(LinearRegressionError.MinPairs);
@@ -58,7 +58,7 @@ export class LinearRegression {
     return new LinearRegression({ a, b }, rounding);
   }
 
-  predict(x: LinearRegressionPairType["x"], rounding?: RoundingPort): LinearRegressionPredictionType {
+  predict(x: LinearRegressionPairType["x"], rounding?: RoundingStrategy): LinearRegressionPredictionType {
     const chosen = rounding ?? this.rounding;
     const prediction = this.params.b * x + this.params.a;
 

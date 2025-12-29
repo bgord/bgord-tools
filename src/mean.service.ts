@@ -1,13 +1,13 @@
-import { RoundToDecimal } from "./rounding.adapter";
-import type { RoundingPort } from "./rounding.port";
+import type { RoundingStrategy } from "./rounding.strategy";
+import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
 import { Sum } from "./sum.service";
 
 export const MeanError = { NotEnoughValues: "mean.not.enough.values" };
 
 export class Mean {
-  private static readonly DEFAULT_ROUNDING: RoundingPort = new RoundToDecimal(2);
+  private static readonly DEFAULT_ROUNDING: RoundingStrategy = new RoundingDecimalStrategy(2);
 
-  static calculate(values: number[], rounding?: RoundingPort): number {
+  static calculate(values: number[], rounding?: RoundingStrategy): number {
     if (values.length === 0) throw new Error(MeanError.NotEnoughValues);
 
     const sum = Sum.of(values);
