@@ -1,8 +1,10 @@
 # Changelog
+- 2025-12-29 14:31 35ed12c **refactor: make time zone offset value vo stricter**
 ## 2025-12-29 11:52 v1.2.8
 - 2025-12-29 11:52 2e3ccd5 **1.2.8**
 - 2025-12-29 11:51 6c3726d **step: add duration.min**
 - 2025-12-29 11:45 e57d77c **refactor: make rounding a strategy**
+- 2025-12-29 10:52 5f012e0 **docs: generate CHANGELOG**
 - 2025-12-29 10:52 51d9891 **docs: generate readme**
 - 2025-12-29 10:52 3059bb1 **docs: generate CHANGELOG**
 ## 2025-12-28 12:52 v1.2.7
