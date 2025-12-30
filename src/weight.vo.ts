@@ -2,13 +2,13 @@ import type { DivisionFactorType } from "./division-factor.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
-import { WeightGrams } from "./weight-grams.vo";
+import { WeightGrams, type WeightGramsType } from "./weight-grams.vo";
 
 export class Weight {
   private static readonly GRAMS_PER_KILOGRAM = 1_000;
 
   private constructor(
-    private readonly grams: number,
+    private readonly grams: WeightGramsType,
     private readonly rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ) {}
 
@@ -26,7 +26,7 @@ export class Weight {
   }
 
   static zero(): Weight {
-    return new Weight(0);
+    return new Weight(WeightGrams.parse(0));
   }
 
   get(): number {
@@ -44,13 +44,13 @@ export class Weight {
   }
 
   add(other: Weight): Weight {
-    return new Weight(this.grams + other.grams);
+    return new Weight(WeightGrams.parse(this.grams + other.grams));
   }
 
   subtract(other: Weight): Weight {
     const result = this.grams - other.grams;
 
-    return new Weight(result < 0 ? 0 : result);
+    return new Weight(WeightGrams.parse(result < 0 ? 0 : result));
   }
 
   multiply(factor: MultiplicationFactorType): Weight {
