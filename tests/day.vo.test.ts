@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
+import { Integer } from "../src/integer.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
@@ -65,8 +66,12 @@ describe("Day", () => {
   });
 
   test("shift", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(DayIsoId.parse("2023-11-16"));
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(DayIsoId.parse("2023-11-12"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
+      DayIsoId.parse("2023-11-16"),
+    );
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
+      DayIsoId.parse("2023-11-12"),
+    );
   });
 
   test("round-trips", () => {

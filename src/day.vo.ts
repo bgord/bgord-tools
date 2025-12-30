@@ -2,6 +2,7 @@ import { formatISO } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
+import { Integer, type IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
@@ -41,14 +42,14 @@ export class Day extends DateRange {
   }
 
   previous(): Day {
-    return this.shift(-1);
+    return this.shift(Integer.parse(-1));
   }
 
   next(): Day {
-    return this.shift(1);
+    return this.shift(Integer.parse(1));
   }
 
-  shift(count: number): Day {
+  shift(count: IntegerType): Day {
     return Day.fromTimestamp(this.getStart().add(Duration.Days(count)));
   }
 
