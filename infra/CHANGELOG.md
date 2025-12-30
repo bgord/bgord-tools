@@ -1,4 +1,5 @@
 # Changelog
+- 2025-12-30 13:50 96a5684 **1.2.10**
 - 2025-12-30 13:49 4552725 **refactor: use int in day vo**
 - 2025-12-30 13:47 849d167 **refactor: use int in month vo**
 - 2025-12-30 13:44 fbf63b4 **refactor: use int in week vo**
@@ -7,6 +8,8 @@
 - 2025-12-30 13:38 8e38a87 **step: integer**
 - 2025-12-30 13:38 6cc1ec0 **fix: test type error**
 - 2025-12-30 13:31 0c3755d **step: positive int**
+- 2025-12-30 12:50 4f6d322 **docs: generate readme**
+- 2025-12-30 12:50 447eaa4 **docs: generate CHANGELOG**
 ## 2025-12-29 14:31 v1.2.9
 - 2025-12-29 14:31 7e58480 **1.2.9**
 - 2025-12-29 14:31 35ed12c **refactor: make time zone offset value vo stricter**
