@@ -1,4 +1,6 @@
 # Changelog
+## 2025-12-30 14:38 v1.2.12
+- 2025-12-30 14:38 e78c60c **1.2.12**
 - 2025-12-30 14:33 a16bc03 **feature: integer non negative vo**
 ## 2025-12-30 13:51 v1.2.11
 - 2025-12-30 13:51 152d6cd **1.2.11**
@@ -11,6 +13,8 @@
 - 2025-12-30 13:43 ad4272c **refactor: use int in year**
 - 2025-12-30 13:38 8e38a87 **step: integer**
 - 2025-12-30 13:38 6cc1ec0 **fix: test type error**
+- 2025-12-30 13:34 c15f69c **docs: generate readme**
+- 2025-12-30 13:34 0b309c0 **docs: generate CHANGELOG**
 - 2025-12-30 13:31 0c3755d **step: positive int**
 - 2025-12-30 12:51 57dbdef **docs: generate CHANGELOG**
 - 2025-12-30 12:51 55973ce **docs: generate CHANGELOG**
