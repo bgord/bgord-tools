@@ -65,6 +65,7 @@ export * from "./pagination-skip.vo";
 export * from "./pagination-take.vo";
 export * from "./percentage.service";
 export * from "./population-standard-deviation.service";
+export * from "./positive-int.vo";
 export * from "./quarter.vo";
 export * from "./quarter-iso-id.vo";
 export * from "./random.service";
