@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { endOfYear, startOfYear } from "date-fns";
 import { Duration } from "../src/duration.service";
+import { Integer } from "../src/integer.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
 import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
@@ -61,8 +62,12 @@ describe("Year", () => {
   });
 
   test("shift", () => {
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(YearIsoId.parse("2025"));
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(YearIsoId.parse("2021"));
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
+      YearIsoId.parse("2025"),
+    );
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
+      YearIsoId.parse("2021"),
+    );
   });
 
   test("round-trips", () => {

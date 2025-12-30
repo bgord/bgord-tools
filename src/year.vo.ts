@@ -1,5 +1,6 @@
 import { addYears, endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
+import { Integer, type IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
@@ -41,14 +42,14 @@ export class Year extends DateRange {
   }
 
   previous(): Year {
-    return this.shift(-1);
+    return this.shift(Integer.parse(-1));
   }
 
   next(): Year {
-    return this.shift(1);
+    return this.shift(Integer.parse(1));
   }
 
-  shift(count: number): Year {
+  shift(count: IntegerType): Year {
     const shifted = addYears(this.getStart().ms, count).getTime();
 
     return Year.fromTimestamp(Timestamp.fromNumber(shifted));
