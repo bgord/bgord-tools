@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { endOfMonth, startOfMonth } from "date-fns";
 import { Duration } from "../src/duration.service";
+import { Integer } from "../src/integer.vo";
 import { Month } from "../src/month.vo";
 import { MonthIsoId } from "../src/month-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
@@ -50,8 +51,12 @@ describe("Month", () => {
   });
 
   test("shift", () => {
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(2).toIsoId()).toEqual(MonthIsoId.parse("2024-01"));
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(-2).toIsoId()).toEqual(MonthIsoId.parse("2023-09"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
+      MonthIsoId.parse("2024-01"),
+    );
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
+      MonthIsoId.parse("2023-09"),
+    );
   });
 
   test("round-trips", () => {

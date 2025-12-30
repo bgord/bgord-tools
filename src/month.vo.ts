@@ -1,5 +1,6 @@
 import { endOfMonth, format, getMonth, setMonth, startOfMonth } from "date-fns";
 import { DateRange } from "./date-range.vo";
+import { Integer, type IntegerType } from "./integer.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
@@ -33,14 +34,14 @@ export class Month extends DateRange {
   }
 
   previous(): Month {
-    return this.shift(-1);
+    return this.shift(Integer.parse(-1));
   }
 
   next(): Month {
-    return this.shift(1);
+    return this.shift(Integer.parse(1));
   }
 
-  shift(count: number): Month {
+  shift(count: IntegerType): Month {
     const shifted = setMonth(this.getStart().ms, getMonth(this.getStart().ms) + count).getTime();
 
     return Month.fromTimestamp(Timestamp.fromNumber(shifted));
