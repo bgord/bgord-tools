@@ -38,4 +38,10 @@ describe("Outlier detector", () => {
 
     expect(values.filter((value) => detector.isInlier(value))).toEqual([]);
   });
+
+  test("works score equal to threshold ", () => {
+    const detector = new OutlierDetector([10, 30], 0);
+
+    expect(detector.isInlier(20)).toEqual(true);
+  });
 });
