@@ -31,4 +31,12 @@ describe("DateCalculator", () => {
     // Local midnight (00:00 -05:00) corresponds to 2024-05-31T19:00:00Z.
     expect(result).toEqual(Timestamp.fromNumber(new Date("2024-05-31T19:00:00Z").getTime()));
   });
+
+  test("UTC+2 timezone - between days", () => {
+    const now = Timestamp.fromNumber(new Date("2024-06-01T01:00:00Z").getTime());
+
+    const result = DateCalculator.getStartOfDayTsInTz({ now, timeZoneOffset: Duration.Hours(2) });
+
+    expect(result).toEqual(Timestamp.fromNumber(new Date("2024-05-31T02:00:00Z").getTime()));
+  });
 });
