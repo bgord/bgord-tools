@@ -90,7 +90,7 @@ describe("Size", () => {
   });
 
   test("toBytes", () => {
-    expect(Size.fromGB(1).toBytes()).toEqual(SizeBytes.parse(1073741824));
+    expect(Size.toBytes({ unit: Size.unit.GB, value: 1 })).toEqual(SizeBytes.parse(1073741824));
   });
 
   test("toString", () => {
