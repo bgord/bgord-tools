@@ -19,4 +19,8 @@ describe("IntegerNonNegative VO", () => {
   test("rejects fraction", () => {
     expect(() => IntegerNonNegative.parse(100.5)).toThrow("integer.non.negative.type");
   });
+
+  test("rejects negative", () => {
+    expect(() => IntegerNonNegative.parse(-1)).toThrow("integer.non.negative.invalid");
+  });
 });
