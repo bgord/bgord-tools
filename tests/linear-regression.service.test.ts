@@ -70,6 +70,16 @@ describe("LinearRegression", () => {
     expect(model.predict(10)).toEqual(20);
   });
 
+  test("predicts correctly for line with non-zero intercept", () => {
+    const model = LinearRegression.fromPairs([
+      { x: 1, y: 3 },
+      { x: 2, y: 5 },
+    ]);
+
+    expect(model.predict(3)).toEqual(7);
+    expect(model.inspect()).toEqual({ a: 1, b: 2 });
+  });
+
   test("works the same way when constructed directly", () => {
     const model = LinearRegression.fromPairs([
       { x: 1, y: 2 },
@@ -111,5 +121,32 @@ describe("LinearRegression", () => {
         { x: 0, y: 0 },
       ]),
     ).toThrow("linear.regression.model.creation");
+  });
+
+  test("throws when sum of x is max safe integer", () => {
+    expect(() =>
+      LinearRegression.fromPairs([
+        { x: Number.MAX_SAFE_INTEGER, y: 0 },
+        { x: 0, y: 0 },
+      ]),
+    ).toThrow("linear.regression.sum.x.too.big");
+  });
+
+  test("throws when sum of y is max safe integer", () => {
+    expect(() =>
+      LinearRegression.fromPairs([
+        { x: 0, y: Number.MAX_SAFE_INTEGER },
+        { x: 0, y: 0 },
+      ]),
+    ).toThrow("linear.regression.sum.y.too.big");
+  });
+
+  test("throws when sum of xy is max safe integer", () => {
+    expect(() =>
+      LinearRegression.fromPairs([
+        { x: Number.MAX_SAFE_INTEGER - 2, y: 2 },
+        { x: 0, y: 0 },
+      ]),
+    ).toThrow("linear.regression.sum.x.times.y.too.big");
   });
 });
