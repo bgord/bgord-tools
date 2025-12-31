@@ -6,3 +6,4 @@ dist
 tsconfig.tsbuildinfo
 tmp/
 .stryker-tmp
+reports/
