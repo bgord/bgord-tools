@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Extension } from "../src/extension.vo";
-import { Mime } from "../src/mime.vo";
+import { Mime, MimeError } from "../src/mime.vo";
 
 describe("Mime", () => {
   test("fromString", () => {
@@ -70,5 +70,9 @@ describe("Mime", () => {
 
   test("toJSON", () => {
     expect(Mime.fromString("text/plain").toJSON()).toEqual({ type: "text", subtype: "plain" });
+  });
+
+  test("MimeError", () => {
+    expect(MimeError.NotAccepted).toEqual("mime.not.accepted");
   });
 });
