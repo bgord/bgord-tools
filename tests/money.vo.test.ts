@@ -136,6 +136,10 @@ describe("Money", () => {
     }
   });
 
+  test("zero", () => {
+    expect(Money.zero()).toEqual(Money.fromAmountSafe(MoneyAmount.parse(0)));
+  });
+
   test("toString", () => {
     expect(Money.fromAmount(5).toString()).toEqual("0.05");
   });
