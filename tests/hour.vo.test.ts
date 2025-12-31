@@ -50,11 +50,13 @@ describe("Hour", () => {
   test("isAfter", () => {
     expect(THIRTEEN.isAfter(FIVE)).toEqual(true);
     expect(FIVE.isAfter(THIRTEEN)).toEqual(false);
+    expect(THIRTEEN.isAfter(THIRTEEN)).toEqual(false);
   });
 
   test("isBefore", () => {
     expect(FIVE.isBefore(THIRTEEN)).toEqual(true);
     expect(THIRTEEN.isBefore(FIVE)).toEqual(false);
+    expect(THIRTEEN.isBefore(THIRTEEN)).toEqual(false);
   });
 
   test("Hour.list() returns cached 24 items", () => {
