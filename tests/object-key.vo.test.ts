@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { ObjectKey, ObjectKeyError } from "../src/object-key.vo";
+import { ObjectKey } from "../src/object-key.vo";
 
 describe("ObjectKey", () => {
   test("happy path", () => {
@@ -17,54 +17,54 @@ describe("ObjectKey", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => ObjectKey.parse("")).toThrow(ObjectKeyError.Empty);
+    expect(() => ObjectKey.parse("")).toThrow("object.key.empty");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => ObjectKey.parse(null)).toThrow(ObjectKeyError.Type);
+    expect(() => ObjectKey.parse(null)).toThrow("object.key.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => ObjectKey.parse(123)).toThrow(ObjectKeyError.Type);
+    expect(() => ObjectKey.parse(123)).toThrow("object.key.type");
   });
 
   test("rejects too long", () => {
-    expect(() => ObjectKey.parse("a".repeat(257))).toThrow(ObjectKeyError.TooLong);
+    expect(() => ObjectKey.parse("a".repeat(257))).toThrow("object.key.too.long");
   });
 
   test("rejects leading slash", () => {
-    expect(() => ObjectKey.parse("/users/u/avatar.webp")).toThrow(ObjectKeyError.LeadingSlash);
+    expect(() => ObjectKey.parse("/users/u/avatar.webp")).toThrow("object.key.leading.slash");
   });
 
   test("rejects backslashes", () => {
-    expect(() => ObjectKey.parse("users\\u\\avatar.webP")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("users\\u\\avatar.webP")).toThrow("object.key.bad.chars");
   });
 
   test("rejects control characters", () => {
-    expect(() => ObjectKey.parse("users/\u0000/avatar.webp")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("users/\u0000/avatar.webp")).toThrow("object.key.bad.chars");
   });
 
   test("rejects trailing slash", () => {
-    expect(() => ObjectKey.parse("users/u/")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("users/u/")).toThrow("object.key.bad.chars");
   });
 
   test("rejects single dot segments", () => {
-    expect(() => ObjectKey.parse("users/./avatar.webp")).toThrow(ObjectKeyError.DotSegments);
+    expect(() => ObjectKey.parse("users/./avatar.webp")).toThrow("object.key.dot.segments");
   });
 
   test("rejects double dot segments", () => {
-    expect(() => ObjectKey.parse("users/../avatar.webp")).toThrow(ObjectKeyError.DotSegments);
+    expect(() => ObjectKey.parse("users/../avatar.webp")).toThrow("object.key.dot.segments");
   });
 
   test("rejects uppercase letters", () => {
-    expect(() => ObjectKey.parse("Users/u/avatar.webp")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("Users/u/avatar.webp")).toThrow("object.key.bad.chars");
   });
 
   test("rejects empty segments", () => {
-    expect(() => ObjectKey.parse("users//avatar.webp")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("users//avatar.webp")).toThrow("object.key.bad.chars");
   });
 
   test("rejects spaces in segments", () => {
-    expect(() => ObjectKey.parse("users/user id/avatar.webp")).toThrow(ObjectKeyError.BadChars);
+    expect(() => ObjectKey.parse("users/user id/avatar.webp")).toThrow("object.key.bad.chars");
   });
 });

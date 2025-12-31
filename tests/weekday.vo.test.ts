@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Weekday, WeekdayFormatterEnum, WeekdayFormatters, WeekdayValueError } from "../src/weekday.vo";
+import { Weekday, WeekdayFormatterEnum, WeekdayFormatters } from "../src/weekday.vo";
 import * as mocks from "./mocks";
 
 describe("Weekday", () => {
@@ -24,10 +24,10 @@ describe("Weekday", () => {
   });
 
   test("throws on invalid input", () => {
-    expect(() => new Weekday(-1)).toThrow(WeekdayValueError);
-    expect(() => new Weekday(7)).toThrow(WeekdayValueError);
-    expect(() => new Weekday(Number.NaN)).toThrow(WeekdayValueError);
-    expect(() => new Weekday(1.5)).toThrow(WeekdayValueError);
+    expect(() => new Weekday(-1)).toThrow("weekday.invalid");
+    expect(() => new Weekday(7)).toThrow("weekday.invalid");
+    expect(() => new Weekday(Number.NaN)).toThrow("weekday.invalid");
+    expect(() => new Weekday(1.5)).toThrow("weekday.invalid");
   });
 
   test("maps named weekdays", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { RoundingDecimalError, RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
+import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 
 describe("RoundingDecimalStrategy", () => {
   test("happy path", () => {
@@ -10,9 +10,9 @@ describe("RoundingDecimalStrategy", () => {
   });
 
   test("invalid", () => {
-    expect(() => new RoundingDecimalStrategy(-1)).toThrow(RoundingDecimalError.Invalid);
-    expect(() => new RoundingDecimalStrategy(0)).toThrow(RoundingDecimalError.Invalid);
-    expect(() => new RoundingDecimalStrategy(1.5)).toThrow(RoundingDecimalError.Invalid);
-    expect(() => new RoundingDecimalStrategy(101)).toThrow(RoundingDecimalError.Invalid);
+    expect(() => new RoundingDecimalStrategy(-1)).toThrow("rounding.decimal.invalid");
+    expect(() => new RoundingDecimalStrategy(0)).toThrow("rounding.decimal.invalid");
+    expect(() => new RoundingDecimalStrategy(1.5)).toThrow("rounding.decimal.invalid");
+    expect(() => new RoundingDecimalStrategy(101)).toThrow("rounding.decimal.invalid");
   });
 });

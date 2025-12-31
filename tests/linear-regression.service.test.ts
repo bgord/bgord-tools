@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { LinearRegression, LinearRegressionError } from "../src/linear-regression.service";
+import { LinearRegression } from "../src/linear-regression.service";
 
 describe("LinearRegression", () => {
   test("throws when sum of x values is too big", () => {
@@ -8,7 +8,7 @@ describe("LinearRegression", () => {
         { x: Number.MAX_SAFE_INTEGER, y: 2 },
         { x: Number.MAX_SAFE_INTEGER, y: 4 },
       ]),
-    ).toThrow(LinearRegressionError.SumXTooBig);
+    ).toThrow("linear.regression.sum.x.too.big");
   });
 
   test("throws when sum of y values is too big", () => {
@@ -17,7 +17,7 @@ describe("LinearRegression", () => {
         { y: Number.MAX_SAFE_INTEGER, x: 2 },
         { y: Number.MAX_SAFE_INTEGER, x: 4 },
       ]),
-    ).toThrow(LinearRegressionError.SumYTooBig);
+    ).toThrow("linear.regression.sum.y.too.big");
   });
 
   test("throws when sum of x times y values is too big", () => {
@@ -29,7 +29,7 @@ describe("LinearRegression", () => {
         { x, y },
         { x, y },
       ]),
-    ).toThrow(LinearRegressionError.SumXTimesYTooBig);
+    ).toThrow("linear.regression.sum.x.times.y.too.big");
   });
 
   test("throws when sum of x squared values is too big", () => {
@@ -40,15 +40,15 @@ describe("LinearRegression", () => {
         { x: value, y: 0 },
         { x: -value, y: 0 },
       ]),
-    ).toThrow(LinearRegressionError.SumXSquaredTooBig);
+    ).toThrow("linear.regression.sum.x.squared.too.big");
   });
 
   test("throws where no min two pairs are provided - empty array", () => {
-    expect(() => LinearRegression.fromPairs([])).toThrow(LinearRegressionError.MinPairs);
+    expect(() => LinearRegression.fromPairs([])).toThrow("linear.regression.min.pairs");
   });
 
   test("throws where no min two pairs are provided - one", () => {
-    expect(() => LinearRegression.fromPairs([{ x: 1, y: 2 }])).toThrow(LinearRegressionError.MinPairs);
+    expect(() => LinearRegression.fromPairs([{ x: 1, y: 2 }])).toThrow("linear.regression.min.pairs");
   });
 
   test("predicts correctly from two pairs", () => {
@@ -101,7 +101,7 @@ describe("LinearRegression", () => {
         { x: 0, y: 0 },
         { x: 0, y: 0 },
       ]),
-    ).toThrow(LinearRegressionError.ModelCreation);
+    ).toThrow("linear.regression.model.creation");
   });
 
   test("incalculable result with identical x values", () => {
@@ -110,6 +110,6 @@ describe("LinearRegression", () => {
         { x: 0, y: 0 },
         { x: 0, y: 0 },
       ]),
-    ).toThrow(LinearRegressionError.ModelCreation);
+    ).toThrow("linear.regression.model.creation");
   });
 });

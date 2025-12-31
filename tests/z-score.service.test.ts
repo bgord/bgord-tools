@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { RoundingToNearestStrategy } from "../src/rounding-to-nearest.strategy";
-import { ZScore, ZScoreError } from "../src/z-score.service";
+import { ZScore } from "../src/z-score.service";
 
 describe("Z-score", () => {
   test("throws for empty values array", () => {
-    expect(() => new ZScore([])).toThrow(ZScoreError.NotEnoughValues);
+    expect(() => new ZScore([])).toThrow("z.score.not.enough.values");
   });
 
   test("works for all zeros", () => {
@@ -12,7 +12,7 @@ describe("Z-score", () => {
   });
 
   test("throws for one value", () => {
-    expect(() => new ZScore([1])).toThrow(ZScoreError.NotEnoughValues);
+    expect(() => new ZScore([1])).toThrow("z.score.not.enough.values");
   });
 
   test("works for two values", () => {

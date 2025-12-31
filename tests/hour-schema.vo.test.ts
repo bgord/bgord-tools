@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
+import { HourSchema } from "../src/hour-schema.vo";
 
 describe("HourSchema", () => {
   test("happy path", () => {
@@ -8,22 +8,22 @@ describe("HourSchema", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => HourSchema.parse(null)).toThrow(HourSchemaError.Type);
+    expect(() => HourSchema.parse(null)).toThrow("hour.schema.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => HourSchema.parse("123")).toThrow(HourSchemaError.Type);
+    expect(() => HourSchema.parse("123")).toThrow("hour.schema.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => HourSchema.parse(1.5)).toThrow(HourSchemaError.Type);
+    expect(() => HourSchema.parse(1.5)).toThrow("hour.schema.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => HourSchema.parse(-1)).toThrow(HourSchemaError.Invalid);
+    expect(() => HourSchema.parse(-1)).toThrow("hour.schema.invalid");
   });
 
   test("rejects too big", () => {
-    expect(() => HourSchema.parse(24)).toThrow(HourSchemaError.Invalid);
+    expect(() => HourSchema.parse(24)).toThrow("hour.schema.invalid");
   });
 });

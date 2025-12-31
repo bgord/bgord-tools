@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
+import { YearIsoId } from "../src/year-iso-id.vo";
 
 describe("YearIsoId", () => {
   test("happy path", () => {
@@ -11,18 +11,18 @@ describe("YearIsoId", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => YearIsoId.parse(null)).toThrow(YearIsoIdError.Type);
+    expect(() => YearIsoId.parse(null)).toThrow("year.iso.id.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => YearIsoId.parse(123)).toThrow(YearIsoIdError.Type);
+    expect(() => YearIsoId.parse(123)).toThrow("year.iso.id.type");
   });
 
   test("rejects invalid year", () => {
-    expect(() => YearIsoId.parse("202A")).toThrow(YearIsoIdError.BadChars);
+    expect(() => YearIsoId.parse("202A")).toThrow("year.iso.id.bad.chars");
   });
 
   test("rejects 5 digits year", () => {
-    expect(() => YearIsoId.parse("202A")).toThrow(YearIsoIdError.BadChars);
+    expect(() => YearIsoId.parse("202A")).toThrow("year.iso.id.bad.chars");
   });
 });

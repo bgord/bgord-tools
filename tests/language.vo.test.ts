@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Language, LanguageError } from "../src/language.vo";
+import { Language } from "../src/language.vo";
 
 describe("Language", () => {
   test("happy path", () => {
@@ -14,19 +14,19 @@ describe("Language", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => Language.parse("")).toThrow(LanguageError.BadChars);
+    expect(() => Language.parse("")).toThrow("language.bad.chars");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => Language.parse(null)).toThrow(LanguageError.Type);
+    expect(() => Language.parse(null)).toThrow("language.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => Language.parse(123)).toThrow(LanguageError.Type);
+    expect(() => Language.parse(123)).toThrow("language.type");
   });
 
   test("rejects strings < 1 and > 2", () => {
-    expect(() => Language.parse("e")).toThrow(LanguageError.BadChars);
-    expect(() => Language.parse("eng")).toThrow(LanguageError.BadChars);
+    expect(() => Language.parse("e")).toThrow("language.bad.chars");
+    expect(() => Language.parse("eng")).toThrow("language.bad.chars");
   });
 });

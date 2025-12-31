@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Hour } from "../src/hour.vo";
-import { HourSchema, HourSchemaError } from "../src/hour-schema.vo";
+import { HourSchema } from "../src/hour-schema.vo";
 import * as mocks from "./mocks";
 
 const FIVE = Hour.fromValue(5);
@@ -12,9 +12,9 @@ describe("Hour", () => {
   });
 
   test("throws for invalid hour values", () => {
-    expect(() => Hour.fromValue(12.5)).toThrow(HourSchemaError.Type);
-    expect(() => Hour.fromValue(-1)).toThrow(HourSchemaError.Invalid);
-    expect(() => Hour.fromValue(24)).toThrow(HourSchemaError.Invalid);
+    expect(() => Hour.fromValue(12.5)).toThrow("hour.schema.type");
+    expect(() => Hour.fromValue(-1)).toThrow("hour.schema.invalid");
+    expect(() => Hour.fromValue(24)).toThrow("hour.schema.invalid");
   });
 
   test("fromTimestampValue", () => {

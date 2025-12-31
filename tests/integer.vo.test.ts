@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Integer, IntegerError } from "../src/integer.vo";
+import { Integer } from "../src/integer.vo";
 
 describe("Integer VO", () => {
   test("happy path", () => {
@@ -11,14 +11,14 @@ describe("Integer VO", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => Integer.parse(null)).toThrow(IntegerError.Type);
+    expect(() => Integer.parse(null)).toThrow("integer.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => Integer.parse("100")).toThrow(IntegerError.Type);
+    expect(() => Integer.parse("100")).toThrow("integer.type");
   });
 
   test("rejects fraction", () => {
-    expect(() => Integer.parse(100.5)).toThrow(IntegerError.Type);
+    expect(() => Integer.parse(100.5)).toThrow("integer.type");
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { RevisionValue, RevisionValueError } from "../src/revision-value.vo";
+import { RevisionValue } from "../src/revision-value.vo";
 
 describe("RevisionValue", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("RevisionValue", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => RevisionValue.parse(null)).toThrow(RevisionValueError.Type);
+    expect(() => RevisionValue.parse(null)).toThrow("revision.value.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => RevisionValue.parse("123")).toThrow(RevisionValueError.Type);
+    expect(() => RevisionValue.parse("123")).toThrow("revision.value.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => RevisionValue.parse(1.5)).toThrow(RevisionValueError.Type);
+    expect(() => RevisionValue.parse(1.5)).toThrow("revision.value.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => RevisionValue.parse(-1)).toThrow(RevisionValueError.Invalid);
+    expect(() => RevisionValue.parse(-1)).toThrow("revision.value.invalid");
   });
 });

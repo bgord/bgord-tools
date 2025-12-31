@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { MonthIsoId, MonthIsoIdError } from "../src/month-iso-id.vo";
+import { MonthIsoId } from "../src/month-iso-id.vo";
 
 describe("MonthIsoId", () => {
   test("happy path", () => {
@@ -11,27 +11,27 @@ describe("MonthIsoId", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => MonthIsoId.parse("")).toThrow(MonthIsoIdError.BadChars);
+    expect(() => MonthIsoId.parse("")).toThrow("month.iso.id.bad.chars");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => MonthIsoId.parse(null)).toThrow(MonthIsoIdError.Type);
+    expect(() => MonthIsoId.parse(null)).toThrow("month.iso.id.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => MonthIsoId.parse(123)).toThrow(MonthIsoIdError.Type);
+    expect(() => MonthIsoId.parse(123)).toThrow("month.iso.id.type");
   });
 
   test("rejects months < 1 and > 12", () => {
-    expect(() => MonthIsoId.parse("2023-00")).toThrow(MonthIsoIdError.Invalid);
-    expect(() => MonthIsoId.parse("2023-13")).toThrow(MonthIsoIdError.Invalid);
+    expect(() => MonthIsoId.parse("2023-00")).toThrow("month.iso.id.invalid");
+    expect(() => MonthIsoId.parse("2023-13")).toThrow("month.iso.id.invalid");
   });
 
   test("rejects structurally invalid strings", () => {
     const invalid = ["2023-1", "2023/01", "23-01"];
 
     for (const value of invalid) {
-      expect(() => MonthIsoId.parse(value)).toThrow(MonthIsoIdError.BadChars);
+      expect(() => MonthIsoId.parse(value)).toThrow("month.iso.id.bad.chars");
     }
   });
 });

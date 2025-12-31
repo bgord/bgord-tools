@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { ReorderingCalculator, ReorderingError, ReorderingTransfer } from "../src/reordering.service";
+import { ReorderingCalculator, ReorderingTransfer } from "../src/reordering.service";
 
 describe("Reordering", () => {
   test("add", () => {
@@ -21,7 +21,7 @@ describe("Reordering", () => {
 
   test("delete - throws when item is not found", () => {
     expect(() => ReorderingCalculator.fromArray(["a", "b", "c"]).delete("d")).toThrow(
-      ReorderingError.CannotFindItem,
+      "reordering.cannot.find.item",
     );
   });
 
@@ -99,7 +99,7 @@ describe("Reordering", () => {
     const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
 
     expect(() => calculator.transfer(new ReorderingTransfer({ id: "ddd", to: 1 }))).toThrow(
-      ReorderingError.CannotFindCurrent,
+      "reordering.cannot.find.current",
     );
   });
 
@@ -107,7 +107,7 @@ describe("Reordering", () => {
     const calculator = ReorderingCalculator.fromArray(["aaa", "bbb", "ccc"]);
 
     expect(() => calculator.transfer(new ReorderingTransfer({ id: "ccc", to: 4 }))).toThrow(
-      ReorderingError.CannotFindTarget,
+      "reordering.cannot.find.target",
     );
   });
 

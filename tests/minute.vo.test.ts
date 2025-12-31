@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Minute } from "../src/minute.vo";
-import { MinuteSchema, MinuteSchemaError } from "../src/minute-schema.vo";
+import { MinuteSchema } from "../src/minute-schema.vo";
 import * as mocks from "./mocks";
 
 const FIVE = Minute.fromValue(5);
@@ -12,9 +12,9 @@ describe("Minute", () => {
   });
 
   test("throws for invalid minute values", () => {
-    expect(() => Minute.fromValue(12.5)).toThrow(MinuteSchemaError.Type);
-    expect(() => Minute.fromValue(-1)).toThrow(MinuteSchemaError.Invalid);
-    expect(() => Minute.fromValue(60)).toThrow(MinuteSchemaError.Invalid);
+    expect(() => Minute.fromValue(12.5)).toThrow("minute.schema.error");
+    expect(() => Minute.fromValue(-1)).toThrow("minute.schema.invalid");
+    expect(() => Minute.fromValue(60)).toThrow("minute.schema.invalid");
   });
 
   test("fromTimestamp extracts UTC minutes", () => {

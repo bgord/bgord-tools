@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Page, PaginationPageError } from "../src/pagination-page.vo";
+import { Page } from "../src/pagination-page.vo";
 
 describe("PaginationTake", () => {
   test("happy path", () => {
@@ -22,6 +22,6 @@ describe("PaginationTake", () => {
   });
 
   test("rejects fractions", () => {
-    expect(() => Page.parse(1.5)).toThrow(PaginationPageError.Type);
+    expect(() => Page.parse(1.5)).toThrow("pagination.page.type");
   });
 });

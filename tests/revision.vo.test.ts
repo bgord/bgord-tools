@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { ETag, WeakETag } from "../src/etags.vo";
-import { Revision, RevisionError } from "../src/revision.vo";
-import { RevisionValue, RevisionValueError } from "../src/revision-value.vo";
+import { Revision } from "../src/revision.vo";
+import { RevisionValue } from "../src/revision-value.vo";
 
 describe("Revision", () => {
   test("happy path", () => {
@@ -12,7 +12,7 @@ describe("Revision", () => {
   });
 
   test("throws for invalid input", () => {
-    expect(() => new Revision("invalid")).toThrow(RevisionValueError.Type);
+    expect(() => new Revision("invalid")).toThrow("revision.value.type");
   });
 
   test("fromETag", () => {
@@ -23,7 +23,7 @@ describe("Revision", () => {
   });
 
   test("fromETag - throws for null", () => {
-    expect(() => Revision.fromETag(null)).toThrow(RevisionError.Missing);
+    expect(() => Revision.fromETag(null)).toThrow("revision.missing");
   });
 
   test("fromWeakETag", () => {
@@ -34,7 +34,7 @@ describe("Revision", () => {
   });
 
   test("fromWeakETag - throws for null", () => {
-    expect(() => Revision.fromWeakETag(null)).toThrow(RevisionError.Missing);
+    expect(() => Revision.fromWeakETag(null)).toThrow("revision.missing");
   });
 
   test("equals", () => {
@@ -43,7 +43,7 @@ describe("Revision", () => {
   });
 
   test("validate - throws mismatch", () => {
-    expect(() => new Revision(123).validate(new Revision(456).value)).toThrow(RevisionError.Mismatch);
+    expect(() => new Revision(123).validate(new Revision(456).value)).toThrow("revision.mismatch");
   });
 
   test("next - returns a new revision with incremented value", () => {

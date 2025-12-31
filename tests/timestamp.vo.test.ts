@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
-import { TimestampValue, TimestampValueError } from "../src/timestamp-value.vo";
+import { TimestampValue } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
 describe("Timestamp", () => {
@@ -10,7 +10,7 @@ describe("Timestamp", () => {
   });
 
   test("fromValue - error", () => {
-    expect(() => Timestamp.fromValue(TimestampValue.parse(-1))).toThrow(TimestampValueError.Invalid);
+    expect(() => Timestamp.fromValue(TimestampValue.parse(-1))).toThrow("timestamp.invalid");
   });
 
   test("fromNumber - success", () => {
@@ -18,7 +18,7 @@ describe("Timestamp", () => {
   });
 
   test("fromNumber - error", () => {
-    expect(() => Timestamp.fromNumber(-1)).toThrow(TimestampValueError.Invalid);
+    expect(() => Timestamp.fromNumber(-1)).toThrow("timestamp.invalid");
   });
 
   test("fromDate - success", () => {
@@ -26,7 +26,7 @@ describe("Timestamp", () => {
   });
 
   test("fromDate - error", () => {
-    expect(() => Timestamp.fromDate(new Date("invalid"))).toThrow(TimestampValueError.Invalid);
+    expect(() => Timestamp.fromDate(new Date("invalid"))).toThrow("timestamp.invalid");
   });
 
   test("fromDateLike - success", () => {
@@ -34,7 +34,7 @@ describe("Timestamp", () => {
   });
 
   test("fromDateLike - error", () => {
-    expect(() => Timestamp.fromDateLike("invalid")).toThrow(TimestampValueError.Invalid);
+    expect(() => Timestamp.fromDateLike("invalid")).toThrow("timestamp.invalid");
   });
 
   test("add", () => {

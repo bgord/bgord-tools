@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Percentage, PercentageError } from "../src/percentage.service";
+import { Percentage } from "../src/percentage.service";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 
 describe("Percentage", () => {
@@ -10,7 +10,7 @@ describe("Percentage", () => {
   });
 
   test("throws - invalid denominator", () => {
-    expect(() => Percentage.of(2, 0)).toThrow(PercentageError.InvalidDenominator);
+    expect(() => Percentage.of(2, 0)).toThrow("percentage.invalid.denominator");
   });
 
   test("non-default rounding", () => {

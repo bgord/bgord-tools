@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const HourSchemaError = { Type: "hour.schema.error", Invalid: "hour.schema.invalid" };
+export const HourSchemaError = { Type: "hour.schema.type", Invalid: "hour.schema.invalid" };
 
 export const HourSchema = z
   .number(HourSchemaError.Type)

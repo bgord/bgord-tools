@@ -6,7 +6,7 @@ export const DirectoryPathRelativeError = {
   LeadingSlash: "directory.path.relative.leading.slash",
   TooLong: "directory.path.absolue.too.long",
   TrailingSlash: "directory.path.absolue.trailing.slash",
-  Type: "directory.path.relative.not.type",
+  Type: "directory.path.relative.type",
 };
 
 // Letters, digits, dots, underscores, and hyphens

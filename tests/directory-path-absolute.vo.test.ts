@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DirectoryPathAbsoluteError, DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
+import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
 
 describe("DirectoryPathAbsoluteSchema", () => {
   test("happy path", () => {
@@ -12,68 +12,68 @@ describe("DirectoryPathAbsoluteSchema", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => DirectoryPathAbsoluteSchema.parse(null)).toThrow(DirectoryPathAbsoluteError.Type);
+    expect(() => DirectoryPathAbsoluteSchema.parse(null)).toThrow("directory.path.absolue.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => DirectoryPathAbsoluteSchema.parse(42)).toThrow(DirectoryPathAbsoluteError.Type);
+    expect(() => DirectoryPathAbsoluteSchema.parse(42)).toThrow("directory.path.absolue.type");
   });
 
   test("rejects too-long", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse(`/${"a".repeat(512)}`)).toThrow(
-      DirectoryPathAbsoluteError.TooLong,
+      "directory.path.absolue.too.long",
     );
   });
 
   test("rejects empty", () => {
-    expect(() => DirectoryPathAbsoluteSchema.parse("")).toThrow(DirectoryPathAbsoluteError.Empty);
+    expect(() => DirectoryPathAbsoluteSchema.parse("")).toThrow("directory.path.absolue.empty");
   });
 
   test("rejects empty segment", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp//app///users/")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 
   test("rejects trailing slash", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("tmp/app/")).toThrow(
-      DirectoryPathAbsoluteError.TrailingSlash,
+      "directory.path.absolue.trailing.slash",
     );
   });
 
   test("rejects relative path", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("tmp/app")).toThrow(
-      DirectoryPathAbsoluteError.LeadingSlash,
+      "directory.path.absolue.leading.slash",
     );
   });
 
   test("rejects backslash", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp\\app")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 
   test("rejects control chars", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp\napp")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 
   test("rejects dot segment", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/../etc")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 
   test("rejects double-dot segment ", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/./users")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 
   test("rejects invalid segment", () => {
     expect(() => DirectoryPathAbsoluteSchema.parse("/tmp/app/invalid segment")).toThrow(
-      DirectoryPathAbsoluteError.BadSegments,
+      "directory.path.absolue.bad.segments",
     );
   });
 });

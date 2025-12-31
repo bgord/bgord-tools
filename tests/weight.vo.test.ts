@@ -3,7 +3,6 @@ import { DivisionFactor } from "../src/division-factor.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { Weight } from "../src/weight.vo";
-import { WeightGramsError } from "../src/weight-grams.vo";
 
 const twoDecimals = new RoundingDecimalStrategy(2);
 const threeDecimals = new RoundingDecimalStrategy(3);
@@ -20,7 +19,7 @@ describe("Weight", () => {
   });
 
   test("guards invalid inputs", () => {
-    expect(() => Weight.fromKilograms(-1)).toThrow(WeightGramsError.Invalid);
+    expect(() => Weight.fromKilograms(-1)).toThrow("weight.grams.invalid");
   });
 
   test("toKilograms", () => {

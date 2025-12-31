@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DateRange, DateRangeError } from "../src/date-range.vo";
+import { DateRange } from "../src/date-range.vo";
 import { Duration } from "../src/duration.service";
 import * as mocks from "./mocks";
 
@@ -10,7 +10,7 @@ const range = new DateRange(START, END);
 
 describe("DateRange", () => {
   test("throws when start > end", () => {
-    expect(() => new DateRange(END, START)).toThrow(DateRangeError.Invalid);
+    expect(() => new DateRange(END, START)).toThrow("date.range.invalid");
   });
 
   test("getStart", () => {

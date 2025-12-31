@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { WeightGrams, WeightGramsError } from "../src/weight-grams.vo";
+import { WeightGrams } from "../src/weight-grams.vo";
 
 describe("WeightGrams", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("WeightGrams", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => WeightGrams.parse(null)).toThrow(WeightGramsError.Type);
+    expect(() => WeightGrams.parse(null)).toThrow("weight.grams.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => WeightGrams.parse("123")).toThrow(WeightGramsError.Type);
+    expect(() => WeightGrams.parse("123")).toThrow("weight.grams.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => WeightGrams.parse(-1)).toThrow(WeightGramsError.Invalid);
+    expect(() => WeightGrams.parse(-1)).toThrow("weight.grams.invalid");
   });
 
   test("rejects fractions", () => {
-    expect(() => WeightGrams.parse(1.5)).toThrow(WeightGramsError.Type);
+    expect(() => WeightGrams.parse(1.5)).toThrow("weight.grams.type");
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { PaginationTakeError, Take } from "../src/pagination-take.vo";
+import { Take } from "../src/pagination-take.vo";
 
 describe("PaginationTake", () => {
   test("happy path", () => {
@@ -9,22 +9,22 @@ describe("PaginationTake", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => Take.parse(null)).toThrow(PaginationTakeError.Type);
+    expect(() => Take.parse(null)).toThrow("pagination.take.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => Take.parse("123")).toThrow(PaginationTakeError.Type);
+    expect(() => Take.parse("123")).toThrow("pagination.take.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => Take.parse(1.5)).toThrow(PaginationTakeError.Type);
+    expect(() => Take.parse(1.5)).toThrow("pagination.take.type");
   });
 
   test("rejects zero", () => {
-    expect(() => Take.parse(0)).toThrow(PaginationTakeError.Invalid);
+    expect(() => Take.parse(0)).toThrow("pagination.take.invalid");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => Take.parse(-1)).toThrow(PaginationTakeError.Invalid);
+    expect(() => Take.parse(-1)).toThrow("pagination.take.invalid");
   });
 });

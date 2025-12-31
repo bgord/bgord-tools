@@ -10,7 +10,7 @@ export enum WeekdayFormatterEnum {
   ZERO_BASED_NUMBER = "ZERO_BASED_NUMBER", // Sunday=0 ... Saturday=6 (JS)
 }
 
-export const WeekdayValueError = "invalid.weekday" as const;
+export const WeekdayValueError = { Invalid: "weekday.invalid" } as const;
 
 const FULL_NAMES: readonly string[] = [
   "Sunday",
@@ -47,7 +47,9 @@ export class Weekday {
   static readonly SATURDAY = new Weekday(6);
 
   constructor(candidate: number, formatter?: WeekdayFormatter) {
-    if (!Number.isInteger(candidate) || candidate < 0 || candidate > 6) throw new Error(WeekdayValueError);
+    if (!Number.isInteger(candidate) || candidate < 0 || candidate > 6) {
+      throw new Error(WeekdayValueError.Invalid);
+    }
 
     this.value = candidate;
     this.formatter = formatter ?? WeekdayFormatters.FULL;

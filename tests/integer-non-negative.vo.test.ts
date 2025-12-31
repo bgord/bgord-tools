@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { IntegerNonNegative, IntegerNonNegativeError } from "../src/integer-non-negative.vo";
+import { IntegerNonNegative } from "../src/integer-non-negative.vo";
 
 describe("IntegerNonNegative VO", () => {
   test("happy path", () => {
@@ -9,14 +9,14 @@ describe("IntegerNonNegative VO", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => IntegerNonNegative.parse(null)).toThrow(IntegerNonNegativeError.Type);
+    expect(() => IntegerNonNegative.parse(null)).toThrow("integer.non.negative.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => IntegerNonNegative.parse("100")).toThrow(IntegerNonNegativeError.Type);
+    expect(() => IntegerNonNegative.parse("100")).toThrow("integer.non.negative.type");
   });
 
   test("rejects fraction", () => {
-    expect(() => IntegerNonNegative.parse(100.5)).toThrow(IntegerNonNegativeError.Type);
+    expect(() => IntegerNonNegative.parse(100.5)).toThrow("integer.non.negative.type");
   });
 });

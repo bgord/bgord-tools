@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { MultiplicationFactor, MultiplicationFactorError } from "../src/multiplication-factor.vo";
+import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 
 describe("DivisionFactor", () => {
   test("happy path", () => {
@@ -9,14 +9,14 @@ describe("DivisionFactor", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => MultiplicationFactor.parse(null)).toThrow(MultiplicationFactorError.Type);
+    expect(() => MultiplicationFactor.parse(null)).toThrow("multiplication.factor.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => MultiplicationFactor.parse("123")).toThrow(MultiplicationFactorError.Type);
+    expect(() => MultiplicationFactor.parse("123")).toThrow("multiplication.factor.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => MultiplicationFactor.parse(-1)).toThrow(MultiplicationFactorError.Invalid);
+    expect(() => MultiplicationFactor.parse(-1)).toThrow("multiplication.factor.invalid");
   });
 });

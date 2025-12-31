@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Height } from "../src/height.vo";
-import { HeightMillimeters, HeightMillimetersError } from "../src/height-milimiters.vo";
+import { HeightMillimeters } from "../src/height-milimiters.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { RoundingDownStrategy } from "../src/rounding-down.strategy";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
@@ -25,9 +25,9 @@ describe("Height", () => {
   });
 
   test("guards invalid inputs", () => {
-    expect(() => Height.fromCentimeters(-1)).toThrow(HeightMillimetersError.Invalid);
-    expect(() => Height.fromMillimeters(Number.NaN)).toThrow(HeightMillimetersError.Type);
-    expect(() => Height.fromMillimeters(Number.POSITIVE_INFINITY)).toThrow(HeightMillimetersError.Type);
+    expect(() => Height.fromCentimeters(-1)).toThrow("height.millimeters.invalid");
+    expect(() => Height.fromMillimeters(Number.NaN)).toThrow("height.millimeters.type");
+    expect(() => Height.fromMillimeters(Number.POSITIVE_INFINITY)).toThrow("height.millimeters.type");
   });
 
   test("toCentimeters", () => {

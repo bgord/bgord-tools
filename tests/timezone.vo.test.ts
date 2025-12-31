@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Timezone, TimezoneError } from "../src/timezone.vo";
+import { Timezone } from "../src/timezone.vo";
 
 describe("Timezone", () => {
   test("happy path", () => {
@@ -11,26 +11,26 @@ describe("Timezone", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => Timezone.parse("")).toThrow(TimezoneError.Empty);
+    expect(() => Timezone.parse("")).toThrow("timezone.empty");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => Timezone.parse(null)).toThrow(TimezoneError.Type);
+    expect(() => Timezone.parse(null)).toThrow("timezone.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => Timezone.parse(123)).toThrow(TimezoneError.Type);
+    expect(() => Timezone.parse(123)).toThrow("timezone.type");
   });
 
   test("rejects too long", () => {
-    expect(() => Timezone.parse("a".repeat(129))).toThrow(TimezoneError.TooLong);
+    expect(() => Timezone.parse("a".repeat(129))).toThrow("timezone.too.long");
   });
 
   test("rejects invalid timezones", () => {
     const invalid = ["invalid-timezone", "Moon/Base1", "GMT+25"];
 
     for (const value of invalid) {
-      expect(() => Timezone.parse(value)).toThrow(TimezoneError.Invalid);
+      expect(() => Timezone.parse(value)).toThrow("timezone.invalid");
     }
   });
 });

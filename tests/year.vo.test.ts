@@ -4,7 +4,7 @@ import { Duration } from "../src/duration.service";
 import { Integer } from "../src/integer.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
-import { YearIsoId, YearIsoIdError } from "../src/year-iso-id.vo";
+import { YearIsoId } from "../src/year-iso-id.vo";
 import * as mocks from "./mocks";
 
 describe("Year", () => {
@@ -27,10 +27,10 @@ describe("Year", () => {
   });
 
   test("fromNumber rejects invalid inputs", () => {
-    expect(() => Year.fromNumber(-1)).toThrow(YearIsoIdError.BadChars);
-    expect(() => Year.fromNumber(10000)).toThrow(YearIsoIdError.BadChars);
-    expect(() => Year.fromNumber(2025.5)).toThrow(YearIsoIdError.BadChars);
-    expect(() => Year.fromNumber(Number.NaN)).toThrow(YearIsoIdError.BadChars);
+    expect(() => Year.fromNumber(-1)).toThrow("year.iso.id.bad.chars");
+    expect(() => Year.fromNumber(10000)).toThrow("year.iso.id.bad.chars");
+    expect(() => Year.fromNumber(2025.5)).toThrow("year.iso.id.bad.chars");
+    expect(() => Year.fromNumber(Number.NaN)).toThrow("year.iso.id.bad.chars");
   });
 
   test("fromNumber", () => {

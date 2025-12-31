@@ -1,13 +1,13 @@
 import { describe, expect, test } from "bun:test";
-import { OutlierDetector, OutlierDetectorError } from "../src/outlier-detector.service";
+import { OutlierDetector } from "../src/outlier-detector.service";
 
 describe("Outlier detector", () => {
   test("throws for empty values array", () => {
-    expect(() => new OutlierDetector([], 2)).toThrow(OutlierDetectorError.NotEnoughValues);
+    expect(() => new OutlierDetector([], 2)).toThrow("outlier.detector.not.enough.values");
   });
 
   test("throws for one value array", () => {
-    expect(() => new OutlierDetector([1], 2)).toThrow(OutlierDetectorError.NotEnoughValues);
+    expect(() => new OutlierDetector([1], 2)).toThrow("outlier.detector.not.enough.values");
   });
 
   test("works for three values", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Basename, BasenameError } from "../src/basename.vo";
+import { Basename } from "../src/basename.vo";
 
 describe("Basename", () => {
   test("happy path", () => {
@@ -9,59 +9,59 @@ describe("Basename", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => Basename.parse(null)).toThrow(BasenameError.Type);
+    expect(() => Basename.parse(null)).toThrow("basename.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => Basename.parse(42)).toThrow(BasenameError.Type);
+    expect(() => Basename.parse(42)).toThrow("basename.type");
   });
 
   test("rejects 129 chars", () => {
-    expect(() => Basename.parse("a".repeat(129))).toThrow(BasenameError.TooLong);
+    expect(() => Basename.parse("a".repeat(129))).toThrow("basename.too.long");
   });
 
   test("rejects empty", () => {
-    expect(() => Basename.parse("")).toThrow(BasenameError.Empty);
+    expect(() => Basename.parse("")).toThrow("basename.empty");
   });
 
   test("rejects forward slash", () => {
-    expect(() => Basename.parse("a/b")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("a/b")).toThrow("basename.bad.chars");
   });
 
   test("rejects backslash", () => {
-    expect(() => Basename.parse("a\\b")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("a\\b")).toThrow("basename.bad.chars");
   });
 
   test("rejects control chars", () => {
-    expect(() => Basename.parse("line\nbreak")).toThrow(BasenameError.BadChars);
-    expect(() => Basename.parse("nul\u0000byte")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("line\nbreak")).toThrow("basename.bad.chars");
+    expect(() => Basename.parse("nul\u0000byte")).toThrow("basename.bad.chars");
   });
 
   test("rejects single dot", () => {
-    expect(() => Basename.parse(".")).toThrow(BasenameError.DotSegments);
+    expect(() => Basename.parse(".")).toThrow("basename.dot.segments");
   });
 
   test("rejects double dot", () => {
-    expect(() => Basename.parse("..")).toThrow(BasenameError.DotSegments);
+    expect(() => Basename.parse("..")).toThrow("basename.dot.segments");
   });
 
   test("rejects dotfile", () => {
-    expect(() => Basename.parse(".env")).toThrow(BasenameError.Dotfiles);
+    expect(() => Basename.parse(".env")).toThrow("basename.dotfiles");
   });
 
   test("rejects trailing dot", () => {
-    expect(() => Basename.parse("name.")).toThrow(BasenameError.TrailingDot);
+    expect(() => Basename.parse("name.")).toThrow("basename.trailing.dot");
   });
 
   test("rejects space", () => {
-    expect(() => Basename.parse("name name")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("name name")).toThrow("basename.bad.chars");
   });
 
   test("rejects emoji", () => {
-    expect(() => Basename.parse("name🙂")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("name🙂")).toThrow("basename.bad.chars");
   });
 
   test("rejects symbol", () => {
-    expect(() => Basename.parse("name@")).toThrow(BasenameError.BadChars);
+    expect(() => Basename.parse("name@")).toThrow("basename.bad.chars");
   });
 });

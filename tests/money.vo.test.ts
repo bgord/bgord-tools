@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { DivisionFactor } from "../src/division-factor.vo";
-import { Money, MoneyError } from "../src/money.vo";
-import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
+import { Money } from "../src/money.vo";
+import { MoneyAmount } from "../src/money-amount.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundingDownStrategy } from "../src/rounding-down.strategy";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
@@ -21,7 +21,7 @@ describe("Money", () => {
   });
 
   test("throws on invalid input", () => {
-    expect(() => Money.fromAmount(100.5)).toThrow(MoneyAmountError.Type);
+    expect(() => Money.fromAmount(100.5)).toThrow("money.amount.type");
   });
 
   test("add", () => {
@@ -51,7 +51,7 @@ describe("Money", () => {
 
   test("subtract - result less than zero", () => {
     expect(() => Money.fromAmount(100).subtract(Money.fromAmount(120)).getAmount()).toThrow(
-      MoneyError.SubtractResultLessThanZero,
+      "money.subtract.result.less.than.zero",
     );
   });
 

@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Extension } from "../src/extension.vo";
 import { Mime } from "../src/mime.vo";
-import { MimeValueError } from "../src/mime-value.vo";
 
 describe("Mime", () => {
   test("fromString", () => {
@@ -20,10 +19,10 @@ describe("Mime", () => {
   });
 
   test("throws InvalidMimeError for invalid input", () => {
-    expect(() => Mime.fromString("")).toThrow(MimeValueError.Invalid);
-    expect(() => Mime.fromString("/subtype")).toThrow(MimeValueError.Invalid);
-    expect(() => Mime.fromString("type/")).toThrow(MimeValueError.Invalid);
-    expect(() => Mime.fromString("no-slash")).toThrow(MimeValueError.Invalid);
+    expect(() => Mime.fromString("")).toThrow("mime.value.invalid");
+    expect(() => Mime.fromString("/subtype")).toThrow("mime.value.invalid");
+    expect(() => Mime.fromString("type/")).toThrow("mime.value.invalid");
+    expect(() => Mime.fromString("no-slash")).toThrow("mime.value.invalid");
   });
 
   test("isSatisfiedBy - happy path", () => {

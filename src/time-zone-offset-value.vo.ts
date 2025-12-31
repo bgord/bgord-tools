@@ -7,12 +7,12 @@ export const TimeZoneOffsetValueError = {
 };
 
 export const TimeZoneOffsetValue = z.coerce
-  .number({ error: TimeZoneOffsetValueError.Type })
-  .int({ error: TimeZoneOffsetValueError.Type })
+  .number(TimeZoneOffsetValueError.Type)
+  .int(TimeZoneOffsetValueError.Type)
   // UTC+14 (Kiribati)
-  .min(-840, { error: TimeZoneOffsetValueError.Min })
+  .min(-840, TimeZoneOffsetValueError.Min)
   // UTC-12 (Baker Island)
-  .max(720, { error: TimeZoneOffsetValueError.Max })
+  .max(720, TimeZoneOffsetValueError.Max)
   .default(0) // Default to UTC if missing or invalid
   // Stryker disable next-line StringLiteral
   .brand("TimeZoneOffsetValue");

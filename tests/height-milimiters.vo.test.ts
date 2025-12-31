@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { HeightMillimeters, HeightMillimetersError } from "../src/height-milimiters.vo";
+import { HeightMillimeters } from "../src/height-milimiters.vo";
 
 describe("HeightMillimeters", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("HeightMillimeters", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => HeightMillimeters.parse(null)).toThrow(HeightMillimetersError.Type);
+    expect(() => HeightMillimeters.parse(null)).toThrow("height.millimeters.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => HeightMillimeters.parse("123")).toThrow(HeightMillimetersError.Type);
+    expect(() => HeightMillimeters.parse("123")).toThrow("height.millimeters.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => HeightMillimeters.parse(1.5)).toThrow(HeightMillimetersError.Type);
+    expect(() => HeightMillimeters.parse(1.5)).toThrow("height.millimeters.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => HeightMillimeters.parse(-1)).toThrow(HeightMillimetersError.Invalid);
+    expect(() => HeightMillimeters.parse(-1)).toThrow("height.millimeters.invalid");
   });
 });

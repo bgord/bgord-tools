@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { MimeValue, MimeValueError } from "../src/mime-value.vo";
+import { MimeValue } from "../src/mime-value.vo";
 
 describe("MimeValue", () => {
   test("happy path", () => {
@@ -10,30 +10,30 @@ describe("MimeValue", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => MimeValue.parse("")).toThrow(MimeValueError.Invalid);
+    expect(() => MimeValue.parse("")).toThrow("mime.value.invalid");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => MimeValue.parse(null)).toThrow(MimeValueError.Type);
+    expect(() => MimeValue.parse(null)).toThrow("mime.value.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => MimeValue.parse(123)).toThrow(MimeValueError.Type);
+    expect(() => MimeValue.parse(123)).toThrow("mime.value.type");
   });
 
   test("rejects missing type", () => {
-    expect(() => MimeValue.parse("/plain")).toThrow(MimeValueError.Invalid);
+    expect(() => MimeValue.parse("/plain")).toThrow("mime.value.invalid");
   });
 
   test("rejects missing subtype", () => {
-    expect(() => MimeValue.parse("text/")).toThrow(MimeValueError.Invalid);
+    expect(() => MimeValue.parse("text/")).toThrow("mime.value.invalid");
   });
 
   test("rejects no slash", () => {
-    expect(() => MimeValue.parse("text")).toThrow(MimeValueError.Invalid);
+    expect(() => MimeValue.parse("text")).toThrow("mime.value.invalid");
   });
 
   test("rejects only *", () => {
-    expect(() => MimeValue.parse("*")).toThrow(MimeValueError.Invalid);
+    expect(() => MimeValue.parse("*")).toThrow("mime.value.invalid");
   });
 });

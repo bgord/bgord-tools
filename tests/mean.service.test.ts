@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { Mean, MeanError } from "../src/mean.service";
+import { Mean } from "../src/mean.service";
 import { RoundingToNearestStrategy } from "../src/rounding-to-nearest.strategy";
 
 describe("Mean", () => {
   test("throws for empty values array", () => {
-    expect(() => Mean.calculate([])).toThrow(MeanError.NotEnoughValues);
+    expect(() => Mean.calculate([])).toThrow("mean.not.enough.values");
   });
 
   test("works for one value", () => {

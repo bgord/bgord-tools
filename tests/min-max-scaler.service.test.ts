@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { MinMaxScaler, MinMaxScalerError } from "../src/min-max-scaler.service";
+import { MinMaxScaler } from "../src/min-max-scaler.service";
 
 describe("MinMaxScaler", () => {
   test("scale - default bound", () => {
@@ -94,28 +94,30 @@ describe("MinMaxScaler", () => {
 
   test("scale - throws for invalid min/max config", () => {
     expect(() => new MinMaxScaler({ min: 100, max: 0, bound: { lower: 0, upper: 10 } })).toThrow(
-      MinMaxScalerError.InvalidMinMax,
+      "min.max.scaler.invalid.min.max",
     );
   });
 
   test("scale - throws for invalid bound config", () => {
     expect(() => new MinMaxScaler({ min: 0, max: 10, bound: { lower: 20, upper: 10 } })).toThrow(
-      MinMaxScalerError.InvalidBound,
+      "min.max.scaler.invalid.bound",
     );
     expect(() => new MinMaxScaler({ min: 0, max: 10, bound: { lower: 10, upper: 10 } })).toThrow(
-      MinMaxScalerError.InvalidBound,
+      "min.max.scaler.invalid.bound",
     );
   });
 
   test("scale - throws when value is out of configured range", () => {
-    expect(() => new MinMaxScaler({ min: 0, max: 10 }).scale(15)).toThrow(MinMaxScalerError.ValueOutOfRange);
+    expect(() => new MinMaxScaler({ min: 0, max: 10 }).scale(15)).toThrow(
+      "min.max.scaler.value.out.of.range",
+    );
   });
 
   test("descale - throws when scaled value is out of bounds", () => {
     const scaler = new MinMaxScaler({ min: 0, max: 100, bound: { lower: 10, upper: 20 } });
 
-    expect(() => scaler.descale(5)).toThrow(MinMaxScalerError.ScaledOutOfBounds);
-    expect(() => scaler.descale(25)).toThrow(MinMaxScalerError.ScaledOutOfBounds);
+    expect(() => scaler.descale(5)).toThrow("min.max.scaler.scaled.out.of.bounds");
+    expect(() => scaler.descale(25)).toThrow("min.max.scaler.scaled.out.of.bounds");
   });
 
   test("getMinMax - happy path", () => {
@@ -123,7 +125,7 @@ describe("MinMaxScaler", () => {
   });
 
   test("getMinMax - empty array", () => {
-    expect(() => MinMaxScaler.getMinMax([])).toThrow(MinMaxScalerError.EmptyArray);
+    expect(() => MinMaxScaler.getMinMax([])).toThrow("min.max.scaler.empty.array");
   });
 
   test("getMinMax - single-value arrays", () => {

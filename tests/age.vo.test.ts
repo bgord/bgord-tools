@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { Age, AgeError } from "../src/age.vo";
+import { Age } from "../src/age.vo";
 import { AgeYears } from "../src/age-years.vo";
-import { TimestampValueError } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
 describe("Age", () => {
@@ -36,7 +35,7 @@ describe("Age", () => {
   test("fromBirthdateTimestamp - rejects future birthdates", () => {
     expect(() =>
       Age.fromBirthdateTimestamp({ birthdate: mocks.toTimestamp("2125-10-01"), now: mocks.TIME_ZERO }),
-    ).toThrowError(AgeError.FutureBirthdate);
+    ).toThrowError("age.future.birthdate");
   });
 
   test("fromBirthdate - birthday has already happened", () => {
@@ -53,19 +52,19 @@ describe("Age", () => {
 
   test("fromBirthdate - rejects future birthdates", () => {
     expect(() => Age.fromBirthdate({ birthdate: "2125-10-01", now: mocks.TIME_ZERO })).toThrowError(
-      AgeError.FutureBirthdate,
+      "age.future.birthdate",
     );
   });
 
   test("fromBirthdate - rejects above upper bound", () => {
     expect(() => Age.fromBirthdate({ birthdate: "1800-01-01", now: mocks.TIME_ZERO })).toThrow(
-      TimestampValueError.Invalid,
+      "timestamp.invalid",
     );
   });
 
   test("fromBirthdate - invalid date string throws", () => {
     expect(() => Age.fromBirthdate({ birthdate: "not-a-date", now: mocks.TIME_ZERO })).toThrow(
-      TimestampValueError.Invalid,
+      "timestamp.invalid",
     );
   });
 

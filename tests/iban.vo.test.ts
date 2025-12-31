@@ -1,6 +1,5 @@
 import { describe, expect, test } from "bun:test";
 import { IBAN } from "../src/iban.vo";
-import { IbanSchemaError } from "../src/iban-schema.vo";
 
 describe("IBAN", () => {
   test("normalizes and formats", () => {
@@ -48,7 +47,7 @@ describe("IBAN", () => {
     ];
 
     for (const value of invalid) {
-      expect(() => new IBAN(value)).toThrow(IbanSchemaError.Invalid);
+      expect(() => new IBAN(value)).toThrow("iban.schema.invalid");
     }
   });
 });

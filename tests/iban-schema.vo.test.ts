@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { IbanSchema, IbanSchemaError } from "../src/iban-schema.vo";
+import { IbanSchema } from "../src/iban-schema.vo";
 
 describe("IBAN", () => {
   test("normalizes and formats valid IBANs", () => {
@@ -16,15 +16,15 @@ describe("IBAN", () => {
   });
 
   test("rejects non-string input - number", () => {
-    expect(() => IbanSchema.parse(123)).toThrow(IbanSchemaError.Type);
+    expect(() => IbanSchema.parse(123)).toThrow("iban.schema.type");
   });
 
   test("rejects non-string input - null", () => {
-    expect(() => IbanSchema.parse(null)).toThrow(IbanSchemaError.Type);
+    expect(() => IbanSchema.parse(null)).toThrow("iban.schema.type");
   });
 
   test("rejects empty", () => {
-    expect(() => IbanSchema.parse("")).toThrow(IbanSchemaError.Invalid);
+    expect(() => IbanSchema.parse("")).toThrow("iban.schema.invalid");
   });
 
   test("rejects invalid format", () => {
@@ -37,7 +37,7 @@ describe("IBAN", () => {
     ];
 
     for (const value of invalid) {
-      expect(() => IbanSchema.parse(value)).toThrow(IbanSchemaError.Invalid);
+      expect(() => IbanSchema.parse(value)).toThrow("iban.schema.invalid");
     }
   });
 });

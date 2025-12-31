@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { MoneyAmount, MoneyAmountError } from "../src/money-amount.vo";
+import { MoneyAmount } from "../src/money-amount.vo";
 
 describe("MoneyAmount", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("MoneyAmount", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => MoneyAmount.parse(null)).toThrow(MoneyAmountError.Type);
+    expect(() => MoneyAmount.parse(null)).toThrow("money.amount.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => MoneyAmount.parse("123")).toThrow(MoneyAmountError.Type);
+    expect(() => MoneyAmount.parse("123")).toThrow("money.amount.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => MoneyAmount.parse(1.5)).toThrow(MoneyAmountError.Type);
+    expect(() => MoneyAmount.parse(1.5)).toThrow("money.amount.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => MoneyAmount.parse(-1)).toThrow(MoneyAmountError.Invalid);
+    expect(() => MoneyAmount.parse(-1)).toThrow("money.amount.invalid");
   });
 });

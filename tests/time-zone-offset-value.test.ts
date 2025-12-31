@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { TimeZoneOffsetValue, TimeZoneOffsetValueError } from "../src/time-zone-offset-value.vo";
+import { TimeZoneOffsetValue } from "../src/time-zone-offset-value.vo";
 
 describe("TimeZoneOffsetValue", () => {
   test("happy path", () => {
@@ -9,15 +9,15 @@ describe("TimeZoneOffsetValue", () => {
   });
 
   test("rejects - fractions", () => {
-    expect(() => TimeZoneOffsetValue.parse("2.5")).toThrow(TimeZoneOffsetValueError.Type);
+    expect(() => TimeZoneOffsetValue.parse("2.5")).toThrow("time.zone.offset.value.type");
   });
 
   test("rejects - min", () => {
-    expect(() => TimeZoneOffsetValue.parse("-841")).toThrow(TimeZoneOffsetValueError.Min);
+    expect(() => TimeZoneOffsetValue.parse("-841")).toThrow("time.zone.offset.value.min");
   });
 
   test("rejects - max", () => {
-    expect(() => TimeZoneOffsetValue.parse("721")).toThrow(TimeZoneOffsetValueError.Max);
+    expect(() => TimeZoneOffsetValue.parse("721")).toThrow("time.zone.offset.value.max");
   });
 
   test("transforms invalid values to 0", () => {

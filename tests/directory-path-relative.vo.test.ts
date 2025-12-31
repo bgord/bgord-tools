@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DirectoryPathRelativeError, DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
+import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 
 describe("DirectoryPathRelativeSchema", () => {
   test("happy path", () => {
@@ -12,62 +12,62 @@ describe("DirectoryPathRelativeSchema", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => DirectoryPathRelativeSchema.parse(null)).toThrow(DirectoryPathRelativeError.Type);
+    expect(() => DirectoryPathRelativeSchema.parse(null)).toThrow("directory.path.relative.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow(DirectoryPathRelativeError.Type);
+    expect(() => DirectoryPathRelativeSchema.parse(123)).toThrow("directory.path.relative.type");
   });
 
   test("rejects empty", () => {
-    expect(() => DirectoryPathRelativeSchema.parse("")).toThrow(DirectoryPathRelativeError.Empty);
+    expect(() => DirectoryPathRelativeSchema.parse("")).toThrow("directory.path.relative.empty");
   });
 
   test("rejects too long", () => {
     expect(() => DirectoryPathRelativeSchema.parse(`/${"a".repeat(512)}`)).toThrow(
-      DirectoryPathRelativeError.TooLong,
+      "directory.path.absolue.too.long",
     );
   });
 
   test("rejects empty segment", () => {
     expect(() => DirectoryPathRelativeSchema.parse("tmp//app///users/")).toThrow(
-      DirectoryPathRelativeError.BadSegments,
+      "directory.path.relative.bad.segments",
     );
   });
 
   test("rejects leading slash", () => {
     expect(() => DirectoryPathRelativeSchema.parse("/users/avatars")).toThrow(
-      DirectoryPathRelativeError.LeadingSlash,
+      "directory.path.relative.leading.slash",
     );
   });
 
   test("rejects trailing slash", () => {
     expect(() => DirectoryPathRelativeSchema.parse("tmp/app/")).toThrow(
-      DirectoryPathRelativeError.TrailingSlash,
+      "directory.path.absolue.trailing.slash",
     );
   });
 
   test("rejects backslash", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users\\avatars")).toThrow(
-      DirectoryPathRelativeError.BadSegments,
+      "directory.path.relative.bad.segments",
     );
   });
 
   test("rejects control chars", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users\navatars")).toThrow(
-      DirectoryPathRelativeError.BadSegments,
+      "directory.path.relative.bad.segments",
     );
   });
 
   test("rejects dot segment", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users/./avatars")).toThrow(
-      DirectoryPathRelativeError.BadSegments,
+      "directory.path.relative.bad.segments",
     );
   });
 
   test("rejects dot segment", () => {
     expect(() => DirectoryPathRelativeSchema.parse("users/../avatars")).toThrow(
-      DirectoryPathRelativeError.BadSegments,
+      "directory.path.relative.bad.segments",
     );
   });
 });

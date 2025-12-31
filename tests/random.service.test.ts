@@ -1,17 +1,17 @@
 import { describe, expect, test } from "bun:test";
-import { Random, RandomError } from "../src/random.service";
+import { Random } from "../src/random.service";
 
 describe("Random", () => {
   test("throws when min equals max", () => {
-    expect(() => Random.generate({ min: 1, max: 1 })).toThrow(RandomError.MinMax);
+    expect(() => Random.generate({ min: 1, max: 1 })).toThrow("random.min.max");
   });
 
   test("throws when min greater than max", () => {
-    expect(() => Random.generate({ min: 2, max: 1 })).toThrow(RandomError.MinMax);
+    expect(() => Random.generate({ min: 2, max: 1 })).toThrow("random.min.max");
   });
 
   test("throws when all zeros", () => {
-    expect(() => Random.generate({ min: 0, max: 0 })).toThrow(RandomError.MinMax);
+    expect(() => Random.generate({ min: 0, max: 0 })).toThrow("random.min.max");
   });
 
   test("generate - default config", () => {

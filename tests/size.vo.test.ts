@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Size } from "../src/size.vo";
-import { SizeBytes, SizeBytesError } from "../src/size-bytes.vo";
+import { SizeBytes } from "../src/size-bytes.vo";
 
 describe("Size", () => {
   test("happy path", () => {
@@ -11,7 +11,7 @@ describe("Size", () => {
   });
 
   test("rejects invalid values", () => {
-    expect(() => Size.fromKb(1.555)).toThrow(SizeBytesError.Invalid);
+    expect(() => Size.fromKb(1.555)).toThrow("size.bytes.invalid");
   });
 
   test("convert - bytes to bytes", () => {
