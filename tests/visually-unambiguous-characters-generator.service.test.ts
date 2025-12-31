@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, spyOn, test } from "bun:test";
+import { Random } from "../src/random.service";
 import { VisuallyUnambiguousCharactersGenerator } from "../src/visually-unambiguous-characters-generator.service";
 
 describe("VisuallyUnambiguousCharactersGenerator", () => {
@@ -21,5 +22,18 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
     VisuallyUnambiguousCharactersGenerator.chars.forEach((character) => expect(character.length).toEqual(1));
 
     expect(VisuallyUnambiguousCharactersGenerator.chars.length).toBeGreaterThan(0);
+  });
+
+  test("correct random bounds", () => {
+    const randomSpy = spyOn(Random, "generate").mockReturnValue(0);
+
+    VisuallyUnambiguousCharactersGenerator.generate();
+
+    expect(randomSpy).toHaveBeenCalledWith({
+      min: 0,
+      max: VisuallyUnambiguousCharactersGenerator.chars.length - 1,
+    });
+
+    randomSpy.mockRestore();
   });
 });
