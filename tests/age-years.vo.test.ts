@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { AgeYears, AgeYearsError } from "../src/age-years.vo";
+import { AgeYears } from "../src/age-years.vo";
 
 describe("AgeYears", () => {
   test("happy path", () => {
@@ -8,22 +8,22 @@ describe("AgeYears", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => AgeYears.parse(null)).toThrow(AgeYearsError.Type);
+    expect(() => AgeYears.parse(null)).toThrow("age.years.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => AgeYears.parse("100")).toThrow(AgeYearsError.Type);
+    expect(() => AgeYears.parse("100")).toThrow("age.years.type");
   });
 
   test("rejects fraction", () => {
-    expect(() => AgeYears.parse(100.5)).toThrow(AgeYearsError.Type);
+    expect(() => AgeYears.parse(100.5)).toThrow("age.years.type");
   });
 
   test("rejects 0", () => {
-    expect(() => AgeYears.parse(0)).toThrow(AgeYearsError.Invalid);
+    expect(() => AgeYears.parse(0)).toThrow("age.years.invalid");
   });
 
   test("rejects 131", () => {
-    expect(() => AgeYears.parse(131)).toThrow(AgeYearsError.Invalid);
+    expect(() => AgeYears.parse(131)).toThrow("age.years.invalid");
   });
 });

@@ -7,6 +7,7 @@ export const MinuteSchema = z
   .int(MinuteSchemaError.Type)
   .gte(0, MinuteSchemaError.Invalid)
   .lte(59, MinuteSchemaError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("MinuteSchema");
 
 export type MinuteSchemaType = z.infer<typeof MinuteSchema>;

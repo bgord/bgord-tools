@@ -21,6 +21,7 @@ export const WeekIsoId = z
     if (week < 1) return false;
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("WeekIsoId");
 
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;

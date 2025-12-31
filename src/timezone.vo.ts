@@ -19,6 +19,7 @@ export const Timezone = z
       return false;
     }
   }, TimezoneError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("Timezone");
 
 export type TimezoneType = z.infer<typeof Timezone>;

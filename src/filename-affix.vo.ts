@@ -20,6 +20,7 @@ export const FilenameAffix = z
   .min(1, FilenameAffixError.Empty)
   .max(32, FilenameAffixError.TooLong)
   .regex(FILENAME_AFFIX_WHITELIST, FilenameAffixError.BadChars)
+  // Stryker disable next-line StringLiteral
   .brand("FilenameAffix");
 
 export type FilenameAffixType = z.infer<typeof FilenameAffix>;

@@ -26,6 +26,7 @@ export const Basename = z
   // Reject trailing dot like "picture." to avoid extension collision
   .refine((value) => !value.endsWith("."), BasenameError.TrailingDot)
   .regex(BASENAME_CHARS, BasenameError.BadChars)
+  // Stryker disable next-line StringLiteral
   .brand("Basename");
 
 export type BasenameType = z.infer<typeof Basename>;

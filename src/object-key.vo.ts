@@ -29,6 +29,7 @@ export const ObjectKey = z
     (value) => value.split("/").every((segment) => !DOT_SEGMENTS.includes(segment)),
     ObjectKeyError.DotSegments,
   )
+  // Stryker disable next-line StringLiteral
   .brand("ObjectKey");
 
 export type ObjectKeyType = z.infer<typeof ObjectKey>;

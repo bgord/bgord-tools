@@ -20,6 +20,7 @@ export const Extension = z
   // Transform ".png" -> "png"
   .transform((value) => value.replace(LEADING_DOT_FILE, ""))
   .refine((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars)
+  // Stryker disable next-line StringLiteral
   .brand("Extension");
 
 export type ExtensionType = z.infer<typeof Extension>;

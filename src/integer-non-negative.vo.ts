@@ -9,6 +9,7 @@ export const IntegerNonNegative = z
   .number(IntegerNonNegativeError.Type)
   .int(IntegerNonNegativeError.Type)
   .min(0, IntegerNonNegativeError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("IntegerNonNegative");
 
 export type IntegerNonNegativeType = z.infer<typeof IntegerNonNegative>;

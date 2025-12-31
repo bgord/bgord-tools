@@ -14,6 +14,7 @@ export const DayIsoId = z
   .string(DayIsoIdError.Type)
   .regex(DAY_ISO_ID_CHARS, DayIsoIdError.BadChars)
   .refine((value) => isValid(parseISO(value)), DayIsoIdError.InvalidDate)
+  // Stryker disable next-line StringLiteral
   .brand("DayIsoId");
 
 export type DayIsoIdType = z.infer<typeof DayIsoId>;

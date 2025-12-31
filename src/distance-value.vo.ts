@@ -6,6 +6,7 @@ export const DistanceValue = z
   .number(DistanceValueError.Type)
   .int(DistanceValueError.Type)
   .min(0, DistanceValueError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("DistanceValue");
 
 export type DistanceValueType = z.infer<typeof DistanceValue>;

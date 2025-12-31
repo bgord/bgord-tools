@@ -16,6 +16,7 @@ export const PackageVersionSchema = z
 
     return { major: Number(match[1]), minor: Number(match[2]), patch: Number(match[3]) };
   })
+  // Stryker disable next-line StringLiteral
   .brand("PackageVersionSchema");
 
 export type PackageVersionSchemaType = z.infer<typeof PackageVersionSchema>;

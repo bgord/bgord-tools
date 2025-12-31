@@ -6,6 +6,7 @@ export const MoneyAmount = z
   .number(MoneyAmountError.Type)
   .int(MoneyAmountError.Type)
   .min(0, MoneyAmountError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("MoneyAmount");
 
 export type MoneyAmountType = z.infer<typeof MoneyAmount>;

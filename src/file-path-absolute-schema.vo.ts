@@ -27,6 +27,7 @@ export const FilePathAbsoluteSchema = z
 
     return { directory, filename };
   })
+  // Stryker disable next-line StringLiteral
   .brand("FilePathAbsoluteSchema");
 
 export type FilePathAbsoluteType = z.infer<typeof FilePathAbsoluteSchema>;

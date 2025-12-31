@@ -17,6 +17,7 @@ export const MonthIsoId = z
 
     return month >= 1 && month <= 12;
   }, MonthIsoIdError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("MonthIsoId");
 
 export type MonthIsoIdType = z.infer<typeof MonthIsoId>;

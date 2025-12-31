@@ -9,6 +9,7 @@ export const ApiKey = z
   .string(ApiKeyError.Type)
   .length(64, ApiKeyError.Length)
   .regex(API_KEY_CHARS, ApiKeyError.BadChars)
+  // Stryker disable next-line StringLiteral
   .brand("ApiKey");
 
 export type ApiKeyType = z.infer<typeof ApiKey>;

@@ -8,6 +8,7 @@ export const RoundingDecimal = z
   .int(RoundingDecimalError.Invalid)
   .min(1, RoundingDecimalError.Invalid)
   .max(100, RoundingDecimalError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("RoundingDecimal");
 
 export class RoundingDecimalStrategy implements RoundingStrategy {

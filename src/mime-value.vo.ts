@@ -9,4 +9,5 @@ export const MimeValue = z
   .string(MimeValueError.Type)
   .regex(MIME_VALUE_CHARS_WHITELIST, MimeValueError.Invalid)
   .transform((value) => ({ type: value.split("/")[0], subtype: value.split("/")[1] }))
+  // Stryker disable next-line StringLiteral
   .brand("MimeValue");

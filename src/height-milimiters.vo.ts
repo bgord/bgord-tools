@@ -9,6 +9,7 @@ export const HeightMillimeters = z
   .number(HeightMillimetersError.Type)
   .int(HeightMillimetersError.Type)
   .min(0, HeightMillimetersError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("HeightMillimeters");
 
 export type HeightMillimetersType = z.infer<typeof HeightMillimeters>;

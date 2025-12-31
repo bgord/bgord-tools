@@ -27,6 +27,7 @@ export const FilePathRelativeSchema = z
 
     return { directory, filename };
   })
+  // Stryker disable next-line StringLiteral
   .brand("FilePathRelativeSchema");
 
 export type FilePathRelativeType = z.infer<typeof FilePathRelativeSchema>;

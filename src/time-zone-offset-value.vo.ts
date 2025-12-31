@@ -14,6 +14,7 @@ export const TimeZoneOffsetValue = z.coerce
   // UTC-12 (Baker Island)
   .max(720, { error: TimeZoneOffsetValueError.Max })
   .default(0) // Default to UTC if missing or invalid
+  // Stryker disable next-line StringLiteral
   .brand("TimeZoneOffsetValue");
 
 export type TimeZoneOffsetValueType = z.infer<typeof TimeZoneOffsetValue>;

@@ -9,6 +9,7 @@ export const AgeYears = z
   .int(AgeYearsError.Type)
   .min(1, AgeYearsError.Invalid)
   .max(130, AgeYearsError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("AgeYears");
 
 export type AgeYearsType = z.infer<typeof AgeYears>;

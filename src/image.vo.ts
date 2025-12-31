@@ -10,6 +10,7 @@ export const ImageWidth = z
   .int(ImageWidthError.Type)
   .min(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageWidthError.Length)
   .max(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageWidthError.Length)
+  // Stryker disable next-line StringLiteral
   .brand("ImageWidth");
 
 export type ImageWidthType = z.infer<typeof ImageWidth>;
@@ -19,6 +20,7 @@ export const ImageHeight = z
   .int(ImageHeightError.Type)
   .min(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageHeightError.Length)
   .max(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageHeightError.Length)
+  // Stryker disable next-line StringLiteral
   .brand("ImageHeight");
 
 export type ImageHeightType = z.infer<typeof ImageHeight>;

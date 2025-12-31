@@ -6,6 +6,7 @@ export const IntegerPositive = z
   .number(IntegerPositiveError.Type)
   .int(IntegerPositiveError.Type)
   .min(1, IntegerPositiveError.Invalid)
+  // Stryker disable next-line StringLiteral
   .brand("IntegerPositive");
 
 export type IntegerPositiveType = z.infer<typeof IntegerPositive>;
