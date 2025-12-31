@@ -7,6 +7,14 @@ describe("DayIsoId", () => {
     expect(DayIsoId.safeParse("2024-02-29").success).toEqual(true);
   });
 
+  test("rejects prefix", () => {
+    expect(() => DayIsoId.parse("prefix2025-07-15")).toThrow("day.iso.id.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => DayIsoId.parse("2025-07-15suffix")).toThrow("day.iso.id.bad.chars");
+  });
+
   test("rejects non-string - null", () => {
     expect(() => DayIsoId.parse(null)).toThrow("day.iso.id.type");
   });
