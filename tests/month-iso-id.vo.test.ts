@@ -10,6 +10,14 @@ describe("MonthIsoId", () => {
     }
   });
 
+  test("rejects prefix", () => {
+    expect(() => MonthIsoId.parse("prefix2000-01")).toThrow("month.iso.id.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => MonthIsoId.parse("2000-01suffix")).toThrow("month.iso.id.bad.chars");
+  });
+
   test("rejects empty", () => {
     expect(() => MonthIsoId.parse("")).toThrow("month.iso.id.bad.chars");
   });
