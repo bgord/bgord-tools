@@ -50,7 +50,7 @@ export class Weight {
   subtract(other: Weight): Weight {
     const result = this.grams - other.grams;
 
-    return new Weight(WeightGrams.parse(result <= 0 ? 0 : result));
+    return new Weight(WeightGrams.parse(Math.max(0, result)), this.rounding);
   }
 
   multiply(factor: MultiplicationFactorType): Weight {
