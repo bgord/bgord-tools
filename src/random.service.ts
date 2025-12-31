@@ -13,7 +13,7 @@ export class Random {
     const max = config ? config.max : Random.DEFAULT_MAX;
 
     if (min === max) throw new Error(RandomError.MinMax);
-    if (min > max) throw new Error(RandomError.MinMax);
+    if (min >= max) throw new Error(RandomError.MinMax);
 
     return new RoundingDownStrategy().round(Math.random() * (max - min + 1)) + min;
   }

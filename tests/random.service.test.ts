@@ -10,6 +10,10 @@ describe("Random", () => {
     expect(() => Random.generate({ min: 2, max: 1 })).toThrow("random.min.max");
   });
 
+  test("throws when min equals max", () => {
+    expect(() => Random.generate({ min: 1, max: 1 })).toThrow("random.min.max");
+  });
+
   test("throws when all zeros", () => {
     expect(() => Random.generate({ min: 0, max: 0 })).toThrow("random.min.max");
   });
