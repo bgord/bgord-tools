@@ -30,10 +30,7 @@ export class PackageVersion {
     if (this.minor > another.minor) return true;
     if (this.minor < another.minor) return false;
 
-    if (this.patch > another.patch) return true;
-    if (this.patch < another.patch) return false;
-
-    return true;
+    return this.patch >= another.patch;
   }
 
   toString(): string {

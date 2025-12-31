@@ -47,6 +47,10 @@ describe("PackageVersion", () => {
   });
 
   test("isGreaterThanOrEqual versions are the same", () => {
+    expect(new PackageVersion(1, 9, 3).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(false);
+  });
+
+  test("isGreaterThanOrEqual versions are the same", () => {
     expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
   });
 
