@@ -1,4 +1,5 @@
 # Changelog
+- 2025-12-31 16:00 ff45901 **step: update packages**
 - 2025-12-31 15:55 fe0a709 **step: dll**
 - 2025-12-31 15:50 c4915b9 **step: minmax**
 - 2025-12-31 15:47 ec8bf24 **step: linear regression**
@@ -11,6 +12,7 @@
 - 2025-12-31 15:09 c5ef7f8 **step: random**
 - 2025-12-31 15:03 ef74d9c **step: visually**
 - 2025-12-31 15:00 e37f8e2 **step: weight**
+- 2025-12-31 15:00 e00393d **docs: generate CHANGELOG**
 - 2025-12-31 14:52 4f25fa2 **step: package version schema**
 - 2025-12-31 14:51 6e7d0a6 **step: etags**
 - 2025-12-31 14:44 d081198 **step: size**
