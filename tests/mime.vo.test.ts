@@ -10,6 +10,13 @@ describe("Mime", () => {
     expect(mime.subtype).toEqual("plain");
   });
 
+  test("fromString - trimmed", () => {
+    const mime = Mime.fromString("text/plain ");
+
+    expect(mime.type).toEqual("text");
+    expect(mime.subtype).toEqual("plain");
+  });
+
   test("fromExtension", () => {
     expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
   });
