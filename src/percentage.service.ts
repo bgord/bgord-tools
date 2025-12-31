@@ -10,7 +10,6 @@ export class Percentage {
     rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ): number {
     if (denominator === 0) throw new Error(PercentageError.InvalidDenominator);
-    if (numerator === 0) return 0;
     return rounding.round((numerator / denominator) * 100);
   }
 }
