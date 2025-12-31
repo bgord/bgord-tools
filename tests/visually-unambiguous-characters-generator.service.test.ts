@@ -16,4 +16,10 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
       expect(VisuallyUnambiguousCharactersGenerator.chars).toContain(character);
     });
   });
+
+  test("single charactes allowed", () => {
+    VisuallyUnambiguousCharactersGenerator.chars.forEach((character) => expect(character.length).toEqual(1));
+
+    expect(VisuallyUnambiguousCharactersGenerator.chars.length).toBeGreaterThan(0);
+  });
 });
