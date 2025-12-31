@@ -1,4 +1,6 @@
 # Changelog
+## 2025-12-31 16:01 v1.2.14
+- 2025-12-31 16:01 f015991 **1.2.14**
 - 2025-12-31 16:00 ff45901 **step: update packages**
 - 2025-12-31 15:55 fe0a709 **step: dll**
 - 2025-12-31 15:50 c4915b9 **step: minmax**
@@ -11,6 +13,7 @@
 - 2025-12-31 15:11 51016e0 **step: outlier detector**
 - 2025-12-31 15:09 c5ef7f8 **step: random**
 - 2025-12-31 15:03 ef74d9c **step: visually**
+- 2025-12-31 15:01 b4d2f44 **docs: generate CHANGELOG**
 - 2025-12-31 15:00 e37f8e2 **step: weight**
 - 2025-12-31 15:00 e00393d **docs: generate CHANGELOG**
 - 2025-12-31 14:52 4f25fa2 **step: package version schema**
