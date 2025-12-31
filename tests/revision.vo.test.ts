@@ -42,6 +42,10 @@ describe("Revision", () => {
     expect(new Revision(123).equals(new Revision(456).value)).toEqual(false);
   });
 
+  test("validate success", () => {
+    expect(() => new Revision(123).validate(new Revision(123).value)).not.toThrow();
+  });
+
   test("validate - throws mismatch", () => {
     expect(() => new Revision(123).validate(new Revision(456).value)).toThrow("revision.mismatch");
   });
