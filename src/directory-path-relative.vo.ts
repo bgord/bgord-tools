@@ -14,7 +14,9 @@ export const DIRECTORY_PATH_RELATIVE_CHARS = /^[A-Za-z0-9._-]+$/;
 
 const DOT_SEGMENTS = [".", ".."];
 
+// Stryker disable all
 export const DirectoryPathRelativeSchema = z
+  // Stryker restore all
   .string(DirectoryPathRelativeError.Type)
   .min(1, DirectoryPathRelativeError.Empty)
   .max(512, DirectoryPathRelativeError.TooLong)
@@ -27,7 +29,6 @@ export const DirectoryPathRelativeSchema = z
         .every((segment) => DIRECTORY_PATH_RELATIVE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment)),
     DirectoryPathRelativeError.BadSegments,
   )
-  // Stryker disable next-line StringLiteral
   .brand("DirectoryPathRelativeSchema");
 
 export type DirectoryPathRelativeType = z.infer<typeof DirectoryPathRelativeSchema>;

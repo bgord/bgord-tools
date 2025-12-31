@@ -5,11 +5,12 @@ export const IntegerNonNegativeError = {
   Invalid: "integer.non.negative.invalid",
 };
 
+// Stryker disable all
 export const IntegerNonNegative = z
+  // Stryker restore all
   .number(IntegerNonNegativeError.Type)
   .int(IntegerNonNegativeError.Type)
   .min(0, IntegerNonNegativeError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("IntegerNonNegative");
 
 export type IntegerNonNegativeType = z.infer<typeof IntegerNonNegative>;

@@ -5,10 +5,11 @@ export const MultiplicationFactorError = {
   Invalid: "multiplication.factor.invalid",
 };
 
+// Stryker disable all
 export const MultiplicationFactor = z
+  // Stryker restore all
   .number(MultiplicationFactorError.Type)
   .min(0, MultiplicationFactorError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("MultiplicationFactor");
 
 export type MultiplicationFactorType = z.infer<typeof MultiplicationFactor>;

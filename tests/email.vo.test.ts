@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { Email, EmailError } from "../src/email.vo";
+import { Email } from "../src/email.vo";
 
 describe("Email", () => {
   test("happy path", () => {
@@ -7,14 +7,14 @@ describe("Email", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => Email.parse("")).toThrow(EmailError.Invalid);
+    expect(() => Email.parse("")).toThrow("email.invalid");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => Email.parse(null)).toThrow(EmailError.Invalid);
+    expect(() => Email.parse(null)).toThrow("email.invalid");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => Email.parse(123)).toThrow(EmailError.Invalid);
+    expect(() => Email.parse(123)).toThrow("email.invalid");
   });
 });

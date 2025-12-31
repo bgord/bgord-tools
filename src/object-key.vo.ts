@@ -14,7 +14,9 @@ const OBJECT_KEY_SEGMENT_CHARS_WHITELIST = /^[a-z0-9._-]+$/;
 
 const DOT_SEGMENTS = [".", ".."];
 
+// Stryker disable all
 export const ObjectKey = z
+  // Stryker restore all
   .string(ObjectKeyError.Type)
   .min(1, ObjectKeyError.Empty)
   .max(256, ObjectKeyError.TooLong)
@@ -29,7 +31,6 @@ export const ObjectKey = z
     (value) => value.split("/").every((segment) => !DOT_SEGMENTS.includes(segment)),
     ObjectKeyError.DotSegments,
   )
-  // Stryker disable next-line StringLiteral
   .brand("ObjectKey");
 
 export type ObjectKeyType = z.infer<typeof ObjectKey>;

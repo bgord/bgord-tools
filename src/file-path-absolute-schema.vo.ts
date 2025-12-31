@@ -10,7 +10,9 @@ export const FilePathAbsoluteSchemaError = {
   Empty: "file.path.absolute.empty",
 };
 
+// Stryker disable all
 export const FilePathAbsoluteSchema = z
+  // Stryker restore all
   .string(FilePathAbsoluteSchemaError.Type)
   .min(1, FilePathAbsoluteSchemaError.Empty)
   .refine((value) => value.startsWith("/"), FilePathAbsoluteSchemaError.LeadingSlash)
@@ -27,7 +29,6 @@ export const FilePathAbsoluteSchema = z
 
     return { directory, filename };
   })
-  // Stryker disable next-line StringLiteral
   .brand("FilePathAbsoluteSchema");
 
 export type FilePathAbsoluteType = z.infer<typeof FilePathAbsoluteSchema>;

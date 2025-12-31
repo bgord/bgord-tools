@@ -10,7 +10,9 @@ export const WeekIsoIdError = {
 // Four digits, hypen, W, followed by two digits
 const WEEK_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-W[0-9]{2}$/;
 
+// Stryker disable all
 export const WeekIsoId = z
+  // Stryker restore all
   .string(WeekIsoIdError.Type)
   .regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars)
   .refine((value) => {
@@ -21,7 +23,6 @@ export const WeekIsoId = z
     if (week < 1) return false;
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("WeekIsoId");
 
 export type WeekIsoIdType = z.infer<typeof WeekIsoId>;

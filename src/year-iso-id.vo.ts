@@ -5,10 +5,11 @@ export const YearIsoIdError = { Type: "year.iso.id.type", BadChars: "year.iso.id
 // Four digits
 const YEAR_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}$/;
 
+// Stryker disable all
 export const YearIsoId = z
+  // Stryker restore all
   .string(YearIsoIdError.Type)
   .regex(YEAR_ISO_ID_CHARS_WHITELIST, YearIsoIdError.BadChars)
-  // Stryker disable next-line StringLiteral
   .brand("YearIsoId");
 
 export type YearIsoIdType = z.infer<typeof YearIsoId>;

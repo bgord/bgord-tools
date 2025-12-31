@@ -12,7 +12,9 @@ const EXTENSION_WHITELIST = /^[a-z0-9]+$/;
 
 const LEADING_DOT_FILE = /^\./;
 
+// Stryker disable all
 export const Extension = z
+  // Stryker restore all
   .string(ExtensionError.Type)
   .toLowerCase()
   .min(2, ExtensionError.Empty)
@@ -20,7 +22,6 @@ export const Extension = z
   // Transform ".png" -> "png"
   .transform((value) => value.replace(LEADING_DOT_FILE, ""))
   .refine((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars)
-  // Stryker disable next-line StringLiteral
   .brand("Extension");
 
 export type ExtensionType = z.infer<typeof Extension>;

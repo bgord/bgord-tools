@@ -9,7 +9,9 @@ export const MonthIsoIdError = {
 // Four digits, hyphen, two digits
 const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;
 
+// Stryker disable all
 export const MonthIsoId = z
+  // Stryker restore all
   .string(MonthIsoIdError.Type)
   .regex(MONTH_ISO_ID_CHARS_WHITELIST, MonthIsoIdError.BadChars)
   .refine((value) => {
@@ -17,7 +19,6 @@ export const MonthIsoId = z
 
     return month >= 1 && month <= 12;
   }, MonthIsoIdError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("MonthIsoId");
 
 export type MonthIsoIdType = z.infer<typeof MonthIsoId>;

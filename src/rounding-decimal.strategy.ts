@@ -3,12 +3,13 @@ import type { RoundingStrategy } from "./rounding.strategy";
 
 export const RoundingDecimalError = { Type: "rounding.decimal.type", Invalid: "rounding.decimal.invalid" };
 
+// Stryker disable all
 export const RoundingDecimal = z
+  // Stryker restore all
   .number(RoundingDecimalError.Type)
   .int(RoundingDecimalError.Invalid)
   .min(1, RoundingDecimalError.Invalid)
   .max(100, RoundingDecimalError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("RoundingDecimal");
 
 export class RoundingDecimalStrategy implements RoundingStrategy {

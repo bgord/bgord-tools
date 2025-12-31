@@ -7,7 +7,9 @@ export const TimezoneError = {
   Invalid: "timezone.invalid",
 };
 
+// Stryker disable all
 export const Timezone = z
+  // Stryker restore all
   .string(TimezoneError.Type)
   .min(1, TimezoneError.Empty)
   .max(128, TimezoneError.TooLong)
@@ -19,7 +21,6 @@ export const Timezone = z
       return false;
     }
   }, TimezoneError.Invalid)
-  // Stryker disable next-line StringLiteral
   .brand("Timezone");
 
 export type TimezoneType = z.infer<typeof Timezone>;

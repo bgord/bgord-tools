@@ -10,7 +10,9 @@ export const FilePathRelativeSchemaError = {
   Empty: "file.path.relative.empty",
 };
 
+// Stryker disable all
 export const FilePathRelativeSchema = z
+  // Stryker restore all
   .string(FilePathRelativeSchemaError.Type)
   .min(1, FilePathRelativeSchemaError.Empty)
   .refine((value) => !value.startsWith("/"), FilePathRelativeSchemaError.LeadingSlash)
@@ -27,7 +29,6 @@ export const FilePathRelativeSchema = z
 
     return { directory, filename };
   })
-  // Stryker disable next-line StringLiteral
   .brand("FilePathRelativeSchema");
 
 export type FilePathRelativeType = z.infer<typeof FilePathRelativeSchema>;

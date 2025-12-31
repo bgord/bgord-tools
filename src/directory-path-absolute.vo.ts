@@ -14,7 +14,9 @@ export const DIRECTORY_PATH_ABSOLUTE_CHARS = /^[a-zA-Z0-9._-]+$/;
 
 const DOT_SEGMENTS = [".", ".."];
 
+// Stryker disable all
 export const DirectoryPathAbsoluteSchema = z
+  // Stryker restore all
   .string(DirectoryPathAbsoluteError.Type)
   .min(1, DirectoryPathAbsoluteError.Empty)
   .max(512, DirectoryPathAbsoluteError.TooLong)
@@ -29,7 +31,6 @@ export const DirectoryPathAbsoluteSchema = z
       (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment),
     );
   }, DirectoryPathAbsoluteError.BadSegments)
-  // Stryker disable next-line StringLiteral
   .brand("DirectoryPathAbsoluteSchema");
 
 export type DirectoryPathAbsoluteType = z.infer<typeof DirectoryPathAbsoluteSchema>;

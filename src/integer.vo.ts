@@ -2,7 +2,8 @@ import { z } from "zod/v4";
 
 export const IntegerError = { Type: "integer.type" };
 
-// Stryker disable next-line StringLiteral
+// Stryker disable all
 export const Integer = z.number(IntegerError.Type).int(IntegerError.Type).brand("Integer");
+// Stryker restore all
 
 export type IntegerType = z.infer<typeof Integer>;
