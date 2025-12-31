@@ -10,6 +10,8 @@ describe("RoundingDecimalStrategy", () => {
   });
 
   test("invalid", () => {
+    // @ts-expect-error
+    expect(() => new RoundingDecimalStrategy("")).toThrow("rounding.decimal.type");
     expect(() => new RoundingDecimalStrategy(-1)).toThrow("rounding.decimal.invalid");
     expect(() => new RoundingDecimalStrategy(0)).toThrow("rounding.decimal.invalid");
     expect(() => new RoundingDecimalStrategy(1.5)).toThrow("rounding.decimal.invalid");
