@@ -38,7 +38,9 @@ export class Year extends DateRange {
   isLeapYear(): boolean {
     const year = getYear(this.getStart().ms);
 
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    if (year % 400 === 0) return true;
+    if (year % 100 === 0) return false;
+    return year % 4 === 0;
   }
 
   previous(): Year {

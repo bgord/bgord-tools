@@ -93,6 +93,8 @@ describe("Year", () => {
 
   test("leap year check for 2400", () => expect(Year.fromNumber(2400).isLeapYear()).toEqual(true));
 
+  test("leap year check for 2100", () => expect(Year.fromNumber(2100).isLeapYear()).toEqual(false));
+
   test("toString", () => {
     expect(Year.fromIsoId(YearIsoId.parse("2023")).toString()).toEqual("2023");
   });
