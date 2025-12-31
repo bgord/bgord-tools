@@ -27,6 +27,14 @@ describe("FilePathRelative", () => {
     expect(() => FilePathRelative.fromString("/tmp/file.txt")).toThrow();
   });
 
+  test("withFilename", () => {
+    expect(
+      FilePathRelative.fromParts("users/avatars", Filename.fromString("avatar.webp"))
+        .withFilename(Filename.fromString("avatar.png"))
+        .get(),
+    ).toEqual("users/avatars/avatar.png");
+  });
+
   test("withDirectory", () => {
     expect(
       FilePathRelative.fromParts("users/avatars", Filename.fromString("avatar.webp"))
@@ -65,6 +73,14 @@ describe("FilePathAbsolute", () => {
 
   test("rejects relative paths", () => {
     expect(() => FilePathAbsolute.fromString("var/uploads/avatar.webp")).toThrow();
+  });
+
+  test("withFilename", () => {
+    expect(
+      FilePathAbsolute.fromParts("/tmp/app/users", Filename.fromString("avatar.webp"))
+        .withFilename(Filename.fromString("avatar.png"))
+        .get(),
+    ).toEqual("/tmp/app/users/avatar.png");
   });
 
   test("withDirectory", () => {
