@@ -89,6 +89,10 @@ describe("Size", () => {
     expect(value.format(Size.unit.GB)).toEqual("2 GB");
   });
 
+  test("toBytes", () => {
+    expect(Size.fromGB(1).toBytes()).toEqual(SizeBytes.parse(1073741824));
+  });
+
   test("toString", () => {
     expect(Size.fromGB(1).toString()).toEqual("1 GB");
   });
