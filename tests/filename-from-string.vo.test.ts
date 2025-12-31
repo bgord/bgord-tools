@@ -11,6 +11,14 @@ describe("FilenameFromString", () => {
     });
   });
 
+  test("rejects prefix", () => {
+    expect(() => FilenameFromString.parse("\navatar.png")).toThrow("filename.from.string.invalid");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => FilenameFromString.parse("avatar.png\n")).toThrow("filename.from.string.invalid");
+  });
+
   test("rejects non-string - null", () => {
     expect(() => FilenameFromString.parse(null)).toThrow("filename.from.string.type");
   });
