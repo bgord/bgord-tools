@@ -17,6 +17,10 @@ describe("Hour", () => {
     expect(() => Hour.fromValue(24)).toThrow("hour.schema.invalid");
   });
 
+  test("fromValueSafe", () => {
+    expect(Hour.fromValueSafe(HourSchema.parse(1)).get()).toEqual(HourSchema.parse(1));
+  });
+
   test("fromTimestampValue", () => {
     expect(Hour.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(HourSchema.parse(22));
   });
