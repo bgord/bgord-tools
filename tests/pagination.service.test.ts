@@ -68,6 +68,33 @@ describe("Pagination", () => {
     expect(emptyPaged.meta.total).toEqual(0);
   });
 
+  test("prepare - first page boundary", () => {
+    const config = {
+      total: 50,
+      pagination: { values: { take: 10, skip: 0 }, page: 1 },
+      result: [],
+    };
+    const paged = Pagination.prepare(config);
+
+    expect(paged.meta.currentPage).toEqual(1);
+    expect(paged.meta.previousPage).toBeUndefined();
+    expect(paged.meta.nextPage).toEqual(2);
+  });
+
+  test("prepare - last page boundary", () => {
+    const config = {
+      total: 50,
+      pagination: { values: { take: 10, skip: 40 }, page: 5 },
+      result: [],
+    };
+    const paged = Pagination.prepare(config);
+
+    expect(paged.meta.currentPage).toEqual(5);
+    expect(paged.meta.lastPage).toEqual(5);
+    expect(paged.meta.previousPage).toEqual(4);
+    expect(paged.meta.nextPage).toBeUndefined();
+  });
+
   test("isExhausted", () => {
     const config = { total: 25, pagination: { values: { take: 10, skip: 10 }, page: 3 } };
     const exhausted = Pagination.isExhausted(config);
