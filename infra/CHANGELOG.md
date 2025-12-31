@@ -1,7 +1,67 @@
 # Changelog
+- 2025-12-31 15:55 fe0a709 **step: dll**
+- 2025-12-31 15:50 c4915b9 **step: minmax**
+- 2025-12-31 15:47 ec8bf24 **step: linear regression**
+- 2025-12-31 15:39 9c523cf **step: linear regression**
+- 2025-12-31 15:32 63bc29a **step: visually**
+- 2025-12-31 15:24 8d10c54 **step: pagination**
+- 2025-12-31 15:21 3aa89c1 **step: height**
+- 2025-12-31 15:16 2bb10a6 **step: date calculator**
+- 2025-12-31 15:11 51016e0 **step: outlier detector**
+- 2025-12-31 15:09 c5ef7f8 **step: random**
+- 2025-12-31 15:03 ef74d9c **step: visually**
+- 2025-12-31 15:00 e37f8e2 **step: weight**
+- 2025-12-31 14:52 4f25fa2 **step: package version schema**
+- 2025-12-31 14:51 6e7d0a6 **step: etags**
+- 2025-12-31 14:44 d081198 **step: size**
+- 2025-12-31 14:43 aed9eab **step: month iso id**
+- 2025-12-31 14:42 dbfa415 **step: minute**
+- 2025-12-31 14:41 86809bb **step: duration**
+- 2025-12-31 14:38 4524b11 **step: mime**
+- 2025-12-31 14:37 5937903 **step: mime value**
+- 2025-12-31 14:35 2dfb0cf **step: iban schema**
+- 2025-12-31 14:32 a1b73dd **step: extension**
+- 2025-12-31 14:28 bbf8d79 **step: hour**
+- 2025-12-31 14:26 55e437b **step: filename from string**
+- 2025-12-31 14:23 4b810ab **step: filename affix**
+- 2025-12-31 14:21 4e9a54e **step: day iso id**
+- 2025-12-31 14:21 43f6173 **step: distance**
+- 2025-12-31 14:20 1f19377 **step: api key**
+- 2025-12-31 14:18 523691f **step: weight**
+- 2025-12-31 14:17 a33ec6c **step: week iso id**
+- 2025-12-31 14:12 8481741 **step: weekday**
+- 2025-12-31 14:06 bf55b11 **step: gitignore stryker tmp**
+- 2025-12-31 14:04 3306504 **step: file path**
+- 2025-12-31 14:02 76dc053 **step: outlier**
+- 2025-12-31 14:01 0f1c0d6 **step: package version**
+- 2025-12-31 13:56 1c26f0d **step: weekday**
+- 2025-12-31 13:51 998a7e4 **step: random**
+- 2025-12-31 13:50 f56ee4d **step: revision**
+- 2025-12-31 13:49 093b40d **step: clock**
+- 2025-12-31 13:43 283e961 **step: mime**
+- 2025-12-31 13:42 886005e **step: percentgage**
+- 2025-12-31 13:41 b6b25d0 **step: money**
+- 2025-12-31 13:39 f4c215c **step: minute**
+- 2025-12-31 13:38 4df1ac7 **step: hour**
+- 2025-12-31 13:37 e2a68db **step: rounding decimal**
+- 2025-12-31 13:37 b937762 **step: size**
+- 2025-12-31 13:35 b2b8058 **step: weight**
+- 2025-12-31 13:31 ceb318d **step: height**
+- 2025-12-31 13:26 e0f687d **step: timestamp**
+- 2025-12-31 13:25 e380125 **step: integer non negative invalid**
+- 2025-12-31 13:23 3c42e0b **step: age is younger than**
+- 2025-12-31 13:22 a00c707 **step: age is older than**
+- 2025-12-31 13:21 425682f **step: age equals**
+- 2025-12-31 13:18 fa9f1b6 **step: add leap year testcase for 2100**
+- 2025-12-31 13:14 9f22ced **fix: error assertions**
+- 2025-12-31 12:07 7decb06 **fix: stryker disable comments**
+- 2025-12-31 11:43 b0e37e5 **refactor: use string literal for errors in tests**
+- 2025-12-31 11:09 87a8c64 **refactor: exclude brand name from mutation testing**
+- 2025-12-31 10:20 64e8a4a **step: install stryker**
 ## 2025-12-31 09:39 v1.2.13
 - 2025-12-31 09:39 bb6d15e **1.2.13**
 - 2025-12-31 09:38 60da4b1 **step: update packages**
+- 2025-12-31 08:39 b95bd39 **docs: generate CHANGELOG**
 - 2025-12-31 08:38 a86d8c1 **docs: generate CHANGELOG**
 ## 2025-12-30 14:38 v1.2.12
 - 2025-12-30 14:38 e78c60c **1.2.12**
