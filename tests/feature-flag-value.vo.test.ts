@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { FeatureFlagValue, FeatureFlagValueError } from "../src/feature-flag-value.vo";
+import { FeatureFlagValue } from "../src/feature-flag-value.vo";
 
 describe("FeatureFlagValue", () => {
   test("happy path", () => {
@@ -8,6 +8,6 @@ describe("FeatureFlagValue", () => {
   });
 
   test("rejects other values", () => {
-    expect(() => FeatureFlagValue.parse("maybe")).toThrow(FeatureFlagValueError.Invalid);
+    expect(() => FeatureFlagValue.parse("maybe")).toThrow("feature.flag.value.invalid");
   });
 });

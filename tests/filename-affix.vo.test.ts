@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { FilenameAffix, FilenameAffixError } from "../src/filename-affix.vo";
+import { FilenameAffix } from "../src/filename-affix.vo";
 
 describe("FilenameAffixSchema", () => {
   test("happy path", () => {
@@ -8,22 +8,22 @@ describe("FilenameAffixSchema", () => {
   });
 
   test("rejects non-string - number", () => {
-    expect(() => FilenameAffix.parse(123)).toThrow(FilenameAffixError.Type);
+    expect(() => FilenameAffix.parse(123)).toThrow("affix.type");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => FilenameAffix.parse(null)).toThrow(FilenameAffixError.Type);
+    expect(() => FilenameAffix.parse(null)).toThrow("affix.type");
   });
 
   test("rejects empty", () => {
-    expect(() => FilenameAffix.parse("")).toThrow(FilenameAffixError.Empty);
+    expect(() => FilenameAffix.parse("")).toThrow("affix.empty");
   });
 
   test("rejects too long", () => {
-    expect(() => FilenameAffix.parse("x".repeat(33))).toThrow(FilenameAffixError.TooLong);
+    expect(() => FilenameAffix.parse("x".repeat(33))).toThrow("affix.too.long");
   });
 
   test("rejects disallowed characters", () => {
-    expect(() => FilenameAffix.parse("/@!")).toThrow(FilenameAffixError.BadChars);
+    expect(() => FilenameAffix.parse("/@!")).toThrow("affix.bad.chars");
   });
 });

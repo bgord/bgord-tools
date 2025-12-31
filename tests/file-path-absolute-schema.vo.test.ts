@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
-import { FilePathAbsoluteSchema, FilePathAbsoluteSchemaError } from "../src/file-path-absolute-schema.vo";
+import { FilePathAbsoluteSchema } from "../src/file-path-absolute-schema.vo";
 
 describe("FilePathAbsoluteSchema", () => {
   test("happy path", () => {
@@ -16,32 +16,32 @@ describe("FilePathAbsoluteSchema", () => {
   });
 
   test("rejects non-string - number", () => {
-    expect(() => FilePathAbsoluteSchema.parse(123)).toThrow(FilePathAbsoluteSchemaError.Type);
+    expect(() => FilePathAbsoluteSchema.parse(123)).toThrow("file.path.absolute.type");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => FilePathAbsoluteSchema.parse(null)).toThrow(FilePathAbsoluteSchemaError.Type);
+    expect(() => FilePathAbsoluteSchema.parse(null)).toThrow("file.path.absolute.type");
   });
 
   test("rejects empty", () => {
-    expect(() => FilePathAbsoluteSchema.parse("")).toThrow(FilePathAbsoluteSchemaError.Empty);
+    expect(() => FilePathAbsoluteSchema.parse("")).toThrow("file.path.absolute.empty");
   });
 
   test("rejects lacking leading slash", () => {
     expect(() => FilePathAbsoluteSchema.parse("var/uploads/avatar.webp")).toThrow(
-      FilePathAbsoluteSchemaError.LeadingSlash,
+      "file.path.absolute.leading.slash",
     );
   });
 
   test("rejects backslashes", () => {
     expect(() => FilePathAbsoluteSchema.parse("/var\\uploads/avatar.webp")).toThrow(
-      FilePathAbsoluteSchemaError.BackslashForbidden,
+      "file.path.absolute.backslash.forbidden",
     );
   });
 
   test("rejects trailing slash", () => {
     expect(() => FilePathAbsoluteSchema.parse("/var/uploads/avatar.webp/")).toThrow(
-      FilePathAbsoluteSchemaError.TrailingSlash,
+      "file.path.absolute.trailing.slash",
     );
   });
 

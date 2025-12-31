@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DivisionFactor, DivisionFactorError } from "../src/division-factor.vo";
+import { DivisionFactor } from "../src/division-factor.vo";
 
 describe("DivisionFactor", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("DivisionFactor", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => DivisionFactor.parse(null)).toThrow(DivisionFactorError.Type);
+    expect(() => DivisionFactor.parse(null)).toThrow("division.factor.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => DivisionFactor.parse("123")).toThrow(DivisionFactorError.Type);
+    expect(() => DivisionFactor.parse("123")).toThrow("division.factor.type");
   });
 
   test("rejects zero", () => {
-    expect(() => DivisionFactor.parse(0)).toThrow(DivisionFactorError.Invalid);
+    expect(() => DivisionFactor.parse(0)).toThrow("division.factor.invalid");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => DivisionFactor.parse(-1)).toThrow(DivisionFactorError.Invalid);
+    expect(() => DivisionFactor.parse(-1)).toThrow("division.factor.invalid");
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DurationMs, DurationMsError } from "../src/duration-ms.vo";
+import { DurationMs } from "../src/duration-ms.vo";
 
 describe("DurationMs", () => {
   test("happy path", () => {
@@ -8,14 +8,14 @@ describe("DurationMs", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => DurationMs.parse(null)).toThrow(DurationMsError.Invalid);
+    expect(() => DurationMs.parse(null)).toThrow("duration.invalid");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => DurationMs.parse("123")).toThrow(DurationMsError.Invalid);
+    expect(() => DurationMs.parse("123")).toThrow("duration.invalid");
   });
 
   test("rejects fractions", () => {
-    expect(() => DurationMs.parse(1.5)).toThrow(DurationMsError.Invalid);
+    expect(() => DurationMs.parse(1.5)).toThrow("duration.invalid");
   });
 });

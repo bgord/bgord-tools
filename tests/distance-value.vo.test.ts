@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DistanceValue, DistanceValueError } from "../src/distance-value.vo";
+import { DistanceValue } from "../src/distance-value.vo";
 
 describe("DistanceValue", () => {
   test("happy path", () => {
@@ -8,18 +8,18 @@ describe("DistanceValue", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => DistanceValue.parse(null)).toThrow(DistanceValueError.Type);
+    expect(() => DistanceValue.parse(null)).toThrow("distance.value.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => DistanceValue.parse("123")).toThrow(DistanceValueError.Type);
+    expect(() => DistanceValue.parse("123")).toThrow("distance.value.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => DistanceValue.parse(1.5)).toThrow(DistanceValueError.Type);
+    expect(() => DistanceValue.parse(1.5)).toThrow("distance.value.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => DistanceValue.parse(-1)).toThrow(DistanceValueError.Invalid);
+    expect(() => DistanceValue.parse(-1)).toThrow("distance.value.invalid");
   });
 });

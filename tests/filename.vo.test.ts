@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
-import { FilenameAffix, FilenameAffixError, FilenameAffixStrategy } from "../src/filename-affix.vo";
+import { FilenameAffix, FilenameAffixStrategy } from "../src/filename-affix.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
 import { MIMES } from "../src/mime.vo";
 
@@ -70,7 +70,7 @@ describe("Filename", () => {
 
   test("withAffix rejects invalid input - suffix", () => {
     expect(() => Filename.fromString("avatar.webp").withAffix("", FilenameAffixStrategy.suffix)).toThrow(
-      FilenameAffixError.Empty,
+      "affix.empty",
     );
   });
 
@@ -100,7 +100,7 @@ describe("Filename", () => {
 
   test("withAffix rejects invalid input - prefix", () => {
     expect(() => Filename.fromString("avatar.webp").withAffix("", FilenameAffixStrategy.prefix)).toThrow(
-      FilenameAffixError.Empty,
+      "affix.empty",
     );
   });
 

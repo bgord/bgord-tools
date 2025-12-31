@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { ETag, WeakETag, WeakETagError } from "../src/etags.vo";
+import { ETag, WeakETag } from "../src/etags.vo";
 import { RevisionValue } from "../src/revision-value.vo";
 
 describe("ETag", () => {
@@ -33,6 +33,6 @@ describe("WeakETag class", () => {
   test("throws for invalid", () => {
     const invalidValue = "invalid";
 
-    expect(() => WeakETag.fromHeader(invalidValue)).toThrow(WeakETagError.Invalid);
+    expect(() => WeakETag.fromHeader(invalidValue)).toThrow("weak.etag.invalid");
   });
 });

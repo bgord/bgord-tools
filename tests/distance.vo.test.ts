@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { Distance, DistanceError } from "../src/distance.vo";
-import { DistanceValue, DistanceValueError } from "../src/distance-value.vo";
+import { Distance } from "../src/distance.vo";
+import { DistanceValue } from "../src/distance-value.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 
 describe("Distance", () => {
@@ -10,7 +10,7 @@ describe("Distance", () => {
   });
 
   test("throws on invalid input", () => {
-    expect(() => Distance.fromMeters(100.5)).toThrow(DistanceValueError.Type);
+    expect(() => Distance.fromMeters(100.5)).toThrow("distance.value.type");
   });
 
   test("fromMetersSafe", () => {
@@ -25,7 +25,7 @@ describe("Distance", () => {
 
   test("fromKilometers - throws on invalid input", () => {
     expect(() => Distance.fromKilometers(0.123456789, new RoundingDecimalStrategy(5))).toThrow(
-      DistanceValueError.Type,
+      "distance.value.type",
     );
   });
 
@@ -36,7 +36,7 @@ describe("Distance", () => {
   });
 
   test("fromMiles - throws on invalid input", () => {
-    expect(() => Distance.fromMiles(1, new RoundingDecimalStrategy(1))).toThrow(DistanceValueError.Type);
+    expect(() => Distance.fromMiles(1, new RoundingDecimalStrategy(1))).toThrow("distance.value.type");
   });
 
   test("add", () => {
@@ -54,7 +54,7 @@ describe("Distance", () => {
 
   test("subtract - result less than zero", () => {
     expect(() => Distance.fromMeters(100).subtract(Distance.fromMeters(120)).get()).toThrow(
-      DistanceError.SubtractResultLessThanZero,
+      "distance.subtract.result.less.than.zero",
     );
   });
 

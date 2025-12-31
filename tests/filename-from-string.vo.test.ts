@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
-import { FilenameFromString, FilenameFromStringError } from "../src/filename-from-string.vo";
+import { FilenameFromString } from "../src/filename-from-string.vo";
 
 describe("FilenameFromString", () => {
   test("happy path", () => {
@@ -12,26 +12,26 @@ describe("FilenameFromString", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => FilenameFromString.parse(null)).toThrow(FilenameFromStringError.Type);
+    expect(() => FilenameFromString.parse(null)).toThrow("filename.from.string.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => FilenameFromString.parse(123)).toThrow(FilenameFromStringError.Type);
+    expect(() => FilenameFromString.parse(123)).toThrow("filename.from.string.type");
   });
 
   test("rejects empty", () => {
-    expect(() => FilenameFromString.parse("")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => FilenameFromString.parse("")).toThrow("filename.from.string.invalid");
   });
 
   test("rejects missing extension", () => {
-    expect(() => FilenameFromString.parse("avatar")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => FilenameFromString.parse("avatar")).toThrow("filename.from.string.invalid");
   });
 
   test("rejects missing extension with dot", () => {
-    expect(() => FilenameFromString.parse("name.")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => FilenameFromString.parse("name.")).toThrow("filename.from.string.invalid");
   });
 
   test("rejects only an extension", () => {
-    expect(() => FilenameFromString.parse(".png")).toThrow(FilenameFromStringError.Invalid);
+    expect(() => FilenameFromString.parse(".png")).toThrow("filename.from.string.invalid");
   });
 });

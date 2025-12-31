@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
-import { FilePathRelativeSchema, FilePathRelativeSchemaError } from "../src/file-path-relative-schema.vo";
+import { FilePathRelativeSchema } from "../src/file-path-relative-schema.vo";
 
 describe("FilePathRelativeSchema", () => {
   test("happy path", () => {
@@ -21,33 +21,29 @@ describe("FilePathRelativeSchema", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => FilePathRelativeSchema.parse(null)).toThrow(FilePathRelativeSchemaError.Type);
+    expect(() => FilePathRelativeSchema.parse(null)).toThrow("file.path.relative.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => FilePathRelativeSchema.parse(123)).toThrow(FilePathRelativeSchemaError.Type);
+    expect(() => FilePathRelativeSchema.parse(123)).toThrow("file.path.relative.type");
   });
 
   test("rejects empty", () => {
-    expect(() => FilePathRelativeSchema.parse("")).toThrow(FilePathRelativeSchemaError.Empty);
+    expect(() => FilePathRelativeSchema.parse("")).toThrow("file.path.relative.empty");
   });
 
   test("rejects leading slash", () => {
-    expect(() => FilePathRelativeSchema.parse("/tmp/file.txt")).toThrow(
-      FilePathRelativeSchemaError.LeadingSlash,
-    );
+    expect(() => FilePathRelativeSchema.parse("/tmp/file.txt")).toThrow("file.path.relative.leading.slash");
   });
 
   test("rejects backslash", () => {
     expect(() => FilePathRelativeSchema.parse("tmp\\file.txt")).toThrow(
-      FilePathRelativeSchemaError.BackslashForbidden,
+      "file.path.relative.backslash.forbidden",
     );
   });
 
   test("rejects no directory", () => {
-    expect(() => FilePathRelativeSchema.parse("file.txt")).toThrow(
-      FilePathRelativeSchemaError.RequiresDirectory,
-    );
+    expect(() => FilePathRelativeSchema.parse("file.txt")).toThrow("file.path.relative.requires.directory");
   });
 
   test("delegated failures", () => {
