@@ -32,12 +32,30 @@ describe("Weekday", () => {
 
   test("maps named weekdays", () => {
     expect(Weekday.SUNDAY.get()).toEqual(0);
+    expect(Weekday.SUNDAY.isSunday()).toEqual(true);
+    expect(Weekday.SUNDAY.isMonday()).toEqual(false);
+
     expect(Weekday.MONDAY.get()).toEqual(1);
+    expect(Weekday.MONDAY.isMonday()).toEqual(true);
+    expect(Weekday.MONDAY.isThursday()).toEqual(false);
+
     expect(Weekday.TUESDAY.get()).toEqual(2);
+    expect(Weekday.TUESDAY.isTuesday()).toEqual(true);
+    expect(Weekday.TUESDAY.isWednesday()).toEqual(false);
+
     expect(Weekday.WEDNESDAY.get()).toEqual(3);
+    expect(Weekday.WEDNESDAY.isWednesday()).toEqual(true);
+    expect(Weekday.WEDNESDAY.isThursday()).toEqual(false);
+
     expect(Weekday.THURSDAY.get()).toEqual(4);
+    expect(Weekday.THURSDAY.isThursday()).toEqual(true);
+    expect(Weekday.THURSDAY.isFriday()).toEqual(false);
+
     expect(Weekday.FRIDAY.get()).toEqual(5);
+    expect(Weekday.FRIDAY.isSaturday()).toEqual(false);
+
     expect(Weekday.SATURDAY.get()).toEqual(6);
+    expect(Weekday.SATURDAY.isSunday()).toEqual(false);
   });
 
   test("format - default", () => {
