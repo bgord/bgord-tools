@@ -17,6 +17,10 @@ describe("Minute", () => {
     expect(() => Minute.fromValue(60)).toThrow("minute.schema.invalid");
   });
 
+  test("fromValueSafe", () => {
+    expect(Minute.fromValueSafe(MinuteSchema.parse(13)).get()).toEqual(MinuteSchema.parse(13));
+  });
+
   test("fromTimestamp extracts UTC minutes", () => {
     expect(Minute.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(MinuteSchema.parse(13));
   });
