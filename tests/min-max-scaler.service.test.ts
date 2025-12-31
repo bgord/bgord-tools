@@ -92,6 +92,15 @@ describe("MinMaxScaler", () => {
     });
   });
 
+  test("scale - non-zero min value", () => {
+    const scaler = new MinMaxScaler({ min: 50, max: 100, bound: { lower: 0, upper: 10 } });
+
+    const result = scaler.scale(75);
+
+    expect(result.scaled).toBe(5);
+    expect(result.original).toBe(75);
+  });
+
   test("scale - throws for invalid min/max config", () => {
     expect(() => new MinMaxScaler({ min: 100, max: 0, bound: { lower: 0, upper: 10 } })).toThrow(
       "min.max.scaler.invalid.min.max",
@@ -107,10 +116,16 @@ describe("MinMaxScaler", () => {
     );
   });
 
-  test("scale - throws when value is out of configured range", () => {
+  test("scale - throws when value is bigger than configured range", () => {
     expect(() => new MinMaxScaler({ min: 0, max: 10 }).scale(15)).toThrow(
       "min.max.scaler.value.out.of.range",
     );
+  });
+
+  test("scale - throws when value is less than configured range", () => {
+    const scaler = new MinMaxScaler({ min: 10, max: 20 });
+
+    expect(() => scaler.scale(5)).toThrow("min.max.scaler.value.out.of.range");
   });
 
   test("descale - throws when scaled value is out of bounds", () => {

@@ -61,7 +61,7 @@ export class MinMaxScaler {
     if (value < min || value > max) throw new Error(MinMaxScalerError.ValueOutOfRange);
 
     if (min === max) {
-      return { original: value, scaled: (lower + upper) / 2, isMin: value === min, isMax: value === max };
+      return { original: value, scaled: (lower + upper) / 2, isMin: true, isMax: true };
     }
 
     const result = ((value - min) / (max - min)) * (upper - lower) + lower;
