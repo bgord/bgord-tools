@@ -7,6 +7,14 @@ describe("FilenameAffixSchema", () => {
     expect(FilenameAffix.safeParse("_v2").success).toEqual(true);
   });
 
+  test("rejects prefix", () => {
+    expect(() => FilenameAffix.parse("*-sm")).toThrow("affix.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => FilenameAffix.parse("sm-*")).toThrow("affix.bad.chars");
+  });
+
   test("rejects non-string - number", () => {
     expect(() => FilenameAffix.parse(123)).toThrow("affix.type");
   });
