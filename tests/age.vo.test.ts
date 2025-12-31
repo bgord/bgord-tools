@@ -80,11 +80,18 @@ describe("Age", () => {
     expect(Age.fromValue(12).get()).toEqual(12);
   });
 
-  test("compares", () => {
+  test("equals - true", () => {
     const first = Age.fromValue(18);
     const second = Age.fromValue(18);
 
     expect(first.equals(second)).toEqual(true);
+  });
+
+  test("equals - false", () => {
+    const first = Age.fromValue(18);
+    const second = Age.fromValue(19);
+
+    expect(first.equals(second)).toEqual(false);
   });
 
   test("isOlderThan", () => {
