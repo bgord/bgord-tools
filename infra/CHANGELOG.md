@@ -1,4 +1,5 @@
 # Changelog
+- 2025-12-31 09:38 60da4b1 **step: update packages**
 ## 2025-12-30 14:38 v1.2.12
 - 2025-12-30 14:38 e78c60c **1.2.12**
 - 2025-12-30 14:33 a16bc03 **feature: integer non negative vo**
@@ -11,6 +12,7 @@
 - 2025-12-30 13:44 fbf63b4 **refactor: use int in week vo**
 - 2025-12-30 13:43 f626530 **refactor: use int in weight**
 - 2025-12-30 13:43 ad4272c **refactor: use int in year**
+- 2025-12-30 13:38 a84ff70 **docs: generate CHANGELOG**
 - 2025-12-30 13:38 8e38a87 **step: integer**
 - 2025-12-30 13:38 6cc1ec0 **fix: test type error**
 - 2025-12-30 13:34 c15f69c **docs: generate readme**
