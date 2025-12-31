@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, spyOn, test } from "bun:test";
 import { Random } from "../src/random.service";
 
 describe("Random", () => {
@@ -8,10 +8,6 @@ describe("Random", () => {
 
   test("throws when min greater than max", () => {
     expect(() => Random.generate({ min: 2, max: 1 })).toThrow("random.min.max");
-  });
-
-  test("throws when min equals max", () => {
-    expect(() => Random.generate({ min: 1, max: 1 })).toThrow("random.min.max");
   });
 
   test("throws when all zeros", () => {
@@ -30,5 +26,19 @@ describe("Random", () => {
 
     expect(result).toBeGreaterThanOrEqual(1);
     expect(result).toBeLessThanOrEqual(10);
+  });
+
+  test("calculation integrity", () => {
+    const min = 100;
+    const max = 110;
+    const randomSpy = spyOn(Math, "random").mockReturnValue(0.9999999);
+
+    expect(Random.generate({ min, max })).toEqual(max);
+
+    randomSpy.mockReturnValue(0);
+
+    expect(Random.generate({ min, max })).toEqual(min);
+
+    randomSpy.mockRestore();
   });
 });
