@@ -38,9 +38,17 @@ describe("Height", () => {
     expect(Height.fromMillimeters(1804).toCentimeters(new RoundingDecimalStrategy(1))).toEqual(180.4);
   });
 
+  test("toCentimeters - custom rounding", () => {
+    expect(Height.fromMillimeters(1804).toCentimeters(new RoundingDownStrategy())).toEqual(180);
+  });
+
   test("format", () => {
     expect(Height.fromMillimeters(1804).format()).toEqual("180.4 cm");
     expect(Height.fromCentimeters(180).format()).toEqual("180 cm");
+  });
+
+  test("format - custom rounding", () => {
+    expect(Height.fromMillimeters(1809).format(new RoundingDownStrategy())).toEqual("180 cm");
   });
 
   test("equals", () => {
