@@ -8,6 +8,14 @@ describe("WeekIsoId", () => {
     expect(WeekIsoId.safeParse("2020-W53").success).toEqual(true);
   });
 
+  test("rejects prefix", () => {
+    expect(() => WeekIsoId.parse("prefix2025-W01")).toThrow("week.iso.id.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => WeekIsoId.parse("2025-W01suffix")).toThrow("week.iso.id.bad.chars");
+  });
+
   test("rejects empty", () => {
     expect(() => WeekIsoId.parse("")).toThrow("week.iso.id.bad.chars");
   });
