@@ -49,4 +49,16 @@ describe("Extension", () => {
   test("rejects double dot", () => {
     expect(() => Extension.parse("..png")).toThrow("extension.bad.chars");
   });
+
+  test("rejects prefix", () => {
+    expect(() => Extension.parse("!webp")).toThrow("extension.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => Extension.parse("webp ")).toThrow("extension.bad.chars");
+  });
+
+  test("rejects internal dot", () => {
+    expect(() => Extension.parse("a.png")).toThrow("extension.bad.chars");
+  });
 });
