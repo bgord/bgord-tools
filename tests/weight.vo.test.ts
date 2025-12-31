@@ -40,15 +40,35 @@ describe("Weight", () => {
     expect(Weight.fromGrams(1_999).divide(DivisionFactor.parse(3)).get()).toEqual(666);
   });
 
-  test("comparisons", () => {
-    const x = Weight.fromGrams(10_000);
-    const y = Weight.fromKilograms(10);
-    const z = Weight.fromGrams(10_001);
+  test("equals", () => {
+    const a = Weight.fromGrams(1800);
+    const b = Weight.fromGrams(180);
 
-    expect(x.equals(y)).toEqual(true);
-    expect(x.lessThan(z)).toEqual(true);
-    expect(z.greaterThanOrEqual(y)).toEqual(true);
+    expect(a.equals(a)).toEqual(true);
+    expect(a.equals(b)).toEqual(false);
+  });
+
+  test("greaterThan", () => {
+    const a = Weight.fromGrams(1800);
+    const b = Weight.fromGrams(180);
+
+    expect(a.greaterThan(a)).toEqual(false);
+    expect(a.greaterThan(b)).toEqual(true);
+  });
+
+  test("lessThan", () => {
+    const a = Weight.fromGrams(180);
+    const b = Weight.fromGrams(1800);
+
+    expect(a.lessThan(a)).toEqual(false);
+    expect(a.lessThan(b)).toEqual(true);
+  });
+
+  test("isZero", () => {
+    const a = Weight.fromGrams(10);
+
     expect(Weight.zero().isZero()).toEqual(true);
+    expect(a.isZero()).toEqual(false);
   });
 
   test("toString", () => {

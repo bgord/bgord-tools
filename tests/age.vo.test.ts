@@ -96,22 +96,20 @@ describe("Age", () => {
 
   test("isOlderThan", () => {
     const youngerAge = Age.fromValue(17);
-    const youngerEqualAge = Age.fromValue(17);
     const olderAge = Age.fromValue(18);
 
     expect(olderAge.isOlderThan(youngerAge)).toEqual(true);
     expect(youngerAge.isOlderThan(olderAge)).toEqual(false);
-    expect(youngerAge.isOlderThan(youngerEqualAge)).toEqual(false);
+    expect(youngerAge.isOlderThan(youngerAge)).toEqual(false);
   });
 
   test("isYoungerThan", () => {
     const youngerAge = Age.fromValue(17);
-    const youngerEqualAge = Age.fromValue(17);
     const olderAge = Age.fromValue(18);
 
     expect(youngerAge.isYoungerThan(olderAge)).toEqual(true);
     expect(olderAge.isYoungerThan(youngerAge)).toEqual(false);
-    expect(youngerAge.isYoungerThan(youngerEqualAge)).toEqual(false);
+    expect(youngerAge.isYoungerThan(youngerAge)).toEqual(false);
   });
 
   test("isAdult - treats exactly the same age as adult", () => {

@@ -73,16 +73,8 @@ export class Weight {
     return this.grams > other.grams;
   }
 
-  greaterThanOrEqual(other: Weight): boolean {
-    return this.grams >= other.grams;
-  }
-
   lessThan(other: Weight): boolean {
     return this.grams < other.grams;
-  }
-
-  lessThanOrEqual(other: Weight): boolean {
-    return this.grams <= other.grams;
   }
 
   isZero(): boolean {
