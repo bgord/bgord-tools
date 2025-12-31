@@ -10,6 +10,14 @@ describe("PackageVersionSchema", () => {
     }
   });
 
+  test("rejects prefix", () => {
+    expect(() => PackageVersionSchema.parse(" v1.0.0")).toThrow("package.version.schema.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => PackageVersionSchema.parse("v1.0.0 ")).toThrow("package.version.schema.bad.chars");
+  });
+
   test("rejects empty value", () => {
     expect(() => PackageVersionSchema.parse("")).toThrow("package.version.schema.bad.chars");
   });
