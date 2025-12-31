@@ -15,6 +15,14 @@ describe("IBAN", () => {
     }
   });
 
+  test("rejects prefix", () => {
+    expect(() => IbanSchema.parse("_PL61 1090 1014 0000 0712 1981 2874")).toThrow("iban.schema.invalid");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => IbanSchema.parse("PL61 1090 1014 0000 0712 1981 2874_")).toThrow("iban.schema.invalid");
+  });
+
   test("rejects non-string input - number", () => {
     expect(() => IbanSchema.parse(123)).toThrow("iban.schema.type");
   });
