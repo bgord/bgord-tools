@@ -26,4 +26,12 @@ describe("ApiKey", () => {
   test("rejects bad chars", () => {
     expect(() => ApiKey.parse(`${"a".repeat(63)}!`)).toThrow("api.key.bad.chars");
   });
+
+  test("rejects prefix", () => {
+    expect(() => ApiKey.parse(`prefix${"a".repeat(64)}`)).toThrow("api.key.bad.chars");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => ApiKey.parse(`${"a".repeat(64)}suffix`)).toThrow("api.key.bad.chars");
+  });
 });
