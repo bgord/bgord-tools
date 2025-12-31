@@ -43,15 +43,37 @@ describe("Height", () => {
     expect(Height.fromCentimeters(180).format()).toEqual("180 cm");
   });
 
-  test("comparisons", () => {
-    const a = Height.fromMillimeters(1800);
+  test("equals", () => {
+    const a = Height.fromCentimeters(1800);
     const b = Height.fromCentimeters(180);
-    const c = Height.fromMillimeters(1801);
 
-    expect(a.equals(b)).toEqual(true);
-    expect(a.lessThan(c)).toEqual(true);
-    expect(c.greaterThan(b)).toEqual(true);
+    expect(a.equals(a)).toEqual(true);
+    expect(a.equals(b)).toEqual(false);
+  });
+
+  test("greaterThan", () => {
+    const a = Height.fromCentimeters(1800);
+    const b = Height.fromCentimeters(180);
+
+    expect(a.greaterThan(a)).toEqual(false);
+    expect(a.greaterThan(b)).toEqual(true);
+  });
+
+  test("lessThan", () => {
+    const a = Height.fromCentimeters(180);
+    const b = Height.fromCentimeters(1800);
+
+    expect(a.lessThan(a)).toEqual(false);
+    expect(a.lessThan(b)).toEqual(true);
+  });
+
+  test("isZero", () => {
     expect(Height.zero().isZero()).toEqual(true);
+    expect(Height.fromCentimeters(180).isZero()).toEqual(false);
+  });
+
+  test("get", () => {
+    expect(Height.fromMillimeters(1804).get()).toEqual(1804);
   });
 
   test("toString", () => {
