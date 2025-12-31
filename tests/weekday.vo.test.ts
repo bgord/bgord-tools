@@ -37,7 +37,7 @@ describe("Weekday", () => {
 
     expect(Weekday.MONDAY.get()).toEqual(1);
     expect(Weekday.MONDAY.isMonday()).toEqual(true);
-    expect(Weekday.MONDAY.isThursday()).toEqual(false);
+    expect(Weekday.MONDAY.isTuesday()).toEqual(false);
 
     expect(Weekday.TUESDAY.get()).toEqual(2);
     expect(Weekday.TUESDAY.isTuesday()).toEqual(true);
