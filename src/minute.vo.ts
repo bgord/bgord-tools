@@ -37,12 +37,12 @@ export class Minute {
     return this.value === another.value;
   }
 
-  isAfter(another: Minute): boolean {
-    return this.value > another.value;
-  }
-
   isBefore(another: Minute): boolean {
     return this.value < another.value;
+  }
+
+  isAfter(another: Minute): boolean {
+    return this.value > another.value;
   }
 
   static list(): readonly Minute[] {

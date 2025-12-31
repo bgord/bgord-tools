@@ -42,14 +42,16 @@ describe("Minute", () => {
     expect(FIVE.equals(TEN)).toEqual(false);
   });
 
-  test("isAfter", () => {
-    expect(TEN.isAfter(FIVE)).toEqual(true);
-    expect(FIVE.isAfter(TEN)).toEqual(false);
-  });
-
   test("isBefore", () => {
     expect(FIVE.isBefore(TEN)).toEqual(true);
     expect(TEN.isBefore(FIVE)).toEqual(false);
+    expect(TEN.isBefore(TEN)).toEqual(false);
+  });
+
+  test("isAfter", () => {
+    expect(TEN.isAfter(FIVE)).toEqual(true);
+    expect(FIVE.isAfter(TEN)).toEqual(false);
+    expect(FIVE.isAfter(FIVE)).toEqual(false);
   });
 
   test("Minute.list()", () => {
