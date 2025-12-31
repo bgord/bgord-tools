@@ -11,6 +11,13 @@ describe("Outlier detector", () => {
   });
 
   test("works for three values", () => {
+    const values = [1, 3];
+    const detector = new OutlierDetector(values, 2);
+
+    expect(values.filter((value) => detector.isInlier(value))).toEqual([1, 3]);
+  });
+
+  test("works for three values", () => {
     const values = [1, 3, 10];
     const detector = new OutlierDetector(values, 2);
 
