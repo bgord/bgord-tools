@@ -19,6 +19,11 @@ describe("ETag", () => {
 
     expect(etag).toEqual(null);
   });
+
+  test("static", () => {
+    expect(ETag.HEADER_NAME).toEqual("ETag");
+    expect(ETag.IF_MATCH_HEADER_NAME).toEqual("if-match");
+  });
 });
 
 describe("WeakETag class", () => {
@@ -34,5 +39,10 @@ describe("WeakETag class", () => {
     const invalidValue = "invalid";
 
     expect(() => WeakETag.fromHeader(invalidValue)).toThrow("weak.etag.invalid");
+  });
+
+  test("static", () => {
+    expect(WeakETag.HEADER_NAME).toEqual("ETag");
+    expect(WeakETag.IF_MATCH_HEADER_NAME).toEqual("if-match");
   });
 });
