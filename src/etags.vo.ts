@@ -14,8 +14,6 @@ export class ETag {
   }
 
   static fromHeader(value?: ETagValueType): ETag | null {
-    if (value?.startsWith("W/")) return null;
-
     const candidate = Number(value);
 
     if (Number.isNaN(candidate)) return null;

@@ -13,11 +13,22 @@ describe("ETag", () => {
     expect(etag.revision).toEqual(123);
   });
 
-  test("returns null", () => {
+  test("returns null for W/ prefix", () => {
     const weakETagValue = "W/123";
     const etag = ETag.fromHeader(weakETagValue);
 
     expect(etag).toEqual(null);
+  });
+
+  test("returns null for nan", () => {
+    const weakETagValue = "abc";
+    const etag = ETag.fromHeader(weakETagValue);
+
+    expect(etag).toEqual(null);
+  });
+
+  test("returns null for empty", () => {
+    expect(ETag.fromHeader()).toEqual(null);
   });
 
   test("static", () => {
@@ -35,10 +46,20 @@ describe("WeakETag class", () => {
     expect(weakEtag?.revision).toEqual(RevisionValue.parse(123));
   });
 
+  test("returns null for nan", () => {
+    const invalidValue = "W/abc";
+
+    expect(WeakETag.fromHeader(invalidValue)).toEqual(null);
+  });
+
   test("throws for invalid", () => {
     const invalidValue = "invalid";
 
     expect(() => WeakETag.fromHeader(invalidValue)).toThrow("weak.etag.invalid");
+  });
+
+  test("throws for empty", () => {
+    expect(() => WeakETag.fromHeader()).toThrow("weak.etag.invalid");
   });
 
   test("static", () => {
