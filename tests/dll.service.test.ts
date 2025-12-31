@@ -17,9 +17,11 @@ describe("DLL", () => {
   });
 
   test("isEmpty", () => {
-    const dll = new DoublyLinkedList();
-
+    const dll = new DoublyLinkedList<Token>();
     expect(dll.isEmpty()).toEqual(true);
+
+    dll.append(new Node(token));
+    expect(dll.isEmpty()).toEqual(false);
   });
 
   test("appends the first Node", () => {
@@ -273,7 +275,11 @@ describe("DLL", () => {
 
     expect(dll.getSize()).toEqual(2);
     expect(dll.getHead()).toEqual(node1);
+
     expect(dll.getHead()?.next).toEqual(node3);
+
+    expect(node3.prev).toEqual(node1);
+
     expect(dll.getTail()).toEqual(node3);
   });
 

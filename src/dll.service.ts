@@ -108,15 +108,13 @@ export class DoublyLinkedList<T> {
       return;
     }
 
-    const nextNode = target.next;
+    const nextNode = target.next!;
     this.size += 1;
 
     node.prev = target;
     node.next = nextNode;
 
-    if (nextNode) {
-      nextNode.prev = node;
-    }
+    nextNode.prev = node;
 
     target.next = node;
   }
@@ -127,15 +125,13 @@ export class DoublyLinkedList<T> {
       return;
     }
 
-    const prevNode = target.prev;
+    const prevNode = target.prev!;
     this.size += 1;
 
     node.next = target;
     node.prev = prevNode;
 
-    if (prevNode) {
-      prevNode.next = node;
-    }
+    prevNode.next = node;
 
     target.prev = node;
   }
