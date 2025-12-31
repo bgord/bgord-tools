@@ -56,6 +56,7 @@ describe("Timestamp", () => {
   test("isBefore", () => {
     expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(Date.now()))).toEqual(true);
     expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(0))).toEqual(false);
+    expect(mocks.TIME_ZERO.isBefore(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isBeforeOrEqual", () => {
@@ -65,8 +66,9 @@ describe("Timestamp", () => {
   });
 
   test("isAfter", () => {
-    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(Date.now()))).toEqual(false);
     expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(0))).toEqual(true);
+    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(Date.now()))).toEqual(false);
+    expect(mocks.TIME_ZERO.isAfter(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isAfterOrEqual", () => {
