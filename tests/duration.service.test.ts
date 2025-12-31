@@ -97,17 +97,28 @@ describe("Duration", () => {
     expect(result.ms).toEqual(DurationMs.parse(9));
   });
 
-  test("equals / comparisons", () => {
+  test("equals", () => {
     const a = Duration.Ms(1_000);
-    const b = Duration.Ms(1_000);
-    const c = Duration.Ms(2_000);
+    const b = Duration.Ms(2_000);
 
-    expect(a.equals(b)).toEqual(true);
-    expect(a.equals(c)).toEqual(false);
-    expect(c.isLongerThan(a)).toEqual(true);
-    expect(a.isShorterThan(c)).toEqual(true);
-    expect(a.isLongerThan(c)).toEqual(false);
-    expect(c.isShorterThan(a)).toEqual(false);
+    expect(a.equals(a)).toEqual(true);
+    expect(a.equals(b)).toEqual(false);
+  });
+
+  test("isLongerThan", () => {
+    const a = Duration.Ms(2_000);
+    const b = Duration.Ms(1_000);
+
+    expect(a.isLongerThan(b)).toEqual(true);
+    expect(a.isLongerThan(a)).toEqual(false);
+  });
+
+  test("isShorterThan", () => {
+    const a = Duration.Ms(1_000);
+    const b = Duration.Ms(2_000);
+
+    expect(a.isShorterThan(b)).toEqual(true);
+    expect(a.isShorterThan(a)).toEqual(false);
   });
 
   test("toAbolute", () => {
