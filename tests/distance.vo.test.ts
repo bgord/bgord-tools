@@ -104,6 +104,11 @@ describe("Distance", () => {
     }
   });
 
+  test("isZero", () => {
+    expect(Distance.fromMeters(0).isZero()).toEqual(true);
+    expect(Distance.fromMeters(1).isZero()).toEqual(false);
+  });
+
   test("toString", () => {
     expect(Distance.fromMeters(5).toString()).toEqual("5");
   });
