@@ -9,6 +9,14 @@ describe("MimeValue", () => {
     expect(MimeValue.safeParse("application/octet-stream").success).toEqual(true);
   });
 
+  test("rejects prefix", () => {
+    expect(() => MimeValue.parse("1text/plain")).toThrow("mime.value.invalid");
+  });
+
+  test("rejects suffix", () => {
+    expect(() => MimeValue.parse("text/plain1")).toThrow("mime.value.invalid");
+  });
+
   test("rejects empty", () => {
     expect(() => MimeValue.parse("")).toThrow("mime.value.invalid");
   });
