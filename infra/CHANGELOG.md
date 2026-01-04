@@ -1,5 +1,8 @@
 # Changelog
+## 2026-01-04 15:17 v1.2.15
+- 2026-01-04 15:17 16efb36 **1.2.15**
 - 2026-01-04 15:14 f2c2fb6 **step: update packages**
+- 2026-01-04 14:14 e19c0be **docs: generate CHANGELOG**
 - 2025-12-31 16:04 cd37315 **step: gitignore stryker reports**
 ## 2025-12-31 16:01 v1.2.14
 - 2025-12-31 16:01 f015991 **1.2.14**
