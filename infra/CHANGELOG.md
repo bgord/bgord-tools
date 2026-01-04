@@ -1,4 +1,6 @@
 # Changelog
+- 2026-01-04 15:14 f2c2fb6 **step: update packages**
+- 2025-12-31 16:04 cd37315 **step: gitignore stryker reports**
 ## 2025-12-31 16:01 v1.2.14
 - 2025-12-31 16:01 f015991 **1.2.14**
 - 2025-12-31 16:00 ff45901 **step: update packages**
@@ -14,6 +16,7 @@
 - 2025-12-31 15:09 c5ef7f8 **step: random**
 - 2025-12-31 15:03 ef74d9c **step: visually**
 - 2025-12-31 15:01 b4d2f44 **docs: generate CHANGELOG**
+- 2025-12-31 15:01 a736008 **docs: generate CHANGELOG**
 - 2025-12-31 15:00 e37f8e2 **step: weight**
 - 2025-12-31 15:00 e00393d **docs: generate CHANGELOG**
 - 2025-12-31 14:52 4f25fa2 **step: package version schema**
