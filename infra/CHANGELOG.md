@@ -1,4 +1,6 @@
 # Changelog
+- 2026-01-05 13:49 c92e826 **step: update packages**
+- 2026-01-05 13:48 9bb7224 **step: bump bgord/scripts**
 - 2026-01-04 16:08 d40ea7f **step: bump bgord/scripts**
 - 2026-01-04 16:00 b780c09 **step: remove custom stryker config**
 - 2026-01-04 16:00 b4d9712 **step: bump bgord/scripts**
@@ -6,6 +8,7 @@
 ## 2026-01-04 15:17 v1.2.15
 - 2026-01-04 15:17 16efb36 **1.2.15**
 - 2026-01-04 15:14 f2c2fb6 **step: update packages**
+- 2026-01-04 15:08 7874a02 **docs: generate CHANGELOG**
 - 2026-01-04 15:01 1aae5c2 **docs: generate CHANGELOG**
 - 2026-01-04 14:18 b784a9f **docs: generate CHANGELOG**
 - 2026-01-04 14:14 e19c0be **docs: generate CHANGELOG**
