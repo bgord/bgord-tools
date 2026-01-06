@@ -19,4 +19,4 @@ export const HourFormatters: Record<HourFormatterEnum, HourFormatter> = {
   },
   TWELVE_HOURS: (value) => (value % 12 || 12).toString().padStart(2, "0"),
   TWELVE_HOURS_WO_PADDING: (value) => (value % 12 || 12).toString(),
-} as const;
+};

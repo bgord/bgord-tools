@@ -10,7 +10,7 @@ export enum WeekdayFormatterEnum {
   ZERO_BASED_NUMBER = "ZERO_BASED_NUMBER", // Sunday=0 ... Saturday=6 (JS)
 }
 
-export const WeekdayValueError = { Invalid: "weekday.invalid" } as const;
+export const WeekdayValueError = { Invalid: "weekday.invalid" };
 
 const FULL_NAMES: readonly string[] = [
   "Sunday",
