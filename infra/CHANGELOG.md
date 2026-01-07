@@ -1,6 +1,13 @@
 # Changelog
+- 2026-01-07 14:52 b508eb3 **step: bump bgord/scripts**
+- 2026-01-07 14:37 149a6b0 **step: update tests**
+- 2026-01-07 14:29 46af22c **step: add all methods**
+- 2026-01-07 14:05 6cad72e **step: add is greater than**
+- 2026-01-07 13:52 d470d40 **step: package version equals method**
+- 2026-01-06 16:45 fd3b92a **step: remove as const**
 - 2026-01-05 13:49 c92e826 **step: update packages**
 - 2026-01-05 13:48 9bb7224 **step: bump bgord/scripts**
+- 2026-01-05 12:50 f9085cd **docs: generate CHANGELOG**
 - 2026-01-04 16:08 d40ea7f **step: bump bgord/scripts**
 - 2026-01-04 16:00 b780c09 **step: remove custom stryker config**
 - 2026-01-04 16:00 b4d9712 **step: bump bgord/scripts**
