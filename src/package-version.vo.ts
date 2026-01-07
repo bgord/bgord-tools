@@ -23,28 +23,37 @@ export class PackageVersion {
     return new PackageVersion(version.major, version.minor, version.patch);
   }
 
+  private compareTo(another: PackageVersion): -1 | 0 | 1 {
+    if (this.major > another.major) return 1;
+    if (this.major < another.major) return -1;
+
+    if (this.minor > another.minor) return 1;
+    if (this.minor < another.minor) return -1;
+
+    if (this.patch > another.patch) return 1;
+    if (this.patch < another.patch) return -1;
+
+    return 0;
+  }
+
   equals(another: PackageVersion): boolean {
-    return this.major === another.major && this.minor === another.minor && this.patch === another.patch;
+    return this.compareTo(another) === 0;
   }
 
   isGreaterThan(another: PackageVersion): boolean {
-    if (this.major !== another.major) return this.major > another.major;
-    if (this.minor !== another.minor) return this.minor > another.minor;
-    return this.patch > another.patch;
+    return this.compareTo(another) === 1;
   }
 
   isGreaterThanOrEqual(another: PackageVersion): boolean {
-    return this.equals(another) || this.isGreaterThan(another);
+    return this.compareTo(another) !== -1;
   }
 
   isSmallerThan(another: PackageVersion): boolean {
-    if (this.major !== another.major) return this.major < another.major;
-    if (this.minor !== another.minor) return this.minor < another.minor;
-    return this.patch < another.patch;
+    return this.compareTo(another) === -1;
   }
 
   isSmallerThanOrEqual(another: PackageVersion): boolean {
-    return this.equals(another) || this.isSmallerThan(another);
+    return this.compareTo(another) !== 1;
   }
 
   toString(): string {

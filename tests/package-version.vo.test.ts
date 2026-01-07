@@ -3,106 +3,187 @@ import { PackageVersion } from "../src/package-version.vo";
 import { PackageVersionSchema } from "../src/package-version-schema.vo";
 
 describe("PackageVersion", () => {
-  describe("fromVersionString method", () => {
-    // @ts-expect-error Inspect private attributes
-    expect(PackageVersion.fromVersionString("v1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
+  test("fromVersionString", () => {
+    const version = PackageVersion.fromVersionString("v1.2.3");
+
+    expect(version.toJSON()).toEqual({ major: 1, minor: 2, patch: 3 });
   });
 
-  describe("fromVersionStringSafe method", () => {
-    // @ts-expect-error Inspect private attributes
-    expect(PackageVersion.fromVersionStringSafe(PackageVersionSchema.parse("v1.0.0"))).toEqual({
-      major: 1,
-      minor: 0,
-      patch: 0,
-    });
-  });
+  test("fromVersionStringSafe", () => {
+    const version = PackageVersion.fromVersionStringSafe(PackageVersionSchema.parse("v1.2.3"));
 
-  describe("fromStringWith method", () => {
-    // @ts-expect-error Inspect private attributes
-    expect(PackageVersion.fromString("1.0.0")).toEqual({ major: 1, minor: 0, patch: 0 });
+    expect(version.toJSON()).toEqual({ major: 1, minor: 2, patch: 3 });
   });
 
   test("equals - true", () => {
-    expect(new PackageVersion(1, 9, 4).equals(new PackageVersion(1, 9, 4))).toEqual(true);
+    const left = PackageVersion.fromString("1.2.3");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.equals(right)).toEqual(true);
   });
 
-  test("equals - false - different major", () => {
-    expect(new PackageVersion(1, 9, 4).equals(new PackageVersion(2, 9, 4))).toEqual(false);
+  test("equals - false - major mismatch", () => {
+    const left = PackageVersion.fromString("2.1.1");
+    const right = PackageVersion.fromString("1.1.1");
+
+    expect(left.equals(right)).toEqual(false);
   });
 
-  test("equals - false - different minor", () => {
-    expect(new PackageVersion(1, 9, 4).equals(new PackageVersion(1, 8, 4))).toEqual(false);
+  test("equals - false - minor mismatch", () => {
+    const left = PackageVersion.fromString("1.2.1");
+    const right = PackageVersion.fromString("1.1.1");
+
+    expect(left.equals(right)).toEqual(false);
   });
 
-  test("equals - false - different patch", () => {
-    expect(new PackageVersion(1, 9, 4).equals(new PackageVersion(1, 9, 7))).toEqual(false);
+  test("equals - false - patch mismatch", () => {
+    const left = PackageVersion.fromString("1.1.2");
+    const right = PackageVersion.fromString("1.1.1");
+
+    expect(left.equals(right)).toEqual(false);
   });
 
-  test("isGreaterThan - true - greater all", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(0, 0, 0))).toEqual(true);
+  test("greater - major", () => {
+    const left = PackageVersion.fromString("2.0.0");
+    const right = PackageVersion.fromString("1.9.9");
+
+    expect(left.isGreaterThan(right)).toEqual(true);
+    expect(right.isGreaterThan(left)).toEqual(false);
   });
 
-  test("isGreaterThan - true - greater major", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(0, 8, 4))).toEqual(true);
+  test("greater - minor", () => {
+    const left = PackageVersion.fromString("1.2.0");
+    const right = PackageVersion.fromString("1.1.9");
+
+    expect(left.isGreaterThan(right)).toEqual(true);
+    expect(right.isGreaterThan(left)).toEqual(false);
   });
 
-  test("isGreaterThan - true - equal major, greater minor", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 7, 4))).toEqual(true);
+  test("greater - patch", () => {
+    const left = PackageVersion.fromString("1.1.2");
+    const right = PackageVersion.fromString("1.1.1");
+
+    expect(left.isGreaterThan(right)).toEqual(true);
+    expect(right.isGreaterThan(left)).toEqual(false);
   });
 
-  test("isGreaterThan - true - equal major and minor, smaller patch", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 8, 3))).toEqual(true);
+  test("greater - false - equal", () => {
+    const left = PackageVersion.fromString("1.2.3");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isGreaterThan(right)).toEqual(false);
   });
 
-  test("isGreaterThan - false - smaller major", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(2, 8, 4))).toEqual(false);
+  test("greater - false - major smaller", () => {
+    const left = PackageVersion.fromString("1.0.0");
+    const right = PackageVersion.fromString("2.0.0");
+
+    expect(left.isGreaterThan(right)).toEqual(false);
   });
 
-  test("isGreaterThan - false - smaller minor", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 9, 4))).toEqual(false);
+  test("greater - false - minor smaller", () => {
+    const left = PackageVersion.fromString("1.1.0");
+    const right = PackageVersion.fromString("1.2.0");
+
+    expect(left.isGreaterThan(right)).toEqual(false);
   });
 
-  test("isGreaterThan - false - smaller patch", () => {
-    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 8, 5))).toEqual(false);
+  test("greaterOrEqual - equal", () => {
+    const left = PackageVersion.fromString("1.2.3");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isGreaterThanOrEqual(right)).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual true - greater all", () => {
-    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(0, 0, 0))).toEqual(true);
+  test("greaterOrEqual - greater", () => {
+    const left = PackageVersion.fromString("1.2.4");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isGreaterThanOrEqual(right)).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual true - equal all", () => {
-    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
+  test("greaterOrEqual - false - smaller", () => {
+    const left = PackageVersion.fromString("1.2.2");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isGreaterThanOrEqual(right)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - true - equal major and minor, greater patch", () => {
-    expect(new PackageVersion(1, 9, 5).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
+  test("smaller - major", () => {
+    const left = PackageVersion.fromString("1.0.0");
+    const right = PackageVersion.fromString("2.0.0");
+
+    expect(left.isSmallerThan(right)).toEqual(true);
+    expect(right.isSmallerThan(left)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - true - greater major", () => {
-    expect(new PackageVersion(2, 1, 0).isGreaterThanOrEqual(new PackageVersion(1, 9, 3))).toEqual(true);
+  test("smaller - minor", () => {
+    const left = PackageVersion.fromString("1.1.0");
+    const right = PackageVersion.fromString("1.2.0");
+
+    expect(left.isSmallerThan(right)).toEqual(true);
+    expect(right.isSmallerThan(left)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - true - equal major, greater minor", () => {
-    expect(new PackageVersion(1, 9, 0).isGreaterThanOrEqual(new PackageVersion(1, 8, 5))).toEqual(true);
+  test("smaller - patch", () => {
+    const left = PackageVersion.fromString("1.1.1");
+    const right = PackageVersion.fromString("1.1.2");
+
+    expect(left.isSmallerThan(right)).toEqual(true);
+    expect(right.isSmallerThan(left)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - false - smaller major", () => {
-    expect(new PackageVersion(1, 9, 3).isGreaterThanOrEqual(new PackageVersion(2, 1, 0))).toEqual(false);
+  test("smaller - false - equal", () => {
+    const left = PackageVersion.fromString("1.2.3");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isSmallerThan(right)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - false - equal major, smaller minor", () => {
-    expect(new PackageVersion(1, 8, 5).isGreaterThanOrEqual(new PackageVersion(1, 9, 0))).toEqual(false);
+  test("smaller - false - major greater", () => {
+    const left = PackageVersion.fromString("2.0.0");
+    const right = PackageVersion.fromString("1.0.0");
+
+    expect(left.isSmallerThan(right)).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - false - equal major and minor, smaller patch", () => {
-    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 5))).toEqual(false);
+  test("smaller - false - minor greater", () => {
+    const left = PackageVersion.fromString("1.2.0");
+    const right = PackageVersion.fromString("1.1.0");
+
+    expect(left.isSmallerThan(right)).toEqual(false);
+  });
+
+  test("smallerOrEqual - equal", () => {
+    const left = PackageVersion.fromString("1.2.3");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isSmallerThanOrEqual(right)).toEqual(true);
+  });
+
+  test("smallerOrEqual - smaller", () => {
+    const left = PackageVersion.fromString("1.2.2");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isSmallerThanOrEqual(right)).toEqual(true);
+  });
+
+  test("smallerOrEqual - false - greater", () => {
+    const left = PackageVersion.fromString("1.2.4");
+    const right = PackageVersion.fromString("1.2.3");
+
+    expect(left.isSmallerThanOrEqual(right)).toEqual(false);
   });
 
   test("toString", () => {
-    expect(PackageVersion.fromString("5.0.1").toString()).toEqual("5.0.1");
+    const version = PackageVersion.fromString("3.4.5");
+
+    expect(version.toString()).toEqual("3.4.5");
   });
 
   test("toJSON", () => {
-    expect(PackageVersion.fromString("5.0.1").toJSON()).toEqual({ major: 5, minor: 0, patch: 1 });
+    const version = PackageVersion.fromString("3.4.5");
+
+    expect(version.toJSON()).toEqual({ major: 3, minor: 4, patch: 5 });
   });
 });
