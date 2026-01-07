@@ -28,19 +28,23 @@ export class PackageVersion {
   }
 
   isGreaterThan(another: PackageVersion): boolean {
-    if (this.major > another.major) return true;
-    if (this.minor > another.minor) return true;
+    if (this.major !== another.major) return this.major > another.major;
+    if (this.minor !== another.minor) return this.minor > another.minor;
     return this.patch > another.patch;
   }
 
   isGreaterThanOrEqual(another: PackageVersion): boolean {
-    if (this.major > another.major) return true;
-    if (this.major < another.major) return false;
+    return this.equals(another) || this.isGreaterThan(another);
+  }
 
-    if (this.minor > another.minor) return true;
-    if (this.minor < another.minor) return false;
+  isSmallerThan(another: PackageVersion): boolean {
+    if (this.major !== another.major) return this.major < another.major;
+    if (this.minor !== another.minor) return this.minor < another.minor;
+    return this.patch < another.patch;
+  }
 
-    return this.patch >= another.patch;
+  isSmallerThanOrEqual(another: PackageVersion): boolean {
+    return this.equals(another) || this.isSmallerThan(another);
   }
 
   toString(): string {
