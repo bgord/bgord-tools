@@ -38,32 +38,64 @@ describe("PackageVersion", () => {
     expect(new PackageVersion(1, 9, 4).equals(new PackageVersion(1, 9, 7))).toEqual(false);
   });
 
-  test("isGreaterThanOrEqual - true - greater major", () => {
-    expect(new PackageVersion(2, 1, 0).isGreaterThanOrEqual(new PackageVersion(1, 9, 3))).toEqual(true);
+  test("isGreaterThan - true - greater all", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(0, 0, 0))).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual - false - smaller major", () => {
-    expect(new PackageVersion(1, 9, 3).isGreaterThanOrEqual(new PackageVersion(2, 1, 0))).toEqual(false);
+  test("isGreaterThan - true - greater major", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(0, 8, 4))).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual - true - equal major, greater minor", () => {
-    expect(new PackageVersion(1, 9, 0).isGreaterThanOrEqual(new PackageVersion(1, 8, 5))).toEqual(true);
+  test("isGreaterThan - true - equal major, greater minor", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 7, 4))).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual - false - equal major, smaller minor", () => {
-    expect(new PackageVersion(1, 8, 5).isGreaterThanOrEqual(new PackageVersion(1, 9, 0))).toEqual(false);
+  test("isGreaterThan - true - equal major and minor, smaller patch", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 8, 3))).toEqual(true);
+  });
+
+  test("isGreaterThan - false - smaller major", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(2, 8, 4))).toEqual(false);
+  });
+
+  test("isGreaterThan - false - smaller minor", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 9, 4))).toEqual(false);
+  });
+
+  test("isGreaterThan - false - smaller patch", () => {
+    expect(new PackageVersion(1, 8, 4).isGreaterThan(new PackageVersion(1, 8, 5))).toEqual(false);
+  });
+
+  test("isGreaterThanOrEqual true - greater all", () => {
+    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(0, 0, 0))).toEqual(true);
+  });
+
+  test("isGreaterThanOrEqual true - equal all", () => {
+    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
   });
 
   test("isGreaterThanOrEqual - true - equal major and minor, greater patch", () => {
     expect(new PackageVersion(1, 9, 5).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual - false - equal major and minor, smaller patch", () => {
-    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 5))).toEqual(false);
+  test("isGreaterThanOrEqual - true - greater major", () => {
+    expect(new PackageVersion(2, 1, 0).isGreaterThanOrEqual(new PackageVersion(1, 9, 3))).toEqual(true);
   });
 
-  test("isGreaterThanOrEqual true - equal all", () => {
-    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 4))).toEqual(true);
+  test("isGreaterThanOrEqual - true - equal major, greater minor", () => {
+    expect(new PackageVersion(1, 9, 0).isGreaterThanOrEqual(new PackageVersion(1, 8, 5))).toEqual(true);
+  });
+
+  test("isGreaterThanOrEqual - false - smaller major", () => {
+    expect(new PackageVersion(1, 9, 3).isGreaterThanOrEqual(new PackageVersion(2, 1, 0))).toEqual(false);
+  });
+
+  test("isGreaterThanOrEqual - false - equal major, smaller minor", () => {
+    expect(new PackageVersion(1, 8, 5).isGreaterThanOrEqual(new PackageVersion(1, 9, 0))).toEqual(false);
+  });
+
+  test("isGreaterThanOrEqual - false - equal major and minor, smaller patch", () => {
+    expect(new PackageVersion(1, 9, 4).isGreaterThanOrEqual(new PackageVersion(1, 9, 5))).toEqual(false);
   });
 
   test("toString", () => {
