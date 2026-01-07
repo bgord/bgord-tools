@@ -23,6 +23,10 @@ export class PackageVersion {
     return new PackageVersion(version.major, version.minor, version.patch);
   }
 
+  equals(another: PackageVersion): boolean {
+    return this.major === another.major && this.minor === another.minor && this.patch === another.patch;
+  }
+
   isGreaterThanOrEqual(another: PackageVersion): boolean {
     if (this.major > another.major) return true;
     if (this.major < another.major) return false;
