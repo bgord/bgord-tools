@@ -1,10 +1,12 @@
 # Changelog
+- 2026-01-12 22:37 c485699 **step: update packages**
 ## 2026-01-07 14:54 v1.2.16
 - 2026-01-07 14:54 3540b0b **1.2.16**
 - 2026-01-07 14:52 b508eb3 **step: bump bgord/scripts**
 - 2026-01-07 14:37 149a6b0 **step: update tests**
 - 2026-01-07 14:29 46af22c **step: add all methods**
 - 2026-01-07 14:05 6cad72e **step: add is greater than**
+- 2026-01-07 13:54 d10c9f3 **docs: generate CHANGELOG**
 - 2026-01-07 13:52 d470d40 **step: package version equals method**
 - 2026-01-07 13:52 6276c5b **docs: generate CHANGELOG**
 - 2026-01-06 16:45 fd3b92a **step: remove as const**
