@@ -10,6 +10,7 @@ export class Duration {
 
   static readonly MIN = Duration.Ms(1);
 
+  private static readonly NS_IN_MS = 1000000;
   private static readonly MS_IN_SECOND = 1_000;
   private static readonly MS_IN_MINUTE = 60 * Duration.MS_IN_SECOND;
   private static readonly MS_IN_HOUR = 60 * Duration.MS_IN_MINUTE;
@@ -23,7 +24,6 @@ export class Duration {
   static Weeks(value: number): Duration {
     return new Duration(value * Duration.MS_IN_WEEK);
   }
-
   static Days(value: number): Duration {
     return new Duration(value * Duration.MS_IN_DAY);
   }
@@ -39,11 +39,13 @@ export class Duration {
   static Ms(value: number): Duration {
     return new Duration(value);
   }
+  static Ns(value: number): Duration {
+    return new Duration(new RoundingToNearestStrategy().round(value / Duration.NS_IN_MS));
+  }
 
   get weeks(): number {
     return Duration.rounding.round(this.internal / Duration.MS_IN_WEEK);
   }
-
   get days(): number {
     return Duration.rounding.round(this.internal / Duration.MS_IN_DAY);
   }
@@ -58,6 +60,9 @@ export class Duration {
   }
   get ms(): DurationMsType {
     return this.internal;
+  }
+  get ns(): number {
+    return this.internal * Duration.NS_IN_MS;
   }
 
   isLongerThan(another: Duration): boolean {

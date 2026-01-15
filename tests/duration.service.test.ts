@@ -5,13 +5,14 @@ import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 
 describe("Duration", () => {
   test("weeks", () => {
-    const days = Duration.Weeks(2);
+    const weeks = Duration.Weeks(2);
 
-    expect(days.days).toEqual(14);
-    expect(days.hours).toEqual(336);
-    expect(days.minutes).toEqual(20160);
-    expect(days.seconds).toEqual(1209600);
-    expect(days.ms).toEqual(DurationMs.parse(1_209_600_000));
+    expect(weeks.days).toEqual(14);
+    expect(weeks.hours).toEqual(336);
+    expect(weeks.minutes).toEqual(20160);
+    expect(weeks.seconds).toEqual(1209600);
+    expect(weeks.ms).toEqual(DurationMs.parse(1_209_600_000));
+    expect(weeks.ns).toEqual(1_209_600_000_000_000);
   });
 
   test("days", () => {
@@ -23,6 +24,7 @@ describe("Duration", () => {
     expect(days.minutes).toEqual(2880);
     expect(days.seconds).toEqual(172800);
     expect(days.ms).toEqual(DurationMs.parse(172_800_000));
+    expect(days.ns).toEqual(DurationMs.parse(172_800_000_000_000));
   });
 
   test("hours", () => {
@@ -34,6 +36,7 @@ describe("Duration", () => {
     expect(hours.minutes).toEqual(180);
     expect(hours.seconds).toEqual(10_800);
     expect(hours.ms).toEqual(DurationMs.parse(10_800_000));
+    expect(hours.ns).toEqual(DurationMs.parse(10_800_000_000_000));
   });
 
   test("minutes", () => {
@@ -45,6 +48,7 @@ describe("Duration", () => {
     expect(minutes.minutes).toEqual(30);
     expect(minutes.seconds).toEqual(1_800);
     expect(minutes.ms).toEqual(DurationMs.parse(1_800_000));
+    expect(minutes.ns).toEqual(DurationMs.parse(1_800_000_000_000));
   });
 
   test("seconds", () => {
@@ -56,6 +60,7 @@ describe("Duration", () => {
     expect(seconds.minutes).toEqual(2);
     expect(seconds.seconds).toEqual(120);
     expect(seconds.ms).toEqual(DurationMs.parse(120_000));
+    expect(seconds.ns).toEqual(DurationMs.parse(120_000_000_000));
   });
 
   test("ms", () => {
@@ -67,6 +72,19 @@ describe("Duration", () => {
     expect(ms.minutes).toEqual(0.01);
     expect(ms.seconds).toEqual(0.5);
     expect(ms.ms).toEqual(DurationMs.parse(500));
+    expect(ms.ns).toEqual(DurationMs.parse(500_000_000));
+  });
+
+  test("ns", () => {
+    const ns = Duration.Ns(5_499_999);
+
+    expect(ns.weeks).toEqual(0);
+    expect(ns.days).toEqual(0);
+    expect(ns.hours).toEqual(0);
+    expect(ns.minutes).toEqual(0);
+    expect(ns.seconds).toEqual(0.01);
+    expect(ns.ms).toEqual(DurationMs.parse(5));
+    expect(ns.ns).toEqual(DurationMs.parse(5_000_000));
   });
 
   test("add/subtract", () => {
