@@ -1,5 +1,8 @@
 # Changelog
+## 2026-01-15 15:29 v1.2.19
+- 2026-01-15 15:29 b3f070a **1.2.19**
 - 2026-01-15 15:20 6c76813 **step: add more comparison methods for size**
+- 2026-01-15 14:29 64c51ce **docs: generate CHANGELOG**
 ## 2026-01-14 13:42 v1.2.18
 - 2026-01-14 13:42 15a8160 **1.2.18**
 - 2026-01-14 13:33 979d71f **step: update packages**
