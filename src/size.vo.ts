@@ -59,6 +59,14 @@ export class Size {
     return Size.CONVERT_ROUND.round(this.bytes / Size.GB_MULTIPLIER);
   }
 
+  equals(another: Size): boolean {
+    return this.bytes === another.toBytes();
+  }
+
+  isSmallerThan(another: Size): boolean {
+    return this.bytes < another.toBytes();
+  }
+
   isGreaterThan(another: Size): boolean {
     return this.bytes > another.toBytes();
   }

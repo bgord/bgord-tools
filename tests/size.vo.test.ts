@@ -48,9 +48,21 @@ describe("Size", () => {
     expect(Size.fromMB(1025).toGB()).toEqual(2);
   });
 
+  test("equals", () => {
+    expect(Size.fromGB(1).equals(Size.fromGB(1))).toEqual(true);
+    expect(Size.fromMB(1).equals(Size.fromMB(2))).toEqual(false);
+  });
+
+  test("isSmallerThan", () => {
+    expect(Size.fromMB(1).isSmallerThan(Size.fromGB(1))).toEqual(true);
+    expect(Size.fromMB(1).isSmallerThan(Size.fromMB(1))).toEqual(false);
+    expect(Size.fromGB(2).isSmallerThan(Size.fromGB(1))).toEqual(false);
+  });
+
   test("isGreaterThan", () => {
     expect(Size.fromGB(1).isGreaterThan(Size.fromMB(1))).toEqual(true);
     expect(Size.fromMB(1).isGreaterThan(Size.fromMB(1))).toEqual(false);
+    expect(Size.fromMB(1).isGreaterThan(Size.fromMB(2))).toEqual(false);
   });
 
   test("format - bytes source", () => {
