@@ -1,5 +1,8 @@
 # Changelog
+## 2026-01-16 15:35 v1.2.21
 - 2026-01-16 15:35 4c4d50f **refactor: remove src from package json files**
+- 2026-01-16 15:35 2b28d33 **1.2.21**
+- 2026-01-16 14:35 31f7290 **docs: generate CHANGELOG**
 - 2026-01-16 13:06 a1a705b **docs: generate CHANGELOG**
 - 2026-01-15 22:12 d5c2d33 **step: add strip internal tsconfig option**
 ## 2026-01-15 21:00 v1.2.20
