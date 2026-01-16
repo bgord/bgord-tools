@@ -1,5 +1,8 @@
 # Changelog
+## 2026-01-16 18:10 v1.2.22
+- 2026-01-16 18:10 3e0cee8 **1.2.22**
 - 2026-01-16 18:08 e17ba78 **refactor: adjust z imports**
+- 2026-01-16 17:09 6e6fd6f **docs: generate CHANGELOG**
 ## 2026-01-16 15:35 v1.2.21
 - 2026-01-16 15:35 4c4d50f **refactor: remove src from package json files**
 - 2026-01-16 15:35 2b28d33 **1.2.21**
