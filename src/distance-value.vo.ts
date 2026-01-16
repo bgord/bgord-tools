@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const DistanceValueError = { Type: "distance.value.type", Invalid: "distance.value.invalid" };
 

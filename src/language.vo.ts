@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const LanguageError = { Type: "language.type", BadChars: "language.bad.chars" };
 

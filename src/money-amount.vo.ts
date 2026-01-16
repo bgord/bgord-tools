@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const MoneyAmountError = { Type: "money.amount.type", Invalid: "money.amount.invalid" };
 

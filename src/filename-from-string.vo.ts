@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 import { Basename } from "./basename.vo";
 import { Extension } from "./extension.vo";
 

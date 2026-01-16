@@ -1,5 +1,5 @@
 // Stryker disable all
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 import {
   ReorderingItemPositionValue,

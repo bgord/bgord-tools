@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const ImageWidthError = { Type: "image.width.type", Length: "image.width.length" };
 export const ImageHeightError = { Type: "image.height.type", Length: "image.height.length" };

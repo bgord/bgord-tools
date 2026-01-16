@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const PaginationSkipError = { Type: "pagination.skip.type", Invalid: "pagination.skip.invalid" };
 

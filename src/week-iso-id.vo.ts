@@ -1,5 +1,5 @@
 import { getISOWeeksInYear } from "date-fns";
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const WeekIsoIdError = {
   Type: "week.iso.id.type",

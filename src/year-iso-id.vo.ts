@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const YearIsoIdError = { Type: "year.iso.id.type", BadChars: "year.iso.id.bad.chars" };
 

@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const HourSchemaError = { Type: "hour.schema.type", Invalid: "hour.schema.invalid" };
 

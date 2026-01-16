@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const ApiKeyError = { Type: "api.key.type", Length: "api.key.length", BadChars: "api.key.bad.chars" };
 

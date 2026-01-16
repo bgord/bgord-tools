@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 import { DirectoryPathAbsoluteSchema } from "./directory-path-absolute.vo";
 import { Filename } from "./filename.vo";
 

@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 
 export const IntegerPositiveError = { Type: "integer.positive.type", Invalid: "integer.positive.invalid" };
 

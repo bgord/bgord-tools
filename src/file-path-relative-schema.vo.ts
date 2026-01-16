@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import * as z from "zod/v4";
 import { DirectoryPathRelativeSchema } from "./directory-path-relative.vo";
 import { Filename } from "./filename.vo";
 
