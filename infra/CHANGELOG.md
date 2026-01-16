@@ -1,7 +1,9 @@
 # Changelog
+- 2026-01-15 22:12 d5c2d33 **step: add strip internal tsconfig option**
 ## 2026-01-15 21:00 v1.2.20
 - 2026-01-15 21:00 c2b5297 **1.2.20**
 - 2026-01-15 20:57 4324f3b **step: add duration ns**
+- 2026-01-15 20:01 a05e225 **docs: generate CHANGELOG**
 - 2026-01-15 20:00 b5b03e5 **docs: generate CHANGELOG**
 ## 2026-01-15 15:29 v1.2.19
 - 2026-01-15 15:29 b3f070a **1.2.19**
