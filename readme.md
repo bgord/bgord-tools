@@ -73,6 +73,7 @@ src/
 ├── mime-registry.service.ts
 ├── mime-value.vo.ts
 ├── mime.vo.ts
+├── mimes.ts
 ├── min-max-scaler.service.ts
 ├── minute-schema.vo.ts
 ├── minute.vo.ts
