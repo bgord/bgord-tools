@@ -70,6 +70,7 @@ src/
 ├── language.vo.ts
 ├── linear-regression.service.ts
 ├── mean.service.ts
+├── mime-registry-entry.vo.ts
 ├── mime-registry.service.ts
 ├── mime-value.vo.ts
 ├── mime.vo.ts
