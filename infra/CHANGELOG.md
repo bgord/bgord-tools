@@ -1,7 +1,11 @@
 # Changelog
+## 2026-01-17 18:32 v1.3.2
+- 2026-01-17 18:32 269d949 **1.3.2**
 - 2026-01-17 18:20 fbe8be9 **refactor: disable stryker for mime registry error**
 - 2026-01-17 18:16 96f39f8 **refactor: remove redundant mime types vo**
 - 2026-01-17 18:14 0744ac3 **step: make mime value respect digits in the subtype**
+- 2026-01-17 17:30 bdeed25 **docs: generate CHANGELOG**
+- 2026-01-17 17:30 15bbd4c **docs: generate readme**
 ## 2026-01-17 16:33 v1.3.1
 - 2026-01-17 16:33 041168f **1.3.1**
 - 2026-01-17 16:31 9ccaecc **step: add mime registry error**
