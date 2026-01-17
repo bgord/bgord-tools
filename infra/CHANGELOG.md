@@ -1,7 +1,12 @@
 # Changelog
+- 2026-01-17 16:18 369b4c3 **feature: mime registry service**
+- 2026-01-17 15:54 2375ea1 **refactor: remove mime types from mime vo**
+- 2026-01-17 15:53 126b1ee **refactor: remove get mime method from filename vo**
+- 2026-01-17 15:49 368cbd3 **refactor: remove mime types**
 ## 2026-01-16 18:10 v1.2.22
 - 2026-01-16 18:10 3e0cee8 **1.2.22**
 - 2026-01-16 18:08 e17ba78 **refactor: adjust z imports**
+- 2026-01-16 17:10 f0295b3 **docs: generate CHANGELOG**
 - 2026-01-16 17:09 6e6fd6f **docs: generate CHANGELOG**
 ## 2026-01-16 15:35 v1.2.21
 - 2026-01-16 15:35 4c4d50f **refactor: remove src from package json files**
