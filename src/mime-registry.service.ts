@@ -3,6 +3,11 @@ import type { Mime } from "./mime.vo";
 
 export type MimeRegistryEntry = { mime: Mime; extensions: ExtensionType[] };
 
+export const MimeRegistryError = {
+  ExtensionNotFound: "mime.registry.extension.not.found",
+  MimeNotFound: "mime.registry.mime.not.found",
+};
+
 export class MimeRegistry {
   private readonly byExtension = new Map<ExtensionType, Mime>();
   private readonly byMime = new Map<string, ExtensionType>();
