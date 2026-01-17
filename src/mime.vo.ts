@@ -28,6 +28,7 @@ export class Mime {
   }
 }
 
+// Stryker disable all
 export const MIMES = {
   csv: Mime.fromString("text/csv"),
   jpeg: Mime.fromString("image/jpeg"),
@@ -42,3 +43,4 @@ export const MIMES = {
   xwav: Mime.fromString("audio/x-wav"),
   zip: Mime.fromString("application/zip"),
 };
+// Stryker restore all

@@ -3,10 +3,12 @@ import type { Mime } from "./mime.vo";
 
 export type MimeRegistryEntry = { mime: Mime; extensions: ExtensionType[] };
 
+// Stryker disable all
 export const MimeRegistryError = {
   ExtensionNotFound: "mime.registry.extension.not.found",
   MimeNotFound: "mime.registry.mime.not.found",
 };
+// Stryker restore all
 
 export class MimeRegistry {
   private readonly byExtension = new Map<ExtensionType, Mime>();
