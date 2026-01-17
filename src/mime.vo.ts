@@ -27,20 +27,3 @@ export class Mime {
     return { type: this.type, subtype: this.subtype };
   }
 }
-
-// Stryker disable all
-export const MIMES = {
-  csv: Mime.fromString("text/csv"),
-  jpeg: Mime.fromString("image/jpeg"),
-  markdown: Mime.fromString("text/markdown"),
-  mp4: Mime.fromString("video/mp4"),
-  pdf: Mime.fromString("application/pdf"),
-  png: Mime.fromString("image/png"),
-  text: Mime.fromString("text/plain"),
-  webp: Mime.fromString("image/webp"),
-  wildcard: Mime.fromString("*/*"),
-  wav: Mime.fromString("audio/wav"),
-  xwav: Mime.fromString("audio/x-wav"),
-  zip: Mime.fromString("application/zip"),
-};
-// Stryker restore all

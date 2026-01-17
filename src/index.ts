@@ -48,6 +48,7 @@ export * from "./mean.service";
 export * from "./mime.vo";
 export * from "./mime-registry.service";
 export * from "./mime-value.vo";
+export * from "./mimes";
 export * from "./min-max-scaler.service";
 export * from "./minute.vo";
 export * from "./minute-schema.vo";
