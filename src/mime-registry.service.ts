@@ -1,7 +1,6 @@
 import type { ExtensionType } from "./extension.vo";
 import type { Mime } from "./mime.vo";
-
-export type MimeRegistryEntry = { readonly mime: Mime; readonly extensions: ExtensionType[] };
+import type { MimeRegistryEntry } from "./mime-registry-entry.vo";
 
 // Stryker disable all
 export const MimeRegistryError = {
