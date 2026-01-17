@@ -30,11 +30,15 @@ export class Mime {
 
 export const MIMES = {
   csv: Mime.fromString("text/csv"),
-  text: Mime.fromString("text/plain"),
+  jpeg: Mime.fromString("image/jpeg"),
   markdown: Mime.fromString("text/markdown"),
+  mp4: Mime.fromString("video/mp4"),
   pdf: Mime.fromString("application/pdf"),
   png: Mime.fromString("image/png"),
-  jpeg: Mime.fromString("image/jpeg"),
+  text: Mime.fromString("text/plain"),
   webp: Mime.fromString("image/webp"),
+  wildcard: Mime.fromString("*/*"),
+  wav: Mime.fromString("audio/wav"),
+  xwav: Mime.fromString("audio/x-wav"),
   zip: Mime.fromString("application/zip"),
 };

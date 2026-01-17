@@ -47,7 +47,6 @@ export * from "./linear-regression.service";
 export * from "./mean.service";
 export * from "./mime.vo";
 export * from "./mime-registry.service";
-export * from "./mime-types.vo";
 export * from "./mime-value.vo";
 export * from "./min-max-scaler.service";
 export * from "./minute.vo";
