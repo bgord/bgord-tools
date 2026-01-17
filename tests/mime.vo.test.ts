@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import { Extension } from "../src/extension.vo";
 import { Mime, MimeError } from "../src/mime.vo";
 
 describe("Mime", () => {
@@ -15,10 +14,6 @@ describe("Mime", () => {
 
     expect(mime.type).toEqual("text");
     expect(mime.subtype).toEqual("plain");
-  });
-
-  test("fromExtension", () => {
-    expect(Mime.fromExtension(Extension.parse("pdf")).toString()).toEqual("application/pdf");
   });
 
   test("strips semicolon separated mime metadata", () => {
@@ -58,10 +53,6 @@ describe("Mime", () => {
     expect(imageWildcard.isSatisfiedBy(wildcardPlain)).toEqual(false);
     expect(imageWildcard.isSatisfiedBy(anyWildcard)).toEqual(false);
     expect(wildcardPlain.isSatisfiedBy(anyWildcard)).toEqual(false);
-  });
-
-  test("toExtension", () => {
-    expect(Mime.fromString("application/pdf").toExtension()).toEqual(Extension.parse("pdf"));
   });
 
   test("toString", () => {

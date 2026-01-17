@@ -1,5 +1,3 @@
-import * as mime from "mime-types";
-import { Extension, type ExtensionType } from "./extension.vo";
 import { MimeValue } from "./mime-value.vo";
 
 export const MimeError = { NotAccepted: "mime.not.accepted" };
@@ -16,17 +14,9 @@ export class Mime {
     return new Mime(type, subtype);
   }
 
-  static fromExtension(extension: ExtensionType): Mime {
-    return Mime.fromString(String(mime.contentType(extension)));
-  }
-
   isSatisfiedBy(another: Mime): boolean {
     if (!(this.type === another.type || this.type === "*")) return false;
     return this.subtype === another.subtype || this.subtype === "*";
-  }
-
-  toExtension(): ExtensionType {
-    return Extension.parse(mime.extension(this.toString()));
   }
 
   toString(): string {
