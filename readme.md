@@ -71,7 +71,6 @@ src/
 ├── linear-regression.service.ts
 ├── mean.service.ts
 ├── mime-registry.service.ts
-├── mime-types.vo.ts
 ├── mime-value.vo.ts
 ├── mime.vo.ts
 ├── min-max-scaler.service.ts
