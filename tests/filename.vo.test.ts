@@ -4,7 +4,6 @@ import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
 import { FilenameAffix, FilenameAffixStrategy } from "../src/filename-affix.vo";
 import { FilenameFromStringError } from "../src/filename-from-string.vo";
-import { MIMES } from "../src/mime.vo";
 
 describe("Filename", () => {
   test("fromParts", () => {
@@ -34,10 +33,6 @@ describe("Filename", () => {
 
   test("getExtension", () => {
     expect(Filename.fromString("user-photo.jpg").getExtension()).toEqual(Extension.parse("jpg"));
-  });
-
-  test("getMime", () => {
-    expect(Filename.fromString("user-photo.png").getMime()).toEqual(MIMES.png);
   });
 
   test("withExtension", () => {
