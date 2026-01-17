@@ -1,8 +1,10 @@
 # Changelog
+- 2026-01-17 21:33 c461b0b **refactor: make mime registry entry readonly**
 ## 2026-01-17 21:27 v1.3.3
 - 2026-01-17 21:27 9674de0 **1.3.3**
 - 2026-01-17 21:26 6fefdce **step: add predefined mimes**
 - 2026-01-17 21:11 860d07c **step: add has extension and has mime methods**
+- 2026-01-17 20:27 26fca4c **docs: generate CHANGELOG**
 - 2026-01-17 20:26 c87a44c **docs: generate CHANGELOG**
 - 2026-01-17 20:26 1ae427d **docs: generate readme**
 ## 2026-01-17 18:32 v1.3.2
