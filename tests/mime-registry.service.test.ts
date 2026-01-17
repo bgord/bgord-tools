@@ -40,4 +40,16 @@ describe("MimeRegistry", () => {
   test("toExtension - unknown mime", () => {
     expect(registry.toExtension(pdfMime)).toEqual(undefined);
   });
+
+  test("hasExtension", () => {
+    expect(registry.hasExtension(jpgExtension)).toEqual(true);
+    expect(registry.hasExtension(jpgExtension)).toEqual(true);
+    expect(registry.hasExtension(csvExtension)).toEqual(false);
+  });
+
+  test("hasMime", () => {
+    expect(registry.hasMime(jpegMime)).toEqual(true);
+    expect(registry.hasMime(pngMime)).toEqual(true);
+    expect(registry.hasMime(pdfMime)).toEqual(false);
+  });
 });

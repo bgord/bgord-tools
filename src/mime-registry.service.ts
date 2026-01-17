@@ -26,6 +26,14 @@ export class MimeRegistry {
     }
   }
 
+  hasExtension(extension: ExtensionType): boolean {
+    return this.byExtension.has(extension);
+  }
+
+  hasMime(mime: Mime): boolean {
+    return this.byMime.has(mime.toString());
+  }
+
   fromExtension(extension: ExtensionType): Mime | undefined {
     return this.byExtension.get(extension);
   }
