@@ -1,4 +1,6 @@
 # Changelog
+- 2026-01-18 12:48 9417dcf **step: update packages**
+- 2026-01-18 12:47 f06d9ae **refactor: remove notification tempalte**
 ## 2026-01-17 21:48 v1.3.6
 - 2026-01-17 21:48 260410e **1.3.6**
 ## 2026-01-17 21:47 v1.3.5
@@ -11,6 +13,7 @@
 - 2026-01-17 21:27 9674de0 **1.3.3**
 - 2026-01-17 21:26 6fefdce **step: add predefined mimes**
 - 2026-01-17 21:11 860d07c **step: add has extension and has mime methods**
+- 2026-01-17 20:48 4c3844a **docs: generate CHANGELOG**
 - 2026-01-17 20:47 e548a11 **docs: generate CHANGELOG**
 - 2026-01-17 20:47 dd24195 **docs: generate CHANGELOG**
 - 2026-01-17 20:47 2b3dd1a **docs: generate readme**
