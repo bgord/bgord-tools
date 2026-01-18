@@ -59,7 +59,6 @@ export * from "./month.vo";
 export * from "./month-iso-id.vo";
 export * from "./multiplication-factor.vo";
 export * from "./noop.service";
-export * from "./notification-template.vo";
 export * from "./object-key.vo";
 export * from "./outlier-detector.service";
 export * from "./package-version.vo";
