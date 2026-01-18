@@ -1,6 +1,10 @@
 # Changelog
+## 2026-01-18 12:49 v1.3.7
+- 2026-01-18 12:49 bb02108 **1.3.7**
 - 2026-01-18 12:48 9417dcf **step: update packages**
 - 2026-01-18 12:47 f06d9ae **refactor: remove notification tempalte**
+- 2026-01-18 11:48 c0ddb79 **docs: generate CHANGELOG**
+- 2026-01-18 11:48 0904ec6 **docs: generate readme**
 ## 2026-01-17 21:48 v1.3.6
 - 2026-01-17 21:48 260410e **1.3.6**
 ## 2026-01-17 21:47 v1.3.5
