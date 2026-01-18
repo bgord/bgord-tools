@@ -84,7 +84,6 @@ src/
 ├── month.vo.ts
 ├── multiplication-factor.vo.ts
 ├── noop.service.ts
-├── notification-template.vo.ts
 ├── object-key.vo.ts
 ├── outlier-detector.service.ts
 ├── package-version-schema.vo.ts
