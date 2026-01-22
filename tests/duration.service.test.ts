@@ -147,4 +147,12 @@ describe("Duration", () => {
   test("MIN", () => {
     expect(Duration.MIN.ms).toEqual(DurationMs.parse(1));
   });
+
+  test("toString", () => {
+    expect(Duration.MIN.toString()).toEqual("1");
+  });
+
+  test("toJSON", () => {
+    expect(Duration.MIN.toJSON()).toEqual(1);
+  });
 });

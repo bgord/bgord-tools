@@ -91,4 +91,12 @@ export class Duration {
   toAbsolute(): Duration {
     return Duration.Ms(Math.abs(this.internal));
   }
+
+  toString(): string {
+    return this.internal.toString();
+  }
+
+  toJSON(): number {
+    return this.internal;
+  }
 }
