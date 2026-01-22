@@ -11,6 +11,7 @@ describe("MimeValue", () => {
     expect(MimeValue.safeParse("application/ace+json").success).toEqual(true);
     expect(MimeValue.safeParse("video/vnd.planar").success).toEqual(true);
     expect(MimeValue.safeParse(`${"a".repeat(24)}/${"a".repeat(72)}`).success).toEqual(true);
+    expect(MimeValue.safeParse("application/clue_info+xml").success).toEqual(true);
   });
 
   test("rejects prefix", () => {
