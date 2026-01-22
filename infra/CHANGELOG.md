@@ -1,7 +1,12 @@
 # Changelog
+- 2026-01-22 18:48 16b4400 **step: add underscore to subtype**
+- 2026-01-22 18:43 8c1c6e3 **step: make subtype up to 72 chars**
+- 2026-01-22 18:42 f886383 **step: add missing test cases**
+- 2026-01-22 15:35 da29099 **step: allow dot and plus in mime subtype**
 - 2026-01-22 15:26 0292957 **refactor: remove private constructor in duration service**
 - 2026-01-22 15:25 aa10306 **step: add duration to json and string**
 - 2026-01-22 15:24 4aca507 **step: update packages**
+- 2026-01-22 14:28 9885b25 **docs: generate CHANGELOG**
 ## 2026-01-18 12:49 v1.3.7
 - 2026-01-18 12:49 bb02108 **1.3.7**
 - 2026-01-18 12:48 9417dcf **step: update packages**
