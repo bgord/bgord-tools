@@ -2,12 +2,14 @@ import { describe, expect, test } from "bun:test";
 import { MimeValue } from "../src/mime-value.vo";
 
 describe("MimeValue", () => {
-  test("happy path", () => {
+  test.only("happy path", () => {
     expect(MimeValue.safeParse("text/plain").success).toEqual(true);
     expect(MimeValue.safeParse("*/*").success).toEqual(true);
     expect(MimeValue.safeParse("image/*").success).toEqual(true);
     expect(MimeValue.safeParse("application/octet-stream").success).toEqual(true);
     expect(MimeValue.safeParse("video/mp4").success).toEqual(true);
+    expect(MimeValue.safeParse("application/ace+json").success).toEqual(true);
+    expect(MimeValue.safeParse("video/vnd.planar").success).toEqual(true);
   });
 
   test("rejects prefix", () => {
