@@ -17,7 +17,7 @@ export class Duration {
   private static readonly MS_IN_DAY = 24 * Duration.MS_IN_HOUR;
   private static readonly MS_IN_WEEK = 7 * Duration.MS_IN_DAY;
 
-  private constructor(candidateMs: number) {
+  constructor(candidateMs: number) {
     this.internal = DurationMs.parse(candidateMs);
   }
 
