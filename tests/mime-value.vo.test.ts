@@ -10,7 +10,7 @@ describe("MimeValue", () => {
     expect(MimeValue.safeParse("video/mp4").success).toEqual(true);
     expect(MimeValue.safeParse("application/ace+json").success).toEqual(true);
     expect(MimeValue.safeParse("video/vnd.planar").success).toEqual(true);
-    expect(MimeValue.safeParse(`${"a".repeat(24)}/${"a".repeat(24)}`).success).toEqual(true);
+    expect(MimeValue.safeParse(`${"a".repeat(24)}/${"a".repeat(72)}`).success).toEqual(true);
   });
 
   test("rejects prefix", () => {
@@ -46,7 +46,7 @@ describe("MimeValue", () => {
   });
 
   test("rejects too lonog subtype", () => {
-    expect(() => MimeValue.parse(`text/${"a".repeat(25)}`)).toThrow("mime.value.invalid");
+    expect(() => MimeValue.parse(`text/${"a".repeat(73)}`)).toThrow("mime.value.invalid");
   });
 
   test("rejects no slash", () => {
