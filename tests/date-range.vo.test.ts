@@ -47,4 +47,12 @@ describe("DateRange", () => {
   test("equals - false", () => {
     expect(range.equals(new DateRange(START, END.add(Duration.Seconds(1))))).toEqual(false);
   });
+
+  test("toString", () => {
+    expect(range.toString()).toEqual(`${START.toString()} - ${END.toString()}`);
+  });
+
+  test("toJSON", () => {
+    expect(range.toJSON()).toEqual({ start: START.ms, end: END.ms });
+  });
 });

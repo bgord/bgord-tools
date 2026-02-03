@@ -30,6 +30,10 @@ export class DateRange {
     return this.start.equals(other.start) && this.end.equals(other.end);
   }
 
+  toString(): string {
+    return `${this.start.toString()} - ${this.end.toString()}`;
+  }
+
   toJSON(): { start: number; end: number } {
     return { start: this.getStart().ms, end: this.getEnd().ms };
   }
