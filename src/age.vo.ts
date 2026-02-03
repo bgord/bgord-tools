@@ -51,7 +51,7 @@ export class Age {
   }
 
   toString(): string {
-    return this.value.toString();
+    return this.get().toString();
   }
 
   toJSON(): number {
