@@ -9,8 +9,12 @@ const END = START.add(Duration.Seconds(1));
 const range = new DateRange(START, END);
 
 describe("DateRange", () => {
-  test("throws when start > end", () => {
+  test("constructor - start after end", () => {
     expect(() => new DateRange(END, START)).toThrow("date.range.invalid");
+  });
+
+  test("constructor - start equals end", () => {
+    expect(() => new DateRange(START, START)).toThrow("date.range.invalid");
   });
 
   test("getStart", () => {
@@ -37,12 +41,10 @@ describe("DateRange", () => {
   });
 
   test("equals - true", () => {
-    expect(new DateRange(START, END).equals(new DateRange(START, END))).toEqual(true);
+    expect(range.equals(range)).toEqual(true);
   });
 
   test("equals - false", () => {
-    const different = new DateRange(START, END.add(Duration.Seconds(1)));
-
-    expect(range.equals(different)).toEqual(false);
+    expect(range.equals(new DateRange(START, END.add(Duration.Seconds(1))))).toEqual(false);
   });
 });

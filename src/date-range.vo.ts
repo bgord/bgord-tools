@@ -7,7 +7,7 @@ export class DateRange {
     private readonly start: Timestamp,
     private readonly end: Timestamp,
   ) {
-    if (start.isAfter(end)) throw new Error(DateRangeError.Invalid);
+    if (start.isAfterOrEqual(end)) throw new Error(DateRangeError.Invalid);
   }
 
   getStart(): Timestamp {
