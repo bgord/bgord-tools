@@ -1,4 +1,8 @@
 # Changelog
+## 2026-02-06 17:49 v1.3.13
+- 2026-02-06 17:49 74a08aa **1.3.13**
+- 2026-02-06 16:48 d01b58e **docs: generate readme**
+- 2026-02-06 16:48 7552523 **docs: generate CHANGELOG**
 - 2026-02-05 11:18 1847dfd **step: update packages**
 - 2026-02-03 21:42 daff985 **step: add date range toString**
 - 2026-02-03 21:37 a50ff12 **refactor: make date range constructor throw when start equals end**
