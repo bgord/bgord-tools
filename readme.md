@@ -28,8 +28,6 @@ src/
 ├── age.vo.ts
 ├── api-key.vo.ts
 ├── basename.vo.ts
-├── clock-format.service.ts
-├── clock.vo.ts
 ├── date-calculator.service.ts
 ├── date-formatter.service.ts
 ├── date-range.vo.ts
