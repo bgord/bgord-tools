@@ -1,7 +1,15 @@
 # Changelog
+- 2026-02-05 11:18 1847dfd **step: update packages**
+- 2026-02-03 21:42 daff985 **step: add date range toString**
+- 2026-02-03 21:37 a50ff12 **refactor: make date range constructor throw when start equals end**
+- 2026-02-03 21:32 b1d4a27 **refactor: remove unused clock vo**
+- 2026-02-03 21:29 b2a1db8 **refactor: age to string unification**
+- 2026-02-03 21:25 0809a45 **step: update packages**
+- 2026-02-02 13:31 d7447e1 **step: update packages**
 ## 2026-01-30 10:19 v1.3.12
 - 2026-01-30 10:19 574bdce **1.3.12**
 - 2026-01-30 10:18 d958ed0 **step: update packages**
+- 2026-01-30 09:20 2ed917b **docs: generate CHANGELOG**
 - 2026-01-30 09:19 60faae5 **docs: generate CHANGELOG**
 ## 2026-01-28 12:56 v1.3.11
 - 2026-01-28 12:56 fdddb73 **1.3.11**
