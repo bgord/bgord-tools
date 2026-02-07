@@ -97,6 +97,7 @@ export * from "./visually-unambiguous-characters-generator.service";
 export * from "./week.vo";
 export * from "./week-iso-id.vo";
 export * from "./weekday.vo";
+export * from "./weekday-iso-id.vo";
 export * from "./weight.vo";
 export * from "./weight-grams.vo";
 export * from "./year.vo";
