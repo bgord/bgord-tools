@@ -7,7 +7,7 @@ export const MeanError = { NotEnoughValues: "mean.not.enough.values" };
 export class Mean {
   private static readonly DEFAULT_ROUNDING: RoundingStrategy = new RoundingDecimalStrategy(2);
 
-  static calculate(values: number[], rounding?: RoundingStrategy): number {
+  static calculate(values: ReadonlyArray<number>, rounding?: RoundingStrategy): number {
     if (values.length === 0) throw new Error(MeanError.NotEnoughValues);
 
     const sum = Sum.of(values);

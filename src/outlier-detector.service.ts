@@ -6,7 +6,7 @@ export class OutlierDetector {
   private readonly zScore: ZScore;
   private readonly threshold: number;
 
-  constructor(values: number[], threshold: number) {
+  constructor(values: ReadonlyArray<number>, threshold: number) {
     if (values.length < 2) throw new Error(OutlierDetectorError.NotEnoughValues);
 
     this.zScore = new ZScore(values);

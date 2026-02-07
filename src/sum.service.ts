@@ -1,9 +1,9 @@
 export class Sum {
-  static of(values: readonly number[]): number {
+  static of(values: ReadonlyArray<number>): number {
     return values.reduce((sum, x) => sum + x, 0);
   }
 
-  static precise(values: readonly number[]): number {
+  static precise(values: ReadonlyArray<number>): number {
     let sum = 0;
     let compensation = 0;
 

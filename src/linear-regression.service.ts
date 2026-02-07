@@ -25,7 +25,10 @@ export class LinearRegression {
     this.rounding = rounding ?? LinearRegression.DEFAULT_ROUNDING;
   }
 
-  static fromPairs(pairs: LinearRegressionPairType[], rounding?: RoundingStrategy): LinearRegression {
+  static fromPairs(
+    pairs: ReadonlyArray<LinearRegressionPairType>,
+    rounding?: RoundingStrategy,
+  ): LinearRegression {
     const count = pairs.length;
 
     if (count < 2) throw new Error(LinearRegressionError.MinPairs);

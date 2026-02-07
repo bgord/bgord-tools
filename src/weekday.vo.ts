@@ -12,7 +12,7 @@ export enum WeekdayFormatterEnum {
 
 export const WeekdayValueError = { Invalid: "weekday.invalid" };
 
-const FULL_NAMES: readonly string[] = [
+const FULL_NAMES: ReadonlyArray<string> = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -22,7 +22,7 @@ const FULL_NAMES: readonly string[] = [
   "Saturday",
 ] as const;
 
-const SHORT_NAMES: readonly string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+const SHORT_NAMES: ReadonlyArray<string> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 
 export const WeekdayFormatters: Record<WeekdayFormatterEnum, WeekdayFormatter> = {
   FULL: (value) => FULL_NAMES[value],
@@ -107,11 +107,11 @@ export class Weekday {
     return this.value === 0;
   }
 
-  static list(formatter?: WeekdayFormatter): readonly Weekday[] {
+  static list(formatter?: WeekdayFormatter): ReadonlyArray<Weekday> {
     return Array.from({ length: 7 }, (_, index) => new Weekday(index, formatter));
   }
 
-  static listMondayFirst(formatter?: WeekdayFormatter): readonly Weekday[] {
+  static listMondayFirst(formatter?: WeekdayFormatter): ReadonlyArray<Weekday> {
     const [Sunday, ...rest] = Weekday.list(formatter);
 
     return [...rest, Sunday];

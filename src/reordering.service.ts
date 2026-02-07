@@ -81,7 +81,7 @@ export class ReorderingCalculator {
     this.dll = DoublyLinkedList.fromArray<ReorderingItem>([]);
   }
 
-  static fromArray(ids: ReorderingItem["id"][]) {
+  static fromArray(ids: ReadonlyArray<ReorderingItem["id"]>) {
     const reordering = new ReorderingCalculator();
     for (const id of ids) {
       reordering.add(id);
@@ -147,7 +147,7 @@ export class ReorderingCalculator {
 }
 
 export class ReorderingIntegrator {
-  static appendPosition(reordering: ReorderingType[]) {
+  static appendPosition(reordering: ReadonlyArray<ReorderingType>) {
     return function <T extends { id: ReorderingItemIdType }>(item: T): WithReorderingPositionValue<T> {
       const found = reordering.find((x) => x.id === item.id);
       const positionValue = ReorderingItemPositionValue.parse(found?.position ?? 0);

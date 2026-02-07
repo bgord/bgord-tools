@@ -8,7 +8,11 @@ export type PaginationValuesType = Record<string, unknown>;
 export type TotalType = number;
 export type ExhaustedType = boolean;
 export type PaginationExhaustedConfig = { total: TotalType; pagination: PaginationType };
-export type PaginationPrepareConfigType<T> = { total: TotalType; pagination: PaginationType; result: T[] };
+export type PaginationPrepareConfigType<T> = {
+  total: TotalType;
+  pagination: PaginationType;
+  result: ReadonlyArray<T>;
+};
 
 export class Pagination {
   static parse(values: PaginationValuesType, _take: TakeType): PaginationType {
@@ -61,7 +65,7 @@ export class Pagination {
 }
 
 export type Paged<T> = {
-  result: T[];
+  result: ReadonlyArray<T>;
   meta: {
     exhausted: ExhaustedType;
     currentPage: PageType;

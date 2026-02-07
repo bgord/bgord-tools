@@ -8,7 +8,10 @@ export const PopulationStandardDeviationError = {
 };
 
 export class PopulationStandardDeviation {
-  static calculate(values: number[], rounding: RoundingStrategy = new RoundingDecimalStrategy(2)): number {
+  static calculate(
+    values: ReadonlyArray<number>,
+    rounding: RoundingStrategy = new RoundingDecimalStrategy(2),
+  ): number {
     if (values.length < 2) throw new Error(PopulationStandardDeviationError.NotEnoughValues);
 
     const mean = Mean.calculate(values);

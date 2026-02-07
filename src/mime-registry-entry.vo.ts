@@ -4,6 +4,6 @@ import type { Mime } from "./mime.vo";
 export class MimeRegistryEntry {
   constructor(
     readonly mime: Mime,
-    readonly extensions: ExtensionType[],
+    readonly extensions: ReadonlyArray<ExtensionType>,
   ) {}
 }

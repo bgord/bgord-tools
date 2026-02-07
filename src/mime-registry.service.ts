@@ -13,7 +13,7 @@ export class MimeRegistry {
   private readonly byExtension = new Map<ExtensionType, Mime>();
   private readonly byMime = new Map<string, ExtensionType>();
 
-  constructor(entries: readonly MimeRegistryEntry[]) {
+  constructor(entries: ReadonlyArray<MimeRegistryEntry>) {
     for (const entry of entries) {
       for (const extension of entry.extensions) {
         this.byExtension.set(extension, entry.mime);

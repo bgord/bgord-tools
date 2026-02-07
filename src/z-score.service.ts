@@ -10,7 +10,7 @@ export class ZScore {
   private readonly standardDeviation: number;
 
   constructor(
-    values: number[],
+    values: ReadonlyArray<number>,
     private readonly rounding: RoundingStrategy = new RoundingDecimalStrategy(2),
   ) {
     if (values.length < 2) throw new Error(ZScoreError.NotEnoughValues);

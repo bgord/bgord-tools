@@ -155,11 +155,11 @@ export class DoublyLinkedList<T> {
     }
   }
 
-  toArray(): Node<T>[] {
+  toArray(): ReadonlyArray<Node<T>> {
     return Array.from(this);
   }
 
-  static fromArray<T>(array: T[]): DoublyLinkedList<T> {
+  static fromArray<T>(array: ReadonlyArray<T>): DoublyLinkedList<T> {
     const dll = new DoublyLinkedList<T>();
     for (const item of array) {
       dll.append(new Node<T>(item));

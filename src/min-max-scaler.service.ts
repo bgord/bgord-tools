@@ -89,7 +89,7 @@ export class MinMaxScaler {
     };
   }
 
-  static getMinMax(values: MinMaxScalerValueType[]): { min: number; max: number } {
+  static getMinMax(values: ReadonlyArray<MinMaxScalerValueType>): { min: number; max: number } {
     if (values.length === 0) throw new Error(MinMaxScalerError.EmptyArray);
     return { min: Math.min(...values), max: Math.max(...values) };
   }

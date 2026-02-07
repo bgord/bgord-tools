@@ -45,7 +45,7 @@ export class Minute {
     return this.value > another.value;
   }
 
-  static list(): readonly Minute[] {
+  static list(): ReadonlyArray<Minute> {
     return Array.from({ length: 60 }, (_, index) => Minute.fromValue(index));
   }
 

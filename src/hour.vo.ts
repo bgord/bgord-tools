@@ -50,7 +50,7 @@ export class Hour {
     return this.value < another.value;
   }
 
-  static list(): readonly Hour[] {
+  static list(): ReadonlyArray<Hour> {
     return Array.from({ length: 24 }, (_, index) => Hour.fromValue(index));
   }
 
