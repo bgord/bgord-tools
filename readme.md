@@ -121,6 +121,7 @@ src/
 ├── visually-unambiguous-characters-generator.service.ts
 ├── week-iso-id.vo.ts
 ├── week.vo.ts
+├── weekday-iso-id.vo.ts
 ├── weekday.vo.ts
 ├── weight-grams.vo.ts
 ├── weight.vo.ts
