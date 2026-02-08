@@ -1,119 +1,74 @@
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
-
-export type WeekdayFormatter = (value: Weekday["value"]) => string;
-
-export enum WeekdayFormatterEnum {
-  FULL = "FULL", // "Sunday"
-  SHORT = "SHORT", // "Sun"
-  ISO_NUMBER = "ISO_NUMBER", // Monday=1 ... Sunday=7
-  ZERO_BASED_NUMBER = "ZERO_BASED_NUMBER", // Sunday=0 ... Saturday=6 (JS)
-}
-
-export const WeekdayValueError = { Invalid: "weekday.invalid" };
-
-const FULL_NAMES: ReadonlyArray<string> = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-] as const;
-
-const SHORT_NAMES: ReadonlyArray<string> = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
-
-export const WeekdayFormatters: Record<WeekdayFormatterEnum, WeekdayFormatter> = {
-  FULL: (value) => FULL_NAMES[value],
-  SHORT: (value) => SHORT_NAMES[value],
-  ISO_NUMBER: (value) => (value === 0 ? 7 : value).toString(), // ISO-8601: Mon=1..Sun=7
-  ZERO_BASED_NUMBER: (value) => value.toString(), // JS getUTCDay(): Sun=0..Sat=6
-} as const;
+import { WeekdayIsoId, type WeekdayIsoIdType } from "./weekday-iso-id.vo";
 
 export class Weekday {
-  // 0..6 (Sun..Sat)
-  private readonly value: number;
+  static readonly MONDAY = Weekday.fromIsoId(WeekdayIsoId.parse(1));
+  static readonly TUESDAY = Weekday.fromIsoId(WeekdayIsoId.parse(2));
+  static readonly WEDNESDAY = Weekday.fromIsoId(WeekdayIsoId.parse(3));
+  static readonly THURSDAY = Weekday.fromIsoId(WeekdayIsoId.parse(4));
+  static readonly FRIDAY = Weekday.fromIsoId(WeekdayIsoId.parse(5));
+  static readonly SATURDAY = Weekday.fromIsoId(WeekdayIsoId.parse(6));
+  static readonly SUNDAY = Weekday.fromIsoId(WeekdayIsoId.parse(7));
 
-  // default formatter used by toString()/format() when no runtime formatter given
-  private readonly formatter: WeekdayFormatter;
+  private constructor(private readonly value: WeekdayIsoIdType) {}
 
-  static readonly SUNDAY = new Weekday(0);
-  static readonly MONDAY = new Weekday(1);
-  static readonly TUESDAY = new Weekday(2);
-  static readonly WEDNESDAY = new Weekday(3);
-  static readonly THURSDAY = new Weekday(4);
-  static readonly FRIDAY = new Weekday(5);
-  static readonly SATURDAY = new Weekday(6);
+  static fromTimestamp(timestamp: Timestamp): Weekday {
+    // UTC returns numbers from 0-6, starting from Sunday
+    const utc = new Date(timestamp.ms).getUTCDay();
 
-  constructor(candidate: number, formatter?: WeekdayFormatter) {
-    if (!Number.isInteger(candidate) || candidate < 0 || candidate > 6) {
-      throw new Error(WeekdayValueError.Invalid);
-    }
-
-    this.value = candidate;
-    this.formatter = formatter ?? WeekdayFormatters.FULL;
-  }
-
-  static fromTimestamp(timestamp: Timestamp, formatter?: WeekdayFormatter): Weekday {
-    const dayZeroBased = new Date(timestamp.ms).getUTCDay(); // 0..6
-    return new Weekday(dayZeroBased, formatter);
+    return new Weekday(WeekdayIsoId.parse(utc === 0 ? 7 : utc));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Weekday {
     return Weekday.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
-  get(): number {
+  static fromIsoId(iso: WeekdayIsoIdType): Weekday {
+    return new Weekday(iso);
+  }
+
+  get(): WeekdayIsoIdType {
     return this.value;
-  }
-
-  format(): string {
-    return this.formatter(this.value);
-  }
-
-  toString(): string {
-    return this.format();
   }
 
   equals(another: Weekday): boolean {
     return this.value === another.value;
   }
 
-  /** ISO-8601 weekday number: Monday=1 ... Sunday=7 */
-  toIsoNumber(): number {
-    return this.value === 0 ? 7 : this.value;
-  }
-
   isMonday(): boolean {
-    return this.value === 1;
+    return this.equals(Weekday.MONDAY);
   }
+
   isTuesday(): boolean {
-    return this.value === 2;
+    return this.equals(Weekday.TUESDAY);
   }
+
   isWednesday(): boolean {
-    return this.value === 3;
+    return this.equals(Weekday.WEDNESDAY);
   }
+
   isThursday(): boolean {
-    return this.value === 4;
+    return this.equals(Weekday.THURSDAY);
   }
+
   isFriday(): boolean {
-    return this.value === 5;
+    return this.equals(Weekday.FRIDAY);
   }
+
   isSaturday(): boolean {
-    return this.value === 6;
+    return this.equals(Weekday.SATURDAY);
   }
+
   isSunday(): boolean {
-    return this.value === 0;
+    return this.equals(Weekday.SUNDAY);
   }
 
-  static list(formatter?: WeekdayFormatter): ReadonlyArray<Weekday> {
-    return Array.from({ length: 7 }, (_, index) => new Weekday(index, formatter));
+  toJSON(): number {
+    return this.value;
   }
 
-  static listMondayFirst(formatter?: WeekdayFormatter): ReadonlyArray<Weekday> {
-    const [Sunday, ...rest] = Weekday.list(formatter);
-
-    return [...rest, Sunday];
+  toString(): string {
+    return this.value.toString();
   }
 }
