@@ -1,5 +1,9 @@
 # Changelog
+## 2026-02-08 11:53 v1.3.14
+- 2026-02-08 11:53 e2c9c30 **1.3.14**
 - 2026-02-08 11:37 febf0e1 **step: update packages**
+- 2026-02-08 10:38 e3337a7 **docs: generate readme**
+- 2026-02-08 10:38 c779c01 **docs: generate CHANGELOG**
 - 2026-02-07 22:51 5ad1444 **step: bump bgord/scripts**
 - 2026-02-07 22:14 b6c6da2 **step: define weekday iso id vo**
 - 2026-02-07 22:02 2ab13d5 **step: bump bgord/scripts**
