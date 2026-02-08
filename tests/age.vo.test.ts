@@ -5,12 +5,12 @@ import * as mocks from "./mocks";
 
 describe("Age", () => {
   test("fromValue", () => {
-    expect(Age.fromValue(1).get()).toEqual(1);
+    expect(Age.fromValue(0).get()).toEqual(0);
     expect(Age.fromValue(130).get()).toEqual(130);
   });
 
   test("fromValueSafe", () => {
-    expect(Age.fromValueSafe(AgeYears.parse(1)).get()).toEqual(1);
+    expect(Age.fromValueSafe(AgeYears.parse(0)).get()).toEqual(0);
     expect(Age.fromValueSafe(AgeYears.parse(130)).get()).toEqual(130);
   });
 
@@ -69,7 +69,7 @@ describe("Age", () => {
   });
 
   test("MIN", () => {
-    expect(Age.MIN).toEqual(1);
+    expect(Age.MIN).toEqual(0);
   });
 
   test("MAX", () => {
