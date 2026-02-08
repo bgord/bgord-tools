@@ -1,6 +1,13 @@
 # Changelog
+- 2026-02-08 11:37 febf0e1 **step: update packages**
+- 2026-02-07 22:51 5ad1444 **step: bump bgord/scripts**
+- 2026-02-07 22:14 b6c6da2 **step: define weekday iso id vo**
+- 2026-02-07 22:02 2ab13d5 **step: bump bgord/scripts**
+- 2026-02-07 22:02 17161dc **refactor: use readonly array instead of []**
+- 2026-02-07 22:01 115adb1 **step: bump bgord/scripts**
 ## 2026-02-06 17:49 v1.3.13
 - 2026-02-06 17:49 74a08aa **1.3.13**
+- 2026-02-06 16:49 ec886a6 **docs: generate CHANGELOG**
 - 2026-02-06 16:48 d01b58e **docs: generate readme**
 - 2026-02-06 16:48 7552523 **docs: generate CHANGELOG**
 - 2026-02-05 11:18 1847dfd **step: update packages**
