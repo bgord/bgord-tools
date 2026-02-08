@@ -3,8 +3,8 @@ import { WeekdayIsoId } from "../src/weekday-iso-id.vo";
 
 describe("WeekIsoId VO", () => {
   test("happy path", () => {
-    expect(WeekdayIsoId.safeParse(0).success).toEqual(true);
-    expect(WeekdayIsoId.safeParse(6).success).toEqual(true);
+    expect(WeekdayIsoId.safeParse(1).success).toEqual(true);
+    expect(WeekdayIsoId.safeParse(7).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
@@ -20,10 +20,10 @@ describe("WeekIsoId VO", () => {
   });
 
   test("rejects too small", () => {
-    expect(() => WeekdayIsoId.parse(-1)).toThrow("weekday.iso.id.invalid");
+    expect(() => WeekdayIsoId.parse(0)).toThrow("weekday.iso.id.invalid");
   });
 
   test("rejects too big", () => {
-    expect(() => WeekdayIsoId.parse(7)).toThrow("weekday.iso.id.invalid");
+    expect(() => WeekdayIsoId.parse(8)).toThrow("weekday.iso.id.invalid");
   });
 });

@@ -7,8 +7,8 @@ export const WeekdayIsoId = z
   // Stryker restore all
   .number(WeekdayIsoIdError.Type)
   .int(WeekdayIsoIdError.Type)
-  .min(0, WeekdayIsoIdError.Invalid)
-  .max(6, WeekdayIsoIdError.Invalid)
+  .min(1, WeekdayIsoIdError.Invalid)
+  .max(7, WeekdayIsoIdError.Invalid)
   .brand("WeekdayIsoId");
 
 export type WeekdayIsoIdType = z.infer<typeof WeekdayIsoId>;
