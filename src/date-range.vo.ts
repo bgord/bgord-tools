@@ -1,3 +1,4 @@
+import type { Duration } from "./duration.service";
 import type { Timestamp } from "./timestamp.vo";
 
 export const DateRangeError = { Invalid: "date.range.invalid" };
@@ -20,6 +21,10 @@ export class DateRange {
 
   get(): [Timestamp, Timestamp] {
     return [this.start, this.end];
+  }
+
+  getDuration(): Duration {
+    return this.end.difference(this.start);
   }
 
   contains(timestamp: Timestamp): boolean {

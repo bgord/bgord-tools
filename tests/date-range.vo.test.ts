@@ -3,8 +3,9 @@ import { DateRange } from "../src/date-range.vo";
 import { Duration } from "../src/duration.service";
 import * as mocks from "./mocks";
 
+const duration = Duration.Seconds(1);
 const START = mocks.TIME_ZERO;
-const END = START.add(Duration.Seconds(1));
+const END = START.add(duration);
 
 const range = new DateRange(START, END);
 
@@ -27,6 +28,10 @@ describe("DateRange", () => {
 
   test("get", () => {
     expect(range.get()).toEqual([START, END]);
+  });
+
+  test("getDuration", () => {
+    expect(range.getDuration()).toEqual(duration);
   });
 
   test("contains - true", () => {
