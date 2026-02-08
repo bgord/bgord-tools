@@ -24,13 +24,13 @@ export class Age {
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
-    const birthdate = Timestamp.fromNumber(new Date(candidate.birthdate).getTime());
+    const birthdate = Timestamp.fromDateLike(candidate.birthdate);
 
     if (birthdate.isAfter(candidate.now)) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(candidate.now.ms, birthdate.ms));
   }
 
-  get(): number {
+  get(): AgeYearsType {
     return this.value;
   }
 
