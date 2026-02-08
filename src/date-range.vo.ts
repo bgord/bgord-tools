@@ -18,7 +18,7 @@ export class DateRange {
     return this.end;
   }
 
-  toRange(): [Timestamp, Timestamp] {
+  get(): [Timestamp, Timestamp] {
     return [this.start, this.end];
   }
 

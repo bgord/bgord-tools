@@ -25,8 +25,8 @@ describe("DateRange", () => {
     expect(range.getEnd()).toEqual(END);
   });
 
-  test("toRange", () => {
-    expect(range.toRange()).toEqual([START, END]);
+  test("get", () => {
+    expect(range.get()).toEqual([START, END]);
   });
 
   test("contains - true", () => {
