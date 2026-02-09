@@ -1,7 +1,5 @@
 import { MimeValue } from "./mime-value.vo";
 
-export const MimeError = { NotAccepted: "mime.not.accepted" };
-
 export class Mime {
   private constructor(
     readonly type: string,
