@@ -1,4 +1,6 @@
 # Changelog
+## 2026-02-09 12:42 v1.3.15
+- 2026-02-09 12:42 645302b **1.3.15**
 - 2026-02-09 12:38 2cca7fc **refactor: improve tests**
 - 2026-02-09 12:32 40ea978 **refactor: improve year**
 - 2026-02-09 12:30 14014bd **refactor: improve week**
@@ -15,6 +17,7 @@
 - 2026-02-09 11:48 0ac8472 **refactor: rename hour schema to hour value**
 - 2026-02-09 11:45 407f88a **refactor: remove hour formatter**
 - 2026-02-09 11:44 9963351 **refactor: cleanup height**
+- 2026-02-09 11:41 7525c9e **docs: generate CHANGELOG**
 - 2026-02-09 11:40 9b8a75c **refactor: improve duration**
 - 2026-02-09 11:34 cfec539 **docs: generate CHANGELOG**
 - 2026-02-09 11:34 573996f **docs: generate readme**
