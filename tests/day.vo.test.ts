@@ -6,23 +6,41 @@ import { Integer } from "../src/integer.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
+const start = Timestamp.fromNumber(
+  Date.UTC(
+    mocks.TIME_ZERO_DATE.getUTCFullYear(),
+    mocks.TIME_ZERO_DATE.getUTCMonth(),
+    mocks.TIME_ZERO_DATE.getUTCDate(),
+  ),
+);
+const end = start.add(Duration.Days(1)).subtract(mocks.epsilon);
+
 describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
-    const date = new Date(mocks.TIME_ZERO.ms);
-    const expectedStart = Timestamp.fromNumber(
-      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
-    );
-    const expectedEnd = expectedStart.add(Duration.Days(1)).subtract(mocks.epsilon);
 
-    expect(day.getStart()).toEqual(expectedStart);
-    expect(day.getEnd()).toEqual(expectedEnd);
+    expect(day.getStart()).toEqual(start);
+    expect(day.getEnd()).toEqual(end);
     expect(day.toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
     expect(day.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
+  test("fromTimestamp", () => {
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
+  });
+
   test("fromTimestampValue", () => {
     expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(
+      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
+    );
+  });
+
+  test("fromNow", () => {
+    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
+  });
+
+  test("fromIsoId", () => {
+    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toIsoId()).toEqual(
       DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
     );
   });
@@ -35,26 +53,12 @@ describe("Day", () => {
     expect(day.contains(timestamp)).toEqual(true);
   });
 
-  test("fromNow", () => {
-    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
-  });
-
-  test("fromNow", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
-  });
-
-  test("fromIsoId", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toIsoId()).toEqual(
-      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
-    );
-  });
-
   test("equals", () => {
-    const now = Timestamp.fromNumber(Date.now());
-    const dayA = Day.fromTimestamp(now);
-    const dayB = Day.fromNow(now);
+    const day = Day.fromTimestamp(mocks.TIME_ZERO);
+    const now = Day.fromNow(Timestamp.fromNumber(Date.now()));
 
-    expect(dayB.equals(dayA)).toEqual(true);
+    expect(day.equals(now)).toEqual(false);
+    expect(day.equals(day)).toEqual(true);
   });
 
   test("next", () => {
