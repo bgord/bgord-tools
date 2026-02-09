@@ -1,29 +1,29 @@
 import { describe, expect, test } from "bun:test";
-import { MinuteSchema } from "../src/minute-schema.vo";
+import { MinuteValue } from "../src/minute-value.vo";
 
-describe("MinuteSchema", () => {
+describe("MinuteValue", () => {
   test("happy path", () => {
-    expect(MinuteSchema.safeParse(0).success).toEqual(true);
-    expect(MinuteSchema.safeParse(59).success).toEqual(true);
+    expect(MinuteValue.safeParse(0).success).toEqual(true);
+    expect(MinuteValue.safeParse(59).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
-    expect(() => MinuteSchema.parse(null)).toThrow("minute.schema.type");
+    expect(() => MinuteValue.parse(null)).toThrow("minute.value.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => MinuteSchema.parse("123")).toThrow("minute.schema.type");
+    expect(() => MinuteValue.parse("123")).toThrow("minute.value.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => MinuteSchema.parse(1.5)).toThrow("minute.schema.type");
+    expect(() => MinuteValue.parse(1.5)).toThrow("minute.value.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => MinuteSchema.parse(-1)).toThrow("minute.schema.invalid");
+    expect(() => MinuteValue.parse(-1)).toThrow("minute.value.invalid");
   });
 
   test("rejects 60", () => {
-    expect(() => MinuteSchema.parse(60)).toThrow("minute.schema.invalid");
+    expect(() => MinuteValue.parse(60)).toThrow("minute.value.invalid");
   });
 });

@@ -1,20 +1,20 @@
-import { MinuteSchema, type MinuteSchemaType } from "./minute-schema.vo";
+import { MinuteValue, type MinuteValueType } from "./minute-value.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Minute {
-  private constructor(private readonly value: MinuteSchemaType) {}
+  private constructor(private readonly value: MinuteValueType) {}
 
   static fromValue(candidate: number): Minute {
-    return new Minute(MinuteSchema.parse(candidate));
+    return new Minute(MinuteValue.parse(candidate));
   }
 
-  static fromValueSafe(candidate: MinuteSchemaType) {
+  static fromValueSafe(candidate: MinuteValueType) {
     return new Minute(candidate);
   }
 
   static fromTimestamp(timestamp: Timestamp): Minute {
-    return new Minute(MinuteSchema.parse(new Date(timestamp.ms).getUTCMinutes()));
+    return new Minute(MinuteValue.parse(new Date(timestamp.ms).getUTCMinutes()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
@@ -29,7 +29,7 @@ export class Minute {
     return Minute.fromValue(59);
   }
 
-  get(): MinuteSchemaType {
+  get(): MinuteValueType {
     return this.value;
   }
 

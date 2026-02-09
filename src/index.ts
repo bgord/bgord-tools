@@ -49,7 +49,7 @@ export * from "./mime-value.vo";
 export * from "./mimes";
 export * from "./min-max-scaler.service";
 export * from "./minute.vo";
-export * from "./minute-schema.vo";
+export * from "./minute-value.vo";
 export * from "./money.vo";
 export * from "./money-amount.vo";
 export * from "./month.vo";
