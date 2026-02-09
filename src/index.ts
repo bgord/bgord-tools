@@ -30,7 +30,7 @@ export * from "./filename-from-string.vo";
 export * from "./height.vo";
 export * from "./height-milimiters.vo";
 export * from "./hour.vo";
-export * from "./hour-schema.vo";
+export * from "./hour-value.vo";
 export * from "./iban.vo";
 export * from "./iban-mask.service";
 export * from "./iban-schema.vo";

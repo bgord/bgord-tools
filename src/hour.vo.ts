@@ -1,20 +1,20 @@
-import { HourSchema, type HourSchemaType } from "./hour-schema.vo";
+import { HourValue, type HourValueType } from "./hour-value.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Hour {
-  private constructor(private readonly value: HourSchemaType) {}
+  private constructor(private readonly value: HourValueType) {}
 
   static fromValue(candidate: number): Hour {
-    return new Hour(HourSchema.parse(candidate));
+    return new Hour(HourValue.parse(candidate));
   }
 
-  static fromValueSafe(candidate: HourSchemaType) {
+  static fromValueSafe(candidate: HourValueType) {
     return new Hour(candidate);
   }
 
   static fromTimestamp(timestamp: Timestamp): Hour {
-    return new Hour(HourSchema.parse(new Date(timestamp.ms).getUTCHours()));
+    return new Hour(HourValue.parse(new Date(timestamp.ms).getUTCHours()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Hour {
@@ -29,7 +29,7 @@ export class Hour {
     return Hour.fromValue(23);
   }
 
-  get(): HourSchemaType {
+  get(): HourValueType {
     return this.value;
   }
 
