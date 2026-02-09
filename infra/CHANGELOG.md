@@ -1,8 +1,34 @@
 # Changelog
+- 2026-02-09 12:32 40ea978 **refactor: improve year**
+- 2026-02-09 12:30 14014bd **refactor: improve week**
+- 2026-02-09 12:21 e15812a **refactor: improve quarter**
+- 2026-02-09 12:18 1934c85 **refactor: remove transform from package schema**
+- 2026-02-09 12:11 b687143 **refactor: simplify month**
+- 2026-02-09 12:09 0ef83af **refactor: remove to timstamp from mocks**
+- 2026-02-09 12:06 8cbf09e **refactor: remove rounding from money**
+- 2026-02-09 11:58 cb2e555 **refactor: improve minute**
+- 2026-02-09 11:56 154f332 **fix: type issues**
+- 2026-02-09 11:55 0362a5a **refactor: improve minute**
+- 2026-02-09 11:53 2553b24 **refactor: remove transform from mime value**
+- 2026-02-09 11:51 04911e9 **refactor: improve mime**
+- 2026-02-09 11:48 0ac8472 **refactor: rename hour schema to hour value**
+- 2026-02-09 11:45 407f88a **refactor: remove hour formatter**
+- 2026-02-09 11:44 9963351 **refactor: cleanup height**
+- 2026-02-09 11:40 9b8a75c **refactor: improve duration**
+- 2026-02-09 11:32 be5b633 **fix: distance**
+- 2026-02-09 11:31 c2234c7 **refactor: improve day vo tests**
+- 2026-02-09 11:27 e8f7dcd **fix: day iso id tests**
+- 2026-02-08 17:39 5c4f896 **step: add date range duration**
+- 2026-02-08 17:36 215f706 **refactor: simplify date range get**
+- 2026-02-08 17:29 d49323a **fix: allow for age 0**
+- 2026-02-08 17:15 ede6829 **refactor: simplfy age vo**
+- 2026-02-08 17:12 600f6c4 **refactor: simplify weekday vo**
+- 2026-02-08 16:49 126492b **fix: weekday iso id**
 - 2026-02-08 12:24 8d9c28b **step: bump bgord/scripts**
 ## 2026-02-08 11:53 v1.3.14
 - 2026-02-08 11:53 e2c9c30 **1.3.14**
 - 2026-02-08 11:37 febf0e1 **step: update packages**
+- 2026-02-08 11:28 88a700b **docs: generate CHANGELOG**
 - 2026-02-08 10:53 59eecb9 **docs: generate CHANGELOG**
 - 2026-02-08 10:38 e3337a7 **docs: generate readme**
 - 2026-02-08 10:38 c779c01 **docs: generate CHANGELOG**
