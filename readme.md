@@ -55,8 +55,7 @@ src/
 ├── filename.vo.ts
 ├── height-milimiters.vo.ts
 ├── height.vo.ts
-├── hour-format.service.ts
-├── hour-schema.vo.ts
+├── hour-value.vo.ts
 ├── hour.vo.ts
 ├── iban-mask.service.ts
 ├── iban-schema.vo.ts
@@ -74,7 +73,7 @@ src/
 ├── mime.vo.ts
 ├── mimes.ts
 ├── min-max-scaler.service.ts
-├── minute-schema.vo.ts
+├── minute-value.vo.ts
 ├── minute.vo.ts
 ├── money-amount.vo.ts
 ├── money.vo.ts
