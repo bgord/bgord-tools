@@ -2,7 +2,6 @@ import type { DivisionFactorType } from "./division-factor.vo";
 import { MoneyAmount, type MoneyAmountType } from "./money-amount.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
-import { RoundingDownStrategy } from "./rounding-down.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.less.than.zero" };
@@ -10,17 +9,14 @@ export const MoneyError = { SubtractResultLessThanZero: "money.subtract.result.l
 export class Money {
   private static readonly ZERO = MoneyAmount.parse(0);
 
-  private constructor(
-    private readonly amount: MoneyAmountType,
-    private readonly rounding: RoundingStrategy = new RoundingToNearestStrategy(),
-  ) {}
+  private constructor(private readonly amount: MoneyAmountType) {}
 
-  static fromAmount(candidate: number, rounding?: RoundingStrategy): Money {
-    return new Money(MoneyAmount.parse(candidate), rounding);
+  static fromAmount(candidate: number): Money {
+    return new Money(MoneyAmount.parse(candidate));
   }
 
-  static fromAmountSafe(candidate: MoneyAmountType, rounding?: RoundingStrategy): Money {
-    return new Money(candidate, rounding);
+  static fromAmountSafe(candidate: MoneyAmountType): Money {
+    return new Money(candidate);
   }
 
   static zero(): Money {
@@ -32,22 +28,25 @@ export class Money {
   }
 
   add(money: Money): Money {
-    return new Money(MoneyAmount.parse(this.amount + money.getAmount()), this.rounding);
+    return new Money(MoneyAmount.parse(this.amount + money.getAmount()));
   }
 
-  multiply(factor: MultiplicationFactorType): Money {
-    return new Money(MoneyAmount.parse(this.rounding.round(this.amount * factor)), this.rounding);
+  multiply(
+    factor: MultiplicationFactorType,
+    rounding: RoundingStrategy = new RoundingToNearestStrategy(),
+  ): Money {
+    return new Money(MoneyAmount.parse(rounding.round(this.amount * factor)));
   }
 
   subtract(money: Money): Money {
     const result = this.amount - money.getAmount();
 
     if (result < Money.ZERO) throw new Error(MoneyError.SubtractResultLessThanZero);
-    return new Money(MoneyAmount.parse(this.rounding.round(result)), this.rounding);
+    return new Money(MoneyAmount.parse(result));
   }
 
-  divide(factor: DivisionFactorType): Money {
-    return new Money(MoneyAmount.parse(this.rounding.round(this.amount / factor)), this.rounding);
+  divide(factor: DivisionFactorType, rounding: RoundingStrategy = new RoundingToNearestStrategy()): Money {
+    return new Money(MoneyAmount.parse(rounding.round(this.amount / factor)));
   }
 
   equals(another: Money): boolean {
@@ -66,15 +65,8 @@ export class Money {
     return this.amount === Money.ZERO;
   }
 
-  format(): string {
-    const whole = new RoundingDownStrategy().round(this.amount / 100);
-    const fraction = this.amount % 100;
-
-    return `${whole}.${fraction.toString().padStart(2, "0")}`;
-  }
-
   toString(): string {
-    return this.format();
+    return this.amount.toString();
   }
 
   toJSON(): number {
