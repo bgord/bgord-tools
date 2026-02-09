@@ -1,6 +1,6 @@
 import * as z from "zod/v4";
 
-export const MinuteSchemaError = { Type: "minute.schema.error", Invalid: "minute.schema.invalid" };
+export const MinuteSchemaError = { Type: "minute.schema.type", Invalid: "minute.schema.invalid" };
 
 // Stryker disable all
 export const MinuteSchema = z

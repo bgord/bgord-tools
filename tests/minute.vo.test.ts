@@ -12,7 +12,7 @@ describe("Minute", () => {
   });
 
   test("throws for invalid minute values", () => {
-    expect(() => Minute.fromValue(12.5)).toThrow("minute.schema.error");
+    expect(() => Minute.fromValue(12.5)).toThrow("minute.schema.type");
     expect(() => Minute.fromValue(-1)).toThrow("minute.schema.invalid");
     expect(() => Minute.fromValue(60)).toThrow("minute.schema.invalid");
   });
@@ -21,7 +21,7 @@ describe("Minute", () => {
     expect(Minute.fromValueSafe(MinuteSchema.parse(13)).get()).toEqual(MinuteSchema.parse(13));
   });
 
-  test("fromTimestamp extracts UTC minutes", () => {
+  test("fromTimestamp", () => {
     expect(Minute.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(MinuteSchema.parse(13));
   });
 
@@ -58,7 +58,7 @@ describe("Minute", () => {
     expect(FIVE.isAfter(FIVE)).toEqual(false);
   });
 
-  test("Minute.list()", () => {
+  test("list", () => {
     const list = Minute.list();
 
     expect(list.length).toEqual(60);

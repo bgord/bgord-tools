@@ -8,15 +8,15 @@ describe("MinuteSchema", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => MinuteSchema.parse(null)).toThrow("minute.schema.error");
+    expect(() => MinuteSchema.parse(null)).toThrow("minute.schema.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => MinuteSchema.parse("123")).toThrow("minute.schema.error");
+    expect(() => MinuteSchema.parse("123")).toThrow("minute.schema.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => MinuteSchema.parse(1.5)).toThrow("minute.schema.error");
+    expect(() => MinuteSchema.parse(1.5)).toThrow("minute.schema.type");
   });
 
   test("rejects negative numbers", () => {
