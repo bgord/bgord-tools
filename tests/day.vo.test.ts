@@ -46,7 +46,7 @@ describe("Day", () => {
   });
 
   test("leap-day", () => {
-    const timestamp = mocks.toTimestamp("2024-02-29");
+    const timestamp = Timestamp.fromDateLike("2024-02-29");
     const day = Day.fromTimestamp(timestamp);
 
     expect(day.toIsoId()).toEqual(DayIsoId.parse("2024-02-29"));

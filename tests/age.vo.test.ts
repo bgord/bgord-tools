@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Age } from "../src/age.vo";
 import { AgeYears } from "../src/age-years.vo";
+import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 describe("Age", () => {
@@ -16,25 +17,34 @@ describe("Age", () => {
 
   test("fromBirthdateTimestamp - birthday has already happened", () => {
     expect(
-      Age.fromBirthdateTimestamp({ birthdate: mocks.toTimestamp("2000-11-13"), now: mocks.TIME_ZERO }).get(),
+      Age.fromBirthdateTimestamp({
+        birthdate: Timestamp.fromDateLike("2000-11-13"),
+        now: mocks.TIME_ZERO,
+      }).get(),
     ).toEqual(AgeYears.parse(23));
   });
 
   test("fromBirthdateTimestamp - birthday has NOT yet happened", () => {
     expect(
-      Age.fromBirthdateTimestamp({ birthdate: mocks.toTimestamp("2000-11-15"), now: mocks.TIME_ZERO }).get(),
+      Age.fromBirthdateTimestamp({
+        birthdate: Timestamp.fromDateLike("2000-11-15"),
+        now: mocks.TIME_ZERO,
+      }).get(),
     ).toEqual(AgeYears.parse(22));
   });
 
   test("fromBirthdateTimestamp - exactly on birthday", () => {
     expect(
-      Age.fromBirthdateTimestamp({ birthdate: mocks.toTimestamp("2000-11-14"), now: mocks.TIME_ZERO }).get(),
+      Age.fromBirthdateTimestamp({
+        birthdate: Timestamp.fromDateLike("2000-11-14"),
+        now: mocks.TIME_ZERO,
+      }).get(),
     ).toEqual(AgeYears.parse(23));
   });
 
   test("fromBirthdateTimestamp - rejects future birthdates", () => {
     expect(() =>
-      Age.fromBirthdateTimestamp({ birthdate: mocks.toTimestamp("2125-10-01"), now: mocks.TIME_ZERO }),
+      Age.fromBirthdateTimestamp({ birthdate: Timestamp.fromDateLike("2125-10-01"), now: mocks.TIME_ZERO }),
     ).toThrowError("age.future.birthdate");
   });
 

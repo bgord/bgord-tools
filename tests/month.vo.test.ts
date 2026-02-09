@@ -18,7 +18,7 @@ describe("Month", () => {
   });
 
   test("happy path - near year boundary", () => {
-    const timestamp = mocks.toTimestamp("2025-12-31");
+    const timestamp = Timestamp.fromDateLike("2025-12-31");
     const month = Month.fromTimestamp(timestamp);
 
     expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(timestamp.ms).getTime()));
