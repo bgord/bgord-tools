@@ -1,4 +1,5 @@
 # Changelog
+- 2026-02-09 12:38 2cca7fc **refactor: improve tests**
 - 2026-02-09 12:32 40ea978 **refactor: improve year**
 - 2026-02-09 12:30 14014bd **refactor: improve week**
 - 2026-02-09 12:21 e15812a **refactor: improve quarter**
@@ -15,6 +16,8 @@
 - 2026-02-09 11:45 407f88a **refactor: remove hour formatter**
 - 2026-02-09 11:44 9963351 **refactor: cleanup height**
 - 2026-02-09 11:40 9b8a75c **refactor: improve duration**
+- 2026-02-09 11:34 cfec539 **docs: generate CHANGELOG**
+- 2026-02-09 11:34 573996f **docs: generate readme**
 - 2026-02-09 11:32 be5b633 **fix: distance**
 - 2026-02-09 11:31 c2234c7 **refactor: improve day vo tests**
 - 2026-02-09 11:27 e8f7dcd **fix: day iso id tests**
