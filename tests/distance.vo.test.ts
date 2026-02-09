@@ -84,28 +84,6 @@ describe("Distance", () => {
 
   test("isZero", () => {
     expect(Distance.fromMeters(0).isZero()).toEqual(true);
-  });
-
-  test("format", () => {
-    const cases = [
-      [9999, "9999"],
-      [90, "90"],
-      [99, "99"],
-      [10209, "10209"],
-      [0, "0"],
-      [1, "1"],
-      [100, "100"],
-      [1000, "1000"],
-      [123456789, "123456789"],
-    ] as const;
-
-    for (const [value, result] of cases) {
-      expect(Distance.fromMeters(value).format()).toEqual(result);
-    }
-  });
-
-  test("isZero", () => {
-    expect(Distance.fromMeters(0).isZero()).toEqual(true);
     expect(Distance.fromMeters(1).isZero()).toEqual(false);
   });
 

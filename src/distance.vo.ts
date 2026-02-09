@@ -39,8 +39,8 @@ export class Distance {
     return new Distance(DistanceValue.parse(this.value + distance.get()));
   }
 
-  subtract(money: Distance): Distance {
-    const result = this.value - money.get();
+  subtract(distance: Distance): Distance {
+    const result = this.value - distance.get();
 
     if (result < Distance.ZERO) throw new Error(DistanceError.SubtractResultLessThanZero);
     return new Distance(DistanceValue.parse(result));
@@ -62,12 +62,8 @@ export class Distance {
     return this.value === Distance.ZERO;
   }
 
-  format(): string {
-    return this.value.toString();
-  }
-
   toString(): string {
-    return this.format();
+    return this.value.toString();
   }
 
   toJSON(): number {
