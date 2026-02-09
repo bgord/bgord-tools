@@ -1,4 +1,4 @@
-import { addYears, endOfYear, getYear, startOfYear } from "date-fns";
+import { endOfYear, getYear, startOfYear } from "date-fns";
 import { DateRange } from "./date-range.vo";
 import { Integer, type IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
@@ -26,9 +26,12 @@ export class Year extends DateRange {
   }
 
   static fromIsoId(isoId: YearIsoIdType): Year {
-    const reference = Date.UTC(Number(isoId));
+    const year = Number(isoId);
 
-    return Year.fromTimestamp(Timestamp.fromNumber(reference));
+    return new Year(
+      Timestamp.fromNumber(Date.UTC(year, 0, 1)),
+      Timestamp.fromNumber(Date.UTC(year + 1, 0, 1) - 1),
+    );
   }
 
   toIsoId(): YearIsoIdType {
@@ -52,9 +55,9 @@ export class Year extends DateRange {
   }
 
   shift(count: IntegerType): Year {
-    const shifted = addYears(this.getStart().ms, count).getTime();
+    const year = getYear(this.getStart().ms) + count;
 
-    return Year.fromTimestamp(Timestamp.fromNumber(shifted));
+    return Year.fromIsoId(YearIsoId.parse(String(year)));
   }
 
   toString(): string {
