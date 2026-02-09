@@ -1,5 +1,6 @@
-import { addWeeks, endOfISOWeek, getISOWeek, getISOWeekYear, setISOWeek, startOfISOWeek } from "date-fns";
+import { addWeeks, endOfISOWeek, getISOWeek, getISOWeekYear, startOfISOWeek } from "date-fns";
 import { DateRange } from "./date-range.vo";
+import { Duration } from "./duration.service";
 import { Integer, type IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
@@ -25,9 +26,10 @@ export class Week extends DateRange {
     const [year, week] = WeekIsoId.parse(isoId).split("-W").map(Number);
 
     // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
-    const reference = setISOWeek(Date.UTC(year, 0, 4), week).getTime();
+    const januaryFourth = Timestamp.fromNumber(Date.UTC(year, 0, 4));
+    const firstWeekStart = Timestamp.fromNumber(startOfISOWeek(januaryFourth.ms).getTime());
 
-    return Week.fromTimestamp(Timestamp.fromNumber(reference));
+    return Week.fromTimestamp(firstWeekStart.add(Duration.Weeks(week - 1)));
   }
 
   toIsoId(): WeekIsoIdType {
