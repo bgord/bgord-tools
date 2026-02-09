@@ -1,4 +1,3 @@
-import { type HourFormatter, HourFormatters } from "./hour-format.service";
 import { HourSchema, type HourSchemaType } from "./hour-schema.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
@@ -34,10 +33,6 @@ export class Hour {
     return this.value;
   }
 
-  format(formatter: HourFormatter): string {
-    return formatter(this.value);
-  }
-
   equals(another: Hour): boolean {
     return this.value === another.value;
   }
@@ -55,7 +50,7 @@ export class Hour {
   }
 
   toString(): string {
-    return HourFormatters.TWENTY_FOUR_HOURS(this.value);
+    return this.value.toString();
   }
 
   toJSON(): number {

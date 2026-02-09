@@ -41,11 +41,6 @@ describe("Hour", () => {
     expect(FIVE.get()).toEqual(HourSchema.parse(5));
   });
 
-  test("format", () => {
-    expect(FIVE.toString()).toEqual("05");
-    expect(THIRTEEN.toString()).toEqual("13");
-  });
-
   test("equals", () => {
     expect(FIVE.equals(FIVE)).toEqual(true);
     expect(FIVE.equals(THIRTEEN)).toEqual(false);
@@ -63,7 +58,7 @@ describe("Hour", () => {
     expect(THIRTEEN.isBefore(THIRTEEN)).toEqual(false);
   });
 
-  test("Hour.list() returns cached 24 items", () => {
+  test("list", () => {
     const hours = Hour.list();
 
     expect(hours.length).toEqual(24);
@@ -73,7 +68,7 @@ describe("Hour", () => {
   });
 
   test("toString", () => {
-    expect(FIVE.toString()).toEqual("05");
+    expect(FIVE.toString()).toEqual("5");
     expect(THIRTEEN.toString()).toEqual("13");
   });
 
