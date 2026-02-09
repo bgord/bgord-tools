@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { Timestamp } from "../src/timestamp.vo";
 import { Weekday } from "../src/weekday.vo";
 import { WeekdayIsoId } from "../src/weekday-iso-id.vo";
 import * as mocks from "./mocks";
@@ -33,6 +34,13 @@ describe("Weekday", () => {
     expect(weekday.isTuesday()).toEqual(true);
   });
 
+  test("fromTimestamp - sunday", () => {
+    const timestamp = Timestamp.fromDateLike("2026-02-08T12:00:00.000Z");
+    const weekday = Weekday.fromTimestamp(timestamp);
+
+    expect(weekday.isSunday()).toEqual(true);
+  });
+
   test("fromTimestampValue", () => {
     const weekday = Weekday.fromTimestampValue(mocks.TIME_ZERO.ms);
 
@@ -48,5 +56,13 @@ describe("Weekday", () => {
   test("equals", () => {
     expect(Weekday.MONDAY.equals(Weekday.MONDAY)).toEqual(true);
     expect(Weekday.MONDAY.equals(Weekday.WEDNESDAY)).toEqual(false);
+  });
+
+  test("toString", () => {
+    expect(Weekday.MONDAY.toString()).toEqual("1");
+  });
+
+  test("toJSON", () => {
+    expect(Weekday.MONDAY.toJSON()).toEqual(1);
   });
 });
