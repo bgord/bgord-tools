@@ -139,7 +139,7 @@ describe("Duration", () => {
     expect(a.isShorterThan(a)).toEqual(false);
   });
 
-  test("toAbolute", () => {
+  test("toAbsolute", () => {
     expect(Duration.Ms(1000).toAbsolute()).toEqual(Duration.Ms(1000));
     expect(Duration.Ms(-1000).toAbsolute()).toEqual(Duration.Ms(1000));
   });

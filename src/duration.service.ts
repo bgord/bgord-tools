@@ -81,11 +81,8 @@ export class Duration {
   subtract(another: Duration): Duration {
     return Duration.Ms(this.internal - another.internal);
   }
-
   times(factor: MultiplicationFactorType): Duration {
-    const rounding = new RoundingToNearestStrategy();
-
-    return Duration.Ms(rounding.round(this.internal * factor));
+    return Duration.Ms(new RoundingToNearestStrategy().round(this.internal * factor));
   }
 
   toAbsolute(): Duration {
