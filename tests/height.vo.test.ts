@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Height } from "../src/height.vo";
 import { HeightMillimeters } from "../src/height-milimiters.vo";
-import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { RoundingDownStrategy } from "../src/rounding-down.strategy";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 
@@ -34,21 +33,8 @@ describe("Height", () => {
     const height = Height.fromCentimeters(180);
 
     expect(height.toCentimeters()).toEqual(180);
-    expect(height.toCentimeters(new RoundingDecimalStrategy(1))).toEqual(180);
-    expect(Height.fromMillimeters(1804).toCentimeters(new RoundingDecimalStrategy(1))).toEqual(180.4);
-  });
-
-  test("toCentimeters - custom rounding", () => {
-    expect(Height.fromMillimeters(1804).toCentimeters(new RoundingDownStrategy())).toEqual(180);
-  });
-
-  test("format", () => {
-    expect(Height.fromMillimeters(1804).format()).toEqual("180.4 cm");
-    expect(Height.fromCentimeters(180).format()).toEqual("180 cm");
-  });
-
-  test("format - custom rounding", () => {
-    expect(Height.fromMillimeters(1809).format(new RoundingDownStrategy())).toEqual("180 cm");
+    expect(height.toCentimeters()).toEqual(180);
+    expect(Height.fromMillimeters(1804).toCentimeters()).toEqual(180.4);
   });
 
   test("equals", () => {
@@ -85,7 +71,7 @@ describe("Height", () => {
   });
 
   test("toString", () => {
-    expect(Height.fromMillimeters(1804).toString()).toEqual("180.4 cm");
+    expect(Height.fromMillimeters(1804).toString()).toEqual("1804");
   });
 
   test("toJSON", () => {
