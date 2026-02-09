@@ -1,7 +1,11 @@
-import { PackageVersionSchema, type PackageVersionSchemaType } from "./package-version-schema.vo";
+import {
+  PACKAGE_VERSIONS_CHARS_WHITELIST,
+  PackageVersionSchema,
+  type PackageVersionSchemaType,
+} from "./package-version-schema.vo";
 
 export class PackageVersion {
-  constructor(
+  private constructor(
     private readonly major: number,
     private readonly minor: number,
     private readonly patch: number,
@@ -10,17 +14,19 @@ export class PackageVersion {
   static fromVersionString(candidate: string): PackageVersion {
     const version = PackageVersionSchema.parse(candidate);
 
-    return new PackageVersion(version.major, version.minor, version.patch);
+    return PackageVersion.fromVersionStringSafe(version);
   }
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
-    return new PackageVersion(candidate.major, candidate.minor, candidate.patch);
+    const [, major, minor, patch] = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(candidate)!.map(Number);
+
+    return new PackageVersion(major, minor, patch);
   }
 
   static fromString(candidate: string): PackageVersion {
     const version = PackageVersionSchema.parse(`v${candidate}`);
 
-    return new PackageVersion(version.major, version.minor, version.patch);
+    return PackageVersion.fromVersionStringSafe(version);
   }
 
   private compareTo(another: PackageVersion): -1 | 0 | 1 {
