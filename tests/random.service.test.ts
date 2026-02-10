@@ -29,16 +29,14 @@ describe("Random", () => {
   });
 
   test("calculation integrity", () => {
+    using randomSpy = spyOn(Math, "random").mockReturnValue(0.9999999);
     const min = 100;
     const max = 110;
-    const randomSpy = spyOn(Math, "random").mockReturnValue(0.9999999);
 
     expect(Random.generate({ min, max })).toEqual(max);
 
     randomSpy.mockReturnValue(0);
 
     expect(Random.generate({ min, max })).toEqual(min);
-
-    randomSpy.mockRestore();
   });
 });

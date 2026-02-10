@@ -25,7 +25,7 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
   });
 
   test("correct random bounds", () => {
-    const randomSpy = spyOn(Random, "generate").mockReturnValue(0);
+    using randomSpy = spyOn(Random, "generate").mockReturnValue(0);
 
     VisuallyUnambiguousCharactersGenerator.generate();
 
@@ -33,7 +33,5 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
       min: 0,
       max: VisuallyUnambiguousCharactersGenerator.chars.length - 1,
     });
-
-    randomSpy.mockRestore();
   });
 });
