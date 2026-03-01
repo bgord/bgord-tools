@@ -1,7 +1,9 @@
 # Changelog
+- 2026-03-01 09:08 2309780 **step: update packages**
 ## 2026-02-24 11:08 v1.3.18
 - 2026-02-24 11:08 d9a0a52 **1.3.18**
 - 2026-02-24 11:06 cf5bb19 **step: update packages**
+- 2026-02-24 10:08 ce4b178 **docs: generate CHANGELOG**
 - 2026-02-24 10:07 636d70c **docs: generate CHANGELOG**
 ## 2026-02-20 16:14 v1.3.17
 - 2026-02-20 16:14 2693784 **1.3.17**
