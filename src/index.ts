@@ -2,6 +2,7 @@ export * from "./age.vo";
 export * from "./age-years.vo";
 export * from "./api-key.vo";
 export * from "./basename.vo";
+export * from "./batch";
 export * from "./date-calculator.service";
 export * from "./date-formatter.service";
 export * from "./date-range.vo";
