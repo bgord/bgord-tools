@@ -28,6 +28,7 @@ src/
 ├── age.vo.ts
 ├── api-key.vo.ts
 ├── basename.vo.ts
+├── batch.ts
 ├── date-calculator.service.ts
 ├── date-formatter.service.ts
 ├── date-range.vo.ts
