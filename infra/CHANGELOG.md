@@ -1,8 +1,10 @@
 # Changelog
+- 2026-03-03 19:49 ead9064 **step: update packages**
 ## 2026-03-02 11:20 v1.3.20
 - 2026-03-02 11:20 267a687 **1.3.20**
 - 2026-03-02 11:18 dd80f8c **step: update packages**
 - 2026-03-02 11:17 76f9ae8 **step: add batch**
+- 2026-03-02 10:20 42817ce **docs: generate CHANGELOG**
 - 2026-03-02 10:18 a18f777 **docs: generate readme**
 - 2026-03-02 10:18 04e0772 **docs: generate CHANGELOG**
 ## 2026-03-01 09:09 v1.3.19
