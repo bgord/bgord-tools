@@ -1,5 +1,7 @@
 # Changelog
+- 2026-03-05 14:33 763c73e **step: add repeat util**
 - 2026-03-03 19:49 ead9064 **step: update packages**
+- 2026-03-03 18:51 75b184e **docs: generate CHANGELOG**
 ## 2026-03-02 11:20 v1.3.20
 - 2026-03-02 11:20 267a687 **1.3.20**
 - 2026-03-02 11:18 dd80f8c **step: update packages**
