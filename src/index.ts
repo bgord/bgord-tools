@@ -74,6 +74,7 @@ export * from "./rate-limiter.service";
 export * from "./relative-date.vo";
 export * from "./reordering.service";
 export * from "./reordering-item-position-value.vo";
+export * from "./repeat";
 export * from "./revision.vo";
 export * from "./revision-value.vo";
 export * from "./rounding.strategy";
