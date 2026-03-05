@@ -1,8 +1,11 @@
 # Changelog
+## 2026-03-05 14:41 v1.3.22
+- 2026-03-05 14:41 acc13c4 **1.3.22**
 - 2026-03-05 14:40 5255b66 **refactor: simplify repeat**
 ## 2026-03-05 14:35 v1.3.21
 - 2026-03-05 14:35 500fe40 **1.3.21**
 - 2026-03-05 14:33 763c73e **step: add repeat util**
+- 2026-03-05 13:41 2aa116a **docs: generate CHANGELOG**
 - 2026-03-05 13:35 5552701 **docs: generate CHANGELOG**
 - 2026-03-05 13:34 7f3c65f **docs: generate readme**
 - 2026-03-05 13:34 13e32d1 **docs: generate CHANGELOG**
