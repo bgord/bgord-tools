@@ -8,11 +8,6 @@ describe("Language", () => {
     expect(Language.safeParse("pl").success).toEqual(true);
   });
 
-  test("converts upper to lowercase", () => {
-    expect(Language.safeParse("EN").success).toEqual(true);
-    expect(Language.safeParse("FR").success).toEqual(true);
-  });
-
   test("rejects empty", () => {
     expect(() => Language.parse("")).toThrow("language.bad.chars");
   });
@@ -23,6 +18,12 @@ describe("Language", () => {
 
   test("rejects non-string - number", () => {
     expect(() => Language.parse(123)).toThrow("language.type");
+  });
+
+  test("rejects non-lowercase", () => {
+    expect(() => Language.parse("EN")).toThrow("language.case");
+    expect(() => Language.parse("ES")).toThrow("language.case");
+    expect(() => Language.parse("PL")).toThrow("language.case");
   });
 
   test("rejects strings < 1 and > 2", () => {
