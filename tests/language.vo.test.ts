@@ -21,9 +21,9 @@ describe("Language", () => {
   });
 
   test("rejects non-lowercase", () => {
-    expect(() => Language.parse("EN")).toThrow("language.case");
-    expect(() => Language.parse("ES")).toThrow("language.case");
-    expect(() => Language.parse("PL")).toThrow("language.case");
+    expect(() => Language.parse("EN")).toThrow("language.bad.chars");
+    expect(() => Language.parse("ES")).toThrow("language.bad.chars");
+    expect(() => Language.parse("PL")).toThrow("language.bad.chars");
   });
 
   test("rejects strings < 1 and > 2", () => {
