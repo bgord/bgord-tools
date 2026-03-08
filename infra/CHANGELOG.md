@@ -1,9 +1,11 @@
 # Changelog
+- 2026-03-08 09:05 a568245 **refactor: remove language vo brand**
 ## 2026-03-07 22:22 v1.3.23
 - 2026-03-07 22:22 297eb17 **1.3.23**
 - 2026-03-07 22:20 cde05d6 **step: update packages**
 - 2026-03-07 22:19 d66e83d **step: make language vo branded**
 - 2026-03-07 22:18 1291afb **step: make language vo require lowercase**
+- 2026-03-07 21:23 5a6fbae **docs: generate CHANGELOG**
 - 2026-03-07 21:21 5acc773 **docs: generate CHANGELOG**
 ## 2026-03-05 14:41 v1.3.22
 - 2026-03-05 14:41 acc13c4 **1.3.22**
