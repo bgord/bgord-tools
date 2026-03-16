@@ -1,15 +1,16 @@
+import * as v from "valibot";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { WeekdayIsoId, type WeekdayIsoIdType } from "./weekday-iso-id.vo";
 
 export class Weekday {
-  static readonly MONDAY = Weekday.fromIsoId(WeekdayIsoId.parse(1));
-  static readonly TUESDAY = Weekday.fromIsoId(WeekdayIsoId.parse(2));
-  static readonly WEDNESDAY = Weekday.fromIsoId(WeekdayIsoId.parse(3));
-  static readonly THURSDAY = Weekday.fromIsoId(WeekdayIsoId.parse(4));
-  static readonly FRIDAY = Weekday.fromIsoId(WeekdayIsoId.parse(5));
-  static readonly SATURDAY = Weekday.fromIsoId(WeekdayIsoId.parse(6));
-  static readonly SUNDAY = Weekday.fromIsoId(WeekdayIsoId.parse(7));
+  static readonly MONDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 1));
+  static readonly TUESDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 2));
+  static readonly WEDNESDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 3));
+  static readonly THURSDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 4));
+  static readonly FRIDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 5));
+  static readonly SATURDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 6));
+  static readonly SUNDAY = Weekday.fromIsoId(v.parse(WeekdayIsoId, 7));
 
   private constructor(private readonly value: WeekdayIsoIdType) {}
 
@@ -17,7 +18,7 @@ export class Weekday {
     // UTC returns numbers from 0-6, starting from Sunday
     const utc = new Date(timestamp.ms).getUTCDay();
 
-    return new Weekday(WeekdayIsoId.parse(utc === 0 ? 7 : utc));
+    return new Weekday(v.parse(WeekdayIsoId, utc === 0 ? 7 : utc));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Weekday {

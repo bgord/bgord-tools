@@ -1,14 +1,13 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const WeekdayIsoIdError = { Type: "weekday.iso.id.type", Invalid: "weekday.iso.id.invalid" };
 
-// Stryker disable all
-export const WeekdayIsoId = z
-  // Stryker restore all
-  .number(WeekdayIsoIdError.Type)
-  .int(WeekdayIsoIdError.Type)
-  .min(1, WeekdayIsoIdError.Invalid)
-  .max(7, WeekdayIsoIdError.Invalid)
-  .brand("WeekdayIsoId");
+export const WeekdayIsoId = v.pipe(
+  v.number(WeekdayIsoIdError.Type),
+  v.integer(WeekdayIsoIdError.Type),
+  v.minValue(1, WeekdayIsoIdError.Invalid),
+  v.maxValue(7, WeekdayIsoIdError.Invalid),
+  v.brand("WeekdayIsoId"),
+);
 
-export type WeekdayIsoIdType = z.infer<typeof WeekdayIsoId>;
+export type WeekdayIsoIdType = v.InferOutput<typeof WeekdayIsoId>;
