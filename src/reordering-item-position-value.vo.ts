@@ -1,10 +1,11 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const ReorderingItemPositionValueError = { Invalid: "reordering.position.type" };
 
-export const ReorderingItemPositionValue = z
-  .number(ReorderingItemPositionValueError.Invalid)
-  .int(ReorderingItemPositionValueError.Invalid)
-  .min(0, ReorderingItemPositionValueError.Invalid);
+export const ReorderingItemPositionValue = v.pipe(
+  v.number(ReorderingItemPositionValueError.Invalid),
+  v.integer(ReorderingItemPositionValueError.Invalid),
+  v.minValue(0, ReorderingItemPositionValueError.Invalid),
+);
 
-export type ReorderingItemPositionValueType = z.infer<typeof ReorderingItemPositionValue>;
+export type ReorderingItemPositionValueType = v.InferOutput<typeof ReorderingItemPositionValue>;

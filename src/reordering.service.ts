@@ -1,4 +1,5 @@
 // Stryker disable all
+import * as v from "valibot";
 import * as z from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 import {
@@ -30,7 +31,7 @@ export class ReorderingPosition {
   readonly value: ReorderingItemPositionValueType;
 
   constructor(value: ReorderingItemPositionValueType) {
-    this.value = ReorderingItemPositionValue.parse(value);
+    this.value = v.parse(ReorderingItemPositionValue, value);
   }
 
   eq(another: ReorderingPosition): boolean {
@@ -91,7 +92,7 @@ export class ReorderingCalculator {
 
   add(id: ReorderingItem["id"]): ReorderingItem {
     const size = this.dll.getSize();
-    const position = new ReorderingPosition(ReorderingItemPositionValue.parse(size));
+    const position = new ReorderingPosition(v.parse(ReorderingItemPositionValue, size));
     const item = new ReorderingItem(id, position);
     const node = new Node(item);
     this.dll.append(node);
@@ -139,7 +140,7 @@ export class ReorderingCalculator {
     let index = 0;
     for (const node of this.dll) {
       const id = node.data.id;
-      const position = new ReorderingPosition(ReorderingItemPositionValue.parse(index));
+      const position = new ReorderingPosition(v.parse(ReorderingItemPositionValue, index));
       node.data = new ReorderingItem(id, position);
       index += 1;
     }
@@ -150,7 +151,7 @@ export class ReorderingIntegrator {
   static appendPosition(reordering: ReadonlyArray<ReorderingType>) {
     return function <T extends { id: ReorderingItemIdType }>(item: T): WithReorderingPositionValue<T> {
       const found = reordering.find((x) => x.id === item.id);
-      const positionValue = ReorderingItemPositionValue.parse(found?.position ?? 0);
+      const positionValue = v.parse(ReorderingItemPositionValue, found?.position ?? 0);
       return { ...item, position: positionValue };
     };
   }
