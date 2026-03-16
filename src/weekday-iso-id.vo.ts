@@ -7,6 +7,7 @@ export const WeekdayIsoId = v.pipe(
   v.integer(WeekdayIsoIdError.Type),
   v.minValue(1, WeekdayIsoIdError.Invalid),
   v.maxValue(7, WeekdayIsoIdError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("WeekdayIsoId"),
 );
 

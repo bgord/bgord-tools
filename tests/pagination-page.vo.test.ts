@@ -14,6 +14,10 @@ describe("PaginationPage", () => {
     expect(v.safeParse(Page, null)).toMatchObject({ success: true, output: 1 });
   });
 
+  test("transforms undefined to 1", () => {
+    expect(v.safeParse(Page, undefined)).toMatchObject({ success: true, output: 1 });
+  });
+
   test("transforms string to int", () => {
     expect(v.safeParse(Page, "123")).toMatchObject({ success: true, output: 123 });
   });

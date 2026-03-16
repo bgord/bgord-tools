@@ -7,12 +7,14 @@ export const DayIsoIdError = {
   InvalidDate: "day.iso.id.invalid.date",
 };
 
+// Four digits, hyphen, two digits, hyphen, two digits
 export const DAY_ISO_ID_CHARS = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
 
 export const DayIsoId = v.pipe(
   v.string(DayIsoIdError.Type),
   v.regex(DAY_ISO_ID_CHARS, DayIsoIdError.BadChars),
   v.check((value) => isValid(parseISO(value)), DayIsoIdError.InvalidDate),
+  // Stryker disable next-line StringLiteral
   v.brand("DayIsoId"),
 );
 

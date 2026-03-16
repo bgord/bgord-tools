@@ -17,11 +17,11 @@ describe("ApiKey", () => {
   });
 
   test("rejects empty", () => {
-    expect(() => v.parse(ApiKey, "")).toThrow("api.key.length");
+    expect(() => v.parse(ApiKey, "")).toThrow("api.key.bad.chars");
   });
 
   test("rejects too long", () => {
-    expect(() => v.parse(ApiKey, `${"a".repeat(64)}abc`)).toThrow("api.key.length");
+    expect(() => v.parse(ApiKey, `${"a".repeat(64)}abc`)).toThrow("api.key.bad.chars");
   });
 
   test("rejects bad chars", () => {

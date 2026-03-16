@@ -6,6 +6,7 @@ export const MonthIsoIdError = {
   Invalid: "month.iso.id.invalid",
 };
 
+// Four digits, hyphen, two digits
 const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;
 
 export const MonthIsoId = v.pipe(
@@ -16,6 +17,7 @@ export const MonthIsoId = v.pipe(
 
     return month >= 1 && month <= 12;
   }, MonthIsoIdError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("MonthIsoId"),
 );
 

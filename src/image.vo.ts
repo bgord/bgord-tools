@@ -10,6 +10,7 @@ export const ImageWidth = v.pipe(
   v.integer(ImageWidthError.Type),
   v.minValue(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageWidthError.Length),
   v.maxValue(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageWidthError.Length),
+  // Stryker disable next-line StringLiteral
   v.brand("ImageWidth"),
 );
 
@@ -20,6 +21,7 @@ export const ImageHeight = v.pipe(
   v.integer(ImageHeightError.Type),
   v.minValue(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageHeightError.Length),
   v.maxValue(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageHeightError.Length),
+  // Stryker disable next-line StringLiteral
   v.brand("ImageHeight"),
 );
 

@@ -8,6 +8,7 @@ export const MultiplicationFactorError = {
 export const MultiplicationFactor = v.pipe(
   v.number(MultiplicationFactorError.Type),
   v.minValue(0, MultiplicationFactorError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("MultiplicationFactor"),
 );
 

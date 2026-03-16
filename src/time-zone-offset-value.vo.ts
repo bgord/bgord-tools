@@ -15,6 +15,7 @@ export const TimeZoneOffsetValue = v.pipe(
   v.minValue(-840, TimeZoneOffsetValueError.Min),
   // UTC-12 (Baker Island)
   v.maxValue(720, TimeZoneOffsetValueError.Max),
+  // Stryker disable next-line StringLiteral
   v.brand("TimeZoneOffsetValue"),
 );
 

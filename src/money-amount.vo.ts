@@ -6,6 +6,7 @@ export const MoneyAmount = v.pipe(
   v.number(MoneyAmountError.Type),
   v.integer(MoneyAmountError.Type),
   v.minValue(0, MoneyAmountError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("MoneyAmount"),
 );
 

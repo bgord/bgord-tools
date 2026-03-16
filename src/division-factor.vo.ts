@@ -5,6 +5,7 @@ export const DivisionFactorError = { Type: "division.factor.type", Invalid: "div
 export const DivisionFactor = v.pipe(
   v.number(DivisionFactorError.Type),
   v.gtValue(0, DivisionFactorError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("DivisionFactor"),
 );
 

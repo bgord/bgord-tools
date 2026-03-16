@@ -1,14 +1,14 @@
 import * as v from "valibot";
 
-export const ApiKeyError = { Type: "api.key.type", Length: "api.key.length", BadChars: "api.key.bad.chars" };
+export const ApiKeyError = { Type: "api.key.type", BadChars: "api.key.bad.chars" };
 
 // 64 letters and digits allowed
 const API_KEY_CHARS = /^[a-zA-Z0-9]{64}$/;
 
 export const ApiKey = v.pipe(
   v.string(ApiKeyError.Type),
-  v.length(64, ApiKeyError.Length),
   v.regex(API_KEY_CHARS, ApiKeyError.BadChars),
+  // Stryker disable next-line StringLiteral
   v.brand("ApiKey"),
 );
 

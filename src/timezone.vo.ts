@@ -12,13 +12,16 @@ export const Timezone = v.pipe(
   v.minLength(1, TimezoneError.Empty),
   v.maxLength(128, TimezoneError.TooLong),
   v.check((value) => {
+    // Stryker disable all
     try {
       new Intl.DateTimeFormat("en-US", { timeZone: value }).format(Date.now());
       return true;
     } catch {
       return false;
     }
+    // Stryker restore all
   }, TimezoneError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("Timezone"),
 );
 

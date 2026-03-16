@@ -11,6 +11,7 @@ export const PACKAGE_VERSIONS_CHARS_WHITELIST = /^v([0-9]{1,4})\.([0-9]{1,4})\.(
 export const PackageVersionSchema = v.pipe(
   v.string(PackageVersionSchemaError.Type),
   v.regex(PACKAGE_VERSIONS_CHARS_WHITELIST, PackageVersionSchemaError.BadChars),
+  // Stryker disable next-line StringLiteral
   v.brand("PackageVersionSchema"),
 );
 

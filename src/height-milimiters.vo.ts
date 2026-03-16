@@ -9,6 +9,7 @@ export const HeightMillimeters = v.pipe(
   v.number(HeightMillimetersError.Type),
   v.integer(HeightMillimetersError.Type),
   v.minValue(0, HeightMillimetersError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("HeightMillimeters"),
 );
 

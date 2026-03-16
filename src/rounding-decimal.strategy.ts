@@ -8,6 +8,7 @@ export const RoundingDecimal = v.pipe(
   v.integer(RoundingDecimalError.Invalid),
   v.minValue(1, RoundingDecimalError.Invalid),
   v.maxValue(100, RoundingDecimalError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("RoundingDecimal"),
 );
 

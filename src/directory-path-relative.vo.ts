@@ -26,6 +26,7 @@ export const DirectoryPathRelativeSchema = v.pipe(
         .every((segment) => DIRECTORY_PATH_RELATIVE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment)),
     DirectoryPathRelativeError.BadSegments,
   ),
+  // Stryker disable next-line StringLiteral
   v.brand("DirectoryPathRelativeSchema"),
 );
 

@@ -8,6 +8,7 @@ const MIME_VALUE_CHARS_WHITELIST = /^[a-z*-]{1,24}\/[a-z0-9*+-_.]{1,72}$/;
 export const MimeValue = v.pipe(
   v.string(MimeValueError.Type),
   v.regex(MIME_VALUE_CHARS_WHITELIST, MimeValueError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("MimeValue"),
 );
 

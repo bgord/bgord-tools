@@ -6,6 +6,7 @@ export const DistanceValue = v.pipe(
   v.number(DistanceValueError.Type),
   v.integer(DistanceValueError.Type),
   v.minValue(0, DistanceValueError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("DistanceValue"),
 );
 

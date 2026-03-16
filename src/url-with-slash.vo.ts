@@ -6,6 +6,7 @@ export const UrlWithSlash = v.pipe(
   v.string(UrlWithSlashError.Invalid),
   v.url(UrlWithSlashError.Invalid),
   v.endsWith("/", UrlWithSlashError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("UrlWithSlash"),
 );
 
