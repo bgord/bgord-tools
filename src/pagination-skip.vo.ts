@@ -1,10 +1,11 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const PaginationSkipError = { Type: "pagination.skip.type", Invalid: "pagination.skip.invalid" };
 
-export const Skip = z
-  .number(PaginationSkipError.Type)
-  .int(PaginationSkipError.Type)
-  .gte(0, PaginationSkipError.Invalid);
+export const Skip = v.pipe(
+  v.number(PaginationSkipError.Type),
+  v.integer(PaginationSkipError.Type),
+  v.minValue(0, PaginationSkipError.Invalid),
+);
 
-export type SkipType = z.infer<typeof Skip>;
+export type SkipType = v.InferOutput<typeof Skip>;

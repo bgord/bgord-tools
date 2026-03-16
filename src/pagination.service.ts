@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { Page, type PageType } from "./pagination-page.vo";
 import { Skip, type SkipType } from "./pagination-skip.vo";
 import { Take, type TakeType } from "./pagination-take.vo";
@@ -19,7 +20,7 @@ export class Pagination {
     const page = Page.parse(values.page);
     const take = Take.parse(_take);
 
-    const skip = Skip.parse((page - 1) * take);
+    const skip = v.parse(Skip, (page - 1) * take);
 
     return { values: { take, skip }, page };
   }
@@ -60,7 +61,7 @@ export class Pagination {
   };
 
   static getFirstPage(input: { take: TakeType }): PaginationType {
-    return { values: { take: Take.parse(input.take), skip: Skip.parse(0) }, page: Page.parse(1) };
+    return { values: { take: Take.parse(input.take), skip: v.parse(Skip, 0) }, page: Page.parse(1) };
   }
 }
 
