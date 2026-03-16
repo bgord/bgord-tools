@@ -1,15 +1,11 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
-export const QuarterIsoIdError = {
-  Type: "quarter.iso.id.type",
-  BadChars: "quarter.iso.id.bad.chars",
-};
+export const QuarterIsoIdError = { Type: "quarter.iso.id.type", BadChars: "quarter.iso.id.bad.chars" };
 
-// Stryker disable all
-export const QuarterIsoId = z
-  // Stryker restore all
-  .string(QuarterIsoIdError.Type)
-  .regex(/^\d{4}-Q[1-4]$/, QuarterIsoIdError.BadChars)
-  .brand("QuarterIsoId");
+export const QuarterIsoId = v.pipe(
+  v.string(QuarterIsoIdError.Type),
+  v.regex(/^\d{4}-Q[1-4]$/, QuarterIsoIdError.BadChars),
+  v.brand("QuarterIsoId"),
+);
 
-export type QuarterIsoIdType = z.infer<typeof QuarterIsoId>;
+export type QuarterIsoIdType = v.InferOutput<typeof QuarterIsoId>;

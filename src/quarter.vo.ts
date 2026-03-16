@@ -1,4 +1,5 @@
 import { endOfQuarter, getQuarter, getYear, startOfQuarter } from "date-fns";
+import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
 import { Timestamp } from "./timestamp.vo";
@@ -21,7 +22,7 @@ export class Quarter extends DateRange {
   }
 
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
-    const [year, quarter] = QuarterIsoId.parse(isoId).split("-Q").map(Number);
+    const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number);
 
     return Quarter.fromTimestamp(Timestamp.fromNumber(Date.UTC(year, (quarter - 1) * 3, 1)));
   }
@@ -30,7 +31,7 @@ export class Quarter extends DateRange {
     const year = getYear(this.getStart().ms);
     const quarter = getQuarter(this.getStart().ms);
 
-    return QuarterIsoId.parse(`${year}-Q${quarter}`);
+    return v.parse(QuarterIsoId, `${year}-Q${quarter}`);
   }
 
   toString(): string {

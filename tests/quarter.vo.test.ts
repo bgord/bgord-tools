@@ -1,10 +1,13 @@
 import { describe, expect, test } from "bun:test";
 import { endOfQuarter, startOfQuarter } from "date-fns";
+import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Quarter } from "../src/quarter.vo";
 import { QuarterIsoId } from "../src/quarter-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
+
+const q4 = v.parse(QuarterIsoId, "2023-Q4");
 
 describe("Quarter", () => {
   test("happy path", () => {
@@ -12,7 +15,7 @@ describe("Quarter", () => {
 
     expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(mocks.TIME_ZERO.ms).getTime()));
     expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(mocks.TIME_ZERO.ms).getTime()));
-    expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+    expect(quarter.toIsoId()).toEqual(q4);
     expect(quarter.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
@@ -22,30 +25,30 @@ describe("Quarter", () => {
 
     expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(timestamp.ms).getTime()));
     expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(timestamp.ms).getTime()));
-    expect(quarter.toIsoId()).toEqual(QuarterIsoId.parse("2025-Q4"));
+    expect(quarter.toIsoId()).toEqual(v.parse(QuarterIsoId, "2025-Q4"));
   });
 
   test("fromNow", () => {
-    expect(Quarter.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+    expect(Quarter.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(q4);
   });
 
   test("fromTimestamp", () => {
-    expect(Quarter.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+    expect(Quarter.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(q4);
   });
 
   test("fromTimestampValue", () => {
-    expect(Quarter.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+    expect(Quarter.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(q4);
   });
 
   test("fromIsoId", () => {
-    expect(Quarter.fromIsoId(QuarterIsoId.parse("2023-Q4")).toIsoId()).toEqual(QuarterIsoId.parse("2023-Q4"));
+    expect(Quarter.fromIsoId(q4).toIsoId()).toEqual(q4);
   });
 
   test("round-trips", () => {
     const ids = ["1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "2026-Q1"] as const;
 
     for (const id of ids) {
-      expect(Quarter.fromIsoId(QuarterIsoId.parse(id)).toIsoId()).toEqual(QuarterIsoId.parse(id));
+      expect(Quarter.fromIsoId(v.parse(QuarterIsoId, id)).toIsoId()).toEqual(v.parse(QuarterIsoId, id));
     }
   });
 
@@ -57,13 +60,10 @@ describe("Quarter", () => {
   });
 
   test("toString", () => {
-    expect(Quarter.fromIsoId(QuarterIsoId.parse("2023-Q4")).toString()).toEqual("2023-Q4");
+    expect(Quarter.fromIsoId(q4).toString()).toEqual("2023-Q4");
   });
 
   test("toJSON", () => {
-    expect(Quarter.fromIsoId(QuarterIsoId.parse("2023-Q4")).toJSON()).toEqual({
-      start: 1696118400000,
-      end: 1704067199999,
-    });
+    expect(Quarter.fromIsoId(q4).toJSON()).toEqual({ start: 1696118400000, end: 1704067199999 });
   });
 });
