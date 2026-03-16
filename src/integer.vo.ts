@@ -1,9 +1,7 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const IntegerError = { Type: "integer.type" };
 
-// Stryker disable all
-export const Integer = z.number(IntegerError.Type).int(IntegerError.Type).brand("Integer");
-// Stryker restore all
+export const Integer = v.pipe(v.number(IntegerError.Type), v.integer(IntegerError.Type), v.brand("Integer"));
 
-export type IntegerType = z.infer<typeof Integer>;
+export type IntegerType = v.InferOutput<typeof Integer>;

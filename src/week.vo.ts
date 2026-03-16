@@ -1,4 +1,5 @@
 import { addWeeks, endOfISOWeek, getISOWeek, getISOWeekYear, startOfISOWeek } from "date-fns";
+import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Duration } from "./duration.service";
 import { Integer, type IntegerType } from "./integer.vo";
@@ -40,11 +41,11 @@ export class Week extends DateRange {
   }
 
   previous(): Week {
-    return this.shift(Integer.parse(-1));
+    return this.shift(v.parse(Integer, -1));
   }
 
   next(): Week {
-    return this.shift(Integer.parse(1));
+    return this.shift(v.parse(Integer, 1));
   }
 
   shift(count: IntegerType): Week {

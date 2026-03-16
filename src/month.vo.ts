@@ -1,4 +1,5 @@
 import { endOfMonth, format, startOfMonth } from "date-fns";
+import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Integer, type IntegerType } from "./integer.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
@@ -34,11 +35,11 @@ export class Month extends DateRange {
   }
 
   previous(): Month {
-    return this.shift(Integer.parse(-1));
+    return this.shift(v.parse(Integer, -1));
   }
 
   next(): Month {
-    return this.shift(Integer.parse(1));
+    return this.shift(v.parse(Integer, 1));
   }
 
   shift(count: IntegerType): Month {

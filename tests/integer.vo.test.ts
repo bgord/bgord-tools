@@ -1,24 +1,25 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Integer } from "../src/integer.vo";
 
 describe("Integer VO", () => {
   test("happy path", () => {
-    expect(Integer.safeParse(-130).success).toEqual(true);
-    expect(Integer.safeParse(-1).success).toEqual(true);
-    expect(Integer.safeParse(0).success).toEqual(true);
-    expect(Integer.safeParse(1).success).toEqual(true);
-    expect(Integer.safeParse(130).success).toEqual(true);
+    expect(v.safeParse(Integer, -130).success).toEqual(true);
+    expect(v.safeParse(Integer, -1).success).toEqual(true);
+    expect(v.safeParse(Integer, 0).success).toEqual(true);
+    expect(v.safeParse(Integer, 1).success).toEqual(true);
+    expect(v.safeParse(Integer, 130).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
-    expect(() => Integer.parse(null)).toThrow("integer.type");
+    expect(() => v.parse(Integer, null)).toThrow("integer.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => Integer.parse("100")).toThrow("integer.type");
+    expect(() => v.parse(Integer, "100")).toThrow("integer.type");
   });
 
   test("rejects fraction", () => {
-    expect(() => Integer.parse(100.5)).toThrow("integer.type");
+    expect(() => v.parse(Integer, 100.5)).toThrow("integer.type");
   });
 });

@@ -42,12 +42,12 @@ export class Day extends DateRange {
     return v.parse(DayIsoId, formatISO(midday.ms, { representation: "date" }));
   }
 
-  next(): Day {
-    return this.shift(Integer.parse(1));
+  previous(): Day {
+    return this.shift(v.parse(Integer, -1));
   }
 
-  previous(): Day {
-    return this.shift(Integer.parse(-1));
+  next(): Day {
+    return this.shift(v.parse(Integer, 1));
   }
 
   shift(count: IntegerType): Day {

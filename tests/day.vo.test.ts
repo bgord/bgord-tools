@@ -69,10 +69,10 @@ describe("Day", () => {
   });
 
   test("shift", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
       v.parse(DayIsoId, "2023-11-16"),
     );
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
       v.parse(DayIsoId, "2023-11-12"),
     );
   });

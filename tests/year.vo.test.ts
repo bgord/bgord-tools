@@ -65,10 +65,10 @@ describe("Year", () => {
   });
 
   test("shift", () => {
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
       v.parse(YearIsoId, "2025"),
     );
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
       v.parse(YearIsoId, "2021"),
     );
   });

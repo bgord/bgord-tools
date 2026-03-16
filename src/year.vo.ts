@@ -48,11 +48,11 @@ export class Year extends DateRange {
   }
 
   previous(): Year {
-    return this.shift(Integer.parse(-1));
+    return this.shift(v.parse(Integer, -1));
   }
 
   next(): Year {
-    return this.shift(Integer.parse(1));
+    return this.shift(v.parse(Integer, 1));
   }
 
   shift(count: IntegerType): Year {
