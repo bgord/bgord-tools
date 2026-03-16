@@ -11,7 +11,7 @@ export class Filename {
   ) {}
 
   static fromParts(basename: string, extension: string): Filename {
-    return new Filename(v.parse(Basename, basename), Extension.parse(extension));
+    return new Filename(v.parse(Basename, basename), v.parse(Extension, extension));
   }
 
   static fromPartsSafe(basename: BasenameType, extension: ExtensionType): Filename {

@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const ExtensionError = {
   Type: "extension.type",
@@ -9,19 +9,17 @@ export const ExtensionError = {
 
 // Lowercase letters and digits allowed
 const EXTENSION_WHITELIST = /^[a-z0-9]+$/;
-
 const LEADING_DOT_FILE = /^\./;
 
-// Stryker disable all
-export const Extension = z
-  // Stryker restore all
-  .string(ExtensionError.Type)
-  .toLowerCase()
-  .min(2, ExtensionError.Empty)
-  .max(16, ExtensionError.TooLong)
+export const Extension = v.pipe(
+  v.string(ExtensionError.Type),
+  v.toLowerCase(),
   // Transform ".png" -> "png"
-  .transform((value) => value.replace(LEADING_DOT_FILE, ""))
-  .refine((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars)
-  .brand("Extension");
+  v.transform((value) => value.replace(LEADING_DOT_FILE, "")),
+  v.minLength(2, ExtensionError.Empty),
+  v.maxLength(16, ExtensionError.TooLong),
+  v.check((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars),
+  v.brand("Extension"),
+);
 
-export type ExtensionType = z.infer<typeof Extension>;
+export type ExtensionType = v.InferOutput<typeof Extension>;

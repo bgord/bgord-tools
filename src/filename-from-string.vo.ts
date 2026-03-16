@@ -20,7 +20,7 @@ export const FilenameFromString = z
     const index = value.lastIndexOf(".");
 
     const basename = v.parse(Basename, value.slice(0, index));
-    const extension = Extension.parse(value.slice(index + 1));
+    const extension = v.parse(Extension, value.slice(index + 1));
 
     return { basename, extension };
   });

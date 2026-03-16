@@ -8,7 +8,7 @@ describe("FilenameFromString", () => {
   test("happy path", () => {
     expect(FilenameFromString.parse("avatar.WEBP")).toEqual({
       basename: v.parse(Basename, "avatar"),
-      extension: Extension.parse("webp"),
+      extension: v.parse(Extension, "webp"),
     });
   });
 

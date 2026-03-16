@@ -1,17 +1,18 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Extension } from "../src/extension.vo";
 import { Mime } from "../src/mime.vo";
 import { MimeRegistry } from "../src/mime-registry.service";
 
 const jpegMime = Mime.fromString("image/jpeg");
-const jpgExtension = Extension.parse("jpg");
-const jpegExtension = Extension.parse("jpeg");
+const jpgExtension = v.parse(Extension, "jpg");
+const jpegExtension = v.parse(Extension, "jpeg");
 
 const pngMime = Mime.fromString("image/png");
-const pngExtension = Extension.parse("png");
+const pngExtension = v.parse(Extension, "png");
 
 const pdfMime = Mime.fromString("application/pdf");
-const csvExtension = Extension.parse("csv");
+const csvExtension = v.parse(Extension, "csv");
 
 const registry = new MimeRegistry([
   { mime: jpegMime, extensions: [jpgExtension, jpegExtension] },
