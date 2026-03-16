@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { MinuteValue, type MinuteValueType } from "./minute-value.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
@@ -6,7 +7,7 @@ export class Minute {
   private constructor(private readonly value: MinuteValueType) {}
 
   static fromValue(candidate: number): Minute {
-    return new Minute(MinuteValue.parse(candidate));
+    return new Minute(v.parse(MinuteValue, candidate));
   }
 
   static fromValueSafe(candidate: MinuteValueType) {
@@ -14,7 +15,7 @@ export class Minute {
   }
 
   static fromTimestamp(timestamp: Timestamp): Minute {
-    return new Minute(MinuteValue.parse(new Date(timestamp.ms).getUTCMinutes()));
+    return new Minute(v.parse(MinuteValue, new Date(timestamp.ms).getUTCMinutes()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Minute } from "../src/minute.vo";
 import { MinuteValue } from "../src/minute-value.vo";
 import * as mocks from "./mocks";
@@ -6,9 +7,11 @@ import * as mocks from "./mocks";
 const FIVE = Minute.fromValue(5);
 const TEN = Minute.fromValue(10);
 
+const thirteenth = v.parse(MinuteValue, 13);
+
 describe("Minute", () => {
   test("happy path", () => {
-    expect(FIVE.get()).toEqual(MinuteValue.parse(5));
+    expect(FIVE.get()).toEqual(v.parse(MinuteValue, 5));
   });
 
   test("throws for invalid minute values", () => {
@@ -18,27 +21,27 @@ describe("Minute", () => {
   });
 
   test("fromValueSafe", () => {
-    expect(Minute.fromValueSafe(MinuteValue.parse(13)).get()).toEqual(MinuteValue.parse(13));
+    expect(Minute.fromValueSafe(thirteenth).get()).toEqual(thirteenth);
   });
 
   test("fromTimestamp", () => {
-    expect(Minute.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(MinuteValue.parse(13));
+    expect(Minute.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(thirteenth);
   });
 
   test("fromTimestampValue", () => {
-    expect(Minute.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(MinuteValue.parse(13));
+    expect(Minute.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(thirteenth);
   });
 
   test("zero", () => {
-    expect(Minute.zero().get()).toEqual(MinuteValue.parse(0));
+    expect(Minute.zero().get()).toEqual(v.parse(MinuteValue, 0));
   });
 
   test("max", () => {
-    expect(Minute.max().get()).toEqual(MinuteValue.parse(59));
+    expect(Minute.max().get()).toEqual(v.parse(MinuteValue, 59));
   });
 
   test("get", () => {
-    expect(FIVE.get()).toEqual(MinuteValue.parse(5));
+    expect(FIVE.get()).toEqual(v.parse(MinuteValue, 5));
   });
 
   test("equals", () => {
@@ -62,8 +65,8 @@ describe("Minute", () => {
     const list = Minute.list();
 
     expect(list.length).toEqual(60);
-    expect(list[0].get()).toEqual(MinuteValue.parse(0));
-    expect(list[59].get()).toEqual(MinuteValue.parse(59));
+    expect(list[0].get()).toEqual(v.parse(MinuteValue, 0));
+    expect(list[59].get()).toEqual(v.parse(MinuteValue, 59));
   });
 
   test("toString", () => {
@@ -72,7 +75,7 @@ describe("Minute", () => {
   });
 
   test("toJSON", () => {
-    expect(FIVE.toJSON()).toEqual(MinuteValue.parse(5));
-    expect(TEN.toJSON()).toEqual(MinuteValue.parse(10));
+    expect(FIVE.toJSON()).toEqual(v.parse(MinuteValue, 5));
+    expect(TEN.toJSON()).toEqual(v.parse(MinuteValue, 10));
   });
 });
