@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const FeatureFlagValueError = { Invalid: "feature.flag.value.invalid" };
 
@@ -7,6 +7,6 @@ export enum FeatureFlagEnum {
   no = "no",
 }
 
-export const FeatureFlagValue = z.enum(FeatureFlagEnum, FeatureFlagValueError.Invalid);
+export const FeatureFlagValue = v.picklist(Object.values(FeatureFlagEnum), FeatureFlagValueError.Invalid);
 
-export type FeatureFlagValueType = z.infer<typeof FeatureFlagValue>;
+export type FeatureFlagValueType = v.InferOutput<typeof FeatureFlagValue>;
