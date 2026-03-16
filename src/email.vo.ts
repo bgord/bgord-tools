@@ -1,9 +1,7 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const EmailError = { Invalid: "email.invalid" };
 
-// Stryker disable all
-export const Email = z.email(EmailError.Invalid).brand("Email");
-// Stryker restore all
+export const Email = v.pipe(v.string(EmailError.Invalid), v.email(EmailError.Invalid), v.brand("Email"));
 
-export type EmailType = z.infer<typeof Email>;
+export type EmailType = v.InferOutput<typeof Email>;
