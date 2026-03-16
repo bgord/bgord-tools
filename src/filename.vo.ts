@@ -19,7 +19,7 @@ export class Filename {
   }
 
   static fromString(candidate: string): Filename {
-    const filename = FilenameFromString.parse(candidate);
+    const filename = v.parse(FilenameFromString, candidate);
 
     return new Filename(filename.basename, filename.extension);
   }

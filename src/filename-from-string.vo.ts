@@ -1,5 +1,4 @@
 import * as v from "valibot";
-import * as z from "zod/v4";
 import { Basename } from "./basename.vo";
 import { Extension } from "./extension.vo";
 
@@ -13,16 +12,17 @@ export const FilenameFromStringError = {
 // .+ at least one character
 const DOT_WITH_SIDES = /^.+\..+$/;
 
-export const FilenameFromString = z
-  .string(FilenameFromStringError.Type)
-  .regex(DOT_WITH_SIDES, FilenameFromStringError.Invalid)
-  .transform((value) => {
+export const FilenameFromString = v.pipe(
+  v.string(FilenameFromStringError.Type),
+  v.regex(DOT_WITH_SIDES, FilenameFromStringError.Invalid),
+  v.transform((value) => {
     const index = value.lastIndexOf(".");
 
     const basename = v.parse(Basename, value.slice(0, index));
     const extension = v.parse(Extension, value.slice(index + 1));
 
     return { basename, extension };
-  });
+  }),
+);
 
-export type FilenameFromStringType = z.infer<typeof FilenameFromString>;
+export type FilenameFromStringType = v.InferOutput<typeof FilenameFromString>;
