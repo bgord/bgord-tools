@@ -1,9 +1,11 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const DurationMsError = { Invalid: "duration.invalid" };
 
-// Stryker disable all
-export const DurationMs = z.number(DurationMsError.Invalid).int(DurationMsError.Invalid).brand("DurationMs");
-// Stryker restore all
+export const DurationMs = v.pipe(
+  v.number(DurationMsError.Invalid),
+  v.integer(DurationMsError.Invalid),
+  v.brand("DurationMs"),
+);
 
-export type DurationMsType = z.infer<typeof DurationMs>;
+export type DurationMsType = v.InferOutput<typeof DurationMs>;

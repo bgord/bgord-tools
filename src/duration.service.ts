@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { DurationMs, type DurationMsType } from "./duration-ms.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
@@ -18,7 +19,7 @@ export class Duration {
   private static readonly MS_IN_WEEK = 7 * Duration.MS_IN_DAY;
 
   constructor(candidateMs: number) {
-    this.internal = DurationMs.parse(candidateMs);
+    this.internal = v.parse(DurationMs, candidateMs);
   }
 
   static Weeks(value: number): Duration {

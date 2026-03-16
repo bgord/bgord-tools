@@ -12,7 +12,7 @@ describe("Duration", () => {
     expect(weeks.hours).toEqual(336);
     expect(weeks.minutes).toEqual(20160);
     expect(weeks.seconds).toEqual(1209600);
-    expect(weeks.ms).toEqual(DurationMs.parse(1_209_600_000));
+    expect(weeks.ms).toEqual(v.parse(DurationMs, 1_209_600_000));
     expect(weeks.ns).toEqual(1_209_600_000_000_000);
   });
 
@@ -24,8 +24,8 @@ describe("Duration", () => {
     expect(days.hours).toEqual(48);
     expect(days.minutes).toEqual(2880);
     expect(days.seconds).toEqual(172800);
-    expect(days.ms).toEqual(DurationMs.parse(172_800_000));
-    expect(days.ns).toEqual(DurationMs.parse(172_800_000_000_000));
+    expect(days.ms).toEqual(v.parse(DurationMs, 172_800_000));
+    expect(days.ns).toEqual(172_800_000_000_000);
   });
 
   test("hours", () => {
@@ -36,8 +36,8 @@ describe("Duration", () => {
     expect(hours.hours).toEqual(3);
     expect(hours.minutes).toEqual(180);
     expect(hours.seconds).toEqual(10_800);
-    expect(hours.ms).toEqual(DurationMs.parse(10_800_000));
-    expect(hours.ns).toEqual(DurationMs.parse(10_800_000_000_000));
+    expect(hours.ms).toEqual(v.parse(DurationMs, 10_800_000));
+    expect(hours.ns).toEqual(10_800_000_000_000);
   });
 
   test("minutes", () => {
@@ -48,8 +48,8 @@ describe("Duration", () => {
     expect(minutes.hours).toEqual(0.5);
     expect(minutes.minutes).toEqual(30);
     expect(minutes.seconds).toEqual(1_800);
-    expect(minutes.ms).toEqual(DurationMs.parse(1_800_000));
-    expect(minutes.ns).toEqual(DurationMs.parse(1_800_000_000_000));
+    expect(minutes.ms).toEqual(v.parse(DurationMs, 1_800_000));
+    expect(minutes.ns).toEqual(1_800_000_000_000);
   });
 
   test("seconds", () => {
@@ -60,8 +60,8 @@ describe("Duration", () => {
     expect(seconds.hours).toEqual(0.03);
     expect(seconds.minutes).toEqual(2);
     expect(seconds.seconds).toEqual(120);
-    expect(seconds.ms).toEqual(DurationMs.parse(120_000));
-    expect(seconds.ns).toEqual(DurationMs.parse(120_000_000_000));
+    expect(seconds.ms).toEqual(v.parse(DurationMs, 120_000));
+    expect(seconds.ns).toEqual(120_000_000_000);
   });
 
   test("ms", () => {
@@ -72,8 +72,8 @@ describe("Duration", () => {
     expect(ms.hours).toEqual(0);
     expect(ms.minutes).toEqual(0.01);
     expect(ms.seconds).toEqual(0.5);
-    expect(ms.ms).toEqual(DurationMs.parse(500));
-    expect(ms.ns).toEqual(DurationMs.parse(500_000_000));
+    expect(ms.ms).toEqual(v.parse(DurationMs, 500));
+    expect(ms.ns).toEqual(500_000_000);
   });
 
   test("ns", () => {
@@ -84,8 +84,8 @@ describe("Duration", () => {
     expect(ns.hours).toEqual(0);
     expect(ns.minutes).toEqual(0);
     expect(ns.seconds).toEqual(0.01);
-    expect(ns.ms).toEqual(DurationMs.parse(5));
-    expect(ns.ns).toEqual(DurationMs.parse(5_000_000));
+    expect(ns.ms).toEqual(v.parse(DurationMs, 5));
+    expect(ns.ns).toEqual(5_000_000);
   });
 
   test("add/subtract", () => {
@@ -104,7 +104,7 @@ describe("Duration", () => {
 
     const result = base.times(factor);
 
-    expect(result.ms).toEqual(DurationMs.parse(15));
+    expect(result.ms).toEqual(v.parse(DurationMs, 15));
   });
 
   test("times - rounding", () => {
@@ -113,7 +113,7 @@ describe("Duration", () => {
 
     const result = base.times(factor);
 
-    expect(result.ms).toEqual(DurationMs.parse(9));
+    expect(result.ms).toEqual(v.parse(DurationMs, 9));
   });
 
   test("equals", () => {
@@ -146,7 +146,7 @@ describe("Duration", () => {
   });
 
   test("MIN", () => {
-    expect(Duration.MIN.ms).toEqual(DurationMs.parse(1));
+    expect(Duration.MIN.ms).toEqual(v.parse(DurationMs, 1));
   });
 
   test("toString", () => {
