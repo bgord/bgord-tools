@@ -1,12 +1,12 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const UrlWithoutSlashError = { Invalid: "url.without.slash.invalid" };
 
-// Stryker disable all
-export const UrlWithoutSlash = z
-  // Stryker restore all
-  .url(UrlWithoutSlashError.Invalid)
-  .refine((value) => !value.endsWith("/"), UrlWithoutSlashError.Invalid)
-  .brand("UrlWithoutSlash");
+export const UrlWithoutSlash = v.pipe(
+  v.string(UrlWithoutSlashError.Invalid),
+  v.url(UrlWithoutSlashError.Invalid),
+  v.check((value) => !value.endsWith("/"), UrlWithoutSlashError.Invalid),
+  v.brand("UrlWithoutSlash"),
+);
 
-export type UrlWithoutSlashType = z.infer<typeof UrlWithoutSlash>;
+export type UrlWithoutSlashType = v.InferOutput<typeof UrlWithoutSlash>;
