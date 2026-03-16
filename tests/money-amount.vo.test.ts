@@ -1,25 +1,26 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { MoneyAmount } from "../src/money-amount.vo";
 
 describe("MoneyAmount", () => {
   test("happy path", () => {
-    expect(MoneyAmount.safeParse(0).success).toEqual(true);
-    expect(MoneyAmount.safeParse(1_000).success).toEqual(true);
+    expect(v.safeParse(MoneyAmount, 0).success).toEqual(true);
+    expect(v.safeParse(MoneyAmount, 1_000).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
-    expect(() => MoneyAmount.parse(null)).toThrow("money.amount.type");
+    expect(() => v.parse(MoneyAmount, null)).toThrow("money.amount.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => MoneyAmount.parse("123")).toThrow("money.amount.type");
+    expect(() => v.parse(MoneyAmount, "123")).toThrow("money.amount.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => MoneyAmount.parse(1.5)).toThrow("money.amount.type");
+    expect(() => v.parse(MoneyAmount, 1.5)).toThrow("money.amount.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => MoneyAmount.parse(-1)).toThrow("money.amount.invalid");
+    expect(() => v.parse(MoneyAmount, -1)).toThrow("money.amount.invalid");
   });
 });

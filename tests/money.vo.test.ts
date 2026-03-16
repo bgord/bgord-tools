@@ -15,8 +15,8 @@ const multiplier = v.parse(MultiplicationFactor, 1.5);
 
 describe("Money", () => {
   test("fromAmount", () => {
-    expect(Money.fromAmount(0).getAmount()).toEqual(MoneyAmount.parse(0));
-    expect(Money.fromAmount(100).getAmount()).toEqual(MoneyAmount.parse(100));
+    expect(Money.fromAmount(0).getAmount()).toEqual(v.parse(MoneyAmount, 0));
+    expect(Money.fromAmount(100).getAmount()).toEqual(v.parse(MoneyAmount, 100));
   });
 
   test("fromAmount - invalid input", () => {
@@ -24,35 +24,39 @@ describe("Money", () => {
   });
 
   test("fromAmountSafe", () => {
-    expect(Money.fromAmountSafe(MoneyAmount.parse(0)).getAmount()).toEqual(MoneyAmount.parse(0));
-    expect(Money.fromAmountSafe(MoneyAmount.parse(100)).getAmount()).toEqual(MoneyAmount.parse(100));
+    expect(Money.fromAmountSafe(v.parse(MoneyAmount, 0)).getAmount()).toEqual(v.parse(MoneyAmount, 0));
+    expect(Money.fromAmountSafe(v.parse(MoneyAmount, 100)).getAmount()).toEqual(v.parse(MoneyAmount, 100));
   });
 
   test("add", () => {
-    expect(Money.fromAmount(100).add(Money.fromAmount(0)).getAmount()).toEqual(MoneyAmount.parse(100));
-    expect(Money.fromAmount(15).add(Money.fromAmount(10)).getAmount()).toEqual(MoneyAmount.parse(25));
+    expect(Money.fromAmount(100).add(Money.fromAmount(0)).getAmount()).toEqual(v.parse(MoneyAmount, 100));
+    expect(Money.fromAmount(15).add(Money.fromAmount(10)).getAmount()).toEqual(v.parse(MoneyAmount, 25));
   });
 
   test("multiply - integer factor", () => {
     expect(Money.fromAmount(100).multiply(v.parse(MultiplicationFactor, 5)).getAmount()).toEqual(
-      MoneyAmount.parse(500),
+      v.parse(MoneyAmount, 500),
     );
   });
 
   test("multiply - float factor - default round-to-nearest", () => {
-    expect(Money.fromAmount(99).multiply(multiplier).getAmount()).toEqual(MoneyAmount.parse(149));
+    expect(Money.fromAmount(99).multiply(multiplier).getAmount()).toEqual(v.parse(MoneyAmount, 149));
   });
 
   test("multiply - float factor - round-up", () => {
-    expect(Money.fromAmount(99).multiply(multiplier, roundUp).getAmount()).toEqual(MoneyAmount.parse(149));
+    expect(Money.fromAmount(99).multiply(multiplier, roundUp).getAmount()).toEqual(v.parse(MoneyAmount, 149));
   });
 
   test("multiply - float factor - round-down", () => {
-    expect(Money.fromAmount(99).multiply(multiplier, roundDown).getAmount()).toEqual(MoneyAmount.parse(148));
+    expect(Money.fromAmount(99).multiply(multiplier, roundDown).getAmount()).toEqual(
+      v.parse(MoneyAmount, 148),
+    );
   });
 
   test("subtract - result more than zero", () => {
-    expect(Money.fromAmount(100).subtract(Money.fromAmount(20)).getAmount()).toEqual(MoneyAmount.parse(80));
+    expect(Money.fromAmount(100).subtract(Money.fromAmount(20)).getAmount()).toEqual(
+      v.parse(MoneyAmount, 80),
+    );
   });
 
   test("subtract - result zero", () => {
@@ -66,15 +70,15 @@ describe("Money", () => {
   });
 
   test("divide - float factor - default round-to-nearest", () => {
-    expect(Money.fromAmount(98).divide(divisor).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(divisor).getAmount()).toEqual(v.parse(MoneyAmount, 39));
   });
 
   test("divide - float factor - round-up", () => {
-    expect(Money.fromAmount(98).divide(divisor, roundUp).getAmount()).toEqual(MoneyAmount.parse(40));
+    expect(Money.fromAmount(98).divide(divisor, roundUp).getAmount()).toEqual(v.parse(MoneyAmount, 40));
   });
 
   test("divide - float factor - round-down", () => {
-    expect(Money.fromAmount(98).divide(divisor, roundDown).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(divisor, roundDown).getAmount()).toEqual(v.parse(MoneyAmount, 39));
   });
 
   test("equals", () => {
@@ -107,7 +111,7 @@ describe("Money", () => {
   });
 
   test("zero", () => {
-    expect(Money.zero()).toEqual(Money.fromAmountSafe(MoneyAmount.parse(0)));
+    expect(Money.zero()).toEqual(Money.fromAmountSafe(v.parse(MoneyAmount, 0)));
   });
 
   test("toString", () => {

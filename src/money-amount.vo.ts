@@ -1,13 +1,12 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const MoneyAmountError = { Type: "money.amount.type", Invalid: "money.amount.invalid" };
 
-// Stryker disable all
-export const MoneyAmount = z
-  // Stryker restore all
-  .number(MoneyAmountError.Type)
-  .int(MoneyAmountError.Type)
-  .min(0, MoneyAmountError.Invalid)
-  .brand("MoneyAmount");
+export const MoneyAmount = v.pipe(
+  v.number(MoneyAmountError.Type),
+  v.integer(MoneyAmountError.Type),
+  v.minValue(0, MoneyAmountError.Invalid),
+  v.brand("MoneyAmount"),
+);
 
-export type MoneyAmountType = z.infer<typeof MoneyAmount>;
+export type MoneyAmountType = v.InferOutput<typeof MoneyAmount>;
