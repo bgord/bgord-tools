@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 import { TimestampValue } from "../src/timestamp-value.vo";
@@ -10,7 +11,7 @@ describe("Timestamp", () => {
   });
 
   test("fromValue - error", () => {
-    expect(() => Timestamp.fromValue(TimestampValue.parse(-1))).toThrow("timestamp.invalid");
+    expect(() => Timestamp.fromValue(v.parse(TimestampValue, -1))).toThrow("timestamp.invalid");
   });
 
   test("fromNumber - success", () => {
@@ -38,12 +39,14 @@ describe("Timestamp", () => {
   });
 
   test("add", () => {
-    expect(mocks.TIME_ZERO.add(Duration.Ms(500)).ms).toEqual(TimestampValue.parse(mocks.TIME_ZERO.ms + 500));
+    expect(mocks.TIME_ZERO.add(Duration.Ms(500)).ms).toEqual(
+      v.parse(TimestampValue, mocks.TIME_ZERO.ms + 500),
+    );
   });
 
   test("subtract", () => {
     expect(mocks.TIME_ZERO.subtract(Duration.Ms(500)).ms).toEqual(
-      TimestampValue.parse(mocks.TIME_ZERO.ms - 500),
+      v.parse(TimestampValue, mocks.TIME_ZERO.ms - 500),
     );
   });
 

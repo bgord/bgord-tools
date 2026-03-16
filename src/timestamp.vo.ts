@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { Duration } from "./duration.service";
 import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
@@ -9,7 +10,7 @@ export class Timestamp {
   }
 
   static fromNumber(value: number): Timestamp {
-    return new Timestamp(TimestampValue.parse(value));
+    return new Timestamp(v.parse(TimestampValue, value));
   }
 
   static fromDate(value: Date): Timestamp {
