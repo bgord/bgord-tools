@@ -1,10 +1,12 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const LanguageError = { Type: "language.type", BadChars: "language.bad.chars" };
 
-// Two lowercase letters
 const LANGUAGE_CHARS_WHITELIST = /^[a-z]{2}$/;
 
-export const Language = z.string(LanguageError.Type).regex(LANGUAGE_CHARS_WHITELIST, LanguageError.BadChars);
+export const Language = v.pipe(
+  v.string(LanguageError.Type),
+  v.regex(LANGUAGE_CHARS_WHITELIST, LanguageError.BadChars),
+);
 
-export type LanguageType = z.infer<typeof Language>;
+export type LanguageType = v.InferOutput<typeof Language>;
