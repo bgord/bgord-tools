@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const BasenameError = {
   Type: "basename.type",
@@ -12,22 +12,20 @@ export const BasenameError = {
 
 // Letters, digits, dots, underscores, and hyphens allowed
 const BASENAME_CHARS = /^[a-zA-Z0-9._-]+$/;
-
 const DOT_SEGMENTS = [".", ".."];
 
-// Stryker disable all
-export const Basename = z
-  // Stryker restore all
-  .string(BasenameError.Type)
-  .min(1, BasenameError.Empty)
-  .max(128, BasenameError.TooLong)
+export const Basename = v.pipe(
+  v.string(BasenameError.Type),
+  v.minLength(1, BasenameError.Empty),
+  v.maxLength(128, BasenameError.TooLong),
   // Reject "." and ".." as a filename to avoid directory traversal
-  .refine((value) => !DOT_SEGMENTS.includes(value), BasenameError.DotSegments)
+  v.check((value) => !DOT_SEGMENTS.includes(value), BasenameError.DotSegments),
   // Reject dotfiles like ".env"
-  .refine((value) => !value.startsWith("."), BasenameError.Dotfiles)
+  v.check((value) => !value.startsWith("."), BasenameError.Dotfiles),
   // Reject trailing dot like "picture." to avoid extension collision
-  .refine((value) => !value.endsWith("."), BasenameError.TrailingDot)
-  .regex(BASENAME_CHARS, BasenameError.BadChars)
-  .brand("Basename");
+  v.check((value) => !value.endsWith("."), BasenameError.TrailingDot),
+  v.regex(BASENAME_CHARS, BasenameError.BadChars),
+  v.brand("Basename"),
+);
 
-export type BasenameType = z.infer<typeof Basename>;
+export type BasenameType = v.InferOutput<typeof Basename>;

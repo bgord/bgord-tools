@@ -12,7 +12,7 @@ describe("Filename", () => {
   });
 
   test("fromPartsSafe", () => {
-    const basename = Basename.parse("avatar");
+    const basename = v.parse(Basename, "avatar");
     const extension = Extension.parse("webp");
 
     expect(Filename.fromPartsSafe(basename, extension).get()).toEqual("avatar.webp");
@@ -29,7 +29,7 @@ describe("Filename", () => {
   });
 
   test("getBasename", () => {
-    expect(Filename.fromString("user-photo.jpg").getBasename()).toEqual(Basename.parse("user-photo"));
+    expect(Filename.fromString("user-photo.jpg").getBasename()).toEqual(v.parse(Basename, "user-photo"));
   });
 
   test("getExtension", () => {
@@ -47,7 +47,7 @@ describe("Filename", () => {
 
   test("withBasename", () => {
     const filename = Filename.fromString("avatar.webp");
-    const basename = Basename.parse("profile_v2");
+    const basename = v.parse(Basename, "profile_v2");
     const updated = filename.withBasename(basename);
 
     expect(filename.get()).toEqual("avatar.webp");
@@ -115,14 +115,14 @@ describe("Filename", () => {
   });
 
   test("toString", () => {
-    const basename = Basename.parse("avatar");
+    const basename = v.parse(Basename, "avatar");
     const extension = Extension.parse("webp");
 
     expect(Filename.fromPartsSafe(basename, extension).toString()).toEqual("avatar.webp");
   });
 
   test("toJSON", () => {
-    const basename = Basename.parse("avatar");
+    const basename = v.parse(Basename, "avatar");
     const extension = Extension.parse("webp");
 
     expect(Filename.fromPartsSafe(basename, extension).toJSON()).toEqual("avatar.webp");

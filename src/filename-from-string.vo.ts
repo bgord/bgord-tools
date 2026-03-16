@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import * as z from "zod/v4";
 import { Basename } from "./basename.vo";
 import { Extension } from "./extension.vo";
@@ -18,7 +19,7 @@ export const FilenameFromString = z
   .transform((value) => {
     const index = value.lastIndexOf(".");
 
-    const basename = Basename.parse(value.slice(0, index));
+    const basename = v.parse(Basename, value.slice(0, index));
     const extension = Extension.parse(value.slice(index + 1));
 
     return { basename, extension };

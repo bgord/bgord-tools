@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { FilenameFromString } from "../src/filename-from-string.vo";
@@ -6,7 +7,7 @@ import { FilenameFromString } from "../src/filename-from-string.vo";
 describe("FilenameFromString", () => {
   test("happy path", () => {
     expect(FilenameFromString.parse("avatar.WEBP")).toEqual({
-      basename: Basename.parse("avatar"),
+      basename: v.parse(Basename, "avatar"),
       extension: Extension.parse("webp"),
     });
   });

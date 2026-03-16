@@ -11,7 +11,7 @@ export class Filename {
   ) {}
 
   static fromParts(basename: string, extension: string): Filename {
-    return new Filename(Basename.parse(basename), Extension.parse(extension));
+    return new Filename(v.parse(Basename, basename), Extension.parse(extension));
   }
 
   static fromPartsSafe(basename: BasenameType, extension: ExtensionType): Filename {
@@ -48,18 +48,18 @@ export class Filename {
     const affix = v.parse(FilenameAffix, candidate);
 
     if (strategy === FilenameAffixStrategy.prefix) {
-      return new Filename(Basename.parse(`${affix}${this.basename}`), this.extension);
+      return new Filename(v.parse(Basename, `${affix}${this.basename}`), this.extension);
     }
 
-    return new Filename(Basename.parse(`${this.basename}${affix}`), this.extension);
+    return new Filename(v.parse(Basename, `${this.basename}${affix}`), this.extension);
   }
 
   withAffixSafe(affix: FilenameAffixType, strategy: FilenameAffixStrategy): Filename {
     if (strategy === FilenameAffixStrategy.prefix) {
-      return new Filename(Basename.parse(`${affix}${this.basename}`), this.extension);
+      return new Filename(v.parse(Basename, `${affix}${this.basename}`), this.extension);
     }
 
-    return new Filename(Basename.parse(`${this.basename}${affix}`), this.extension);
+    return new Filename(v.parse(Basename, `${this.basename}${affix}`), this.extension);
   }
 
   withSuffix(candidate: string) {
