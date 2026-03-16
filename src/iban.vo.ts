@@ -1,10 +1,11 @@
+import * as v from "valibot";
 import { IbanSchema, type IbanSchemaType } from "./iban-schema.vo";
 
 export class IBAN {
   private readonly value: IbanSchemaType;
 
   constructor(candidate: string) {
-    this.value = IbanSchema.parse(candidate);
+    this.value = v.parse(IbanSchema, candidate);
   }
 
   toString(): IbanSchemaType {

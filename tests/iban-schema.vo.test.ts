@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { IbanSchema } from "../src/iban-schema.vo";
 
 describe("IBAN", () => {
@@ -9,30 +10,29 @@ describe("IBAN", () => {
       "DE44 5001 0517 5407 3249 31",
       "GB82WEST12345698765432",
     ];
-
     for (const value of cases) {
-      expect(IbanSchema.safeParse(value).success).toEqual(true);
+      expect(v.safeParse(IbanSchema, value).success).toEqual(true);
     }
   });
 
   test("rejects prefix", () => {
-    expect(() => IbanSchema.parse("_PL61 1090 1014 0000 0712 1981 2874")).toThrow("iban.schema.invalid");
+    expect(() => v.parse(IbanSchema, "_PL61 1090 1014 0000 0712 1981 2874")).toThrow("iban.schema.invalid");
   });
 
   test("rejects suffix", () => {
-    expect(() => IbanSchema.parse("PL61 1090 1014 0000 0712 1981 2874_")).toThrow("iban.schema.invalid");
+    expect(() => v.parse(IbanSchema, "PL61 1090 1014 0000 0712 1981 2874_")).toThrow("iban.schema.invalid");
   });
 
   test("rejects non-string input - number", () => {
-    expect(() => IbanSchema.parse(123)).toThrow("iban.schema.type");
+    expect(() => v.parse(IbanSchema, 123)).toThrow("iban.schema.type");
   });
 
   test("rejects non-string input - null", () => {
-    expect(() => IbanSchema.parse(null)).toThrow("iban.schema.type");
+    expect(() => v.parse(IbanSchema, null)).toThrow("iban.schema.type");
   });
 
   test("rejects empty", () => {
-    expect(() => IbanSchema.parse("")).toThrow("iban.schema.invalid");
+    expect(() => v.parse(IbanSchema, "")).toThrow("iban.schema.invalid");
   });
 
   test("rejects invalid format", () => {
@@ -43,9 +43,8 @@ describe("IBAN", () => {
       "PL61 1090 1014 0000 0712 1981 2874 00000 00",
       "PL61 1090 1014 $000 0712 1981 2874",
     ];
-
     for (const value of invalid) {
-      expect(() => IbanSchema.parse(value)).toThrow("iban.schema.invalid");
+      expect(() => v.parse(IbanSchema, value)).toThrow("iban.schema.invalid");
     }
   });
 });
