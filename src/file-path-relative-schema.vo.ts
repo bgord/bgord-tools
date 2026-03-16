@@ -1,5 +1,4 @@
 import * as v from "valibot";
-import * as z from "zod/v4";
 import { DirectoryPathRelativeSchema } from "./directory-path-relative.vo";
 import { Filename } from "./filename.vo";
 
@@ -11,25 +10,21 @@ export const FilePathRelativeSchemaError = {
   Empty: "file.path.relative.empty",
 };
 
-// Stryker disable all
-export const FilePathRelativeSchema = z
-  // Stryker restore all
-  .string(FilePathRelativeSchemaError.Type)
-  .min(1, FilePathRelativeSchemaError.Empty)
-  .refine((value) => !value.startsWith("/"), FilePathRelativeSchemaError.LeadingSlash)
-  .refine((value) => !value.includes("\\"), FilePathRelativeSchemaError.BackslashForbidden)
-  .refine((value) => value.includes("/"), FilePathRelativeSchemaError.RequiresDirectory)
-  .transform((normalized) => {
+export const FilePathRelativeSchema = v.pipe(
+  v.string(FilePathRelativeSchemaError.Type),
+  v.minLength(1, FilePathRelativeSchemaError.Empty),
+  v.check((value) => !value.startsWith("/"), FilePathRelativeSchemaError.LeadingSlash),
+  v.check((value) => !value.includes("\\"), FilePathRelativeSchemaError.BackslashForbidden),
+  v.check((value) => value.includes("/"), FilePathRelativeSchemaError.RequiresDirectory),
+  v.transform((normalized) => {
     const lastSlashIndex = normalized.lastIndexOf("/");
-
     const directoryCandidate = normalized.slice(0, lastSlashIndex);
     const filenameCandidate = normalized.slice(lastSlashIndex + 1);
-
     const directory = v.parse(DirectoryPathRelativeSchema, directoryCandidate);
     const filename = Filename.fromString(filenameCandidate);
-
     return { directory, filename };
-  })
-  .brand("FilePathRelativeSchema");
+  }),
+  v.brand("FilePathRelativeSchema"),
+);
 
-export type FilePathRelativeType = z.infer<typeof FilePathRelativeSchema>;
+export type FilePathRelativeType = v.InferOutput<typeof FilePathRelativeSchema>;

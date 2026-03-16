@@ -22,7 +22,7 @@ export class FilePathRelative {
   }
 
   static fromString(candidate: string): FilePathRelative {
-    const schema = FilePathRelativeSchema.parse(candidate);
+    const schema = v.parse(FilePathRelativeSchema, candidate);
 
     return new FilePathRelative(schema.directory, schema.filename);
   }
