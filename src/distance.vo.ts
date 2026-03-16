@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { DistanceValue, type DistanceValueType } from "./distance-value.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
@@ -5,12 +6,12 @@ import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 export const DistanceError = { SubtractResultLessThanZero: "distance.subtract.result.less.than.zero" };
 
 export class Distance {
-  private static readonly ZERO = DistanceValue.parse(0);
+  private static readonly ZERO = v.parse(DistanceValue, 0);
 
   private constructor(private readonly value: DistanceValueType) {}
 
   static fromMeters(candidate: number): Distance {
-    return new Distance(DistanceValue.parse(candidate));
+    return new Distance(v.parse(DistanceValue, candidate));
   }
 
   static fromMetersSafe(candidate: DistanceValueType): Distance {
@@ -21,14 +22,14 @@ export class Distance {
     candidate: number,
     rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ): Distance {
-    return new Distance(DistanceValue.parse(rounding.round(candidate * 1000)));
+    return new Distance(v.parse(DistanceValue, rounding.round(candidate * 1000)));
   }
 
   static fromMiles(
     candidate: number,
     rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ): Distance {
-    return new Distance(DistanceValue.parse(rounding.round(candidate * 1_609.344)));
+    return new Distance(v.parse(DistanceValue, rounding.round(candidate * 1_609.344)));
   }
 
   get(): DistanceValueType {
@@ -36,14 +37,14 @@ export class Distance {
   }
 
   add(distance: Distance): Distance {
-    return new Distance(DistanceValue.parse(this.value + distance.get()));
+    return new Distance(v.parse(DistanceValue, this.value + distance.get()));
   }
 
   subtract(distance: Distance): Distance {
     const result = this.value - distance.get();
 
     if (result < Distance.ZERO) throw new Error(DistanceError.SubtractResultLessThanZero);
-    return new Distance(DistanceValue.parse(result));
+    return new Distance(v.parse(DistanceValue, result));
   }
 
   equals(another: Distance): boolean {

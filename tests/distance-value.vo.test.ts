@@ -1,25 +1,26 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DistanceValue } from "../src/distance-value.vo";
 
 describe("DistanceValue", () => {
   test("happy path", () => {
-    expect(DistanceValue.safeParse(0).success).toEqual(true);
-    expect(DistanceValue.safeParse(1_000).success).toEqual(true);
+    expect(v.safeParse(DistanceValue, 0).success).toEqual(true);
+    expect(v.safeParse(DistanceValue, 1_000).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
-    expect(() => DistanceValue.parse(null)).toThrow("distance.value.type");
+    expect(() => v.parse(DistanceValue, null)).toThrow("distance.value.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => DistanceValue.parse("123")).toThrow("distance.value.type");
+    expect(() => v.parse(DistanceValue, "123")).toThrow("distance.value.type");
   });
 
   test("rejects fractions", () => {
-    expect(() => DistanceValue.parse(1.5)).toThrow("distance.value.type");
+    expect(() => v.parse(DistanceValue, 1.5)).toThrow("distance.value.type");
   });
 
   test("rejects negative numbers", () => {
-    expect(() => DistanceValue.parse(-1)).toThrow("distance.value.invalid");
+    expect(() => v.parse(DistanceValue, -1)).toThrow("distance.value.invalid");
   });
 });

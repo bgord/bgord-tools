@@ -1,13 +1,12 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const DistanceValueError = { Type: "distance.value.type", Invalid: "distance.value.invalid" };
 
-// Stryker disable all
-export const DistanceValue = z
-  // Stryker restore all
-  .number(DistanceValueError.Type)
-  .int(DistanceValueError.Type)
-  .min(0, DistanceValueError.Invalid)
-  .brand("DistanceValue");
+export const DistanceValue = v.pipe(
+  v.number(DistanceValueError.Type),
+  v.integer(DistanceValueError.Type),
+  v.minValue(0, DistanceValueError.Invalid),
+  v.brand("DistanceValue"),
+);
 
-export type DistanceValueType = z.infer<typeof DistanceValue>;
+export type DistanceValueType = v.InferOutput<typeof DistanceValue>;

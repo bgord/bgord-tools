@@ -1,12 +1,13 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Distance } from "../src/distance.vo";
 import { DistanceValue } from "../src/distance-value.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 
 describe("Distance", () => {
   test("happy path", () => {
-    expect(Distance.fromMeters(0).get()).toEqual(DistanceValue.parse(0));
-    expect(Distance.fromMeters(100).get()).toEqual(DistanceValue.parse(100));
+    expect(Distance.fromMeters(0).get()).toEqual(v.parse(DistanceValue, 0));
+    expect(Distance.fromMeters(100).get()).toEqual(v.parse(DistanceValue, 100));
   });
 
   test("throws on invalid input", () => {
@@ -14,13 +15,13 @@ describe("Distance", () => {
   });
 
   test("fromMetersSafe", () => {
-    expect(Distance.fromMetersSafe(DistanceValue.parse(1)).get()).toEqual(DistanceValue.parse(1));
+    expect(Distance.fromMetersSafe(v.parse(DistanceValue, 1)).get()).toEqual(v.parse(DistanceValue, 1));
   });
 
   test("fromKilometers", () => {
-    expect(Distance.fromKilometers(1).get()).toEqual(DistanceValue.parse(1000));
-    expect(Distance.fromKilometers(1.5).get()).toEqual(DistanceValue.parse(1500));
-    expect(Distance.fromKilometers(0.123456789).get()).toEqual(DistanceValue.parse(123));
+    expect(Distance.fromKilometers(1).get()).toEqual(v.parse(DistanceValue, 1000));
+    expect(Distance.fromKilometers(1.5).get()).toEqual(v.parse(DistanceValue, 1500));
+    expect(Distance.fromKilometers(0.123456789).get()).toEqual(v.parse(DistanceValue, 123));
   });
 
   test("fromKilometers - throws on invalid input", () => {
@@ -30,9 +31,9 @@ describe("Distance", () => {
   });
 
   test("fromMiles", () => {
-    expect(Distance.fromMiles(1).get()).toEqual(DistanceValue.parse(1609));
-    expect(Distance.fromMiles(1.5).get()).toEqual(DistanceValue.parse(2414));
-    expect(Distance.fromMiles(0.123456789).get()).toEqual(DistanceValue.parse(199));
+    expect(Distance.fromMiles(1).get()).toEqual(v.parse(DistanceValue, 1609));
+    expect(Distance.fromMiles(1.5).get()).toEqual(v.parse(DistanceValue, 2414));
+    expect(Distance.fromMiles(0.123456789).get()).toEqual(v.parse(DistanceValue, 199));
   });
 
   test("fromMiles - throws on invalid input", () => {
@@ -40,12 +41,14 @@ describe("Distance", () => {
   });
 
   test("add", () => {
-    expect(Distance.fromMeters(100).add(Distance.fromMeters(0)).get()).toEqual(DistanceValue.parse(100));
-    expect(Distance.fromMeters(15).add(Distance.fromMeters(10)).get()).toEqual(DistanceValue.parse(25));
+    expect(Distance.fromMeters(100).add(Distance.fromMeters(0)).get()).toEqual(v.parse(DistanceValue, 100));
+    expect(Distance.fromMeters(15).add(Distance.fromMeters(10)).get()).toEqual(v.parse(DistanceValue, 25));
   });
 
   test("subtract - result more than zero", () => {
-    expect(Distance.fromMeters(100).subtract(Distance.fromMeters(20)).get()).toEqual(DistanceValue.parse(80));
+    expect(Distance.fromMeters(100).subtract(Distance.fromMeters(20)).get()).toEqual(
+      v.parse(DistanceValue, 80),
+    );
   });
 
   test("subtract - result zero", () => {
