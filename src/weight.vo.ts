@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import type { DivisionFactorType } from "./division-factor.vo";
 import type { MultiplicationFactorType } from "./multiplication-factor.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
@@ -18,15 +19,15 @@ export class Weight {
   ): Weight {
     const grams = rounding.round(kilograms * Weight.GRAMS_PER_KILOGRAM);
 
-    return new Weight(WeightGrams.parse(grams), rounding);
+    return new Weight(v.parse(WeightGrams, grams), rounding);
   }
 
   static fromGrams(grams: number, rounding: RoundingStrategy = new RoundingToNearestStrategy()): Weight {
-    return new Weight(WeightGrams.parse(grams), rounding);
+    return new Weight(v.parse(WeightGrams, grams), rounding);
   }
 
   static zero(): Weight {
-    return new Weight(WeightGrams.parse(0));
+    return new Weight(v.parse(WeightGrams, 0));
   }
 
   get(): number {
@@ -44,25 +45,25 @@ export class Weight {
   }
 
   add(other: Weight): Weight {
-    return new Weight(WeightGrams.parse(this.grams + other.grams));
+    return new Weight(v.parse(WeightGrams, this.grams + other.grams));
   }
 
   subtract(other: Weight): Weight {
     const result = this.grams - other.grams;
 
-    return new Weight(WeightGrams.parse(Math.max(0, result)), this.rounding);
+    return new Weight(v.parse(WeightGrams, Math.max(0, result)), this.rounding);
   }
 
   multiply(factor: MultiplicationFactorType): Weight {
     const grams = this.rounding.round(this.grams * factor);
 
-    return new Weight(WeightGrams.parse(grams));
+    return new Weight(v.parse(WeightGrams, grams));
   }
 
   divide(divisor: DivisionFactorType): Weight {
     const grams = this.rounding.round(this.grams / divisor);
 
-    return new Weight(WeightGrams.parse(grams));
+    return new Weight(v.parse(WeightGrams, grams));
   }
 
   equals(other: Weight): boolean {

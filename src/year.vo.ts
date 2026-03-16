@@ -58,7 +58,6 @@ export class Year extends DateRange {
   shift(count: IntegerType): Year {
     const year = getYear(this.getStart().ms) + count;
 
-    // TODO?
     return Year.fromNumber(year);
   }
 
