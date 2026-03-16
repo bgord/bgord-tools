@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const MonthIsoIdError = {
   Type: "month.iso.id.type",
@@ -6,19 +6,17 @@ export const MonthIsoIdError = {
   Invalid: "month.iso.id.invalid",
 };
 
-// Four digits, hyphen, two digits
 const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;
 
-// Stryker disable all
-export const MonthIsoId = z
-  // Stryker restore all
-  .string(MonthIsoIdError.Type)
-  .regex(MONTH_ISO_ID_CHARS_WHITELIST, MonthIsoIdError.BadChars)
-  .refine((value) => {
+export const MonthIsoId = v.pipe(
+  v.string(MonthIsoIdError.Type),
+  v.regex(MONTH_ISO_ID_CHARS_WHITELIST, MonthIsoIdError.BadChars),
+  v.check((value) => {
     const month = value.split("-").map(Number)[1];
 
     return month >= 1 && month <= 12;
-  }, MonthIsoIdError.Invalid)
-  .brand("MonthIsoId");
+  }, MonthIsoIdError.Invalid),
+  v.brand("MonthIsoId"),
+);
 
-export type MonthIsoIdType = z.infer<typeof MonthIsoId>;
+export type MonthIsoIdType = v.InferOutput<typeof MonthIsoId>;

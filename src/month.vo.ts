@@ -23,7 +23,7 @@ export class Month extends DateRange {
   }
 
   static fromIsoId(iso: MonthIsoIdType): Month {
-    const [year, month] = MonthIsoId.parse(iso).split("-").map(Number);
+    const [year, month] = v.parse(MonthIsoId, iso).split("-").map(Number);
 
     const reference = Timestamp.fromNumber(Date.UTC(year, month - 1, 1));
 
@@ -31,7 +31,7 @@ export class Month extends DateRange {
   }
 
   toIsoId(): MonthIsoIdType {
-    return MonthIsoId.parse(format(this.getStart().ms, "yyyy-MM"));
+    return v.parse(MonthIsoId, format(this.getStart().ms, "yyyy-MM"));
   }
 
   previous(): Month {

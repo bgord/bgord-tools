@@ -8,13 +8,15 @@ import { MonthIsoId } from "../src/month-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
+const november = v.parse(MonthIsoId, "2023-11");
+
 describe("Month", () => {
   test("happy path", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
     expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(mocks.TIME_ZERO.ms).getTime()));
     expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(mocks.TIME_ZERO.ms).getTime()));
-    expect(month.toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(month.toIsoId()).toEqual(november);
     expect(month.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
@@ -24,49 +26,49 @@ describe("Month", () => {
 
     expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(timestamp.ms).getTime()));
     expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(timestamp.ms).getTime()));
-    expect(month.toIsoId()).toEqual(MonthIsoId.parse("2025-12"));
+    expect(month.toIsoId()).toEqual(v.parse(MonthIsoId, "2025-12"));
   });
 
   test("fromNow", () => {
-    expect(Month.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(november);
   });
 
   test("fromTimestamp", () => {
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(november);
   });
 
   test("fromTimestampValue", () => {
-    expect(Month.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(november);
   });
 
   test("fromIsoId", () => {
-    expect(Month.fromIsoId(MonthIsoId.parse("2023-11")).toIsoId()).toEqual(MonthIsoId.parse("2023-11"));
+    expect(Month.fromIsoId(november).toIsoId()).toEqual(november);
   });
 
   test("next", () => {
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(MonthIsoId.parse("2023-12"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(v.parse(MonthIsoId, "2023-12"));
   });
 
   test("previous", () => {
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(MonthIsoId.parse("2023-10"));
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(v.parse(MonthIsoId, "2023-10"));
   });
 
   test("shift", () => {
     expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
-      MonthIsoId.parse("2024-01"),
+      v.parse(MonthIsoId, "2024-01"),
     );
     expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
-      MonthIsoId.parse("2023-09"),
+      v.parse(MonthIsoId, "2023-09"),
     );
   });
 
   test("round-trips", () => {
     const months = ["1970-01", "1999-12", "2024-02", "2025-12", "2026-01"].map((value) =>
-      MonthIsoId.parse(value),
+      v.parse(MonthIsoId, value),
     );
 
     for (const value of months) {
-      expect(Month.fromIsoId(MonthIsoId.parse(value)).toIsoId()).toEqual(value);
+      expect(Month.fromIsoId(v.parse(MonthIsoId, value)).toIsoId()).toEqual(value);
     }
   });
 
@@ -78,13 +80,10 @@ describe("Month", () => {
   });
 
   test("toString", () => {
-    expect(Month.fromIsoId(MonthIsoId.parse("2023-11")).toString()).toEqual("2023-11");
+    expect(Month.fromIsoId(november).toString()).toEqual(november);
   });
 
   test("toJSON", () => {
-    expect(Month.fromIsoId(MonthIsoId.parse("2023-11")).toJSON()).toEqual({
-      start: 1698796800000,
-      end: 1701388799999,
-    });
+    expect(Month.fromIsoId(november).toJSON()).toEqual({ start: 1698796800000, end: 1701388799999 });
   });
 });
