@@ -1,13 +1,12 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const IntegerPositiveError = { Type: "integer.positive.type", Invalid: "integer.positive.invalid" };
 
-// Stryker disable all
-export const IntegerPositive = z
-  // Stryker restore all
-  .number(IntegerPositiveError.Type)
-  .int(IntegerPositiveError.Type)
-  .min(1, IntegerPositiveError.Invalid)
-  .brand("IntegerPositive");
+export const IntegerPositive = v.pipe(
+  v.number(IntegerPositiveError.Type),
+  v.integer(IntegerPositiveError.Type),
+  v.minValue(1, IntegerPositiveError.Invalid),
+  v.brand("IntegerPositive"),
+);
 
-export type IntegerPositiveType = z.infer<typeof IntegerPositive>;
+export type IntegerPositiveType = v.InferOutput<typeof IntegerPositive>;

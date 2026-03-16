@@ -1,8 +1,9 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { batch } from "../src/batch";
 import { IntegerPositive } from "../src/integer-positive.vo";
 
-const size = IntegerPositive.parse(10);
+const size = v.parse(IntegerPositive, 10);
 
 describe("batch", () => {
   test("happy path", () => {
