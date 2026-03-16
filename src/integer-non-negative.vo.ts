@@ -1,16 +1,15 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const IntegerNonNegativeError = {
   Type: "integer.non.negative.type",
   Invalid: "integer.non.negative.invalid",
 };
 
-// Stryker disable all
-export const IntegerNonNegative = z
-  // Stryker restore all
-  .number(IntegerNonNegativeError.Type)
-  .int(IntegerNonNegativeError.Type)
-  .min(0, IntegerNonNegativeError.Invalid)
-  .brand("IntegerNonNegative");
+export const IntegerNonNegative = v.pipe(
+  v.number(IntegerNonNegativeError.Type),
+  v.integer(IntegerNonNegativeError.Type),
+  v.minValue(0, IntegerNonNegativeError.Invalid),
+  v.brand("IntegerNonNegative"),
+);
 
-export type IntegerNonNegativeType = z.infer<typeof IntegerNonNegative>;
+export type IntegerNonNegativeType = v.InferOutput<typeof IntegerNonNegative>;
