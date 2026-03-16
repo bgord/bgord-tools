@@ -1,6 +1,5 @@
 // Stryker disable all
 import * as v from "valibot";
-import * as z from "zod/v4";
 import { DoublyLinkedList, Node } from "./dll.service";
 import {
   ReorderingItemPositionValue,
@@ -15,15 +14,15 @@ export const ReorderingError = {
 
 const ReorderingIdError = { Type: "reordering.id.type" };
 
-export const ReorderingId = z.string(ReorderingIdError.Type).min(1, ReorderingIdError.Type);
-export type ReorderingItemIdType = z.infer<typeof ReorderingId>;
+export const ReorderingId = v.pipe(v.string(ReorderingIdError.Type), v.minLength(1, ReorderingIdError.Type));
+export type ReorderingItemIdType = v.InferOutput<typeof ReorderingId>;
 
-export const Reordering = z.object({
+export const Reordering = v.object({
   correlationId: ReorderingId,
   id: ReorderingId,
   position: ReorderingItemPositionValue,
 });
-export type ReorderingType = z.infer<typeof Reordering>;
+export type ReorderingType = v.InferOutput<typeof Reordering>;
 
 export type WithReorderingPositionValue<T> = T & { position: ReorderingItemPositionValueType };
 
