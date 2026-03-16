@@ -24,7 +24,7 @@ export class Week extends DateRange {
   }
 
   static fromIsoId(isoId: WeekIsoIdType): Week {
-    const [year, week] = WeekIsoId.parse(isoId).split("-W").map(Number);
+    const [year, week] = v.parse(WeekIsoId, isoId).split("-W").map(Number);
 
     // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
     const januaryFourth = Timestamp.fromNumber(Date.UTC(year, 0, 4));
@@ -37,7 +37,7 @@ export class Week extends DateRange {
     const year = getISOWeekYear(this.getStart().ms);
     const week = getISOWeek(this.getStart().ms);
 
-    return WeekIsoId.parse(`${year}-W${String(week).padStart(2, "0")}`);
+    return v.parse(WeekIsoId, `${year}-W${String(week).padStart(2, "0")}`);
   }
 
   previous(): Week {
