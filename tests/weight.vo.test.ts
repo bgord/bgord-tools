@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DivisionFactor } from "../src/division-factor.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
@@ -6,6 +7,8 @@ import { Weight } from "../src/weight.vo";
 
 const twoDecimals = new RoundingDecimalStrategy(2);
 const threeDecimals = new RoundingDecimalStrategy(3);
+
+const factor = v.parse(DivisionFactor, 3);
 
 describe("Weight", () => {
   test("fromKilograms", () => {
@@ -38,7 +41,7 @@ describe("Weight", () => {
     expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(2_000)).get()).toEqual(0);
     expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(1_000)).get()).toEqual(0);
     expect(Weight.fromGrams(1_001).multiply(MultiplicationFactor.parse(0.5)).get()).toEqual(501);
-    expect(Weight.fromGrams(1_999).divide(DivisionFactor.parse(3)).get()).toEqual(666);
+    expect(Weight.fromGrams(1_999).divide(factor).get()).toEqual(666);
   });
 
   test("equals", () => {

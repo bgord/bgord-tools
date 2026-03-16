@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DivisionFactor } from "../src/division-factor.vo";
 import { Money } from "../src/money.vo";
 import { MoneyAmount } from "../src/money-amount.vo";
@@ -8,6 +9,8 @@ import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 
 const roundUp = new RoundingUpStrategy();
 const roundDown = new RoundingDownStrategy();
+
+const factor = v.parse(DivisionFactor, 2.5);
 
 describe("Money", () => {
   test("fromAmount", () => {
@@ -68,19 +71,15 @@ describe("Money", () => {
   });
 
   test("divide - float factor - default round-to-nearest", () => {
-    expect(Money.fromAmount(98).divide(DivisionFactor.parse(2.5)).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(factor).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("divide - float factor - round-up", () => {
-    expect(Money.fromAmount(98).divide(DivisionFactor.parse(2.5), roundUp).getAmount()).toEqual(
-      MoneyAmount.parse(40),
-    );
+    expect(Money.fromAmount(98).divide(factor, roundUp).getAmount()).toEqual(MoneyAmount.parse(40));
   });
 
   test("divide - float factor - round-down", () => {
-    expect(Money.fromAmount(98).divide(DivisionFactor.parse(2.5), roundDown).getAmount()).toEqual(
-      MoneyAmount.parse(39),
-    );
+    expect(Money.fromAmount(98).divide(factor, roundDown).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("equals", () => {
