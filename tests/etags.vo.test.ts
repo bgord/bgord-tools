@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { ETag, WeakETag } from "../src/etags.vo";
 import { RevisionValue } from "../src/revision-value.vo";
 
@@ -37,13 +38,13 @@ describe("ETag", () => {
   });
 });
 
-describe("WeakETag class", () => {
+describe("WeakETag", () => {
   test("happy path", () => {
     const value = "W/123";
     const weakEtag = WeakETag.fromHeader(value);
 
     expect(weakEtag?.value).toEqual(value);
-    expect(weakEtag?.revision).toEqual(RevisionValue.parse(123));
+    expect(weakEtag?.revision).toEqual(v.parse(RevisionValue, 123));
   });
 
   test("returns null for nan", () => {

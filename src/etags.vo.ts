@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { RevisionValue, type RevisionValueType } from "./revision-value.vo";
 
 type ETagValueType = string;
@@ -17,7 +18,7 @@ export class ETag {
     const candidate = Number(value);
 
     if (Number.isNaN(candidate)) return null;
-    return new ETag(RevisionValue.parse(candidate));
+    return new ETag(v.parse(RevisionValue, candidate));
   }
 }
 
@@ -42,6 +43,6 @@ export class WeakETag {
     const candidate = Number(value.split("W/")[1]);
 
     if (Number.isNaN(candidate)) return null;
-    return new WeakETag(RevisionValue.parse(candidate));
+    return new WeakETag(v.parse(RevisionValue, candidate));
   }
 }

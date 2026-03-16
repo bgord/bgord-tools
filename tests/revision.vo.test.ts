@@ -1,11 +1,12 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { ETag, WeakETag } from "../src/etags.vo";
 import { Revision } from "../src/revision.vo";
 import { RevisionValue } from "../src/revision-value.vo";
 
 describe("Revision", () => {
   test("happy path", () => {
-    const value = RevisionValue.parse(0);
+    const value = v.parse(RevisionValue, 0);
     const revision = new Revision(value);
 
     expect(revision.value).toEqual(value);
@@ -19,7 +20,7 @@ describe("Revision", () => {
     const etag = ETag.fromHeader("123");
     const revision = Revision.fromETag(etag);
 
-    expect(revision.value).toEqual(RevisionValue.parse(123));
+    expect(revision.value).toEqual(v.parse(RevisionValue, 123));
   });
 
   test("fromETag - throws for null", () => {
@@ -30,7 +31,7 @@ describe("Revision", () => {
     const weak = WeakETag.fromHeader("W/123");
     const revision = Revision.fromWeakETag(weak);
 
-    expect(revision.value).toEqual(RevisionValue.parse(123));
+    expect(revision.value).toEqual(v.parse(RevisionValue, 123));
   });
 
   test("fromWeakETag - throws for null", () => {
@@ -54,7 +55,7 @@ describe("Revision", () => {
     const revision = new Revision(123);
     const incremented = revision.next();
 
-    expect(incremented.value).toEqual(RevisionValue.parse(revision.value + 1));
+    expect(incremented.value).toEqual(v.parse(RevisionValue, revision.value + 1));
   });
 
   test("toString", () => {
