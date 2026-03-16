@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const TimezoneError = {
   Type: "timezone.type",
@@ -7,20 +7,19 @@ export const TimezoneError = {
   Invalid: "timezone.invalid",
 };
 
-// Stryker disable all
-export const Timezone = z
-  // Stryker restore all
-  .string(TimezoneError.Type)
-  .min(1, TimezoneError.Empty)
-  .max(128, TimezoneError.TooLong)
-  .refine((value) => {
+export const Timezone = v.pipe(
+  v.string(TimezoneError.Type),
+  v.minLength(1, TimezoneError.Empty),
+  v.maxLength(128, TimezoneError.TooLong),
+  v.check((value) => {
     try {
       new Intl.DateTimeFormat("en-US", { timeZone: value }).format(Date.now());
       return true;
     } catch {
       return false;
     }
-  }, TimezoneError.Invalid)
-  .brand("Timezone");
+  }, TimezoneError.Invalid),
+  v.brand("Timezone"),
+);
 
-export type TimezoneType = z.infer<typeof Timezone>;
+export type TimezoneType = v.InferOutput<typeof Timezone>;
