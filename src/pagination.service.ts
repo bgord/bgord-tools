@@ -17,7 +17,7 @@ export type PaginationPrepareConfigType<T> = {
 
 export class Pagination {
   static parse(values: PaginationValuesType, _take: TakeType): PaginationType {
-    const page = Page.parse(values.page);
+    const page = v.parse(Page, values.page);
     const take = v.parse(Take, _take);
 
     const skip = v.parse(Skip, (page - 1) * take);
@@ -31,8 +31,8 @@ export class Pagination {
     const currentPage = config.pagination.page;
     const lastPage = Pagination.getLastPage(config);
 
-    const previousPage = currentPage > 1 ? Page.parse(currentPage - 1) : undefined;
-    const nextPage = currentPage < lastPage ? Page.parse(currentPage + 1) : undefined;
+    const previousPage = currentPage > 1 ? v.parse(Page, currentPage - 1) : undefined;
+    const nextPage = currentPage < lastPage ? v.parse(Page, currentPage + 1) : undefined;
 
     return {
       result: config.result,
@@ -45,7 +45,7 @@ export class Pagination {
   }
 
   private static getLastPage(config: PaginationExhaustedConfig): PageType {
-    return Page.parse(new RoundingUpStrategy().round(config.total / config.pagination.values.take));
+    return v.parse(Page, new RoundingUpStrategy().round(config.total / config.pagination.values.take));
   }
 
   static empty = {
@@ -61,7 +61,7 @@ export class Pagination {
   };
 
   static getFirstPage(input: { take: TakeType }): PaginationType {
-    return { values: { take: v.parse(Take, input.take), skip: v.parse(Skip, 0) }, page: Page.parse(1) };
+    return { values: { take: v.parse(Take, input.take), skip: v.parse(Skip, 0) }, page: v.parse(Page, 1) };
   }
 }
 

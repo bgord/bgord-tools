@@ -1,27 +1,28 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Page } from "../src/pagination-page.vo";
 
-describe("PaginationTake", () => {
+describe("PaginationPage", () => {
   test("happy path", () => {
-    expect(Page.safeParse(0).success).toEqual(true);
-    expect(Page.safeParse(1).success).toEqual(true);
-    expect(Page.safeParse(5).success).toEqual(true);
-    expect(Page.safeParse(15).success).toEqual(true);
+    expect(v.safeParse(Page, 0).success).toEqual(true);
+    expect(v.safeParse(Page, 1).success).toEqual(true);
+    expect(v.safeParse(Page, 5).success).toEqual(true);
+    expect(v.safeParse(Page, 15).success).toEqual(true);
   });
 
   test("transforms null to 1", () => {
-    expect(Page.safeParse(null)).toEqual({ success: true, data: 1 });
+    expect(v.safeParse(Page, null)).toMatchObject({ success: true, output: 1 });
   });
 
   test("transforms string to int", () => {
-    expect(Page.safeParse("123")).toEqual({ success: true, data: 123 });
+    expect(v.safeParse(Page, "123")).toMatchObject({ success: true, output: 123 });
   });
 
   test("transforms negative numbers to 1", () => {
-    expect(Page.safeParse(-2)).toEqual({ success: true, data: 1 });
+    expect(v.safeParse(Page, -2)).toMatchObject({ success: true, output: 1 });
   });
 
   test("rejects fractions", () => {
-    expect(() => Page.parse(1.5)).toThrow("pagination.page.type");
+    expect(() => v.parse(Page, 1.5)).toThrow("pagination.page.type");
   });
 });
