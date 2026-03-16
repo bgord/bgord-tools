@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
 import { RoundingUpStrategy } from "./rounding-up.strategy";
 import { SizeBytes, type SizeBytesType } from "./size-bytes.vo";
@@ -93,13 +94,13 @@ export class Size {
   private calculateBytes(value: SizeConfigType["value"], unit: SizeUnitEnum): SizeBytesType {
     switch (unit) {
       case SizeUnitEnum.kB:
-        return SizeBytes.parse(value * Size.KB_MULTIPLIER);
+        return v.parse(SizeBytes, value * Size.KB_MULTIPLIER);
       case SizeUnitEnum.MB:
-        return SizeBytes.parse(value * Size.MB_MULTIPLIER);
+        return v.parse(SizeBytes, value * Size.MB_MULTIPLIER);
       case SizeUnitEnum.GB:
-        return SizeBytes.parse(value * Size.GB_MULTIPLIER);
+        return v.parse(SizeBytes, value * Size.GB_MULTIPLIER);
       default:
-        return SizeBytes.parse(value);
+        return v.parse(SizeBytes, value);
     }
   }
 

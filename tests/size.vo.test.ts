@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Size } from "../src/size.vo";
 import { SizeBytes } from "../src/size-bytes.vo";
 
@@ -15,19 +16,19 @@ describe("Size", () => {
   });
 
   test("convert - bytes to bytes", () => {
-    expect(Size.fromBytes(4096).toBytes()).toEqual(SizeBytes.parse(4096));
+    expect(Size.fromBytes(4096).toBytes()).toEqual(v.parse(SizeBytes, 4096));
   });
 
   test("convert - kB to bytes", () => {
-    expect(Size.fromKb(512).toBytes()).toEqual(SizeBytes.parse(524288));
+    expect(Size.fromKb(512).toBytes()).toEqual(v.parse(SizeBytes, 524288));
   });
 
   test("convert - MB to bytes", () => {
-    expect(Size.fromMB(1.5).toBytes()).toEqual(SizeBytes.parse(1572864));
+    expect(Size.fromMB(1.5).toBytes()).toEqual(v.parse(SizeBytes, 1572864));
   });
 
   test("convert - GB to bytes", () => {
-    expect(Size.fromGB(1.5).toBytes()).toEqual(SizeBytes.parse(1610612736));
+    expect(Size.fromGB(1.5).toBytes()).toEqual(v.parse(SizeBytes, 1610612736));
   });
 
   test("tokB", () => {
@@ -102,7 +103,7 @@ describe("Size", () => {
   });
 
   test("toBytes", () => {
-    expect(Size.toBytes({ unit: Size.unit.GB, value: 1 })).toEqual(SizeBytes.parse(1073741824));
+    expect(Size.toBytes({ unit: Size.unit.GB, value: 1 })).toEqual(v.parse(SizeBytes, 1073741824));
   });
 
   test("toString", () => {
