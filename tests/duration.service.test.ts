@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { DurationMs } from "../src/duration-ms.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
@@ -99,7 +100,7 @@ describe("Duration", () => {
 
   test("times", () => {
     const base = Duration.Ms(10);
-    const factor = MultiplicationFactor.parse(1.5);
+    const factor = v.parse(MultiplicationFactor, 1.5);
 
     const result = base.times(factor);
 
@@ -108,7 +109,7 @@ describe("Duration", () => {
 
   test("times - rounding", () => {
     const base = Duration.Ms(7);
-    const factor = MultiplicationFactor.parse(1.29);
+    const factor = v.parse(MultiplicationFactor, 1.29);
 
     const result = base.times(factor);
 

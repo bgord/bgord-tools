@@ -1,15 +1,14 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const MultiplicationFactorError = {
   Type: "multiplication.factor.type",
   Invalid: "multiplication.factor.invalid",
 };
 
-// Stryker disable all
-export const MultiplicationFactor = z
-  // Stryker restore all
-  .number(MultiplicationFactorError.Type)
-  .min(0, MultiplicationFactorError.Invalid)
-  .brand("MultiplicationFactor");
+export const MultiplicationFactor = v.pipe(
+  v.number(MultiplicationFactorError.Type),
+  v.minValue(0, MultiplicationFactorError.Invalid),
+  v.brand("MultiplicationFactor"),
+);
 
-export type MultiplicationFactorType = z.infer<typeof MultiplicationFactor>;
+export type MultiplicationFactorType = v.InferOutput<typeof MultiplicationFactor>;

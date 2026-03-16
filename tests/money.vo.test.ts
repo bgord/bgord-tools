@@ -10,7 +10,8 @@ import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 const roundUp = new RoundingUpStrategy();
 const roundDown = new RoundingDownStrategy();
 
-const factor = v.parse(DivisionFactor, 2.5);
+const divisor = v.parse(DivisionFactor, 2.5);
+const multiplier = v.parse(MultiplicationFactor, 1.5);
 
 describe("Money", () => {
   test("fromAmount", () => {
@@ -33,27 +34,21 @@ describe("Money", () => {
   });
 
   test("multiply - integer factor", () => {
-    expect(Money.fromAmount(100).multiply(MultiplicationFactor.parse(5)).getAmount()).toEqual(
+    expect(Money.fromAmount(100).multiply(v.parse(MultiplicationFactor, 5)).getAmount()).toEqual(
       MoneyAmount.parse(500),
     );
   });
 
   test("multiply - float factor - default round-to-nearest", () => {
-    expect(Money.fromAmount(99).multiply(MultiplicationFactor.parse(1.5)).getAmount()).toEqual(
-      MoneyAmount.parse(149),
-    );
+    expect(Money.fromAmount(99).multiply(multiplier).getAmount()).toEqual(MoneyAmount.parse(149));
   });
 
   test("multiply - float factor - round-up", () => {
-    expect(Money.fromAmount(99).multiply(MultiplicationFactor.parse(1.5), roundUp).getAmount()).toEqual(
-      MoneyAmount.parse(149),
-    );
+    expect(Money.fromAmount(99).multiply(multiplier, roundUp).getAmount()).toEqual(MoneyAmount.parse(149));
   });
 
   test("multiply - float factor - round-down", () => {
-    expect(Money.fromAmount(99).multiply(MultiplicationFactor.parse(1.5), roundDown).getAmount()).toEqual(
-      MoneyAmount.parse(148),
-    );
+    expect(Money.fromAmount(99).multiply(multiplier, roundDown).getAmount()).toEqual(MoneyAmount.parse(148));
   });
 
   test("subtract - result more than zero", () => {
@@ -71,15 +66,15 @@ describe("Money", () => {
   });
 
   test("divide - float factor - default round-to-nearest", () => {
-    expect(Money.fromAmount(98).divide(factor).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(divisor).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("divide - float factor - round-up", () => {
-    expect(Money.fromAmount(98).divide(factor, roundUp).getAmount()).toEqual(MoneyAmount.parse(40));
+    expect(Money.fromAmount(98).divide(divisor, roundUp).getAmount()).toEqual(MoneyAmount.parse(40));
   });
 
   test("divide - float factor - round-down", () => {
-    expect(Money.fromAmount(98).divide(factor, roundDown).getAmount()).toEqual(MoneyAmount.parse(39));
+    expect(Money.fromAmount(98).divide(divisor, roundDown).getAmount()).toEqual(MoneyAmount.parse(39));
   });
 
   test("equals", () => {

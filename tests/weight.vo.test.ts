@@ -40,7 +40,7 @@ describe("Weight", () => {
     expect(b.get()).toEqual(20_300);
     expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(2_000)).get()).toEqual(0);
     expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(1_000)).get()).toEqual(0);
-    expect(Weight.fromGrams(1_001).multiply(MultiplicationFactor.parse(0.5)).get()).toEqual(501);
+    expect(Weight.fromGrams(1_001).multiply(v.parse(MultiplicationFactor, 0.5)).get()).toEqual(501);
     expect(Weight.fromGrams(1_999).divide(factor).get()).toEqual(666);
   });
 
