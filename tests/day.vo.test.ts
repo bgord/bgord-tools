@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
@@ -15,41 +16,39 @@ const start = Timestamp.fromNumber(
 );
 const end = start.add(Duration.Days(1)).subtract(mocks.epsilon);
 
+const dayIsoId = v.parse(DayIsoId, mocks.TIME_ZERO_DATE_LIKE);
+
 describe("Day", () => {
   test("happy path", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
     expect(day.getStart()).toEqual(start);
     expect(day.getEnd()).toEqual(end);
-    expect(day.toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
+    expect(day.toIsoId()).toEqual(dayIsoId);
     expect(day.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("fromTimestamp", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(dayIsoId);
   });
 
   test("fromTimestampValue", () => {
-    expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(
-      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
-    );
+    expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(dayIsoId);
   });
 
   test("fromNow", () => {
-    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE));
+    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(dayIsoId);
   });
 
   test("fromIsoId", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toIsoId()).toEqual(
-      DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE),
-    );
+    expect(Day.fromIsoId(dayIsoId).toIsoId()).toEqual(dayIsoId);
   });
 
   test("leap-day", () => {
     const timestamp = Timestamp.fromDateLike("2024-02-29");
     const day = Day.fromTimestamp(timestamp);
 
-    expect(day.toIsoId()).toEqual(DayIsoId.parse("2024-02-29"));
+    expect(day.toIsoId()).toEqual(v.parse(DayIsoId, "2024-02-29"));
     expect(day.contains(timestamp)).toEqual(true);
   });
 
@@ -62,24 +61,24 @@ describe("Day", () => {
   });
 
   test("next", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(DayIsoId.parse("2023-11-15"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(v.parse(DayIsoId, "2023-11-15"));
   });
 
   test("previous", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(DayIsoId.parse("2023-11-13"));
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).previous().toIsoId()).toEqual(v.parse(DayIsoId, "2023-11-13"));
   });
 
   test("shift", () => {
     expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(2)).toIsoId()).toEqual(
-      DayIsoId.parse("2023-11-16"),
+      v.parse(DayIsoId, "2023-11-16"),
     );
     expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Integer.parse(-2)).toIsoId()).toEqual(
-      DayIsoId.parse("2023-11-12"),
+      v.parse(DayIsoId, "2023-11-12"),
     );
   });
 
   test("round-trips", () => {
-    expect(Day.fromIsoId(DayIsoId.parse("2025-12-31")).toIsoId()).toEqual(DayIsoId.parse("2025-12-31"));
+    expect(Day.fromIsoId(dayIsoId).toIsoId()).toEqual(dayIsoId);
   });
 
   test("contains", () => {
@@ -90,15 +89,10 @@ describe("Day", () => {
   });
 
   test("toString", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toString()).toEqual(
-      mocks.TIME_ZERO_DATE_LIKE,
-    );
+    expect(Day.fromIsoId(dayIsoId).toString()).toEqual(mocks.TIME_ZERO_DATE_LIKE);
   });
 
   test("toJSON", () => {
-    expect(Day.fromIsoId(DayIsoId.parse(mocks.TIME_ZERO_DATE_LIKE)).toJSON()).toEqual({
-      start: 1699920000000,
-      end: 1700006399999,
-    });
+    expect(Day.fromIsoId(dayIsoId).toJSON()).toEqual({ start: 1699920000000, end: 1700006399999 });
   });
 });

@@ -1,4 +1,5 @@
 import { formatISO } from "date-fns";
+import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
@@ -27,7 +28,7 @@ export class Day extends DateRange {
   }
 
   static fromIsoId(isoId: DayIsoIdType): Day {
-    const [year, month, day] = DayIsoId.parse(isoId).split("-").map(Number);
+    const [year, month, day] = v.parse(DayIsoId, isoId).split("-").map(Number);
 
     const startUtc = Timestamp.fromNumber(Date.UTC(year, month - 1, day));
     const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
@@ -38,7 +39,7 @@ export class Day extends DateRange {
   toIsoId(): DayIsoIdType {
     const midday = this.getStart().add(Duration.Hours(12));
 
-    return DayIsoId.parse(formatISO(midday.ms, { representation: "date" }));
+    return v.parse(DayIsoId, formatISO(midday.ms, { representation: "date" }));
   }
 
   next(): Day {
