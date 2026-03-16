@@ -1,16 +1,17 @@
+import * as v from "valibot";
 import { HeightMillimeters, type HeightMillimetersType } from "./height-milimiters.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
 export class Height {
-  private static readonly ZERO = HeightMillimeters.parse(0);
+  private static readonly ZERO = v.parse(HeightMillimeters, 0);
 
   private static readonly MILLIMETERS_PER_CENTIMETER = 10;
 
   private constructor(private readonly millimeters: HeightMillimetersType) {}
 
   static fromMillimeters(millimeters: number): Height {
-    return new Height(HeightMillimeters.parse(millimeters));
+    return new Height(v.parse(HeightMillimeters, millimeters));
   }
 
   static fromMillimetersSafe(millimeters: HeightMillimetersType): Height {
@@ -23,7 +24,7 @@ export class Height {
   ): Height {
     const millimeters = rounding.round(centimeters * Height.MILLIMETERS_PER_CENTIMETER);
 
-    return new Height(HeightMillimeters.parse(millimeters));
+    return new Height(v.parse(HeightMillimeters, millimeters));
   }
 
   static zero(): Height {

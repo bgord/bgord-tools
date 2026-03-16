@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Height } from "../src/height.vo";
 import { HeightMillimeters } from "../src/height-milimiters.vo";
 import { RoundingDownStrategy } from "../src/rounding-down.strategy";
@@ -16,7 +17,7 @@ describe("Height", () => {
   });
 
   test("fromMillimetersSafe", () => {
-    expect(Height.fromMillimetersSafe(HeightMillimeters.parse(100)).toMillimeters()).toEqual(100);
+    expect(Height.fromMillimetersSafe(v.parse(HeightMillimeters, 100)).toMillimeters()).toEqual(100);
   });
 
   test("zero factory", () => {

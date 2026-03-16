@@ -1,16 +1,15 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const HeightMillimetersError = {
   Type: "height.millimeters.type",
   Invalid: "height.millimeters.invalid",
 };
 
-// Stryker disable all
-export const HeightMillimeters = z
-  // Stryker restore all
-  .number(HeightMillimetersError.Type)
-  .int(HeightMillimetersError.Type)
-  .min(0, HeightMillimetersError.Invalid)
-  .brand("HeightMillimeters");
+export const HeightMillimeters = v.pipe(
+  v.number(HeightMillimetersError.Type),
+  v.integer(HeightMillimetersError.Type),
+  v.minValue(0, HeightMillimetersError.Invalid),
+  v.brand("HeightMillimeters"),
+);
 
-export type HeightMillimetersType = z.infer<typeof HeightMillimeters>;
+export type HeightMillimetersType = v.InferOutput<typeof HeightMillimeters>;
