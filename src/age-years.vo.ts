@@ -1,16 +1,15 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const AgeYearsError = { Type: "age.years.type", Invalid: "age.years.invalid" };
 
 export const AgeYearsConstraints = { min: 0, max: 130 };
 
-// Stryker disable all
-export const AgeYears = z
-  // Stryker restore all
-  .number(AgeYearsError.Type)
-  .int(AgeYearsError.Type)
-  .min(0, AgeYearsError.Invalid)
-  .max(130, AgeYearsError.Invalid)
-  .brand("AgeYears");
+export const AgeYears = v.pipe(
+  v.number(AgeYearsError.Type),
+  v.integer(AgeYearsError.Type),
+  v.minValue(0, AgeYearsError.Invalid),
+  v.maxValue(130, AgeYearsError.Invalid),
+  v.brand("AgeYears"),
+);
 
-export type AgeYearsType = z.infer<typeof AgeYears>;
+export type AgeYearsType = v.InferOutput<typeof AgeYears>;

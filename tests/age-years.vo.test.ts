@@ -1,29 +1,30 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { AgeYears } from "../src/age-years.vo";
 
 describe("AgeYears", () => {
   test("happy path", () => {
-    expect(AgeYears.safeParse(0).success).toEqual(true);
-    expect(AgeYears.safeParse(130).success).toEqual(true);
+    expect(v.safeParse(AgeYears, 0).success).toEqual(true);
+    expect(v.safeParse(AgeYears, 130).success).toEqual(true);
   });
 
   test("rejects non-number - null", () => {
-    expect(() => AgeYears.parse(null)).toThrow("age.years.type");
+    expect(() => v.parse(AgeYears, null)).toThrow("age.years.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => AgeYears.parse("100")).toThrow("age.years.type");
+    expect(() => v.parse(AgeYears, "100")).toThrow("age.years.type");
   });
 
   test("rejects fraction", () => {
-    expect(() => AgeYears.parse(100.5)).toThrow("age.years.type");
+    expect(() => v.parse(AgeYears, 100.5)).toThrow("age.years.type");
   });
 
   test("rejects negative", () => {
-    expect(() => AgeYears.parse(-1)).toThrow("age.years.invalid");
+    expect(() => v.parse(AgeYears, -1)).toThrow("age.years.invalid");
   });
 
   test("rejects 131", () => {
-    expect(() => AgeYears.parse(131)).toThrow("age.years.invalid");
+    expect(() => v.parse(AgeYears, 131)).toThrow("age.years.invalid");
   });
 });

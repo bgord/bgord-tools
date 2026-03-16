@@ -1,4 +1,5 @@
 import { differenceInYears } from "date-fns";
+import * as v from "valibot";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
 import { Timestamp } from "./timestamp.vo";
 
@@ -11,7 +12,7 @@ export class Age {
   private constructor(private readonly value: AgeYearsType) {}
 
   static fromValue(candidate: number): Age {
-    return new Age(AgeYears.parse(candidate));
+    return new Age(v.parse(AgeYears, candidate));
   }
 
   static fromValueSafe(candidate: AgeYearsType): Age {
