@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 import { FilePathRelativeSchema } from "../src/file-path-relative-schema.vo";
 
@@ -7,17 +8,17 @@ describe("FilePathRelativeSchema", () => {
     expect({
       directory: FilePathRelativeSchema.parse("tmp/file.txt").directory,
       filename: FilePathRelativeSchema.parse("tmp/file.txt").filename.get(),
-    }).toEqual({ directory: DirectoryPathRelativeSchema.parse("tmp"), filename: "file.txt" });
+    }).toEqual({ directory: v.parse(DirectoryPathRelativeSchema, "tmp"), filename: "file.txt" });
 
     expect({
       directory: FilePathRelativeSchema.parse("a/b/c/avatar.webp").directory,
       filename: FilePathRelativeSchema.parse("a/b/c/avatar.webp").filename.get(),
-    }).toEqual({ directory: DirectoryPathRelativeSchema.parse("a/b/c"), filename: "avatar.webp" });
+    }).toEqual({ directory: v.parse(DirectoryPathRelativeSchema, "a/b/c"), filename: "avatar.webp" });
 
     expect({
       directory: FilePathRelativeSchema.parse("dir/sub/archive.tar.gz").directory,
       filename: FilePathRelativeSchema.parse("dir/sub/archive.tar.gz").filename.get(),
-    }).toEqual({ directory: DirectoryPathRelativeSchema.parse("dir/sub"), filename: "archive.tar.gz" });
+    }).toEqual({ directory: v.parse(DirectoryPathRelativeSchema, "dir/sub"), filename: "archive.tar.gz" });
   });
 
   test("rejects non-string - null", () => {

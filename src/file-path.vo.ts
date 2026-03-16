@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { DirectoryPathAbsoluteSchema, type DirectoryPathAbsoluteType } from "./directory-path-absolute.vo";
 import { DirectoryPathRelativeSchema, type DirectoryPathRelativeType } from "./directory-path-relative.vo";
 import { FilePathAbsoluteSchema } from "./file-path-absolute-schema.vo";
@@ -11,7 +12,7 @@ export class FilePathRelative {
   ) {}
 
   static fromParts(directoryCandidate: string, filename: Filename): FilePathRelative {
-    const directory = DirectoryPathRelativeSchema.parse(directoryCandidate);
+    const directory = v.parse(DirectoryPathRelativeSchema, directoryCandidate);
 
     return new FilePathRelative(directory, filename);
   }

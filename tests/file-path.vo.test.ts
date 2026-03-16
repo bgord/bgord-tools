@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
 import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 import { FilePathAbsolute, FilePathRelative } from "../src/file-path.vo";
@@ -18,7 +19,7 @@ describe("FilePathRelative", () => {
       filename: FilePathRelative.fromString("tmp/file.txt").getFilename().get(),
     }).toEqual({
       path: "tmp/file.txt",
-      directory: DirectoryPathRelativeSchema.parse("tmp"),
+      directory: v.parse(DirectoryPathRelativeSchema, "tmp"),
       filename: "file.txt",
     });
   });
@@ -38,7 +39,7 @@ describe("FilePathRelative", () => {
   test("withDirectory", () => {
     expect(
       FilePathRelative.fromParts("users/avatars", Filename.fromString("avatar.webp"))
-        .withDirectory(DirectoryPathRelativeSchema.parse("users/pictures"))
+        .withDirectory(v.parse(DirectoryPathRelativeSchema, "users/pictures"))
         .get(),
     ).toEqual("users/pictures/avatar.webp");
   });
@@ -94,7 +95,7 @@ describe("FilePathAbsolute", () => {
   test("toRelative", () => {
     expect(
       FilePathAbsolute.fromParts("/tmp/app/users", Filename.fromString("avatar.webp"))
-        .toRelative(DirectoryPathRelativeSchema.parse("users/avatars"))
+        .toRelative(v.parse(DirectoryPathRelativeSchema, "users/avatars"))
         .get(),
     ).toEqual("users/avatars/avatar.webp");
   });

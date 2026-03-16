@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const DirectoryPathRelativeError = {
   BadSegments: "directory.path.relative.bad.segments",
@@ -11,24 +11,22 @@ export const DirectoryPathRelativeError = {
 
 // Letters, digits, dots, underscores, and hyphens
 export const DIRECTORY_PATH_RELATIVE_CHARS = /^[A-Za-z0-9._-]+$/;
-
 const DOT_SEGMENTS = [".", ".."];
 
-// Stryker disable all
-export const DirectoryPathRelativeSchema = z
-  // Stryker restore all
-  .string(DirectoryPathRelativeError.Type)
-  .min(1, DirectoryPathRelativeError.Empty)
-  .max(512, DirectoryPathRelativeError.TooLong)
-  .refine((value) => !value.startsWith("/"), DirectoryPathRelativeError.LeadingSlash)
-  .refine((value) => !value.endsWith("/"), DirectoryPathRelativeError.TrailingSlash)
-  .refine(
+export const DirectoryPathRelativeSchema = v.pipe(
+  v.string(DirectoryPathRelativeError.Type),
+  v.minLength(1, DirectoryPathRelativeError.Empty),
+  v.maxLength(512, DirectoryPathRelativeError.TooLong),
+  v.check((value) => !value.startsWith("/"), DirectoryPathRelativeError.LeadingSlash),
+  v.check((value) => !value.endsWith("/"), DirectoryPathRelativeError.TrailingSlash),
+  v.check(
     (value) =>
       value
         .split("/")
         .every((segment) => DIRECTORY_PATH_RELATIVE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment)),
     DirectoryPathRelativeError.BadSegments,
-  )
-  .brand("DirectoryPathRelativeSchema");
+  ),
+  v.brand("DirectoryPathRelativeSchema"),
+);
 
-export type DirectoryPathRelativeType = z.infer<typeof DirectoryPathRelativeSchema>;
+export type DirectoryPathRelativeType = v.InferOutput<typeof DirectoryPathRelativeSchema>;

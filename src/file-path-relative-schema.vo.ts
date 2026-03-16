@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import * as z from "zod/v4";
 import { DirectoryPathRelativeSchema } from "./directory-path-relative.vo";
 import { Filename } from "./filename.vo";
@@ -24,7 +25,7 @@ export const FilePathRelativeSchema = z
     const directoryCandidate = normalized.slice(0, lastSlashIndex);
     const filenameCandidate = normalized.slice(lastSlashIndex + 1);
 
-    const directory = DirectoryPathRelativeSchema.parse(directoryCandidate);
+    const directory = v.parse(DirectoryPathRelativeSchema, directoryCandidate);
     const filename = Filename.fromString(filenameCandidate);
 
     return { directory, filename };
