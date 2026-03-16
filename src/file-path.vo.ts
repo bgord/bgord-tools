@@ -59,7 +59,7 @@ export class FilePathAbsolute {
   ) {}
 
   static fromParts(directoryCandidate: string, filename: Filename): FilePathAbsolute {
-    const directory = DirectoryPathAbsoluteSchema.parse(directoryCandidate);
+    const directory = v.parse(DirectoryPathAbsoluteSchema, directoryCandidate);
 
     return new FilePathAbsolute(directory, filename);
   }

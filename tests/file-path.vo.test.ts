@@ -47,7 +47,7 @@ describe("FilePathRelative", () => {
   test("toAbsolute", () => {
     expect(
       FilePathRelative.fromParts("users/avatars", Filename.fromString("avatar.webp"))
-        .toAbsolute(DirectoryPathAbsoluteSchema.parse("/tmp/app"))
+        .toAbsolute(v.parse(DirectoryPathAbsoluteSchema, "/tmp/app"))
         .get(),
     ).toEqual("/tmp/app/avatar.webp");
   });
@@ -67,7 +67,7 @@ describe("FilePathAbsolute", () => {
       filename: FilePathAbsolute.fromString("/avatar.webp").getFilename().get(),
     }).toEqual({
       path: "/avatar.webp",
-      directory: DirectoryPathAbsoluteSchema.parse("/"),
+      directory: v.parse(DirectoryPathAbsoluteSchema, "/"),
       filename: "avatar.webp",
     });
   });
@@ -87,7 +87,7 @@ describe("FilePathAbsolute", () => {
   test("withDirectory", () => {
     expect(
       FilePathAbsolute.fromParts("/tmp/app/users", Filename.fromString("avatar.webp"))
-        .withDirectory(DirectoryPathAbsoluteSchema.parse("/var/lib/app/users"))
+        .withDirectory(v.parse(DirectoryPathAbsoluteSchema, "/var/lib/app/users"))
         .get(),
     ).toEqual("/var/lib/app/users/avatar.webp");
   });

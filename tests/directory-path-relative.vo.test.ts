@@ -6,8 +6,7 @@ describe("DirectoryPathRelativeSchema", () => {
   test("happy path", () => {
     const valid = ["users/avatars", "users"];
     for (const value of valid) {
-      // @ts-expect-error
-      expect(v.parse(DirectoryPathRelativeSchema, value)).toEqual(value);
+      expect(v.safeParse(DirectoryPathRelativeSchema, value)).toMatchObject({ success: true, output: value });
     }
   });
 

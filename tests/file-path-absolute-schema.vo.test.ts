@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
 import { FilePathAbsoluteSchema } from "../src/file-path-absolute-schema.vo";
 
@@ -7,12 +8,12 @@ describe("FilePathAbsoluteSchema", () => {
     expect({
       directory: FilePathAbsoluteSchema.parse("/avatar.webp").directory,
       filename: FilePathAbsoluteSchema.parse("/avatar.webp").filename.get(),
-    }).toEqual({ directory: DirectoryPathAbsoluteSchema.parse("/"), filename: "avatar.webp" });
+    }).toEqual({ directory: v.parse(DirectoryPathAbsoluteSchema, "/"), filename: "avatar.webp" });
 
     expect({
       directory: FilePathAbsoluteSchema.parse("/var/uploads/avatar.webp").directory,
       filename: FilePathAbsoluteSchema.parse("/var/uploads/avatar.webp").filename.get(),
-    }).toEqual({ directory: DirectoryPathAbsoluteSchema.parse("/var/uploads"), filename: "avatar.webp" });
+    }).toEqual({ directory: v.parse(DirectoryPathAbsoluteSchema, "/var/uploads"), filename: "avatar.webp" });
   });
 
   test("rejects non-string - number", () => {
@@ -49,7 +50,7 @@ describe("FilePathAbsoluteSchema", () => {
     expect({
       directory: FilePathAbsoluteSchema.parse("/avatar.webp").directory,
       filename: FilePathAbsoluteSchema.parse("/avatar.webp").filename.get(),
-    }).toEqual({ directory: DirectoryPathAbsoluteSchema.parse("/"), filename: "avatar.webp" });
+    }).toEqual({ directory: v.parse(DirectoryPathAbsoluteSchema, "/"), filename: "avatar.webp" });
   });
 
   test("delegated failures", () => {

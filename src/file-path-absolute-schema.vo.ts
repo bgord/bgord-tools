@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import * as z from "zod/v4";
 import { DirectoryPathAbsoluteSchema } from "./directory-path-absolute.vo";
 import { Filename } from "./filename.vo";
@@ -24,7 +25,7 @@ export const FilePathAbsoluteSchema = z
     const directoryCandidate = index === 0 ? "/" : normalized.slice(0, index);
     const filenameCandidate = normalized.slice(index + 1);
 
-    const directory = DirectoryPathAbsoluteSchema.parse(directoryCandidate);
+    const directory = v.parse(DirectoryPathAbsoluteSchema, directoryCandidate);
     const filename = Filename.fromString(filenameCandidate);
 
     return { directory, filename };
