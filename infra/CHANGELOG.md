@@ -1,8 +1,11 @@
 # Changelog
+## 2026-03-16 18:56 v1.4.1
 - 2026-03-16 18:56 d38c6ba **fix: exclude tests from tsconfig**
+- 2026-03-16 18:56 893e90a **1.4.1**
 ## 2026-03-16 18:55 v1.4.0
 - 2026-03-16 18:55 94846e4 **1.4.0**
 - 2026-03-16 18:18 1f6b5f7 **refactor: mutation tests adjustments**
+- 2026-03-16 17:56 021e103 **docs: generate CHANGELOG**
 - 2026-03-16 17:55 226ff22 **docs: generate CHANGELOG**
 - 2026-03-16 17:53 d634ab3 **docs: generate CHANGELOG**
 - 2026-03-16 17:28 e9b1f31 **step: update packages**
