@@ -1,60 +1,61 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { MimeValue } from "../src/mime-value.vo";
 
 describe("MimeValue", () => {
   test("happy path", () => {
-    expect(MimeValue.safeParse("text/plain").success).toEqual(true);
-    expect(MimeValue.safeParse("*/*").success).toEqual(true);
-    expect(MimeValue.safeParse("image/*").success).toEqual(true);
-    expect(MimeValue.safeParse("application/octet-stream").success).toEqual(true);
-    expect(MimeValue.safeParse("video/mp4").success).toEqual(true);
-    expect(MimeValue.safeParse("application/ace+json").success).toEqual(true);
-    expect(MimeValue.safeParse("video/vnd.planar").success).toEqual(true);
-    expect(MimeValue.safeParse(`${"a".repeat(24)}/${"a".repeat(72)}`).success).toEqual(true);
-    expect(MimeValue.safeParse("application/clue_info+xml").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "text/plain").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "*/*").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "image/*").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "application/octet-stream").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "video/mp4").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "application/ace+json").success).toEqual(true);
+    expect(v.safeParse(MimeValue, "video/vnd.planar").success).toEqual(true);
+    expect(v.safeParse(MimeValue, `${"a".repeat(24)}/${"a".repeat(72)}`).success).toEqual(true);
+    expect(v.safeParse(MimeValue, "application/clue_info+xml").success).toEqual(true);
   });
 
   test("rejects prefix", () => {
-    expect(() => MimeValue.parse("!text/plain")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "!text/plain")).toThrow("mime.value.invalid");
   });
 
   test("rejects suffix", () => {
-    expect(() => MimeValue.parse("text/plain!")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "text/plain!")).toThrow("mime.value.invalid");
   });
 
   test("rejects empty", () => {
-    expect(() => MimeValue.parse("")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "")).toThrow("mime.value.invalid");
   });
 
   test("rejects non-string - null", () => {
-    expect(() => MimeValue.parse(null)).toThrow("mime.value.type");
+    expect(() => v.parse(MimeValue, null)).toThrow("mime.value.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => MimeValue.parse(123)).toThrow("mime.value.type");
+    expect(() => v.parse(MimeValue, 123)).toThrow("mime.value.type");
   });
 
   test("rejects missing type", () => {
-    expect(() => MimeValue.parse("/plain")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "/plain")).toThrow("mime.value.invalid");
   });
 
   test("rejects too long type", () => {
-    expect(() => MimeValue.parse(`${"a".repeat(25)}/plain`)).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, `${"a".repeat(25)}/plain`)).toThrow("mime.value.invalid");
   });
 
   test("rejects missing subtype", () => {
-    expect(() => MimeValue.parse("text/")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "text/")).toThrow("mime.value.invalid");
   });
 
-  test("rejects too lonog subtype", () => {
-    expect(() => MimeValue.parse(`text/${"a".repeat(73)}`)).toThrow("mime.value.invalid");
+  test("rejects too long subtype", () => {
+    expect(() => v.parse(MimeValue, `text/${"a".repeat(73)}`)).toThrow("mime.value.invalid");
   });
 
   test("rejects no slash", () => {
-    expect(() => MimeValue.parse("text")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "text")).toThrow("mime.value.invalid");
   });
 
   test("rejects only *", () => {
-    expect(() => MimeValue.parse("*")).toThrow("mime.value.invalid");
+    expect(() => v.parse(MimeValue, "*")).toThrow("mime.value.invalid");
   });
 });

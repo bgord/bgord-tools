@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { MimeValue } from "./mime-value.vo";
 
 export class Mime {
@@ -7,7 +8,7 @@ export class Mime {
   ) {}
 
   static fromString(candidate: string): Mime {
-    const value = MimeValue.parse(candidate.split(";")[0].trim());
+    const value = v.parse(MimeValue, candidate.split(";")[0].trim());
     const [type, subtype] = value.split("/");
 
     return new Mime(type, subtype);
