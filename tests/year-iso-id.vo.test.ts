@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { YearIsoId } from "../src/year-iso-id.vo";
 
 describe("YearIsoId", () => {
@@ -6,23 +7,23 @@ describe("YearIsoId", () => {
     const valid = ["0000", "1970", "1999", "2024", "2025", "9999"];
 
     for (const year of valid) {
-      expect(YearIsoId.safeParse(year).success).toEqual(true);
+      expect(v.safeParse(YearIsoId, year).success).toEqual(true);
     }
   });
 
   test("rejects non-string - null", () => {
-    expect(() => YearIsoId.parse(null)).toThrow("year.iso.id.type");
+    expect(() => v.parse(YearIsoId, null)).toThrow("year.iso.id.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => YearIsoId.parse(123)).toThrow("year.iso.id.type");
+    expect(() => v.parse(YearIsoId, 123)).toThrow("year.iso.id.type");
   });
 
   test("rejects invalid year", () => {
-    expect(() => YearIsoId.parse("202A")).toThrow("year.iso.id.bad.chars");
+    expect(() => v.parse(YearIsoId, "202A")).toThrow("year.iso.id.bad.chars");
   });
 
   test("rejects 5 digits year", () => {
-    expect(() => YearIsoId.parse("202A")).toThrow("year.iso.id.bad.chars");
+    expect(() => v.parse(YearIsoId, "202A")).toThrow("year.iso.id.bad.chars");
   });
 });

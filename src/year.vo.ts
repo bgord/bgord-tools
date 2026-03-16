@@ -1,4 +1,5 @@
 import { endOfYear, getYear, startOfYear } from "date-fns";
+import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Integer, type IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
@@ -22,7 +23,7 @@ export class Year extends DateRange {
   }
 
   static fromNumber(candidate: number): Year {
-    return Year.fromIsoId(YearIsoId.parse(String(candidate)));
+    return Year.fromIsoId(v.parse(YearIsoId, String(candidate)));
   }
 
   static fromIsoId(isoId: YearIsoIdType): Year {
@@ -35,7 +36,7 @@ export class Year extends DateRange {
   }
 
   toIsoId(): YearIsoIdType {
-    return YearIsoId.parse(String(getYear(this.getStart().ms)));
+    return v.parse(YearIsoId, String(getYear(this.getStart().ms)));
   }
 
   isLeapYear(): boolean {
@@ -57,7 +58,8 @@ export class Year extends DateRange {
   shift(count: IntegerType): Year {
     const year = getYear(this.getStart().ms) + count;
 
-    return Year.fromIsoId(YearIsoId.parse(String(year)));
+    // TODO?
+    return Year.fromNumber(year);
   }
 
   toString(): string {
