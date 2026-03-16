@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Hour } from "../src/hour.vo";
 import { HourValue } from "../src/hour-value.vo";
 import * as mocks from "./mocks";
@@ -8,7 +9,7 @@ const THIRTEEN = Hour.fromValue(13);
 
 describe("Hour", () => {
   test("happy path", () => {
-    expect(FIVE.get()).toEqual(HourValue.parse(5));
+    expect(FIVE.get()).toEqual(v.parse(HourValue, 5));
   });
 
   test("throws for invalid hour values", () => {
@@ -18,27 +19,27 @@ describe("Hour", () => {
   });
 
   test("fromValueSafe", () => {
-    expect(Hour.fromValueSafe(HourValue.parse(1)).get()).toEqual(HourValue.parse(1));
+    expect(Hour.fromValueSafe(v.parse(HourValue, 1)).get()).toEqual(v.parse(HourValue, 1));
   });
 
   test("fromTimestampValue", () => {
-    expect(Hour.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(HourValue.parse(22));
+    expect(Hour.fromTimestampValue(mocks.TIME_ZERO.ms).get()).toEqual(v.parse(HourValue, 22));
   });
 
   test("fromTimestamp", () => {
-    expect(Hour.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(HourValue.parse(22));
+    expect(Hour.fromTimestamp(mocks.TIME_ZERO).get()).toEqual(v.parse(HourValue, 22));
   });
 
   test("zero", () => {
-    expect(Hour.zero().get()).toEqual(HourValue.parse(0));
+    expect(Hour.zero().get()).toEqual(v.parse(HourValue, 0));
   });
 
   test("max", () => {
-    expect(Hour.max().get()).toEqual(HourValue.parse(23));
+    expect(Hour.max().get()).toEqual(v.parse(HourValue, 23));
   });
 
   test("get", () => {
-    expect(FIVE.get()).toEqual(HourValue.parse(5));
+    expect(FIVE.get()).toEqual(v.parse(HourValue, 5));
   });
 
   test("equals", () => {
@@ -62,8 +63,8 @@ describe("Hour", () => {
     const hours = Hour.list();
 
     expect(hours.length).toEqual(24);
-    expect(hours[0].get()).toEqual(HourValue.parse(0));
-    expect(hours[23].get()).toEqual(HourValue.parse(23));
+    expect(hours[0].get()).toEqual(v.parse(HourValue, 0));
+    expect(hours[23].get()).toEqual(v.parse(HourValue, 23));
     expect(Hour.list()).toEqual(hours);
   });
 
@@ -73,7 +74,7 @@ describe("Hour", () => {
   });
 
   test("toJSON", () => {
-    expect(FIVE.toJSON()).toEqual(HourValue.parse(5));
+    expect(FIVE.toJSON()).toEqual(v.parse(HourValue, 5));
     expect(THIRTEEN.toJSON()).toEqual(13);
   });
 });
