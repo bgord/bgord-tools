@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { Basename } from "../src/basename.vo";
 import { Extension } from "../src/extension.vo";
 import { Filename } from "../src/filename.vo";
@@ -71,14 +72,14 @@ describe("Filename", () => {
 
   test("withAffixSafe - suffix", () => {
     const filename = Filename.fromString("avatar.webp");
-    const affix = FilenameAffix.parse("-sm");
+    const affix = v.parse(FilenameAffix, "-sm");
 
     expect(filename.withAffixSafe(affix, FilenameAffixStrategy.suffix).get()).toEqual("avatar-sm.webp");
   });
 
   test("withSuffixSafe", () => {
     const filename = Filename.fromString("avatar.webp");
-    const affix = FilenameAffix.parse("-sm");
+    const affix = v.parse(FilenameAffix, "-sm");
 
     expect(filename.withSuffixSafe(affix).get()).toEqual("avatar-sm.webp");
   });
@@ -101,14 +102,14 @@ describe("Filename", () => {
 
   test("withAffixSafe - prefix", () => {
     const filename = Filename.fromString("avatar.webp");
-    const affix = FilenameAffix.parse("sm-");
+    const affix = v.parse(FilenameAffix, "sm-");
 
     expect(filename.withAffixSafe(affix, FilenameAffixStrategy.prefix).get()).toEqual("sm-avatar.webp");
   });
 
   test("withPrefixSafe", () => {
     const filename = Filename.fromString("avatar.webp");
-    const affix = FilenameAffix.parse("sm-");
+    const affix = v.parse(FilenameAffix, "sm-");
 
     expect(filename.withPrefixSafe(affix).get()).toEqual("sm-avatar.webp");
   });

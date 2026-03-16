@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import { Basename, type BasenameType } from "./basename.vo";
 import { Extension, type ExtensionType } from "./extension.vo";
 import { FilenameAffix, FilenameAffixStrategy, type FilenameAffixType } from "./filename-affix.vo";
@@ -44,7 +45,7 @@ export class Filename {
   }
 
   withAffix(candidate: string, strategy: FilenameAffixStrategy): Filename {
-    const affix = FilenameAffix.parse(candidate);
+    const affix = v.parse(FilenameAffix, candidate);
 
     if (strategy === FilenameAffixStrategy.prefix) {
       return new Filename(Basename.parse(`${affix}${this.basename}`), this.extension);

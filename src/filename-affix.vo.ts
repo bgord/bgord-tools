@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export enum FilenameAffixStrategy {
   prefix = "prefix",
@@ -15,13 +15,12 @@ export const FilenameAffixError = {
 // Letters, digits, underscores, and hyphens allowed
 const FILENAME_AFFIX_WHITELIST = /^[a-zA-Z0-9_-]+$/;
 
-// Stryker disable all
-export const FilenameAffix = z
-  // Stryker restore all
-  .string(FilenameAffixError.Type)
-  .min(1, FilenameAffixError.Empty)
-  .max(32, FilenameAffixError.TooLong)
-  .regex(FILENAME_AFFIX_WHITELIST, FilenameAffixError.BadChars)
-  .brand("FilenameAffix");
+export const FilenameAffix = v.pipe(
+  v.string(FilenameAffixError.Type),
+  v.minLength(1, FilenameAffixError.Empty),
+  v.maxLength(32, FilenameAffixError.TooLong),
+  v.regex(FILENAME_AFFIX_WHITELIST, FilenameAffixError.BadChars),
+  v.brand("FilenameAffix"),
+);
 
-export type FilenameAffixType = z.infer<typeof FilenameAffix>;
+export type FilenameAffixType = v.InferOutput<typeof FilenameAffix>;
