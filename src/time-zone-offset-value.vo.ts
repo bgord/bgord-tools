@@ -1,4 +1,4 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const TimeZoneOffsetValueError = {
   Type: "time.zone.offset.value.type",
@@ -6,16 +6,16 @@ export const TimeZoneOffsetValueError = {
   Max: "time.zone.offset.value.max",
 };
 
-// Stryker disable all
-export const TimeZoneOffsetValue = z.coerce
-  // Stryker restore all
-  .number(TimeZoneOffsetValueError.Type)
-  .int(TimeZoneOffsetValueError.Type)
+export const TimeZoneOffsetValue = v.pipe(
+  v.unknown(),
+  v.transform((value) => (value === undefined ? 0 : Number(value))),
+  v.number(TimeZoneOffsetValueError.Type),
+  v.integer(TimeZoneOffsetValueError.Type),
   // UTC+14 (Kiribati)
-  .min(-840, TimeZoneOffsetValueError.Min)
+  v.minValue(-840, TimeZoneOffsetValueError.Min),
   // UTC-12 (Baker Island)
-  .max(720, TimeZoneOffsetValueError.Max)
-  .default(0) // Default to UTC if missing or invalid
-  .brand("TimeZoneOffsetValue");
+  v.maxValue(720, TimeZoneOffsetValueError.Max),
+  v.brand("TimeZoneOffsetValue"),
+);
 
-export type TimeZoneOffsetValueType = z.infer<typeof TimeZoneOffsetValue>;
+export type TimeZoneOffsetValueType = v.InferOutput<typeof TimeZoneOffsetValue>;
