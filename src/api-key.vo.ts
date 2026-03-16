@@ -1,16 +1,15 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const ApiKeyError = { Type: "api.key.type", Length: "api.key.length", BadChars: "api.key.bad.chars" };
 
 // 64 letters and digits allowed
 const API_KEY_CHARS = /^[a-zA-Z0-9]{64}$/;
 
-// Stryker disable all
-export const ApiKey = z
-  // Stryker disable all
-  .string(ApiKeyError.Type)
-  .length(64, ApiKeyError.Length)
-  .regex(API_KEY_CHARS, ApiKeyError.BadChars)
-  .brand("ApiKey");
+export const ApiKey = v.pipe(
+  v.string(ApiKeyError.Type),
+  v.length(64, ApiKeyError.Length),
+  v.regex(API_KEY_CHARS, ApiKeyError.BadChars),
+  v.brand("ApiKey"),
+);
 
-export type ApiKeyType = z.infer<typeof ApiKey>;
+export type ApiKeyType = v.InferOutput<typeof ApiKey>;
