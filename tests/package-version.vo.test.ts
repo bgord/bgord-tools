@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import * as v from "valibot";
 import { PackageVersion } from "../src/package-version.vo";
 import { PackageVersionSchema } from "../src/package-version-schema.vo";
 
@@ -10,7 +11,7 @@ describe("PackageVersion", () => {
   });
 
   test("fromVersionStringSafe", () => {
-    const version = PackageVersion.fromVersionStringSafe(PackageVersionSchema.parse("v1.2.3"));
+    const version = PackageVersion.fromVersionStringSafe(v.parse(PackageVersionSchema, "v1.2.3"));
 
     expect(version.toJSON()).toEqual({ major: 1, minor: 2, patch: 3 });
   });

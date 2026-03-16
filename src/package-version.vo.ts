@@ -1,3 +1,4 @@
+import * as v from "valibot";
 import {
   PACKAGE_VERSIONS_CHARS_WHITELIST,
   PackageVersionSchema,
@@ -12,9 +13,7 @@ export class PackageVersion {
   ) {}
 
   static fromVersionString(candidate: string): PackageVersion {
-    const version = PackageVersionSchema.parse(candidate);
-
-    return PackageVersion.fromVersionStringSafe(version);
+    return PackageVersion.fromVersionStringSafe(v.parse(PackageVersionSchema, candidate));
   }
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
@@ -24,9 +23,7 @@ export class PackageVersion {
   }
 
   static fromString(candidate: string): PackageVersion {
-    const version = PackageVersionSchema.parse(`v${candidate}`);
-
-    return PackageVersion.fromVersionStringSafe(version);
+    return PackageVersion.fromVersionStringSafe(v.parse(PackageVersionSchema, `v${candidate}`));
   }
 
   private compareTo(another: PackageVersion): -1 | 0 | 1 {
