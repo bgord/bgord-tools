@@ -1,28 +1,26 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 
 export const ImageWidthError = { Type: "image.width.type", Length: "image.width.length" };
 export const ImageHeightError = { Type: "image.height.type", Length: "image.height.length" };
 
 const IMAGE_DIMENSIONS_CONSTRAINTS = { min: 1, max: 10_000 };
 
-// Stryker disable all
-export const ImageWidth = z
-  // Stryker restore all
-  .number(ImageWidthError.Type)
-  .int(ImageWidthError.Type)
-  .min(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageWidthError.Length)
-  .max(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageWidthError.Length)
-  .brand("ImageWidth");
+export const ImageWidth = v.pipe(
+  v.number(ImageWidthError.Type),
+  v.integer(ImageWidthError.Type),
+  v.minValue(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageWidthError.Length),
+  v.maxValue(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageWidthError.Length),
+  v.brand("ImageWidth"),
+);
 
-export type ImageWidthType = z.infer<typeof ImageWidth>;
+export type ImageWidthType = v.InferOutput<typeof ImageWidth>;
 
-// Stryker disable all
-export const ImageHeight = z
-  // Stryker restore all
-  .number(ImageHeightError.Type)
-  .int(ImageHeightError.Type)
-  .min(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageHeightError.Length)
-  .max(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageHeightError.Length)
-  .brand("ImageHeight");
+export const ImageHeight = v.pipe(
+  v.number(ImageHeightError.Type),
+  v.integer(ImageHeightError.Type),
+  v.minValue(IMAGE_DIMENSIONS_CONSTRAINTS.min, ImageHeightError.Length),
+  v.maxValue(IMAGE_DIMENSIONS_CONSTRAINTS.max, ImageHeightError.Length),
+  v.brand("ImageHeight"),
+);
 
-export type ImageHeightType = z.infer<typeof ImageHeight>;
+export type ImageHeightType = v.InferOutput<typeof ImageHeight>;
