@@ -62,6 +62,7 @@ src/
 ├── iban-schema.vo.ts
 ├── iban.vo.ts
 ├── image.vo.ts
+├── int.vo.ts
 ├── integer-non-negative.vo.ts
 ├── integer-positive.vo.ts
 ├── integer.vo.ts
