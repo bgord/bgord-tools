@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { endOfMonth, startOfMonth } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
-import { Integer } from "../src/integer.vo";
+import { Int } from "../src/int.vo";
 import { Month } from "../src/month.vo";
 import { MonthIsoId } from "../src/month-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
@@ -54,10 +54,10 @@ describe("Month", () => {
   });
 
   test("shift", () => {
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(2)).toIsoId()).toEqual(
       v.parse(MonthIsoId, "2024-01"),
     );
-    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
+    expect(Month.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(-2)).toIsoId()).toEqual(
       v.parse(MonthIsoId, "2023-09"),
     );
   });

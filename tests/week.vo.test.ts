@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
-import { Integer } from "../src/integer.vo";
+import { Int } from "../src/int.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import { Week } from "../src/week.vo";
 import { WeekIsoId } from "../src/week-iso-id.vo";
@@ -56,10 +56,10 @@ describe("Week", () => {
   });
 
   test("shift", () => {
-    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(2)).toIsoId()).toEqual(
       v.parse(WeekIsoId, "2023-W48"),
     );
-    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
+    expect(Week.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(-2)).toIsoId()).toEqual(
       v.parse(WeekIsoId, "2023-W44"),
     );
   });

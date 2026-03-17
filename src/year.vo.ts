@@ -1,7 +1,8 @@
 import { endOfYear, getYear, startOfYear } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
-import { Integer, type IntegerType } from "./integer.vo";
+import { Int } from "./int.vo";
+import type { IntegerType } from "./integer.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
@@ -48,11 +49,11 @@ export class Year extends DateRange {
   }
 
   previous(): Year {
-    return this.shift(v.parse(Integer, -1));
+    return this.shift(Int.of(-1));
   }
 
   next(): Year {
-    return this.shift(v.parse(Integer, 1));
+    return this.shift(Int.of(1));
   }
 
   shift(count: IntegerType): Year {

@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { endOfYear, startOfYear } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
-import { Integer } from "../src/integer.vo";
+import { Int } from "../src/int.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import { Year } from "../src/year.vo";
 import { YearIsoId } from "../src/year-iso-id.vo";
@@ -65,10 +65,10 @@ describe("Year", () => {
   });
 
   test("shift", () => {
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(2)).toIsoId()).toEqual(
       v.parse(YearIsoId, "2025"),
     );
-    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(-2)).toIsoId()).toEqual(
       v.parse(YearIsoId, "2021"),
     );
   });

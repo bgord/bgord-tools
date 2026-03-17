@@ -3,7 +3,7 @@ import * as v from "valibot";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
-import { Integer } from "../src/integer.vo";
+import { Int } from "../src/int.vo";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
@@ -69,10 +69,10 @@ describe("Day", () => {
   });
 
   test("shift", () => {
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, 2)).toIsoId()).toEqual(
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(2)).toIsoId()).toEqual(
       v.parse(DayIsoId, "2023-11-16"),
     );
-    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(v.parse(Integer, -2)).toIsoId()).toEqual(
+    expect(Day.fromTimestamp(mocks.TIME_ZERO).shift(Int.of(-2)).toIsoId()).toEqual(
       v.parse(DayIsoId, "2023-11-12"),
     );
   });
