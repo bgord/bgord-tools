@@ -1,7 +1,11 @@
 # Changelog
+## 2026-03-17 16:21 v1.4.2
+- 2026-03-17 16:21 0812df7 **1.4.2**
 - 2026-03-17 16:20 2f0f25f **step: update packages**
 - 2026-03-17 16:18 72f9948 **refactor: use Int**
 - 2026-03-17 16:11 1fa2cff **feature: add int vo**
+- 2026-03-17 15:20 552459f **docs: generate CHANGELOG**
+- 2026-03-17 15:20 319f536 **docs: generate readme**
 ## 2026-03-16 18:56 v1.4.1
 - 2026-03-16 18:56 d38c6ba **fix: exclude tests from tsconfig**
 - 2026-03-16 18:56 893e90a **1.4.1**
