@@ -111,7 +111,9 @@ src/
 ├── size-bytes.vo.ts
 ├── size.vo.ts
 ├── slug.service.ts
+├── sms-body.vo.ts
 ├── sum.service.ts
+├── telephone-number.vo.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
 ├── timestamp-value.vo.ts
