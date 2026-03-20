@@ -1,8 +1,10 @@
 # Changelog
+- 2026-03-20 17:29 dbcd491 **step: add sms related vos**
 ## 2026-03-20 14:35 v1.4.3
 - 2026-03-20 14:35 42db763 **1.4.3**
 - 2026-03-20 14:34 84c11fb **step: update packages**
 - 2026-03-20 14:33 7eb0f0f **step: bump bgord/scripts**
+- 2026-03-20 13:36 11002b1 **docs: generate CHANGELOG**
 - 2026-03-20 13:34 0430880 **docs: generate CHANGELOG**
 - 2026-03-18 15:55 7e62ed7 **step: bump bgord/scripts**
 - 2026-03-17 21:29 93b8203 **step: bump bgord/scripts**
