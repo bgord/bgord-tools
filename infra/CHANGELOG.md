@@ -1,9 +1,14 @@
 # Changelog
+- 2026-03-20 14:34 84c11fb **step: update packages**
+- 2026-03-20 14:33 7eb0f0f **step: bump bgord/scripts**
+- 2026-03-18 15:55 7e62ed7 **step: bump bgord/scripts**
+- 2026-03-17 21:29 93b8203 **step: bump bgord/scripts**
 ## 2026-03-17 16:21 v1.4.2
 - 2026-03-17 16:21 0812df7 **1.4.2**
 - 2026-03-17 16:20 2f0f25f **step: update packages**
 - 2026-03-17 16:18 72f9948 **refactor: use Int**
 - 2026-03-17 16:11 1fa2cff **feature: add int vo**
+- 2026-03-17 15:21 0417e25 **docs: generate CHANGELOG**
 - 2026-03-17 15:20 552459f **docs: generate CHANGELOG**
 - 2026-03-17 15:20 319f536 **docs: generate readme**
 ## 2026-03-16 18:56 v1.4.1
