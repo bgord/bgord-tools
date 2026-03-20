@@ -87,6 +87,7 @@ export * from "./size.vo";
 export * from "./size-bytes.vo";
 export * from "./slug.service";
 export * from "./sms-body.vo";
+export * from "./sms-message.vo";
 export * from "./sum.service";
 export * from "./telephone-number.vo";
 export * from "./thousands-separator.service";
