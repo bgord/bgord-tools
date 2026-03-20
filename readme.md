@@ -112,6 +112,7 @@ src/
 ├── size.vo.ts
 ├── slug.service.ts
 ├── sms-body.vo.ts
+├── sms-message.vo.ts
 ├── sum.service.ts
 ├── telephone-number.vo.ts
 ├── thousands-separator.service.ts
