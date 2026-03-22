@@ -1,5 +1,7 @@
 # Changelog
+- 2026-03-22 18:44 ed61e77 **step: update packages**
 - 2026-03-22 18:44 5904511 **step: update packages**
+- 2026-03-22 17:46 23e5b46 **docs: generate CHANGELOG**
 ## 2026-03-20 17:31 v1.4.4
 - 2026-03-20 17:31 2a61ef6 **1.4.4**
 - 2026-03-20 17:30 6256172 **step: add sms message vo**
