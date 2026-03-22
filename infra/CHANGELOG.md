@@ -1,4 +1,7 @@
 # Changelog
+## 2026-03-22 20:47 v1.4.5
+- 2026-03-22 20:47 80842b1 **1.4.5**
+- 2026-03-22 19:45 618eef1 **docs: generate CHANGELOG**
 - 2026-03-22 18:44 ed61e77 **step: update packages**
 - 2026-03-22 18:44 5904511 **step: update packages**
 - 2026-03-22 17:46 23e5b46 **docs: generate CHANGELOG**
