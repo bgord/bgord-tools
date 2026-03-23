@@ -4,11 +4,13 @@
     "declaration": true,
     "outDir": "dist",
     "rootDir": "src",
+    "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipLibCheck": true,
+    "incremental": true,
     "stripInternal": true
   },
   "include": ["src"]
