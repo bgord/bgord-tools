@@ -1,28 +1,14 @@
 {
   "compilerOptions": {
-    // Explicitly targets ES2022 for broad runtime compatibility; TS6 default changed to "esnext"
-    "target": "ES2022",
-    // ES2022 module format for ESM output; TS6 default changed to "nodenext"
-    "module": "ES2022",
-    // Required for library output: generates .d.ts type declaration files; default is false
+    "module": "preserve",
     "declaration": true,
-    // Output directory for compiled JS; no default
     "outDir": "dist",
-    // Required explicitly in TS6: previously inferred, now must be set to prevent ambiguous output layout
     "rootDir": "src",
-    // Changed from deprecated "node" (node10): "bundler" is the correct resolution mode for module: "ES2022" without Node's strict ESM semantics
-    "moduleResolution": "bundler",
-    // Errors on functions missing a return statement on all code paths; not covered by strict
     "noImplicitReturns": true,
-    // Errors on unintentional switch-case fallthrough; not covered by strict
     "noFallthroughCasesInSwitch": true,
-    // Errors on declared but unused local variables; not covered by strict
     "noUnusedLocals": true,
-    // Errors on declared but unused function parameters; not covered by strict
     "noUnusedParameters": true,
-    // Skips type-checking of .d.ts files in node_modules; improves build performance
     "skipLibCheck": true,
-    // Strips @internal-tagged declarations from emitted .d.ts files; required for the public API surface
     "stripInternal": true
   },
   "include": ["src"]
