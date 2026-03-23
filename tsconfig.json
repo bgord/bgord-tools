@@ -2,16 +2,19 @@
   "compilerOptions": {
     "module": "preserve",
     "declaration": true,
-    "outDir": "dist",
-    "rootDir": "src",
-    "noUncheckedIndexedAccess": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "skipLibCheck": true,
     "incremental": true,
-    "stripInternal": true
+    "stripInternal": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": ["src"]
 }

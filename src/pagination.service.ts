@@ -17,7 +17,7 @@ export type PaginationPrepareConfigType<T> = {
 
 export class Pagination {
   static parse(values: PaginationValuesType, _take: TakeType): PaginationType {
-    const page = v.parse(Page, values.page);
+    const page = v.parse(Page, values["page"]);
     const take = v.parse(Take, _take);
 
     const skip = v.parse(Skip, (page - 1) * take);

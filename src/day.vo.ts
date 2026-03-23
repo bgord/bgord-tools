@@ -29,7 +29,7 @@ export class Day extends DateRange {
   }
 
   static fromIsoId(isoId: DayIsoIdType): Day {
-    const [year, month, day] = v.parse(DayIsoId, isoId).split("-").map(Number);
+    const [year, month, day] = v.parse(DayIsoId, isoId).split("-").map(Number) as [number, number, number];
 
     const startUtc = Timestamp.fromNumber(Date.UTC(year, month - 1, day));
     const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));

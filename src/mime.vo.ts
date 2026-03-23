@@ -8,8 +8,8 @@ export class Mime {
   ) {}
 
   static fromString(candidate: string): Mime {
-    const value = v.parse(MimeValue, candidate.split(";")[0].trim());
-    const [type, subtype] = value.split("/");
+    const value = v.parse(MimeValue, candidate.split(";")[0]!.trim());
+    const [type, subtype] = value.split("/") as [string, string];
 
     return new Mime(type, subtype);
   }

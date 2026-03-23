@@ -39,7 +39,7 @@ export class LinearRegression {
     let sumXY = 0;
 
     for (let index = 0; index < count; index++) {
-      const pair = pairs[index];
+      const pair = pairs[index]!;
       sumX += pair.x;
       sumY += pair.y;
       sumXX += pair.x * pair.x;

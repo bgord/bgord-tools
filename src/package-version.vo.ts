@@ -17,7 +17,12 @@ export class PackageVersion {
   }
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
-    const [, major, minor, patch] = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(candidate)!.map(Number);
+    const [, major, minor, patch] = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(candidate)!.map(Number) as [
+      number,
+      number,
+      number,
+      number,
+    ];
 
     return new PackageVersion(major, minor, patch);
   }

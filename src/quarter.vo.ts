@@ -22,7 +22,7 @@ export class Quarter extends DateRange {
   }
 
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
-    const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number);
+    const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number) as [number, number];
 
     return Quarter.fromTimestamp(Timestamp.fromNumber(Date.UTC(year, (quarter - 1) * 3, 1)));
   }

@@ -19,7 +19,7 @@ export class MimeRegistry {
         this.byExtension.set(extension, entry.mime);
       }
 
-      const canonical = entry.extensions[0];
+      const canonical = entry.extensions[0]!;
 
       this.byMime.set(entry.mime.toString(), canonical);
     }
