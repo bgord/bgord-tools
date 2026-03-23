@@ -1,6 +1,10 @@
 # Changelog
+- 2026-03-23 21:26 cdf4d87 **step: simplify tsconfig.json**
+- 2026-03-23 21:15 24e2052 **step: migrate to ts6**
+- 2026-03-23 20:48 b79c8e0 **step: update packages**
 ## 2026-03-22 20:47 v1.4.5
 - 2026-03-22 20:47 80842b1 **1.4.5**
+- 2026-03-22 19:47 fd61760 **docs: generate CHANGELOG**
 - 2026-03-22 19:45 618eef1 **docs: generate CHANGELOG**
 - 2026-03-22 18:44 ed61e77 **step: update packages**
 - 2026-03-22 18:44 5904511 **step: update packages**
