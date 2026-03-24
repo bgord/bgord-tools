@@ -1,10 +1,13 @@
 # Changelog
+## 2026-03-24 09:34 v1.4.7
+- 2026-03-24 09:34 a2d9f2c **1.4.7**
 - 2026-03-23 21:58 8aa1862 **refactor: simplify tsconfig**
 - 2026-03-23 21:44 4882666 **step: add incremental**
 ## 2026-03-23 21:27 v1.4.6
 - 2026-03-23 21:27 5effce9 **1.4.6**
 - 2026-03-23 21:26 cdf4d87 **step: simplify tsconfig.json**
 - 2026-03-23 21:15 24e2052 **step: migrate to ts6**
+- 2026-03-23 21:11 fb9bb98 **docs: generate CHANGELOG**
 - 2026-03-23 20:48 b79c8e0 **step: update packages**
 - 2026-03-23 20:27 6de423c **docs: generate CHANGELOG**
 - 2026-03-23 20:26 294528a **docs: generate CHANGELOG**
