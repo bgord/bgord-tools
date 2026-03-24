@@ -1,6 +1,8 @@
 # Changelog
+- 2026-03-24 09:51 c567ccd **refactor: switch to module esnext**
 ## 2026-03-24 09:34 v1.4.7
 - 2026-03-24 09:34 a2d9f2c **1.4.7**
+- 2026-03-24 08:34 0dd38a4 **docs: generate CHANGELOG**
 - 2026-03-23 21:58 8aa1862 **refactor: simplify tsconfig**
 - 2026-03-23 21:44 4882666 **step: add incremental**
 ## 2026-03-23 21:27 v1.4.6
