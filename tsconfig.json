@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "preserve",
+    "module": "esnext",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
