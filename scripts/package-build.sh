@@ -8,6 +8,7 @@ OUTPUT_DIRECTORY="dist"
 
 step_start "Directory clear"
 rm -rf $OUTPUT_DIRECTORY
+rm tsconfig.tsbuildinfo
 step_end "Directory clear"
 
 step_start "Package build"
