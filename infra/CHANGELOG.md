@@ -1,10 +1,13 @@
 # Changelog
+## 2026-03-24 09:56 v1.4.9
+- 2026-03-24 09:56 522138c **1.4.9**
 - 2026-03-24 09:55 934df5c **step: cleanup incremental build file on package build**
 ## 2026-03-24 09:52 v1.4.8
 - 2026-03-24 09:52 fd64086 **1.4.8**
 - 2026-03-24 09:51 c567ccd **refactor: switch to module esnext**
 ## 2026-03-24 09:34 v1.4.7
 - 2026-03-24 09:34 a2d9f2c **1.4.7**
+- 2026-03-24 08:56 82a68a2 **docs: generate CHANGELOG**
 - 2026-03-24 08:52 d37471b **docs: generate CHANGELOG**
 - 2026-03-24 08:51 442b9e1 **docs: generate CHANGELOG**
 - 2026-03-24 08:34 0dd38a4 **docs: generate CHANGELOG**
