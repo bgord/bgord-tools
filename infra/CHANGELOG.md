@@ -1,4 +1,5 @@
 # Changelog
+- 2026-03-24 11:37 2b26a75 **refactor: guard**
 ## 2026-03-24 10:16 v1.4.10
 - 2026-03-24 10:16 f43939a **1.4.10**
 - 2026-03-24 10:13 1e2771f **step: add module resolution bundler**
@@ -10,6 +11,7 @@
 - 2026-03-24 09:51 c567ccd **refactor: switch to module esnext**
 ## 2026-03-24 09:34 v1.4.7
 - 2026-03-24 09:34 a2d9f2c **1.4.7**
+- 2026-03-24 09:16 09f516f **docs: generate CHANGELOG**
 - 2026-03-24 09:14 e10e675 **docs: generate CHANGELOG**
 - 2026-03-24 08:56 82a68a2 **docs: generate CHANGELOG**
 - 2026-03-24 08:56 0199d45 **docs: generate CHANGELOG**
