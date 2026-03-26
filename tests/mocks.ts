@@ -1,3 +1,4 @@
+import { expect } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { Timestamp } from "../src/timestamp.vo";
 
@@ -9,3 +10,19 @@ export const TIME_ZERO_DATE_LIKE = "2023-11-14";
 export const TIME_ZERO_DATE = new Date(TIME_ZERO_DATE_LIKE);
 
 export const epsilon = Duration.Ms(1);
+
+export const IntentionalCause = "intentional.cause" as const;
+export const IntentionalError = "intentional.error" as const;
+export const throwIntentionalError = () => {
+  throw new Error(IntentionalError);
+};
+export const throwIntentionalErrorAsync = async () => {
+  throw new Error(IntentionalError);
+};
+
+export const IntentionalErrorNormalized = {
+  cause: undefined,
+  message: IntentionalError,
+  name: "Error",
+  stack: expect.any(String),
+};
