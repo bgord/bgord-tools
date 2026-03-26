@@ -1,5 +1,10 @@
 # Changelog
+- 2026-03-26 13:54 15b348c **refactor: improve tests**
+- 2026-03-26 13:53 d3eea3f **step: migrate bgord bun runtime free services**
+- 2026-03-26 13:53 bc84ada **step: add bun types to tsconfig**
+- 2026-03-26 10:57 5a24caf **step: update packages**
 - 2026-03-24 11:37 2b26a75 **refactor: guard**
+- 2026-03-24 10:38 6c4cdb5 **docs: generate CHANGELOG**
 ## 2026-03-24 10:16 v1.4.10
 - 2026-03-24 10:16 f43939a **1.4.10**
 - 2026-03-24 10:13 1e2771f **step: add module resolution bundler**
