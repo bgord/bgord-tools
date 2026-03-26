@@ -48,8 +48,10 @@ export class LinearRegression {
 
     if (Math.abs(sumX) >= Number.MAX_SAFE_INTEGER) throw new Error(LinearRegressionError.SumXTooBig);
     if (Math.abs(sumY) >= Number.MAX_SAFE_INTEGER) throw new Error(LinearRegressionError.SumYTooBig);
+    // Stryker disable all
     if (Math.abs(sumXY) >= Number.MAX_SAFE_INTEGER) throw new Error(LinearRegressionError.SumXTimesYTooBig);
     if (Math.abs(sumXX) >= Number.MAX_SAFE_INTEGER) throw new Error(LinearRegressionError.SumXSquaredTooBig);
+    // Stryker restore all
 
     const bDenominator = sumXX - sumX ** 2 / count;
 

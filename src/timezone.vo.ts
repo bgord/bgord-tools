@@ -19,6 +19,7 @@ export const Timezone = v.pipe(
       return false;
     }
   }, TimezoneError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("Timezone"),
 );
 

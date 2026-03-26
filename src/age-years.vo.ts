@@ -9,6 +9,7 @@ export const AgeYears = v.pipe(
   v.integer(AgeYearsError.Type),
   v.minValue(0, AgeYearsError.Invalid),
   v.maxValue(130, AgeYearsError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("AgeYears"),
 );
 

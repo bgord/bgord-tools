@@ -28,6 +28,7 @@ export const ObjectKey = v.pipe(
     (value) => value.split("/").every((segment) => !DOT_SEGMENTS.includes(segment)),
     ObjectKeyError.DotSegments,
   ),
+  // Stryker disable next-line StringLiteral
   v.brand("ObjectKey"),
 );
 

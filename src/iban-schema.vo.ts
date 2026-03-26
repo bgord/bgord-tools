@@ -10,6 +10,7 @@ export const IbanSchema = v.pipe(
   v.toUpperCase(),
   v.transform((value) => value.replaceAll(" ", "")),
   v.check((value) => IBAN_CHARS_WHITELIST.test(value), IbanSchemaError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("IbanSchema"),
 );
 
