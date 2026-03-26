@@ -8,7 +8,6 @@ const API_KEY_CHARS = /^[a-zA-Z0-9]{64}$/;
 export const ApiKey = v.pipe(
   v.string(ApiKeyError.Type),
   v.regex(API_KEY_CHARS, ApiKeyError.BadChars),
-  // Stryker disable next-line StringLiteral
   v.brand("ApiKey"),
 );
 

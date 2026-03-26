@@ -11,7 +11,6 @@ const E164 = /^\+[1-9]\d{1,14}$/;
 export const TelephoneNumber = v.pipe(
   v.string(TelephoneNumberError.Type),
   v.regex(E164, TelephoneNumberError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("TelephoneNumber"),
 );
 

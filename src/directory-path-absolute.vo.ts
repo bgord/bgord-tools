@@ -28,7 +28,6 @@ export const DirectoryPathAbsoluteSchema = v.pipe(
       (segment) => DIRECTORY_PATH_ABSOLUTE_CHARS.test(segment) && !DOT_SEGMENTS.includes(segment),
     );
   }, DirectoryPathAbsoluteError.BadSegments),
-  // Stryker disable next-line StringLiteral
   v.brand("DirectoryPathAbsoluteSchema"),
 );
 

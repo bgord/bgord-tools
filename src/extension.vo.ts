@@ -19,7 +19,6 @@ export const Extension = v.pipe(
   v.minLength(2, ExtensionError.Empty),
   v.maxLength(16, ExtensionError.TooLong),
   v.check((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars),
-  // Stryker disable next-line StringLiteral
   v.brand("Extension"),
 );
 

@@ -10,7 +10,6 @@ export const SmsBody = v.pipe(
   v.string(SmsBodyError.Type),
   v.minLength(1, SmsBodyError.Empty),
   v.maxLength(640, SmsBodyError.TooLong),
-  // Stryker disable next-line StringLiteral
   v.brand("SmsBody"),
 );
 

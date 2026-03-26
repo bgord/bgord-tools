@@ -7,7 +7,6 @@ export const MinuteValue = v.pipe(
   v.integer(MinuteValueError.Type),
   v.minValue(0, MinuteValueError.Invalid),
   v.maxValue(59, MinuteValueError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("MinuteValue"),
 );
 

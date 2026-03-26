@@ -8,7 +8,6 @@ const YEAR_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}$/;
 export const YearIsoId = v.pipe(
   v.string(YearIsoIdError.Type),
   v.regex(YEAR_ISO_ID_CHARS_WHITELIST, YearIsoIdError.BadChars),
-  // Stryker disable next-line StringLiteral
   v.brand("YearIsoId"),
 );
 

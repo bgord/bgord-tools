@@ -9,7 +9,6 @@ export const IntegerNonNegative = v.pipe(
   v.number(IntegerNonNegativeError.Type),
   v.integer(IntegerNonNegativeError.Type),
   v.minValue(0, IntegerNonNegativeError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("IntegerNonNegative"),
 );
 

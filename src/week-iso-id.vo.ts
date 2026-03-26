@@ -20,7 +20,6 @@ export const WeekIsoId = v.pipe(
     if (week < 1) return false;
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("WeekIsoId"),
 );
 

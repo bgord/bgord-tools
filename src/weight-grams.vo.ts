@@ -6,7 +6,6 @@ export const WeightGrams = v.pipe(
   v.number(WeightGramsError.Type),
   v.integer(WeightGramsError.Type),
   v.minValue(0, WeightGramsError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("WeightGrams"),
 );
 

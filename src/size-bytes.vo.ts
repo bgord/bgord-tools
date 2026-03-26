@@ -6,7 +6,6 @@ export const SizeBytes = v.pipe(
   v.number(SizeBytesError.Invalid),
   v.integer(SizeBytesError.Invalid),
   v.minValue(0, SizeBytesError.Invalid),
-  // Stryker disable next-line StringLiteral
   v.brand("SizeBytes"),
 );
 

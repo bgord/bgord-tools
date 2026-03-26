@@ -25,7 +25,6 @@ export const Basename = v.pipe(
   // Reject trailing dot like "picture." to avoid extension collision
   v.check((value) => !value.endsWith("."), BasenameError.TrailingDot),
   v.regex(BASENAME_CHARS, BasenameError.BadChars),
-  // Stryker disable next-line StringLiteral
   v.brand("Basename"),
 );
 

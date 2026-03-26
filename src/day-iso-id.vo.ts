@@ -14,7 +14,6 @@ export const DayIsoId = v.pipe(
   v.string(DayIsoIdError.Type),
   v.regex(DAY_ISO_ID_CHARS, DayIsoIdError.BadChars),
   v.check((value) => isValid(parseISO(value)), DayIsoIdError.InvalidDate),
-  // Stryker disable next-line StringLiteral
   v.brand("DayIsoId"),
 );
 

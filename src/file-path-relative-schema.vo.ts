@@ -24,7 +24,6 @@ export const FilePathRelativeSchema = v.pipe(
     const filename = Filename.fromString(filenameCandidate);
     return { directory, filename };
   }),
-  // Stryker disable next-line StringLiteral
   v.brand("FilePathRelativeSchema"),
 );
 
