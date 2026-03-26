@@ -1,10 +1,13 @@
 # Changelog
+## 2026-03-26 17:14 v1.4.12
+- 2026-03-26 17:14 065bc24 **1.4.12**
 - 2026-03-26 14:54 0fca55f **refactor: restore brand stryker suppresions**
 - 2026-03-26 14:52 d53fe98 **step: bump bgord/scripts**
 - 2026-03-26 14:50 cae9cd2 **step: install stryker typescript checker**
 - 2026-03-26 14:44 bf76f5e **refactor: remove stryker suppressions**
 ## 2026-03-26 14:02 v1.4.11
 - 2026-03-26 14:02 890ad7c **1.4.11**
+- 2026-03-26 13:56 03cd578 **docs: generate CHANGELOG**
 - 2026-03-26 13:54 15b348c **refactor: improve tests**
 - 2026-03-26 13:53 d3eea3f **step: migrate bgord bun runtime free services**
 - 2026-03-26 13:53 bc84ada **step: add bun types to tsconfig**
