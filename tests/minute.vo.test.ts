@@ -65,8 +65,8 @@ describe("Minute", () => {
     const list = Minute.list();
 
     expect(list.length).toEqual(60);
-    expect(list[0].get()).toEqual(v.parse(MinuteValue, 0));
-    expect(list[59].get()).toEqual(v.parse(MinuteValue, 59));
+    expect(list[0]?.get()).toEqual(v.parse(MinuteValue, 0));
+    expect(list[59]?.get()).toEqual(v.parse(MinuteValue, 59));
   });
 
   test("toString", () => {

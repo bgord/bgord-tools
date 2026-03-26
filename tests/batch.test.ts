@@ -10,9 +10,9 @@ describe("batch", () => {
     const result = batch(strings, size);
 
     expect(result.length).toEqual(3);
-    expect(result[0].length).toEqual(10);
-    expect(result[1].length).toEqual(10);
-    expect(result[2].length).toEqual(5);
+    expect(result[0]?.length).toEqual(10);
+    expect(result[1]?.length).toEqual(10);
+    expect(result[2]?.length).toEqual(5);
   });
 
   test("happy path - less than size", () => {

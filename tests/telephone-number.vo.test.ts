@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
-import { TelephoneNumber, TelephoneNumberError } from "../src/telephone-number.vo";
+import { TelephoneNumber } from "../src/telephone-number.vo";
 
 describe("TelephoneNumber", () => {
   test("happy path - US number", () => {
@@ -20,38 +20,38 @@ describe("TelephoneNumber", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => v.parse(TelephoneNumber, null)).toThrow(TelephoneNumberError.Type);
+    expect(() => v.parse(TelephoneNumber, null)).toThrow("telephone.number.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => v.parse(TelephoneNumber, 48600123456)).toThrow(TelephoneNumberError.Type);
+    expect(() => v.parse(TelephoneNumber, 48600123456)).toThrow("telephone.number.type");
   });
 
   test("rejects missing plus prefix", () => {
-    expect(() => v.parse(TelephoneNumber, "48600123456")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "48600123456")).toThrow("telephone.number.invalid");
   });
 
   test("rejects leading zero in country code", () => {
-    expect(() => v.parse(TelephoneNumber, "+04860123456")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "+04860123456")).toThrow("telephone.number.invalid");
   });
 
   test("rejects non-digit characters", () => {
-    expect(() => v.parse(TelephoneNumber, "+1 212 555 1234")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "+1 212 555 1234")).toThrow("telephone.number.invalid");
   });
 
   test("rejects dashes", () => {
-    expect(() => v.parse(TelephoneNumber, "+1-212-555-1234")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "+1-212-555-1234")).toThrow("telephone.number.invalid");
   });
 
   test("rejects too long - 16 digits", () => {
-    expect(() => v.parse(TelephoneNumber, "+1234567890123456")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "+1234567890123456")).toThrow("telephone.number.invalid");
   });
 
   test("rejects plus only", () => {
-    expect(() => v.parse(TelephoneNumber, "+")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "+")).toThrow("telephone.number.invalid");
   });
 
   test("rejects empty string", () => {
-    expect(() => v.parse(TelephoneNumber, "")).toThrow(TelephoneNumberError.Invalid);
+    expect(() => v.parse(TelephoneNumber, "")).toThrow("telephone.number.invalid");
   });
 });

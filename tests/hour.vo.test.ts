@@ -63,8 +63,8 @@ describe("Hour", () => {
     const hours = Hour.list();
 
     expect(hours.length).toEqual(24);
-    expect(hours[0].get()).toEqual(v.parse(HourValue, 0));
-    expect(hours[23].get()).toEqual(v.parse(HourValue, 23));
+    expect(hours[0]?.get()).toEqual(v.parse(HourValue, 0));
+    expect(hours[23]?.get()).toEqual(v.parse(HourValue, 23));
     expect(Hour.list()).toEqual(hours);
   });
 

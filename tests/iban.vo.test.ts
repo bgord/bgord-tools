@@ -16,7 +16,7 @@ describe("IBAN", () => {
       ],
       ["DE44 5001 0517 5407 3249 31", "DE44500105175407324931", "DE44 5001 0517 5407 3249 31"],
       ["GB82WEST12345698765432", "GB82WEST12345698765432", "GB82 WEST 1234 5698 7654 32"],
-    ];
+    ] as const;
 
     for (const [input, normalized, formatted] of cases) {
       const iban = new IBAN(input);
