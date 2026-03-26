@@ -34,6 +34,7 @@ src/
 ├── date-range.vo.ts
 ├── day-iso-id.vo.ts
 ├── day.vo.ts
+├── deep-clone-with.ts
 ├── directory-path-absolute.vo.ts
 ├── directory-path-relative.vo.ts
 ├── distance-value.vo.ts
@@ -44,6 +45,7 @@ src/
 ├── duration.service.ts
 ├── email-mask.service.ts
 ├── email.vo.ts
+├── error-normalizer.service.ts
 ├── etags.vo.ts
 ├── extension.vo.ts
 ├── feature-flag-value.vo.ts
@@ -66,6 +68,7 @@ src/
 ├── integer-non-negative.vo.ts
 ├── integer-positive.vo.ts
 ├── integer.vo.ts
+├── is-plain-object.ts
 ├── language.vo.ts
 ├── linear-regression.service.ts
 ├── mean.service.ts
