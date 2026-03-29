@@ -1,6 +1,8 @@
 # Changelog
+- 2026-03-29 10:40 c81794f **step: update packages**
 ## 2026-03-26 17:14 v1.4.12
 - 2026-03-26 17:14 065bc24 **1.4.12**
+- 2026-03-26 16:14 4de1475 **docs: generate CHANGELOG**
 - 2026-03-26 14:54 0fca55f **refactor: restore brand stryker suppresions**
 - 2026-03-26 14:52 d53fe98 **step: bump bgord/scripts**
 - 2026-03-26 14:50 cae9cd2 **step: install stryker typescript checker**
