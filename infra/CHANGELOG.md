@@ -1,5 +1,8 @@
 # Changelog
+- 2026-03-31 15:10 b5ce0e3 **step: update packages**
+- 2026-03-31 15:10 42d4da8 **step: add duration zero**
 - 2026-03-29 10:40 c81794f **step: update packages**
+- 2026-03-29 08:40 0697000 **docs: generate CHANGELOG**
 ## 2026-03-26 17:14 v1.4.12
 - 2026-03-26 17:14 065bc24 **1.4.12**
 - 2026-03-26 16:14 4de1475 **docs: generate CHANGELOG**
