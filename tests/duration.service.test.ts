@@ -149,6 +149,10 @@ describe("Duration", () => {
     expect(Duration.MIN.ms).toEqual(v.parse(DurationMs, 1));
   });
 
+  test("ZERO", () => {
+    expect(Duration.ZERO.ms).toEqual(v.parse(DurationMs, 0));
+  });
+
   test("toString", () => {
     expect(Duration.MIN.toString()).toEqual("1");
   });

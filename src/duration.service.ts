@@ -10,6 +10,7 @@ export class Duration {
   private readonly internal: DurationMsType;
 
   static readonly MIN = Duration.Ms(1);
+  static readonly ZERO = Duration.Ms(0);
 
   private static readonly NS_IN_MS = 1000000;
   private static readonly MS_IN_SECOND = 1_000;
