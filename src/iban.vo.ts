@@ -8,7 +8,7 @@ export class IBAN {
     this.value = v.parse(IbanSchema, candidate);
   }
 
-  toString(): IbanSchemaType {
+  toString(): string {
     return this.value;
   }
 
