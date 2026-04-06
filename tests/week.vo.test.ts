@@ -73,8 +73,8 @@ describe("Week", () => {
   test("contains", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(week.contains(week.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(week.contains(week.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(week.contains(week.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(week.contains(week.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
@@ -82,6 +82,6 @@ describe("Week", () => {
   });
 
   test("toJSON", () => {
-    expect(Week.fromIsoId(w46).toJSON()).toEqual({ start: 1699833600000, end: 1700438399999 });
+    expect(Week.fromIsoId(w46).toJSON()).toEqual({ start, end });
   });
 });

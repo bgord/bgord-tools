@@ -1,7 +1,6 @@
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
-import { Duration } from "./duration.service";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
 import { Temporal } from "./temporal";
@@ -45,7 +44,14 @@ export class Day extends DateRange {
   }
 
   shift(count: IntegerType): Day {
-    return Day.fromTimestamp(this.getStart().add(Duration.Days(count)));
+    const plain = this.getStart()
+      .toInstant()
+      .toZonedDateTimeISO("UTC")
+      .toPlainDate()
+      .add({ days: count })
+      .toZonedDateTime("UTC");
+
+    return Day.fromTimestamp(Timestamp.fromInstant(plain.toInstant()));
   }
 
   toString(): string {

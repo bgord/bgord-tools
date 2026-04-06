@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
+import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
 import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
@@ -78,8 +79,8 @@ describe("Day", () => {
   test("contains", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(day.contains(day.getStart().subtract(mocks.epsilon))).toEqual(false);
-    expect(day.contains(day.getEnd().add(mocks.epsilon))).toEqual(false);
+    expect(day.contains(day.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(day.contains(day.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
@@ -87,6 +88,6 @@ describe("Day", () => {
   });
 
   test("toJSON", () => {
-    expect(Day.fromIsoId(dayIsoId).toJSON()).toEqual({ start: 1699920000000, end: 1700006399999 });
+    expect(Day.fromIsoId(dayIsoId).toJSON()).toEqual({ start, end });
   });
 });

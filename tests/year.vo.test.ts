@@ -87,8 +87,8 @@ describe("Year", () => {
   test("contains", () => {
     const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.contains(year.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(year.contains(year.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(year.contains(year.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(year.contains(year.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("leap year", () => {

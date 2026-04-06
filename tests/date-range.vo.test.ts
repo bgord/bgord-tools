@@ -36,13 +36,13 @@ describe("DateRange", () => {
 
   test("contains - true", () => {
     expect(range.contains(START)).toEqual(true);
-    expect(range.contains(START.add(Duration.Ms(500)))).toEqual(true);
+    expect(range.contains(START.add(Duration.MIN))).toEqual(true);
     expect(range.contains(END)).toEqual(true);
   });
 
   test("contains - false", () => {
-    expect(range.contains(START.subtract(Duration.Ms(1)))).toEqual(false);
-    expect(range.contains(END.add(Duration.Ms(1)))).toEqual(false);
+    expect(range.contains(START.subtract(Duration.MIN))).toEqual(false);
+    expect(range.contains(END.add(Duration.MIN))).toEqual(false);
   });
 
   test("equals - true", () => {
@@ -50,7 +50,7 @@ describe("DateRange", () => {
   });
 
   test("equals - false", () => {
-    expect(range.equals(new DateRange(START, END.add(Duration.Seconds(1))))).toEqual(false);
+    expect(range.equals(new DateRange(START, END.add(Duration.MIN)))).toEqual(false);
   });
 
   test("toString", () => {

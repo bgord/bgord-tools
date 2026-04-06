@@ -58,8 +58,8 @@ describe("Quarter", () => {
   test("contains", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(quarter.contains(quarter.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(quarter.contains(quarter.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(quarter.contains(quarter.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(quarter.contains(quarter.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {

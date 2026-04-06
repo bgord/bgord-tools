@@ -77,8 +77,8 @@ describe("Month", () => {
   test("contains", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.contains(month.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(month.contains(month.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(month.contains(month.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(month.contains(month.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
