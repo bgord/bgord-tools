@@ -15,10 +15,9 @@ export class Weekday {
   private constructor(private readonly value: WeekdayIsoIdType) {}
 
   static fromTimestamp(timestamp: Timestamp): Weekday {
-    // UTC returns numbers from 0-6, starting from Sunday
-    const utc = new Date(timestamp.ms).getUTCDay();
+    const dayOfWeek = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate().dayOfWeek;
 
-    return new Weekday(v.parse(WeekdayIsoId, utc === 0 ? 7 : utc));
+    return new Weekday(v.parse(WeekdayIsoId, dayOfWeek));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Weekday {
