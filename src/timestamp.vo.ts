@@ -18,14 +18,6 @@ export class Timestamp {
     return new Timestamp(v.parse(TimestampValue, value));
   }
 
-  static fromDate(value: Date): Timestamp {
-    return Timestamp.fromNumber(value.getTime());
-  }
-
-  static fromDateLike(value: string): Timestamp {
-    return Timestamp.fromNumber(new Date(value).getTime());
-  }
-
   add(duration: Duration): Timestamp {
     return Timestamp.fromNumber(this.value + duration.ms);
   }
