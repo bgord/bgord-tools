@@ -3,6 +3,10 @@ import { deepCloneWith } from "../src/deep-clone-with";
 
 const noop = () => undefined;
 
+class NonPlain {
+  constructor(readonly value: string) {}
+}
+
 describe("deepCloneWith", () => {
   test("passthrough - primitives", () => {
     expect(deepCloneWith(5, noop)).toEqual(5);
@@ -17,7 +21,7 @@ describe("deepCloneWith", () => {
   });
 
   test("passthrough - non-plain object", () => {
-    const input = { date: new Date() };
+    const input = { date: new NonPlain("ok") };
 
     expect(deepCloneWith(input, noop)).toEqual(input);
   });

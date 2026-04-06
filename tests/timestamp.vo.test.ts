@@ -1,11 +1,26 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
+import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 import { TimestampValue } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
+const now = Temporal.Now.instant().epochMilliseconds;
+
 describe("Timestamp", () => {
+  test("fromInstant", () => {
+    expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_PLAIN_DATE_TIME)));
+  });
+
+  test("fromString - success", () => {
+    expect(Timestamp.fromString(mocks.TIME_ZERO_PLAIN_DATE_TIME));
+  });
+
+  test("fromString - error", () => {
+    expect(() => Timestamp.fromString("not-a-date")).toThrow("Cannot parse: not-a-date");
+  });
+
   test("fromValue - success", () => {
     expect(Timestamp.fromValue(mocks.TIME_ZERO.ms));
   });
@@ -20,22 +35,6 @@ describe("Timestamp", () => {
 
   test("fromNumber - error", () => {
     expect(() => Timestamp.fromNumber(-1)).toThrow("timestamp.invalid");
-  });
-
-  test("fromDate - success", () => {
-    expect(Timestamp.fromDate(mocks.TIME_ZERO_DATE));
-  });
-
-  test("fromDate - error", () => {
-    expect(() => Timestamp.fromDate(new Date("invalid"))).toThrow("timestamp.invalid");
-  });
-
-  test("fromDateLike - success", () => {
-    expect(Timestamp.fromDateLike(mocks.TIME_ZERO_DATE_LIKE));
-  });
-
-  test("fromDateLike - error", () => {
-    expect(() => Timestamp.fromDateLike("invalid")).toThrow("timestamp.invalid");
   });
 
   test("add", () => {
@@ -57,25 +56,25 @@ describe("Timestamp", () => {
   });
 
   test("isBefore", () => {
-    expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(Date.now()))).toEqual(true);
+    expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(now))).toEqual(true);
     expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(0))).toEqual(false);
     expect(mocks.TIME_ZERO.isBefore(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isBeforeOrEqual", () => {
-    expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(Date.now()))).toEqual(true);
+    expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(now))).toEqual(true);
     expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(0))).toEqual(false);
     expect(mocks.TIME_ZERO.isBeforeOrEqual(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("isAfter", () => {
     expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(0))).toEqual(true);
-    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(Date.now()))).toEqual(false);
+    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(now))).toEqual(false);
     expect(mocks.TIME_ZERO.isAfter(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isAfterOrEqual", () => {
-    expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(Date.now()))).toEqual(false);
+    expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(now))).toEqual(false);
     expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(0))).toEqual(true);
     expect(mocks.TIME_ZERO.isAfterOrEqual(mocks.TIME_ZERO)).toEqual(true);
   });
@@ -86,6 +85,10 @@ describe("Timestamp", () => {
 
   test("get", () => {
     expect(mocks.TIME_ZERO.ms).toEqual(mocks.TIME_ZERO.ms);
+  });
+
+  test("toInstant", () => {
+    expect(mocks.TIME_ZERO.toInstant().toString()).toEqual(mocks.TIME_ZERO_PLAIN_DATE_TIME);
   });
 
   test("toJSON", () => {

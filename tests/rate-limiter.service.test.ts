@@ -2,7 +2,6 @@ import { describe, expect, test } from "bun:test";
 import { Duration } from "../src/duration.service";
 import { RateLimiter } from "../src/rate-limiter.service";
 import { Timestamp } from "../src/timestamp.vo";
-import * as mocks from "./mocks";
 
 const duration = Duration.Ms(1000);
 const currentTimestampMs = Timestamp.fromNumber(0);
@@ -19,11 +18,11 @@ describe("RateLimiter", () => {
 
     expect(first.allowed).toEqual(true);
 
-    const second = rateLimiter.verify(currentTimestampMs.add(duration).subtract(mocks.epsilon));
+    const second = rateLimiter.verify(currentTimestampMs.add(duration).subtract(Duration.MIN));
 
     expect(second.allowed).toEqual(false);
     // @ts-expect-error
-    expect(second.remaining).toEqual(mocks.epsilon);
+    expect(second.remaining).toEqual(Duration.MIN);
   });
 
   test("allows invocations at the limit boundary", () => {
@@ -49,11 +48,11 @@ describe("RateLimiter", () => {
 
     expect(second.allowed).toEqual(true);
 
-    const third = rateLimiter.verify(currentTimestampMs.add(duration).add(mocks.epsilon));
+    const third = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.MIN));
 
     expect(third.allowed).toEqual(false);
 
-    const fourth = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.Ms(2)));
+    const fourth = rateLimiter.verify(currentTimestampMs.add(duration).add(Duration.MIN));
 
     expect(fourth.allowed).toEqual(false);
   });

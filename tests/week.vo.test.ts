@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import { endOfISOWeek, startOfISOWeek } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
@@ -10,25 +9,28 @@ import * as mocks from "./mocks";
 
 const w46 = v.parse(WeekIsoId, "2023-W46");
 
+const start = 1699833600000;
+const end = 1700438399999;
+
 describe("Week", () => {
   test("happy path", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
-    const expectedStart = Timestamp.fromNumber(startOfISOWeek(mocks.TIME_ZERO.ms).getTime());
-    const expectedEnd = Timestamp.fromNumber(endOfISOWeek(mocks.TIME_ZERO.ms).getTime());
 
-    expect(week.getStart()).toEqual(expectedStart);
-    expect(week.getEnd()).toEqual(expectedEnd);
+    expect(week.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(week.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(week.toIsoId()).toEqual(w46);
     expect(week.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - ISO week spills into the next year", () => {
-    const timestamp = Timestamp.fromDateLike("2025-12-31T23:59:59Z");
+    const timestamp = Timestamp.fromString("2025-12-31T23:59:59Z");
     const week = Week.fromTimestamp(timestamp);
+    const start = 1766966400000;
+    const end = 1767571199999;
 
     expect(week.toIsoId()).toEqual(v.parse(WeekIsoId, "2026-W01"));
-    expect(week.getStart()).toEqual(Timestamp.fromNumber(startOfISOWeek(timestamp.ms).getTime()));
-    expect(week.getEnd()).toEqual(Timestamp.fromNumber(endOfISOWeek(timestamp.ms).getTime()));
+    expect(week.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(week.getEnd()).toEqual(Timestamp.fromNumber(end));
   });
 
   test("fromNow", () => {
@@ -71,8 +73,8 @@ describe("Week", () => {
   test("contains", () => {
     const week = Week.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(week.contains(week.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(week.contains(week.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(week.contains(week.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(week.contains(week.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
@@ -80,6 +82,6 @@ describe("Week", () => {
   });
 
   test("toJSON", () => {
-    expect(Week.fromIsoId(w46).toJSON()).toEqual({ start: 1699833600000, end: 1700438399999 });
+    expect(Week.fromIsoId(w46).toJSON()).toEqual({ start, end });
   });
 });

@@ -1,19 +1,23 @@
-import { addWeeks, endOfISOWeek, getISOWeek, getISOWeekYear, startOfISOWeek } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
-import { Duration } from "./duration.service";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Week {
-    const start = Timestamp.fromNumber(startOfISOWeek(timestamp.ms).getTime());
-    const end = Timestamp.fromNumber(endOfISOWeek(timestamp.ms).getTime());
+    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
-    return new Week(start, end);
+    const start = plain
+      .subtract({ days: plain.dayOfWeek - 1 })
+      .toZonedDateTime("UTC")
+      .startOfDay();
+    const end = start.add({ days: 7 }).subtract({ milliseconds: 1 });
+
+    return new Week(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Week {
@@ -27,18 +31,24 @@ export class Week extends DateRange {
   static fromIsoId(isoId: WeekIsoIdType): Week {
     const [year, week] = v.parse(WeekIsoId, isoId).split("-W").map(Number) as [number, number];
 
-    // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
-    const januaryFourth = Timestamp.fromNumber(Date.UTC(year, 0, 4));
-    const firstWeekStart = Timestamp.fromNumber(startOfISOWeek(januaryFourth.ms).getTime());
+    const januaryFourth = Temporal.PlainDate.from({ year, month: 1, day: 4 });
 
-    return Week.fromTimestamp(firstWeekStart.add(Duration.Weeks(week - 1)));
+    const start = januaryFourth.subtract({ days: januaryFourth.dayOfWeek - 1 });
+
+    return Week.fromTimestamp(
+      Timestamp.fromInstant(
+        start
+          .add({ weeks: week - 1 })
+          .toZonedDateTime("UTC")
+          .toInstant(),
+      ),
+    );
   }
 
   toIsoId(): WeekIsoIdType {
-    const year = getISOWeekYear(this.getStart().ms);
-    const week = getISOWeek(this.getStart().ms);
+    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
-    return v.parse(WeekIsoId, `${year}-W${String(week).padStart(2, "0")}`);
+    return v.parse(WeekIsoId, `${plain.yearOfWeek}-W${String(plain.weekOfYear).padStart(2, "0")}`);
   }
 
   previous(): Week {
@@ -50,9 +60,15 @@ export class Week extends DateRange {
   }
 
   shift(count: IntegerType): Week {
-    const shifted = addWeeks(this.getStart().ms, count).getTime();
+    const instant = this.getStart()
+      .toInstant()
+      .toZonedDateTimeISO("UTC")
+      .toPlainDate()
+      .add({ weeks: count })
+      .toZonedDateTime("UTC")
+      .toInstant();
 
-    return Week.fromTimestamp(Timestamp.fromNumber(shifted));
+    return Week.fromTimestamp(Timestamp.fromInstant(instant));
   }
 
   toString(): string {

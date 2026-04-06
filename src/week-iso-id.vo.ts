@@ -1,5 +1,5 @@
-import { getISOWeeksInYear } from "date-fns";
 import * as v from "valibot";
+import { Temporal } from "./temporal";
 
 export const WeekIsoIdError = {
   Type: "week.iso.id.type",
@@ -15,9 +15,12 @@ export const WeekIsoId = v.pipe(
   v.regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars),
   v.check((value) => {
     const [year, week] = value.split("-W").map(Number) as [number, number];
-    // ISO-8601 rule: Jan 4 is always in week 01 of the ISO week-year.
-    const weeksInYear = getISOWeeksInYear(Date.UTC(year, 0, 4));
-    if (week < 1) return false;
+
+    if (isNaN(year) || isNaN(week) || week < 1) return false;
+
+    const weeksInYear = Temporal.PlainDate.from({ year, month: 12, day: 28 }).weekOfYear;
+
+    if (!weeksInYear) return false;
     return week <= weeksInYear;
   }, WeekIsoIdError.Invalid),
   // Stryker disable next-line StringLiteral

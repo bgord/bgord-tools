@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import { endOfMonth, startOfMonth } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
@@ -9,23 +8,26 @@ import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 const november = v.parse(MonthIsoId, "2023-11");
+const start = 1698796800000;
+const end = 1701388799999;
 
 describe("Month", () => {
   test("happy path", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(mocks.TIME_ZERO.ms).getTime()));
-    expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(mocks.TIME_ZERO.ms).getTime()));
+    expect(month.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(month.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(month.toIsoId()).toEqual(november);
     expect(month.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - near year boundary", () => {
-    const timestamp = Timestamp.fromDateLike("2025-12-31");
-    const month = Month.fromTimestamp(timestamp);
+    const start = 1764547200000;
+    const end = 1767225599999;
+    const month = Month.fromTimestamp(Timestamp.fromString("2025-12-31T00:00:00Z"));
 
-    expect(month.getStart()).toEqual(Timestamp.fromNumber(startOfMonth(timestamp.ms).getTime()));
-    expect(month.getEnd()).toEqual(Timestamp.fromNumber(endOfMonth(timestamp.ms).getTime()));
+    expect(month.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(month.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(month.toIsoId()).toEqual(v.parse(MonthIsoId, "2025-12"));
   });
 
@@ -75,8 +77,8 @@ describe("Month", () => {
   test("contains", () => {
     const month = Month.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(month.contains(month.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(month.contains(month.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(month.contains(month.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(month.contains(month.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
@@ -84,6 +86,6 @@ describe("Month", () => {
   });
 
   test("toJSON", () => {
-    expect(Month.fromIsoId(november).toJSON()).toEqual({ start: 1698796800000, end: 1701388799999 });
+    expect(Month.fromIsoId(november).toJSON()).toEqual({ start, end });
   });
 });

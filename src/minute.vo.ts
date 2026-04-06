@@ -6,20 +6,22 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 export class Minute {
   private constructor(private readonly value: MinuteValueType) {}
 
+  static fromTimestamp(timestamp: Timestamp): Minute {
+    const { minute } = timestamp.toInstant().toZonedDateTimeISO("UTC");
+
+    return new Minute(v.parse(MinuteValue, minute));
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Minute {
+    return Minute.fromTimestamp(Timestamp.fromValue(timestamp));
+  }
+
   static fromValue(candidate: number): Minute {
     return new Minute(v.parse(MinuteValue, candidate));
   }
 
   static fromValueSafe(candidate: MinuteValueType) {
     return new Minute(candidate);
-  }
-
-  static fromTimestamp(timestamp: Timestamp): Minute {
-    return new Minute(v.parse(MinuteValue, new Date(timestamp.ms).getUTCMinutes()));
-  }
-
-  static fromTimestampValue(timestamp: TimestampValueType): Minute {
-    return Minute.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
   static zero(): Minute {

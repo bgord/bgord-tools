@@ -1,9 +1,18 @@
 import * as v from "valibot";
 import { Duration } from "./duration.service";
+import { Temporal } from "./temporal";
 import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
 export class Timestamp {
   constructor(private readonly value: TimestampValueType) {}
+
+  static fromInstant(instant: Temporal.Instant): Timestamp {
+    return Timestamp.fromNumber(instant.epochMilliseconds);
+  }
+
+  static fromString(value: string): Timestamp {
+    return Timestamp.fromInstant(Temporal.Instant.from(value));
+  }
 
   static fromValue(value: TimestampValueType): Timestamp {
     return new Timestamp(value);
@@ -11,14 +20,6 @@ export class Timestamp {
 
   static fromNumber(value: number): Timestamp {
     return new Timestamp(v.parse(TimestampValue, value));
-  }
-
-  static fromDate(value: Date): Timestamp {
-    return Timestamp.fromNumber(value.getTime());
-  }
-
-  static fromDateLike(value: string): Timestamp {
-    return Timestamp.fromNumber(new Date(value).getTime());
   }
 
   add(duration: Duration): Timestamp {
@@ -55,6 +56,10 @@ export class Timestamp {
 
   get ms(): TimestampValueType {
     return this.value;
+  }
+
+  toInstant(): Temporal.Instant {
+    return Temporal.Instant.fromEpochMilliseconds(this.value);
   }
 
   toJSON(): TimestampValueType {

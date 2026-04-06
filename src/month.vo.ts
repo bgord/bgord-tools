@@ -1,22 +1,27 @@
-import { endOfMonth, format, startOfMonth } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
 import { MonthIsoId, type MonthIsoIdType } from "./month-iso-id.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Month extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Month {
-    const start = Timestamp.fromNumber(startOfMonth(timestamp.ms).getTime());
-    const end = Timestamp.fromNumber(endOfMonth(timestamp.ms).getTime());
+    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
-    return new Month(start, end);
+    const start = plain.with({ day: 1 });
+    const end = plain.with({ day: 1 }).add({ months: 1 });
+
+    return new Month(
+      Timestamp.fromInstant(start.toZonedDateTime("UTC").toInstant()),
+      Timestamp.fromInstant(end.toZonedDateTime("UTC").toInstant().subtract({ milliseconds: 1 })),
+    );
   }
 
-  static fromTimestampValue(timestamp: TimestampValueType): Month {
-    return Month.fromTimestamp(Timestamp.fromValue(timestamp));
+  static fromTimestampValue(value: TimestampValueType): Month {
+    return Month.fromTimestamp(Timestamp.fromValue(value));
   }
 
   static fromNow(now: Timestamp): Month {
@@ -26,13 +31,15 @@ export class Month extends DateRange {
   static fromIsoId(iso: MonthIsoIdType): Month {
     const [year, month] = v.parse(MonthIsoId, iso).split("-").map(Number) as [number, number];
 
-    const reference = Timestamp.fromNumber(Date.UTC(year, month - 1, 1));
+    const plain = Temporal.PlainDate.from({ year, month, day: 1 });
 
-    return Month.fromTimestamp(reference);
+    return Month.fromTimestamp(Timestamp.fromInstant(plain.toZonedDateTime("UTC").toInstant()));
   }
 
   toIsoId(): MonthIsoIdType {
-    return v.parse(MonthIsoId, format(this.getStart().ms, "yyyy-MM"));
+    const { year, month } = this.getStart().toInstant().toZonedDateTimeISO("UTC");
+
+    return v.parse(MonthIsoId, `${year}-${String(month).padStart(2, "0")}`);
   }
 
   previous(): Month {
@@ -43,11 +50,11 @@ export class Month extends DateRange {
     return this.shift(Int.of(1));
   }
 
-  shift(count: IntegerType): Month {
-    const start = new Date(this.getStart().ms);
+  shift(months: IntegerType): Month {
+    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
     return Month.fromTimestamp(
-      Timestamp.fromNumber(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + count, 1)),
+      Timestamp.fromInstant(plain.add({ months }).toZonedDateTime("UTC").toInstant()),
     );
   }
 

@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import { endOfQuarter, startOfQuarter } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Quarter } from "../src/quarter.vo";
@@ -8,23 +7,27 @@ import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
 const q4 = v.parse(QuarterIsoId, "2023-Q4");
+const start = 1696118400000;
+const end = 1704067199999;
 
 describe("Quarter", () => {
   test("happy path", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(mocks.TIME_ZERO.ms).getTime()));
-    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(mocks.TIME_ZERO.ms).getTime()));
+    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(quarter.toIsoId()).toEqual(q4);
     expect(quarter.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - near year boundary", () => {
-    const timestamp = Timestamp.fromDateLike("2025-12-31T23:59:59Z");
+    const timestamp = Timestamp.fromString("2025-12-31T23:59:59Z");
     const quarter = Quarter.fromTimestamp(timestamp);
+    const start = 1759276800000;
+    const end = 1767225599999;
 
-    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(startOfQuarter(timestamp.ms).getTime()));
-    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(endOfQuarter(timestamp.ms).getTime()));
+    expect(quarter.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(quarter.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(quarter.toIsoId()).toEqual(v.parse(QuarterIsoId, "2025-Q4"));
   });
 
@@ -55,8 +58,8 @@ describe("Quarter", () => {
   test("contains", () => {
     const quarter = Quarter.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(quarter.contains(quarter.getStart().subtract(Duration.Ms(1)))).toEqual(false);
-    expect(quarter.contains(quarter.getEnd().add(Duration.Ms(1)))).toEqual(false);
+    expect(quarter.contains(quarter.getStart().subtract(Duration.MIN))).toEqual(false);
+    expect(quarter.contains(quarter.getEnd().add(Duration.MIN))).toEqual(false);
   });
 
   test("toString", () => {
@@ -64,6 +67,6 @@ describe("Quarter", () => {
   });
 
   test("toJSON", () => {
-    expect(Quarter.fromIsoId(q4).toJSON()).toEqual({ start: 1696118400000, end: 1704067199999 });
+    expect(Quarter.fromIsoId(q4).toJSON()).toEqual({ start, end });
   });
 });

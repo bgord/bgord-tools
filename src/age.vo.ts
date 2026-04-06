@@ -1,6 +1,6 @@
-import { differenceInYears } from "date-fns";
 import * as v from "valibot";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 
 export const AgeError = { FutureBirthdate: "age.future.birthdate" };
@@ -21,14 +21,23 @@ export class Age {
 
   static fromBirthdateTimestamp(params: { birthdate: Timestamp; now: Timestamp }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(params.now.ms, params.birthdate.ms));
+
+    const birthdate = params.birthdate.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const now = params.now.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+
+    return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
-    const birthdate = Timestamp.fromDateLike(candidate.birthdate);
+    const birthdate = Timestamp.fromString(candidate.birthdate)
+      .toInstant()
+      .toZonedDateTimeISO("UTC")
+      .toPlainDate();
 
-    if (birthdate.isAfter(candidate.now)) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(differenceInYears(candidate.now.ms, birthdate.ms));
+    const now = candidate.now.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+
+    if (Temporal.PlainDate.compare(birthdate, now) > 0) throw new Error(AgeError.FutureBirthdate);
+    return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
   get(): AgeYearsType {

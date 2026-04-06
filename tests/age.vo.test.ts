@@ -24,7 +24,7 @@ describe("Age", () => {
   test("fromBirthdateTimestamp - birthday has already happened", () => {
     expect(
       Age.fromBirthdateTimestamp({
-        birthdate: Timestamp.fromDateLike("2000-11-13"),
+        birthdate: Timestamp.fromString("2000-11-13T00:00:00Z"),
         now: mocks.TIME_ZERO,
       }).get(),
     ).toEqual(twentyThree);
@@ -33,7 +33,7 @@ describe("Age", () => {
   test("fromBirthdateTimestamp - birthday has NOT yet happened", () => {
     expect(
       Age.fromBirthdateTimestamp({
-        birthdate: Timestamp.fromDateLike("2000-11-15"),
+        birthdate: Timestamp.fromString("2000-11-15T00:00:00Z"),
         now: mocks.TIME_ZERO,
       }).get(),
     ).toEqual(v.parse(AgeYears, 22));
@@ -42,7 +42,7 @@ describe("Age", () => {
   test("fromBirthdateTimestamp - exactly on birthday", () => {
     expect(
       Age.fromBirthdateTimestamp({
-        birthdate: Timestamp.fromDateLike("2000-11-14"),
+        birthdate: Timestamp.fromString("2000-11-14T00:00:00Z"),
         now: mocks.TIME_ZERO,
       }).get(),
     ).toEqual(twentyThree);
@@ -50,39 +50,46 @@ describe("Age", () => {
 
   test("fromBirthdateTimestamp - rejects future birthdates", () => {
     expect(() =>
-      Age.fromBirthdateTimestamp({ birthdate: Timestamp.fromDateLike("2125-10-01"), now: mocks.TIME_ZERO }),
+      Age.fromBirthdateTimestamp({
+        birthdate: Timestamp.fromString("2125-10-01T00:00:00Z"),
+        now: mocks.TIME_ZERO,
+      }),
     ).toThrowError("age.future.birthdate");
   });
 
   test("fromBirthdate - birthday has already happened", () => {
-    expect(Age.fromBirthdate({ birthdate: "2000-11-13", now: mocks.TIME_ZERO }).get()).toEqual(twentyThree);
+    expect(Age.fromBirthdate({ birthdate: "2000-11-13T00:00:00Z", now: mocks.TIME_ZERO }).get()).toEqual(
+      twentyThree,
+    );
   });
 
   test("fromBirthdate - birthday has NOT yet happened", () => {
-    expect(Age.fromBirthdate({ birthdate: "2000-11-15", now: mocks.TIME_ZERO }).get()).toEqual(
+    expect(Age.fromBirthdate({ birthdate: "2000-11-15T00:00:00Z", now: mocks.TIME_ZERO }).get()).toEqual(
       v.parse(AgeYears, 22),
     );
   });
 
   test("fromBirthdate - exactly on birthday", () => {
-    expect(Age.fromBirthdate({ birthdate: "2000-11-14", now: mocks.TIME_ZERO }).get()).toEqual(twentyThree);
+    expect(Age.fromBirthdate({ birthdate: "2000-11-14T00:00:00Z", now: mocks.TIME_ZERO }).get()).toEqual(
+      twentyThree,
+    );
   });
 
   test("fromBirthdate - rejects future birthdates", () => {
-    expect(() => Age.fromBirthdate({ birthdate: "2125-10-01", now: mocks.TIME_ZERO })).toThrowError(
+    expect(() => Age.fromBirthdate({ birthdate: "2125-10-01T00:00:00Z", now: mocks.TIME_ZERO })).toThrowError(
       "age.future.birthdate",
     );
   });
 
   test("fromBirthdate - rejects above upper bound", () => {
-    expect(() => Age.fromBirthdate({ birthdate: "1800-01-01", now: mocks.TIME_ZERO })).toThrow(
+    expect(() => Age.fromBirthdate({ birthdate: "1800-01-01T00:00:00Z", now: mocks.TIME_ZERO })).toThrow(
       "timestamp.invalid",
     );
   });
 
   test("fromBirthdate - invalid date string throws", () => {
     expect(() => Age.fromBirthdate({ birthdate: "not-a-date", now: mocks.TIME_ZERO })).toThrow(
-      "timestamp.invalid",
+      "Cannot parse: not-a-date",
     );
   });
 

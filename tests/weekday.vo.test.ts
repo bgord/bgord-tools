@@ -36,7 +36,7 @@ describe("Weekday", () => {
   });
 
   test("fromTimestamp - sunday", () => {
-    const timestamp = Timestamp.fromDateLike("2026-02-08T12:00:00.000Z");
+    const timestamp = Timestamp.fromString("2026-02-08T12:00:00.000Z");
     const weekday = Weekday.fromTimestamp(timestamp);
 
     expect(weekday.isSunday()).toEqual(true);

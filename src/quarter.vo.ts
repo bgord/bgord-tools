@@ -1,16 +1,24 @@
-import { endOfQuarter, getQuarter, getYear, startOfQuarter } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Quarter extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Quarter {
-    const start = Timestamp.fromNumber(startOfQuarter(timestamp.ms).getTime());
-    const end = Timestamp.fromNumber(endOfQuarter(timestamp.ms).getTime());
+    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
-    return new Quarter(start, end);
+    const start = Temporal.PlainDate.from({
+      year: plain.year,
+      month: Math.ceil(plain.month / 3) * 3 - 2,
+      day: 1,
+    })
+      .toZonedDateTime("UTC")
+      .startOfDay();
+    const end = start.add({ months: 3 }).subtract({ milliseconds: 1 });
+
+    return new Quarter(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Quarter {
@@ -24,14 +32,16 @@ export class Quarter extends DateRange {
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
     const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number) as [number, number];
 
-    return Quarter.fromTimestamp(Timestamp.fromNumber(Date.UTC(year, (quarter - 1) * 3, 1)));
+    const plain = Temporal.PlainDate.from({ year, month: (quarter - 1) * 3 + 1, day: 1 });
+
+    return Quarter.fromTimestamp(Timestamp.fromInstant(plain.toZonedDateTime("UTC").toInstant()));
   }
 
   toIsoId(): QuarterIsoIdType {
-    const year = getYear(this.getStart().ms);
-    const quarter = getQuarter(this.getStart().ms);
+    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const quarter = Math.ceil(plain.month / 3);
 
-    return v.parse(QuarterIsoId, `${year}-Q${quarter}`);
+    return v.parse(QuarterIsoId, `${plain.year}-Q${quarter}`);
   }
 
   toString(): string {

@@ -1,4 +1,5 @@
 import * as v from "valibot";
+import { Temporal } from "../src/temporal";
 
 export const TimezoneError = {
   Type: "timezone.type",
@@ -13,7 +14,7 @@ export const Timezone = v.pipe(
   v.maxLength(128, TimezoneError.TooLong),
   v.check((value) => {
     try {
-      new Intl.DateTimeFormat("en-US", { timeZone: value }).format(Date.now());
+      Temporal.ZonedDateTime.from(`1970-01-01T00:00:00[${value}]`);
       return true;
     } catch {
       return false;

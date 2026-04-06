@@ -1,10 +1,21 @@
 import * as v from "valibot";
 import { HourValue, type HourValueType } from "./hour-value.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Hour {
   private constructor(private readonly value: HourValueType) {}
+
+  static fromTimestamp(timestamp: Timestamp): Hour {
+    const { hour } = Temporal.Instant.fromEpochMilliseconds(timestamp.ms).toZonedDateTimeISO("UTC");
+
+    return new Hour(v.parse(HourValue, hour));
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Hour {
+    return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
+  }
 
   static fromValue(candidate: number): Hour {
     return new Hour(v.parse(HourValue, candidate));
@@ -12,14 +23,6 @@ export class Hour {
 
   static fromValueSafe(candidate: HourValueType) {
     return new Hour(candidate);
-  }
-
-  static fromTimestamp(timestamp: Timestamp): Hour {
-    return new Hour(v.parse(HourValue, new Date(timestamp.ms).getUTCHours()));
-  }
-
-  static fromTimestampValue(timestamp: TimestampValueType): Hour {
-    return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
   static zero(): Hour {
