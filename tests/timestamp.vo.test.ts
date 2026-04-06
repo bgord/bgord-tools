@@ -1,11 +1,16 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
+import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 import { TimestampValue } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
 describe("Timestamp", () => {
+  test("fromInstant", () => {
+    expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_DATE_LIKE_FULL)));
+  });
+
   test("fromValue - success", () => {
     expect(Timestamp.fromValue(mocks.TIME_ZERO.ms));
   });
@@ -86,6 +91,10 @@ describe("Timestamp", () => {
 
   test("get", () => {
     expect(mocks.TIME_ZERO.ms).toEqual(mocks.TIME_ZERO.ms);
+  });
+
+  test("toInstant", () => {
+    expect(mocks.TIME_ZERO.toInstant().toString()).toEqual(mocks.TIME_ZERO_DATE_LIKE_FULL);
   });
 
   test("toJSON", () => {

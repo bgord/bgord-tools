@@ -6,6 +6,7 @@ import { Timestamp } from "../src/timestamp.vo";
 export const TIME_ZERO = Timestamp.fromNumber(1700000000000);
 
 export const TIME_ZERO_DATE_LIKE = "2023-11-14";
+export const TIME_ZERO_DATE_LIKE_FULL = "2023-11-14T22:13:20Z";
 
 export const TIME_ZERO_DATE = new Date(TIME_ZERO_DATE_LIKE);
 
