@@ -6,6 +6,8 @@ import { Timestamp } from "../src/timestamp.vo";
 import { TimestampValue } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";
 
+const now = Temporal.Now.instant().epochMilliseconds;
+
 describe("Timestamp", () => {
   test("fromInstant", () => {
     expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_PLAIN_DATE_TIME)));
@@ -54,25 +56,25 @@ describe("Timestamp", () => {
   });
 
   test("isBefore", () => {
-    expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(Date.now()))).toEqual(true);
+    expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(now))).toEqual(true);
     expect(mocks.TIME_ZERO.isBefore(Timestamp.fromNumber(0))).toEqual(false);
     expect(mocks.TIME_ZERO.isBefore(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isBeforeOrEqual", () => {
-    expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(Date.now()))).toEqual(true);
+    expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(now))).toEqual(true);
     expect(mocks.TIME_ZERO.isBeforeOrEqual(Timestamp.fromNumber(0))).toEqual(false);
     expect(mocks.TIME_ZERO.isBeforeOrEqual(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("isAfter", () => {
     expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(0))).toEqual(true);
-    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(Date.now()))).toEqual(false);
+    expect(mocks.TIME_ZERO.isAfter(Timestamp.fromNumber(now))).toEqual(false);
     expect(mocks.TIME_ZERO.isAfter(mocks.TIME_ZERO)).toEqual(false);
   });
 
   test("isAfterOrEqual", () => {
-    expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(Date.now()))).toEqual(false);
+    expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(now))).toEqual(false);
     expect(mocks.TIME_ZERO.isAfterOrEqual(Timestamp.fromNumber(0))).toEqual(true);
     expect(mocks.TIME_ZERO.isAfterOrEqual(mocks.TIME_ZERO)).toEqual(true);
   });
