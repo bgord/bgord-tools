@@ -11,6 +11,14 @@ describe("Timestamp", () => {
     expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_DATE_LIKE_FULL)));
   });
 
+  test("fromString - success", () => {
+    expect(Timestamp.fromString(mocks.TIME_ZERO_DATE_LIKE_FULL));
+  });
+
+  test("fromString - error", () => {
+    expect(() => Timestamp.fromString("not-a-date")).toThrow("Cannot parse: not-a-date");
+  });
+
   test("fromValue - success", () => {
     expect(Timestamp.fromValue(mocks.TIME_ZERO.ms));
   });

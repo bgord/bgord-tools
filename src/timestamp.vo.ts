@@ -10,6 +10,10 @@ export class Timestamp {
     return Timestamp.fromNumber(instant.epochMilliseconds);
   }
 
+  static fromString(value: string): Timestamp {
+    return Timestamp.fromInstant(Temporal.Instant.from(value));
+  }
+
   static fromValue(value: TimestampValueType): Timestamp {
     return new Timestamp(value);
   }
