@@ -1,4 +1,7 @@
 # Changelog
+## 2026-04-06 18:15 v1.4.16
+- 2026-04-06 18:15 a3f1b3e **1.4.16**
+- 2026-04-06 18:14 aad0684 **fix: temporal path in timezone vo**
 ## 2026-04-06 18:10 v1.4.15
 - 2026-04-06 18:10 f3cd01c **1.4.15**
 - 2026-04-06 18:08 1f79ae3 **Merge pull request #45 from bgord/itstime**
@@ -9,6 +12,7 @@
 - 2026-04-06 16:36 24306f3 **refactor: remove formatters**
 - 2026-04-06 16:35 fca9c43 **step: remove date-fns**
 - 2026-04-06 16:33 90695df **refactor: use temporal in age**
+- 2026-04-06 16:10 21a027a **docs: generate CHANGELOG**
 - 2026-04-06 16:08 749724b **docs: generate readme**
 - 2026-04-06 16:08 1367a7e **docs: generate CHANGELOG**
 - 2026-04-06 15:55 b79ad76 **refactor: use temporal in quarter**
