@@ -21,7 +21,6 @@ describe("IBAN", () => {
     for (const [input, normalized, formatted] of cases) {
       const iban = new IBAN(input);
 
-      // @ts-expect-error
       expect(iban.toString()).toEqual(normalized);
       expect(iban.format()).toEqual(formatted);
       expect(iban.countryCode).toEqual(normalized.slice(0, 2));

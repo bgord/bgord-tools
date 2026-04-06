@@ -23,7 +23,7 @@ describe("Week", () => {
   });
 
   test("happy path - ISO week spills into the next year", () => {
-    const timestamp = Timestamp.fromDateLike("2025-12-31T23:59:59Z");
+    const timestamp = Timestamp.fromString("2025-12-31T23:59:59Z");
     const week = Week.fromTimestamp(timestamp);
 
     expect(week.toIsoId()).toEqual(v.parse(WeekIsoId, "2026-W01"));

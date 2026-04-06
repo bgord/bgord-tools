@@ -1,6 +1,7 @@
 import { differenceInYears } from "date-fns";
 import * as v from "valibot";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 
 export const AgeError = { FutureBirthdate: "age.future.birthdate" };
@@ -25,7 +26,7 @@ export class Age {
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
-    const birthdate = Timestamp.fromDateLike(candidate.birthdate);
+    const birthdate = Timestamp.fromString(candidate.birthdate);
 
     if (birthdate.isAfter(candidate.now)) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(differenceInYears(candidate.now.ms, birthdate.ms));

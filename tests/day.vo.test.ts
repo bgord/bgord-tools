@@ -45,7 +45,7 @@ describe("Day", () => {
   });
 
   test("leap-day", () => {
-    const timestamp = Timestamp.fromDateLike("2024-02-29");
+    const timestamp = Timestamp.fromString("2024-02-29T00:00:00Z");
     const day = Day.fromTimestamp(timestamp);
 
     expect(day.toIsoId()).toEqual(v.parse(DayIsoId, "2024-02-29"));
