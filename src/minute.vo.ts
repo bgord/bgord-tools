@@ -15,7 +15,7 @@ export class Minute {
   }
 
   static fromTimestamp(timestamp: Timestamp): Minute {
-    return new Minute(v.parse(MinuteValue, new Date(timestamp.ms).getUTCMinutes()));
+    return new Minute(v.parse(MinuteValue, timestamp.toInstant().toZonedDateTimeISO("UTC").minute));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
