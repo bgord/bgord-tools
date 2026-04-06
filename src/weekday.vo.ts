@@ -15,7 +15,7 @@ export class Weekday {
   private constructor(private readonly value: WeekdayIsoIdType) {}
 
   static fromTimestamp(timestamp: Timestamp): Weekday {
-    const dayOfWeek = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate().dayOfWeek;
+    const { dayOfWeek } = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
     return new Weekday(v.parse(WeekdayIsoId, dayOfWeek));
   }

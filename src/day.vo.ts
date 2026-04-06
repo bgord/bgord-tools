@@ -9,9 +9,9 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Day extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Day {
-    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const date = timestamp.toInstant().toZonedDateTimeISO("UTC");
 
-    const start = plain.toZonedDateTime("UTC").startOfDay();
+    const start = date.startOfDay();
     const end = start.add({ days: 1 }).subtract({ milliseconds: 1 });
 
     return new Day(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));

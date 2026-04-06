@@ -7,22 +7,22 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 export class Hour {
   private constructor(private readonly value: HourValueType) {}
 
+  static fromTimestamp(timestamp: Timestamp): Hour {
+    const { hour } = Temporal.Instant.fromEpochMilliseconds(timestamp.ms).toZonedDateTimeISO("UTC");
+
+    return new Hour(v.parse(HourValue, hour));
+  }
+
+  static fromTimestampValue(timestamp: TimestampValueType): Hour {
+    return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
+  }
+
   static fromValue(candidate: number): Hour {
     return new Hour(v.parse(HourValue, candidate));
   }
 
   static fromValueSafe(candidate: HourValueType) {
     return new Hour(candidate);
-  }
-
-  static fromTimestamp(timestamp: Timestamp): Hour {
-    return new Hour(
-      v.parse(HourValue, Temporal.Instant.fromEpochMilliseconds(timestamp.ms).toZonedDateTimeISO("UTC").hour),
-    );
-  }
-
-  static fromTimestampValue(timestamp: TimestampValueType): Hour {
-    return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
   static zero(): Hour {

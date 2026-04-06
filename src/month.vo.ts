@@ -37,9 +37,9 @@ export class Month extends DateRange {
   }
 
   toIsoId(): MonthIsoIdType {
-    const zdt = this.getStart().toInstant().toZonedDateTimeISO("UTC");
+    const { year, month } = this.getStart().toInstant().toZonedDateTimeISO("UTC");
 
-    return v.parse(MonthIsoId, `${zdt.year}-${String(zdt.month).padStart(2, "0")}`);
+    return v.parse(MonthIsoId, `${year}-${String(month).padStart(2, "0")}`);
   }
 
   previous(): Month {
