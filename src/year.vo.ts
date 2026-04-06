@@ -1,18 +1,23 @@
-import { endOfYear, getYear, startOfYear } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Year {
-    const start = Timestamp.fromNumber(startOfYear(timestamp.ms).getTime());
-    const end = Timestamp.fromNumber(endOfYear(timestamp.ms).getTime());
+    const year = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate().year;
 
-    return new Year(start, end);
+    const start = Temporal.PlainDate.from({ year, month: 1, day: 1 });
+    const end = Temporal.PlainDate.from({ year: year + 1, month: 1, day: 1 });
+
+    return new Year(
+      Timestamp.fromInstant(start.toZonedDateTime("UTC").toInstant()),
+      Timestamp.fromInstant(end.toZonedDateTime("UTC").toInstant().subtract({ milliseconds: 1 })),
+    );
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Year {
@@ -28,24 +33,21 @@ export class Year extends DateRange {
   }
 
   static fromIsoId(isoId: YearIsoIdType): Year {
-    const year = Number(isoId);
-
-    return new Year(
-      Timestamp.fromNumber(Date.UTC(year, 0, 1)),
-      Timestamp.fromNumber(Date.UTC(year + 1, 0, 1) - 1),
+    return Year.fromTimestamp(
+      Timestamp.fromInstant(
+        Temporal.PlainDate.from({ year: Number(isoId), month: 1, day: 1 })
+          .toZonedDateTime("UTC")
+          .toInstant(),
+      ),
     );
   }
 
   toIsoId(): YearIsoIdType {
-    return v.parse(YearIsoId, String(getYear(this.getStart().ms)));
+    return v.parse(YearIsoId, this.getStart().toInstant().toZonedDateTimeISO("UTC").year.toString());
   }
 
   isLeapYear(): boolean {
-    const year = getYear(this.getStart().ms);
-
-    if (year % 400 === 0) return true;
-    if (year % 100 === 0) return false;
-    return year % 4 === 0;
+    return this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate().inLeapYear;
   }
 
   previous(): Year {
@@ -57,7 +59,7 @@ export class Year extends DateRange {
   }
 
   shift(count: IntegerType): Year {
-    const year = getYear(this.getStart().ms) + count;
+    const year = this.getStart().toInstant().toZonedDateTimeISO("UTC").year + count;
 
     return Year.fromNumber(year);
   }

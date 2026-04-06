@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import { endOfYear, startOfYear } from "date-fns";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
@@ -9,23 +8,27 @@ import { YearIsoId } from "../src/year-iso-id.vo";
 import * as mocks from "./mocks";
 
 const twentyTwentyThree = v.parse(YearIsoId, "2023");
+const start = 1672531200000;
+const end = 1704067199999;
 
 describe("Year", () => {
   test("happy path", () => {
     const year = Year.fromTimestamp(mocks.TIME_ZERO);
 
-    expect(year.getStart()).toEqual(Timestamp.fromNumber(startOfYear(mocks.TIME_ZERO.ms).getTime()));
-    expect(year.getEnd()).toEqual(Timestamp.fromNumber(endOfYear(mocks.TIME_ZERO.ms).getTime()));
+    expect(year.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(year.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(year.toIsoId()).toEqual(twentyTwentyThree);
     expect(year.contains(mocks.TIME_ZERO)).toEqual(true);
   });
 
   test("happy path - near year boundary", () => {
+    const start = 1735689600000;
+    const end = 1767225599999;
     const timestamp = Timestamp.fromString("2025-12-31T23:59:59Z");
     const year = Year.fromTimestamp(timestamp);
 
-    expect(year.getStart()).toEqual(Timestamp.fromNumber(startOfYear(timestamp.ms).getTime()));
-    expect(year.getEnd()).toEqual(Timestamp.fromNumber(endOfYear(timestamp.ms).getTime()));
+    expect(year.getStart()).toEqual(Timestamp.fromNumber(start));
+    expect(year.getEnd()).toEqual(Timestamp.fromNumber(end));
     expect(year.toIsoId()).toEqual(v.parse(YearIsoId, "2025"));
   });
 
@@ -88,21 +91,19 @@ describe("Year", () => {
     expect(year.contains(year.getEnd().add(Duration.Ms(1)))).toEqual(false);
   });
 
-  test("leap year check for 2000", () => expect(Year.fromNumber(2000).isLeapYear()).toEqual(true));
-
-  test("leap year check for 2010", () => expect(Year.fromNumber(2010).isLeapYear()).toEqual(false));
-
-  test("leap year check for 2024", () => expect(Year.fromNumber(2024).isLeapYear()).toEqual(true));
-
-  test("leap year check for 2400", () => expect(Year.fromNumber(2400).isLeapYear()).toEqual(true));
-
-  test("leap year check for 2100", () => expect(Year.fromNumber(2100).isLeapYear()).toEqual(false));
+  test("leap year", () => {
+    expect(Year.fromNumber(2000).isLeapYear()).toEqual(true);
+    expect(Year.fromNumber(2010).isLeapYear()).toEqual(false);
+    expect(Year.fromNumber(2024).isLeapYear()).toEqual(true);
+    expect(Year.fromNumber(2400).isLeapYear()).toEqual(true);
+    expect(Year.fromNumber(2100).isLeapYear()).toEqual(false);
+  });
 
   test("toString", () => {
     expect(Year.fromIsoId(twentyTwentyThree).toString()).toEqual("2023");
   });
 
   test("toJSON", () => {
-    expect(Year.fromIsoId(twentyTwentyThree).toJSON()).toEqual({ start: 1672531200000, end: 1704067199999 });
+    expect(Year.fromIsoId(twentyTwentyThree).toJSON()).toEqual({ start, end });
   });
 });
