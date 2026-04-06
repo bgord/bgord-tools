@@ -4,19 +4,16 @@ import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
+import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 
-const start = Timestamp.fromNumber(
-  Date.UTC(
-    mocks.TIME_ZERO_DATE.getUTCFullYear(),
-    mocks.TIME_ZERO_DATE.getUTCMonth(),
-    mocks.TIME_ZERO_DATE.getUTCDate(),
-  ),
+const start = Timestamp.fromInstant(
+  Temporal.PlainDate.from(mocks.TIME_ZERO_PLAIN_DATE).toZonedDateTime("UTC").startOfDay().toInstant(),
 );
 const end = start.add(Duration.Days(1)).subtract(mocks.epsilon);
 
-const dayIsoId = v.parse(DayIsoId, mocks.TIME_ZERO_DATE_LIKE);
+const dayIsoId = v.parse(DayIsoId, mocks.TIME_ZERO_PLAIN_DATE);
 
 describe("Day", () => {
   test("happy path", () => {
@@ -89,7 +86,7 @@ describe("Day", () => {
   });
 
   test("toString", () => {
-    expect(Day.fromIsoId(dayIsoId).toString()).toEqual(mocks.TIME_ZERO_DATE_LIKE);
+    expect(Day.fromIsoId(dayIsoId).toString()).toEqual(mocks.TIME_ZERO_PLAIN_DATE);
   });
 
   test("toJSON", () => {

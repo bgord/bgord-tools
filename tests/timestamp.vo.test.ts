@@ -8,11 +8,11 @@ import * as mocks from "./mocks";
 
 describe("Timestamp", () => {
   test("fromInstant", () => {
-    expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_DATE_LIKE_FULL)));
+    expect(Timestamp.fromInstant(Temporal.Instant.from(mocks.TIME_ZERO_PLAIN_DATE_TIME)));
   });
 
   test("fromString - success", () => {
-    expect(Timestamp.fromString(mocks.TIME_ZERO_DATE_LIKE_FULL));
+    expect(Timestamp.fromString(mocks.TIME_ZERO_PLAIN_DATE_TIME));
   });
 
   test("fromString - error", () => {
@@ -86,7 +86,7 @@ describe("Timestamp", () => {
   });
 
   test("toInstant", () => {
-    expect(mocks.TIME_ZERO.toInstant().toString()).toEqual(mocks.TIME_ZERO_DATE_LIKE_FULL);
+    expect(mocks.TIME_ZERO.toInstant().toString()).toEqual(mocks.TIME_ZERO_PLAIN_DATE_TIME);
   });
 
   test("toJSON", () => {
