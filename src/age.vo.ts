@@ -1,7 +1,6 @@
 import { differenceInYears } from "date-fns";
 import * as v from "valibot";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
-import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 
 export const AgeError = { FutureBirthdate: "age.future.birthdate" };
