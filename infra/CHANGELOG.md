@@ -1,7 +1,9 @@
 # Changelog
+- 2026-04-06 09:41 91f711e **step: update packages**
 ## 2026-04-02 14:13 v1.4.14
 - 2026-04-02 14:13 249f1b8 **1.4.14**
 - 2026-04-02 14:10 aff7b26 **step: update packages**
+- 2026-04-02 12:13 3545371 **docs: generate CHANGELOG**
 - 2026-04-02 12:11 9e319cb **docs: generate CHANGELOG**
 - 2026-04-01 23:50 000e9d5 **refactor: to string should return string type**
 ## 2026-03-31 15:12 v1.4.13
