@@ -1,23 +1,21 @@
-import { formatISO } from "date-fns";
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Duration } from "./duration.service";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
+import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Day extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Day {
-    const date = new Date(timestamp.ms);
+    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
-    const startUtc = Timestamp.fromNumber(
-      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
-    );
-    const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
+    const start = plain.toZonedDateTime("UTC").startOfDay();
+    const end = start.add({ days: 1 }).subtract({ milliseconds: 1 });
 
-    return new Day(startUtc, endUtc);
+    return new Day(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Day {
@@ -29,18 +27,13 @@ export class Day extends DateRange {
   }
 
   static fromIsoId(isoId: DayIsoIdType): Day {
-    const [year, month, day] = v.parse(DayIsoId, isoId).split("-").map(Number) as [number, number, number];
-
-    const startUtc = Timestamp.fromNumber(Date.UTC(year, month - 1, day));
-    const endUtc = startUtc.add(Duration.Days(1)).subtract(Duration.Ms(1));
-
-    return new Day(startUtc, endUtc);
+    return Day.fromTimestamp(
+      Timestamp.fromInstant(Temporal.PlainDate.from(isoId).toZonedDateTime("UTC").toInstant()),
+    );
   }
 
   toIsoId(): DayIsoIdType {
-    const midday = this.getStart().add(Duration.Hours(12));
-
-    return v.parse(DayIsoId, formatISO(midday.ms, { representation: "date" }));
+    return v.parse(DayIsoId, this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate().toString());
   }
 
   previous(): Day {
