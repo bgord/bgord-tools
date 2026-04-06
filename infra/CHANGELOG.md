@@ -1,5 +1,34 @@
 # Changelog
+- 2026-04-06 18:08 1f79ae3 **Merge pull request #45 from bgord/itstime**
+- 2026-04-06 18:03 345c34c **refactor: simplify temporal usage**
+- 2026-04-06 17:55 f4793a7 **refactor: restore tsconfig**
+- 2026-04-06 17:44 2f5461b **refactor: prefer temporal duration over the custom one**
+- 2026-04-06 17:30 c9baa61 **refactor: do not use Date.now**
+- 2026-04-06 16:36 24306f3 **refactor: remove formatters**
+- 2026-04-06 16:35 fca9c43 **step: remove date-fns**
+- 2026-04-06 16:33 90695df **refactor: use temporal in age**
+- 2026-04-06 15:55 b79ad76 **refactor: use temporal in quarter**
+- 2026-04-06 15:48 8a34cea **refactor: use temporal in weekday**
+- 2026-04-06 15:45 76f1717 **refactor: use temporal in week**
+- 2026-04-06 15:39 36535d1 **refactor: use temporal in week iso id**
+- 2026-04-06 15:28 4b02ec7 **refactor: use temporal in day**
+- 2026-04-06 15:19 4b8c1b6 **refactor: use temporal in day iso id**
+- 2026-04-06 15:17 bd33a9a **refactor: use temporal in year**
+- 2026-04-06 15:03 b4355b1 **refactor: use temporal in month**
+- 2026-04-06 14:26 b75c571 **refactor: use temporal in hour**
+- 2026-04-06 14:24 5ccdbe5 **refactor: use temporal in minutes**
+- 2026-04-06 14:19 f22da71 **refactor: use temporal in timezone**
+- 2026-04-06 13:51 37285a6 **refactor: simplify mocks**
+- 2026-04-06 13:46 954f9c6 **refactor: remove date calculator**
+- 2026-04-06 13:40 932f891 **refactor: use timestamp from string**
+- 2026-04-06 13:37 f282d63 **step: add timestamp from string**
+- 2026-04-06 13:27 d7f9201 **step: remove legacy timestamp methods**
+- 2026-04-06 13:26 ddf8979 **step: enable ts for tests**
+- 2026-04-06 13:23 ae24df0 **step: make timestamp vo temporal instant aware**
+- 2026-04-06 13:19 b946449 **step: export temporal**
+- 2026-04-06 13:18 812e9a5 **step: install temporal polyfill**
 - 2026-04-06 09:41 91f711e **step: update packages**
+- 2026-04-06 07:41 3016b28 **docs: generate CHANGELOG**
 ## 2026-04-02 14:13 v1.4.14
 - 2026-04-02 14:13 249f1b8 **1.4.14**
 - 2026-04-02 14:10 aff7b26 **step: update packages**
