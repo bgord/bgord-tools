@@ -1,5 +1,8 @@
 # Changelog
+## 2026-04-07 06:58 v1.4.17
+- 2026-04-07 06:58 4c09a43 **1.4.17**
 - 2026-04-07 06:48 b542ad1 **refactor: mutants**
+- 2026-04-07 04:55 6ef4091 **docs: generate CHANGELOG**
 ## 2026-04-06 18:15 v1.4.16
 - 2026-04-06 18:15 a3f1b3e **1.4.16**
 - 2026-04-06 18:14 aad0684 **fix: temporal path in timezone vo**
