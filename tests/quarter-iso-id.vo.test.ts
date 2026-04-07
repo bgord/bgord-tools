@@ -22,14 +22,21 @@ describe("QuarterIsoId", () => {
     expect(() => v.parse(QuarterIsoId, 123)).toThrow("quarter.iso.id.type");
   });
 
+  test("rejects trailing characters", () => {
+    expect(() => v.parse(QuarterIsoId, "2025-Q1x")).toThrow("quarter.iso.id.bad.chars");
+  });
+
+  test("rejects leading characters", () => {
+    expect(() => v.parse(QuarterIsoId, "x2025-Q1")).toThrow("quarter.iso.id.bad.chars");
+  });
+
   test("rejects quarters < 1 and > 4", () => {
     expect(() => v.parse(QuarterIsoId, "2025-Q0")).toThrow("quarter.iso.id.bad.chars");
     expect(() => v.parse(QuarterIsoId, "2025-Q5")).toThrow("quarter.iso.id.bad.chars");
   });
 
   test("rejects structurally invalid strings", () => {
-    const invalid = ["2025Q1", "2025-Q", "25-Q1", "2025-q1", "2025-QA", "2025-01"];
-    for (const value of invalid) {
+    for (const value of ["2025Q1", "2025-Q", "25-Q1", "2025-q1", "2025-QA", "2025-01"]) {
       expect(() => v.parse(QuarterIsoId, value)).toThrow("quarter.iso.id.bad.chars");
     }
   });

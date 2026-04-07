@@ -20,8 +20,7 @@ export const WeekIsoId = v.pipe(
 
     const weeksInYear = Temporal.PlainDate.from({ year, month: 12, day: 28 }).weekOfYear;
 
-    if (!weeksInYear) return false;
-    return week <= weeksInYear;
+    return week <= (weeksInYear ?? 0);
   }, WeekIsoIdError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("WeekIsoId"),

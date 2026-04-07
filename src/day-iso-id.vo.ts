@@ -15,7 +15,7 @@ export const DayIsoId = v.pipe(
   v.regex(DAY_ISO_ID_CHARS, DayIsoIdError.BadChars),
   v.check((value) => {
     try {
-      Temporal.PlainDate.from(value, { overflow: "reject" });
+      Temporal.PlainDate.from(value);
       return true;
     } catch {
       return false;

@@ -27,6 +27,10 @@ describe("TelephoneNumber", () => {
     expect(() => v.parse(TelephoneNumber, 48600123456)).toThrow("telephone.number.type");
   });
 
+  test("rejects characters before plus prefix", () => {
+    expect(() => v.parse(TelephoneNumber, "x+12125551234")).toThrow("telephone.number.invalid");
+  });
+
   test("rejects missing plus prefix", () => {
     expect(() => v.parse(TelephoneNumber, "48600123456")).toThrow("telephone.number.invalid");
   });
