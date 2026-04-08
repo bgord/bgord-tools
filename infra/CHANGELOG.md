@@ -1,4 +1,5 @@
 # Changelog
+- 2026-04-08 13:30 7c85917 **step: add date formatter relative**
 - 2026-04-08 13:02 132becb **step: add date formatter**
 - 2026-04-08 12:58 2835d29 **step: add date formatter**
 ## 2026-04-08 12:40 v1.5.1
@@ -6,6 +7,8 @@
 - 2026-04-08 12:40 49a0e73 **1.5.1**
 - 2026-04-08 11:22 0535099 **fix: biome checks**
 - 2026-04-08 11:21 b11a12c **step: bump bgord/scripts**
+- 2026-04-08 11:13 9c56ab6 **docs: generate readme**
+- 2026-04-08 11:13 93ec705 **docs: generate CHANGELOG**
 - 2026-04-08 10:41 2ba02e1 **docs: generate CHANGELOG**
 - 2026-04-08 10:40 a2232e2 **docs: generate CHANGELOG**
 ## 2026-04-08 10:39 v1.5.0
