@@ -1,7 +1,10 @@
 # Changelog
+## 2026-04-08 12:40 v1.5.1
 - 2026-04-08 12:40 74cba08 **step: handle day from iso id invalid case**
+- 2026-04-08 12:40 49a0e73 **1.5.1**
 - 2026-04-08 11:22 0535099 **fix: biome checks**
 - 2026-04-08 11:21 b11a12c **step: bump bgord/scripts**
+- 2026-04-08 10:40 a2232e2 **docs: generate CHANGELOG**
 ## 2026-04-08 10:39 v1.5.0
 - 2026-04-08 10:39 24facbf **1.5.0**
 - 2026-04-08 10:10 6e6f770 **step: update packages**
