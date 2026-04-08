@@ -25,7 +25,9 @@ export class Day extends DateRange {
     return Day.fromTimestamp(now);
   }
 
-  static fromIsoId(isoId: DayIsoIdType): Day {
+  static fromIsoId(value: DayIsoIdType): Day {
+    const isoId = v.parse(DayIsoId, value);
+
     return Day.fromTimestamp(
       Timestamp.fromInstant(Temporal.PlainDate.from(isoId).toZonedDateTime("UTC").toInstant()),
     );

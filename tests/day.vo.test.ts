@@ -39,6 +39,11 @@ describe("Day", () => {
     expect(Day.fromIsoId(dayIsoId).toIsoId()).toEqual(dayIsoId);
   });
 
+  test("fromIsoId - invalid", () => {
+    // @ts-expect-error
+    expect(() => Day.fromIsoId("invalid").toIsoId()).toThrow("day.iso.id.bad.chars");
+  });
+
   test("leap-day", () => {
     const timestamp = Timestamp.fromString("2024-02-29T00:00:00Z");
     const day = Day.fromTimestamp(timestamp);
