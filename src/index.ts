@@ -3,7 +3,7 @@ export * from "./age-years.vo";
 export * from "./api-key.vo";
 export * from "./basename.vo";
 export * from "./batch";
-export * from "./date-formatter";
+export * from "./date-formatter.service";
 export * from "./date-range.vo";
 export * from "./day.vo";
 export * from "./day-iso-id.vo";
