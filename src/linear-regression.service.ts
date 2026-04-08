@@ -39,6 +39,7 @@ export class LinearRegression {
     let sumXY = 0;
 
     for (let index = 0; index < count; index++) {
+      // biome-ignore lint: lint/style/noNonNullAssertion
       const pair = pairs[index]!;
       sumX += pair.x;
       sumY += pair.y;

@@ -16,7 +16,7 @@ export const WeekIsoId = v.pipe(
   v.check((value) => {
     const [year, week] = value.split("-W").map(Number) as [number, number];
 
-    if (isNaN(year) || isNaN(week) || week < 1) return false;
+    if (Number.isNaN(year) || Number.isNaN(week) || week < 1) return false;
 
     const weeksInYear = Temporal.PlainDate.from({ year, month: 12, day: 28 }).weekOfYear;
 

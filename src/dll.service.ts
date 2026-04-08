@@ -108,6 +108,7 @@ export class DoublyLinkedList<T> {
       return;
     }
 
+    // biome-ignore lint: lint/style/noNonNullAssertion
     const nextNode = target.next!;
     this.size += 1;
 
@@ -125,6 +126,7 @@ export class DoublyLinkedList<T> {
       return;
     }
 
+    // biome-ignore lint: lint/style/noNonNullAssertion
     const prevNode = target.prev!;
     this.size += 1;
 

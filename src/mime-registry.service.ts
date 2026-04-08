@@ -19,6 +19,7 @@ export class MimeRegistry {
         this.byExtension.set(extension, entry.mime);
       }
 
+      // biome-ignore lint: lint/style/noNonNullAssertion
       const canonical = entry.extensions[0]!;
 
       this.byMime.set(entry.mime.toString(), canonical);
