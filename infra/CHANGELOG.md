@@ -1,4 +1,8 @@
 # Changelog
+- 2026-04-10 21:36 70f064e **step: bump bgord/scripts**
+- 2026-04-10 21:31 a4b9ed1 **step: update packages**
+- 2026-04-10 13:11 e51c99d **step: update packages**
+- 2026-04-08 13:49 dc0fb19 **step: bump bgord/scripts**
 ## 2026-04-08 13:42 v1.5.2
 - 2026-04-08 13:42 a36edf5 **1.5.2**
 - 2026-04-08 13:30 7c85917 **step: add date formatter relative**
@@ -8,6 +12,7 @@
 - 2026-04-08 12:40 74cba08 **step: handle day from iso id invalid case**
 - 2026-04-08 12:40 49a0e73 **1.5.1**
 - 2026-04-08 11:42 aefe944 **docs: generate CHANGELOG**
+- 2026-04-08 11:42 9722140 **docs: generate CHANGELOG**
 - 2026-04-08 11:22 0535099 **fix: biome checks**
 - 2026-04-08 11:21 b11a12c **step: bump bgord/scripts**
 - 2026-04-08 11:13 9c56ab6 **docs: generate readme**
