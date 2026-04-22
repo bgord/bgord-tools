@@ -15,6 +15,6 @@ export const Mimes = {
   png: new MimeRegistryEntry(Mime.fromString("image/png"), [v.parse(Extension, "png")]),
   text: new MimeRegistryEntry(Mime.fromString("text/plain"), [v.parse(Extension, "txt")]),
   webp: new MimeRegistryEntry(Mime.fromString("image/webp"), [v.parse(Extension, "webp")]),
-  wav: new MimeRegistryEntry(Mime.fromString("audio/wav"), [v.parse(Extension, "wav")]),
+  wav: new MimeRegistryEntry(Mime.fromString("audio/x-wav"), [v.parse(Extension, "wav")]),
   zip: new MimeRegistryEntry(Mime.fromString("application/zip"), [v.parse(Extension, "zip")]),
 } as const;
