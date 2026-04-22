@@ -14,10 +14,9 @@ const pngExtension = v.parse(Extension, "png");
 const pdfMime = Mime.fromString("application/pdf");
 const csvExtension = v.parse(Extension, "csv");
 
-const registry = new MimeRegistry([
-  { mime: jpegMime, extensions: [jpgExtension, jpegExtension] },
-  { mime: pngMime, extensions: [pngExtension] },
-]);
+const jpeg = { mime: jpegMime, extensions: [jpgExtension, jpegExtension] };
+const png = { mime: pngMime, extensions: [pngExtension] };
+const registry = new MimeRegistry([jpeg, png]);
 
 describe("MimeRegistry", () => {
   test("fromExtension - canonical", () => {
@@ -52,5 +51,9 @@ describe("MimeRegistry", () => {
     expect(registry.hasMime(jpegMime)).toEqual(true);
     expect(registry.hasMime(pngMime)).toEqual(true);
     expect(registry.hasMime(pdfMime)).toEqual(false);
+  });
+
+  test("entries", () => {
+    expect(registry.entries).toEqual([jpeg, png]);
   });
 });
