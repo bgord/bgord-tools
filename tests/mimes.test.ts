@@ -29,7 +29,7 @@ describe("Mimes", () => {
     expect(Mimes.webp.mime.toString()).toEqual("image/webp");
     expect(Mimes.webp.extensions).toEqual([v.parse(Extension, "webp")]);
 
-    expect(Mimes.wav.mime.toString()).toEqual("audio/wav");
+    expect(Mimes.wav.mime.toString()).toEqual("audio/x-wav");
     expect(Mimes.wav.extensions).toEqual([v.parse(Extension, "wav")]);
 
     expect(Mimes.zip.mime.toString()).toEqual("application/zip");
