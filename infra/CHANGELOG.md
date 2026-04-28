@@ -1,9 +1,11 @@
 # Changelog
+- 2026-04-28 10:01 7e5061a **step: update packages**
 ## 2026-04-22 22:21 v1.5.4
 - 2026-04-22 22:21 a17eed8 **1.5.4**
 - 2026-04-22 22:20 e0569a1 **step: adjsut mimes**
 - 2026-04-22 22:20 af12a54 **step: update packages**
 - 2026-04-22 22:19 c82944d **step: expose entries in mime registry**
+- 2026-04-22 20:21 8767f1b **docs: generate CHANGELOG**
 - 2026-04-22 20:20 9390a8b **docs: generate CHANGELOG**
 - 2026-04-22 17:47 98e7cf3 **fix: wav mime**
 - 2026-04-19 13:19 547f511 **step: update packages**
