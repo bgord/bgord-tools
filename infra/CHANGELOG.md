@@ -1,9 +1,12 @@
 # Changelog
+## 2026-04-28 12:08 v1.5.6
+- 2026-04-28 12:08 c58abfa **1.5.6**
 - 2026-04-28 11:52 6caad49 **step: switch to tsgo**
 - 2026-04-28 11:50 8af7303 **step: bump bgord/scripts**
 ## 2026-04-28 11:25 v1.5.5
 - 2026-04-28 11:25 494df1f **1.5.5**
 - 2026-04-28 10:01 7e5061a **step: update packages**
+- 2026-04-28 09:55 3615db3 **docs: generate CHANGELOG**
 - 2026-04-28 09:25 7cb46ef **docs: generate CHANGELOG**
 - 2026-04-28 08:03 6c23975 **docs: generate CHANGELOG**
 ## 2026-04-22 22:21 v1.5.4
