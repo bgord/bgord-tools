@@ -8,10 +8,8 @@ describe("ETag", () => {
     const value = "123";
     const etag = ETag.fromHeader(value);
 
-    //@ts-expect-error
-    expect(etag.value).toEqual(value);
-    //@ts-expect-error
-    expect(etag.revision).toEqual(123);
+    expect(etag?.value).toEqual(value);
+    expect(etag?.revision).toEqual(123);
   });
 
   test("returns null for W/ prefix", () => {
