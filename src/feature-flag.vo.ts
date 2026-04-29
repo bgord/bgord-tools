@@ -1,11 +1,17 @@
 import { FeatureFlagEnum, type FeatureFlagValueType } from "./feature-flag-value.vo";
 
 export class FeatureFlag {
-  static isEnabled(flag: FeatureFlagValueType): boolean {
-    return flag === FeatureFlagEnum.yes;
+  private constructor(private readonly value: FeatureFlagValueType) {}
+
+  static from(value: FeatureFlagValueType) {
+    return new FeatureFlag(value);
   }
 
-  static isDisabled(flag: FeatureFlagValueType): boolean {
-    return flag === FeatureFlagEnum.no;
+  isEnabled(): boolean {
+    return this.value === FeatureFlagEnum.yes;
+  }
+
+  isDisabled(): boolean {
+    return this.value === FeatureFlagEnum.no;
   }
 }
