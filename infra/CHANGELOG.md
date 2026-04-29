@@ -1,6 +1,9 @@
 # Changelog
+## 2026-04-29 14:13 v1.5.7
+- 2026-04-29 14:13 1e23208 **1.5.7**
 - 2026-04-29 14:12 d1bf319 **step: improve feature flag vo**
 - 2026-04-29 14:12 3035b5f **step: update packages**
+- 2026-04-29 12:12 4090b6e **docs: generate CHANGELOG**
 - 2026-04-29 00:05 10f4e50 **step: remove unnecessary ts-expect-error**
 ## 2026-04-28 12:08 v1.5.6
 - 2026-04-28 12:08 c58abfa **1.5.6**
