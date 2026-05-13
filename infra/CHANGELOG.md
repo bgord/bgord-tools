@@ -1,9 +1,11 @@
 # Changelog
+- 2026-05-13 12:47 1cf80cc **step: remove codeql analysis**
 - 2026-05-13 12:46 61da56c **step: bump bgord/scripts**
 - 2026-05-13 12:26 7f2619c **step: update packages**
 - 2026-05-13 12:25 4b7b07d **step: bump bgord/scripts**
 - 2026-05-13 12:24 f0ecc1f **step: update packages**
 - 2026-05-13 12:24 b4ede86 **step: bump bgord/scripts**
+- 2026-05-13 10:46 e8a026a **docs: generate CHANGELOG**
 - 2026-05-13 10:26 8ac90dd **docs: generate CHANGELOG**
 ## 2026-05-08 17:53 v1.5.8
 - 2026-05-08 17:53 1ac5bec **1.5.8**
