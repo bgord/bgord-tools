@@ -38,7 +38,6 @@ jobs:
           branch: master
           commit_message: "docs: generate CHANGELOG"
           file_pattern: infra/CHANGELOG.md
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate a README
         run: bgord-scripts/package-readme-generate.sh "${GITHUB_EVENT_REPOSITORY_NAME}"
@@ -54,4 +53,3 @@ jobs:
           branch: master
           commit_message: "docs: generate readme"
           file_pattern: readme.md
-          token: ${{ secrets.GITHUB_TOKEN }}
