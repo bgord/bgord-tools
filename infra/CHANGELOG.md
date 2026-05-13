@@ -1,10 +1,23 @@
 # Changelog
+- 2026-05-13 13:08 f322e8f **fix: missing credentials**
+- 2026-05-13 13:08 3968ebb **step: bump bgord/scripts**
+- 2026-05-13 13:06 ebe7844 **step: switch to token in docs package**
+- 2026-05-13 13:06 dfd62f7 **step: bump bgord/scripts**
+- 2026-05-13 13:04 ee86bda **step: bump bgord/scripts**
+- 2026-05-13 13:04 750109e **step: add push options**
+- 2026-05-13 13:01 011fb2f **step: bump bgord/scripts**
+- 2026-05-13 12:58 68d5f3f **step: bump bgord/scripts**
+- 2026-05-13 12:56 77ba431 **fix: ci lint errors**
+- 2026-05-13 12:55 9ec949b **step: bump bgord/scripts**
+- 2026-05-13 12:48 dd1f41a **fix: ci lint errors**
+- 2026-05-13 12:48 70519be **step: bump bgord/scripts**
 - 2026-05-13 12:47 1cf80cc **step: remove codeql analysis**
 - 2026-05-13 12:46 61da56c **step: bump bgord/scripts**
 - 2026-05-13 12:26 7f2619c **step: update packages**
 - 2026-05-13 12:25 4b7b07d **step: bump bgord/scripts**
 - 2026-05-13 12:24 f0ecc1f **step: update packages**
 - 2026-05-13 12:24 b4ede86 **step: bump bgord/scripts**
+- 2026-05-13 10:47 1da67bc **docs: generate CHANGELOG**
 - 2026-05-13 10:46 e8a026a **docs: generate CHANGELOG**
 - 2026-05-13 10:26 8ac90dd **docs: generate CHANGELOG**
 ## 2026-05-08 17:53 v1.5.8
