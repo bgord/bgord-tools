@@ -24,7 +24,10 @@ jobs:
           persist-credentials: false
 
       - name: Configure git credentials
-        run: git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: git remote set-url origin https://x-access-token:${TOKEN}@github.com/${REPOSITORY}
 
       - name: Generate a changelog
         run: bgord-scripts/changelog-generate.sh
