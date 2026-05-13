@@ -6,12 +6,14 @@ on:
 concurrency:
   group: ci-docs-${{ github.ref }}
   cancel-in-progress: true
+permissions: {}
 jobs:
   generate:
+    name: Generate docs
     runs-on: ubuntu-24.04
 
     permissions:
-      contents: write
+      contents: write # Required to commit generated CHANGELOG.md and readme.md
 
     steps:
       - name: Check out repository
