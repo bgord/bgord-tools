@@ -1,4 +1,6 @@
 # Changelog
+## 2026-05-13 13:13 v1.5.9
+- 2026-05-13 13:13 b2cbaa6 **1.5.9**
 - 2026-05-13 13:11 32565c5 **fix: ci lint errors**
 - 2026-05-13 13:11 0236386 **step: bump bgord/scripts**
 - 2026-05-13 13:09 c6b2496 **step: remove unused tokens**
@@ -20,6 +22,7 @@
 - 2026-05-13 12:25 4b7b07d **step: bump bgord/scripts**
 - 2026-05-13 12:24 f0ecc1f **step: update packages**
 - 2026-05-13 12:24 b4ede86 **step: bump bgord/scripts**
+- 2026-05-13 11:11 1850dc0 **docs: generate CHANGELOG**
 - 2026-05-13 11:08 e7bdd7d **docs: generate CHANGELOG**
 - 2026-05-13 10:47 1da67bc **docs: generate CHANGELOG**
 - 2026-05-13 10:46 e8a026a **docs: generate CHANGELOG**
