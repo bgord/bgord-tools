@@ -4,7 +4,7 @@ import { DirectoryPathRelativeSchema } from "../src/directory-path-relative.vo";
 
 describe("DirectoryPathRelativeSchema", () => {
   test("happy path", () => {
-    const valid = ["users/avatars", "users"];
+    const valid = ["USERS", "users/avatars", "node_modules/@bgord"];
     for (const value of valid) {
       expect(v.safeParse(DirectoryPathRelativeSchema, value)).toMatchObject({ success: true, output: value });
     }

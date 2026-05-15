@@ -4,7 +4,7 @@ import { DirectoryPathAbsoluteSchema } from "../src/directory-path-absolute.vo";
 
 describe("DirectoryPathAbsoluteSchema", () => {
   test("happy path", () => {
-    const valid = ["/tmp/app/users", "/", "/ok.png"];
+    const valid = ["/tmp/app/users", "/", "/ok.png", "/node_modules/@bgord"];
     for (const value of valid) {
       expect(v.safeParse(DirectoryPathAbsoluteSchema, value)).toMatchObject({ success: true, output: value });
     }

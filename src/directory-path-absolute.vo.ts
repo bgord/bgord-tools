@@ -9,8 +9,8 @@ export const DirectoryPathAbsoluteError = {
   Type: "directory.path.absolue.type",
 };
 
-// Letters, digits, dots, underscores, and hyphens
-export const DIRECTORY_PATH_ABSOLUTE_CHARS = /^[a-zA-Z0-9._-]+$/;
+// Letters, digits, ats, dots, underscores, and hyphens
+export const DIRECTORY_PATH_ABSOLUTE_CHARS = /^[a-zA-Z0-9@._-]+$/;
 const DOT_SEGMENTS = [".", ".."];
 
 export const DirectoryPathAbsoluteSchema = v.pipe(

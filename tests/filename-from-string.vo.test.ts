@@ -10,6 +10,11 @@ describe("FilenameFromString", () => {
       basename: v.parse(Basename, "avatar"),
       extension: v.parse(Extension, "webp"),
     });
+
+    expect(v.parse(FilenameFromString, "main.min.css")).toEqual({
+      basename: v.parse(Basename, "main.min"),
+      extension: v.parse(Extension, "css"),
+    });
   });
 
   test("rejects prefix", () => {
