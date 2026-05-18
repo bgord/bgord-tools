@@ -1,7 +1,9 @@
 # Changelog
+- 2026-05-18 16:06 e73b1ad **step: update packages**
 ## 2026-05-15 15:10 v1.5.10
 - 2026-05-15 15:10 7741980 **1.5.10**
 - 2026-05-15 15:06 f4b3cc9 **step: allow ats in the directory paths**
+- 2026-05-15 13:10 b714c40 **docs: generate CHANGELOG**
 - 2026-05-15 13:07 db10fe0 **docs: generate CHANGELOG**
 - 2026-05-13 22:16 f9430e8 **step: bump bgord/scripts**
 - 2026-05-13 22:16 eabdde1 **step: update workflows**
