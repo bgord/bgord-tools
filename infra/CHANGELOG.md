@@ -1,4 +1,6 @@
 # Changelog
+- 2026-05-24 13:24 4a4c1b9 **step: update packages**
+- 2026-05-18 18:29 1caa953 **docs: generate CHANGELOG**
 - 2026-05-18 16:06 e73b1ad **step: update packages**
 ## 2026-05-15 15:10 v1.5.10
 - 2026-05-15 15:10 7741980 **1.5.10**
