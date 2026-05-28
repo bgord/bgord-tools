@@ -16,7 +16,7 @@ export const MonthIsoId = v.pipe(
     const month = value.split("-").map(Number)[1];
 
     if (!month) return false;
-    return month >= 1 && month <= 12;
+    return month <= 12;
   }, MonthIsoIdError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("MonthIsoId"),
