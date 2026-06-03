@@ -30,7 +30,7 @@ export * from "./filename.vo";
 export * from "./filename-affix.vo";
 export * from "./filename-from-string.vo";
 export * from "./height.vo";
-export * from "./height-milimiters.vo";
+export * from "./height-millimeters.vo";
 export * from "./hour.vo";
 export * from "./hour-value.vo";
 export * from "./iban.vo";

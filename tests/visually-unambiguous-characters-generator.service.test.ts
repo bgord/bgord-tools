@@ -18,7 +18,7 @@ describe("VisuallyUnambiguousCharactersGenerator", () => {
     });
   });
 
-  test("single charactes allowed", () => {
+  test("single characters allowed", () => {
     VisuallyUnambiguousCharactersGenerator.chars.forEach((character) => expect(character.length).toEqual(1));
 
     expect(VisuallyUnambiguousCharactersGenerator.chars.length).toBeGreaterThan(0);

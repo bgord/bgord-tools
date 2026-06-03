@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Height } from "../src/height.vo";
-import { HeightMillimeters } from "../src/height-milimiters.vo";
+import { HeightMillimeters } from "../src/height-millimeters.vo";
 import { RoundingDownStrategy } from "../src/rounding-down.strategy";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 

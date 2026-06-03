@@ -55,7 +55,7 @@ src/
 ├── filename-affix.vo.ts
 ├── filename-from-string.vo.ts
 ├── filename.vo.ts
-├── height-milimiters.vo.ts
+├── height-millimeters.vo.ts
 ├── height.vo.ts
 ├── hour-value.vo.ts
 ├── hour.vo.ts

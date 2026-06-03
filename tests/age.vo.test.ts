@@ -58,7 +58,7 @@ describe("Age", () => {
     ).toEqual(min);
   });
 
-  test("fromBirthdateTimestamp - rejects future birthdates", () => {
+  test("fromBirthdateTimestamp - rejects future dates", () => {
     expect(() =>
       Age.fromBirthdateTimestamp({
         birthdate: Timestamp.fromString("2125-10-01T00:00:00Z"),
@@ -91,7 +91,7 @@ describe("Age", () => {
     ).toEqual(min);
   });
 
-  test("fromBirthdate - rejects future birthdates", () => {
+  test("fromBirthdate - rejects future dates", () => {
     expect(() => Age.fromBirthdate({ birthdate: "2125-10-01T00:00:00Z", now: mocks.TIME_ZERO })).toThrowError(
       "age.future.birthdate",
     );

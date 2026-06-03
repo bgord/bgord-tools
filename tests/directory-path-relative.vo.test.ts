@@ -24,7 +24,7 @@ describe("DirectoryPathRelativeSchema", () => {
 
   test("rejects too long", () => {
     expect(() => v.parse(DirectoryPathRelativeSchema, "a".repeat(513))).toThrow(
-      "directory.path.absolue.too.long",
+      "directory.path.relative.too.long",
     );
   });
 
@@ -42,7 +42,7 @@ describe("DirectoryPathRelativeSchema", () => {
 
   test("rejects trailing slash", () => {
     expect(() => v.parse(DirectoryPathRelativeSchema, "tmp/app/")).toThrow(
-      "directory.path.absolue.trailing.slash",
+      "directory.path.relative.trailing.slash",
     );
   });
 

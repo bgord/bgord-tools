@@ -1,12 +1,12 @@
 import * as v from "valibot";
 
 export const DirectoryPathAbsoluteError = {
-  BadSegments: "directory.path.absolue.bad.segments",
-  Empty: "directory.path.absolue.empty",
-  LeadingSlash: "directory.path.absolue.leading.slash",
-  TooLong: "directory.path.absolue.too.long",
-  TrailingSlash: "directory.path.absolue.trailing.slash",
-  Type: "directory.path.absolue.type",
+  BadSegments: "directory.path.absolute.bad.segments",
+  Empty: "directory.path.absolute.empty",
+  LeadingSlash: "directory.path.absolute.leading.slash",
+  TooLong: "directory.path.absolute.too.long",
+  TrailingSlash: "directory.path.absolute.trailing.slash",
+  Type: "directory.path.absolute.type",
 };
 
 // Letters, digits, ats, dots, underscores, and hyphens

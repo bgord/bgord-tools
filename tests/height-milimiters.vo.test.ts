@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
-import { HeightMillimeters } from "../src/height-milimiters.vo";
+import { HeightMillimeters } from "../src/height-millimeters.vo";
 
 describe("HeightMillimeters", () => {
   test("happy path", () => {

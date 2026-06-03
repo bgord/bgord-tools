@@ -1,5 +1,5 @@
 import * as v from "valibot";
-import { HeightMillimeters, type HeightMillimetersType } from "./height-milimiters.vo";
+import { HeightMillimeters, type HeightMillimetersType } from "./height-millimeters.vo";
 import type { RoundingStrategy } from "./rounding.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 

@@ -4,8 +4,8 @@ export const DirectoryPathRelativeError = {
   BadSegments: "directory.path.relative.bad.segments",
   Empty: "directory.path.relative.empty",
   LeadingSlash: "directory.path.relative.leading.slash",
-  TooLong: "directory.path.absolue.too.long",
-  TrailingSlash: "directory.path.absolue.trailing.slash",
+  TooLong: "directory.path.relative.too.long",
+  TrailingSlash: "directory.path.relative.trailing.slash",
   Type: "directory.path.relative.type",
 };
 

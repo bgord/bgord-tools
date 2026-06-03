@@ -7,7 +7,7 @@ export const WeekIsoIdError = {
   Invalid: "week.iso.id.invalid",
 };
 
-// Four digits, hypen, W, followed by two digits
+// Four digits, hyphen, W, followed by two digits
 const WEEK_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-W[0-9]{2}$/;
 
 export const WeekIsoId = v.pipe(
