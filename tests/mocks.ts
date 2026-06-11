@@ -9,12 +9,6 @@ export const TIME_ZERO_PLAIN_DATE_TIME = "2023-11-14T22:13:20Z";
 
 export const IntentionalCause = "intentional.cause" as const;
 export const IntentionalError = "intentional.error" as const;
-export const throwIntentionalError = () => {
-  throw new Error(IntentionalError);
-};
-export const throwIntentionalErrorAsync = async () => {
-  throw new Error(IntentionalError);
-};
 
 export const IntentionalErrorNormalized = {
   cause: undefined,
