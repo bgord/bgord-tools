@@ -37,7 +37,6 @@ export * from "./iban.vo";
 export * from "./iban-mask.service";
 export * from "./iban-schema.vo";
 export * from "./image.vo";
-export * from "./index";
 export * from "./int.vo";
 export * from "./integer.vo";
 export * from "./integer-non-negative.vo";
