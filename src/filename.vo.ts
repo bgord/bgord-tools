@@ -47,11 +47,7 @@ export class Filename {
   withAffix(candidate: string, strategy: FilenameAffixStrategy): Filename {
     const affix = v.parse(FilenameAffix, candidate);
 
-    if (strategy === FilenameAffixStrategy.prefix) {
-      return new Filename(v.parse(Basename, `${affix}${this.basename}`), this.extension);
-    }
-
-    return new Filename(v.parse(Basename, `${this.basename}${affix}`), this.extension);
+    return this.withAffixSafe(affix, strategy);
   }
 
   withAffixSafe(affix: FilenameAffixType, strategy: FilenameAffixStrategy): Filename {
