@@ -36,15 +36,5 @@
     "temporal-polyfill": "0.3.2",
     "valibot": "1.4.1"
   },
-  "sideEffects": false,
-  "devEngines": {
-    "runtime": {
-      "name": "bun",
-      "onFail": "error"
-    },
-    "packageManager": {
-      "name": "bun",
-      "onFail": "error"
-    }
-  }
+  "sideEffects": false
 }
