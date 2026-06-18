@@ -39,7 +39,6 @@ src/
 ├── distance-value.vo.ts
 ├── distance.vo.ts
 ├── division-factor.vo.ts
-├── dll.service.ts
 ├── duration-ms.vo.ts
 ├── duration.service.ts
 ├── email-mask.service.ts
@@ -69,14 +68,12 @@ src/
 ├── integer.vo.ts
 ├── is-plain-object.ts
 ├── language.vo.ts
-├── linear-regression.service.ts
 ├── mean.service.ts
 ├── mime-registry-entry.vo.ts
 ├── mime-registry.service.ts
 ├── mime-value.vo.ts
 ├── mime.vo.ts
 ├── mimes.ts
-├── min-max-scaler.service.ts
 ├── minute-value.vo.ts
 ├── minute.vo.ts
 ├── money-amount.vo.ts
@@ -86,7 +83,6 @@ src/
 ├── multiplication-factor.vo.ts
 ├── noop.service.ts
 ├── object-key.vo.ts
-├── outlier-detector.service.ts
 ├── package-version-schema.vo.ts
 ├── package-version.vo.ts
 ├── pagination-page.vo.ts
@@ -94,13 +90,10 @@ src/
 ├── pagination-take.vo.ts
 ├── pagination.service.ts
 ├── percentage.service.ts
-├── population-standard-deviation.service.ts
 ├── quarter-iso-id.vo.ts
 ├── quarter.vo.ts
 ├── random.service.ts
 ├── rate-limiter.service.ts
-├── reordering-item-position-value.vo.ts
-├── reordering.service.ts
 ├── repeat.ts
 ├── revision-value.vo.ts
 ├── revision.vo.ts
@@ -133,7 +126,6 @@ src/
 ├── weight-grams.vo.ts
 ├── weight.vo.ts
 ├── year-iso-id.vo.ts
-├── year.vo.ts
-└── z-score.service.ts
+└── year.vo.ts
 ```
 
