@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "temporal-polyfill": "1.0.1",
-    "valibot": "1.4.1"
+    "valibot": "1.4.2"
   },
   "sideEffects": false
 }
