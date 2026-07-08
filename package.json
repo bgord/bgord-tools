@@ -29,7 +29,7 @@
     "lockfile-lint": "5.0.0",
     "publint": "0.3.21",
     "shellcheck": "4.1.0",
-    "typescript": "7.0.1-rc"
+    "typescript": "7.0.2"
   },
   "dependencies": {
     "temporal-polyfill": "1.0.1",
