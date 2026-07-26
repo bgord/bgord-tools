@@ -17,6 +17,7 @@ export class PackageVersion {
   }
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
+    // biome-ignore lint: lint/correctness/noUnsafeOptionalChaining
     const [, major, minor, patch] = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(candidate)?.map(Number) as [
       number,
       number,

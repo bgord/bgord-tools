@@ -1,9 +1,8 @@
-*.log
-.DS_Store
-node_modules
-dist
 .cspellcache
-tsconfig.tsbuildinfo
-tmp/
 .stryker-tmp
+dist
+fallow-viz.html
+node_modules
 reports/
+tmp/
+tsconfig.tsbuildinfo
