@@ -29,7 +29,7 @@ describe("FilenameAffixSchema", () => {
   });
 
   test("rejects too long", () => {
-    expect(() => v.parse(FilenameAffix, "x".repeat(33))).toThrow("affix.too.long");
+    expect(() => v.parse(FilenameAffix, "x".repeat(65))).toThrow("affix.too.long");
   });
 
   test("rejects disallowed characters", () => {

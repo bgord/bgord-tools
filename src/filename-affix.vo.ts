@@ -18,7 +18,7 @@ const FILENAME_AFFIX_WHITELIST = /^[a-zA-Z0-9_-]+$/;
 export const FilenameAffix = v.pipe(
   v.string(FilenameAffixError.Type),
   v.minLength(1, FilenameAffixError.Empty),
-  v.maxLength(32, FilenameAffixError.TooLong),
+  v.maxLength(64, FilenameAffixError.TooLong),
   v.regex(FILENAME_AFFIX_WHITELIST, FilenameAffixError.BadChars),
   // Stryker disable next-line StringLiteral
   v.brand("FilenameAffix"),
