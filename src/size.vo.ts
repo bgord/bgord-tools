@@ -89,7 +89,7 @@ export class Size {
     return new Size(config).toBytes();
   }
 
-  static unit = SizeUnitEnum;
+  static readonly unit = SizeUnitEnum;
 
   private calculateBytes(value: SizeConfigType["value"], unit: SizeUnitEnum): SizeBytesType {
     switch (unit) {

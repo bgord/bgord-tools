@@ -1,7 +1,7 @@
 import { Random } from "./random.service";
 
 export class VisuallyUnambiguousCharactersGenerator {
-  static chars = [
+  static readonly chars = Object.freeze([
     "a",
     "b",
     "c",
@@ -24,7 +24,7 @@ export class VisuallyUnambiguousCharactersGenerator {
     "y",
     "3",
     "4",
-  ];
+  ]);
 
   static generate(length = 1): string {
     return Array.from({ length })
