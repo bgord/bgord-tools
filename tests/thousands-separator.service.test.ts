@@ -27,4 +27,18 @@ describe("ThousandsSeparator", () => {
     expect(ThousandsSeparator.format(150000.99, "_")).toEqual("150_000.99");
     expect(ThousandsSeparator.format(-1234567.89, ",")).toEqual("-1,234,567.89");
   });
+
+  test("formats only the integer part", () => {
+    expect(ThousandsSeparator.format(1234.5678)).toEqual("1 234.5678");
+    expect(ThousandsSeparator.format(0.123456)).toEqual("0.123456");
+  });
+
+  test("leaves exponential notation alone", () => {
+    expect(ThousandsSeparator.format(1234567890123456789012)).toEqual("1.2345678901234568e+21");
+  });
+
+  test("leaves NaN and Infinity alone", () => {
+    expect(ThousandsSeparator.format(Number.NaN)).toEqual("NaN");
+    expect(ThousandsSeparator.format(Number.POSITIVE_INFINITY)).toEqual("Infinity");
+  });
 });
