@@ -10,11 +10,11 @@ describe("TimestampValue", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => v.parse(TimestampValue, null)).toThrow("timestamp.invalid");
+    expect(() => v.parse(TimestampValue, null)).toThrow("timestamp.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => v.parse(TimestampValue, "123")).toThrow("timestamp.invalid");
+    expect(() => v.parse(TimestampValue, "123")).toThrow("timestamp.type");
   });
 
   test("rejects negative numbers", () => {
@@ -22,6 +22,6 @@ describe("TimestampValue", () => {
   });
 
   test("rejects fractions", () => {
-    expect(() => v.parse(TimestampValue, 1.5)).toThrow("timestamp.invalid");
+    expect(() => v.parse(TimestampValue, 1.5)).toThrow("timestamp.type");
   });
 });
