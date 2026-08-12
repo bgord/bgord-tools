@@ -51,11 +51,11 @@ export class Height {
     return this.millimeters === another.millimeters;
   }
 
-  greaterThan(another: Height): boolean {
+  isGreaterThan(another: Height): boolean {
     return this.millimeters > another.millimeters;
   }
 
-  lessThan(another: Height): boolean {
+  isSmallerThan(another: Height): boolean {
     return this.millimeters < another.millimeters;
   }
 

@@ -58,7 +58,7 @@ export class Money {
     return this.amount > another.getAmount();
   }
 
-  isLessThan(another: Money): boolean {
+  isSmallerThan(another: Money): boolean {
     return this.amount < another.getAmount();
   }
 

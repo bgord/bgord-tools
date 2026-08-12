@@ -52,20 +52,20 @@ describe("Weight", () => {
     expect(a.equals(b)).toEqual(false);
   });
 
-  test("greaterThan", () => {
+  test("isGreaterThan", () => {
     const a = Weight.fromGrams(1800);
     const b = Weight.fromGrams(180);
 
-    expect(a.greaterThan(a)).toEqual(false);
-    expect(a.greaterThan(b)).toEqual(true);
+    expect(a.isGreaterThan(a)).toEqual(false);
+    expect(a.isGreaterThan(b)).toEqual(true);
   });
 
-  test("lessThan", () => {
+  test("isSmallerThan", () => {
     const a = Weight.fromGrams(180);
     const b = Weight.fromGrams(1800);
 
-    expect(a.lessThan(a)).toEqual(false);
-    expect(a.lessThan(b)).toEqual(true);
+    expect(a.isSmallerThan(a)).toEqual(false);
+    expect(a.isSmallerThan(b)).toEqual(true);
   });
 
   test("isZero", () => {

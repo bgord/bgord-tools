@@ -70,11 +70,11 @@ export class Weight {
     return this.grams === other.grams;
   }
 
-  greaterThan(other: Weight): boolean {
+  isGreaterThan(other: Weight): boolean {
     return this.grams > other.grams;
   }
 
-  lessThan(other: Weight): boolean {
+  isSmallerThan(other: Weight): boolean {
     return this.grams < other.grams;
   }
 

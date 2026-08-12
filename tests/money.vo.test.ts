@@ -97,12 +97,12 @@ describe("Money", () => {
     expect(twoHundred.isGreaterThan(oneHundred)).toEqual(true);
   });
 
-  test("isLessThan", () => {
+  test("isSmallerThan", () => {
     const oneHundred = Money.fromAmount(100);
     const twoHundred = Money.fromAmount(200);
 
-    expect(oneHundred.isLessThan(oneHundred)).toEqual(false);
-    expect(oneHundred.isLessThan(twoHundred)).toEqual(true);
+    expect(oneHundred.isSmallerThan(oneHundred)).toEqual(false);
+    expect(oneHundred.isSmallerThan(twoHundred)).toEqual(true);
   });
 
   test("isZero", () => {
