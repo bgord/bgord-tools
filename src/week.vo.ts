@@ -9,7 +9,7 @@ import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";
 
 export class Week extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Week {
-    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = timestamp.toPlainDateUTC();
 
     const start = plain
       .subtract({ days: plain.dayOfWeek - 1 })
@@ -42,7 +42,7 @@ export class Week extends DateRange {
   }
 
   toIsoId(): WeekIsoIdType {
-    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = this.getStart().toPlainDateUTC();
 
     return v.parse(WeekIsoId, `${plain.yearOfWeek}-W${String(plain.weekOfYear).padStart(2, "0")}`);
   }
@@ -56,13 +56,7 @@ export class Week extends DateRange {
   }
 
   shift(count: IntegerType): Week {
-    const instant = this.getStart()
-      .toInstant()
-      .toZonedDateTimeISO("UTC")
-      .toPlainDate()
-      .add({ weeks: count })
-      .toZonedDateTime("UTC")
-      .toInstant();
+    const instant = this.getStart().toPlainDateUTC().add({ weeks: count }).toZonedDateTime("UTC").toInstant();
 
     return Week.fromTimestamp(Timestamp.fromInstant(instant));
   }

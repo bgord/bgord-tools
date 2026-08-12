@@ -7,7 +7,7 @@ export class Minute {
   private constructor(private readonly value: MinuteValueType) {}
 
   static fromTimestamp(timestamp: Timestamp): Minute {
-    const { minute } = timestamp.toInstant().toZonedDateTimeISO("UTC");
+    const { minute } = timestamp.toZonedDateTimeUTC();
 
     return new Minute(v.parse(MinuteValue, minute));
   }

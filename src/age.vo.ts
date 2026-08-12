@@ -22,19 +22,16 @@ export class Age {
   static fromBirthdateTimestamp(params: { birthdate: Timestamp; now: Timestamp }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
 
-    const birthdate = params.birthdate.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
-    const now = params.now.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const birthdate = params.birthdate.toPlainDateUTC();
+    const now = params.now.toPlainDateUTC();
 
     return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
-    const birthdate = Timestamp.fromString(candidate.birthdate)
-      .toInstant()
-      .toZonedDateTimeISO("UTC")
-      .toPlainDate();
+    const birthdate = Timestamp.fromString(candidate.birthdate).toPlainDateUTC();
 
-    const now = candidate.now.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const now = candidate.now.toPlainDateUTC();
 
     if (Temporal.PlainDate.compare(birthdate, now) > 0) throw new Error(AgeError.FutureBirthdate);
     return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);

@@ -9,7 +9,7 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Day extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Day {
-    const date = timestamp.toInstant().toZonedDateTimeISO("UTC");
+    const date = timestamp.toZonedDateTimeUTC();
 
     const start = date.startOfDay();
     const end = start.add({ days: 1 }).subtract({ milliseconds: 1 });
@@ -30,7 +30,7 @@ export class Day extends DateRange {
   }
 
   toIsoId(): DayIsoIdType {
-    return v.parse(DayIsoId, this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate().toString());
+    return v.parse(DayIsoId, this.getStart().toPlainDateUTC().toString());
   }
 
   previous(): Day {
@@ -42,12 +42,7 @@ export class Day extends DateRange {
   }
 
   shift(count: IntegerType): Day {
-    const plain = this.getStart()
-      .toInstant()
-      .toZonedDateTimeISO("UTC")
-      .toPlainDate()
-      .add({ days: count })
-      .toZonedDateTime("UTC");
+    const plain = this.getStart().toPlainDateUTC().add({ days: count }).toZonedDateTime("UTC");
 
     return Day.fromTimestamp(Timestamp.fromInstant(plain.toInstant()));
   }

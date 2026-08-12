@@ -91,6 +91,16 @@ describe("Timestamp", () => {
     expect(mocks.TIME_ZERO.toInstant().toString()).toEqual(mocks.TIME_ZERO_PLAIN_DATE_TIME);
   });
 
+  test("toZonedDateTimeUTC", () => {
+    expect(mocks.TIME_ZERO.toZonedDateTimeUTC().toInstant().toString()).toEqual(
+      mocks.TIME_ZERO_PLAIN_DATE_TIME,
+    );
+  });
+
+  test("toPlainDateUTC", () => {
+    expect(mocks.TIME_ZERO.toPlainDateUTC().toString()).toEqual("2023-11-14");
+  });
+
   test("toJSON", () => {
     expect(mocks.TIME_ZERO.toJSON()).toEqual(mocks.TIME_ZERO.ms);
   });

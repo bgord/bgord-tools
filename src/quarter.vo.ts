@@ -9,7 +9,7 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Quarter extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Quarter {
-    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = timestamp.toPlainDateUTC();
 
     const start = Temporal.PlainDate.from({
       year: plain.year,
@@ -36,7 +36,7 @@ export class Quarter extends DateRange {
   }
 
   toIsoId(): QuarterIsoIdType {
-    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = this.getStart().toPlainDateUTC();
     const quarter = Math.ceil(plain.month / 3);
 
     return v.parse(QuarterIsoId, `${plain.year}-Q${quarter}`);
@@ -51,7 +51,7 @@ export class Quarter extends DateRange {
   }
 
   shift(count: IntegerType): Quarter {
-    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = this.getStart().toPlainDateUTC();
 
     return Quarter.fromTimestamp(
       Timestamp.fromInstant(

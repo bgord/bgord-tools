@@ -5,7 +5,7 @@ import type { Timestamp } from "./timestamp.vo";
 export class DateFormatter {
   static datetime(timestamp: Timestamp, offset: Duration = Duration.ZERO): string {
     const adjusted = timestamp.add(offset);
-    const zdt = adjusted.toInstant().toZonedDateTimeISO("UTC");
+    const zdt = adjusted.toZonedDateTimeUTC();
 
     const month = zdt.month.toString().padStart(2, "0");
     const day = zdt.day.toString().padStart(2, "0");
@@ -17,7 +17,7 @@ export class DateFormatter {
 
   static date(timestamp: Timestamp, offset: Duration = Duration.ZERO): string {
     const adjusted = timestamp.add(offset);
-    const zdt = adjusted.toInstant().toZonedDateTimeISO("UTC");
+    const zdt = adjusted.toZonedDateTimeUTC();
 
     const month = zdt.month.toString().padStart(2, "0");
     const day = zdt.day.toString().padStart(2, "0");

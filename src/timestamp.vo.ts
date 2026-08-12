@@ -62,6 +62,14 @@ export class Timestamp {
     return Temporal.Instant.fromEpochMilliseconds(this.value);
   }
 
+  toZonedDateTimeUTC(): Temporal.ZonedDateTime {
+    return this.toInstant().toZonedDateTimeISO("UTC");
+  }
+
+  toPlainDateUTC(): Temporal.PlainDate {
+    return this.toZonedDateTimeUTC().toPlainDate();
+  }
+
   toJSON(): TimestampValueType {
     return this.value;
   }

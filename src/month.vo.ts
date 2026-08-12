@@ -9,7 +9,7 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Month extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Month {
-    const plain = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = timestamp.toPlainDateUTC();
 
     const start = plain.with({ day: 1 });
     const end = plain.with({ day: 1 }).add({ months: 1 });
@@ -33,7 +33,7 @@ export class Month extends DateRange {
   }
 
   toIsoId(): MonthIsoIdType {
-    const { year, month } = this.getStart().toInstant().toZonedDateTimeISO("UTC");
+    const { year, month } = this.getStart().toZonedDateTimeUTC();
 
     return v.parse(MonthIsoId, `${year}-${String(month).padStart(2, "0")}`);
   }
@@ -47,7 +47,7 @@ export class Month extends DateRange {
   }
 
   shift(count: IntegerType): Month {
-    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    const plain = this.getStart().toPlainDateUTC();
 
     return Month.fromTimestamp(
       Timestamp.fromInstant(plain.add({ months: count }).toZonedDateTime("UTC").toInstant()),

@@ -1,6 +1,5 @@
 import * as v from "valibot";
 import { HourValue, type HourValueType } from "./hour-value.vo";
-import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
@@ -8,7 +7,7 @@ export class Hour {
   private constructor(private readonly value: HourValueType) {}
 
   static fromTimestamp(timestamp: Timestamp): Hour {
-    const { hour } = Temporal.Instant.fromEpochMilliseconds(timestamp.ms).toZonedDateTimeISO("UTC");
+    const { hour } = timestamp.toZonedDateTimeUTC();
 
     return new Hour(v.parse(HourValue, hour));
   }

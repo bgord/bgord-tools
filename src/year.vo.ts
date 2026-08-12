@@ -9,7 +9,7 @@ import { YearIsoId, type YearIsoIdType } from "./year-iso-id.vo";
 
 export class Year extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Year {
-    const year = timestamp.toInstant().toZonedDateTimeISO("UTC").toPlainDate().year;
+    const year = timestamp.toPlainDateUTC().year;
 
     const start = Temporal.PlainDate.from({ year, month: 1, day: 1 });
     const end = Temporal.PlainDate.from({ year: year + 1, month: 1, day: 1 });
@@ -39,11 +39,11 @@ export class Year extends DateRange {
   }
 
   toIsoId(): YearIsoIdType {
-    return v.parse(YearIsoId, this.getStart().toInstant().toZonedDateTimeISO("UTC").year.toString());
+    return v.parse(YearIsoId, this.getStart().toZonedDateTimeUTC().year.toString());
   }
 
   isLeapYear(): boolean {
-    return this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate().inLeapYear;
+    return this.getStart().toPlainDateUTC().inLeapYear;
   }
 
   previous(): Year {
@@ -55,7 +55,7 @@ export class Year extends DateRange {
   }
 
   shift(count: IntegerType): Year {
-    const year = this.getStart().toInstant().toZonedDateTimeISO("UTC").year + count;
+    const year = this.getStart().toZonedDateTimeUTC().year + count;
 
     return Year.fromNumber(year);
   }
