@@ -1,7 +1,10 @@
 import type { RoundingStrategy } from "./rounding.strategy";
 import { RoundingToNearestStrategy } from "./rounding-to-nearest.strategy";
 
-export const PercentageError = { InvalidDenominator: "percentage.invalid.denominator" };
+export const PercentageError = {
+  InvalidNumerator: "percentage.invalid.numerator",
+  InvalidDenominator: "percentage.invalid.denominator",
+};
 
 export class Percentage {
   static of(
@@ -9,7 +12,11 @@ export class Percentage {
     denominator: number,
     rounding: RoundingStrategy = new RoundingToNearestStrategy(),
   ): number {
-    if (denominator === 0) throw new Error(PercentageError.InvalidDenominator);
+    if (!Number.isFinite(numerator)) throw new Error(PercentageError.InvalidNumerator);
+    if (!Number.isFinite(denominator) || denominator === 0) {
+      throw new Error(PercentageError.InvalidDenominator);
+    }
+
     return rounding.round((numerator / denominator) * 100);
   }
 }
