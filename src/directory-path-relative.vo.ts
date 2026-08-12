@@ -10,7 +10,7 @@ export const DirectoryPathRelativeError = {
 };
 
 // Letters, digits, ats, dots, underscores, and hyphens
-export const DIRECTORY_PATH_RELATIVE_CHARS = /^[A-Za-z0-9@._-]+$/;
+const DIRECTORY_PATH_RELATIVE_CHARS = /^[A-Za-z0-9@._-]+$/;
 const DOT_SEGMENTS = [".", ".."];
 
 export const DirectoryPathRelativeSchema = v.pipe(
