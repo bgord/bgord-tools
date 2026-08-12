@@ -36,8 +36,8 @@ describe("WeekIsoId", () => {
   });
 
   test("rejects week numbers < 1 or > 53", () => {
-    expect(() => v.parse(WeekIsoId, "2025-W00")).toThrow("week.iso.id.invalid");
-    expect(() => v.parse(WeekIsoId, "2025-W54")).toThrow("week.iso.id.invalid");
+    expect(() => v.parse(WeekIsoId, "2025-W00")).toThrow("week.iso.id.bad.chars");
+    expect(() => v.parse(WeekIsoId, "2025-W54")).toThrow("week.iso.id.bad.chars");
   });
 
   test("rejects week 53 in a year that only has 52 ISO weeks", () => {

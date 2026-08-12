@@ -7,8 +7,8 @@ export const WeekIsoIdError = {
   Invalid: "week.iso.id.invalid",
 };
 
-// Four digits, hyphen, W, followed by two digits
-const WEEK_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-W[0-9]{2}$/;
+// Four digits, hyphen, W, week from 01 to 53
+const WEEK_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])$/;
 
 export const WeekIsoId = v.pipe(
   v.string(WeekIsoIdError.Type),
@@ -16,7 +16,8 @@ export const WeekIsoId = v.pipe(
   v.check((value) => {
     const [year, week] = value.split("-W").map(Number) as [number, number];
 
-    if (Number.isNaN(year) || Number.isNaN(week) || week < 1) return false;
+    // The regex runs first but does not stop the pipe, so malformed input still reaches this check
+    if (Number.isNaN(year) || Number.isNaN(week)) return false;
 
     const weeksInYear = Temporal.PlainDate.from({ year, month: 12, day: 28 }).weekOfYear;
 
