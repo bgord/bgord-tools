@@ -30,11 +30,11 @@ describe("PackageVersionSchema", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => v.parse(PackageVersionSchema, null)).toThrow("package.version.schema.error");
+    expect(() => v.parse(PackageVersionSchema, null)).toThrow("package.version.schema.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => v.parse(PackageVersionSchema, 123)).toThrow("package.version.schema.error");
+    expect(() => v.parse(PackageVersionSchema, 123)).toThrow("package.version.schema.type");
   });
 
   test("rejects invalid values", () => {

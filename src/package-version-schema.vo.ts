@@ -1,7 +1,7 @@
 import * as v from "valibot";
 
 export const PackageVersionSchemaError = {
-  Type: "package.version.schema.error",
+  Type: "package.version.schema.type",
   BadChars: "package.version.schema.bad.chars",
 };
 
