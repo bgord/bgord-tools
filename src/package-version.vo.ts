@@ -1,9 +1,5 @@
 import * as v from "valibot";
-import {
-  PACKAGE_VERSIONS_CHARS_WHITELIST,
-  PackageVersionSchema,
-  type PackageVersionSchemaType,
-} from "./package-version-schema.vo";
+import { PackageVersionSchema, type PackageVersionSchemaType } from "./package-version-schema.vo";
 
 export class PackageVersion {
   private constructor(
@@ -17,13 +13,8 @@ export class PackageVersion {
   }
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
-    // biome-ignore lint: lint/correctness/noUnsafeOptionalChaining
-    const [, major, minor, patch] = PACKAGE_VERSIONS_CHARS_WHITELIST.exec(candidate)?.map(Number) as [
-      number,
-      number,
-      number,
-      number,
-    ];
+    const withoutPrefix = candidate.startsWith("v") ? candidate.slice(1) : candidate;
+    const [major, minor, patch] = withoutPrefix.split(".").map(Number) as [number, number, number];
 
     return new PackageVersion(major, minor, patch);
   }
