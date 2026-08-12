@@ -64,6 +64,18 @@ export class Weekday {
     return this.equals(Weekday.SUNDAY);
   }
 
+  static list(): ReadonlyArray<Weekday> {
+    return [
+      Weekday.MONDAY,
+      Weekday.TUESDAY,
+      Weekday.WEDNESDAY,
+      Weekday.THURSDAY,
+      Weekday.FRIDAY,
+      Weekday.SATURDAY,
+      Weekday.SUNDAY,
+    ];
+  }
+
   toJSON(): number {
     return this.value;
   }

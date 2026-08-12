@@ -59,6 +59,14 @@ describe("Weekday", () => {
     expect(Weekday.MONDAY.equals(Weekday.WEDNESDAY)).toEqual(false);
   });
 
+  test("list", () => {
+    const list = Weekday.list();
+
+    expect(list.length).toEqual(7);
+    expect(list[0]?.get()).toEqual(v.parse(WeekdayIsoId, 1));
+    expect(list[6]?.get()).toEqual(v.parse(WeekdayIsoId, 7));
+  });
+
   test("toString", () => {
     expect(Weekday.MONDAY.toString()).toEqual("1");
   });
