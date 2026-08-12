@@ -85,10 +85,6 @@ src/
 ├── object-key.vo.ts
 ├── package-version-schema.vo.ts
 ├── package-version.vo.ts
-├── pagination-page.vo.ts
-├── pagination-skip.vo.ts
-├── pagination-take.vo.ts
-├── pagination.service.ts
 ├── percentage.service.ts
 ├── quarter-iso-id.vo.ts
 ├── quarter.vo.ts
