@@ -24,10 +24,6 @@ export class Year extends DateRange {
     return Year.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
-  static fromNow(now: Timestamp): Year {
-    return Year.fromTimestamp(now);
-  }
-
   static fromNumber(candidate: number): Year {
     return Year.fromIsoId(v.parse(YearIsoId, String(candidate)));
   }

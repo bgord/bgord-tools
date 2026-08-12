@@ -32,10 +32,6 @@ describe("Quarter", () => {
     expect(quarter.toIsoId()).toEqual(v.parse(QuarterIsoId, "2025-Q4"));
   });
 
-  test("fromNow", () => {
-    expect(Quarter.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(q4);
-  });
-
   test("fromTimestamp", () => {
     expect(Quarter.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(q4);
   });

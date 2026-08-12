@@ -31,10 +31,6 @@ describe("Month", () => {
     expect(month.toIsoId()).toEqual(v.parse(MonthIsoId, "2025-12"));
   });
 
-  test("fromNow", () => {
-    expect(Month.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(november);
-  });
-
   test("fromTimestamp", () => {
     expect(Month.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(november);
   });

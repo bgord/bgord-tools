@@ -27,10 +27,6 @@ export class Quarter extends DateRange {
     return Quarter.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
-  static fromNow(now: Timestamp): Quarter {
-    return Quarter.fromTimestamp(now);
-  }
-
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
     const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number) as [number, number];
 

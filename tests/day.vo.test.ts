@@ -31,10 +31,6 @@ describe("Day", () => {
     expect(Day.fromTimestampValue(mocks.TIME_ZERO.ms).toIsoId()).toEqual(dayIsoId);
   });
 
-  test("fromNow", () => {
-    expect(Day.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(dayIsoId);
-  });
-
   test("fromIsoId", () => {
     expect(Day.fromIsoId(dayIsoId).toIsoId()).toEqual(dayIsoId);
   });
@@ -54,7 +50,7 @@ describe("Day", () => {
 
   test("equals", () => {
     const day = Day.fromTimestamp(mocks.TIME_ZERO);
-    const now = Day.fromNow(Timestamp.fromInstant(Temporal.Now.instant()));
+    const now = Day.fromTimestamp(Timestamp.fromInstant(Temporal.Now.instant()));
 
     expect(day.equals(now)).toEqual(false);
     expect(day.equals(day)).toEqual(true);

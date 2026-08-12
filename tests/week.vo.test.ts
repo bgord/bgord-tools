@@ -33,10 +33,6 @@ describe("Week", () => {
     expect(week.getEnd()).toEqual(Timestamp.fromNumber(end));
   });
 
-  test("fromNow", () => {
-    expect(Week.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(w46);
-  });
-
   test("fromTimestamp", () => {
     expect(Week.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(w46);
   });

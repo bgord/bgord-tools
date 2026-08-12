@@ -21,10 +21,6 @@ export class Day extends DateRange {
     return Day.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
-  static fromNow(now: Timestamp): Day {
-    return Day.fromTimestamp(now);
-  }
-
   static fromIsoId(value: DayIsoIdType): Day {
     const isoId = v.parse(DayIsoId, value);
 

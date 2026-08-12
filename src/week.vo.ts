@@ -24,10 +24,6 @@ export class Week extends DateRange {
     return Week.fromTimestamp(Timestamp.fromValue(timestamp));
   }
 
-  static fromNow(now: Timestamp): Week {
-    return Week.fromTimestamp(now);
-  }
-
   static fromIsoId(isoId: WeekIsoIdType): Week {
     const [year, week] = v.parse(WeekIsoId, isoId).split("-W").map(Number) as [number, number];
 

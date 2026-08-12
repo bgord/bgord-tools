@@ -24,10 +24,6 @@ export class Month extends DateRange {
     return Month.fromTimestamp(Timestamp.fromValue(value));
   }
 
-  static fromNow(now: Timestamp): Month {
-    return Month.fromTimestamp(now);
-  }
-
   static fromIsoId(iso: MonthIsoIdType): Month {
     const [year, month] = v.parse(MonthIsoId, iso).split("-").map(Number) as [number, number];
 

@@ -47,8 +47,8 @@ describe("Year", () => {
     }
   });
 
-  test("fromNow", () => {
-    expect(Year.fromNow(mocks.TIME_ZERO).toIsoId()).toEqual(twentyTwentyThree);
+  test("fromTimestamp", () => {
+    expect(Year.fromTimestamp(mocks.TIME_ZERO).toIsoId()).toEqual(twentyTwentyThree);
   });
 
   test("fromTimestampValue", () => {
