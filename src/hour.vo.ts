@@ -13,10 +13,10 @@ export class Hour {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Hour {
-    return Hour.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Hour.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
-  static fromValue(candidate: number): Hour {
+  static fromNumber(candidate: number): Hour {
     return new Hour(v.parse(HourValue, candidate));
   }
 
@@ -25,11 +25,11 @@ export class Hour {
   }
 
   static zero(): Hour {
-    return Hour.fromValue(0);
+    return Hour.fromNumber(0);
   }
 
   static max(): Hour {
-    return Hour.fromValue(23);
+    return Hour.fromNumber(23);
   }
 
   get(): HourValueType {
@@ -49,7 +49,7 @@ export class Hour {
   }
 
   static list(): ReadonlyArray<Hour> {
-    return Array.from({ length: 24 }, (_, index) => Hour.fromValue(index));
+    return Array.from({ length: 24 }, (_, index) => Hour.fromNumber(index));
   }
 
   toString(): string {

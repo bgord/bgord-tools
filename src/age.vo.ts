@@ -11,7 +11,7 @@ export class Age {
 
   private constructor(private readonly value: AgeYearsType) {}
 
-  static fromValue(candidate: number): Age {
+  static fromNumber(candidate: number): Age {
     return new Age(v.parse(AgeYears, candidate));
   }
 
@@ -25,7 +25,7 @@ export class Age {
     const birthdate = params.birthdate.toPlainDateUTC();
     const now = params.now.toPlainDateUTC();
 
-    return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);
+    return Age.fromNumber(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
   static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
@@ -34,7 +34,7 @@ export class Age {
     const now = candidate.now.toPlainDateUTC();
 
     if (Temporal.PlainDate.compare(birthdate, now) > 0) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromValue(birthdate.until(now, { largestUnit: "years" }).years);
+    return Age.fromNumber(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
   get(): AgeYearsType {

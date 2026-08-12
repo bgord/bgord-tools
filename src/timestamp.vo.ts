@@ -14,7 +14,7 @@ export class Timestamp {
     return Timestamp.fromInstant(Temporal.Instant.from(value));
   }
 
-  static fromValue(value: TimestampValueType): Timestamp {
+  static fromValueSafe(value: TimestampValueType): Timestamp {
     return new Timestamp(value);
   }
 

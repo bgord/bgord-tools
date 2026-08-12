@@ -13,10 +13,10 @@ export class Minute {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Minute {
-    return Minute.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Minute.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
-  static fromValue(candidate: number): Minute {
+  static fromNumber(candidate: number): Minute {
     return new Minute(v.parse(MinuteValue, candidate));
   }
 
@@ -25,11 +25,11 @@ export class Minute {
   }
 
   static zero(): Minute {
-    return Minute.fromValue(0);
+    return Minute.fromNumber(0);
   }
 
   static max(): Minute {
-    return Minute.fromValue(59);
+    return Minute.fromNumber(59);
   }
 
   get(): MinuteValueType {
@@ -49,7 +49,7 @@ export class Minute {
   }
 
   static list(): ReadonlyArray<Minute> {
-    return Array.from({ length: 60 }, (_, index) => Minute.fromValue(index));
+    return Array.from({ length: 60 }, (_, index) => Minute.fromNumber(index));
   }
 
   toString(): string {

@@ -18,7 +18,7 @@ export class Day extends DateRange {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Day {
-    return Day.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Day.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
   static fromIsoId(value: DayIsoIdType): Day {

@@ -4,8 +4,8 @@ import { Minute } from "../src/minute.vo";
 import { MinuteValue } from "../src/minute-value.vo";
 import * as mocks from "./mocks";
 
-const FIVE = Minute.fromValue(5);
-const TEN = Minute.fromValue(10);
+const FIVE = Minute.fromNumber(5);
+const TEN = Minute.fromNumber(10);
 
 const thirteenth = v.parse(MinuteValue, 13);
 
@@ -15,9 +15,9 @@ describe("Minute", () => {
   });
 
   test("throws for invalid minute values", () => {
-    expect(() => Minute.fromValue(12.5)).toThrow("minute.value.type");
-    expect(() => Minute.fromValue(-1)).toThrow("minute.value.invalid");
-    expect(() => Minute.fromValue(60)).toThrow("minute.value.invalid");
+    expect(() => Minute.fromNumber(12.5)).toThrow("minute.value.type");
+    expect(() => Minute.fromNumber(-1)).toThrow("minute.value.invalid");
+    expect(() => Minute.fromNumber(60)).toThrow("minute.value.invalid");
   });
 
   test("fromValueSafe", () => {

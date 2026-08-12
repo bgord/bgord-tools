@@ -18,7 +18,7 @@ export class Year extends DateRange {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Year {
-    return Year.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Year.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
   static fromNumber(candidate: number): Year {

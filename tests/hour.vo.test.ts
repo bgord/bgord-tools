@@ -4,8 +4,8 @@ import { Hour } from "../src/hour.vo";
 import { HourValue } from "../src/hour-value.vo";
 import * as mocks from "./mocks";
 
-const FIVE = Hour.fromValue(5);
-const THIRTEEN = Hour.fromValue(13);
+const FIVE = Hour.fromNumber(5);
+const THIRTEEN = Hour.fromNumber(13);
 
 describe("Hour", () => {
   test("happy path", () => {
@@ -13,9 +13,9 @@ describe("Hour", () => {
   });
 
   test("throws for invalid hour values", () => {
-    expect(() => Hour.fromValue(12.5)).toThrow("hour.value.type");
-    expect(() => Hour.fromValue(-1)).toThrow("hour.value.invalid");
-    expect(() => Hour.fromValue(24)).toThrow("hour.value.invalid");
+    expect(() => Hour.fromNumber(12.5)).toThrow("hour.value.type");
+    expect(() => Hour.fromNumber(-1)).toThrow("hour.value.invalid");
+    expect(() => Hour.fromNumber(24)).toThrow("hour.value.invalid");
   });
 
   test("fromValueSafe", () => {

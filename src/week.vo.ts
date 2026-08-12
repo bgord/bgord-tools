@@ -21,7 +21,7 @@ export class Week extends DateRange {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Week {
-    return Week.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Week.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
   static fromIsoId(isoId: WeekIsoIdType): Week {

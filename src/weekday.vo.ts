@@ -21,7 +21,7 @@ export class Weekday {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Weekday {
-    return Weekday.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Weekday.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
   static fromIsoId(iso: WeekdayIsoIdType): Weekday {

@@ -21,12 +21,12 @@ describe("Timestamp", () => {
     expect(() => Timestamp.fromString("not-a-date")).toThrow("Cannot parse: not-a-date");
   });
 
-  test("fromValue - success", () => {
-    expect(Timestamp.fromValue(mocks.TIME_ZERO.ms));
+  test("fromValueSafe - success", () => {
+    expect(Timestamp.fromValueSafe(mocks.TIME_ZERO.ms));
   });
 
-  test("fromValue - error", () => {
-    expect(() => Timestamp.fromValue(v.parse(TimestampValue, -1))).toThrow("timestamp.invalid");
+  test("fromValueSafe - error", () => {
+    expect(() => Timestamp.fromValueSafe(v.parse(TimestampValue, -1))).toThrow("timestamp.invalid");
   });
 
   test("fromNumber - success", () => {

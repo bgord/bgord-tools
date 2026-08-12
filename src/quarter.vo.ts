@@ -24,7 +24,7 @@ export class Quarter extends DateRange {
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Quarter {
-    return Quarter.fromTimestamp(Timestamp.fromValue(timestamp));
+    return Quarter.fromTimestamp(Timestamp.fromValueSafe(timestamp));
   }
 
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {

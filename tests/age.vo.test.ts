@@ -12,9 +12,9 @@ const twentyThree = v.parse(AgeYears, 23);
 const twentyTwo = v.parse(AgeYears, 22);
 
 describe("Age", () => {
-  test("fromValue", () => {
-    expect(Age.fromValue(0).get()).toEqual(min);
-    expect(Age.fromValue(130).get()).toEqual(max);
+  test("fromNumber", () => {
+    expect(Age.fromNumber(0).get()).toEqual(min);
+    expect(Age.fromNumber(130).get()).toEqual(max);
   });
 
   test("fromValueSafe", () => {
@@ -118,26 +118,26 @@ describe("Age", () => {
   });
 
   test("get", () => {
-    expect(Age.fromValue(twentyThree).get()).toEqual(twentyThree);
+    expect(Age.fromNumber(twentyThree).get()).toEqual(twentyThree);
   });
 
   test("equals - true", () => {
-    const first = Age.fromValue(18);
-    const second = Age.fromValue(18);
+    const first = Age.fromNumber(18);
+    const second = Age.fromNumber(18);
 
     expect(first.equals(second)).toEqual(true);
   });
 
   test("equals - false", () => {
-    const first = Age.fromValue(18);
-    const second = Age.fromValue(19);
+    const first = Age.fromNumber(18);
+    const second = Age.fromNumber(19);
 
     expect(first.equals(second)).toEqual(false);
   });
 
   test("isOlderThan", () => {
-    const youngerAge = Age.fromValue(17);
-    const olderAge = Age.fromValue(18);
+    const youngerAge = Age.fromNumber(17);
+    const olderAge = Age.fromNumber(18);
 
     expect(olderAge.isOlderThan(youngerAge)).toEqual(true);
     expect(youngerAge.isOlderThan(olderAge)).toEqual(false);
@@ -145,8 +145,8 @@ describe("Age", () => {
   });
 
   test("isYoungerThan", () => {
-    const youngerAge = Age.fromValue(17);
-    const olderAge = Age.fromValue(18);
+    const youngerAge = Age.fromNumber(17);
+    const olderAge = Age.fromNumber(18);
 
     expect(youngerAge.isYoungerThan(olderAge)).toEqual(true);
     expect(olderAge.isYoungerThan(youngerAge)).toEqual(false);
@@ -154,22 +154,22 @@ describe("Age", () => {
   });
 
   test("isAdult - treats exactly the same age as adult", () => {
-    expect(Age.fromValue(18).isAdult(Age.fromValue(18))).toEqual(true);
+    expect(Age.fromNumber(18).isAdult(Age.fromNumber(18))).toEqual(true);
   });
 
   test("isAdult - treats older age as adult", () => {
-    expect(Age.fromValue(21).isAdult(Age.fromValue(18))).toEqual(true);
+    expect(Age.fromNumber(21).isAdult(Age.fromNumber(18))).toEqual(true);
   });
 
   test("isAdult - treats younger age as not adult", () => {
-    expect(Age.fromValue(17).isAdult(Age.fromValue(18))).toEqual(false);
+    expect(Age.fromNumber(17).isAdult(Age.fromNumber(18))).toEqual(false);
   });
 
   test("toString", () => {
-    expect(Age.fromValue(42).toString()).toEqual("42");
+    expect(Age.fromNumber(42).toString()).toEqual("42");
   });
 
   test("toJSON", () => {
-    expect(Age.fromValue(42).toJSON()).toEqual(42);
+    expect(Age.fromNumber(42).toJSON()).toEqual(42);
   });
 });

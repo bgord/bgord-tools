@@ -16,7 +16,7 @@ export class Month extends DateRange {
   }
 
   static fromTimestampValue(value: TimestampValueType): Month {
-    return Month.fromTimestamp(Timestamp.fromValue(value));
+    return Month.fromTimestamp(Timestamp.fromValueSafe(value));
   }
 
   static fromIsoId(iso: MonthIsoIdType): Month {
