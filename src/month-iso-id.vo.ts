@@ -3,21 +3,14 @@ import * as v from "valibot";
 export const MonthIsoIdError = {
   Type: "month.iso.id.type",
   BadChars: "month.iso.id.bad.chars",
-  Invalid: "month.iso.id.invalid",
 };
 
-// Four digits, hyphen, two digits
-const MONTH_ISO_ID_CHARS_WHITELIST = /^\d{4}-\d{2}$/;
+// Four digits, hyphen, month from 01 to 12
+const MONTH_ISO_ID_CHARS_WHITELIST = /^[0-9]{4}-(0[1-9]|1[0-2])$/;
 
 export const MonthIsoId = v.pipe(
   v.string(MonthIsoIdError.Type),
   v.regex(MONTH_ISO_ID_CHARS_WHITELIST, MonthIsoIdError.BadChars),
-  v.check((value) => {
-    const month = value.split("-").map(Number)[1];
-
-    if (!month) return false;
-    return month <= 12;
-  }, MonthIsoIdError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("MonthIsoId"),
 );

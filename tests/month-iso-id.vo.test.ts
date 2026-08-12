@@ -32,8 +32,8 @@ describe("MonthIsoId", () => {
   });
 
   test("rejects months < 1 and > 12", () => {
-    expect(() => v.parse(MonthIsoId, "2023-00")).toThrow("month.iso.id.invalid");
-    expect(() => v.parse(MonthIsoId, "2023-13")).toThrow("month.iso.id.invalid");
+    expect(() => v.parse(MonthIsoId, "2023-00")).toThrow("month.iso.id.bad.chars");
+    expect(() => v.parse(MonthIsoId, "2023-13")).toThrow("month.iso.id.bad.chars");
   });
 
   test("rejects structurally invalid strings", () => {
