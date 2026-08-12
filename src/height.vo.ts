@@ -60,7 +60,7 @@ export class Height {
   }
 
   isZero(): boolean {
-    return this.millimeters === 0;
+    return this.millimeters === Height.ZERO;
   }
 
   toJSON(): number {
