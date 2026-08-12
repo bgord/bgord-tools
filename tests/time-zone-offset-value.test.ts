@@ -21,7 +21,22 @@ describe("TimeZoneOffsetValue", () => {
     expect(() => v.parse(TimeZoneOffsetValue, "721")).toThrow("time.zone.offset.value.max");
   });
 
-  test("transforms invalid values to 0", () => {
+  test("rejects - booleans", () => {
+    expect(() => v.parse(TimeZoneOffsetValue, true)).toThrow("time.zone.offset.value.type");
+    expect(() => v.parse(TimeZoneOffsetValue, false)).toThrow("time.zone.offset.value.type");
+  });
+
+  test("rejects - arrays", () => {
+    expect(() => v.parse(TimeZoneOffsetValue, [])).toThrow("time.zone.offset.value.type");
+    expect(() => v.parse(TimeZoneOffsetValue, [60])).toThrow("time.zone.offset.value.type");
+  });
+
+  test("rejects - non-decimal strings", () => {
+    expect(() => v.parse(TimeZoneOffsetValue, "0x10")).toThrow("time.zone.offset.value.type");
+    expect(() => v.parse(TimeZoneOffsetValue, "  ")).toThrow("time.zone.offset.value.type");
+  });
+
+  test("transforms missing values to 0", () => {
     // @ts-expect-error Value comparison
     expect(v.parse(TimeZoneOffsetValue, undefined)).toEqual(0);
     // @ts-expect-error Value comparison
