@@ -15,4 +15,30 @@ describe("FeatureFlag", () => {
     expect(on.isDisabled()).toEqual(false);
     expect(off.isDisabled()).toEqual(true);
   });
+
+  test("fromString", () => {
+    expect(FeatureFlag.fromString("yes").isEnabled()).toEqual(true);
+    expect(FeatureFlag.fromString("no").isDisabled()).toEqual(true);
+  });
+
+  test("fromString - invalid", () => {
+    expect(() => FeatureFlag.fromString("maybe")).toThrow("feature.flag.value.invalid");
+  });
+
+  test("get", () => {
+    expect(on.get()).toEqual(FeatureFlagEnum.yes);
+  });
+
+  test("equals", () => {
+    expect(on.equals(FeatureFlag.from(FeatureFlagEnum.yes))).toEqual(true);
+    expect(on.equals(off)).toEqual(false);
+  });
+
+  test("toString", () => {
+    expect(on.toString()).toEqual("yes");
+  });
+
+  test("toJSON", () => {
+    expect(off.toJSON()).toEqual(FeatureFlagEnum.no);
+  });
 });
