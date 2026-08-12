@@ -43,7 +43,7 @@ export class Weight {
   }
 
   add(other: Weight): Weight {
-    return new Weight(v.parse(WeightGrams, this.grams + other.grams));
+    return new Weight(v.parse(WeightGrams, this.grams + other.grams), this.rounding);
   }
 
   subtract(other: Weight): Weight {
@@ -55,13 +55,13 @@ export class Weight {
   multiply(factor: MultiplicationFactorType): Weight {
     const grams = this.rounding.round(this.grams * factor);
 
-    return new Weight(v.parse(WeightGrams, grams));
+    return new Weight(v.parse(WeightGrams, grams), this.rounding);
   }
 
   divide(divisor: DivisionFactorType): Weight {
     const grams = this.rounding.round(this.grams / divisor);
 
-    return new Weight(v.parse(WeightGrams, grams));
+    return new Weight(v.parse(WeightGrams, grams), this.rounding);
   }
 
   equals(other: Weight): boolean {

@@ -3,6 +3,7 @@ import * as v from "valibot";
 import { DivisionFactor } from "../src/division-factor.vo";
 import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
+import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 import { Weight } from "../src/weight.vo";
 
 const twoDecimals = new RoundingDecimalStrategy(2);
@@ -44,6 +45,15 @@ describe("Weight", () => {
     expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(1_000)).get()).toEqual(0);
     expect(Weight.fromGrams(1_001).multiply(v.parse(MultiplicationFactor, 0.5)).get()).toEqual(501);
     expect(Weight.fromGrams(1_999).divide(factor).get()).toEqual(666);
+  });
+
+  test("rounding", () => {
+    const up = new RoundingUpStrategy();
+    const base = Weight.fromGrams(101, up);
+
+    expect(base.divide(factor).divide(factor).get()).toEqual(12);
+    expect(base.add(Weight.zero()).divide(factor).get()).toEqual(34);
+    expect(base.multiply(v.parse(MultiplicationFactor, 0.5)).divide(factor).get()).toEqual(17);
   });
 
   test("equals", () => {
