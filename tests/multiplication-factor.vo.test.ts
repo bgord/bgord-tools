@@ -20,4 +20,13 @@ describe("MultiplicationFactor", () => {
   test("rejects negative numbers", () => {
     expect(() => v.parse(MultiplicationFactor, -1)).toThrow("multiplication.factor.invalid");
   });
+
+  test("rejects Infinity", () => {
+    expect(() => v.parse(MultiplicationFactor, Number.POSITIVE_INFINITY)).toThrow(
+      "multiplication.factor.invalid",
+    );
+    expect(() => v.parse(MultiplicationFactor, Number.NEGATIVE_INFINITY)).toThrow(
+      "multiplication.factor.invalid",
+    );
+  });
 });

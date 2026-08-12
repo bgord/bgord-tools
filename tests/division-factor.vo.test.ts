@@ -23,4 +23,9 @@ describe("DivisionFactor", () => {
   test("rejects negative numbers", () => {
     expect(() => v.parse(DivisionFactor, -1)).toThrow("division.factor.invalid");
   });
+
+  test("rejects Infinity", () => {
+    expect(() => v.parse(DivisionFactor, Number.POSITIVE_INFINITY)).toThrow("division.factor.invalid");
+    expect(() => v.parse(DivisionFactor, Number.NEGATIVE_INFINITY)).toThrow("division.factor.invalid");
+  });
 });
