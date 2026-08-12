@@ -1,16 +1,6 @@
 import * as v from "valibot";
 import type { RoundingStrategy } from "./rounding.strategy";
-
-export const RoundingDecimalError = { Type: "rounding.decimal.type", Invalid: "rounding.decimal.invalid" };
-
-export const RoundingDecimal = v.pipe(
-  v.number(RoundingDecimalError.Type),
-  v.integer(RoundingDecimalError.Type),
-  v.minValue(0, RoundingDecimalError.Invalid),
-  v.maxValue(100, RoundingDecimalError.Invalid),
-  // Stryker disable next-line StringLiteral
-  v.brand("RoundingDecimal"),
-);
+import { RoundingDecimal } from "./rounding-decimal.vo";
 
 export class RoundingDecimalStrategy implements RoundingStrategy {
   private readonly decimals: number;

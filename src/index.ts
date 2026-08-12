@@ -73,6 +73,7 @@ export * from "./revision.vo";
 export * from "./revision-value.vo";
 export * from "./rounding.strategy";
 export * from "./rounding-decimal.strategy";
+export * from "./rounding-decimal.vo";
 export * from "./rounding-down.strategy";
 export * from "./rounding-to-nearest.strategy";
 export * from "./rounding-up.strategy";

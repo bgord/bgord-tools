@@ -98,6 +98,7 @@ src/
 ├── revision-value.vo.ts
 ├── revision.vo.ts
 ├── rounding-decimal.strategy.ts
+├── rounding-decimal.vo.ts
 ├── rounding-down.strategy.ts
 ├── rounding-to-nearest.strategy.ts
 ├── rounding-up.strategy.ts
