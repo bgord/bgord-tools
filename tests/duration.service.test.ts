@@ -116,6 +116,16 @@ describe("Duration", () => {
     expect(result.ms).toEqual(v.parse(DurationMs, 9));
   });
 
+  test("rounds fractional conversions to the nearest ms", () => {
+    expect(Duration.Seconds(0.0001).ms).toEqual(v.parse(DurationMs, 0));
+    expect(Duration.Seconds(0.0006).ms).toEqual(v.parse(DurationMs, 1));
+    expect(Duration.Minutes(0.5).ms).toEqual(v.parse(DurationMs, 30_000));
+  });
+
+  test("Ms rejects fractional milliseconds", () => {
+    expect(() => Duration.Ms(1.5)).toThrow("duration.invalid");
+  });
+
   test("equals", () => {
     const a = Duration.Ms(1_000);
     const b = Duration.Ms(2_000);
