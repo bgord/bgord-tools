@@ -32,4 +32,15 @@ describe("Timezone", () => {
       expect(() => v.parse(Timezone, value)).toThrow("timezone.invalid");
     }
   });
+
+  test("rejects offset timezones", () => {
+    const invalid = ["+02:00", "-05:00", "+02"];
+    for (const value of invalid) {
+      expect(() => v.parse(Timezone, value)).toThrow("timezone.invalid");
+    }
+  });
+
+  test("normalizes to the canonical id", () => {
+    expect(v.parse(Timezone, "utc")).toEqual("UTC");
+  });
 });
