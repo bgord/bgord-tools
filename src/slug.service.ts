@@ -4,8 +4,7 @@ export class Slug {
 
   static generate(input: string, separator = "-"): string {
     return (
-      input
-        .split("")
+      [...input.normalize("NFC")]
         .map((character) => (Slug.WHITELIST.test(character) ? character : separator))
         .join("")
         // Collapse multiple consecutive separators
