@@ -8,11 +8,13 @@ export const TimezoneError = {
   Invalid: "timezone.invalid",
 };
 
-// A resolved offset zone, e.g. "+02:00" - not an IANA name
-const TIMEZONE_OFFSET_ID = /^[+-][0-9]{2}:[0-9]{2}$/;
-
 const toTimeZoneId = (value: string): string =>
   Temporal.ZonedDateTime.from(`1970-01-01T00:00:00[${value}]`).timeZoneId;
+
+// Temporal resolves an offset zone to "+02:00" and an IANA zone to its name,
+// so a leading sign is what separates the two
+const isOffsetTimeZone = (timeZoneId: string): boolean =>
+  timeZoneId.startsWith("+") || timeZoneId.startsWith("-");
 
 export const Timezone = v.pipe(
   v.string(TimezoneError.Type),
@@ -20,7 +22,7 @@ export const Timezone = v.pipe(
   v.maxLength(128, TimezoneError.TooLong),
   v.check((value) => {
     try {
-      return !TIMEZONE_OFFSET_ID.test(toTimeZoneId(value));
+      return !isOffsetTimeZone(toTimeZoneId(value));
     } catch {
       return false;
     }

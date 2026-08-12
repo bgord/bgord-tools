@@ -43,4 +43,11 @@ describe("WeekIsoId", () => {
   test("rejects week 53 in a year that only has 52 ISO weeks", () => {
     expect(() => v.parse(WeekIsoId, "2021-W53")).toThrow("week.iso.id.invalid");
   });
+
+  test("malformed input", () => {
+    expect(v.safeParse(WeekIsoId, "prefix2025-W01").issues?.map((issue) => issue.message)).toEqual([
+      "week.iso.id.bad.chars",
+      "week.iso.id.invalid",
+    ]);
+  });
 });

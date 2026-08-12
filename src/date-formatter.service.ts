@@ -30,7 +30,7 @@ export class DateFormatter {
     const rounding = new RoundingDownStrategy();
     const difference = now.difference(timestamp.add(offset));
     const absolute = difference.toAbsolute();
-    const direction = difference.ms > 0 ? -1 : 1;
+    const direction = -Math.sign(difference.ms);
 
     if (absolute.days >= 1) return rtf.format(direction * rounding.round(absolute.days), "day");
     if (absolute.hours >= 1) return rtf.format(direction * rounding.round(absolute.hours), "hour");

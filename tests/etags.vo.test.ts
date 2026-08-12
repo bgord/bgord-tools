@@ -65,6 +65,10 @@ describe("WeakETag", () => {
     expect(WeakETag.fromHeader(invalidValue)).toEqual(null);
   });
 
+  test("returns null when W/ is not at the start", () => {
+    expect(WeakETag.fromHeader("5W/7")).toEqual(null);
+  });
+
   test("returns null for empty", () => {
     expect(WeakETag.fromHeader()).toEqual(null);
   });
