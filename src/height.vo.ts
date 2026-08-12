@@ -31,7 +31,7 @@ export class Height {
     return Height.fromMillimetersSafe(Height.ZERO);
   }
 
-  get(): number {
+  get(): HeightMillimetersType {
     return this.millimeters;
   }
 

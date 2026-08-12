@@ -90,6 +90,25 @@ describe("Distance", () => {
     expect(Distance.fromMeters(1).isZero()).toEqual(false);
   });
 
+  test("zero", () => {
+    expect(Distance.zero().isZero()).toEqual(true);
+  });
+
+  test("toMeters", () => {
+    expect(Distance.fromKilometers(1.5).toMeters()).toEqual(1500);
+  });
+
+  test("toKilometers", () => {
+    expect(Distance.fromMeters(1500).toKilometers()).toEqual(1.5);
+    expect(Distance.fromKilometers(2).toKilometers()).toEqual(2);
+  });
+
+  test("toMiles", () => {
+    expect(Distance.fromMeters(1_609_344).toMiles()).toEqual(1000);
+    // Metres are stored as integers, so a single mile does not round-trip exactly
+    expect(Distance.fromMiles(1).toMiles()).toBeCloseTo(1, 3);
+  });
+
   test("toString", () => {
     expect(Distance.fromMeters(5).toString()).toEqual("5");
   });

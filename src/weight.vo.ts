@@ -30,7 +30,7 @@ export class Weight {
     return new Weight(v.parse(WeightGrams, 0));
   }
 
-  get(): number {
+  get(): WeightGramsType {
     return this.grams;
   }
 
