@@ -12,10 +12,14 @@ describe("Email", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => v.parse(Email, null)).toThrow("email.invalid");
+    expect(() => v.parse(Email, null)).toThrow("email.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => v.parse(Email, 123)).toThrow("email.invalid");
+    expect(() => v.parse(Email, 123)).toThrow("email.type");
+  });
+
+  test("rejects too long", () => {
+    expect(() => v.parse(Email, `${"a".repeat(250)}@x.com`)).toThrow("email.too.long");
   });
 });
