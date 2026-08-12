@@ -18,11 +18,11 @@ describe("ImageWidth", () => {
   });
 
   test("rejects too small", () => {
-    expect(() => v.parse(ImageWidth, 0)).toThrow("image.width.length");
+    expect(() => v.parse(ImageWidth, 0)).toThrow("image.width.invalid");
   });
 
   test("rejects too big", () => {
-    expect(() => v.parse(ImageWidth, 10_001)).toThrow("image.width.length");
+    expect(() => v.parse(ImageWidth, 10_001)).toThrow("image.width.invalid");
   });
 });
 
@@ -42,10 +42,10 @@ describe("ImageHeight", () => {
   });
 
   test("rejects too small", () => {
-    expect(() => v.parse(ImageHeight, 0)).toThrow("image.height.length");
+    expect(() => v.parse(ImageHeight, 0)).toThrow("image.height.invalid");
   });
 
   test("rejects too big", () => {
-    expect(() => v.parse(ImageHeight, 10_001)).toThrow("image.height.length");
+    expect(() => v.parse(ImageHeight, 10_001)).toThrow("image.height.invalid");
   });
 });
