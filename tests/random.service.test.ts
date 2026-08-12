@@ -14,6 +14,20 @@ describe("Random", () => {
     expect(() => Random.generate({ min: 0, max: 0 })).toThrow("random.min.max");
   });
 
+  test("throws for non-integer bounds", () => {
+    expect(() => Random.generate({ min: 0, max: 2.5 })).toThrow("random.not.integer");
+    expect(() => Random.generate({ min: 0.5, max: 3 })).toThrow("random.not.integer");
+  });
+
+  test("stays within the inclusive range", () => {
+    for (let index = 0; index < 1000; index++) {
+      const result = Random.generate({ min: 0, max: 2 });
+
+      expect(result).toBeGreaterThanOrEqual(0);
+      expect(result).toBeLessThanOrEqual(2);
+    }
+  });
+
   test("generate - default config", () => {
     const result = Random.generate();
 

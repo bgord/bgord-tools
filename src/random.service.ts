@@ -2,16 +2,18 @@ import { RoundingDownStrategy } from "./rounding-down.strategy";
 
 type RandomGenerateConfigType = { min: number; max: number };
 
-export const RandomError = { MinMax: "random.min.max" };
+export const RandomError = { MinMax: "random.min.max", NotInteger: "random.not.integer" };
 
 export class Random {
   private static readonly DEFAULT_MIN = 0;
   private static readonly DEFAULT_MAX = 1;
 
+  // Inclusive integer range - both bounds are reachable
   static generate(config?: RandomGenerateConfigType): number {
     const min = config ? config.min : Random.DEFAULT_MIN;
     const max = config ? config.max : Random.DEFAULT_MAX;
 
+    if (!(Number.isInteger(min) && Number.isInteger(max))) throw new Error(RandomError.NotInteger);
     if (min >= max) throw new Error(RandomError.MinMax);
 
     return new RoundingDownStrategy().round(Math.random() * (max - min + 1)) + min;
