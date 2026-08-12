@@ -29,11 +29,13 @@ export class DateFormatter {
     const rtf = new Intl.RelativeTimeFormat("en-US");
     const rounding = new RoundingDownStrategy();
     const difference = now.difference(timestamp.add(offset));
+    const absolute = difference.toAbsolute();
+    const direction = difference.ms > 0 ? -1 : 1;
 
-    if (difference.toAbsolute().days >= 1) return rtf.format(-rounding.round(difference.days), "day");
-    if (difference.toAbsolute().hours >= 1) return rtf.format(-rounding.round(difference.hours), "hour");
-    if (difference.toAbsolute().minutes >= 1)
-      return rtf.format(-rounding.round(difference.minutes), "minute");
+    if (absolute.days >= 1) return rtf.format(direction * rounding.round(absolute.days), "day");
+    if (absolute.hours >= 1) return rtf.format(direction * rounding.round(absolute.hours), "hour");
+    if (absolute.minutes >= 1) return rtf.format(direction * rounding.round(absolute.minutes), "minute");
+
     return "just now";
   }
 }

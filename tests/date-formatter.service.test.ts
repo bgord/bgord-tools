@@ -58,6 +58,16 @@ describe("DateFormatter", () => {
     expect(DateFormatter.relative(now, now.add(Duration.Days(2)))).toEqual("in 2 days");
   });
 
+  test("relative - rounds down toward zero - ago", () => {
+    expect(DateFormatter.relative(now, now.subtract(Duration.Hours(36)))).toEqual("1 day ago");
+    expect(DateFormatter.relative(now, now.subtract(Duration.Minutes(174)))).toEqual("2 hours ago");
+  });
+
+  test("relative - rounds down toward zero - in", () => {
+    expect(DateFormatter.relative(now, now.add(Duration.Hours(36)))).toEqual("in 1 day");
+    expect(DateFormatter.relative(now, now.add(Duration.Minutes(174)))).toEqual("in 2 hours");
+  });
+
   test("relative - with offset", () => {
     expect(DateFormatter.relative(now, now.add(Duration.Hours(1)), offset)).toEqual("in 2 hours");
   });
