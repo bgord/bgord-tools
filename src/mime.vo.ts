@@ -14,6 +14,10 @@ export class Mime {
     return new Mime(type, subtype);
   }
 
+  equals(another: Mime): boolean {
+    return this.type === another.type && this.subtype === another.subtype;
+  }
+
   isSatisfiedBy(another: Mime): boolean {
     if (!(this.type === another.type || this.type === "*")) return false;
     return this.subtype === another.subtype || this.subtype === "*";

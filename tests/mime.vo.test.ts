@@ -55,6 +55,20 @@ describe("Mime", () => {
     expect(wildcardPlain.isSatisfiedBy(anyWildcard)).toEqual(false);
   });
 
+  test("equals", () => {
+    expect(Mime.fromString("text/plain").equals(Mime.fromString("text/plain"))).toEqual(true);
+    expect(Mime.fromString("text/plain").equals(Mime.fromString("text/csv"))).toEqual(false);
+    expect(Mime.fromString("text/plain").equals(Mime.fromString("image/png"))).toEqual(false);
+  });
+
+  test("equals - a wildcard is not equal to what it matches", () => {
+    const wildcard = Mime.fromString("text/*");
+    const concrete = Mime.fromString("text/plain");
+
+    expect(wildcard.isSatisfiedBy(concrete)).toEqual(true);
+    expect(wildcard.equals(concrete)).toEqual(false);
+  });
+
   test("toString", () => {
     expect(Mime.fromString("text/plain").toString()).toEqual("text/plain");
   });
