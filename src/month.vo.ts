@@ -46,11 +46,11 @@ export class Month extends DateRange {
     return this.shift(Int.of(1));
   }
 
-  shift(months: IntegerType): Month {
+  shift(count: IntegerType): Month {
     const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
 
     return Month.fromTimestamp(
-      Timestamp.fromInstant(plain.add({ months }).toZonedDateTime("UTC").toInstant()),
+      Timestamp.fromInstant(plain.add({ months: count }).toZonedDateTime("UTC").toInstant()),
     );
   }
 
