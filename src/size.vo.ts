@@ -19,6 +19,13 @@ export class Size {
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
 
+  private static readonly MULTIPLIERS: Record<SizeUnitEnum, number> = {
+    [SizeUnitEnum.b]: 1,
+    [SizeUnitEnum.kB]: Size.KB_MULTIPLIER,
+    [SizeUnitEnum.MB]: Size.MB_MULTIPLIER,
+    [SizeUnitEnum.GB]: Size.GB_MULTIPLIER,
+  };
+
   private static readonly FORMAT_ROUND = new RoundingDecimalStrategy(2);
 
   private constructor(config: SizeConfigType) {
@@ -47,15 +54,19 @@ export class Size {
   }
 
   tokB(): number {
-    return Size.FORMAT_ROUND.round(this.bytes / Size.KB_MULTIPLIER);
+    return this.toUnit(SizeUnitEnum.kB);
   }
 
   toMB(): number {
-    return Size.FORMAT_ROUND.round(this.bytes / Size.MB_MULTIPLIER);
+    return this.toUnit(SizeUnitEnum.MB);
   }
 
   toGB(): number {
-    return Size.FORMAT_ROUND.round(this.bytes / Size.GB_MULTIPLIER);
+    return this.toUnit(SizeUnitEnum.GB);
+  }
+
+  private toUnit(unit: SizeUnitEnum): number {
+    return Size.FORMAT_ROUND.round(this.bytes / Size.MULTIPLIERS[unit]);
   }
 
   equals(another: Size): boolean {
@@ -71,16 +82,7 @@ export class Size {
   }
 
   format(unit: SizeUnitEnum): string {
-    switch (unit) {
-      case SizeUnitEnum.kB:
-        return `${Size.FORMAT_ROUND.round(this.bytes / Size.KB_MULTIPLIER)} ${SizeUnitEnum.kB}`;
-      case SizeUnitEnum.MB:
-        return `${Size.FORMAT_ROUND.round(this.bytes / Size.MB_MULTIPLIER)} ${SizeUnitEnum.MB}`;
-      case SizeUnitEnum.GB:
-        return `${Size.FORMAT_ROUND.round(this.bytes / Size.GB_MULTIPLIER)} ${SizeUnitEnum.GB}`;
-      default:
-        return `${this.bytes} ${SizeUnitEnum.b}`;
-    }
+    return `${this.toUnit(unit)} ${unit}`;
   }
 
   static toBytes(config: SizeConfigType): SizeBytesType {
@@ -90,16 +92,7 @@ export class Size {
   static readonly unit = SizeUnitEnum;
 
   private calculateBytes(value: SizeConfigType["value"], unit: SizeUnitEnum): SizeBytesType {
-    switch (unit) {
-      case SizeUnitEnum.kB:
-        return v.parse(SizeBytes, value * Size.KB_MULTIPLIER);
-      case SizeUnitEnum.MB:
-        return v.parse(SizeBytes, value * Size.MB_MULTIPLIER);
-      case SizeUnitEnum.GB:
-        return v.parse(SizeBytes, value * Size.GB_MULTIPLIER);
-      default:
-        return v.parse(SizeBytes, value);
-    }
+    return v.parse(SizeBytes, value * Size.MULTIPLIERS[unit]);
   }
 
   toString(): string {
