@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { IbanSchema } from "../src/iban-schema.vo";
 
-describe("IBAN", () => {
+describe("IbanSchema", () => {
   test("normalizes and formats valid IBANs", () => {
     const cases = [
       "PL61 1090 1014 0000 0712 1981 2874",

@@ -1,11 +1,15 @@
 import * as v from "valibot";
 import { IbanSchema, type IbanSchemaType } from "./iban-schema.vo";
 
-export class IBAN {
-  private readonly value: IbanSchemaType;
+export class Iban {
+  private constructor(private readonly value: IbanSchemaType) {}
 
-  constructor(candidate: string) {
-    this.value = v.parse(IbanSchema, candidate);
+  static fromString(candidate: string): Iban {
+    return new Iban(v.parse(IbanSchema, candidate));
+  }
+
+  static fromValueSafe(value: IbanSchemaType): Iban {
+    return new Iban(value);
   }
 
   toString(): string {
@@ -23,7 +27,7 @@ export class IBAN {
     return this.value.slice(0, 2);
   }
 
-  equals(other: IBAN): boolean {
+  equals(other: Iban): boolean {
     return this.value === other.value;
   }
 }

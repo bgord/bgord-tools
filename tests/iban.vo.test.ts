@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
-import { IBAN } from "../src/iban.vo";
+import { Iban } from "../src/iban.vo";
 
-describe("IBAN", () => {
+describe("Iban", () => {
   test("normalizes and formats", () => {
     const cases = [
       [
@@ -19,7 +19,7 @@ describe("IBAN", () => {
     ] as const;
 
     for (const [input, normalized, formatted] of cases) {
-      const iban = new IBAN(input);
+      const iban = Iban.fromString(input);
 
       expect(iban.toString()).toEqual(normalized);
       expect(iban.format()).toEqual(formatted);
@@ -28,9 +28,9 @@ describe("IBAN", () => {
   });
 
   test("equals", () => {
-    const a = new IBAN("PL61 1090 1014 0000 0712 1981 2874");
-    const b = new IBAN("PL61109010140000071219812874");
-    const c = new IBAN("DE44 5001 0517 5407 3249 31");
+    const a = Iban.fromString("PL61 1090 1014 0000 0712 1981 2874");
+    const b = Iban.fromString("PL61109010140000071219812874");
+    const c = Iban.fromString("DE44 5001 0517 5407 3249 31");
 
     expect(a.equals(b)).toEqual(true);
     expect(a.equals(c)).toEqual(false);
@@ -46,7 +46,7 @@ describe("IBAN", () => {
     ];
 
     for (const value of invalid) {
-      expect(() => new IBAN(value)).toThrow("iban.schema.invalid");
+      expect(() => Iban.fromString(value)).toThrow("iban.schema.invalid");
     }
   });
 });

@@ -1,9 +1,9 @@
-import type { IBAN } from "./iban.vo";
+import type { Iban } from "./iban.vo";
 
 export class IbanMask {
   private static readonly VISIBLE = 4;
 
-  static censor(iban: IBAN): string {
+  static censor(iban: Iban): string {
     const { length } = iban.toString();
     let position = 0;
 
