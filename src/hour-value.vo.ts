@@ -8,7 +8,7 @@ export const HourValue = v.pipe(
   v.minValue(0, HourValueError.Invalid),
   v.maxValue(23, HourValueError.Invalid),
   // Stryker disable next-line StringLiteral
-  v.brand("HourSchema"),
+  v.brand("HourValue"),
 );
 
 export type HourValueType = v.InferOutput<typeof HourValue>;
