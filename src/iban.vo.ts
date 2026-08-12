@@ -16,6 +16,10 @@ export class Iban {
     return this.value;
   }
 
+  toJSON(): string {
+    return this.value;
+  }
+
   format(): string {
     // (.{4}) - capture any four characters
     // (?=.) - positive lookahead, at least one more character after the match

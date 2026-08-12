@@ -27,6 +27,12 @@ describe("Iban", () => {
     }
   });
 
+  test("toJSON", () => {
+    expect(Iban.fromString("PL61 1090 1014 0000 0712 1981 2874").toJSON()).toEqual(
+      "PL61109010140000071219812874",
+    );
+  });
+
   test("equals", () => {
     const a = Iban.fromString("PL61 1090 1014 0000 0712 1981 2874");
     const b = Iban.fromString("PL61109010140000071219812874");

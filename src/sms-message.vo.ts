@@ -8,7 +8,7 @@ export class SmsMessage {
     readonly from?: TelephoneNumberType,
   ) {}
 
-  toJSON() {
-    return { to: this.to, from: this.from, body: this.body };
+  toJSON(): { to: TelephoneNumberType; body: SmsBodyType; from?: TelephoneNumberType } {
+    return { to: this.to, body: this.body, from: this.from };
   }
 }
