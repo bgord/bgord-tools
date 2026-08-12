@@ -49,6 +49,10 @@ describe("FilePathRelativeSchema", () => {
     );
   });
 
+  test("rejects trailing slash", () => {
+    expect(() => v.parse(FilePathRelativeSchema, "tmp/")).toThrow("file.path.relative.trailing.slash");
+  });
+
   test("delegated failures", () => {
     const invalid = [
       "tmp/./file.txt",
@@ -57,7 +61,6 @@ describe("FilePathRelativeSchema", () => {
       "my dir/file.txt",
       "tmp/file",
       "tmp/file name.txt",
-      "tmp/",
     ];
     for (const value of invalid) {
       expect(() => v.parse(FilePathRelativeSchema, value)).toThrow();

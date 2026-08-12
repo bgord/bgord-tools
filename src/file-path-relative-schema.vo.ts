@@ -5,6 +5,7 @@ import { Filename } from "./filename.vo";
 export const FilePathRelativeSchemaError = {
   Type: "file.path.relative.type",
   LeadingSlash: "file.path.relative.leading.slash",
+  TrailingSlash: "file.path.relative.trailing.slash",
   BackslashForbidden: "file.path.relative.backslash.forbidden",
   RequiresDirectory: "file.path.relative.requires.directory",
   Empty: "file.path.relative.empty",
@@ -14,6 +15,7 @@ export const FilePathRelativeSchema = v.pipe(
   v.string(FilePathRelativeSchemaError.Type),
   v.minLength(1, FilePathRelativeSchemaError.Empty),
   v.check((value) => !value.startsWith("/"), FilePathRelativeSchemaError.LeadingSlash),
+  v.check((value) => !value.endsWith("/"), FilePathRelativeSchemaError.TrailingSlash),
   v.check((value) => !value.includes("\\"), FilePathRelativeSchemaError.BackslashForbidden),
   v.check((value) => value.includes("/"), FilePathRelativeSchemaError.RequiresDirectory),
   v.transform((normalized) => {
