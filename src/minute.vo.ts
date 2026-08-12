@@ -1,5 +1,5 @@
 import * as v from "valibot";
-import { MinuteValue, type MinuteValueType } from "./minute-value.vo";
+import { MinuteValue, MinuteValueConstraints, type MinuteValueType } from "./minute-value.vo";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 
@@ -29,7 +29,7 @@ export class Minute {
   }
 
   static max(): Minute {
-    return Minute.fromNumber(59);
+    return Minute.fromNumber(MinuteValueConstraints.max);
   }
 
   get(): MinuteValueType {

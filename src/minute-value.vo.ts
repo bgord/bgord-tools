@@ -2,11 +2,13 @@ import * as v from "valibot";
 
 export const MinuteValueError = { Type: "minute.value.type", Invalid: "minute.value.invalid" };
 
+export const MinuteValueConstraints = { min: 0, max: 59 };
+
 export const MinuteValue = v.pipe(
   v.number(MinuteValueError.Type),
   v.integer(MinuteValueError.Type),
-  v.minValue(0, MinuteValueError.Invalid),
-  v.maxValue(59, MinuteValueError.Invalid),
+  v.minValue(MinuteValueConstraints.min, MinuteValueError.Invalid),
+  v.maxValue(MinuteValueConstraints.max, MinuteValueError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("MinuteValue"),
 );
