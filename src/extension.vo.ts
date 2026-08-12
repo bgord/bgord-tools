@@ -16,7 +16,7 @@ export const Extension = v.pipe(
   v.toLowerCase(),
   // Transform ".png" -> "png"
   v.transform((value) => value.replace(LEADING_DOT_FILE, "")),
-  v.minLength(2, ExtensionError.Empty),
+  v.minLength(1, ExtensionError.Empty),
   v.maxLength(16, ExtensionError.TooLong),
   v.check((value) => EXTENSION_WHITELIST.test(value), ExtensionError.BadChars),
   // Stryker disable next-line StringLiteral

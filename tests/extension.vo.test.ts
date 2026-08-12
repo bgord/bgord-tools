@@ -23,8 +23,9 @@ describe("Extension", () => {
     expect(() => v.parse(Extension, "")).toThrow("extension.empty");
   });
 
-  test("rejects single char", () => {
-    expect(() => v.parse(Extension, "a")).toThrow("extension.empty");
+  test("accepts single char", () => {
+    expect(v.parse(Extension, "c")).toEqual("c");
+    expect(v.parse(Extension, ".h")).toEqual("h");
   });
 
   test("rejects single dot", () => {
