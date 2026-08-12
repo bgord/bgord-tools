@@ -32,21 +32,28 @@ describe("Size", () => {
   });
 
   test("tokB", () => {
-    expect(Size.fromBytes(1023).tokB()).toEqual(1);
+    expect(Size.fromBytes(512).tokB()).toEqual(0.5);
     expect(Size.fromBytes(1024).tokB()).toEqual(1);
-    expect(Size.fromBytes(1025).tokB()).toEqual(2);
+    expect(Size.fromBytes(1536).tokB()).toEqual(1.5);
   });
 
   test("toMB", () => {
-    expect(Size.fromKb(1023).toMB()).toEqual(1);
+    expect(Size.fromKb(512).toMB()).toEqual(0.5);
     expect(Size.fromKb(1024).toMB()).toEqual(1);
-    expect(Size.fromKb(1025).toMB()).toEqual(2);
+    expect(Size.fromKb(1536).toMB()).toEqual(1.5);
   });
 
   test("toGB", () => {
-    expect(Size.fromMB(1023).toGB()).toEqual(1);
+    expect(Size.fromBytes(1).toGB()).toEqual(0);
     expect(Size.fromMB(1024).toGB()).toEqual(1);
-    expect(Size.fromMB(1025).toGB()).toEqual(2);
+    expect(Size.fromMB(1536).toGB()).toEqual(1.5);
+  });
+
+  test("accessors agree with format", () => {
+    const size = Size.fromBytes(1536);
+
+    expect(size.tokB()).toEqual(1.5);
+    expect(size.format(Size.unit.kB)).toEqual("1.5 kB");
   });
 
   test("equals", () => {

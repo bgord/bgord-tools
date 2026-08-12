@@ -1,6 +1,5 @@
 import * as v from "valibot";
 import { RoundingDecimalStrategy } from "./rounding-decimal.strategy";
-import { RoundingUpStrategy } from "./rounding-up.strategy";
 import { SizeBytes, type SizeBytesType } from "./size-bytes.vo";
 
 enum SizeUnitEnum {
@@ -20,7 +19,6 @@ export class Size {
   private static readonly MB_MULTIPLIER = 1024 * Size.KB_MULTIPLIER;
   private static readonly GB_MULTIPLIER = 1024 * Size.MB_MULTIPLIER;
 
-  private static readonly CONVERT_ROUND = new RoundingUpStrategy();
   private static readonly FORMAT_ROUND = new RoundingDecimalStrategy(2);
 
   private constructor(config: SizeConfigType) {
@@ -49,15 +47,15 @@ export class Size {
   }
 
   tokB(): number {
-    return Size.CONVERT_ROUND.round(this.bytes / Size.KB_MULTIPLIER);
+    return Size.FORMAT_ROUND.round(this.bytes / Size.KB_MULTIPLIER);
   }
 
   toMB(): number {
-    return Size.CONVERT_ROUND.round(this.bytes / Size.MB_MULTIPLIER);
+    return Size.FORMAT_ROUND.round(this.bytes / Size.MB_MULTIPLIER);
   }
 
   toGB(): number {
-    return Size.CONVERT_ROUND.round(this.bytes / Size.GB_MULTIPLIER);
+    return Size.FORMAT_ROUND.round(this.bytes / Size.GB_MULTIPLIER);
   }
 
   equals(another: Size): boolean {
