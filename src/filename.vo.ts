@@ -58,20 +58,20 @@ export class Filename {
     return new Filename(v.parse(Basename, `${this.basename}${affix}`), this.extension);
   }
 
-  withSuffix(candidate: string) {
+  withSuffix(candidate: string): Filename {
     return this.withAffix(candidate, FilenameAffixStrategy.suffix);
   }
 
   withSuffixSafe(affix: FilenameAffixType): Filename {
-    return this.withAffix(affix, FilenameAffixStrategy.suffix);
+    return this.withAffixSafe(affix, FilenameAffixStrategy.suffix);
   }
 
-  withPrefix(candidate: string) {
+  withPrefix(candidate: string): Filename {
     return this.withAffix(candidate, FilenameAffixStrategy.prefix);
   }
 
   withPrefixSafe(affix: FilenameAffixType): Filename {
-    return this.withAffix(affix, FilenameAffixStrategy.prefix);
+    return this.withAffixSafe(affix, FilenameAffixStrategy.prefix);
   }
 
   toString(): string {
