@@ -4,7 +4,7 @@ import { Temporal } from "./temporal";
 export const DayIsoIdError = {
   Type: "day.iso.id.type",
   BadChars: "day.iso.id.bad.chars",
-  InvalidDate: "day.iso.id.invalid.date",
+  Invalid: "day.iso.id.invalid",
 };
 
 // Four digits, hyphen, two digits, hyphen, two digits
@@ -20,7 +20,7 @@ export const DayIsoId = v.pipe(
     } catch {
       return false;
     }
-  }, DayIsoIdError.InvalidDate),
+  }, DayIsoIdError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("DayIsoId"),
 );

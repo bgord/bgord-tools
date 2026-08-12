@@ -38,7 +38,7 @@ describe("DayIsoId", () => {
   test("rejects impossible calendar dates", () => {
     const invalid = ["2025-02-30", "2025-13-01", "2025-00-10", "2025-04-31", "2025-02-29"];
     for (const value of invalid) {
-      expect(() => v.parse(DayIsoId, value)).toThrow("day.iso.id.invalid.date");
+      expect(() => v.parse(DayIsoId, value)).toThrow("day.iso.id.invalid");
     }
   });
 });
