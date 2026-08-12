@@ -10,7 +10,7 @@ export class Mean {
   static calculate(values: ReadonlyArray<number>, rounding?: RoundingStrategy): number {
     if (values.length === 0) throw new Error(MeanError.NotEnoughValues);
 
-    const sum = Sum.of(values);
+    const sum = Sum.precise(values);
     const mean = sum / values.length;
 
     return (rounding ?? Mean.DEFAULT_ROUNDING).round(mean);

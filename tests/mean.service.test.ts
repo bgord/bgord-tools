@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Mean } from "../src/mean.service";
+import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { RoundingToNearestStrategy } from "../src/rounding-to-nearest.strategy";
 
 describe("Mean", () => {
@@ -25,5 +26,11 @@ describe("Mean", () => {
 
   test("non-default rounding", () => {
     expect(Mean.calculate([1, 3, 6], new RoundingToNearestStrategy())).toEqual(3);
+  });
+
+  test("uses compensated summation", () => {
+    const values = Array.from({ length: 10_000 }, () => 0.1);
+
+    expect(Mean.calculate(values, new RoundingDecimalStrategy(15))).toEqual(0.1);
   });
 });
