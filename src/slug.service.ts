@@ -1,6 +1,6 @@
 export class Slug {
   // Any letter or any number
-  private static WHITELIST = /[\p{L}\p{N}]/u;
+  private static readonly WHITELIST = /[\p{L}\p{N}]/u;
 
   static generate(input: string, separator = "-"): string {
     return (

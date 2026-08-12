@@ -34,6 +34,14 @@ describe("ETag", () => {
     expect(ETag.HEADER_NAME).toEqual("ETag");
     expect(ETag.IF_MATCH_HEADER_NAME).toEqual("if-match");
   });
+
+  test("toString", () => {
+    expect(ETag.fromHeader("123")?.toString()).toEqual("123");
+  });
+
+  test("toJSON", () => {
+    expect(ETag.fromHeader("123")?.toJSON()).toEqual("123");
+  });
 });
 
 describe("WeakETag", () => {
@@ -64,5 +72,13 @@ describe("WeakETag", () => {
   test("static", () => {
     expect(WeakETag.HEADER_NAME).toEqual("ETag");
     expect(WeakETag.IF_MATCH_HEADER_NAME).toEqual("if-match");
+  });
+
+  test("toString", () => {
+    expect(WeakETag.fromHeader("W/123")?.toString()).toEqual("W/123");
+  });
+
+  test("toJSON", () => {
+    expect(WeakETag.fromHeader("W/123")?.toJSON()).toEqual("W/123");
   });
 });

@@ -4,9 +4,9 @@ import { RevisionValue, type RevisionValueType } from "./revision-value.vo";
 type ETagValueType = string;
 
 export class ETag {
-  static HEADER_NAME = "ETag";
+  static readonly HEADER_NAME = "ETag";
 
-  static IF_MATCH_HEADER_NAME = "if-match";
+  static readonly IF_MATCH_HEADER_NAME = "if-match";
 
   readonly value: ETagValueType;
 
@@ -20,14 +20,22 @@ export class ETag {
     if (Number.isNaN(candidate)) return null;
     return new ETag(v.parse(RevisionValue, candidate));
   }
+
+  toString(): string {
+    return this.value;
+  }
+
+  toJSON(): string {
+    return this.value;
+  }
 }
 
 export type WeakETagValueType = string;
 
 export class WeakETag {
-  static HEADER_NAME = "ETag";
+  static readonly HEADER_NAME = "ETag";
 
-  static IF_MATCH_HEADER_NAME = "if-match";
+  static readonly IF_MATCH_HEADER_NAME = "if-match";
 
   readonly value: WeakETagValueType;
 
@@ -42,5 +50,13 @@ export class WeakETag {
 
     if (Number.isNaN(candidate)) return null;
     return new WeakETag(v.parse(RevisionValue, candidate));
+  }
+
+  toString(): string {
+    return this.value;
+  }
+
+  toJSON(): string {
+    return this.value;
   }
 }
