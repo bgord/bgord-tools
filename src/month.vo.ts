@@ -9,15 +9,10 @@ import type { TimestampValueType } from "./timestamp-value.vo";
 
 export class Month extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Month {
-    const plain = timestamp.toPlainDateUTC();
+    const start = timestamp.toPlainDateUTC().with({ day: 1 }).toZonedDateTime("UTC").startOfDay();
+    const end = start.add({ months: 1 }).subtract({ milliseconds: 1 });
 
-    const start = plain.with({ day: 1 });
-    const end = plain.with({ day: 1 }).add({ months: 1 });
-
-    return new Month(
-      Timestamp.fromInstant(start.toZonedDateTime("UTC").toInstant()),
-      Timestamp.fromInstant(end.toZonedDateTime("UTC").toInstant().subtract({ milliseconds: 1 })),
-    );
+    return new Month(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));
   }
 
   static fromTimestampValue(value: TimestampValueType): Month {

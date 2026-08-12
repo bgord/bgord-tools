@@ -11,13 +11,10 @@ export class Year extends DateRange {
   static fromTimestamp(timestamp: Timestamp): Year {
     const year = timestamp.toPlainDateUTC().year;
 
-    const start = Temporal.PlainDate.from({ year, month: 1, day: 1 });
-    const end = Temporal.PlainDate.from({ year: year + 1, month: 1, day: 1 });
+    const start = Temporal.PlainDate.from({ year, month: 1, day: 1 }).toZonedDateTime("UTC").startOfDay();
+    const end = start.add({ years: 1 }).subtract({ milliseconds: 1 });
 
-    return new Year(
-      Timestamp.fromInstant(start.toZonedDateTime("UTC").toInstant()),
-      Timestamp.fromInstant(end.toZonedDateTime("UTC").toInstant().subtract({ milliseconds: 1 })),
-    );
+    return new Year(Timestamp.fromInstant(start.toInstant()), Timestamp.fromInstant(end.toInstant()));
   }
 
   static fromTimestampValue(timestamp: TimestampValueType): Year {
