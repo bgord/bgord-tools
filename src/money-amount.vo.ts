@@ -4,7 +4,7 @@ export const MoneyAmountError = { Type: "money.amount.type", Invalid: "money.amo
 
 export const MoneyAmount = v.pipe(
   v.number(MoneyAmountError.Type),
-  v.integer(MoneyAmountError.Type),
+  v.safeInteger(MoneyAmountError.Type),
   v.minValue(0, MoneyAmountError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("MoneyAmount"),

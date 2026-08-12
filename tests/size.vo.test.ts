@@ -12,7 +12,7 @@ describe("Size", () => {
   });
 
   test("rejects invalid values", () => {
-    expect(() => Size.fromKb(1.555)).toThrow("size.bytes.invalid");
+    expect(() => Size.fromKb(1.555)).toThrow("size.bytes.type");
   });
 
   test("convert - bytes to bytes", () => {

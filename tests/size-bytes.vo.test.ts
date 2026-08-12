@@ -9,11 +9,11 @@ describe("SizeBytes", () => {
   });
 
   test("rejects non-number - null", () => {
-    expect(() => v.parse(SizeBytes, null)).toThrow("size.bytes.invalid");
+    expect(() => v.parse(SizeBytes, null)).toThrow("size.bytes.type");
   });
 
   test("rejects non-number - string", () => {
-    expect(() => v.parse(SizeBytes, "123")).toThrow("size.bytes.invalid");
+    expect(() => v.parse(SizeBytes, "123")).toThrow("size.bytes.type");
   });
 
   test("rejects negative numbers", () => {
@@ -21,6 +21,6 @@ describe("SizeBytes", () => {
   });
 
   test("rejects fractions", () => {
-    expect(() => v.parse(SizeBytes, 1.5)).toThrow("size.bytes.invalid");
+    expect(() => v.parse(SizeBytes, 1.5)).toThrow("size.bytes.type");
   });
 });

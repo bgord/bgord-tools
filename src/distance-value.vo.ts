@@ -4,7 +4,7 @@ export const DistanceValueError = { Type: "distance.value.type", Invalid: "dista
 
 export const DistanceValue = v.pipe(
   v.number(DistanceValueError.Type),
-  v.integer(DistanceValueError.Type),
+  v.safeInteger(DistanceValueError.Type),
   v.minValue(0, DistanceValueError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("DistanceValue"),
