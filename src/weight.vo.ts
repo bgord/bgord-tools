@@ -35,9 +35,7 @@ export class Weight {
   }
 
   toKilograms(): number {
-    const kilograms = this.grams / Weight.GRAMS_PER_KILOGRAM;
-
-    return this.rounding.round(kilograms);
+    return this.grams / Weight.GRAMS_PER_KILOGRAM;
   }
 
   format(): string {

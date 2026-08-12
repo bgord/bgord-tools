@@ -27,6 +27,8 @@ describe("Weight", () => {
 
   test("toKilograms", () => {
     expect(Weight.fromKilograms(10, threeDecimals).toKilograms()).toEqual(10.0);
+    expect(Weight.fromGrams(1500).toKilograms()).toEqual(1.5);
+    expect(Weight.fromGrams(100).toKilograms()).toEqual(0.1);
   });
 
   test("format", () => {
