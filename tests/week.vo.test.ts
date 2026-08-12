@@ -45,6 +45,11 @@ describe("Week", () => {
     expect(Week.fromIsoId(w46).toIsoId()).toEqual(w46);
   });
 
+  test("fromIsoId - invalid", () => {
+    // @ts-expect-error
+    expect(() => Week.fromIsoId("invalid")).toThrow("week.iso.id.bad.chars");
+  });
+
   test("next", () => {
     expect(Week.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(v.parse(WeekIsoId, "2023-W47"));
   });

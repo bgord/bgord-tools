@@ -37,7 +37,7 @@ describe("Day", () => {
 
   test("fromIsoId - invalid", () => {
     // @ts-expect-error
-    expect(() => Day.fromIsoId("invalid").toIsoId()).toThrow("day.iso.id.bad.chars");
+    expect(() => Day.fromIsoId("invalid")).toThrow("day.iso.id.bad.chars");
   });
 
   test("leap-day", () => {

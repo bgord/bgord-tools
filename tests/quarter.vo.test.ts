@@ -44,6 +44,11 @@ describe("Quarter", () => {
     expect(Quarter.fromIsoId(q4).toIsoId()).toEqual(q4);
   });
 
+  test("fromIsoId - invalid", () => {
+    // @ts-expect-error
+    expect(() => Quarter.fromIsoId("invalid")).toThrow("quarter.iso.id.bad.chars");
+  });
+
   test("round-trips", () => {
     const ids = ["1970-Q1", "1999-Q4", "2024-Q2", "2025-Q3", "2026-Q1"] as const;
 

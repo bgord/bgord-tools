@@ -31,7 +31,7 @@ export class Year extends DateRange {
   static fromIsoId(isoId: YearIsoIdType): Year {
     return Year.fromTimestamp(
       Timestamp.fromInstant(
-        Temporal.PlainDate.from({ year: Number(isoId), month: 1, day: 1 })
+        Temporal.PlainDate.from({ year: Number(v.parse(YearIsoId, isoId)), month: 1, day: 1 })
           .toZonedDateTime("UTC")
           .toInstant(),
       ),

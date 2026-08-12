@@ -59,6 +59,11 @@ describe("Year", () => {
     expect(Year.fromIsoId(twentyTwentyThree).toIsoId()).toEqual(twentyTwentyThree);
   });
 
+  test("fromIsoId - invalid", () => {
+    // @ts-expect-error
+    expect(() => Year.fromIsoId("invalid")).toThrow("year.iso.id.bad.chars");
+  });
+
   test("next", () => {
     expect(Year.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(v.parse(YearIsoId, "2024"));
   });

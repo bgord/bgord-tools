@@ -43,6 +43,11 @@ describe("Month", () => {
     expect(Month.fromIsoId(november).toIsoId()).toEqual(november);
   });
 
+  test("fromIsoId - invalid", () => {
+    // @ts-expect-error
+    expect(() => Month.fromIsoId("invalid")).toThrow("month.iso.id.bad.chars");
+  });
+
   test("next", () => {
     expect(Month.fromTimestamp(mocks.TIME_ZERO).next().toIsoId()).toEqual(v.parse(MonthIsoId, "2023-12"));
   });
