@@ -22,4 +22,9 @@ describe("Integer VO", () => {
   test("rejects fraction", () => {
     expect(() => v.parse(Integer, 100.5)).toThrow("integer.type");
   });
+
+  test("rejects unsafe integers", () => {
+    expect(() => v.parse(Integer, Number.MAX_SAFE_INTEGER + 2)).toThrow("integer.type");
+    expect(() => v.parse(Integer, 1e308)).toThrow("integer.type");
+  });
 });

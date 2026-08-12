@@ -4,7 +4,7 @@ export const IntegerPositiveError = { Type: "integer.positive.type", Invalid: "i
 
 export const IntegerPositive = v.pipe(
   v.number(IntegerPositiveError.Type),
-  v.integer(IntegerPositiveError.Type),
+  v.safeInteger(IntegerPositiveError.Type),
   v.minValue(1, IntegerPositiveError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("IntegerPositive"),

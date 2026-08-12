@@ -24,4 +24,11 @@ describe("IntegerNonNegative VO", () => {
   test("rejects negative", () => {
     expect(() => v.parse(IntegerNonNegative, -1)).toThrow("integer.non.negative.invalid");
   });
+
+  test("rejects unsafe integers", () => {
+    expect(() => v.parse(IntegerNonNegative, Number.MAX_SAFE_INTEGER + 2)).toThrow(
+      "integer.non.negative.type",
+    );
+    expect(() => v.parse(IntegerNonNegative, 1e308)).toThrow("integer.non.negative.type");
+  });
 });

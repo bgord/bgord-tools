@@ -24,4 +24,9 @@ describe("TimestampValue", () => {
   test("rejects fractions", () => {
     expect(() => v.parse(TimestampValue, 1.5)).toThrow("timestamp.type");
   });
+
+  test("rejects unsafe integers", () => {
+    expect(() => v.parse(TimestampValue, Number.MAX_SAFE_INTEGER + 2)).toThrow("timestamp.type");
+    expect(() => v.parse(TimestampValue, 1e308)).toThrow("timestamp.type");
+  });
 });

@@ -4,7 +4,7 @@ export const TimestampValueError = { Type: "timestamp.type", Invalid: "timestamp
 
 export const TimestampValue = v.pipe(
   v.number(TimestampValueError.Type),
-  v.integer(TimestampValueError.Type),
+  v.safeInteger(TimestampValueError.Type),
   v.minValue(0, TimestampValueError.Invalid),
   // Stryker disable next-line StringLiteral
   v.brand("TimestampValue"),

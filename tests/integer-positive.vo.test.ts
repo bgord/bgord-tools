@@ -23,4 +23,9 @@ describe("IntegerPositive VO", () => {
   test("rejects 0", () => {
     expect(() => v.parse(IntegerPositive, 0)).toThrow("integer.positive.invalid");
   });
+
+  test("rejects unsafe integers", () => {
+    expect(() => v.parse(IntegerPositive, Number.MAX_SAFE_INTEGER + 2)).toThrow("integer.positive.type");
+    expect(() => v.parse(IntegerPositive, 1e308)).toThrow("integer.positive.type");
+  });
 });

@@ -19,4 +19,9 @@ describe("DurationMs", () => {
   test("rejects fractions", () => {
     expect(() => v.parse(DurationMs, 1.5)).toThrow("duration.invalid");
   });
+
+  test("rejects unsafe integers", () => {
+    expect(() => v.parse(DurationMs, Number.MAX_SAFE_INTEGER + 2)).toThrow("duration.invalid");
+    expect(() => v.parse(DurationMs, 1e308)).toThrow("duration.invalid");
+  });
 });
