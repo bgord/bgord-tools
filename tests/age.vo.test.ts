@@ -97,6 +97,12 @@ describe("Age", () => {
     );
   });
 
+  test("fromBirthdate - rejects a birthdate later the same day", () => {
+    expect(() => Age.fromBirthdate({ birthdate: "2023-11-14T23:59:00Z", now: mocks.TIME_ZERO })).toThrow(
+      "age.future.birthdate",
+    );
+  });
+
   test("fromBirthdate - rejects above upper bound", () => {
     expect(() => Age.fromBirthdate({ birthdate: "1800-01-01T00:00:00Z", now: mocks.TIME_ZERO })).toThrow(
       "timestamp.invalid",
@@ -115,6 +121,14 @@ describe("Age", () => {
 
   test("MAX", () => {
     expect(Age.MAX).toEqual(130);
+  });
+
+  test("min", () => {
+    expect(Age.min().get()).toEqual(min);
+  });
+
+  test("max", () => {
+    expect(Age.max().get()).toEqual(max);
   });
 
   test("get", () => {

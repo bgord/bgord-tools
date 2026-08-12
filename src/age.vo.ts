@@ -1,6 +1,5 @@
 import * as v from "valibot";
 import { AgeYears, AgeYearsConstraints, type AgeYearsType } from "./age-years.vo";
-import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 
 export const AgeError = { FutureBirthdate: "age.future.birthdate" };
@@ -19,6 +18,14 @@ export class Age {
     return new Age(candidate);
   }
 
+  static min(): Age {
+    return Age.fromNumber(AgeYearsConstraints.min);
+  }
+
+  static max(): Age {
+    return Age.fromNumber(AgeYearsConstraints.max);
+  }
+
   static fromBirthdateTimestamp(params: { birthdate: Timestamp; now: Timestamp }): Age {
     if (params.birthdate.isAfter(params.now)) throw new Error(AgeError.FutureBirthdate);
 
@@ -28,13 +35,11 @@ export class Age {
     return Age.fromNumber(birthdate.until(now, { largestUnit: "years" }).years);
   }
 
-  static fromBirthdate(candidate: { birthdate: string; now: Timestamp }): Age {
-    const birthdate = Timestamp.fromString(candidate.birthdate).toPlainDateUTC();
-
-    const now = candidate.now.toPlainDateUTC();
-
-    if (Temporal.PlainDate.compare(birthdate, now) > 0) throw new Error(AgeError.FutureBirthdate);
-    return Age.fromNumber(birthdate.until(now, { largestUnit: "years" }).years);
+  static fromBirthdate(params: { birthdate: string; now: Timestamp }): Age {
+    return Age.fromBirthdateTimestamp({
+      birthdate: Timestamp.fromString(params.birthdate),
+      now: params.now,
+    });
   }
 
   get(): AgeYearsType {
