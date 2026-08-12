@@ -34,7 +34,7 @@ describe("ThousandsSeparator", () => {
   });
 
   test("leaves exponential notation alone", () => {
-    expect(ThousandsSeparator.format(1234567890123456789012)).toEqual("1.2345678901234568e+21");
+    expect(ThousandsSeparator.format(1.2345678901234568e21)).toEqual("1.2345678901234568e+21");
   });
 
   test("leaves NaN and Infinity alone", () => {

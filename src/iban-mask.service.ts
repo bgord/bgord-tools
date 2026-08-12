@@ -8,7 +8,7 @@ export class IbanMask {
     let position = 0;
 
     // format() inserts the spaces, only the IBAN characters are masked - by their position
-    // in the unspaced value, so the grouping never shifts what stays visible
+    // in the value without spaces, so the grouping never shifts what stays visible
     return iban.format().replace(/[A-Z0-9]/g, (character) => {
       const index = position++;
       const visible = index < IbanMask.VISIBLE || index >= length - IbanMask.VISIBLE;
