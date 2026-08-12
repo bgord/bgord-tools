@@ -14,11 +14,11 @@ describe("UrlWithoutSlash", () => {
   });
 
   test("rejects non-string - null", () => {
-    expect(() => v.parse(UrlWithoutSlash, null)).toThrow("url.without.slash.invalid");
+    expect(() => v.parse(UrlWithoutSlash, null)).toThrow("url.without.slash.type");
   });
 
   test("rejects non-string - number", () => {
-    expect(() => v.parse(UrlWithoutSlash, 123)).toThrow("url.without.slash.invalid");
+    expect(() => v.parse(UrlWithoutSlash, 123)).toThrow("url.without.slash.type");
   });
 
   test("rejects invalid url", () => {
@@ -26,6 +26,8 @@ describe("UrlWithoutSlash", () => {
   });
 
   test("rejects url with slash", () => {
-    expect(() => v.parse(UrlWithoutSlash, "https://example.com/")).toThrow("url.without.slash.invalid");
+    expect(() => v.parse(UrlWithoutSlash, "https://example.com/")).toThrow(
+      "url.without.slash.trailing.slash",
+    );
   });
 });

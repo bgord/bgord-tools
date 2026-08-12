@@ -1,11 +1,15 @@
 import * as v from "valibot";
 
-export const UrlWithSlashError = { Invalid: "url.with.slash.invalid" };
+export const UrlWithSlashError = {
+  Type: "url.with.slash.type",
+  Invalid: "url.with.slash.invalid",
+  MissingSlash: "url.with.slash.missing.slash",
+};
 
 export const UrlWithSlash = v.pipe(
-  v.string(UrlWithSlashError.Invalid),
+  v.string(UrlWithSlashError.Type),
   v.url(UrlWithSlashError.Invalid),
-  v.endsWith("/", UrlWithSlashError.Invalid),
+  v.endsWith("/", UrlWithSlashError.MissingSlash),
   // Stryker disable next-line StringLiteral
   v.brand("UrlWithSlash"),
 );
