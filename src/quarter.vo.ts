@@ -1,5 +1,7 @@
 import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
+import { Int } from "./int.vo";
+import type { IntegerType } from "./integer.vo";
 import { QuarterIsoId, type QuarterIsoIdType } from "./quarter-iso-id.vo";
 import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
@@ -42,6 +44,27 @@ export class Quarter extends DateRange {
     const quarter = Math.ceil(plain.month / 3);
 
     return v.parse(QuarterIsoId, `${plain.year}-Q${quarter}`);
+  }
+
+  previous(): Quarter {
+    return this.shift(Int.of(-1));
+  }
+
+  next(): Quarter {
+    return this.shift(Int.of(1));
+  }
+
+  shift(count: IntegerType): Quarter {
+    const plain = this.getStart().toInstant().toZonedDateTimeISO("UTC").toPlainDate();
+
+    return Quarter.fromTimestamp(
+      Timestamp.fromInstant(
+        plain
+          .add({ months: count * 3 })
+          .toZonedDateTime("UTC")
+          .toInstant(),
+      ),
+    );
   }
 
   toString(): string {

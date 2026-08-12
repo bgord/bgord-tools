@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
+import { Int } from "../src/int.vo";
 import { Quarter } from "../src/quarter.vo";
 import { QuarterIsoId } from "../src/quarter-iso-id.vo";
 import { Timestamp } from "../src/timestamp.vo";
@@ -53,6 +54,20 @@ describe("Quarter", () => {
     for (const id of ids) {
       expect(Quarter.fromIsoId(v.parse(QuarterIsoId, id)).toIsoId()).toEqual(v.parse(QuarterIsoId, id));
     }
+  });
+
+  test("previous", () => {
+    expect(Quarter.fromIsoId(q4).previous().toIsoId()).toEqual(v.parse(QuarterIsoId, "2023-Q3"));
+  });
+
+  test("next", () => {
+    expect(Quarter.fromIsoId(q4).next().toIsoId()).toEqual(v.parse(QuarterIsoId, "2024-Q1"));
+  });
+
+  test("shift", () => {
+    expect(Quarter.fromIsoId(q4).shift(Int.of(0)).toIsoId()).toEqual(q4);
+    expect(Quarter.fromIsoId(q4).shift(Int.of(4)).toIsoId()).toEqual(v.parse(QuarterIsoId, "2024-Q4"));
+    expect(Quarter.fromIsoId(q4).shift(Int.of(-4)).toIsoId()).toEqual(v.parse(QuarterIsoId, "2022-Q4"));
   });
 
   test("contains", () => {
