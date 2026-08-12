@@ -10,6 +10,13 @@ describe("PackageVersionSchema", () => {
     }
   });
 
+  test("the v prefix is optional", () => {
+    const valid = ["0.0.0", "1.10.0", "9999.9999.9999"];
+    for (const value of valid) {
+      expect(v.safeParse(PackageVersionSchema, value).success).toEqual(true);
+    }
+  });
+
   test("rejects prefix", () => {
     expect(() => v.parse(PackageVersionSchema, " v1.0.0")).toThrow("package.version.schema.bad.chars");
   });
@@ -31,7 +38,7 @@ describe("PackageVersionSchema", () => {
   });
 
   test("rejects invalid values", () => {
-    const invalid = ["v", "v1", "v1.0", "0.0.0", "vx.0.0", "v1.x.0", "v1.1.x"];
+    const invalid = ["v", "v1", "v1.0", "1.0", "vx.0.0", "v1.x.0", "v1.1.x", "vv1.0.0"];
     for (const value of invalid) {
       expect(() => v.parse(PackageVersionSchema, value)).toThrow("package.version.schema.bad.chars");
     }

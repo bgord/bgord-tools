@@ -5,8 +5,8 @@ export const PackageVersionSchemaError = {
   BadChars: "package.version.schema.bad.chars",
 };
 
-// v, 1-4 digits, dot, 1-4 digits, dot, 1-4 digits - () for capturing groups
-export const PACKAGE_VERSIONS_CHARS_WHITELIST = /^v([0-9]{1,4})\.([0-9]{1,4})\.([0-9]{1,4})$/;
+// optional v, 1-4 digits, dot, 1-4 digits, dot, 1-4 digits - () for capturing groups
+export const PACKAGE_VERSIONS_CHARS_WHITELIST = /^v?([0-9]{1,4})\.([0-9]{1,4})\.([0-9]{1,4})$/;
 
 export const PackageVersionSchema = v.pipe(
   v.string(PackageVersionSchemaError.Type),
