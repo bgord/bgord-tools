@@ -14,4 +14,17 @@ describe("IbanMask", () => {
 
     expect(IbanMask.censor(iban)).toEqual("PL61 **** **** **** **** **** 2874");
   });
+
+  test("keeps the first and last four characters for any length", () => {
+    const cases = [
+      ["DE89370400440532013000", "DE89 **** **** **** **30 00"],
+      ["GB82WEST12345698765432", "GB82 **** **** **** **54 32"],
+      ["NO9386011117947", "NO93 **** ***7 947"],
+      ["MT84MALT011000012345MTLCAST001S", "MT84 **** **** **** **** **** ***0 01S"],
+    ] as const;
+
+    for (const [value, expected] of cases) {
+      expect(IbanMask.censor(new IBAN(value))).toEqual(expected);
+    }
+  });
 });

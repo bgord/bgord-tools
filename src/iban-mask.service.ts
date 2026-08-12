@@ -1,18 +1,19 @@
 import type { IBAN } from "./iban.vo";
 
 export class IbanMask {
+  private static readonly VISIBLE = 4;
+
   static censor(iban: IBAN): string {
-    const value = iban.format();
+    const { length } = iban.toString();
+    let position = 0;
 
-    const FIRST_SPACE_INDEX = 4;
-    const LAST_SPACE_INDEX = value.length - 5;
+    // format() inserts the spaces, only the IBAN characters are masked - by their position
+    // in the unspaced value, so the grouping never shifts what stays visible
+    return iban.format().replace(/[A-Z0-9]/g, (character) => {
+      const index = position++;
+      const visible = index < IbanMask.VISIBLE || index >= length - IbanMask.VISIBLE;
 
-    const start = value.slice(0, FIRST_SPACE_INDEX);
-    const middle = value.slice(FIRST_SPACE_INDEX + 1, LAST_SPACE_INDEX);
-    const end = value.slice(-4);
-
-    const maskedMiddle = middle.replace(/[A-Z0-9]/g, "*");
-
-    return `${start} ${maskedMiddle} ${end}`;
+      return visible ? character : "*";
+    });
   }
 }
