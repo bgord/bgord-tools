@@ -24,8 +24,6 @@ export class ETag {
 
 export type WeakETagValueType = string;
 
-export const WeakETagError = { Invalid: "weak.etag.invalid" };
-
 export class WeakETag {
   static HEADER_NAME = "ETag";
 
@@ -38,7 +36,7 @@ export class WeakETag {
   }
 
   static fromHeader(value?: WeakETagValueType): WeakETag | null {
-    if (!value?.startsWith("W/")) throw new Error(WeakETagError.Invalid);
+    if (!value?.startsWith("W/")) return null;
 
     const candidate = Number(value.split("W/")[1]);
 

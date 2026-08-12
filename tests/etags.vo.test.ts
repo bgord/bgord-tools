@@ -51,14 +51,14 @@ describe("WeakETag", () => {
     expect(WeakETag.fromHeader(invalidValue)).toEqual(null);
   });
 
-  test("throws for invalid", () => {
+  test("returns null for invalid", () => {
     const invalidValue = "invalid";
 
-    expect(() => WeakETag.fromHeader(invalidValue)).toThrow("weak.etag.invalid");
+    expect(WeakETag.fromHeader(invalidValue)).toEqual(null);
   });
 
-  test("throws for empty", () => {
-    expect(() => WeakETag.fromHeader()).toThrow("weak.etag.invalid");
+  test("returns null for empty", () => {
+    expect(WeakETag.fromHeader()).toEqual(null);
   });
 
   test("static", () => {
