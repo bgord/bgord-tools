@@ -69,7 +69,7 @@ describe("Hour", () => {
   });
 
   test("toString", () => {
-    expect(FIVE.toString()).toEqual("5");
+    expect(FIVE.toString()).toEqual("05");
     expect(THIRTEEN.toString()).toEqual("13");
   });
 

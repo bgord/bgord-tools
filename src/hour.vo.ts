@@ -53,7 +53,7 @@ export class Hour {
   }
 
   toString(): string {
-    return this.value.toString();
+    return this.value.toString().padStart(2, "0");
   }
 
   toJSON(): number {
