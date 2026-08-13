@@ -7,9 +7,6 @@ export enum FeatureFlagEnum {
   no = "no",
 }
 
-export const FeatureFlagValue = v.pipe(
-  v.picklist(Object.values(FeatureFlagEnum), FeatureFlagValueError.Invalid),
-  v.brand("FeatureFlagValue"),
-);
+export const FeatureFlagValue = v.picklist(Object.values(FeatureFlagEnum), FeatureFlagValueError.Invalid);
 
 export type FeatureFlagValueType = v.InferOutput<typeof FeatureFlagValue>;

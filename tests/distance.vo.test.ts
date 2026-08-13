@@ -95,7 +95,7 @@ describe("Distance", () => {
   });
 
   test("toMeters", () => {
-    expect(Distance.fromKilometers(1.5).toMeters()).toEqual(1500);
+    expect(Distance.fromKilometers(1.5).toMeters()).toEqual(v.parse(DistanceValue, 1500));
   });
 
   test("toKilometers", () => {

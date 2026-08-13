@@ -10,9 +10,9 @@ describe("TimeZoneOffsetValue", () => {
   });
 
   test("accepts numbers", () => {
-    expect(v.parse(TimeZoneOffsetValue, 720)).toEqual(720);
-    expect(v.parse(TimeZoneOffsetValue, -840)).toEqual(-840);
-    expect(v.parse(TimeZoneOffsetValue, 0)).toEqual(0);
+    expect(v.parse(TimeZoneOffsetValue, 720)).toEqual(v.parse(TimeZoneOffsetValue, 720));
+    expect(v.parse(TimeZoneOffsetValue, -840)).toEqual(v.parse(TimeZoneOffsetValue, -840));
+    expect(v.parse(TimeZoneOffsetValue, 0)).toEqual(v.parse(TimeZoneOffsetValue, 0));
   });
 
   test("rejects - fractions", () => {

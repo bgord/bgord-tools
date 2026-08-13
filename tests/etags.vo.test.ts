@@ -9,7 +9,7 @@ describe("ETag", () => {
     const etag = ETag.fromHeader(value);
 
     expect(etag?.value).toEqual(value);
-    expect(etag?.revision).toEqual(123);
+    expect(etag?.revision).toEqual(v.parse(RevisionValue, 123));
   });
 
   test("returns null for W/ prefix", () => {

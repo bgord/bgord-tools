@@ -3,6 +3,7 @@ import * as v from "valibot";
 import { Extension } from "../src/extension.vo";
 import { Mime } from "../src/mime.vo";
 import { MimeRegistry } from "../src/mime-registry.service";
+import { MimeRegistryEntry } from "../src/mime-registry-entry.vo";
 
 const jpegMime = Mime.fromString("image/jpeg");
 const jpgExtension = v.parse(Extension, "jpg");
@@ -14,8 +15,8 @@ const pngExtension = v.parse(Extension, "png");
 const pdfMime = Mime.fromString("application/pdf");
 const csvExtension = v.parse(Extension, "csv");
 
-const jpeg = { mime: jpegMime, extensions: [jpgExtension, jpegExtension] };
-const png = { mime: pngMime, extensions: [pngExtension] };
+const jpeg = new MimeRegistryEntry(jpegMime, [jpgExtension, jpegExtension]);
+const png = new MimeRegistryEntry(pngMime, [pngExtension]);
 const registry = new MimeRegistry([jpeg, png]);
 
 describe("MimeRegistry", () => {

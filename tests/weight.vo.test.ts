@@ -5,6 +5,7 @@ import { MultiplicationFactor } from "../src/multiplication-factor.vo";
 import { RoundingDecimalStrategy } from "../src/rounding-decimal.strategy";
 import { RoundingUpStrategy } from "../src/rounding-up.strategy";
 import { Weight } from "../src/weight.vo";
+import { WeightGrams } from "../src/weight-grams.vo";
 
 const twoDecimals = new RoundingDecimalStrategy(2);
 const threeDecimals = new RoundingDecimalStrategy(3);
@@ -13,13 +14,13 @@ const factor = v.parse(DivisionFactor, 3);
 
 describe("Weight", () => {
   test("fromKilograms", () => {
-    expect(Weight.fromKilograms(0.1).get()).toEqual(100);
-    expect(Weight.fromKilograms(0.333).get()).toEqual(333);
-    expect(Weight.fromKilograms(20).get()).toEqual(20_000);
+    expect(Weight.fromKilograms(0.1).get()).toEqual(v.parse(WeightGrams, 100));
+    expect(Weight.fromKilograms(0.333).get()).toEqual(v.parse(WeightGrams, 333));
+    expect(Weight.fromKilograms(20).get()).toEqual(v.parse(WeightGrams, 20_000));
   });
 
   test("fromGrams", () => {
-    expect(Weight.fromGrams(5).get()).toEqual(5);
+    expect(Weight.fromGrams(5).get()).toEqual(v.parse(WeightGrams, 5));
   });
 
   test("guards invalid inputs", () => {
@@ -40,20 +41,24 @@ describe("Weight", () => {
     const a = Weight.fromGrams(19_600);
     const b = a.add(Weight.fromKilograms(0.7));
 
-    expect(b.get()).toEqual(20_300);
-    expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(2_000)).get()).toEqual(0);
-    expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(1_000)).get()).toEqual(0);
-    expect(Weight.fromGrams(1_001).multiply(v.parse(MultiplicationFactor, 0.5)).get()).toEqual(501);
-    expect(Weight.fromGrams(1_999).divide(factor).get()).toEqual(666);
+    expect(b.get()).toEqual(v.parse(WeightGrams, 20_300));
+    expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(2_000)).get()).toEqual(v.parse(WeightGrams, 0));
+    expect(Weight.fromGrams(1_000).subtract(Weight.fromGrams(1_000)).get()).toEqual(v.parse(WeightGrams, 0));
+    expect(Weight.fromGrams(1_001).multiply(v.parse(MultiplicationFactor, 0.5)).get()).toEqual(
+      v.parse(WeightGrams, 501),
+    );
+    expect(Weight.fromGrams(1_999).divide(factor).get()).toEqual(v.parse(WeightGrams, 666));
   });
 
   test("rounding", () => {
     const up = new RoundingUpStrategy();
     const base = Weight.fromGrams(101, up);
 
-    expect(base.divide(factor).divide(factor).get()).toEqual(12);
-    expect(base.add(Weight.zero()).divide(factor).get()).toEqual(34);
-    expect(base.multiply(v.parse(MultiplicationFactor, 0.5)).divide(factor).get()).toEqual(17);
+    expect(base.divide(factor).divide(factor).get()).toEqual(v.parse(WeightGrams, 12));
+    expect(base.add(Weight.zero()).divide(factor).get()).toEqual(v.parse(WeightGrams, 34));
+    expect(base.multiply(v.parse(MultiplicationFactor, 0.5)).divide(factor).get()).toEqual(
+      v.parse(WeightGrams, 17),
+    );
   });
 
   test("equals", () => {

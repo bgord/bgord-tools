@@ -68,7 +68,7 @@ describe("Height", () => {
   });
 
   test("get", () => {
-    expect(Height.fromMillimeters(1804).get()).toEqual(1804);
+    expect(Height.fromMillimeters(1804).get()).toEqual(v.parse(HeightMillimeters, 1804));
   });
 
   test("toString", () => {

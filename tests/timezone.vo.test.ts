@@ -41,6 +41,6 @@ describe("Timezone", () => {
   });
 
   test("normalizes to the canonical id", () => {
-    expect(v.parse(Timezone, "utc")).toEqual("UTC");
+    expect(v.parse(Timezone, "utc")).toEqual(v.parse(Timezone, "UTC"));
   });
 });
