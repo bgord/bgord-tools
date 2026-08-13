@@ -6,6 +6,7 @@ export const RevisionValue = v.pipe(
   v.number(RevisionValueError.Type),
   v.integer(RevisionValueError.Type),
   v.minValue(0, RevisionValueError.Invalid),
+  v.brand("RevisionValue"),
 );
 
 export type RevisionValueType = v.InferOutput<typeof RevisionValue>;
