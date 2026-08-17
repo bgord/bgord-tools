@@ -14,7 +14,10 @@ export class PackageVersion {
 
   static fromVersionStringSafe(candidate: PackageVersionSchemaType): PackageVersion {
     const withoutPrefix = candidate.startsWith("v") ? candidate.slice(1) : candidate;
-    const [major, minor, patch] = withoutPrefix.split(".").map(Number) as [number, number, number];
+    const parts = withoutPrefix.split(".");
+    const major = Number(parts[0]);
+    const minor = Number(parts[1]);
+    const patch = Number(parts[2]);
 
     return new PackageVersion(major, minor, patch);
   }

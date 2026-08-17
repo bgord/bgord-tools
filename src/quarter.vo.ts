@@ -28,7 +28,9 @@ export class Quarter extends DateRange {
   }
 
   static fromIsoId(isoId: QuarterIsoIdType): Quarter {
-    const [year, quarter] = v.parse(QuarterIsoId, isoId).split("-Q").map(Number) as [number, number];
+    const parts = v.parse(QuarterIsoId, isoId).split("-Q");
+    const year = Number(parts[0]);
+    const quarter = Number(parts[1]);
 
     const plain = Temporal.PlainDate.from({ year, month: (quarter - 1) * 3 + 1, day: 1 });
 

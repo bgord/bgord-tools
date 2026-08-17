@@ -19,7 +19,7 @@ export function deepCloneWith<T>(
 
       for (const ownKey of Reflect.ownKeys(current)) {
         const value = current[ownKey];
-        result[ownKey] = clone(value, ownKey as string);
+        result[ownKey] = clone(value, typeof ownKey === "string" ? ownKey : undefined);
       }
       return result;
     }

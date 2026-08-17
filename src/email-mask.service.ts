@@ -2,7 +2,9 @@ import type { EmailType } from "./email.vo";
 
 export class EmailMask {
   static censor(email: EmailType): string {
-    const [local, domain] = email.split("@") as [string, string];
+    const separator = email.lastIndexOf("@");
+    const local = email.slice(0, separator);
+    const domain = email.slice(separator + 1);
 
     if (local.length <= 2) return `${"*".repeat(local.length)}@${domain}`;
 

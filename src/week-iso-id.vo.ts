@@ -14,7 +14,9 @@ export const WeekIsoId = v.pipe(
   v.string(WeekIsoIdError.Type),
   v.regex(WEEK_ISO_ID_CHARS_WHITELIST, WeekIsoIdError.BadChars),
   v.check((value) => {
-    const [year, week] = value.split("-W").map(Number) as [number, number];
+    const parts = value.split("-W");
+    const year = Number(parts[0]);
+    const week = Number(parts[1]);
 
     // The regex runs first but does not stop the pipe, so malformed input still reaches this check
     if (Number.isNaN(year) || Number.isNaN(week)) return false;

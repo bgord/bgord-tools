@@ -25,7 +25,9 @@ export class Week extends DateRange {
   }
 
   static fromIsoId(isoId: WeekIsoIdType): Week {
-    const [year, week] = v.parse(WeekIsoId, isoId).split("-W").map(Number) as [number, number];
+    const parts = v.parse(WeekIsoId, isoId).split("-W");
+    const year = Number(parts[0]);
+    const week = Number(parts[1]);
 
     const januaryFourth = Temporal.PlainDate.from({ year, month: 1, day: 4 });
 

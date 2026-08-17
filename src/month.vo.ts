@@ -20,7 +20,9 @@ export class Month extends DateRange {
   }
 
   static fromIsoId(iso: MonthIsoIdType): Month {
-    const [year, month] = v.parse(MonthIsoId, iso).split("-").map(Number) as [number, number];
+    const parts = v.parse(MonthIsoId, iso).split("-");
+    const year = Number(parts[0]);
+    const month = Number(parts[1]);
 
     const plain = Temporal.PlainDate.from({ year, month, day: 1 });
 

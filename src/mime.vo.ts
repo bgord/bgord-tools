@@ -9,7 +9,9 @@ export class Mime {
 
   static fromString(candidate: string): Mime {
     const value = v.parse(MimeValue, candidate.split(";")[0]?.trim());
-    const [type, subtype] = value.split("/") as [string, string];
+    const separator = value.indexOf("/");
+    const type = value.slice(0, separator);
+    const subtype = value.slice(separator + 1);
 
     return new Mime(type, subtype);
   }
