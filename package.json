@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.8",
-    "@stryker-mutator/core": "9.6.1",
-    "@stryker-mutator/typescript-checker": "9.6.1",
+    "@stryker-mutator/core": "10.0.0",
+    "@stryker-mutator/typescript-checker": "10.0.0",
     "@types/bun": "1.3.14",
     "cspell": "10.0.1",
     "fallow": "3.16.0",
