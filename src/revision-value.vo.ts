@@ -6,6 +6,7 @@ export const RevisionValue = v.pipe(
   v.number(RevisionValueError.Type),
   v.integer(RevisionValueError.Type),
   v.minValue(0, RevisionValueError.Invalid),
+  // Stryker disable next-line StringLiteral
   v.brand("RevisionValue"),
 );
 
