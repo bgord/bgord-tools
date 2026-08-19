@@ -63,7 +63,6 @@ export * from "./percentage.service";
 export * from "./quarter.vo";
 export * from "./quarter-iso-id.vo";
 export * from "./random.service";
-export * from "./rate-limiter.service";
 export * from "./repeat";
 export * from "./revision.vo";
 export * from "./revision-value.vo";
