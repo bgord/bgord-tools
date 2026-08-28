@@ -4,7 +4,6 @@ import { Day } from "../src/day.vo";
 import { DayIsoId } from "../src/day-iso-id.vo";
 import { Duration } from "../src/duration.service";
 import { Int } from "../src/int.vo";
-import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 import * as mocks from "./mocks";
 

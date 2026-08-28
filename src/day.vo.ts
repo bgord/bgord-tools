@@ -3,7 +3,6 @@ import { DateRange } from "./date-range.vo";
 import { DayIsoId, type DayIsoIdType } from "./day-iso-id.vo";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
-import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 

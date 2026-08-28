@@ -105,7 +105,6 @@ src/
 ├── sms-message.vo.ts
 ├── sum.service.ts
 ├── telephone-number.vo.ts
-├── temporal.ts
 ├── thousands-separator.service.ts
 ├── time-zone-offset-value.vo.ts
 ├── timestamp-value.vo.ts

@@ -2,7 +2,6 @@ import * as v from "valibot";
 import { DateRange } from "./date-range.vo";
 import { Int } from "./int.vo";
 import type { IntegerType } from "./integer.vo";
-import { Temporal } from "./temporal";
 import { Timestamp } from "./timestamp.vo";
 import type { TimestampValueType } from "./timestamp-value.vo";
 import { WeekIsoId, type WeekIsoIdType } from "./week-iso-id.vo";

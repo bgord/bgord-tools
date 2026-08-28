@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
 import { Duration } from "../src/duration.service";
-import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 import { TimestampValue } from "../src/timestamp-value.vo";
 import * as mocks from "./mocks";

@@ -1,6 +1,5 @@
 import * as v from "valibot";
 import { Duration } from "./duration.service";
-import { Temporal } from "./temporal";
 import { TimestampValue, type TimestampValueType } from "./timestamp-value.vo";
 
 export class Timestamp {

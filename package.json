@@ -32,7 +32,6 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "temporal-polyfill": "1.0.4",
     "valibot": "1.4.2"
   },
   "sideEffects": false

@@ -1,5 +1,4 @@
 import * as v from "valibot";
-import { Temporal } from "./temporal";
 
 export const WeekIsoIdError = {
   Type: "week.iso.id.type",

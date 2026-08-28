@@ -1,5 +1,4 @@
 import * as v from "valibot";
-import { Temporal } from "./temporal";
 
 export const TimezoneError = {
   Type: "timezone.type",

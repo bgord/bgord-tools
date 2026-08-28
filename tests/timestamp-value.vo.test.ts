@@ -1,6 +1,5 @@
 import { describe, expect, test } from "bun:test";
 import * as v from "valibot";
-import { Temporal } from "../src/temporal";
 import { TimestampValue } from "../src/timestamp-value.vo";
 
 describe("TimestampValue", () => {

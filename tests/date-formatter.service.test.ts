@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { DateFormatter } from "../src/date-formatter.service";
 import { Duration } from "../src/duration.service";
-import { Temporal } from "../src/temporal";
 import { Timestamp } from "../src/timestamp.vo";
 
 const now = Timestamp.fromInstant(Temporal.Instant.from("2023-01-01T00:01:00Z"));
