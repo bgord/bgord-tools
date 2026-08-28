@@ -111,7 +111,7 @@ describe("Age", () => {
 
   test("fromBirthdate - invalid date string throws", () => {
     expect(() => Age.fromBirthdate({ birthdate: "not-a-date", now: mocks.TIME_ZERO })).toThrow(
-      "Cannot parse: not-a-date",
+      /not a valid Temporal.Instant string/,
     );
   });
 

@@ -18,7 +18,7 @@ describe("Timestamp", () => {
   });
 
   test("fromString - error", () => {
-    expect(() => Timestamp.fromString("not-a-date")).toThrow("Cannot parse: not-a-date");
+    expect(() => Timestamp.fromString("not-a-date")).toThrow(/not a valid Temporal.Instant string/);
   });
 
   test("fromValueSafe - success", () => {
