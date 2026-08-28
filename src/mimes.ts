@@ -17,4 +17,5 @@ export const Mimes = {
   webp: new MimeRegistryEntry(Mime.fromString("image/webp"), [v.parse(Extension, "webp")]),
   wav: new MimeRegistryEntry(Mime.fromString("audio/x-wav"), [v.parse(Extension, "wav")]),
   zip: new MimeRegistryEntry(Mime.fromString("application/zip"), [v.parse(Extension, "zip")]),
+  tar: new MimeRegistryEntry(Mime.fromString("application/gzip"), [v.parse(Extension, "tar")]),
 } as const;

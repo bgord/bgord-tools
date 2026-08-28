@@ -34,5 +34,8 @@ describe("Mimes", () => {
 
     expect(Mimes.zip.mime.toString()).toEqual("application/zip");
     expect(Mimes.zip.extensions).toEqual([v.parse(Extension, "zip")]);
+
+    expect(Mimes.tar.mime.toString()).toEqual("application/gzip");
+    expect(Mimes.tar.extensions).toEqual([v.parse(Extension, "tar")]);
   });
 });
