@@ -24,7 +24,7 @@
     "@stryker-mutator/typescript-checker": "10.0.0",
     "@types/bun": "1.4.0",
     "cspell": "10.1.1",
-    "fallow": "3.20.0",
+    "fallow": "3.21.0",
     "lefthook": "2.1.12",
     "lockfile-lint": "5.0.1",
     "publint": "0.3.24",
