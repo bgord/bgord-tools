@@ -12,6 +12,16 @@ export class ErrorNormalizer {
   }
 
   private static normalizeWithGuard(error: unknown, seen: WeakSet<object>): NormalizedError {
+    if (ErrorNormalizer.isNormalizedError(error)) {
+      if (seen.has(error)) return { message: error.message, name: error.name };
+
+      seen.add(error);
+
+      const cause = error.cause ? ErrorNormalizer.normalizeWithGuard(error.cause, seen) : undefined;
+
+      return { message: error.message, name: error.name, stack: error.stack, cause };
+    }
+
     if (error instanceof Error) {
       if (seen.has(error)) return { message: error.message, name: error.name };
 

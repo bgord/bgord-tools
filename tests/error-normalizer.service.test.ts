@@ -67,6 +67,69 @@ describe("ErrorNormalizer", () => {
     });
   });
 
+  test("normalize - normalized error", () => {
+    const result = ErrorNormalizer.normalize({
+      message: mocks.IntentionalError,
+      name: "Error",
+      stack: "stack",
+    });
+
+    expect(result).toEqual({
+      message: mocks.IntentionalError,
+      name: "Error",
+      stack: "stack",
+      cause: undefined,
+    });
+  });
+
+  test("normalize - normalized error - idempotent", () => {
+    const error = new Error(mocks.IntentionalError, { cause: new Error(mocks.IntentionalCause) });
+
+    const result = ErrorNormalizer.normalize(ErrorNormalizer.normalize(error));
+
+    expect(result).toEqual({
+      ...mocks.IntentionalErrorNormalized,
+      cause: { name: "Error", message: mocks.IntentionalCause, stack: expect.any(String), cause: undefined },
+    });
+  });
+
+  test("normalize - normalized error - cause", () => {
+    const result = ErrorNormalizer.normalize({
+      message: mocks.IntentionalError,
+      cause: { message: mocks.IntentionalCause },
+    });
+
+    expect(result).toEqual({ message: mocks.IntentionalError, cause: { message: mocks.IntentionalCause } });
+  });
+
+  test("normalize - normalized error - unknown fields", () => {
+    const result = ErrorNormalizer.normalize({ message: mocks.IntentionalError, token: "secret" });
+
+    expect(result).not.toHaveProperty("token");
+  });
+
+  test("normalize - normalized error - circular", () => {
+    const error: { message: string; name: string; cause?: unknown } = {
+      message: mocks.IntentionalError,
+      name: "Error",
+    };
+    error.cause = error;
+
+    const result = ErrorNormalizer.normalize(error);
+
+    expect(result).toEqual({
+      message: mocks.IntentionalError,
+      name: "Error",
+      cause: { message: mocks.IntentionalError, name: "Error" },
+    });
+  });
+
+  test("normalize - plain object without message", () => {
+    const result = ErrorNormalizer.normalize({ code: "critical" });
+
+    expect(result).toEqual({ message: "[object Object]" });
+  });
+
   test("isNormalizedError - happy path", () => {
     const error = new Error(mocks.IntentionalError);
     const result = ErrorNormalizer.isNormalizedError(ErrorNormalizer.normalize(error));
