@@ -19,12 +19,12 @@
     "build": "bash scripts/package-build.sh"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
-    "@stryker-mutator/core": "10.0.0",
-    "@stryker-mutator/typescript-checker": "10.0.0",
+    "@biomejs/biome": "2.6.3",
+    "@stryker-mutator/core": "10.1.1",
+    "@stryker-mutator/typescript-checker": "10.1.1",
     "@types/bun": "1.4.4",
     "cspell": "10.4.0",
-    "fallow": "3.33.1",
+    "fallow": "3.35.0",
     "lefthook": "2.2.2",
     "lockfile-lint": "5.1.0",
     "publint": "0.3.25",
