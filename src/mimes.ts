@@ -13,9 +13,9 @@ export const Mimes = {
   mp4: new MimeRegistryEntry(Mime.fromString("video/mp4"), [v.parse(Extension, "mp4")]),
   pdf: new MimeRegistryEntry(Mime.fromString("application/pdf"), [v.parse(Extension, "pdf")]),
   png: new MimeRegistryEntry(Mime.fromString("image/png"), [v.parse(Extension, "png")]),
-  text: new MimeRegistryEntry(Mime.fromString("text/plain"), [v.parse(Extension, "txt")]),
-  webp: new MimeRegistryEntry(Mime.fromString("image/webp"), [v.parse(Extension, "webp")]),
-  wav: new MimeRegistryEntry(Mime.fromString("audio/x-wav"), [v.parse(Extension, "wav")]),
-  zip: new MimeRegistryEntry(Mime.fromString("application/zip"), [v.parse(Extension, "zip")]),
   tar: new MimeRegistryEntry(Mime.fromString("application/gzip"), [v.parse(Extension, "tar")]),
+  text: new MimeRegistryEntry(Mime.fromString("text/plain"), [v.parse(Extension, "txt")]),
+  wav: new MimeRegistryEntry(Mime.fromString("audio/x-wav"), [v.parse(Extension, "wav")]),
+  webp: new MimeRegistryEntry(Mime.fromString("image/webp"), [v.parse(Extension, "webp")]),
+  zip: new MimeRegistryEntry(Mime.fromString("application/zip"), [v.parse(Extension, "zip")]),
 } as const;
