@@ -8,6 +8,9 @@ describe("Mimes", () => {
     expect(Mimes.csv.mime.toString()).toEqual("text/csv");
     expect(Mimes.csv.extensions).toEqual([v.parse(Extension, "csv")]);
 
+    expect(Mimes.html.mime.toString()).toEqual("text/html");
+    expect(Mimes.html.extensions).toEqual([v.parse(Extension, "html")]);
+
     expect(Mimes.jpg.mime.toString()).toEqual("image/jpeg");
     expect(Mimes.jpg.extensions).toEqual([v.parse(Extension, "jpg"), v.parse(Extension, "jpeg")]);
 

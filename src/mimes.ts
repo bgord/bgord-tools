@@ -5,6 +5,7 @@ import { MimeRegistryEntry } from "./mime-registry-entry.vo";
 
 export const Mimes = {
   csv: new MimeRegistryEntry(Mime.fromString("text/csv"), [v.parse(Extension, "csv")]),
+  html: new MimeRegistryEntry(Mime.fromString("text/html"), [v.parse(Extension, "html")]),
   jpg: new MimeRegistryEntry(Mime.fromString("image/jpeg"), [
     v.parse(Extension, "jpg"),
     v.parse(Extension, "jpeg"),
