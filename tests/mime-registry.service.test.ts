@@ -15,8 +15,8 @@ const pngExtension = v.parse(Extension, "png");
 const pdfMime = Mime.fromString("application/pdf");
 const csvExtension = v.parse(Extension, "csv");
 
-const jpeg = new MimeRegistryEntry(jpegMime, [jpgExtension, jpegExtension]);
-const png = new MimeRegistryEntry(pngMime, [pngExtension]);
+const jpeg = new MimeRegistryEntry(jpegMime, jpgExtension, [jpegExtension]);
+const png = new MimeRegistryEntry(pngMime, pngExtension);
 const registry = new MimeRegistry([jpeg, png]);
 
 describe("MimeRegistry", () => {
