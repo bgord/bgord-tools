@@ -6,6 +6,7 @@ import { MimeRegistryEntry } from "./mime-registry-entry.vo";
 export const Mimes = {
   csv: new MimeRegistryEntry(Mime.fromString("text/csv"), v.parse(Extension, "csv")),
   html: new MimeRegistryEntry(Mime.fromString("text/html"), v.parse(Extension, "html")),
+  ico: new MimeRegistryEntry(Mime.fromString("image/x-icon"), v.parse(Extension, "ico")),
   jpg: new MimeRegistryEntry(Mime.fromString("image/jpeg"), v.parse(Extension, "jpg"), [
     v.parse(Extension, "jpeg"),
   ]),
@@ -13,6 +14,7 @@ export const Mimes = {
   mp4: new MimeRegistryEntry(Mime.fromString("video/mp4"), v.parse(Extension, "mp4")),
   pdf: new MimeRegistryEntry(Mime.fromString("application/pdf"), v.parse(Extension, "pdf")),
   png: new MimeRegistryEntry(Mime.fromString("image/png"), v.parse(Extension, "png")),
+  svg: new MimeRegistryEntry(Mime.fromString("image/svg+xml"), v.parse(Extension, "svg")),
   tar: new MimeRegistryEntry(Mime.fromString("application/gzip"), v.parse(Extension, "tar")),
   text: new MimeRegistryEntry(Mime.fromString("text/plain"), v.parse(Extension, "txt")),
   wav: new MimeRegistryEntry(Mime.fromString("audio/x-wav"), v.parse(Extension, "wav")),

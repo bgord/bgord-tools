@@ -11,6 +11,9 @@ describe("Mimes", () => {
     expect(Mimes.html.mime.toString()).toEqual("text/html");
     expect(Mimes.html.extensions).toEqual([v.parse(Extension, "html")]);
 
+    expect(Mimes.ico.mime.toString()).toEqual("image/x-icon");
+    expect(Mimes.ico.extensions).toEqual([v.parse(Extension, "ico")]);
+
     expect(Mimes.jpg.mime.toString()).toEqual("image/jpeg");
     expect(Mimes.jpg.extensions).toEqual([v.parse(Extension, "jpg"), v.parse(Extension, "jpeg")]);
 
@@ -25,6 +28,9 @@ describe("Mimes", () => {
 
     expect(Mimes.png.mime.toString()).toEqual("image/png");
     expect(Mimes.png.extensions).toEqual([v.parse(Extension, "png")]);
+
+    expect(Mimes.svg.mime.toString()).toEqual("image/svg+xml");
+    expect(Mimes.svg.extensions).toEqual([v.parse(Extension, "svg")]);
 
     expect(Mimes.text.mime.toString()).toEqual("text/plain");
     expect(Mimes.text.extensions).toEqual([v.parse(Extension, "txt")]);
