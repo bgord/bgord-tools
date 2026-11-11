@@ -22,11 +22,6 @@ export class PackageVersion {
     return new PackageVersion(major, minor, patch);
   }
 
-  /** @deprecated Use {@link PackageVersion.fromVersionString}, which accepts both `1.2.3` and `v1.2.3`. */
-  static fromString(candidate: string): PackageVersion {
-    return PackageVersion.fromVersionString(candidate);
-  }
-
   private compareTo(another: PackageVersion): -1 | 0 | 1 {
     if (this.major > another.major) return 1;
     if (this.major < another.major) return -1;
