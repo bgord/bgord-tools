@@ -1,4 +1,3 @@
-/* cSpell:disable */
 import { describe, expect, test } from "bun:test";
 import { Iban } from "../src/iban.vo";
 import { IbanMask } from "../src/iban-mask.service";
